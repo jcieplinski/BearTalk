@@ -1,0 +1,790 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8CA9DAB2B166B3300BC35F8 /* BearTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */; };
+		D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */; };
+		D8CA9DAF2B166B3400BC35F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */; };
+		D8CA9DB32B166B3400BC35F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CA9DB22B166B3400BC35F8 /* Preview Assets.xcassets */; };
+		D8CA9DBD2B166B3400BC35F8 /* BearTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */; };
+		D8CA9DC72B166B3400BC35F8 /* BearTalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC62B166B3400BC35F8 /* BearTalkUITests.swift */; };
+		D8CA9DC92B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC82B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift */; };
+		D8CA9DD62B166B5100BC35F8 /* BearAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DD52B166B5100BC35F8 /* BearAPI.swift */; };
+		D8CA9DD82B166C3D00BC35F8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DD72B166C3D00BC35F8 /* Extensions.swift */; };
+		D8CA9DDA2B166C4400BC35F8 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DD92B166C4400BC35F8 /* Enumerations.swift */; };
+		D8CA9DDC2B167EDF00BC35F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */; };
+		D8CA9DDE2B169BCC00BC35F8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DDD2B169BCC00BC35F8 /* AppState.swift */; };
+		D8CA9DE42B169D8500BC35F8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DE32B169D8500BC35F8 /* HomeView.swift */; };
+		D8CA9DE62B16B1EA00BC35F8 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DE52B16B1EA00BC35F8 /* LoginResponse.swift */; };
+		D8CA9DE82B16B20D00BC35F8 /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DE72B16B20D00BC35F8 /* RefreshResponse.swift */; };
+		D8CA9DEA2B16B21D00BC35F8 /* SessionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DE92B16B21D00BC35F8 /* SessionInfo.swift */; };
+		D8CA9DEC2B16B22D00BC35F8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DEB2B16B22D00BC35F8 /* UserProfile.swift */; };
+		D8CA9DEE2B16B23D00BC35F8 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DED2B16B23D00BC35F8 /* Vehicle.swift */; };
+		D8CA9DF02B16B25800BC35F8 /* VehicleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DEF2B16B25800BC35F8 /* VehicleConfig.swift */; };
+		D8CA9DF22B16B26800BC35F8 /* VehicleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DF12B16B26800BC35F8 /* VehicleState.swift */; };
+		D8CA9DF42B16B27800BC35F8 /* EASubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DF32B16B27800BC35F8 /* EASubscription.swift */; };
+		D8CA9DF62B16B28700BC35F8 /* ChargingAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DF52B16B28700BC35F8 /* ChargingAccount.swift */; };
+		D8CA9DF82B16B29400BC35F8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DF72B16B29400BC35F8 /* BatteryState.swift */; };
+		D8CA9DFA2B16B2A200BC35F8 /* CabinState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DF92B16B2A200BC35F8 /* CabinState.swift */; };
+		D8CA9DFC2B16B2AF00BC35F8 /* BodyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DFB2B16B2AF00BC35F8 /* BodyState.swift */; };
+		D8CA9DFE2B16B2BB00BC35F8 /* ChassisState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DFD2B16B2BB00BC35F8 /* ChassisState.swift */; };
+		D8CA9E002B16B2C800BC35F8 /* ChargingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DFF2B16B2C800BC35F8 /* ChargingState.swift */; };
+		D8CA9E022B16B2D600BC35F8 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E012B16B2D600BC35F8 /* GPS.swift */; };
+		D8CA9E042B16B2E300BC35F8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E032B16B2E300BC35F8 /* Location.swift */; };
+		D8CA9E062B16B2F000BC35F8 /* SoftwareUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E052B16B2F000BC35F8 /* SoftwareUpdate.swift */; };
+		D8CA9E082B16B2FB00BC35F8 /* AlarmState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E072B16B2FB00BC35F8 /* AlarmState.swift */; };
+		D8CA9E0A2B16B30A00BC35F8 /* HVACStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E092B16B30A00BC35F8 /* HVACStatus.swift */; };
+		D8CA9E0C2B16B31900BC35F8 /* MobileAppReqStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E0B2B16B31900BC35F8 /* MobileAppReqStatus.swift */; };
+		D8CA9E0E2B16B32800BC35F8 /* TCUInternetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E0D2B16B32800BC35F8 /* TCUInternetStatus.swift */; };
+		D8CA9E102B16B42A00BC35F8 /* URLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E0F2B16B42A00BC35F8 /* URLStrings.swift */; };
+		D8CA9E122B16BA5200BC35F8 /* UserVehiclesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */; };
+		D8CA9E162B16D89F00BC35F8 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D8CA9DB92B166B3400BC35F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8CA9D9F2B166B3300BC35F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8CA9DA62B166B3300BC35F8;
+			remoteInfo = BearTalk;
+		};
+		D8CA9DC32B166B3400BC35F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8CA9D9F2B166B3300BC35F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8CA9DA62B166B3300BC35F8;
+			remoteInfo = BearTalk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkApp.swift; sourceTree = "<group>"; };
+		D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D8CA9DB02B166B3400BC35F8 /* BearTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BearTalk.entitlements; sourceTree = "<group>"; };
+		D8CA9DB22B166B3400BC35F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BearTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkTests.swift; sourceTree = "<group>"; };
+		D8CA9DC22B166B3400BC35F8 /* BearTalkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BearTalkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CA9DC62B166B3400BC35F8 /* BearTalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkUITests.swift; sourceTree = "<group>"; };
+		D8CA9DC82B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D8CA9DD52B166B5100BC35F8 /* BearAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearAPI.swift; sourceTree = "<group>"; };
+		D8CA9DD72B166C3D00BC35F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D8CA9DD92B166C4400BC35F8 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
+		D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D8CA9DDD2B169BCC00BC35F8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D8CA9DE32B169D8500BC35F8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D8CA9DE52B16B1EA00BC35F8 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		D8CA9DE72B16B20D00BC35F8 /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
+		D8CA9DE92B16B21D00BC35F8 /* SessionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfo.swift; sourceTree = "<group>"; };
+		D8CA9DEB2B16B22D00BC35F8 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		D8CA9DED2B16B23D00BC35F8 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		D8CA9DEF2B16B25800BC35F8 /* VehicleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleConfig.swift; sourceTree = "<group>"; };
+		D8CA9DF12B16B26800BC35F8 /* VehicleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleState.swift; sourceTree = "<group>"; };
+		D8CA9DF32B16B27800BC35F8 /* EASubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EASubscription.swift; sourceTree = "<group>"; };
+		D8CA9DF52B16B28700BC35F8 /* ChargingAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargingAccount.swift; sourceTree = "<group>"; };
+		D8CA9DF72B16B29400BC35F8 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
+		D8CA9DF92B16B2A200BC35F8 /* CabinState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinState.swift; sourceTree = "<group>"; };
+		D8CA9DFB2B16B2AF00BC35F8 /* BodyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyState.swift; sourceTree = "<group>"; };
+		D8CA9DFD2B16B2BB00BC35F8 /* ChassisState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChassisState.swift; sourceTree = "<group>"; };
+		D8CA9DFF2B16B2C800BC35F8 /* ChargingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargingState.swift; sourceTree = "<group>"; };
+		D8CA9E012B16B2D600BC35F8 /* GPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
+		D8CA9E032B16B2E300BC35F8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D8CA9E052B16B2F000BC35F8 /* SoftwareUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftwareUpdate.swift; sourceTree = "<group>"; };
+		D8CA9E072B16B2FB00BC35F8 /* AlarmState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmState.swift; sourceTree = "<group>"; };
+		D8CA9E092B16B30A00BC35F8 /* HVACStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HVACStatus.swift; sourceTree = "<group>"; };
+		D8CA9E0B2B16B31900BC35F8 /* MobileAppReqStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAppReqStatus.swift; sourceTree = "<group>"; };
+		D8CA9E0D2B16B32800BC35F8 /* TCUInternetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCUInternetStatus.swift; sourceTree = "<group>"; };
+		D8CA9E0F2B16B42A00BC35F8 /* URLStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStrings.swift; sourceTree = "<group>"; };
+		D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVehiclesReponse.swift; sourceTree = "<group>"; };
+		D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8CA9DA42B166B3300BC35F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DB52B166B3400BC35F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DBF2B166B3400BC35F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D8CA9D9E2B166B3300BC35F8 = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DA92B166B3300BC35F8 /* BearTalk */,
+				D8CA9DBB2B166B3400BC35F8 /* BearTalkTests */,
+				D8CA9DC52B166B3400BC35F8 /* BearTalkUITests */,
+				D8CA9DA82B166B3300BC35F8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8CA9DA82B166B3300BC35F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DA72B166B3300BC35F8 /* BearTalk.app */,
+				D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */,
+				D8CA9DC22B166B3400BC35F8 /* BearTalkUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8CA9DA92B166B3300BC35F8 /* BearTalk */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */,
+				D8CA9DE12B169C2400BC35F8 /* API */,
+				D8CA9DDF2B169C0E00BC35F8 /* Model */,
+				D8CA9DE02B169C1900BC35F8 /* View */,
+				D8CA9DE22B169C2F00BC35F8 /* Dongles */,
+				D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */,
+				D8CA9DB02B166B3400BC35F8 /* BearTalk.entitlements */,
+				D8CA9DB12B166B3400BC35F8 /* Preview Content */,
+			);
+			path = BearTalk;
+			sourceTree = "<group>";
+		};
+		D8CA9DB12B166B3400BC35F8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DB22B166B3400BC35F8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D8CA9DBB2B166B3400BC35F8 /* BearTalkTests */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */,
+			);
+			path = BearTalkTests;
+			sourceTree = "<group>";
+		};
+		D8CA9DC52B166B3400BC35F8 /* BearTalkUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DC62B166B3400BC35F8 /* BearTalkUITests.swift */,
+				D8CA9DC82B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift */,
+			);
+			path = BearTalkUITests;
+			sourceTree = "<group>";
+		};
+		D8CA9DDF2B169C0E00BC35F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DDD2B169BCC00BC35F8 /* AppState.swift */,
+				D8CA9E132B16BA8800BC35F8 /* Responses */,
+				D8CA9DE92B16B21D00BC35F8 /* SessionInfo.swift */,
+				D8CA9DEB2B16B22D00BC35F8 /* UserProfile.swift */,
+				D8CA9E142B16BA9C00BC35F8 /* Vehicle */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8CA9DE02B169C1900BC35F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */,
+				D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */,
+				D8CA9DE32B169D8500BC35F8 /* HomeView.swift */,
+				D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8CA9DE12B169C2400BC35F8 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DD52B166B5100BC35F8 /* BearAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D8CA9DE22B169C2F00BC35F8 /* Dongles */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DD72B166C3D00BC35F8 /* Extensions.swift */,
+				D8CA9E0F2B16B42A00BC35F8 /* URLStrings.swift */,
+				D8CA9DD92B166C4400BC35F8 /* Enumerations.swift */,
+			);
+			path = Dongles;
+			sourceTree = "<group>";
+		};
+		D8CA9E132B16BA8800BC35F8 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DE52B16B1EA00BC35F8 /* LoginResponse.swift */,
+				D8CA9DE72B16B20D00BC35F8 /* RefreshResponse.swift */,
+				D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		D8CA9E142B16BA9C00BC35F8 /* Vehicle */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DED2B16B23D00BC35F8 /* Vehicle.swift */,
+				D8CA9DEF2B16B25800BC35F8 /* VehicleConfig.swift */,
+				D8CA9DF12B16B26800BC35F8 /* VehicleState.swift */,
+				D8CA9DF32B16B27800BC35F8 /* EASubscription.swift */,
+				D8CA9DF52B16B28700BC35F8 /* ChargingAccount.swift */,
+				D8CA9DF72B16B29400BC35F8 /* BatteryState.swift */,
+				D8CA9DF92B16B2A200BC35F8 /* CabinState.swift */,
+				D8CA9DFB2B16B2AF00BC35F8 /* BodyState.swift */,
+				D8CA9DFD2B16B2BB00BC35F8 /* ChassisState.swift */,
+				D8CA9DFF2B16B2C800BC35F8 /* ChargingState.swift */,
+				D8CA9E012B16B2D600BC35F8 /* GPS.swift */,
+				D8CA9E032B16B2E300BC35F8 /* Location.swift */,
+				D8CA9E052B16B2F000BC35F8 /* SoftwareUpdate.swift */,
+				D8CA9E072B16B2FB00BC35F8 /* AlarmState.swift */,
+				D8CA9E092B16B30A00BC35F8 /* HVACStatus.swift */,
+				D8CA9E0B2B16B31900BC35F8 /* MobileAppReqStatus.swift */,
+				D8CA9E0D2B16B32800BC35F8 /* TCUInternetStatus.swift */,
+			);
+			path = Vehicle;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D8CA9DA62B166B3300BC35F8 /* BearTalk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8CA9DCC2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalk" */;
+			buildPhases = (
+				D8CA9DA32B166B3300BC35F8 /* Sources */,
+				D8CA9DA42B166B3300BC35F8 /* Frameworks */,
+				D8CA9DA52B166B3300BC35F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BearTalk;
+			productName = BearTalk;
+			productReference = D8CA9DA72B166B3300BC35F8 /* BearTalk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D8CA9DB72B166B3400BC35F8 /* BearTalkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8CA9DCF2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalkTests" */;
+			buildPhases = (
+				D8CA9DB42B166B3400BC35F8 /* Sources */,
+				D8CA9DB52B166B3400BC35F8 /* Frameworks */,
+				D8CA9DB62B166B3400BC35F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8CA9DBA2B166B3400BC35F8 /* PBXTargetDependency */,
+			);
+			name = BearTalkTests;
+			productName = BearTalkTests;
+			productReference = D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D8CA9DC12B166B3400BC35F8 /* BearTalkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8CA9DD22B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalkUITests" */;
+			buildPhases = (
+				D8CA9DBE2B166B3400BC35F8 /* Sources */,
+				D8CA9DBF2B166B3400BC35F8 /* Frameworks */,
+				D8CA9DC02B166B3400BC35F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8CA9DC42B166B3400BC35F8 /* PBXTargetDependency */,
+			);
+			name = BearTalkUITests;
+			productName = BearTalkUITests;
+			productReference = D8CA9DC22B166B3400BC35F8 /* BearTalkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8CA9D9F2B166B3300BC35F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					D8CA9DA62B166B3300BC35F8 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					D8CA9DB72B166B3400BC35F8 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = D8CA9DA62B166B3300BC35F8;
+					};
+					D8CA9DC12B166B3400BC35F8 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = D8CA9DA62B166B3300BC35F8;
+					};
+				};
+			};
+			buildConfigurationList = D8CA9DA22B166B3300BC35F8 /* Build configuration list for PBXProject "BearTalk" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D8CA9D9E2B166B3300BC35F8;
+			productRefGroup = D8CA9DA82B166B3300BC35F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8CA9DA62B166B3300BC35F8 /* BearTalk */,
+				D8CA9DB72B166B3400BC35F8 /* BearTalkTests */,
+				D8CA9DC12B166B3400BC35F8 /* BearTalkUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8CA9DA52B166B3300BC35F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA9DB32B166B3400BC35F8 /* Preview Assets.xcassets in Resources */,
+				D8CA9DAF2B166B3400BC35F8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DB62B166B3400BC35F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DC02B166B3400BC35F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8CA9DA32B166B3300BC35F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA9E0E2B16B32800BC35F8 /* TCUInternetStatus.swift in Sources */,
+				D8CA9DE82B16B20D00BC35F8 /* RefreshResponse.swift in Sources */,
+				D8CA9E022B16B2D600BC35F8 /* GPS.swift in Sources */,
+				D8CA9DDC2B167EDF00BC35F8 /* LoginView.swift in Sources */,
+				D8CA9DF02B16B25800BC35F8 /* VehicleConfig.swift in Sources */,
+				D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */,
+				D8CA9DDE2B169BCC00BC35F8 /* AppState.swift in Sources */,
+				D8CA9DFC2B16B2AF00BC35F8 /* BodyState.swift in Sources */,
+				D8CA9DAB2B166B3300BC35F8 /* BearTalkApp.swift in Sources */,
+				D8CA9DD62B166B5100BC35F8 /* BearAPI.swift in Sources */,
+				D8CA9DE42B169D8500BC35F8 /* HomeView.swift in Sources */,
+				D8CA9E042B16B2E300BC35F8 /* Location.swift in Sources */,
+				D8CA9DF22B16B26800BC35F8 /* VehicleState.swift in Sources */,
+				D8CA9DF82B16B29400BC35F8 /* BatteryState.swift in Sources */,
+				D8CA9DE62B16B1EA00BC35F8 /* LoginResponse.swift in Sources */,
+				D8CA9DF42B16B27800BC35F8 /* EASubscription.swift in Sources */,
+				D8CA9DEE2B16B23D00BC35F8 /* Vehicle.swift in Sources */,
+				D8CA9DF62B16B28700BC35F8 /* ChargingAccount.swift in Sources */,
+				D8CA9E162B16D89F00BC35F8 /* HomeCell.swift in Sources */,
+				D8CA9DEC2B16B22D00BC35F8 /* UserProfile.swift in Sources */,
+				D8CA9E002B16B2C800BC35F8 /* ChargingState.swift in Sources */,
+				D8CA9E102B16B42A00BC35F8 /* URLStrings.swift in Sources */,
+				D8CA9DFE2B16B2BB00BC35F8 /* ChassisState.swift in Sources */,
+				D8CA9DDA2B166C4400BC35F8 /* Enumerations.swift in Sources */,
+				D8CA9E082B16B2FB00BC35F8 /* AlarmState.swift in Sources */,
+				D8CA9E062B16B2F000BC35F8 /* SoftwareUpdate.swift in Sources */,
+				D8CA9DEA2B16B21D00BC35F8 /* SessionInfo.swift in Sources */,
+				D8CA9E0C2B16B31900BC35F8 /* MobileAppReqStatus.swift in Sources */,
+				D8CA9E122B16BA5200BC35F8 /* UserVehiclesReponse.swift in Sources */,
+				D8CA9DFA2B16B2A200BC35F8 /* CabinState.swift in Sources */,
+				D8CA9DD82B166C3D00BC35F8 /* Extensions.swift in Sources */,
+				D8CA9E0A2B16B30A00BC35F8 /* HVACStatus.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DB42B166B3400BC35F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA9DBD2B166B3400BC35F8 /* BearTalkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8CA9DBE2B166B3400BC35F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA9DC92B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift in Sources */,
+				D8CA9DC72B166B3400BC35F8 /* BearTalkUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D8CA9DBA2B166B3400BC35F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8CA9DA62B166B3300BC35F8 /* BearTalk */;
+			targetProxy = D8CA9DB92B166B3400BC35F8 /* PBXContainerItemProxy */;
+		};
+		D8CA9DC42B166B3400BC35F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8CA9DA62B166B3300BC35F8 /* BearTalk */;
+			targetProxy = D8CA9DC32B166B3400BC35F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D8CA9DCA2B166B3400BC35F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D8CA9DCB2B166B3400BC35F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		D8CA9DCD2B166B3400BC35F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BearTalk/BearTalk.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BearTalk/Preview Content\"";
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8CA9DCE2B166B3400BC35F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BearTalk/BearTalk.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BearTalk/Preview Content\"";
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D8CA9DD02B166B3400BC35F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BearTalk.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BearTalk";
+			};
+			name = Debug;
+		};
+		D8CA9DD12B166B3400BC35F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BearTalk.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BearTalk";
+			};
+			name = Release;
+		};
+		D8CA9DD32B166B3400BC35F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BearTalk;
+			};
+			name = Debug;
+		};
+		D8CA9DD42B166B3400BC35F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T2N6RA2S89;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BearTalk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8CA9DA22B166B3300BC35F8 /* Build configuration list for PBXProject "BearTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA9DCA2B166B3400BC35F8 /* Debug */,
+				D8CA9DCB2B166B3400BC35F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8CA9DCC2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA9DCD2B166B3400BC35F8 /* Debug */,
+				D8CA9DCE2B166B3400BC35F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8CA9DCF2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA9DD02B166B3400BC35F8 /* Debug */,
+				D8CA9DD12B166B3400BC35F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8CA9DD22B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA9DD32B166B3400BC35F8 /* Debug */,
+				D8CA9DD42B166B3400BC35F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D8CA9D9F2B166B3300BC35F8 /* Project object */;
+}
