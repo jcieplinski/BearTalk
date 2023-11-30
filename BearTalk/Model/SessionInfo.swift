@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SessionInfo: Codable {
+struct SessionInfo: Codable, Equatable {
     let idToken: String
     let expiryTimeSec: Int
     let refreshToken: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GPS: Codable {
+struct GPS: Codable, Equatable {
     let location: Location
     let elevation: Int
     let positionTime: String?

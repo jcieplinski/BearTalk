@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ChassisState: Codable {
+struct ChassisState: Codable, Equatable {
     let odometer: Double
     let frontLeftTirePressBar: Double
     let frontRightTirePressBar: Double
     let rearLeftTirePressBar: Double
     let rearRightTirePressBar: Double
-    let headlightState: String
+    var headlightState: String
     let indicatorState: String
     let hardWarnLeftFront: String
     let hardWarnLeftRear: String

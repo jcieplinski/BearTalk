@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BatteryState: Codable {
+struct BatteryState: Codable, Equatable {
     let range: Int
     let chargePercent: Double
     let kwHr: Double

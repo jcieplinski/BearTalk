@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserProfile: Codable {
+struct UserProfile: Codable, Equatable {
     let email: String
     let locale: String
     let username: String

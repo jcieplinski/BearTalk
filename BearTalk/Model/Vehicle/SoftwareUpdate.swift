@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SoftwareUpdate: Codable {
+struct SoftwareUpdate: Codable, Equatable {
     let versionAvailable: String
     let installDurationMinutes: Int
     let percentComplete: Int

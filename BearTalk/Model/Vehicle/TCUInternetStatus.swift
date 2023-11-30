@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TCUInternetStatus: Codable {
+struct TCUInternetStatus: Codable, Equatable {
     let lteType: String
     let lteStatus: String
     let wifiStatus: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EASubscription: Codable {
+struct EASubscription: Codable, Equatable {
     let name: String
     let expirationDate: String
     let startDate: String

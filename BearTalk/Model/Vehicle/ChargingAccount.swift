@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChargingAccount: Codable {
+struct ChargingAccount: Codable, Equatable {
     let emaid: String
     let vehicleId: String
     let status: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HVACStatus: Codable {
+struct HVACStatus: Codable, Equatable {
     let powerMode: String
     let defrost: String
     let preconditionStatus: String

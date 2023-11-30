@@ -11,7 +11,7 @@ struct HomeCell: View {
     let title: String
     let action: () -> Void
 
-    @State var image: String
+    @Binding var image: String
 
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
@@ -31,5 +31,5 @@ struct HomeCell: View {
 }
 
 #Preview {
-    HomeCell(title: "Frunk", action: {}, image: "car.side.rear.open")
+    HomeCell(title: "Frunk", action: {}, image: .constant("car.side.rear.open"))
 }

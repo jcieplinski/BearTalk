@@ -119,7 +119,7 @@ final class BearAPI {
     }
 
     static func doorLockControl(lockState: LockState) async throws -> Bool {
-        var request = URLRequest(url: URL(string: .baseAPI + .doorLocksControl)!)
+        let request = URLRequest(url: URL(string: .baseAPI + .doorLocksControl)!)
         var authRequest = addAuthHeader(to: request)
 
         authRequest.httpMethod = "POST"
@@ -139,7 +139,7 @@ final class BearAPI {
     }
 
     static func cargoControl(area: Cargo, closureState: ClosureState) async throws -> Bool {
-        var request = URLRequest(url: URL(string: .baseAPI + area.controlURL)!)
+        let request = URLRequest(url: URL(string: .baseAPI + area.controlURL)!)
         var authRequest = addAuthHeader(to: request)
 
         authRequest.httpMethod = "POST"
@@ -159,13 +159,33 @@ final class BearAPI {
     }
 
     static func chargePortControl(closureState: ClosureState) async throws -> Bool {
-        var request = URLRequest(url: URL(string: .baseAPI + .chargePortControl)!)
+        let request = URLRequest(url: URL(string: .baseAPI + .chargePortControl)!)
         var authRequest = addAuthHeader(to: request)
 
         authRequest.httpMethod = "POST"
         authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
 
         let parameters: [String : Any] = ["vehicle_id": vehicleID, "closure_state": closureState.rawValue]
+
+        do {
+            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            let _ = try await URLSession.shared.data(for: authRequest)
+
+            return true
+        } catch let error {
+            print(error)
+            return false
+        }
+    }
+
+    static func lightsControl(action: LightsAction) async throws -> Bool {
+        let request = URLRequest(url: URL(string: .baseAPI + .lightsControl)!)
+        var authRequest = addAuthHeader(to: request)
+
+        authRequest.httpMethod = "POST"
+        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
+
+        let parameters: [String : Any] = ["vehicle_id": vehicleID, "action": action.rawValue]
 
         do {
             authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)

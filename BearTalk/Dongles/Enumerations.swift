@@ -88,3 +88,20 @@ enum ClosureState: String {
         }
     }
 }
+
+enum LightsAction: String {
+    case on = "LIGHTS_ON"
+    case off = "LIGHTS_OFF"
+    case flash = "LIGHTS_FLASH"
+
+    var lightsImage: String {
+        switch self {
+        case .on:
+            return "headlight.low.beam.fill"
+        case .off:
+            return "headlight.low.beam"
+        case .flash:
+            return "parkinglight"
+        }
+    }
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BodyState: Codable {
+struct BodyState: Codable, Equatable {
     var doorLocks: String
     var frontCargo: String
     let rearCargo: String

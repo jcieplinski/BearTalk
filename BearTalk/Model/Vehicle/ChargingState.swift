@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChargingState: Codable {
+struct ChargingState: Codable, Equatable {
     let chargeState: String
     let energyType: String
     let chargeSessionMi: Double

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CabinState: Codable {
+struct CabinState: Codable, Equatable {
     let interiorTemp: Double
     let exteriorTemp: Double
 }

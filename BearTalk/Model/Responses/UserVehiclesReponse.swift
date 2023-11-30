@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct UserVehiclesReponse: Codable {
+struct UserVehiclesReponse: Codable, Equatable {
     let userVehicleData: [Vehicle]
 }

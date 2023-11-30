@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RefreshResponse: Codable {
+struct RefreshResponse: Codable, Equatable {
     let sessionInfo: SessionInfo
 }

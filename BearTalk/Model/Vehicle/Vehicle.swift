@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Vehicle: Codable {
+struct Vehicle: Codable, Equatable {
     let vehicleId: String
     let accessLevel: String
     let vehicleConfig: VehicleConfig

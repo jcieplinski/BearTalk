@@ -13,18 +13,24 @@ struct HomeView: View {
     @State var vehicle: Vehicle?
     @State var noVehicleWarning: String = ""
 
+    @State var doorImage: String = LockState.locked.image
+    @State var frunkImage: String = ClosureState.closed.frunkImage
+    @State var trunkImage: String = ClosureState.closed.trunkImage
+    @State var chargePortImage: String = ClosureState.closed.chargePortImage
+    @State var lightsImage: String = LightsAction.off.lightsImage
+    @State var flashLightsImage: String = LightsAction.flash.lightsImage
+
     var body: some View {
         NavigationStack {
             VStack {
                 if let vehicle {
                     List {
-                        HomeCell(title: "Doors", action: toggleDoorLocks, image: LockState(rawValue: vehicle.vehicleState.bodyState.doorLocks)?.image ?? "questionMark")
-
-                        HomeCell(title: "Frunk", action: toggleFrunk, image: ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo)?.frunkImage ?? "questionMark")
-
-                        HomeCell(title: "Trunk", action: toggleTrunk, image: ClosureState(rawValue: vehicle.vehicleState.bodyState.rearCargo)?.trunkImage ?? "questionMark")
-
-                        HomeCell(title: "Charge Port", action: toggleChargePort, image: ClosureState(rawValue: vehicle.vehicleState.bodyState.chargePortState)?.chargePortImage ?? "questionMark")
+                        HomeCell(title: "Doors", action: toggleDoorLocks, image: $doorImage)
+                        HomeCell(title: "Frunk", action: toggleFrunk, image: $frunkImage)
+                        HomeCell(title: "Trunk", action: toggleTrunk, image: $trunkImage)
+                        HomeCell(title: "Charge Port", action: toggleChargePort, image: $chargePortImage)
+                        HomeCell(title: "Lights", action: toggleLights, image: $lightsImage)
+                        HomeCell(title: "Flash Lights", action: flashLights, image: $flashLightsImage)
                     }
                     .listStyle(.plain)
 
@@ -46,6 +52,15 @@ struct HomeView: View {
                         Text("Log Out")
                     }
                 }
+            }
+            .onChange(of: vehicle) { _, newValue in
+                guard let newValue else { return }
+
+                doorImage = LockState(rawValue: newValue.vehicleState.bodyState.doorLocks)?.image ?? "questionMark"
+                frunkImage = ClosureState(rawValue: newValue.vehicleState.bodyState.frontCargo)?.frunkImage ?? "questionMark"
+                trunkImage = ClosureState(rawValue: newValue.vehicleState.bodyState.rearCargo)?.trunkImage ?? "questionMark"
+                chargePortImage = ClosureState(rawValue: newValue.vehicleState.bodyState.chargePortState)?.chargePortImage ?? "questionMark"
+                lightsImage = LightsAction(rawValue: newValue.vehicleState.chassisState.headlightState)?.lightsImage ?? "questionMark"
             }
         }
     }
@@ -145,6 +160,48 @@ struct HomeView: View {
                 } catch let error {
                     print("Could not toggle chargePort state: \(error)")
                 }
+            }
+        }
+    }
+
+    private func toggleLights() {
+        if let lightsAction = LightsAction(rawValue: vehicle?.vehicleState.chassisState.headlightState ?? "") {
+            switch lightsAction {
+            case .on:
+                lights(action: .on)
+            case .off:
+                lights(action: .off)
+            case .flash:
+                break
+            }
+        }
+    }
+
+    private func flashLights() {
+        lights(action: .flash)
+    }
+
+    private func lights(action: LightsAction) {
+        Task {
+            do {
+                let _ = try await BearAPI.wakeUp()
+
+                switch action {
+                case .on:
+                    let success = try await BearAPI.lightsControl(action: .off)
+                    if success {
+                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.off.rawValue
+                    }
+                case .off:
+                    let success = try await BearAPI.lightsControl(action: .on)
+                    if success {
+                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.on.rawValue
+                    }
+                case .flash:
+                    let _ = try await BearAPI.lightsControl(action: .flash)
+                }
+            } catch let error {
+                print("Could not toggle light state: \(error)")
             }
         }
     }

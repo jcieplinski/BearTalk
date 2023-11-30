@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LoginResponse: Codable {
+struct LoginResponse: Codable, Equatable {
     let uid: String
     let sessionInfo: SessionInfo
     let userProfile: UserProfile

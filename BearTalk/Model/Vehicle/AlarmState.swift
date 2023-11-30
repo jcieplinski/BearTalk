@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlarmState: Codable {
+struct AlarmState: Codable, Equatable {
     let alarmStatus: String
     let alarmMode: String
 }

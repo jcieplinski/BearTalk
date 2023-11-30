@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MobileAppReqStatus: Codable {
+struct MobileAppReqStatus: Codable, Equatable {
     let alarmSetReq: String
     let chargePortReq: String
     let chargeLockReq: String

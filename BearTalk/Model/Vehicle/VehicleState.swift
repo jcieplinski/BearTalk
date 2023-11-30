@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct VehicleState: Codable {
+struct VehicleState: Codable, Equatable {
     let batteryState: BatteryState
     let powerState: String
     let cabinState: CabinState
     var bodyState: BodyState
     let lastUpdatedMs: String
-    let chassisState: ChassisState
+    var chassisState: ChassisState
     let chargingState: ChargingState
     let gps: GPS
     let softwareUpdate: SoftwareUpdate
