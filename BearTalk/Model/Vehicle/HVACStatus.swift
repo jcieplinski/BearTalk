@@ -9,6 +9,6 @@ import Foundation
 
 struct HVACStatus: Codable, Equatable {
     let powerMode: String
-    let defrost: String
+    var defrost: String
     let preconditionStatus: String
 }

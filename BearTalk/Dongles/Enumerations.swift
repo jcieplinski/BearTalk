@@ -13,6 +13,7 @@ enum DefaultsKey {
     static let password: String = "password"
     static let userName: String = "userName"
     static let vehicleID: String = "vehicleID"
+    static let carColor: String = "carColor"
 }
 
 enum LockState: String {
@@ -104,4 +105,53 @@ enum LightsAction: String {
             return "parkinglight"
         }
     }
+}
+
+enum DefrostAction: String {
+    case on = "DEFROST_ON"
+    case off = "DEFROST_OFF"
+
+    var defrostImage: String {
+        switch self {
+        case .on:
+            return "windshield.front.and.heat.waves"
+        case .off:
+            return "info.windshield"
+        }
+    }
+}
+
+enum CarColor: String {
+    case eureka = "EUREKA_GOLD"
+    case stellar = "STELLAR_WHITE"
+    case quantum = "QUANTUM_GRAY"
+    case zenith = "ZENITH_RED"
+    case cosmos = "COSMOS_SILVER"
+    case infinite = "INFINITE_BLACK"
+    case fathom = "FATHOM_BLUE"
+
+    var image: String {
+        switch self {
+        case .eureka:
+            return "eureka"
+        case .stellar:
+            return "stellar"
+        case .quantum:
+            return "quantum"
+        case .zenith:
+            return "zenith"
+        case .cosmos:
+            return "cosmos"
+        case .infinite:
+            return "infinite"
+        case .fathom:
+            return "fathom"
+        }
+    }
+}
+
+enum AppTab {
+    case home
+    case stats
+    case map
 }

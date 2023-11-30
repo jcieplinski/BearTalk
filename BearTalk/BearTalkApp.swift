@@ -11,10 +11,15 @@ import SwiftUI
 struct BearTalkApp: App {
     var appState: AppState = AppState()
 
+    init() {
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "AccentColor")
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appState)
+                .tint(.accent)
         }
     }
 }

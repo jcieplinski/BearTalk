@@ -20,4 +20,5 @@ extension String {
     static let chargePortControl = "charge_port_control"
     static let userVehicles = "user_vehicles"
     static let lightsControl = "lights_control"
+    static let defrostControl = "defrost_control"
 }

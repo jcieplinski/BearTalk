@@ -11,6 +11,7 @@ final class BearAPI {
     @AppStorage(DefaultsKey.authorization) static var authorization: String = ""
     @AppStorage(DefaultsKey.refreshToken) static var refreshToken: String = ""
     @AppStorage(DefaultsKey.vehicleID) static var vehicleID: String = ""
+    @AppStorage(DefaultsKey.carColor) static var carColor: String = "eureka"
 
     private static func addAuthHeader(to urlRequest: URLRequest) -> URLRequest {
         var request = urlRequest
@@ -47,6 +48,7 @@ final class BearAPI {
         authorization = loginResponse.sessionInfo.idToken
         refreshToken = loginResponse.sessionInfo.refreshToken
         vehicleID = loginResponse.userVehicleData.first?.vehicleId ?? ""
+        carColor = CarColor(rawValue: loginResponse.userVehicleData.first?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
         return (loginResponse: loginResponse, response: response)
     }
 
@@ -57,7 +59,7 @@ final class BearAPI {
         return true
     }
 
-    static func refreshToken() async throws -> Bool {
+    static func refreshToken() async throws -> Int {
         var request = URLRequest(url: URL(string: .baseAPI + .refreshToken)!)
 
         request.httpMethod = "POST"
@@ -72,12 +74,12 @@ final class BearAPI {
             authorization = sessionInfo.idToken
             refreshToken = sessionInfo.refreshToken
 
-            return true
+            return sessionInfo.expiryTimeSec
         } catch let error {
             print(error)
             authorization = ""
             refreshToken = ""
-            return false
+            return 0
         }
     }
 
@@ -91,6 +93,7 @@ final class BearAPI {
             let (data, _) = try await URLSession.shared.data(for: authRequest)
             let vehicle = try JSONDecoder().decode(UserVehiclesReponse.self, from: data).userVehicleData.first
 
+            carColor = CarColor(rawValue: vehicle?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
             return vehicle
         } catch let error {
             print(error)
@@ -186,6 +189,26 @@ final class BearAPI {
         authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
 
         let parameters: [String : Any] = ["vehicle_id": vehicleID, "action": action.rawValue]
+
+        do {
+            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            let _ = try await URLSession.shared.data(for: authRequest)
+
+            return true
+        } catch let error {
+            print(error)
+            return false
+        }
+    }
+
+    static func defrostControl(action: DefrostAction) async throws -> Bool {
+        let request = URLRequest(url: URL(string: .baseAPI + .defrostControl)!)
+        var authRequest = addAuthHeader(to: request)
+
+        authRequest.httpMethod = "POST"
+        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
+
+        let parameters: [String : Any] = ["vehicle_id": vehicleID, "hvac_defrost": action.rawValue]
 
         do {
             authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)

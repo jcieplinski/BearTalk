@@ -26,7 +26,8 @@ struct HomeCell: View {
             }
             .buttonStyle(BorderlessButtonStyle())
         }
-        .padding(.vertical)
+        .padding(.vertical, 8)
+        .listRowBackground(Color.clear)
     }
 }
 

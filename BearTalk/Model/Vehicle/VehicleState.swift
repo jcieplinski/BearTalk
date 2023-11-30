@@ -20,7 +20,7 @@ struct VehicleState: Codable, Equatable {
     let alarmState: AlarmState
     let cloudConnectionState: String
     let keylessDrivingState: String
-    let hvacStatus: HVACStatus
+    var hvacStatus: HVACStatus
     let driveMode: String
     let privacyMode: String
     let gearPosition: String
