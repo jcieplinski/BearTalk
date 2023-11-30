@@ -148,6 +148,116 @@ enum CarColor: String {
             return "fathom"
         }
     }
+
+    var title: String {
+        switch self {
+        case .eureka:
+            return "Eureka Gold"
+        case .stellar:
+            return "Stellar White"
+        case .quantum:
+            return "Quantum Grey"
+        case .zenith:
+            return "Zenith Red"
+        case .cosmos:
+            return "Cosmos Silver"
+        case .infinite:
+            return "Infinite Black"
+        case .fathom:
+            return "Fathom Blue"
+        }
+    }
+}
+
+enum Interior: String {
+    case santaCruz = "SANTA_CRUZ"
+    case mojave = "MOJAVE"
+    case tahoe = "TAHOE"
+    case santaMonica = "SANTA_MONICA"
+
+    var title: String {
+        switch self {
+        case .santaCruz:
+            "Santa Cruz"
+        case .mojave:
+            "Mojave"
+        case .tahoe:
+            "Tahoe"
+        case .santaMonica:
+            "Santa Monica"
+        }
+    }
+}
+
+enum Look: String {
+    case platinum = "PLATINUM"
+    case stealth = "STEALTH"
+
+    var title: String {
+        switch self {
+        case .platinum:
+            "Platinum"
+        case .stealth:
+            "Stealth"
+        }
+    }
+}
+
+enum Wheels: String {
+    case range = "RANGE"
+    case lite = "LITE"
+    case blade = "BLADE"
+    case dream = "DREAM"
+
+    var title: String {
+        switch self {
+        case .range:
+            "19\" Aero Range"
+        case .lite:
+            "20\" Areo Lite"
+        case .blade:
+            "21\" Aero Blade"
+        case .dream:
+            "21\" Dream"
+        }
+    }
+}
+
+enum Model: String {
+    case air = "AIR"
+    case gravity = "GRAVITY"
+
+    var title: String {
+        switch self {
+        case .air:
+            "Air"
+        case .gravity:
+            "Gravity"
+        }
+    }
+}
+
+enum Trim: String {
+    case dreamEdition = "DREAM_EDITION"
+    case grandTouring = "GRAND_TOURING"
+    case grandTouringPerformance = "GRAND_TOURING_PERFORMANCE"
+    case touring = "TOURING"
+    case pure = "PURE"
+
+    var title: String {
+        switch self {
+        case .dreamEdition:
+            "Dream Edition"
+        case .grandTouring:
+            "Grand Touring"
+        case .grandTouringPerformance:
+            "Grand Touring Performance"
+        case .touring:
+            "Touring"
+        case .pure:
+            "Pure"
+        }
+    }
 }
 
 enum AppTab {

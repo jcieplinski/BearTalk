@@ -14,13 +14,13 @@
             filePath = "BearTalk/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "setRefreshTimer(seconds:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 77ed2adf3ddb02e2"
+                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 77ed2adf3ddb0366"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/joe/git/BearTalk/BearTalk/View/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
                   offsetFromSymbolStart = "448">
                </Location>
                <Location
-                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - a2d763a48481abde"
+                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - a2d763a48481aa5a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,12 +45,12 @@
                   urlString = "file:///Users/joe/git/BearTalk/BearTalk/View/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
                   offsetFromSymbolStart = "68">
                </Location>
                <Location
-                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 9ce71b6cc3526031"
+                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 9ce71b6cc35261b5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -60,12 +60,12 @@
                   urlString = "file:///Users/joe/git/BearTalk/BearTalk/View/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
                   offsetFromSymbolStart = "40">
                </Location>
                <Location
-                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 53d2ba03e2a877d8"
+                  uuid = "28F243DA-414E-461F-A3C0-2DA904088BB2 - 53d2ba03e2a8765c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -75,8 +75,8 @@
                   urlString = "file:///Users/joe/git/BearTalk/BearTalk/View/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>

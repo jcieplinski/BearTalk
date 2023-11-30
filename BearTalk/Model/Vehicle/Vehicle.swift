@@ -10,7 +10,7 @@ import Foundation
 struct Vehicle: Codable, Equatable {
     let vehicleId: String
     let accessLevel: String
-    let vehicleConfig: VehicleConfig
+    var vehicleConfig: VehicleConfig
     var vehicleState: VehicleState
 
     static func example() -> Vehicle? {

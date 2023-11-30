@@ -12,6 +12,9 @@ struct ContentView: View {
     @EnvironmentObject private var appState: AppState
     @AppStorage(DefaultsKey.refreshToken) var refreshToken: String = ""
 
+    var homeViewModel: HomeViewModel = HomeViewModel()
+    var statsViewModel: StatsViewModel = StatsViewModel()
+
     @State var refreshTimer: Timer?
 
     var body: some View {
@@ -20,17 +23,18 @@ struct ContentView: View {
                 Spacer()
             } else if appState.loggedIn {
                 TabView(selection: $appState.selectedTab) {
-                    HomeView()
+                    HomeView(model: homeViewModel)
                         .tabItem {
                             Label("", systemImage: "house.fill")
                         }
                         .tag(AppTab.home)
-                    StatsView()
+                    StatsView(model: statsViewModel)
                         .tabItem {
                             Label("", systemImage: "chart.bar.xaxis")
                         }
                         .tag(AppTab.stats)
                 }
+                .tint(Color(uiColor: .label))
             } else {
                 LoginView()
             }

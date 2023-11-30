@@ -32,5 +32,9 @@ struct HomeCell: View {
 }
 
 #Preview {
-    HomeCell(title: "Frunk", action: {}, image: .constant("car.side.rear.open"))
+    return List {
+        HomeCell(title: "Frunk", action: {}, image: .constant("car.side.rear.open"))
+        HomeCell(title: "Frunk", action: {}, image: .constant("car.side.rear.open"))
+        HomeCell(title: "Frunk", action: {}, image: .constant("car.side.rear.open"))
+    }
 }

@@ -13,6 +13,7 @@ struct BearTalkApp: App {
 
     init() {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "AccentColor")
+        UITabBar.appearance().unselectedItemTintColor = UIColor.label.withAlphaComponent(0.18)
     }
 
     var body: some Scene {

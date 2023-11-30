@@ -48,6 +48,7 @@
 		D8CA9E102B16B42A00BC35F8 /* URLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E0F2B16B42A00BC35F8 /* URLStrings.swift */; };
 		D8CA9E122B16BA5200BC35F8 /* UserVehiclesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */; };
 		D8CA9E162B16D89F00BC35F8 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */; };
+		D8F344632B1915EC00ECBEFF /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F344622B1915EC00ECBEFF /* StatsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		D8CA9E0F2B16B42A00BC35F8 /* URLStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStrings.swift; sourceTree = "<group>"; };
 		D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVehiclesReponse.swift; sourceTree = "<group>"; };
 		D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		D8F344622B1915EC00ECBEFF /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,9 +230,8 @@
 			children = (
 				D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */,
 				D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */,
-				D8CA9DE32B169D8500BC35F8 /* HomeView.swift */,
-				D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */,
-				D8763EEF2B18E5CC00C01F5F /* StatsView.swift */,
+				D8F344602B1915D200ECBEFF /* Home */,
+				D8F344612B1915DF00ECBEFF /* Stats */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,6 +286,24 @@
 				D8CA9E0D2B16B32800BC35F8 /* TCUInternetStatus.swift */,
 			);
 			path = Vehicle;
+			sourceTree = "<group>";
+		};
+		D8F344602B1915D200ECBEFF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA9DE32B169D8500BC35F8 /* HomeView.swift */,
+				D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D8F344612B1915DF00ECBEFF /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				D8763EEF2B18E5CC00C01F5F /* StatsView.swift */,
+				D8F344622B1915EC00ECBEFF /* StatsCell.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,6 +470,7 @@
 				D8CA9E0C2B16B31900BC35F8 /* MobileAppReqStatus.swift in Sources */,
 				D8CA9E122B16BA5200BC35F8 /* UserVehiclesReponse.swift in Sources */,
 				D8CA9DFA2B16B2A200BC35F8 /* CabinState.swift in Sources */,
+				D8F344632B1915EC00ECBEFF /* StatsCell.swift in Sources */,
 				D8CA9DD82B166C3D00BC35F8 /* Extensions.swift in Sources */,
 				D8CA9E0A2B16B30A00BC35F8 /* HVACStatus.swift in Sources */,
 			);

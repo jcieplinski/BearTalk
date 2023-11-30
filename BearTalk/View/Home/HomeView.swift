@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var appState: AppState
 
-    @Bindable var model: HomeViewModel = HomeViewModel()
+    @Bindable var model: HomeViewModel
 
     @State var showLogOutWarning: Bool = false
 
@@ -41,6 +41,7 @@ struct HomeView: View {
                 }
                 Spacer()
             }
+            .tint(.accent)
             .padding()
             .frame(maxWidth: .infinity)
             .task {

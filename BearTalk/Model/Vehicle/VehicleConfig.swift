@@ -12,7 +12,7 @@ struct VehicleConfig: Codable, Equatable {
     let model: String
     let modelVariant: String
     let releaseDate: String?
-    let nickname: String
+    var nickname: String
     let paintColor: String
     let emaId: String
     let wheels: String
