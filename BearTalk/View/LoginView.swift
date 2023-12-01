@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct LoginView: View {
     @EnvironmentObject private var appState: AppState
@@ -17,7 +18,7 @@ struct LoginView: View {
         NavigationStack {
             VStack(spacing: 22) {
                 List {
-                    Text("Log in to your Lucid.com account to begin.")
+                    Text("Log in to your lucidmotors.com account to begin.")
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
                         .padding(.bottom)
@@ -70,6 +71,7 @@ struct LoginView: View {
                         Text("Log In")
                             .padding(.horizontal)
                             .frame(maxWidth: .infinity)
+                            .frame(minHeight: 28)
                     }
                     .buttonStyle(.borderedProminent)
                     .listRowBackground(Color.clear)
@@ -77,6 +79,10 @@ struct LoginView: View {
                     .tint(.accentColor)
                     .frame(maxWidth: .infinity)
                     .padding(.top)
+                    Text("Your username and password will remain between you and Lucid Motors. This app does not send any authorization information to the app creators.")
+                        .font(.caption)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                     if showingProgress {
                         ProgressView()
                             .frame(maxWidth: .infinity)
@@ -90,7 +96,7 @@ struct LoginView: View {
 
             }
             .padding([.top, .leading, .trailing])
-            .navigationTitle("Log In")
+            .navigationTitle("Welcome")
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
