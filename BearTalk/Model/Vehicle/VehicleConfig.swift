@@ -23,7 +23,7 @@ struct VehicleConfig: Codable, Equatable {
     let edition: String
     let battery: String
     let interior: String
-    let specialIdentifiers: [String]?
+    let specialIdentifiers: [String: String]?
     let look: String
     let exteriorColorCode: String
     let interiorColorCode: String
