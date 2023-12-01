@@ -26,6 +26,34 @@ import SwiftUI
     var chargePercentage: String = ""
     var range: String = ""
 
+    func getInfoString() async -> String {
+        do {
+            if let vehicle {
+                var config = vehicle.vehicleConfig
+                config.vin = ""
+                config.emaId = ""
+                config.chargingAccounts = []
+                config.easubscription = EASubscription(name: "", expirationDate: "", startDate: "", status: "")
+                config.regionCode = ""
+                config.countryCode = ""
+                config.nickname = ""
+                
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try jsonEncoder.encode(config)
+                if let json = String(data: jsonData, encoding: String.Encoding.utf8) {
+                    return json
+                } else {
+                    return ""
+                }
+            } else {
+                return ""
+            }
+        } catch let error {
+            print("could not convert vehicleInfo to json \(error)")
+            return ""
+        }
+    }
+
     func updateStats() {
         guard let vehicle else { return }
 

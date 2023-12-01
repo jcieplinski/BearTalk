@@ -208,6 +208,9 @@ enum Wheels: String {
     case lite = "LITE"
     case blade = "BLADE"
     case dream = "DREAM"
+    case performance = "PERFORMANCE"
+    case bladeGraphite = "BLADE_GRAPHITE"
+    case liteStealth = "LITE_STEALTH"
 
     var title: String {
         switch self {
@@ -219,6 +222,12 @@ enum Wheels: String {
             "21\" Aero Blade"
         case .dream:
             "21\" Dream"
+        case .performance:
+            "21\" Performance"
+        case .bladeGraphite:
+            "21\" Aero Blade Graphite"
+        case .liteStealth:
+            "20\" Aero Lite Stealth"
         }
     }
 }
@@ -264,4 +273,34 @@ enum AppTab {
     case home
     case stats
     case map
+}
+
+enum FocusableField: Hashable {
+    case userName
+    case password
+}
+
+enum PowerState: String {
+    case unknown = "UNKNOWN"
+    case sleep = "SLEEP"
+    case sleepCharge = "SLEEP_CHARGE"
+    case monitor = "MONITOR"
+
+    var image: String {
+        switch self {
+        case .unknown:
+            "questionmark"
+        case .sleep:
+            "zzz"
+        case .sleepCharge:
+            "bolt.fill"
+        case .monitor:
+            "parkingsign"
+        }
+    }
+}
+
+enum PowerImage: String {
+    case sleep = "zzz"
+    case awake = "parkingsign.circle"
 }

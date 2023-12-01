@@ -8,18 +8,18 @@
 import Foundation
 
 struct VehicleConfig: Codable, Equatable {
-    let vin: String
+    var vin: String
     let model: String
     let modelVariant: String
     let releaseDate: String?
     var nickname: String
     let paintColor: String
-    let emaId: String
+    var emaId: String
     let wheels: String
-    let easubscription: EASubscription
-    let chargingAccounts: [ChargingAccount]
-    let countryCode: String
-    let regionCode: String
+    var easubscription: EASubscription
+    var chargingAccounts: [ChargingAccount]
+    var countryCode: String
+    var regionCode: String
     let edition: String
     let battery: String
     let interior: String

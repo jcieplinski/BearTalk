@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D865A4B12B19418F00B024F9 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D865A4B02B19418F00B024F9 /* MailView.swift */; };
+		D865A4BD2B196AC800B024F9 /* NoCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D865A4BC2B196AC800B024F9 /* NoCarView.swift */; };
 		D8763EEC2B18265000C01F5F /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = D8763EEB2B1822F900C01F5F /* sample.json */; };
 		D8763EF02B18E5CC00C01F5F /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EEF2B18E5CC00C01F5F /* StatsView.swift */; };
 		D8763EF22B18E71100C01F5F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EF12B18E71100C01F5F /* HomeViewModel.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D865A4B02B19418F00B024F9 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		D865A4BC2B196AC800B024F9 /* NoCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCarView.swift; sourceTree = "<group>"; };
 		D8763EEB2B1822F900C01F5F /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		D8763EEF2B18E5CC00C01F5F /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D8763EF12B18E71100C01F5F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */,
+				D865A4BC2B196AC800B024F9 /* NoCarView.swift */,
+				D865A4B02B19418F00B024F9 /* MailView.swift */,
 				D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */,
 				D8F344602B1915D200ECBEFF /* Home */,
 				D8F344612B1915DF00ECBEFF /* Stats */,
@@ -439,6 +445,7 @@
 			files = (
 				D8763EF52B19032E00C01F5F /* StatsViewModel.swift in Sources */,
 				D8CA9E0E2B16B32800BC35F8 /* TCUInternetStatus.swift in Sources */,
+				D865A4B12B19418F00B024F9 /* MailView.swift in Sources */,
 				D8CA9DE82B16B20D00BC35F8 /* RefreshResponse.swift in Sources */,
 				D8CA9E022B16B2D600BC35F8 /* GPS.swift in Sources */,
 				D8CA9DDC2B167EDF00BC35F8 /* LoginView.swift in Sources */,
@@ -452,6 +459,7 @@
 				D8763EF02B18E5CC00C01F5F /* StatsView.swift in Sources */,
 				D8CA9E042B16B2E300BC35F8 /* Location.swift in Sources */,
 				D8CA9DF22B16B26800BC35F8 /* VehicleState.swift in Sources */,
+				D865A4BD2B196AC800B024F9 /* NoCarView.swift in Sources */,
 				D8CA9DF82B16B29400BC35F8 /* BatteryState.swift in Sources */,
 				D8CA9DE62B16B1EA00BC35F8 /* LoginResponse.swift in Sources */,
 				D8CA9DF42B16B27800BC35F8 /* EASubscription.swift in Sources */,
@@ -636,6 +644,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -644,8 +653,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -674,6 +683,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -682,8 +692,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

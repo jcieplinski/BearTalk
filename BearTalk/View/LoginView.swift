@@ -10,21 +10,17 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject private var appState: AppState
 
+    @FocusState var focused: FocusableField?
+    @State var showingProgress: Bool = false
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 22) {
                 List {
-                    Image(appState.carColor)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 120)
-                        .frame(maxWidth: .infinity)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
                     Text("Log in to your Lucid.com account to begin.")
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical)
+                        .padding(.bottom)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                     Capsule(style: .continuous)
@@ -34,8 +30,15 @@ struct LoginView: View {
                         .overlay {
                             TextField("UserName", text: $appState.userName)
                                 .textFieldStyle(.plain)
-                                .textContentType(.username)
+                                .textContentType(.emailAddress)
+                                .focused($focused, equals: .userName)
                                 .padding()
+                                .submitLabel(.next)
+                                .keyboardType(.emailAddress)
+                                .autocorrectionDisabled()
+                                .onSubmit {
+                                    focused = .password
+                                }
                         }
 
                     Capsule(style: .continuous)
@@ -46,24 +49,47 @@ struct LoginView: View {
                             SecureField("Password", text: $appState.password)
                                 .textFieldStyle(.plain)
                                 .textContentType(.password)
+                                .focused($focused, equals: .password)
                                 .padding()
+                                .onSubmit {
+                                    focused = nil
+                                }
                         }
+                    Image(appState.carColor)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
+                        .frame(width: 120)
+                        .frame(maxWidth: .infinity)
+                        .padding(.top)
+                    Button {
+                        appState.logIn()
+                        showingProgress = true
+                    } label: {
+                        Text("Log In")
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .tint(.accentColor)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top)
+                    if showingProgress {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                    }
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
                 .padding()
-                Spacer()
-                Button {
-                    appState.logIn()
-                } label: {
-                    Text("Log In")
-                        .padding(.horizontal)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.accentColor)
 
             }
-            .padding()
+            .padding([.top, .leading, .trailing])
             .navigationTitle("Log In")
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)

@@ -19,7 +19,9 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if appState.appHoldScreen {
+            if appState.noCarMode {
+                NoCarView()
+            } else if appState.appHoldScreen {
                 Spacer()
             } else if appState.loggedIn {
                 TabView(selection: $appState.selectedTab) {

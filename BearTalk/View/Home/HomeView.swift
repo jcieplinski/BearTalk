@@ -24,6 +24,10 @@ struct HomeView: View {
                         .rotationEffect(.degrees(90))
                         .frame(width: 100, height: 100)
                         .padding(8)
+                        .overlay(alignment: .topTrailing) {
+                            Image(systemName: model.powerState.image)
+                                .offset(x: 80)
+                        }
                     List {
                         HomeCell(title: "Doors", action: model.toggleDoorLocks, image: $model.doorImage)
                         HomeCell(title: "Frunk", action: model.toggleFrunk, image: $model.frunkImage)

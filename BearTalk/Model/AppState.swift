@@ -12,8 +12,10 @@ final class AppState: ObservableObject {
     @Published var appHoldScreen: Bool = true
     @Published var selectedTab: AppTab = .home
 
+    @Published var noCarMode: Bool = false
+
     @AppStorage(DefaultsKey.userName) var userName: String = ""
-    @AppStorage(DefaultsKey.password) var password: String = ""
+    @Published var password: String = ""
     @AppStorage(DefaultsKey.carColor) var carColor: String = "eureka"
 
     var backgroundColors: [Color] {
@@ -43,12 +45,23 @@ final class AppState: ObservableObject {
 
             } catch let error {
                 print("Could not log in: \(error)")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+
+                    noCarMode = true
+                }
             }
         }
     }
 
     func logOut() {
         Task {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+
+                noCarMode = false
+            }
+
             let loggedOut = try await BearAPI.logOut()
 
             if loggedOut {

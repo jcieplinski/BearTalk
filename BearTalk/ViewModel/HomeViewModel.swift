@@ -10,6 +10,7 @@ import SwiftUI
 @Observable final class HomeViewModel {
     var vehicle: Vehicle?
     var noVehicleWarning: String = ""
+    var powerState: PowerState = .sleep
 
     var doorImage: String = LockState.locked.image
     var frunkImage: String = ClosureState.closed.frunkImage
@@ -22,12 +23,13 @@ import SwiftUI
     func updateHomeImages() {
         guard let vehicle else { return }
 
-        doorImage = LockState(rawValue: vehicle.vehicleState.bodyState.doorLocks)?.image ?? "questionMark"
-        frunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo)?.frunkImage ?? "questionMark"
-        trunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.rearCargo)?.trunkImage ?? "questionMark"
-        chargePortImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.chargePortState)?.chargePortImage ?? "questionMark"
-        lightsImage = LightsAction(rawValue: vehicle.vehicleState.chassisState.headlightState)?.lightsImage ?? "questionMark"
-        defrostImage = DefrostAction(rawValue: vehicle.vehicleState.hvacStatus.defrost)?.defrostImage ?? "questionMark"
+        doorImage = LockState(rawValue: vehicle.vehicleState.bodyState.doorLocks)?.image ?? "questionmark"
+        frunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo)?.frunkImage ?? "questionmark"
+        trunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.rearCargo)?.trunkImage ?? "questionmark"
+        chargePortImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.chargePortState)?.chargePortImage ?? "questionmark"
+        lightsImage = LightsAction(rawValue: vehicle.vehicleState.chassisState.headlightState)?.lightsImage ?? "questionmark"
+        defrostImage = DefrostAction(rawValue: vehicle.vehicleState.hvacStatus.defrost)?.defrostImage ?? "questionmark"
+        powerState = PowerState(rawValue: vehicle.vehicleState.powerState) ?? .unknown
     }
 
     func toggleDoorLocks() {
