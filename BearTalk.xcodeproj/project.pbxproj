@@ -71,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D82FA60F2B1A425C00B11EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D865A4B02B19418F00B024F9 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		D865A4BC2B196AC800B024F9 /* NoCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCarView.swift; sourceTree = "<group>"; };
 		D8763EEB2B1822F900C01F5F /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		D8CA9DA92B166B3300BC35F8 /* BearTalk */ = {
 			isa = PBXGroup;
 			children = (
+				D82FA60F2B1A425C00B11EC3 /* Info.plist */,
 				D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */,
 				D8763EEB2B1822F900C01F5F /* sample.json */,
 				D8CA9DE12B169C2400BC35F8 /* API */,
@@ -644,6 +646,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -683,6 +686,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
