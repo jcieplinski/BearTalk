@@ -10,7 +10,7 @@ import Foundation
 struct BodyState: Codable, Equatable {
     var doorLocks: String
     var frontCargo: String
-    let rearCargo: String
+    var rearCargo: String
     let frontLeftDoor: String
     let frontRightDoor: String
     let rearLeftDoor: String

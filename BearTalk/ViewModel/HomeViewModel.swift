@@ -68,7 +68,8 @@ import SwiftUI
     }
 
     func toggleCargo(area: Cargo) {
-        if let closureState = ClosureState(rawValue: vehicle?.vehicleState.bodyState.frontCargo ?? "") {
+        let rawValue = area == .frunk ? vehicle?.vehicleState.bodyState.frontCargo : vehicle?.vehicleState.bodyState.rearCargo
+        if let closureState = ClosureState(rawValue: rawValue ?? "") {
             Task {
                 do {
                     let _ = try await BearAPI.wakeUp()
@@ -79,18 +80,28 @@ import SwiftUI
                             area: area,
                             closureState: .closed)
                         if success {
-                            vehicle?.vehicleState.bodyState.frontCargo = ClosureState.closed.rawValue
+                            switch area {
+                            case .frunk:
+                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.closed.rawValue
+                            case .trunk:
+                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.closed.rawValue
+                            }
                         }
                     case .closed:
                         let success = try await BearAPI.cargoControl(
                             area: area,
                             closureState: .open)
                         if success {
-                            vehicle?.vehicleState.bodyState.frontCargo = ClosureState.open.rawValue
+                            switch area {
+                            case .frunk:
+                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.open.rawValue
+                            case .trunk:
+                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.open.rawValue
+                            }
                         }
                     }
                 } catch let error {
-                    print("Could not toggle frunk state: \(error)")
+                    print("Could not toggle cargo area \(area.controlURL) state: \(error)")
                 }
             }
         }
