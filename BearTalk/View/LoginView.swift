@@ -24,6 +24,11 @@ struct LoginView: View {
                         .padding(.bottom)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
+                    Button {
+                        authenticate()
+                    } label: {
+                        Text("Use FaceID")
+                    }
                     Capsule(style: .continuous)
                         .foregroundStyle(Color.gray.opacity(0.3))
                         .listRowSeparator(.hidden)
@@ -100,6 +105,50 @@ struct LoginView: View {
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
+            .onAppear {
+                Task {
+                    do {
+                        let passwordData = try KeyChain.readPassword(service: DefaultsKey.password, account: appState.userName)
+
+                        appState.password = String(decoding: passwordData, as: UTF8.self)
+                    } catch let error {
+                        print("Error restoring password from KeyChain\(error)")
+                    }
+                }
+//                DispatchQueue.main.async {
+////                    if let receivedData = KeyChain.load(key: DefaultsKey.password) {
+////
+////                        let result = receivedData.to(type: String.self)
+////                        appState.password = result
+////                    }
+//
+//
+//
+//
+//                }
+            }
+        }
+    }
+
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "We need to unlock your data."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                if success {
+
+                } else {
+                    // there was a problem
+                }
+            }
+        } else {
+            // no biometrics
         }
     }
 }

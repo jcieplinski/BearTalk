@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D82FA6112B1A691B00B11EC3 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82FA6102B1A691B00B11EC3 /* Keychain.swift */; };
 		D865A4B12B19418F00B024F9 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D865A4B02B19418F00B024F9 /* MailView.swift */; };
 		D865A4BD2B196AC800B024F9 /* NoCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D865A4BC2B196AC800B024F9 /* NoCarView.swift */; };
 		D8763EEC2B18265000C01F5F /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = D8763EEB2B1822F900C01F5F /* sample.json */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		D82FA60F2B1A425C00B11EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D82FA6102B1A691B00B11EC3 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D865A4B02B19418F00B024F9 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		D865A4BC2B196AC800B024F9 /* NoCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCarView.swift; sourceTree = "<group>"; };
 		D8763EEB2B1822F900C01F5F /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				D82FA60F2B1A425C00B11EC3 /* Info.plist */,
 				D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */,
 				D8763EEB2B1822F900C01F5F /* sample.json */,
+				D82FA6102B1A691B00B11EC3 /* Keychain.swift */,
 				D8CA9DE12B169C2400BC35F8 /* API */,
 				D8CA9DDF2B169C0E00BC35F8 /* Model */,
 				D8763EF32B18E71D00C01F5F /* ViewModel */,
@@ -447,6 +450,7 @@
 			files = (
 				D8763EF52B19032E00C01F5F /* StatsViewModel.swift in Sources */,
 				D8CA9E0E2B16B32800BC35F8 /* TCUInternetStatus.swift in Sources */,
+				D82FA6112B1A691B00B11EC3 /* Keychain.swift in Sources */,
 				D865A4B12B19418F00B024F9 /* MailView.swift in Sources */,
 				D8CA9DE82B16B20D00BC35F8 /* RefreshResponse.swift in Sources */,
 				D8CA9E022B16B2D600BC35F8 /* GPS.swift in Sources */,
@@ -648,6 +652,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -688,6 +693,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

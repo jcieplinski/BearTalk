@@ -36,6 +36,9 @@ final class AppState: ObservableObject {
                     userName: userName,
                     password: password)
                     .loginResponse {
+
+                    saveOrUpdatePassword()
+
                     DispatchQueue.main.async { [weak self] in
                         guard let self else { return }
 
@@ -49,6 +52,34 @@ final class AppState: ObservableObject {
                     guard let self else { return }
 
                     noCarMode = true
+                }
+            }
+        }
+    }
+
+    func saveOrUpdatePassword() {
+        let passwordData = Data(password.utf8)
+
+        do {
+            let savedPasswordData = try KeyChain.readPassword(service: DefaultsKey.password, account: userName)
+            let savedPassword = String(decoding: savedPasswordData, as: UTF8.self)
+
+            if savedPassword != password {
+                try KeyChain.update(password: passwordData, service: DefaultsKey.password, account: userName)
+            }
+        } catch let error {
+            print("Error reading password \(error)")
+            if let keychainError = error as? KeyChain.KeychainError {
+                switch keychainError {
+                case .itemNotFound:
+                    do {
+                        try KeyChain.save(password: passwordData, service: DefaultsKey.password, account: userName)
+                    } catch let error {
+                        print("Error saving password \(error)")
+                    }
+                case .duplicateItem, .invalidItemFormat, .unexpectedStatus(_):
+                    // Just don't bother at this point.
+                    break
                 }
             }
         }
