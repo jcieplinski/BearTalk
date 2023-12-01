@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject private var appState: AppState
 
     @Bindable var model: HomeViewModel
@@ -50,6 +51,18 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             .task {
                 await model.fetchVehicle()
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                switch newPhase {
+                case .inactive, .background:
+                    break
+                case .active:
+                    Task {
+                        await model.fetchVehicle()
+                    }
+                @unknown default:
+                    break
+                }
             }
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .toolbar {
