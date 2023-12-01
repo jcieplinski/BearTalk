@@ -24,9 +24,12 @@ struct StatsView: View {
                 Section("Car") {
                     StatsCell(title: "Vehicle", stat: model.nickname)
                     StatsCell(title: "Vin", stat: model.vin)
-                    StatsCell(title: "Year", stat: model.year)
+                  //  StatsCell(title: "Year", stat: model.year)
                     StatsCell(title: "Model", stat: model.model)
                     StatsCell(title: "Trim", stat: model.trim)
+                    if let DENumber = model.DENumber {
+                        StatsCell(title: "Dream Edition Number", stat: DENumber)
+                    }
                 }
 
                 Section("Status") {

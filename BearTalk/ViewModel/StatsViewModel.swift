@@ -25,6 +25,7 @@ import SwiftUI
     var softwareVersion: String = ""
     var chargePercentage: String = ""
     var range: String = ""
+    var DENumber: String?
 
     func getInfoString() async -> String {
         do {
@@ -59,7 +60,6 @@ import SwiftUI
 
         nickname = vehicle.vehicleConfig.nickname
         vin = vehicle.vehicleConfig.vin
-        odometer = "\(vehicle.vehicleState.chassisState.odometer.rounded())"
         year = vehicle.vehicleConfig.releaseDate ?? "Unknown"
         model = Model(rawValue: vehicle.vehicleConfig.model)?.title ?? "Unknown"
         trim = Trim(rawValue: vehicle.vehicleConfig.modelVariant)?.title ?? "Unknown"
@@ -84,6 +84,15 @@ import SwiftUI
         let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
 
         range = rangeMeasurementConverted
+
+        let odometerMeasurement = Measurement(value: Double(vehicle.vehicleState.chassisState.odometer), unit: UnitLength.kilometers)
+        let odometerMeasurementConverted = odometerMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+
+        odometer = odometerMeasurementConverted
+
+        if let doorPlateNumber = vehicle.vehicleConfig.specialIdentifiers?["doorPlate"] {
+            DENumber = doorPlateNumber
+        }
     }
 
     func fetchVehicle() async {
