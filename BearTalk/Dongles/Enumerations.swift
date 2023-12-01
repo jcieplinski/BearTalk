@@ -124,7 +124,7 @@ enum DefrostAction: String {
 enum CarColor: String {
     case eureka = "EUREKA_GOLD"
     case stellar = "STELLAR_WHITE"
-    case quantum = "QUANTUM_GRAY"
+    case quantum = "QUANTUM_GREY"
     case zenith = "ZENITH_RED"
     case cosmos = "COSMOS_SILVER"
     case infinite = "INFINITE_BLACK"

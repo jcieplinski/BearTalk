@@ -1,14 +1,14 @@
 {
-  "vehicleId": "637c53d457096678c23803a8",
+  "vehicleId": "XXXXXX",
   "accessLevel": "PRIMARY_OWNER",
   "vehicleConfig": {
-    "vin": "50EA1TEA8PA002146",
+    "vin": "XXXXXX",
     "model": "AIR",
     "modelVariant": "TOURING",
     "releaseDate": null,
     "nickname": "Stella",
     "paintColor": "STELLAR_WHITE",
-    "emaId": "USLCDCEGYHIY6X",
+    "emaId": "XXXXXX",
     "wheels": "RANGE",
     "easubscription": {
       "name": "EA",
@@ -18,8 +18,8 @@
     },
     "chargingAccounts": [
       {
-        "emaid": "USLCDCEGYHIY6X",
-        "vehicleId": "637c53d457096678c23803a8",
+        "emaid": "XXXXXX",
+        "vehicleId": "XXXXXX",
         "status": "ENROLLED",
         "createdAtEpochSec": "1671840000",
         "expiryOnEpochSec": "1766534400",
