@@ -285,17 +285,27 @@ enum PowerState: String {
     case sleep = "SLEEP"
     case sleepCharge = "SLEEP_CHARGE"
     case monitor = "MONITOR"
+    case accessory = "ACCESSORY"
+    case wink = "WINK"
+    case cloudOne = "CLOUD_1"
+    case cloudTwo = "CLOUD_2"
+    case liveCharge = "LIVE_CHARGE"
+    case liveUpdate = "LIVE_UPDATE"
 
     var image: String {
         switch self {
         case .unknown:
             "questionmark"
-        case .sleep:
+        case .sleep, .wink, .cloudOne, .cloudTwo:
             "zzz"
-        case .sleepCharge:
+        case .liveCharge:
             "bolt.fill"
-        case .monitor:
+        case .sleepCharge:
+            "bolt"
+        case .monitor, .accessory:
             "parkingsign"
+        case .liveUpdate:
+            "opticaldiscdrive.fill"
         }
     }
 }

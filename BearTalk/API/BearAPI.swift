@@ -121,6 +121,26 @@ final class BearAPI {
         }
     }
 
+    static func honkHorn() async throws -> Bool {
+        let request = URLRequest(url: URL(string: .baseAPI + .honkHorn)!)
+        var authRequest = addAuthHeader(to: request)
+
+        authRequest.httpMethod = "POST"
+        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
+
+        let parameters: [String : Any] = ["vehicle_id": vehicleID]
+
+        do {
+            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            let _ = try await URLSession.shared.data(for: authRequest)
+
+            return true
+        } catch let error {
+            print(error)
+            return false
+        }
+    }
+
     static func doorLockControl(lockState: LockState) async throws -> Bool {
         let request = URLRequest(url: URL(string: .baseAPI + .doorLocksControl)!)
         var authRequest = addAuthHeader(to: request)
