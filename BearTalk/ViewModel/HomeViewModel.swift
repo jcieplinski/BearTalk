@@ -201,7 +201,7 @@ import SwiftUI
 
     func fetchVehicle() async {
         do {
-            if let fetched = try await BearAPI.fetchVehicles() {
+            if let fetched = try await BearAPI.fetchCurrentVehicle() {
                 vehicle = fetched
             }
         } catch let error {

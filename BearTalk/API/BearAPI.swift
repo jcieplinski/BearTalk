@@ -83,7 +83,7 @@ final class BearAPI {
         }
     }
 
-    static func fetchVehicles() async throws -> Vehicle? {
+    static func fetchVehicles() async throws -> [Vehicle]? {
         let request = URLRequest(url: URL(string: .baseAPI + .userVehicles)!)
         var authRequest = addAuthHeader(to: request)
 
@@ -93,12 +93,24 @@ final class BearAPI {
             let (data, _) = try await URLSession.shared.data(for: authRequest)
             let vehicles = try JSONDecoder().decode(UserVehiclesReponse.self, from: data).userVehicleData
 
+            return vehicles
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+
+    static func fetchCurrentVehicle() async throws -> Vehicle? {
+        do {
+            let vehicles = try await fetchVehicles() ?? []
+
             let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
 
             carColor = CarColor(rawValue: vehicle?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
+
             return vehicle
         } catch let error {
-            print(error)
+            print("Could not fetch current vehicle \(error)")
             return nil
         }
     }
