@@ -91,7 +91,9 @@ final class BearAPI {
 
         do {
             let (data, _) = try await URLSession.shared.data(for: authRequest)
-            let vehicle = try JSONDecoder().decode(UserVehiclesReponse.self, from: data).userVehicleData.first
+            let vehicles = try JSONDecoder().decode(UserVehiclesReponse.self, from: data).userVehicleData
+
+            let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
 
             carColor = CarColor(rawValue: vehicle?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
             return vehicle

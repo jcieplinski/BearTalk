@@ -20,16 +20,19 @@ struct ControlsView: View {
             VStack(spacing: 22) {
                 if model.vehicle != nil {
                     // Top Row Status
-                    HStack {
-                        Image(systemName: model.powerState.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 22)
-                        Spacer()
-                        Text(model.chargePercentage)
-                            .font(.title)
-                        Spacer()
-                    }
+                    Text(model.chargePercentage)
+                        .font(.title)
+                        .frame(maxWidth: .infinity)
+                        .overlay(alignment: .leading) {
+                            Image(systemName: model.powerState.image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 18)
+                        }
+                        .overlay(alignment: .trailing) {
+                            Text(model.exteriorTemp)
+                                .font(.body)
+                        }
                     VStack {
                         HStack(spacing: 6) {
                             // Left Side Controls
@@ -146,7 +149,7 @@ struct ControlsView: View {
                                     .frame(width: 52)
                             }
                             Button {
-
+                                model.honkHorn()
                             } label: {
                                 Image(model.hornImage)
                                     .resizable()
@@ -165,6 +168,7 @@ struct ControlsView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .task {
                 await model.fetchVehicle()
+                model.updateHomeImages()
             }
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)

@@ -11,7 +11,8 @@ import SwiftUI
     var vehicle: Vehicle?
     var noVehicleWarning: String = ""
     var powerState: PowerState = .sleep
-    var chargePercentage: String = "80%"
+    var chargePercentage: String = ""
+    var exteriorTemp: String = ""
 
     var doorImage: String = LockState.locked.image
     var frunkImage: String = ClosureState.closed.frunkImage
@@ -28,6 +29,19 @@ import SwiftUI
     var chargePortClosureState: ClosureState?
     var lightsState: LightsAction?
     var defrostState: DefrostAction?
+
+    var vehicleIsReady: Bool {
+        if let powerState = PowerState(rawValue: vehicle?.vehicleState.powerState ?? "") {
+            switch powerState {
+            case .unknown, .sleep, .sleepCharge, .cloudOne, .cloudTwo:
+                return false
+            case .monitor, .accessory, .wink, .liveCharge, .liveUpdate:
+                return true
+            }
+        }
+
+        return false
+    }
 
     func updateHomeImages() {
         guard let vehicle else { return }
@@ -48,13 +62,20 @@ import SwiftUI
         hornImage = "hornOff"
         powerState = PowerState(rawValue: vehicle.vehicleState.powerState) ?? .unknown
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
+
+        let exteriorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.exteriorTemp, unit: UnitTemperature.celsius)
+        let exteriorTempMeasurementConverted = exteriorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
+
+        exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
     }
 
     func toggleDoorLocks() {
         if let lockState {
             Task {
                 do {
-                    let _ = try await BearAPI.wakeUp()
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
 
                     switch lockState {
                     case .unknown:
@@ -89,7 +110,9 @@ import SwiftUI
         if let closureState = area == .frunk ? frunkClosureState : trunkClosureState {
             Task {
                 do {
-                    let _ = try await BearAPI.wakeUp()
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
 
                     switch closureState {
                     case .open:
@@ -128,7 +151,9 @@ import SwiftUI
         if let closureState = chargePortClosureState {
             Task {
                 do {
-                    let _ = try await BearAPI.wakeUp()
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
 
                     switch closureState {
                     case .open:
@@ -153,7 +178,9 @@ import SwiftUI
         if let action = defrostState {
             Task {
                 do {
-                    let _ = try await BearAPI.wakeUp()
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
 
                     switch action {
                     case .on:
@@ -194,7 +221,9 @@ import SwiftUI
     func lights(action: LightsAction) {
         Task {
             do {
-                let _ = try await BearAPI.wakeUp()
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
 
                 switch action {
                 case .on:
@@ -224,6 +253,20 @@ import SwiftUI
         } catch let error {
             print("Error fetching vehicles \(error)")
             noVehicleWarning = "No vehicles found"
+        }
+    }
+
+    func honkHorn() {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                let _ = try await BearAPI.honkHorn()
+            } catch let error {
+                print("Could not honk horn: \(error)")
+            }
         }
     }
 
