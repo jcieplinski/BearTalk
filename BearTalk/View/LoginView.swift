@@ -24,11 +24,11 @@ struct LoginView: View {
                         .padding(.bottom)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
-                    Button {
-                        authenticate()
-                    } label: {
-                        Text("Use FaceID")
-                    }
+//                    Button {
+//                        authenticate()
+//                    } label: {
+//                        Text("Use FaceID")
+//                    }
                     Capsule(style: .continuous)
                         .foregroundStyle(Color.gray.opacity(0.3))
                         .listRowSeparator(.hidden)

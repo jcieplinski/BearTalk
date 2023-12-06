@@ -25,6 +25,15 @@ final class AppState: ObservableObject {
         return [top, bottom]
     }
 
+    static var preview: AppState {
+        let appState = AppState()
+        appState.loggedIn = true
+        appState.noCarMode = false
+        appState.appHoldScreen = false
+
+        return appState
+    }
+
     func logIn() {
         guard userName.isNotBlank, password.isNotBlank else {
             return

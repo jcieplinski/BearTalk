@@ -12,8 +12,9 @@ struct ContentView: View {
     @EnvironmentObject private var appState: AppState
     @AppStorage(DefaultsKey.refreshToken) var refreshToken: String = ""
 
-    var homeViewModel: HomeViewModel = HomeViewModel()
-    var statsViewModel: StatsViewModel = StatsViewModel()
+    @State var homeViewModel: HomeViewModel = HomeViewModel()
+    @State var controlsViewModel: ControlsViewModel = ControlsViewModel()
+    @State var statsViewModel: StatsViewModel = StatsViewModel()
 
     @State var refreshTimer: Timer?
 
@@ -25,14 +26,16 @@ struct ContentView: View {
                 Spacer()
             } else if appState.loggedIn {
                 TabView(selection: $appState.selectedTab) {
-                    HomeView(model: homeViewModel)
+                    ControlsView(model: controlsViewModel)
                         .tabItem {
-                            Label("", systemImage: "house.fill")
+                            Image("home")
+                            Text("Home")
                         }
                         .tag(AppTab.home)
                     StatsView(model: statsViewModel)
                         .tabItem {
-                            Label("", systemImage: "chart.bar.xaxis")
+                            Image("stats")
+                            Text("Stats")
                         }
                         .tag(AppTab.stats)
                 }
@@ -97,6 +100,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .environmentObject(AppState())
+    ContentView(controlsViewModel: ControlsViewModel.preview)
+        .environmentObject(AppState.preview)
 }

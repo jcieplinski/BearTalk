@@ -37,9 +37,9 @@ enum LockState: String {
         case .unknown:
             return "questionmark"
         case .locked:
-            return "lock"
+            return "doorsLocked"
         case .unlocked:
-            return "lock.open"
+            return "doorsUnlocked"
         }
     }
 }
@@ -65,27 +65,27 @@ enum ClosureState: String {
     var frunkImage: String {
         switch self {
         case .open:
-            return "car.side.front.open"
+            return "frunkOpen"
         case .closed:
-            return "car.side"
+            return "frunkClosed"
         }
     }
 
     var trunkImage: String {
         switch self {
         case .open:
-            return "car.side.rear.open"
+            return "trunkOpen"
         case .closed:
-            return "car.side"
+            return "trunkClosed"
         }
     }
 
     var chargePortImage: String {
         switch self {
         case .open:
-            return "bolt"
+            return "chargePortOpen"
         case .closed:
-            return "powerplug"
+            return "chargePortClosed"
         }
     }
 }
@@ -98,11 +98,11 @@ enum LightsAction: String {
     var lightsImage: String {
         switch self {
         case .on:
-            return "headlight.low.beam.fill"
+            return "lightsOn"
         case .off:
-            return "headlight.low.beam"
+            return "lightsOff"
         case .flash:
-            return "parkinglight"
+            return "flashLightsOff"
         }
     }
 }
@@ -114,9 +114,9 @@ enum DefrostAction: String {
     var defrostImage: String {
         switch self {
         case .on:
-            return "windshield.front.and.heat.waves"
+            return "defrostOn"
         case .off:
-            return "info.windshield"
+            return "defrostOff"
         }
     }
 }

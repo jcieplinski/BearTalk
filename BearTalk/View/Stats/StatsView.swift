@@ -56,6 +56,7 @@ struct StatsView: View {
             }
             .scrollContentBackground(.hidden)
             .navigationTitle("Stats")
+            .navigationBarTitleDisplayMode(.inline)
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
