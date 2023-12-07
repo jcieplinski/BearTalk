@@ -16,6 +16,8 @@
 		D8763EF02B18E5CC00C01F5F /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EEF2B18E5CC00C01F5F /* StatsView.swift */; };
 		D8763EF22B18E71100C01F5F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EF12B18E71100C01F5F /* HomeViewModel.swift */; };
 		D8763EF52B19032E00C01F5F /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EF42B19032E00C01F5F /* StatsViewModel.swift */; };
+		D88685672B22555F00757448 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88685662B22555F00757448 /* MapView.swift */; };
+		D886856A2B22559E00757448 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88685692B22559E00757448 /* MapViewModel.swift */; };
 		D8CA9DAB2B166B3300BC35F8 /* BearTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */; };
 		D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */; };
 		D8CA9DAF2B166B3400BC35F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		D8763EEF2B18E5CC00C01F5F /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D8763EF12B18E71100C01F5F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D8763EF42B19032E00C01F5F /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		D88685662B22555F00757448 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		D88685692B22559E00757448 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkApp.swift; sourceTree = "<group>"; };
 		D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -159,8 +163,17 @@
 				D8763EF12B18E71100C01F5F /* HomeViewModel.swift */,
 				D84E1E692B20D3A200C11A97 /* ControlsViewModel.swift */,
 				D8763EF42B19032E00C01F5F /* StatsViewModel.swift */,
+				D88685692B22559E00757448 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D88685682B22556700757448 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				D88685662B22555F00757448 /* MapView.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		D8CA9D9E2B166B3300BC35F8 = {
@@ -247,6 +260,7 @@
 				D865A4B02B19418F00B024F9 /* MailView.swift */,
 				D8CA9DDB2B167EDF00BC35F8 /* LoginView.swift */,
 				D8F344602B1915D200ECBEFF /* Home */,
+				D88685682B22556700757448 /* Map */,
 				D8F344612B1915DF00ECBEFF /* Stats */,
 			);
 			path = View;
@@ -454,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D886856A2B22559E00757448 /* MapViewModel.swift in Sources */,
 				D8763EF52B19032E00C01F5F /* StatsViewModel.swift in Sources */,
 				D8CA9E0E2B16B32800BC35F8 /* TCUInternetStatus.swift in Sources */,
 				D82FA6112B1A691B00B11EC3 /* Keychain.swift in Sources */,
@@ -461,6 +476,7 @@
 				D8CA9DE82B16B20D00BC35F8 /* RefreshResponse.swift in Sources */,
 				D8CA9E022B16B2D600BC35F8 /* GPS.swift in Sources */,
 				D8CA9DDC2B167EDF00BC35F8 /* LoginView.swift in Sources */,
+				D88685672B22555F00757448 /* MapView.swift in Sources */,
 				D8CA9DF02B16B25800BC35F8 /* VehicleConfig.swift in Sources */,
 				D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */,
 				D8CA9DDE2B169BCC00BC35F8 /* AppState.swift in Sources */,

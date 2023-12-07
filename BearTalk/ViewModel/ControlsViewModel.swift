@@ -29,6 +29,21 @@ import SwiftUI
     var chargePortClosureState: ClosureState?
     var lightsState: LightsAction?
     var defrostState: DefrostAction?
+    var gearPosition: GearPosition = .unknown
+
+    var hornActive: Bool = false {
+        didSet {
+            hornImage = hornActive ? "hornOn" : "hornOff"
+        }
+    }
+
+    var lightsFlashActive: Bool = false {
+        didSet {
+            flashLightsImage = lightsFlashActive ? "flashLightsOn" : "flashLightsOff"
+        }
+    }
+
+    var requestInProgress: ControlFunction?
 
     var vehicleIsReady: Bool {
         if let powerState = PowerState(rawValue: vehicle?.vehicleState.powerState ?? "") {
@@ -43,8 +58,10 @@ import SwiftUI
         return false
     }
 
-    func updateHomeImages() {
+    func update() {
         guard let vehicle else { return }
+
+        gearPosition = GearPosition(rawValue: vehicle.vehicleState.gearPosition) ?? .unknown
 
         lockState = LockState(rawValue: vehicle.vehicleState.bodyState.doorLocks)
         frunkClosureState = ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo)
@@ -59,7 +76,8 @@ import SwiftUI
         chargePortImage = chargePortClosureState?.chargePortImage ?? "questionmark"
         lightsImage = lightsState?.lightsImage ?? "questionmark"
         defrostImage = defrostState?.defrostImage ?? "questionmark"
-        hornImage = "hornOff"
+        hornImage = hornActive ? "hornOn" : "hornOff"
+        flashLightsImage = lightsFlashActive ? "flashLightsOn" : "flashLightsOff"
         powerState = PowerState(rawValue: vehicle.vehicleState.powerState) ?? .unknown
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
 
@@ -77,24 +95,183 @@ import SwiftUI
                         let _ = try await BearAPI.wakeUp()
                     }
 
+                    requestInProgress = .doorLocks
+
                     switch lockState {
                     case .unknown:
                         break
                     case .locked:
                         let success = try await BearAPI.doorLockControl(lockState: .unlocked)
                         if success {
-                            vehicle?.vehicleState.bodyState.doorLocks = LockState.unlocked.rawValue
+                            setToggleCheckTimer(.doorLocks)
                         }
                     case .unlocked:
                         let success = try await BearAPI.doorLockControl(lockState: .locked)
                         if success {
-                            vehicle?.vehicleState.bodyState.doorLocks = LockState.locked.rawValue
+                            setToggleCheckTimer(.doorLocks)
                         }
                     }
                 } catch let error {
                     print("Could not change door lock state: \(error)")
                 }
             }
+        }
+    }
+
+    func setToggleCheckTimer(_ control: ControlFunction) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(1000)) { [self] in
+            switch control {
+            case .doorLocks:
+                checkDoorToggle()
+            case .frunk:
+                checkFrunkToggle()
+            case .trunk:
+                checkTrunkToggle()
+            case .chargePort:
+                checkChargePortToggle()
+            case .defrost:
+                checkDefrostToggle()
+            case .lights:
+                checkLightsToggle()
+            case .flash:
+                checkLightsFlash()
+            case .horn:
+                checkHornToggle()
+            }
+        }
+    }
+
+    func checkDoorToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let lockState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.vehicleUnlockReq {
+                    if lockState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.doorLocks)
+                    }
+                }
+            } catch {
+                print("Unable to check on door locks: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkChargePortToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let chargePortClosureState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.chargePortReq {
+                    if chargePortClosureState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.chargePort)
+                    }
+                }
+            } catch {
+                print("Unable to check on chargePort: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkFrunkToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let frunkClosureState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.frunkCargoReq {
+                    if frunkClosureState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.frunk)
+                    }
+                }
+            } catch {
+                print("Unable to check on frunk: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkTrunkToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let trunkClosureState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.frunkCargoReq {
+                    if trunkClosureState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.trunk)
+                    }
+                }
+            } catch {
+                print("Unable to check on trunk: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkDefrostToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let defrostState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.hvacDefrostEnable {
+                    if defrostState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.defrost)
+                    }
+                }
+            } catch {
+                print("Unable to check on defrost: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkLightsToggle() {
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if let lightsState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.lightReq {
+                    if lightsState.rawValue == requestState {
+                        requestInProgress = nil
+                    } else {
+                        setToggleCheckTimer(.lights)
+                    }
+                }
+            } catch {
+                print("Unable to check on defrost: \(error)")
+                requestInProgress = nil
+            }
+        }
+    }
+
+    func checkLightsFlash() {
+        Task {
+            lightsFlashActive = false
+            requestInProgress = nil
+        }
+    }
+
+    func checkHornToggle() {
+        Task {
+            hornActive = false
+            requestInProgress = nil
         }
     }
 
@@ -114,6 +291,8 @@ import SwiftUI
                         let _ = try await BearAPI.wakeUp()
                     }
 
+                    requestInProgress = area == .frunk ? .frunk : .trunk
+
                     switch closureState {
                     case .open:
                         let success = try await BearAPI.cargoControl(
@@ -122,9 +301,9 @@ import SwiftUI
                         if success {
                             switch area {
                             case .frunk:
-                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.closed.rawValue
+                                setToggleCheckTimer(.frunk)
                             case .trunk:
-                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.closed.rawValue
+                                setToggleCheckTimer(.trunk)
                             }
                         }
                     case .closed:
@@ -134,9 +313,9 @@ import SwiftUI
                         if success {
                             switch area {
                             case .frunk:
-                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.open.rawValue
+                                setToggleCheckTimer(.frunk)
                             case .trunk:
-                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.open.rawValue
+                                setToggleCheckTimer(.trunk)
                             }
                         }
                     }
@@ -155,16 +334,18 @@ import SwiftUI
                         let _ = try await BearAPI.wakeUp()
                     }
 
+                    requestInProgress = .chargePort
+
                     switch closureState {
                     case .open:
                         let success = try await BearAPI.chargePortControl(closureState: .closed)
                         if success {
-                            vehicle?.vehicleState.bodyState.chargePortState = ClosureState.closed.rawValue
+                            setToggleCheckTimer(.chargePort)
                         }
                     case .closed:
                         let success = try await BearAPI.chargePortControl(closureState: .open)
                         if success {
-                            vehicle?.vehicleState.bodyState.chargePortState = ClosureState.open.rawValue
+                            setToggleCheckTimer(.chargePort)
                         }
                     }
                 } catch let error {
@@ -182,16 +363,18 @@ import SwiftUI
                         let _ = try await BearAPI.wakeUp()
                     }
 
+                    requestInProgress = .defrost
+
                     switch action {
                     case .on:
                         let success = try await BearAPI.defrostControl(action: .off)
                         if success {
-                            vehicle?.vehicleState.hvacStatus.defrost = DefrostAction.off.rawValue
+                            setToggleCheckTimer(.defrost)
                         }
                     case .off:
                         let success = try await BearAPI.defrostControl(action: .on)
                         if success {
-                            vehicle?.vehicleState.hvacStatus.defrost = DefrostAction.on.rawValue
+                            setToggleCheckTimer(.defrost)
                         }
                     }
                 } catch let error {
@@ -227,20 +410,45 @@ import SwiftUI
 
                 switch action {
                 case .on:
+                    requestInProgress = .lights
+
                     let success = try await BearAPI.lightsControl(action: .off)
                     if success {
-                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.off.rawValue
+                        setToggleCheckTimer(.lights)
                     }
                 case .off:
+                    requestInProgress = .lights
+
                     let success = try await BearAPI.lightsControl(action: .on)
                     if success {
-                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.on.rawValue
+                        setToggleCheckTimer(.lights)
                     }
                 case .flash:
+                    lightsFlashActive = true
+                    requestInProgress = .flash
+
                     let _ = try await BearAPI.lightsControl(action: .flash)
+                    setToggleCheckTimer(.flash)
                 }
             } catch let error {
                 print("Could not toggle light state: \(error)")
+            }
+        }
+    }
+
+    func honkHorn() {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+
+                requestInProgress = .horn
+
+                let _ = try await BearAPI.honkHorn()
+                checkHornToggle()
+            } catch let error {
+                print("Could not honk horn: \(error)")
             }
         }
     }
@@ -253,20 +461,6 @@ import SwiftUI
         } catch let error {
             print("Error fetching vehicles \(error)")
             noVehicleWarning = "No vehicles found"
-        }
-    }
-
-    func honkHorn() {
-        Task {
-            do {
-                if !vehicleIsReady {
-                    let _ = try await BearAPI.wakeUp()
-                }
-                
-                let _ = try await BearAPI.honkHorn()
-            } catch let error {
-                print("Could not honk horn: \(error)")
-            }
         }
     }
 

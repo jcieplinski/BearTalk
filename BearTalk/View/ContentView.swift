@@ -12,9 +12,10 @@ struct ContentView: View {
     @EnvironmentObject private var appState: AppState
     @AppStorage(DefaultsKey.refreshToken) var refreshToken: String = ""
 
-    @State var homeViewModel: HomeViewModel = HomeViewModel()
-    @State var controlsViewModel: ControlsViewModel = ControlsViewModel()
-    @State var statsViewModel: StatsViewModel = StatsViewModel()
+    var homeViewModel: HomeViewModel = HomeViewModel()
+    var controlsViewModel: ControlsViewModel = ControlsViewModel()
+    var statsViewModel: StatsViewModel = StatsViewModel()
+    var mapViewModel: MapViewModel = MapViewModel()
 
     @State var refreshTimer: Timer?
 
@@ -32,6 +33,12 @@ struct ContentView: View {
                             Text("Home")
                         }
                         .tag(AppTab.home)
+                    MapView(model: mapViewModel)
+                        .tabItem {
+                            Image("location")
+                            Text("Location")
+                        }
+                        .tag(AppTab.map)
                     StatsView(model: statsViewModel)
                         .tabItem {
                             Image("stats")

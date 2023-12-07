@@ -314,3 +314,22 @@ enum PowerImage: String {
     case sleep = "zzz"
     case awake = "parkingsign.circle"
 }
+
+enum GearPosition: String {
+    case unknown = "GEAR_UNKNOWN"
+    case park = "GEAR_PARK"
+    case reverse = "GEAR_REVERSE"
+    case neutral = "GEAR_NEUTRAL"
+    case drive = "GEAR_DRIVE"
+}
+
+enum ControlFunction {
+    case doorLocks
+    case frunk
+    case trunk
+    case chargePort
+    case defrost
+    case lights
+    case flash
+    case horn
+}

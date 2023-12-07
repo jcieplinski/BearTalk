@@ -52,6 +52,13 @@ struct ControlsView: View {
                                         }
                                         .tint(model.chargePortClosureState == .open ? .active : .inactive)
                                 }
+                                .disabled(model.gearPosition != .park)
+                                .overlay(alignment: .center) {
+                                    if model.requestInProgress == .chargePort {
+                                        ProgressView()
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                }
                                 Rectangle()
                                     .foregroundStyle(.clear)
                                     .frame(width: 11, height: 50)
@@ -68,6 +75,13 @@ struct ControlsView: View {
                                                 .offset(x: 110)
                                         }
                                         .tint(model.lockState == .locked ? .active : .inactive)
+                                }
+                                .disabled(model.gearPosition != .park)
+                                .overlay(alignment: .center) {
+                                    if model.requestInProgress == .doorLocks {
+                                        ProgressView()
+                                            .frame(maxWidth: .infinity)
+                                    }
                                 }
                                 Rectangle()
                                     .foregroundStyle(.clear)
@@ -103,6 +117,13 @@ struct ControlsView: View {
                                         .tint(model.frunkClosureState == .open ? .active : .inactive)
                                         .padding(.bottom, 120)
                                 }
+                                .disabled(model.gearPosition != .park)
+                                .overlay(alignment: .center) {
+                                    if model.requestInProgress == .frunk {
+                                        ProgressView()
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                }
                                 Button {
                                     model.toggleTrunk()
                                 } label: {
@@ -118,6 +139,13 @@ struct ControlsView: View {
                                         .tint(model.trunkClosureState == .open ? .active : .inactive)
                                         .padding(.top, 120)
                                 }
+                                .disabled(model.gearPosition != .park)
+                                .overlay(alignment: .center) {
+                                    if model.requestInProgress == .trunk {
+                                        ProgressView()
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                }
                             }
                         }
                         Spacer()
@@ -131,6 +159,12 @@ struct ControlsView: View {
                                     .frame(width: 52)
                                     .tint(model.defrostState == .on ? .active : .inactive)
                             }
+                            .overlay(alignment: .center) {
+                                if model.requestInProgress == .defrost {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
                             Button {
                                 model.toggleLights()
                             } label: {
@@ -140,6 +174,12 @@ struct ControlsView: View {
                                     .frame(width: 52)
                                     .tint(model.lightsState == .on ? .active : .inactive)
                             }
+                            .overlay(alignment: .center) {
+                                if model.requestInProgress == .lights {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
                             Button {
                                 model.flashLights()
                             } label: {
@@ -147,6 +187,13 @@ struct ControlsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 52)
+                                    .tint(model.lightsFlashActive ? .active : .inactive)
+                            }
+                            .overlay(alignment: .center) {
+                                if model.requestInProgress == .flash {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                }
                             }
                             Button {
                                 model.honkHorn()
@@ -155,6 +202,13 @@ struct ControlsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 52)
+                                    .tint(model.hornActive ? .active : .inactive)
+                            }
+                            .overlay(alignment: .center) {
+                                if model.requestInProgress == .horn {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                }
                             }
                         }
                     }
@@ -168,7 +222,7 @@ struct ControlsView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .task {
                 await model.fetchVehicle()
-                model.updateHomeImages()
+                model.update()
             }
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
@@ -184,7 +238,19 @@ struct ControlsView: View {
             .onChange(of: model.vehicle) { _, newValue in
                 guard newValue != nil else { return }
 
-                model.updateHomeImages()
+                model.update()
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                switch newPhase {
+                case .inactive, .background:
+                    break
+                case .active:
+                    Task {
+                        await model.fetchVehicle()
+                    }
+                @unknown default:
+                    break
+                }
             }
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
