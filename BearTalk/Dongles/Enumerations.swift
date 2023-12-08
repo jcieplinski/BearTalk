@@ -332,4 +332,5 @@ enum ControlFunction {
     case lights
     case flash
     case horn
+    case wake
 }

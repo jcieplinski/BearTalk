@@ -137,6 +137,8 @@ import SwiftUI
                 checkLightsFlash()
             case .horn:
                 checkHornToggle()
+            case .wake:
+                checkWakeUp()
             }
         }
     }
@@ -272,6 +274,29 @@ import SwiftUI
         Task {
             hornActive = false
             requestInProgress = nil
+        }
+    }
+
+    func checkWakeUp() {
+        guard !vehicleIsReady else {
+            requestInProgress = nil
+            return
+        }
+
+        Task {
+            do {
+                let vehicle = try await BearAPI.fetchCurrentVehicle()
+                if let vehicle { self.vehicle = vehicle }
+
+                if vehicleIsReady {
+                    requestInProgress = nil
+                } else {
+                    setToggleCheckTimer(.wake)
+                }
+            } catch {
+                print("Unable to check on defrost: \(error)")
+                requestInProgress = nil
+            }
         }
     }
 
@@ -449,6 +474,16 @@ import SwiftUI
                 checkHornToggle()
             } catch let error {
                 print("Could not honk horn: \(error)")
+            }
+        }
+    }
+
+    func wakeUpCar() {
+        Task {
+            do {
+                let _ = try await BearAPI.wakeUp()
+            } catch {
+                print("Could not wake car: \(error)")
             }
         }
     }

@@ -18,6 +18,7 @@
 		D8763EF52B19032E00C01F5F /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8763EF42B19032E00C01F5F /* StatsViewModel.swift */; };
 		D88685672B22555F00757448 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88685662B22555F00757448 /* MapView.swift */; };
 		D886856A2B22559E00757448 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88685692B22559E00757448 /* MapViewModel.swift */; };
+		D88685722B237D9300757448 /* OpenFrunkIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88685712B237D9300757448 /* OpenFrunkIntent.swift */; };
 		D8CA9DAB2B166B3300BC35F8 /* BearTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */; };
 		D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */; };
 		D8CA9DAF2B166B3400BC35F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		D8763EF42B19032E00C01F5F /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 		D88685662B22555F00757448 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D88685692B22559E00757448 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		D88685712B237D9300757448 /* OpenFrunkIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFrunkIntent.swift; sourceTree = "<group>"; };
 		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkApp.swift; sourceTree = "<group>"; };
 		D8CA9DAC2B166B3300BC35F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,14 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		D88685702B237D6A00757448 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				D88685712B237D9300757448 /* OpenFrunkIntent.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
 		D8CA9D9E2B166B3300BC35F8 = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +213,7 @@
 				D8CA9DAA2B166B3300BC35F8 /* BearTalkApp.swift */,
 				D8763EEB2B1822F900C01F5F /* sample.json */,
 				D82FA6102B1A691B00B11EC3 /* Keychain.swift */,
+				D88685702B237D6A00757448 /* Intents */,
 				D8CA9DE12B169C2400BC35F8 /* API */,
 				D8CA9DDF2B169C0E00BC35F8 /* Model */,
 				D8763EF32B18E71D00C01F5F /* ViewModel */,
@@ -498,6 +509,7 @@
 				D8CA9DEC2B16B22D00BC35F8 /* UserProfile.swift in Sources */,
 				D8CA9E002B16B2C800BC35F8 /* ChargingState.swift in Sources */,
 				D8CA9E102B16B42A00BC35F8 /* URLStrings.swift in Sources */,
+				D88685722B237D9300757448 /* OpenFrunkIntent.swift in Sources */,
 				D84E1E682B20D30200C11A97 /* ControlsView.swift in Sources */,
 				D8CA9DFE2B16B2BB00BC35F8 /* ChassisState.swift in Sources */,
 				D8CA9DDA2B166C4400BC35F8 /* Enumerations.swift in Sources */,

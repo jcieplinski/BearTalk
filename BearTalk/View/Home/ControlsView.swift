@@ -24,10 +24,15 @@ struct ControlsView: View {
                         .font(.title)
                         .frame(maxWidth: .infinity)
                         .overlay(alignment: .leading) {
-                            Image(systemName: model.powerState.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 18)
+                            Button {
+                                if !model.vehicleIsReady {
+                                    model.wakeUpCar()
+                                }
+                            } label: {
+                                Image(systemName: model.powerState.image)
+                                    .font(.body)
+                                    .fontWeight(.bold)
+                            }
                         }
                         .overlay(alignment: .trailing) {
                             Text(model.exteriorTemp)
