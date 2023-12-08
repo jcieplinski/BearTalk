@@ -48,7 +48,11 @@ final class BearAPI {
         authorization = loginResponse.sessionInfo.idToken
         refreshToken = loginResponse.sessionInfo.refreshToken
         vehicleID = loginResponse.userVehicleData.first?.vehicleId ?? ""
-        carColor = CarColor(rawValue: loginResponse.userVehicleData.first?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
+        
+        if let paintColor = loginResponse.userVehicleData.first?.vehicleConfig.paintColor, let color = CarColor(rawValue: paintColor)?.image {
+            carColor = color
+        }
+
         return (loginResponse: loginResponse, response: response)
     }
 
@@ -106,7 +110,9 @@ final class BearAPI {
 
             let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
 
-            carColor = CarColor(rawValue: vehicle?.vehicleConfig.paintColor ?? "eureka")?.image ?? "eureka"
+            if let paintColor = vehicle?.vehicleConfig.paintColor, let color = CarColor(rawValue: paintColor)?.image {
+                carColor = color
+            }
 
             return vehicle
         } catch let error {
