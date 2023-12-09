@@ -48,12 +48,20 @@ import SwiftUI
     var vehicleIsReady: Bool {
         if let powerState = PowerState(rawValue: vehicle?.vehicleState.powerState ?? "") {
             switch powerState {
-            case .unknown, .sleep, .sleepCharge, .cloudOne, .cloudTwo:
+            case .unknown, .sleep, .sleepCharge, .cloudOne, .cloudTwo, .liveUpdate:
                 return false
-            case .monitor, .accessory, .wink, .liveCharge, .liveUpdate:
+            case .monitor, .accessory, .wink, .liveCharge:
                 return true
             }
         }
+
+        return false
+    }
+
+    var allFunctionsDisable: Bool {
+        if gearPosition != .park { return true }
+
+        if self.powerState == .liveUpdate { return true }
 
         return false
     }
@@ -118,8 +126,8 @@ import SwiftUI
         }
     }
 
-    func setToggleCheckTimer(_ control: ControlFunction) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(1000)) { [self] in
+    func setToggleCheckTimer(_ control: ControlFunction, seconds: Int = 1) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(seconds)) { [self] in
             switch control {
             case .doorLocks:
                 checkDoorToggle()
@@ -152,6 +160,8 @@ import SwiftUI
                 if let lockState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.vehicleUnlockReq {
                     if lockState.rawValue == requestState {
                         requestInProgress = nil
+                    } else if requestState == ClosureState.unknown.rawValue {
+                        requestInProgress = nil
                     } else {
                         setToggleCheckTimer(.doorLocks)
                     }
@@ -172,6 +182,8 @@ import SwiftUI
                 if let chargePortClosureState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.chargePortReq {
                     if chargePortClosureState.rawValue == requestState {
                         requestInProgress = nil
+                    } else if requestState == ClosureState.unknown.rawValue {
+                           requestInProgress = nil
                     } else {
                         setToggleCheckTimer(.chargePort)
                     }
@@ -192,6 +204,8 @@ import SwiftUI
                 if let frunkClosureState, let requestState = vehicle?.vehicleState.mobileAppReqStatus.frunkCargoReq {
                     if frunkClosureState.rawValue == requestState {
                         requestInProgress = nil
+                    } else if requestState == ClosureState.unknown.rawValue {
+                           requestInProgress = nil
                     } else {
                         setToggleCheckTimer(.frunk)
                     }
@@ -291,7 +305,7 @@ import SwiftUI
                 if vehicleIsReady {
                     requestInProgress = nil
                 } else {
-                    setToggleCheckTimer(.wake)
+                    setToggleCheckTimer(.wake, seconds: 3)
                 }
             } catch {
                 print("Unable to check on defrost: \(error)")
@@ -343,6 +357,8 @@ import SwiftUI
                                 setToggleCheckTimer(.trunk)
                             }
                         }
+                    case .unknown:
+                        break
                     }
                 } catch let error {
                     print("Could not toggle cargo area \(area.controlURL) state: \(error)")
@@ -372,6 +388,8 @@ import SwiftUI
                         if success {
                             setToggleCheckTimer(.chargePort)
                         }
+                    case .unknown:
+                        break
                     }
                 } catch let error {
                     print("Could not toggle chargePort state: \(error)")
@@ -481,7 +499,9 @@ import SwiftUI
     func wakeUpCar() {
         Task {
             do {
+                requestInProgress = .wake
                 let _ = try await BearAPI.wakeUp()
+                checkWakeUp()
             } catch {
                 print("Could not wake car: \(error)")
             }
@@ -492,6 +512,7 @@ import SwiftUI
         do {
             if let fetched = try await BearAPI.fetchCurrentVehicle() {
                 vehicle = fetched
+                update()
             }
         } catch let error {
             print("Error fetching vehicles \(error)")

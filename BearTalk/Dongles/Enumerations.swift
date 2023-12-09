@@ -61,12 +61,15 @@ enum Cargo {
 enum ClosureState: String {
     case open = "OPEN"
     case closed = "CLOSED"
+    case unknown = "UNKNOWN_CLOSURE_STATE"
 
     var frunkImage: String {
         switch self {
         case .open:
             return "frunkOpen"
         case .closed:
+            return "frunkClosed"
+        case .unknown:
             return "frunkClosed"
         }
     }
@@ -77,6 +80,8 @@ enum ClosureState: String {
             return "trunkOpen"
         case .closed:
             return "trunkClosed"
+        case .unknown:
+            return "trunkClosed"
         }
     }
 
@@ -86,6 +91,9 @@ enum ClosureState: String {
             return "chargePortOpen"
         case .closed:
             return "chargePortClosed"
+        case .unknown:
+            return "chargePortClosed"
+
         }
     }
 }
@@ -305,7 +313,7 @@ enum PowerState: String {
         case .monitor, .accessory:
             "parkingsign"
         case .liveUpdate:
-            "opticaldiscdrive.fill"
+            "car.rear.waves.up"
         }
     }
 }

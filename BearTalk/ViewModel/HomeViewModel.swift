@@ -99,6 +99,8 @@ import SwiftUI
                                 vehicle?.vehicleState.bodyState.rearCargo = ClosureState.open.rawValue
                             }
                         }
+                    case .unknown:
+                        break
                     }
                 } catch let error {
                     print("Could not toggle cargo area \(area.controlURL) state: \(error)")
@@ -124,6 +126,8 @@ import SwiftUI
                         if success {
                             vehicle?.vehicleState.bodyState.chargePortState = ClosureState.open.rawValue
                         }
+                    case .unknown:
+                        break
                     }
                 } catch let error {
                     print("Could not toggle chargePort state: \(error)")

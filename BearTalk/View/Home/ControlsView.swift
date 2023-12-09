@@ -57,7 +57,7 @@ struct ControlsView: View {
                                         }
                                         .tint(model.chargePortClosureState == .open ? .active : .inactive)
                                 }
-                                .disabled(model.gearPosition != .park)
+                                .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
                                     if model.requestInProgress == .chargePort {
                                         ProgressView()
@@ -81,7 +81,7 @@ struct ControlsView: View {
                                         }
                                         .tint(model.lockState == .locked ? .active : .inactive)
                                 }
-                                .disabled(model.gearPosition != .park)
+                                .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
                                     if model.requestInProgress == .doorLocks {
                                         ProgressView()
@@ -122,7 +122,7 @@ struct ControlsView: View {
                                         .tint(model.frunkClosureState == .open ? .active : .inactive)
                                         .padding(.bottom, 120)
                                 }
-                                .disabled(model.gearPosition != .park)
+                                .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
                                     if model.requestInProgress == .frunk {
                                         ProgressView()
@@ -144,7 +144,7 @@ struct ControlsView: View {
                                         .tint(model.trunkClosureState == .open ? .active : .inactive)
                                         .padding(.top, 120)
                                 }
-                                .disabled(model.gearPosition != .park)
+                                .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
                                     if model.requestInProgress == .trunk {
                                         ProgressView()
