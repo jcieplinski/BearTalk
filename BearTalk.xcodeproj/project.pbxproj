@@ -70,6 +70,7 @@
 		D8F344632B1915EC00ECBEFF /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F344622B1915EC00ECBEFF /* StatsCell.swift */; };
 		D8FB94542BD8556D00A91EBF /* RangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB94532BD8556D00A91EBF /* RangeView.swift */; };
 		D8FB94562BD8580900A91EBF /* RangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB94552BD8580900A91EBF /* RangeViewModel.swift */; };
+		D8FB94582BD86C5300A91EBF /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB94572BD86C5300A91EBF /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		D8F344622B1915EC00ECBEFF /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		D8FB94532BD8556D00A91EBF /* RangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeView.swift; sourceTree = "<group>"; };
 		D8FB94552BD8580900A91EBF /* RangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeViewModel.swift; sourceTree = "<group>"; };
+		D8FB94572BD86C5300A91EBF /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				D8763EF32B18E71D00C01F5F /* ViewModel */,
 				D8CA9DE02B169C1900BC35F8 /* View */,
 				D8FB94532BD8556D00A91EBF /* RangeView.swift */,
+				D8FB94572BD86C5300A91EBF /* SpeechRecognizer.swift */,
 				D8CA9DE22B169C2F00BC35F8 /* Dongles */,
 				D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */,
 				D8CA9DB02B166B3400BC35F8 /* BearTalk.entitlements */,
@@ -545,6 +548,7 @@
 				D88685762B23C9EF00757448 /* ToggleFrunkIntent.swift in Sources */,
 				D865A4BD2B196AC800B024F9 /* NoCarView.swift in Sources */,
 				D8FB94562BD8580900A91EBF /* RangeViewModel.swift in Sources */,
+				D8FB94582BD86C5300A91EBF /* SpeechRecognizer.swift in Sources */,
 				D8CA9DF82B16B29400BC35F8 /* BatteryState.swift in Sources */,
 				D8CA9DE62B16B1EA00BC35F8 /* LoginResponse.swift in Sources */,
 				D8CA9DF42B16B27800BC35F8 /* EASubscription.swift in Sources */,
@@ -744,6 +748,8 @@
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -786,6 +792,8 @@
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
