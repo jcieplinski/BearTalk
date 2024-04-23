@@ -68,6 +68,8 @@
 		D8CA9E122B16BA5200BC35F8 /* UserVehiclesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */; };
 		D8CA9E162B16D89F00BC35F8 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */; };
 		D8F344632B1915EC00ECBEFF /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F344622B1915EC00ECBEFF /* StatsCell.swift */; };
+		D8FB94542BD8556D00A91EBF /* RangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB94532BD8556D00A91EBF /* RangeView.swift */; };
+		D8FB94562BD8580900A91EBF /* RangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB94552BD8580900A91EBF /* RangeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +156,8 @@
 		D8CA9E112B16BA5200BC35F8 /* UserVehiclesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVehiclesReponse.swift; sourceTree = "<group>"; };
 		D8CA9E152B16D89F00BC35F8 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		D8F344622B1915EC00ECBEFF /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
+		D8FB94532BD8556D00A91EBF /* RangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeView.swift; sourceTree = "<group>"; };
+		D8FB94552BD8580900A91EBF /* RangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,7 @@
 				D8763EF12B18E71100C01F5F /* HomeViewModel.swift */,
 				D84E1E692B20D3A200C11A97 /* ControlsViewModel.swift */,
 				D8763EF42B19032E00C01F5F /* StatsViewModel.swift */,
+				D8FB94552BD8580900A91EBF /* RangeViewModel.swift */,
 				D88685692B22559E00757448 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
@@ -251,6 +256,7 @@
 				D8CA9DDF2B169C0E00BC35F8 /* Model */,
 				D8763EF32B18E71D00C01F5F /* ViewModel */,
 				D8CA9DE02B169C1900BC35F8 /* View */,
+				D8FB94532BD8556D00A91EBF /* RangeView.swift */,
 				D8CA9DE22B169C2F00BC35F8 /* Dongles */,
 				D8CA9DAE2B166B3400BC35F8 /* Assets.xcassets */,
 				D8CA9DB02B166B3400BC35F8 /* BearTalk.entitlements */,
@@ -445,7 +451,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					D8CA9DA62B166B3300BC35F8 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -522,6 +528,7 @@
 				D8CA9DDC2B167EDF00BC35F8 /* LoginView.swift in Sources */,
 				D88685672B22555F00757448 /* MapView.swift in Sources */,
 				D8CA9DF02B16B25800BC35F8 /* VehicleConfig.swift in Sources */,
+				D8FB94542BD8556D00A91EBF /* RangeView.swift in Sources */,
 				D88685742B23C9CD00757448 /* CloseFrunkIntent.swift in Sources */,
 				D8CA9DAD2B166B3300BC35F8 /* ContentView.swift in Sources */,
 				D8CA9DDE2B169BCC00BC35F8 /* AppState.swift in Sources */,
@@ -537,6 +544,7 @@
 				D8CA9DF22B16B26800BC35F8 /* VehicleState.swift in Sources */,
 				D88685762B23C9EF00757448 /* ToggleFrunkIntent.swift in Sources */,
 				D865A4BD2B196AC800B024F9 /* NoCarView.swift in Sources */,
+				D8FB94562BD8580900A91EBF /* RangeViewModel.swift in Sources */,
 				D8CA9DF82B16B29400BC35F8 /* BatteryState.swift in Sources */,
 				D8CA9DE62B16B1EA00BC35F8 /* LoginResponse.swift in Sources */,
 				D8CA9DF42B16B27800BC35F8 /* EASubscription.swift in Sources */,
@@ -637,6 +645,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -698,6 +707,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -725,6 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = BearTalk/BearTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"BearTalk/Preview Content\"";
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -766,6 +777,7 @@
 				CODE_SIGN_ENTITLEMENTS = BearTalk/BearTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"BearTalk/Preview Content\"";
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -806,6 +818,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -829,6 +842,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -851,6 +865,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -873,6 +888,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = T2N6RA2S89;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

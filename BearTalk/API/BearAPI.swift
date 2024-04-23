@@ -12,6 +12,7 @@ final class BearAPI {
     @AppStorage(DefaultsKey.refreshToken) static var refreshToken: String = ""
     @AppStorage(DefaultsKey.vehicleID) static var vehicleID: String = ""
     @AppStorage(DefaultsKey.carColor) static var carColor: String = "eureka"
+    @AppStorage(DefaultsKey.lastEfficiency) var lastEfficiency: Double = 3.2
 
     private static func addAuthHeader(to urlRequest: URLRequest) -> URLRequest {
         var request = urlRequest

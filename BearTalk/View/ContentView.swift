@@ -16,6 +16,7 @@ struct ContentView: View {
     var controlsViewModel: ControlsViewModel = ControlsViewModel()
     var statsViewModel: StatsViewModel = StatsViewModel()
     var mapViewModel: MapViewModel = MapViewModel()
+    var rangeViewModel: RangeViewModel = RangeViewModel()
 
     @State var refreshTimer: Timer?
 
@@ -39,6 +40,12 @@ struct ContentView: View {
                             Text("Location")
                         }
                         .tag(AppTab.map)
+                    RangeView(model: rangeViewModel)
+                        .tabItem {
+                            Image("range")
+                            Text("Range")
+                        }
+                        .tag(AppTab.range)
                     StatsView(model: statsViewModel)
                         .tabItem {
                             Image("stats")

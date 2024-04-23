@@ -60,7 +60,7 @@ struct StatsView: View {
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
-            .alert("Help Improve BearTalk", isPresented: $showingMailWarning) {
+            .alert("Help Improve Bear Assist", isPresented: $showingMailWarning) {
                 Button("I Can Help") {
                     showingMailView = true
                 }

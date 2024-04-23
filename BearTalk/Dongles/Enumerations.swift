@@ -14,6 +14,7 @@ enum DefaultsKey {
     static let userName: String = "userName"
     static let vehicleID: String = "vehicleID"
     static let carColor: String = "carColor"
+    static let lastEfficiency: String = "lastEfficiency"
 }
 
 enum LockState: String {
@@ -281,6 +282,7 @@ enum AppTab {
     case home
     case stats
     case map
+    case range
 }
 
 enum FocusableField: Hashable {
