@@ -16,7 +16,7 @@ struct Vehicle: Codable, Equatable {
     static func example() -> Vehicle? {
         if let filepath = Bundle.main.path(forResource: "sample", ofType: "json") {
             do {
-                let contents = try String(contentsOfFile: filepath)
+              let contents = try String(contentsOfFile: filepath, encoding: .utf8)
                 let jsonData = contents.data(using: .utf8)!
                 let decoder = JSONDecoder()
                 return try! decoder.decode(Vehicle.self, from: jsonData)
