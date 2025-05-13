@@ -17,10 +17,11 @@ enum DefaultsKey {
     static let lastEfficiency: String = "lastEfficiency"
 }
 
-enum LockState: String {
-    case unknown = "UNKNOWN_LOCK_STATE"
-    case locked = "LOCKED"
-    case unlocked = "UNLOCKED"
+enum LockState: Codable, Equatable {
+    case unknown
+    case locked
+    case unlocked
+    case UNRECOGNIZED(Int)
 
     var title: String {
         switch self {
@@ -30,6 +31,8 @@ enum LockState: String {
             return "Locked"
         case .unlocked:
             return "Unlocked"
+        case .UNRECOGNIZED(let int):
+            return "Unrecognized \(int)"
         }
     }
 
@@ -41,6 +44,21 @@ enum LockState: String {
             return "doorsLocked"
         case .unlocked:
             return "doorsUnlocked"
+        case .UNRECOGNIZED(_):
+            return "questionmark"
+        }
+    }
+    
+    init(proto: Mobilegateway_Protos_LockState) {
+        switch proto {
+        case .unknown:
+            self = .unknown
+        case .unlocked:
+            self = .unlocked
+        case .locked:
+            self = .locked
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
         }
     }
 }
@@ -290,47 +308,29 @@ enum FocusableField: Hashable {
     case password
 }
 
-enum PowerState: String {
-    case unknown = "UNKNOWN"
-    case sleep = "SLEEP"
-    case sleepCharge = "SLEEP_CHARGE"
-    case monitor = "MONITOR"
-    case accessory = "ACCESSORY"
-    case wink = "WINK"
-    case cloudOne = "CLOUD_1"
-    case cloudTwo = "CLOUD_2"
-    case liveCharge = "LIVE_CHARGE"
-    case liveUpdate = "LIVE_UPDATE"
-
-    var image: String {
-        switch self {
-        case .unknown:
-            "questionmark"
-        case .sleep, .wink, .cloudOne, .cloudTwo:
-            "zzz"
-        case .liveCharge:
-            "bolt.fill"
-        case .sleepCharge:
-            "bolt"
-        case .monitor, .accessory:
-            "parkingsign"
-        case .liveUpdate:
-            "car.rear.waves.up"
-        }
-    }
-}
-
 enum PowerImage: String {
     case sleep = "zzz"
     case awake = "parkingsign.circle"
 }
 
-enum GearPosition: String {
-    case unknown = "GEAR_UNKNOWN"
-    case park = "GEAR_PARK"
-    case reverse = "GEAR_REVERSE"
-    case neutral = "GEAR_NEUTRAL"
-    case drive = "GEAR_DRIVE"
+enum GearPosition: Codable, Equatable {
+    case gearUnknown // = 0
+    case gearPark // = 1
+    case gearReverse // = 2
+    case gearNeutral // = 3
+    case gearDrive // = 4
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_GearPosition) {
+        switch proto {
+        case .gearUnknown: self = .gearUnknown
+        case .gearPark: self = .gearPark
+        case .gearReverse: self = .gearReverse
+        case .gearNeutral: self = .gearNeutral
+        case .gearDrive: self = .gearDrive
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
 }
 
 enum ControlFunction {

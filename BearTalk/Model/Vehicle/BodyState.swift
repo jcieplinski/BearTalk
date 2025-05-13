@@ -8,14 +8,131 @@
 import Foundation
 
 struct BodyState: Codable, Equatable {
-    var doorLocks: String
-    var frontCargo: String
-    var rearCargo: String
-    let frontLeftDoor: String
-    let frontRightDoor: String
-    let rearLeftDoor: String
-    let rearRightDoor: String
-    var chargePortState: String
-    let walkawayLockSts: String
-    let accessTypeSts: String
+    var doorLocks: LockState
+    var frontCargo: DoorState
+    var rearCargo: DoorState
+    let frontLeftDoor: DoorState
+    let frontRightDoor: DoorState
+    let rearLeftDoor: DoorState
+    let rearRightDoor: DoorState
+    var chargePortState: DoorState
+    let walkawayLockSts: WalkawayState
+    let accessTypeSts: AccessRequest
+    
+    internal init(proto: Mobilegateway_Protos_BodyState) {
+        self.doorLocks = LockState(proto: proto.doorLocks)
+        self.frontCargo = DoorState(proto: proto.frontCargo)
+        self.rearCargo = DoorState(proto: proto.rearCargo)
+        self.frontLeftDoor = DoorState(proto: proto.frontLeftDoor)
+        self.frontRightDoor = DoorState(proto: proto.frontRightDoor)
+        self.rearLeftDoor = DoorState(proto: proto.rearLeftDoor)
+        self.rearRightDoor = DoorState(proto: proto.rearRightDoor)
+        self.chargePortState = DoorState(proto: proto.chargePort)
+        self.walkawayLockSts = WalkawayState(proto: proto.walkawayLock)
+        self.accessTypeSts = AccessRequest(proto: proto.accessTypeStatus)
+    }
+}
+
+
+enum DoorState: Codable, Equatable {
+    case unknown
+    case `open`
+    case closed
+    case ajar
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_DoorState) {
+        switch proto {
+        case .unknown:
+            self = .unknown
+        case .open:
+            self = .open
+        case .closed:
+            self = .closed
+        case .ajar:
+            self = .ajar
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
+        }
+    }
+    
+    var frunkImage: String {
+        switch self {
+        case .open, .ajar:
+            return "frunkOpen"
+        case .closed:
+            return "frunkClosed"
+        case .unknown, .UNRECOGNIZED(_):
+            return "frunkClosed"
+        }
+    }
+    
+    var trunkImage: String {
+        switch self {
+        case .open, .ajar:
+            return "trunkOpen"
+        case .closed:
+            return "trunkClosed"
+        case .unknown, .UNRECOGNIZED(_):
+            return "trunkClosed"
+        }
+    }
+    
+    var chargePortImage: String {
+        switch self {
+        case .open, .ajar:
+            return "chargePortOpen"
+        case .closed:
+            return "chargePortClosed"
+        case .unknown, .UNRECOGNIZED(_):
+            return "chargePortClosed"
+            
+        }
+    }
+}
+
+enum WalkawayState: Codable, Equatable {
+    case walkawayUnknown
+    case walkawayActive
+    case walkawayDisable
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_WalkawayState) {
+        switch proto {
+        case .walkawayUnknown:
+            self = .walkawayUnknown
+        case .walkawayActive:
+            self = .walkawayActive
+        case .walkawayDisable:
+            self = .walkawayDisable
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum AccessRequest: Codable, Equatable {
+    case unknown // = 0
+    case active // = 1
+    case passive // = 2
+    case passiveDriver // = 3
+    case passiveTempDisabled // = 4
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_AccessRequest) {
+        switch proto {
+        case .unknown:
+            self = .unknown
+        case .active:
+            self = .active
+        case .passive:
+            self = .passive
+        case .passiveDriver:
+            self = .passiveDriver
+        case .passiveTempDisabled:
+            self = .passiveTempDisabled
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
+        }
+    }
 }

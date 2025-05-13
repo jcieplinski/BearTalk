@@ -37,7 +37,7 @@ import SwiftUI
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
         kWh = vehicle.vehicleState.batteryState.kwHr.round(to: 2)
 
-        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.range), unit: UnitLength.kilometers)
+        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
         let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
 
         unitLabel = Locale.current.measurementSystem == .metric ? "km" : "mi"

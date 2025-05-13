@@ -162,7 +162,7 @@ struct ControlsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 52)
-                                    .tint(model.defrostState == .on ? .active : .inactive)
+                                    .tint(model.defrostState == .defrostOn ? .active : .inactive)
                             }
                             .overlay(alignment: .center) {
                                 if model.requestInProgress == .defrost {

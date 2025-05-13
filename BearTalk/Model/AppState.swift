@@ -48,18 +48,15 @@ final class AppState: ObservableObject {
 
                     saveOrUpdatePassword()
 
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self else { return }
-
+                    Task { @MainActor in
                         loggedIn = true
                     }
                 }
 
             } catch let error {
                 print("Could not log in: \(error)")
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-
+                
+                Task { @MainActor in
                     noCarMode = true
                 }
             }
@@ -96,19 +93,15 @@ final class AppState: ObservableObject {
 
     func logOut() {
         Task {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-
+            Task { @MainActor in
                 noCarMode = false
             }
 
             let loggedOut = try await BearAPI.logOut()
 
             if loggedOut {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    
-                    loggedIn = false
+                Task { @MainActor in
+                     loggedIn = false
                 }
             }
         }

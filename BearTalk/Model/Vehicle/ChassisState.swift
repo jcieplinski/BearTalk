@@ -8,20 +8,94 @@
 import Foundation
 
 struct ChassisState: Codable, Equatable {
-    let odometer: Double
-    let frontLeftTirePressBar: Double
-    let frontRightTirePressBar: Double
-    let rearLeftTirePressBar: Double
-    let rearRightTirePressBar: Double
-    var headlightState: String
-    let indicatorState: String
-    let hardWarnLeftFront: String
-    let hardWarnLeftRear: String
-    let hardWarnRightFront: String
-    let hardWarnRightRear: String
-    let softWarnLeftFront: String
-    let softWarnLeftRear: String
-    let softWarnRightFront: String
-    let softWarnRightRear: String
+    let odometerKm: Double
+    let frontLeftTirePressureBar: Double
+    let frontRightTirePressureBar: Double
+    let rearLeftTirePressureBar: Double
+    let rearRightTirePressureBar: Double
+    var headlights: LightState
+    let hardWarnLeftFront: WarningState
+    let hardWarnLeftRear: WarningState
+    let hardWarnRightFront: WarningState
+    let hardWarnRightRear: WarningState
+    let softWarnLeftFront: WarningState
+    let softWarnLeftRear: WarningState
+    let softWarnRightFront: WarningState
+    let softWarnRightRear: WarningState
     let softwareVersion: String
+    
+    let speed: Double
+    let sensorDefectiveLeftFront: TirePressureSensorDefective
+    let sensorDefectiveLeftRear: TirePressureSensorDefective
+    let sensorDefectiveRightFront: TirePressureSensorDefective
+    let sensorDefectiveRightRear: TirePressureSensorDefective
+    let tirePressureLastUpdated: UInt64
+    
+    init(proto: Mobilegateway_Protos_ChassisState) {
+        self.odometerKm = Double(proto.odometerKm)
+        self.frontLeftTirePressureBar = Double(proto.frontLeftTirePressureBar)
+        self.frontRightTirePressureBar = Double(proto.frontRightTirePressureBar)
+        self.rearLeftTirePressureBar = Double(proto.rearLeftTirePressureBar)
+        self.rearRightTirePressureBar = Double(proto.rearRightTirePressureBar)
+        self.headlights = .init(proto: proto.headlights)
+        self.hardWarnLeftFront = .init(proto: proto.hardWarnLeftFront)
+        self.hardWarnLeftRear = .init(proto: proto.hardWarnLeftRear)
+        self.hardWarnRightFront = .init(proto: proto.hardWarnRightFront)
+        self.hardWarnRightRear = .init(proto: proto.hardWarnRightRear)
+        self.softWarnLeftFront = .init(proto: proto.softWarnLeftFront)
+        self.softWarnLeftRear = .init(proto: proto.softWarnLeftRear)
+        self.softWarnRightFront = .init(proto: proto.softWarnRightFront)
+        self.softWarnRightRear = .init(proto: proto.softWarnRightRear)
+        self.softwareVersion = String(proto.softwareVersion)
+        
+        self.speed = proto.speed
+        self.sensorDefectiveLeftRear = .init(proto: proto.sensorDefectiveLeftRear)
+        self.sensorDefectiveLeftFront = .init(proto: proto.sensorDefectiveLeftFront)
+        self.sensorDefectiveRightRear = .init(proto: proto.sensorDefectiveRightRear)
+        self.sensorDefectiveRightFront = .init(proto: proto.sensorDefectiveRightFront)
+        self.tirePressureLastUpdated = proto.tirePressureLastUpdated
+    }
+}
+
+enum LightState: Codable, Equatable {
+    case reallyUnknown // = 0
+    case off // = 1
+    case on // = 2
+    case unknown // = 3
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_LightState) {
+        switch proto {
+        case .reallyUnknown:
+            self = .reallyUnknown
+        case .off:
+            self = .off
+        case .on:
+            self = .on
+        case .unknown:
+            self = .unknown
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum TirePressureSensorDefective: Codable, Equatable {
+    case unknown // = 0
+    case off // = 1
+    case on // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_TirePressureSensorDefective) {
+        switch proto {
+        case .unknown:
+            self = .unknown
+        case .off:
+            self = .off
+        case .on:
+            self = .on
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
+        }
+    }
 }

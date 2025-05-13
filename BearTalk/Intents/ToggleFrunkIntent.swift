@@ -13,7 +13,7 @@ struct ToggleFrunkIntent: AppIntent {
     @MainActor func perform() async throws -> some ProvidesDialog {
         let _ = try await BearAPI.refreshToken()
         let _ = try await BearAPI.wakeUp()
-        if let vehicle = try await BearAPI.fetchCurrentVehicle(), let currentClosureState = ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo) {
+        if let vehicle = try await BearAPI.fetchCurrentVehicle(), let currentClosureState = ClosureState(rawValue: "vehicle.vehicleState.bodyState.frontCargo.rawValue") {
             switch currentClosureState {
             case .open:
                 let _ = try await BearAPI.cargoControl(area: .frunk, closureState: .closed)

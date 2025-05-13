@@ -80,12 +80,12 @@ import SwiftUI
 
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
 
-        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.range), unit: UnitLength.kilometers)
+        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
         let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
 
         range = rangeMeasurementConverted
 
-        let odometerMeasurement = Measurement(value: Double(vehicle.vehicleState.chassisState.odometer), unit: UnitLength.kilometers)
+        let odometerMeasurement = Measurement(value: Double(vehicle.vehicleState.chassisState.odometerKm), unit: UnitLength.kilometers)
         let odometerMeasurementConverted = odometerMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
 
         odometer = odometerMeasurementConverted

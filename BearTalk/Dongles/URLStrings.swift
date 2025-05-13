@@ -10,6 +10,7 @@ import Foundation
 extension String {
     // URLS for API
     static let baseAPI = "https://mobile.deneb.prod.infotainment.pdx.atieva.com/v1/"
+    static let grpcAPI = "mobile.deneb.prod.infotainment.pdx.atieva.com"
     static let login = "login"
     static let refreshToken = "get_new_jwt_token"
     static let wakeUp = "wakeup"

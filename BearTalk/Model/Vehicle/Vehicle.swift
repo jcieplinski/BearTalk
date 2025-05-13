@@ -9,23 +9,38 @@ import Foundation
 
 struct Vehicle: Codable, Equatable {
     let vehicleId: String
-    let accessLevel: String
+    let accessLevel: AccessLevel
     var vehicleConfig: VehicleConfig
     var vehicleState: VehicleState
 
     static func example() -> Vehicle? {
-        if let filepath = Bundle.main.path(forResource: "sample", ofType: "json") {
-            do {
-              let contents = try String(contentsOfFile: filepath, encoding: .utf8)
-                let jsonData = contents.data(using: .utf8)!
-                let decoder = JSONDecoder()
-                return try! decoder.decode(Vehicle.self, from: jsonData)
-            } catch {
-                return nil
-            }
-        } else {
-            return nil
-        }
+        return nil
 
+    }
+}
+
+enum AccessLevel: Codable, Equatable {
+    case unknown // = 0
+    case predeliveryOwner // = 1
+    case primaryOwner // = 2
+    case secondaryOwner // = 3
+    case deliveryTeam // = 4
+    case serviceTeam // = 5
+    case customerSupportTeam // = 6
+    case readOnly // = 7
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_AccessLevel) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .predeliveryOwner: self = .predeliveryOwner
+        case .primaryOwner: self = .primaryOwner
+        case .secondaryOwner: self = .secondaryOwner
+        case .deliveryTeam: self = .deliveryTeam
+        case .serviceTeam: self = .serviceTeam
+        case .customerSupportTeam: self = .customerSupportTeam
+        case .readOnly: self = .readOnly
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
     }
 }

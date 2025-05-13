@@ -9,7 +9,16 @@ import Foundation
 
 struct GPS: Codable, Equatable {
     let location: Location
-    let elevation: Int
-    let positionTime: String?
+    let hasLocation: Bool
+    let elevation: Int32
+    let positionTime: UInt64
     let headingPrecise: Double
+    
+    init(proto: Mobilegateway_Protos_Gps) {
+        self.location = Location(proto: proto.location)
+        self.hasLocation = proto.hasLocation
+        self.elevation = proto.elevation
+        self.positionTime = proto.positionTime
+        self.headingPrecise = proto.headingPrecise
+    }
 }

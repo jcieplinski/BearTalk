@@ -13,9 +13,9 @@ import SwiftUI
     var powerState: PowerState = .sleep
 
     var doorImage: String = LockState.locked.image
-    var frunkImage: String = ClosureState.closed.frunkImage
-    var trunkImage: String = ClosureState.closed.trunkImage
-    var chargePortImage: String = ClosureState.closed.chargePortImage
+    var frunkImage: String = DoorState.closed.frunkImage
+    var trunkImage: String = DoorState.closed.trunkImage
+    var chargePortImage: String = DoorState.closed.chargePortImage
     var defrostImage: String = DefrostAction.off.defrostImage
     var lightsImage: String = LightsAction.off.lightsImage
     var flashLightsImage: String = LightsAction.flash.lightsImage
@@ -23,17 +23,17 @@ import SwiftUI
     func updateHomeImages() {
         guard let vehicle else { return }
 
-        doorImage = LockState(rawValue: vehicle.vehicleState.bodyState.doorLocks)?.image ?? "questionmark"
-        frunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.frontCargo)?.frunkImage ?? "questionmark"
-        trunkImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.rearCargo)?.trunkImage ?? "questionmark"
-        chargePortImage = ClosureState(rawValue: vehicle.vehicleState.bodyState.chargePortState)?.chargePortImage ?? "questionmark"
-        lightsImage = LightsAction(rawValue: vehicle.vehicleState.chassisState.headlightState)?.lightsImage ?? "questionmark"
-        defrostImage = DefrostAction(rawValue: vehicle.vehicleState.hvacStatus.defrost)?.defrostImage ?? "questionmark"
-        powerState = PowerState(rawValue: vehicle.vehicleState.powerState) ?? .unknown
+        doorImage = vehicle.vehicleState.bodyState.doorLocks.image
+        frunkImage = vehicle.vehicleState.bodyState.frontCargo.frunkImage
+        trunkImage = vehicle.vehicleState.bodyState.rearCargo.trunkImage
+        chargePortImage = vehicle.vehicleState.bodyState.chargePortState.chargePortImage
+        lightsImage = vehicle.vehicleState.mobileAppReqStatus.lightRequest.lightsImage
+        defrostImage = vehicle.vehicleState.hvacState.defrost.defrostImage
+        powerState = vehicle.vehicleState.powerState
     }
 
     func toggleDoorLocks() {
-        if let lockState = LockState(rawValue: vehicle?.vehicleState.bodyState.doorLocks ?? "") {
+        if let lockState = vehicle?.vehicleState.bodyState.doorLocks {
             Task {
                 do {
                     let _ = try await BearAPI.wakeUp()
@@ -44,13 +44,15 @@ import SwiftUI
                     case .locked:
                         let success = try await BearAPI.doorLockControl(lockState: .unlocked)
                         if success {
-                            vehicle?.vehicleState.bodyState.doorLocks = LockState.unlocked.rawValue
+                            vehicle?.vehicleState.bodyState.doorLocks = LockState.unlocked
                         }
                     case .unlocked:
                         let success = try await BearAPI.doorLockControl(lockState: .locked)
                         if success {
-                            vehicle?.vehicleState.bodyState.doorLocks = LockState.locked.rawValue
+                            vehicle?.vehicleState.bodyState.doorLocks = LockState.locked
                         }
+                    case .UNRECOGNIZED(_):
+                        break
                     }
                 } catch let error {
                     print("Could not change door lock state: \(error)")
@@ -69,22 +71,22 @@ import SwiftUI
 
     func toggleCargo(area: Cargo) {
         let rawValue = area == .frunk ? vehicle?.vehicleState.bodyState.frontCargo : vehicle?.vehicleState.bodyState.rearCargo
-        if let closureState = ClosureState(rawValue: rawValue ?? "") {
+        if let closureState = rawValue {
             Task {
                 do {
                     let _ = try await BearAPI.wakeUp()
 
                     switch closureState {
-                    case .open:
+                    case .open, .ajar:
                         let success = try await BearAPI.cargoControl(
                             area: area,
                             closureState: .closed)
                         if success {
                             switch area {
                             case .frunk:
-                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.closed.rawValue
+                                vehicle?.vehicleState.bodyState.frontCargo = DoorState.closed
                             case .trunk:
-                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.closed.rawValue
+                                vehicle?.vehicleState.bodyState.rearCargo = DoorState.closed
                             }
                         }
                     case .closed:
@@ -94,12 +96,12 @@ import SwiftUI
                         if success {
                             switch area {
                             case .frunk:
-                                vehicle?.vehicleState.bodyState.frontCargo = ClosureState.open.rawValue
+                                vehicle?.vehicleState.bodyState.frontCargo = DoorState.open
                             case .trunk:
-                                vehicle?.vehicleState.bodyState.rearCargo = ClosureState.open.rawValue
+                                vehicle?.vehicleState.bodyState.rearCargo = DoorState.open
                             }
                         }
-                    case .unknown:
+                    case .unknown, .UNRECOGNIZED(_):
                         break
                     }
                 } catch let error {
@@ -110,23 +112,23 @@ import SwiftUI
     }
 
     func toggleChargePort() {
-        if let closureState = ClosureState(rawValue: vehicle?.vehicleState.bodyState.chargePortState ?? "") {
+        if let closureState = vehicle?.vehicleState.bodyState.chargePortState {
             Task {
                 do {
                     let _ = try await BearAPI.wakeUp()
 
                     switch closureState {
-                    case .open:
+                    case .open, .ajar:
                         let success = try await BearAPI.chargePortControl(closureState: .closed)
                         if success {
-                            vehicle?.vehicleState.bodyState.chargePortState = ClosureState.closed.rawValue
+                            vehicle?.vehicleState.bodyState.chargePortState = DoorState.closed
                         }
                     case .closed:
                         let success = try await BearAPI.chargePortControl(closureState: .open)
                         if success {
-                            vehicle?.vehicleState.bodyState.chargePortState = ClosureState.open.rawValue
+                            vehicle?.vehicleState.bodyState.chargePortState = DoorState.open
                         }
-                    case .unknown:
+                    case .unknown, .UNRECOGNIZED(_):
                         break
                     }
                 } catch let error {
@@ -137,22 +139,24 @@ import SwiftUI
     }
 
     func toggleDefost() {
-        if let action = DefrostAction(rawValue: vehicle?.vehicleState.hvacStatus.defrost ?? "") {
+        if let action = vehicle?.vehicleState.hvacState.defrost {
             Task {
                 do {
                     let _ = try await BearAPI.wakeUp()
 
                     switch action {
-                    case .on:
+                    case .defrostOn:
                         let success = try await BearAPI.defrostControl(action: .off)
                         if success {
-                            vehicle?.vehicleState.hvacStatus.defrost = DefrostAction.off.rawValue
+                            vehicle?.vehicleState.hvacState.defrost = DefrostState.defrostOff
                         }
-                    case .off:
+                    case .defrostOff:
                         let success = try await BearAPI.defrostControl(action: .on)
                         if success {
-                            vehicle?.vehicleState.hvacStatus.defrost = DefrostAction.on.rawValue
+                            vehicle?.vehicleState.hvacState.defrost = DefrostState.defrostOn
                         }
+                    case .unknown, .UNRECOGNIZED(_):
+                        break
                     }
                 } catch let error {
                     print("Could not toggle defrost state: \(error)")
@@ -162,13 +166,13 @@ import SwiftUI
     }
 
     func toggleLights() {
-        if let lightsAction = LightsAction(rawValue: vehicle?.vehicleState.chassisState.headlightState ?? "") {
+        if let lightsAction = vehicle?.vehicleState.chassisState.headlights {
             switch lightsAction {
             case .on:
                 lights(action: .on)
             case .off:
                 lights(action: .off)
-            case .flash:
+            case .UNRECOGNIZED(_), .reallyUnknown, .unknown:
                 break
             }
         }
@@ -187,12 +191,12 @@ import SwiftUI
                 case .on:
                     let success = try await BearAPI.lightsControl(action: .off)
                     if success {
-                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.off.rawValue
+                        vehicle?.vehicleState.chassisState.headlights = LightState.off
                     }
                 case .off:
                     let success = try await BearAPI.lightsControl(action: .on)
                     if success {
-                        vehicle?.vehicleState.chassisState.headlightState = LightsAction.on.rawValue
+                        vehicle?.vehicleState.chassisState.headlights = LightState.on
                     }
                 case .flash:
                     let _ = try await BearAPI.lightsControl(action: .flash)

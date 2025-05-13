@@ -8,21 +8,29 @@
 import Foundation
 
 struct MobileAppReqStatus: Codable, Equatable {
-    let alarmSetReq: String
-    let chargePortReq: String
-    let chargeLockReq: String
-    let doorLeftFrontReq: String
-    let doorLeftRearReq: String
-    let doorRightFrontReq: String
-    let doorRightRearReq: String
-    let driveEnable: String
-    let frunkCargoReq: String
-    let hornReq: String
-    let hvacDefrostEnable: String
-    let hvacPreconditionEnable: String
-    let lightReq: String
-    let panicReq: String
-    let sharedTripReq: String
-    let trunkCargoReq: String
-    let vehicleUnlockReq: String
+    let alarmSetRequest: AlarmMode
+    let chargePortRequest: DoorState
+    let frunkCargoRequest: DoorState
+    let hornRequest: DoorState
+    let hvacDefrost: DefrostState
+    let hvacPrecondition: HvacPower
+    let lightRequest: LightAction
+    let panicRequest: PanicState
+    let sharedTripRequest: SharedTripState
+    let trunkCargoRequest: DoorState
+    let vehicleUnlockRequest: LockState
+    
+    init(proto: Mobilegateway_Protos_MobileAppReqState) {
+        alarmSetRequest = .init(proto: proto.alarmSetRequest)
+        chargePortRequest = .init(proto: proto.chargePortRequest)
+        frunkCargoRequest = .init(proto: proto.frunkCargoRequest)
+        hornRequest = .init(proto: proto.hornRequest)
+        hvacDefrost = .init(proto: proto.hvacDefrost)
+        hvacPrecondition = .init(proto: proto.hvacPrecondition)
+        lightRequest = .init(proto: proto.lightRequest)
+        panicRequest = .init(proto: proto.panicRequest)
+        sharedTripRequest = .init(proto: proto.sharedTripRequest)
+        trunkCargoRequest = .init(proto: proto.trunkCargoRequest)
+        vehicleUnlockRequest = .init(proto: proto.vehicleUnlockRequest)
+    }
 }
