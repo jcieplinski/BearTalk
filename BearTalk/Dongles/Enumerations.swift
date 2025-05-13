@@ -344,3 +344,190 @@ enum ControlFunction {
     case horn
     case wake
 }
+
+enum PaintColor: Codable, Equatable {
+    case unknown // = 0
+    case eurekaGold // = 1
+    case stellarWhite // = 2
+    case infiniteBlack // = 3
+    case cosmosSilver // = 4
+    case quantumGrey // = 5
+    case zenithRed // = 6
+    case fathomBlue // = 7
+    case custom // = 8
+    case sapphireBlue // = 9
+    case lunarTitanium // = 10
+    case auroraGreen // = 11
+    case supernovaBronze // = 12
+    case glossBlackPrimary // = 13
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_PaintColor) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .eurekaGold: self = .eurekaGold
+        case .stellarWhite: self = .stellarWhite
+        case .infiniteBlack: self = .infiniteBlack
+        case .cosmosSilver: self = .cosmosSilver
+        case .quantumGrey: self = .quantumGrey
+        case .zenithRed: self = .zenithRed
+        case .fathomBlue: self = .fathomBlue
+        case .custom: self = .custom
+        case .sapphireBlue: self = .sapphireBlue
+        case .lunarTitanium: self = .lunarTitanium
+        case .auroraGreen: self = .auroraGreen
+        case .supernovaBronze: self = .supernovaBronze
+        case .glossBlackPrimary: self = .glossBlackPrimary
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .eurekaGold:
+            return "eureka"
+        case .stellarWhite:
+            return "stellar"
+        case .quantumGrey:
+            return "quantum"
+        case .zenithRed:
+            return "zenith"
+        case .cosmosSilver:
+            return "cosmos"
+        case .infiniteBlack:
+            return "infinite"
+        case .fathomBlue:
+            return "fathom"
+        case .unknown:
+            return "euereka"
+        case .custom:
+            return "stellar"
+        case .sapphireBlue:
+            return "stellar"
+        case .lunarTitanium:
+            return "stellar"
+        case .auroraGreen:
+            return "stellar"
+        case .supernovaBronze:
+            return "stellar"
+        case .glossBlackPrimary:
+            return "stellar"
+        case .UNRECOGNIZED(_):
+            return "stellar"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .eurekaGold:
+            return "Eureka Gold"
+        case .stellarWhite:
+            return "Stellar White"
+        case .quantumGrey:
+            return "Quantum Grey"
+        case .zenithRed:
+            return "Zenith Red"
+        case .cosmosSilver:
+            return "Cosmos Silver"
+        case .infiniteBlack:
+            return "Infinite Black"
+        case .fathomBlue:
+            return "Fathom Blue"
+        case .unknown:
+            return "Unknown"
+        case .custom:
+            return "Custom"
+        case .sapphireBlue:
+            return "Sapphire Blue"
+        case .lunarTitanium:
+            return "Lunar Titanium"
+        case .auroraGreen:
+            return "Aurora Green"
+        case .supernovaBronze:
+            return "Supernova Bronze"
+        case .glossBlackPrimary:
+            return "Gloss Black"
+        case .UNRECOGNIZED(_):
+            return "Unrecognized"
+        }
+    }
+}
+
+enum LucidModel: Codable, Equatable {
+    case unknown // = 0
+    case air // = 1
+    case gravity // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_Model) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .air: self = .air
+        case .gravity: self = .gravity
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .air:
+            "Air"
+        case .gravity:
+            "Gravity"
+        case .unknown:
+            "Unknown"
+        case .UNRECOGNIZED(let int):
+            "Unknown (\(int))"
+        }
+    }
+}
+
+enum ModelVariant: Codable, Equatable {
+    case unknown // = 0
+    case dreamEdition // = 1
+    case grandTouring // = 2
+    case touring // = 3
+    case pure // = 4
+    case sapphire // = 5
+    case hyper // = 6
+    case executive // = 7
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_ModelVariant) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .dreamEdition: self = .dreamEdition
+        case .grandTouring: self = .grandTouring
+        case .touring: self = .touring
+        case .pure: self = .pure
+        case .sapphire: self = .sapphire
+        case .hyper: self = .hyper
+        case .executive: self = .executive
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+            
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .dreamEdition:
+            "Dream Edition"
+        case .grandTouring:
+            "Grand Touring"
+        case .hyper:
+            "Grand Touring Performance"
+        case .touring:
+            "Touring"
+        case .pure:
+            "Pure"
+        case .unknown:
+            "Unknown"
+        case .sapphire:
+            "Sapphire"
+        case .executive:
+            "Executive"
+        case .UNRECOGNIZED(_):
+            "Unrecognized"
+        }
+    }
+}

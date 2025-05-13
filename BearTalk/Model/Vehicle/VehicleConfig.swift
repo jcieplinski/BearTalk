@@ -9,11 +9,11 @@ import Foundation
 
 struct VehicleConfig: Codable, Equatable {
     var vin: String
-    let model: String
-    let modelVariant: String
+    let model: LucidModel
+    let modelVariant: ModelVariant
     let releaseDate: String?
     var nickname: String
-    let paintColor: String
+    let paintColor: PaintColor
     var emaId: String
     let wheels: String
     var easubscription: EASubscription
@@ -32,11 +32,11 @@ struct VehicleConfig: Codable, Equatable {
     static func empty() -> VehicleConfig {
         return VehicleConfig(
             vin: "50EA1TEA8PA002146",
-            model: "AIR",
-            modelVariant: "TOURING",
+            model: LucidModel.air,
+            modelVariant: ModelVariant.touring,
             releaseDate: nil,
             nickname: "Stella",
-            paintColor: "STELLAR_WHITE",
+            paintColor: PaintColor.stellarWhite,
             emaId: "USLCDCEGYHIY6X",
             wheels: "RANGE",
             easubscription: EASubscription(name: "EA", expirationDate: "1766600480", startDate: "1671906080", status: "CURRENT"),

@@ -25,6 +25,7 @@ final class BearAPI {
         return request
     }
 
+    @MainActor
     static func logIn(userName: String, password: String) async throws -> (loginResponse: LoginResponse?, response: URLResponse?) {
         try await withGRPCClient(
             transport: .http2NIOPosix(
@@ -69,71 +70,7 @@ final class BearAPI {
                         emaId: response.uid
                     ),
                     userVehicleData: response.userVehicleData.map { vehicle in
-                        let config = VehicleConfig(
-                            vin: vehicle.config.vin,
-                            model: String(describing: vehicle.config.model),
-                            modelVariant: String(describing: vehicle.config.variant),
-                            releaseDate: nil,
-                            nickname: vehicle.config.nickname,
-                            paintColor: String(describing: vehicle.config.paintColor),
-                            emaId: "\(vehicle.config.emaID)",
-                            wheels: String(describing: vehicle.config.wheels),
-                            easubscription: EASubscription(
-                                name: vehicle.config.eaSubscription.name,
-                                expirationDate: "\(vehicle.config.eaSubscription.expirationDate)",
-                                startDate: "\(vehicle.config.eaSubscription.startDate)",
-                                status: String(describing: vehicle.config.eaSubscription.status)
-                            ),
-                            chargingAccounts: vehicle.config.chargingAccounts.map { account in
-                                ChargingAccount(
-                                    emaid: "\(account.emaID)",
-                                    vehicleId: "\(account.vehicleID)",
-                                    status: String(describing: account.status),
-                                    createdAtEpochSec: "\(account.createdAtEpochSec)",
-                                    expiryOnEpocSec: "\(account.expiryOnEpochSec)",
-                                    vendorName: String(describing: account.vendorName)
-                                )
-                            },
-                            countryCode: vehicle.config.countryCode,
-                            regionCode: vehicle.config.regionCode,
-                            edition: String(describing: vehicle.config.edition),
-                            battery: String(describing: vehicle.config.battery),
-                            interior: String(describing: vehicle.config.interior),
-                            specialIdentifiers: nil,
-                            look: String(describing: vehicle.config.look),
-                            exteriorColorCode: "\(vehicle.config.exteriorColorCode)",
-                            interiorColorCode: "\(vehicle.config.interiorColorCode)",
-                            frunkStrut: String(describing: vehicle.config.frunkStrut)
-                        )
-                        
-                        let vehicleState = VehicleState(
-                            batteryState: BatteryState(proto: vehicle.state.battery),
-                            powerState: PowerState(proto: vehicle.state.power),
-                            cabinState: CabinState(proto: vehicle.state.cabin),
-                            bodyState: BodyState(proto: vehicle.state.body),
-                            lastUpdatedMs: "\(vehicle.state.lastUpdatedMs)",
-                            chassisState: ChassisState(proto: vehicle.state.chassis),
-                            chargingState: ChargingState(proto: vehicle.state.charging),
-                            gps: GPS(proto: vehicle.state.gps),
-                            softwareUpdate: SoftwareUpdate(proto: vehicle.state.softwareUpdate),
-                            alarmState: AlarmState(proto: vehicle.state.alarm),
-                            cloudConnectionState: CloudConnection(proto: vehicle.state.cloudConnection),
-                            keylessDrivingState: KeylessDrivingState(proto: vehicle.state.keylessDriving),
-                            hvacState: HVACState(proto: vehicle.state.hvac),
-                            driveMode: DriveMode(proto: vehicle.state.driveMode),
-                            privacyMode: PrivacyMode(proto: vehicle.state.privacyMode),
-                            gearPosition: GearPosition(proto: vehicle.state.gearPosition),
-                            mobileAppReqStatus: MobileAppReqStatus(proto: vehicle.state.mobileAppRequest),
-                            tcuState: TcuState(proto: vehicle.state.tcu),
-                            tcuInternetStatus: TCUInternetStatus(proto: vehicle.state.tcuInternet)
-                        )
-                        
-                        return Vehicle(
-                            vehicleId: vehicle.vehicleID,
-                            accessLevel: AccessLevel(proto: vehicle.accessLevel),
-                            vehicleConfig: config,
-                            vehicleState: vehicleState
-                        )
+                        return mapVehicleResponse(vehicle)
                     },
                     encryption: response.encryption == .single ? "single" : "unknown"
                 )
@@ -142,9 +79,7 @@ final class BearAPI {
                 if let firstVehicle = loginResponse.userVehicleData.first {
                     vehicleID = firstVehicle.vehicleId
                     let paintColor = firstVehicle.vehicleConfig.paintColor
-                    if let color = CarColor(rawValue: paintColor)?.image {
-                        carColor = color
-                    }
+                    carColor = paintColor.image
                 }
                 
                 return (loginResponse: loginResponse, response: nil)
@@ -162,57 +97,72 @@ final class BearAPI {
         return true
     }
 
+    @MainActor
     static func refreshToken() async throws -> Int {
-        var request = URLRequest(url: URL(string: .baseAPI + .refreshToken)!)
-
-        request.httpMethod = "POST"
-        request.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["refresh_token": refreshToken]
-
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let sessionInfo = try JSONDecoder().decode(RefreshResponse.self, from: data).sessionInfo
-            authorization = sessionInfo.idToken
-            refreshToken = sessionInfo.refreshToken
-
-            return sessionInfo.expiryTimeSec
-        } catch let error {
-            print(error)
-            authorization = ""
-            refreshToken = ""
-            return 0
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_GetNewJWTTokenRequest()
+            request.refreshToken = refreshToken
+            
+            do {
+                let loginClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
+                let response = try await loginClient.getNewJWTToken(request)
+                
+                // Update stored credentials
+                authorization = response.sessionInfo.idToken
+                refreshToken = response.sessionInfo.refreshToken
+                
+                return Int(response.sessionInfo.expiryTimeSec)
+            } catch {
+                print("gRPC refresh token error: \(error)")
+                authorization = ""
+                refreshToken = ""
+                throw error
+            }
         }
     }
 
+    @MainActor
     static func fetchVehicles() async throws -> [Vehicle]? {
-//        let request = URLRequest(url: URL(string: .baseAPI + .userVehicles)!)
-//        var authRequest = addAuthHeader(to: request)
-//
-//        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-//
-//        do {
-//            let (data, _) = try await URLSession.shared.data(for: authRequest)
-//            let vehicles = try JSONDecoder().decode(UserVehiclesReponse.self, from: data).userVehicleData
-//
-//            return vehicles
-//        } catch let error {
-//            print(error)
-//            return nil
-//        }
-        
-        return nil
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            let request = Mobilegateway_Protos_GetUserVehiclesRequest()
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let fetchClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
+                let response = try await fetchClient.getUserVehicles(
+                    request,
+                    metadata: metadata
+                )
+                
+                return response.userVehicleData.map { vehicle in
+                    return mapVehicleResponse(vehicle)
+                }
+            } catch {
+                print(error)
+                return nil
+            }
+        }
     }
 
+    @MainActor
     static func fetchCurrentVehicle() async throws -> Vehicle? {
         do {
             let vehicles = try await fetchVehicles() ?? []
 
             let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
 
-            if let paintColor = vehicle?.vehicleConfig.paintColor, let color = CarColor(rawValue: paintColor)?.image {
-                carColor = color
+            if let paintColor = vehicle?.vehicleConfig.paintColor {
+                carColor = paintColor.image
             }
 
             return vehicle

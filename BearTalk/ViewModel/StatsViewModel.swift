@@ -61,12 +61,12 @@ import SwiftUI
         nickname = vehicle.vehicleConfig.nickname
         vin = vehicle.vehicleConfig.vin
         year = vehicle.vehicleConfig.releaseDate ?? "Unknown"
-        model = Model(rawValue: vehicle.vehicleConfig.model)?.title ?? "Unknown"
-        trim = Trim(rawValue: vehicle.vehicleConfig.modelVariant)?.title ?? "Unknown"
+        model = vehicle.vehicleConfig.model.title
+        trim = vehicle.vehicleConfig.modelVariant.title
         wheels = Wheels(rawValue: vehicle.vehicleConfig.wheels)?.title ?? "Unknown"
         look = Look(rawValue: vehicle.vehicleConfig.look)?.title ?? "Unknown"
         interior = Interior(rawValue: vehicle.vehicleConfig.interior)?.title ?? "Unknown"
-        paintColor = CarColor(rawValue: vehicle.vehicleConfig.paintColor)?.title ?? "Unknown"
+        paintColor = vehicle.vehicleConfig.paintColor.title
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
 
         let interiorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.interiorTemp, unit: UnitTemperature.celsius)
