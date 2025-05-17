@@ -136,12 +136,12 @@ extension DataModel {
                     
                     switch action {
                     case .defrostOn:
-                        let success = try await BearAPI.defrostControl(action: .off)
+                        let success = try await BearAPI.defrostControl(action: .defrostOff)
                         if !success {
                             // put up an alert
                         }
                     case .defrostOff:
-                        let success = try await BearAPI.defrostControl(action: .on)
+                        let success = try await BearAPI.defrostControl(action: .defrostOn)
                         if !success {
                             // put up an alert
                         }

@@ -330,6 +330,34 @@ final class BearAPI {
             }
         }
     }
+    
+    static func setChargeLimit(percentage: UInt32) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SetChargeLimitRequest()
+            request.vehicleID = vehicleID
+            request.limitPercent = percentage
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.setChargeLimit(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
 
     static func lightsControl(action: LightAction) async throws -> Bool {
         try await withGRPCClient(
@@ -358,24 +386,233 @@ final class BearAPI {
             }
         }
     }
+    
+    static func setTemperature(temperature: Double) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SetCabinTemperatureRequest()
+            request.vehicleID = vehicleID
+            request.temperature = temperature
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.setCabinTemperature(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    static func setMaxAC(state: MaxACState) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SetMaxACRequest()
+            request.vehicleID = vehicleID
+            request.state = Mobilegateway_Protos_MaxACState(rawValue: state.intValue) ?? .unknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.setMaxAC(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
 
-    static func defrostControl(action: DefrostAction) async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + .defrostControl)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID, "hvac_defrost": action.rawValue]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+    static func defrostControl(action: DefrostState) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_HvacDefrostControlRequest()
+            request.vehicleID = vehicleID
+            request.hvacDefrost = Mobilegateway_Protos_DefrostState(rawValue: action.intvalue) ?? .unknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.hvacDefrostControl(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    static func setSeatClimate(seats: [SeatAssignment]) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SeatClimateControlRequest()
+            request.vehicleID = vehicleID
+            
+            seats.forEach { seat in
+                switch seat {
+                case .driverHeatBackrestZone1(mode: let mode):
+                    request.driverHeatBackrestZone1 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .driverHeatBackrestZone3(mode: let mode):
+                    request.driverHeatBackrestZone3 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .driverHeatCushionZone2(mode: let mode):
+                    request.driverHeatCushionZone2 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .driverHeatCushionZone4(mode: let mode):
+                    request.driverHeatCushionZone4 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .driverVentBackrest(mode: let mode):
+                    request.driverVentBackrest = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .driverVentCushion(mode: let mode):
+                    request.driverVentCushion = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerHeatBackrestZone1(mode: let mode):
+                    request.frontPassengerHeatBackrestZone1 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerHeatBackrestZone3(mode: let mode):
+                    request.frontPassengerHeatBackrestZone3 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerHeatCushionZone2(mode: let mode):
+                    request.frontPassengerHeatCushionZone2 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerHeatCushionZone4(mode: let mode):
+                    request.frontPassengerHeatCushionZone4 = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerVentBackrest(mode: let mode):
+                    request.frontPassengerVentBackrest = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .frontPassengerVentCushion(mode: let mode):
+                    request.frontPassengerVentCushion = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .rearPassengerHeatLeft(mode: let mode):
+                    request.rearPassengerHeatLeft = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .rearPassengerHeatCenter(mode: let mode):
+                    request.rearPassengerHeatCenter = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                case .rearPassengerHeatRight(mode: let mode):
+                    request.rearPassengerHeatRight = Mobilegateway_Protos_SeatClimateMode(rawValue: mode.intValue) ?? .unknown
+                }
+            }
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.seatClimateControl(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    static func setBatteryPreCondition(status: PreconditioningStatus) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SetBatteryPreconRequest()
+            request.vehicleID = vehicleID
+            request.status = Mobilegateway_Protos_BatteryPreconStatus(rawValue: status.intValue) ?? .batteryPreconUnknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.setBatteryPrecon(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    static func setShockAndTilt(mode: AlarmMode) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SecurityAlarmControlRequest()
+            request.vehicleID = vehicleID
+            request.mode = Mobilegateway_Protos_AlarmMode(rawValue: mode.intValue) ?? .unknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.securityAlarmControl(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    static func startSoftwareUpdate() async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_ApplySoftwareUpdateRequest()
+            request.vehicleID = vehicleID
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.applySoftwareUpdate(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
         }
     }
 }

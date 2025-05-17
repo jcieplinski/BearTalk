@@ -128,6 +128,8 @@ import OSLog
             Task { @MainActor in
                 vehicle = refreshedVehicle
                 update()
+                updateStats()
+                updateRangeStats()
             }
         } catch {
             Logger.vehicle.error("Error updating Vehile: \(error)")

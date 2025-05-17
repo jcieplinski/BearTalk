@@ -22,6 +22,15 @@ enum DefrostState: Codable, Equatable {
         }
     }
     
+    var intvalue: Int {
+        switch self {
+        case .unknown: return 0
+        case .defrostOn: return 1
+        case .defrostOff: return 2
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     var defrostImage: String {
         switch self {
         case .defrostOn:
@@ -441,6 +450,19 @@ enum MaxACState: Codable, Equatable {
     case on // = 2
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown:
+            0
+        case .off:
+            1
+        case .on:
+            2
+        case .UNRECOGNIZED(let int):
+            int
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_MaxACState) {
         switch proto {
         case .unknown: self = .unknown
@@ -458,6 +480,23 @@ enum SeatClimateMode: Codable, Equatable {
     case medium // = 4
     case high // = 5
     case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .unknown:
+            0
+        case .off:
+            2
+        case .low:
+            3
+        case .medium:
+            4
+        case .high:
+            5
+        case .UNRECOGNIZED(let int):
+            int
+        }
+    }
     
     init(proto: Mobilegateway_Protos_SeatClimateMode) {
         switch proto {

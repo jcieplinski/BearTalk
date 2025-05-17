@@ -24,6 +24,16 @@ enum AlarmMode: Codable, Equatable {
     case silent // = 3
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .off: return 1
+        case .on: return 2
+        case .silent: return 3
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_AlarmMode) {
         switch proto {
         case .unknown: self = .unknown

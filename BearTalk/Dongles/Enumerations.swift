@@ -637,3 +637,21 @@ enum ModelVariant: Codable, Equatable {
         }
     }
 }
+
+enum SeatAssignment: Codable, Equatable {
+    case driverHeatBackrestZone1(mode: SeatClimateMode)
+    case driverHeatBackrestZone3(mode: SeatClimateMode)
+    case driverHeatCushionZone2(mode: SeatClimateMode)
+    case driverHeatCushionZone4(mode: SeatClimateMode)
+    case driverVentBackrest(mode: SeatClimateMode)
+    case driverVentCushion(mode: SeatClimateMode)
+    case frontPassengerHeatBackrestZone1(mode: SeatClimateMode)
+    case frontPassengerHeatBackrestZone3(mode: SeatClimateMode)
+    case frontPassengerHeatCushionZone2(mode: SeatClimateMode)
+    case frontPassengerHeatCushionZone4(mode: SeatClimateMode)
+    case frontPassengerVentBackrest(mode: SeatClimateMode)
+    case frontPassengerVentCushion(mode: SeatClimateMode)
+    case rearPassengerHeatLeft(mode: SeatClimateMode)
+    case rearPassengerHeatCenter(mode: SeatClimateMode)
+    case rearPassengerHeatRight(mode: SeatClimateMode)
+}

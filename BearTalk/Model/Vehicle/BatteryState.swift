@@ -13,6 +13,15 @@ enum WarningState: Codable, Equatable {
     case warningOn // = 2
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .warningUnknown: return 0
+        case .warningOff: return 1
+        case .warningOn: return 2
+        case .UNRECOGNIZED(let i): return i
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_WarningState) {
         switch proto {
         case .warningUnknown:
@@ -33,6 +42,16 @@ enum PreconditioningStatus: Codable, Equatable {
     case batteryPreconOn // = 2
     case batteryPreconUnavailable // = 3
     case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .batteryPreconUnknown: return 0
+        case .batteryPreconOff: return 1
+        case .batteryPreconOn: return 2
+        case .batteryPreconUnavailable: return 3
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
     
     init(proto: Mobilegateway_Protos_BatteryPreconStatus) {
         switch proto {
