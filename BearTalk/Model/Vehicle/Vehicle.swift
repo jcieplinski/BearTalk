@@ -15,7 +15,6 @@ struct Vehicle: Codable, Equatable {
 
     static func example() -> Vehicle? {
         return nil
-
     }
 }
 

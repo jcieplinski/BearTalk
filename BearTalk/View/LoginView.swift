@@ -42,6 +42,7 @@ struct LoginView: View {
                                 .submitLabel(.next)
                                 .keyboardType(.emailAddress)
                                 .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
                                 .onSubmit {
                                     focused = .password
                                 }

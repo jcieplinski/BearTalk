@@ -18,10 +18,23 @@ enum DefaultsKey {
 }
 
 enum LockState: Codable, Equatable {
-    case unknown
-    case locked
-    case unlocked
+    case unknown // = 0
+    case unlocked // = 1
+    case locked // = 2
     case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .unknown:
+            return 0
+        case .locked:
+            return 2
+        case .unlocked:
+            return 1
+        case .UNRECOGNIZED(let int):
+            return int
+        }
+    }
 
     var title: String {
         switch self {
@@ -196,48 +209,111 @@ enum CarColor: String {
     }
 }
 
-enum Interior: String {
-    case santaCruz = "SANTA_CRUZ"
-    case mojave = "MOJAVE"
-    case tahoe = "TAHOE"
-    case santaMonica = "SANTA_MONICA"
+enum Interior: Codable, Equatable {
+    case unknown // = 0
+    case santaCruz // = 1
+    case tahoe // = 2
+    case mojave // = 3
+    case santaMonica // = 5
+    case UNRECOGNIZED(Int)
 
     var title: String {
         switch self {
+        case .unknown: return "Unknown"
+        case .santaCruz: return "Santa Cruz"
+        case .tahoe: return "Tahoe"
+        case .mojave: return "Mojave"
+        case .santaMonica: return "Santa Monica"
+        case .UNRECOGNIZED(let int):
+            return "Unrecognized(\(int))"
+        }
+    }
+    
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .santaCruz: return 1
+        case .tahoe: return 2
+        case .mojave: return 3
+        case .santaMonica: return 5
+        case .UNRECOGNIZED(let int):
+            return int
+        }
+    }
+    
+    init(proto: Mobilegateway_Protos_Interior) {
+        switch proto {
+            case .unknown:
+            self = .unknown
         case .santaCruz:
-            "Santa Cruz"
-        case .mojave:
-            "Mojave"
+            self = .santaCruz
         case .tahoe:
-            "Tahoe"
+            self = .tahoe
+        case .mojave:
+            self = .mojave
         case .santaMonica:
-            "Santa Monica"
+            self = .santaMonica
+        case .UNRECOGNIZED(let int):
+            self = .UNRECOGNIZED(int)
         }
     }
 }
 
-enum Look: String {
-    case platinum = "PLATINUM"
-    case stealth = "STEALTH"
+enum Look: Codable, Equatable {
+    case unknown // = 0
+    case platinum // = 1
+    case stealth // = 2
+    case sapphire // = 3
+    case surfrider // = 4
+    case base // = 5
+    case UNRECOGNIZED(Int)
 
     var title: String {
         switch self {
+        case .unknown:
+            "Unknown"
         case .platinum:
             "Platinum"
         case .stealth:
             "Stealth"
+        case .sapphire:
+            "Sapphire"
+        case .surfrider:
+            "Surfrider"
+        case .base:
+            "Base"
+        case .UNRECOGNIZED(let int):
+            "Unrecognized(\(int))"
+        }
+    }
+    
+    init(proto: Mobilegateway_Protos_Look) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .platinum: self = .platinum
+        case .stealth: self = .stealth
+        case .sapphire: self = .sapphire
+        case .surfrider: self = .surfrider
+        case .base: self = .base
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }
 }
 
-enum Wheels: String {
-    case range = "RANGE"
-    case lite = "LITE"
-    case blade = "BLADE"
-    case dream = "DREAM"
-    case performance = "PERFORMANCE"
-    case bladeGraphite = "BLADE_GRAPHITE"
-    case liteStealth = "LITE_STEALTH"
+enum Wheels: Codable, Equatable {
+    case unknown // = 0
+    case dream // = 1
+    case blade // = 2
+    case lite // = 3
+    case range // = 4
+    case sport // = 5
+    case sportStealth // = 6
+    case bladeGraphite // = 7
+    case liteStealth // = 8
+    case sportLuster // = 9
+    case sapphirePackage // = 10
+    case rangeStealth // = 11
+    case UNRECOGNIZED(Int)
 
     var title: String {
         switch self {
@@ -249,12 +325,42 @@ enum Wheels: String {
             "21\" Aero Blade"
         case .dream:
             "21\" Dream"
-        case .performance:
+        case .sport:
             "21\" Performance"
         case .bladeGraphite:
             "21\" Aero Blade Graphite"
         case .liteStealth:
             "20\" Aero Lite Stealth"
+        case .sportStealth:
+            "21\" Performance Stealth"
+        case .sportLuster:
+            "Sport Luster"
+        case .sapphirePackage:
+            "20\" / 21\" Sapphire"
+        case .rangeStealth:
+            "19\" Aero Range Stealth"
+        case .unknown:
+            "Unknown"
+        case .UNRECOGNIZED(let int):
+            "Unrecognized: \(int)"
+        }
+    }
+    
+    init(proto: Mobilegateway_Protos_Wheels) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .dream: self = .dream
+        case .blade: self = .blade
+        case .bladeGraphite: self = .bladeGraphite
+        case .lite: self = .lite
+        case .liteStealth: self = .liteStealth
+        case .range: self = .range
+        case .rangeStealth: self = .rangeStealth
+        case .sapphirePackage: self = .sapphirePackage
+        case .sport: self = .sport
+        case .sportLuster: self = .sportLuster
+        case .sportStealth: self = .sportStealth
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }
 }

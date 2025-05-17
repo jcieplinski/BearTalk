@@ -10,8 +10,7 @@ import MessageUI
 
 struct StatsView: View {
     @EnvironmentObject private var appState: AppState
-
-    @Bindable var model: StatsViewModel
+    @Environment(DataModel.self) var model
 
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var showingMailView = false
@@ -71,7 +70,6 @@ struct StatsView: View {
                 Text("Sending your vehicle data will help Joe improve the app. No identifying information will be sent, and you can inspect it prior to sending.")
             }
             .task {
-                await model.fetchVehicle()
                 vehicleInfo = await model.getInfoString()
             }
             .sheet(isPresented: $showingMailView) {
@@ -92,6 +90,7 @@ struct StatsView: View {
 }
 
 #Preview {
-    StatsView(model: StatsViewModel.preview)
+    StatsView()
         .environmentObject(AppState())
+        .environment(DataModel())
 }

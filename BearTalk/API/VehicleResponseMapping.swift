@@ -15,7 +15,7 @@ extension BearAPI {
             nickname: vehicle.config.nickname,
             paintColor: PaintColor(proto: vehicle.config.paintColor),
             emaId: "\(vehicle.config.emaID)",
-            wheels: String(describing: vehicle.config.wheels),
+            wheels: Wheels(proto: vehicle.config.wheels),
             easubscription: EASubscription(
                 name: vehicle.config.eaSubscription.name,
                 expirationDate: "\(vehicle.config.eaSubscription.expirationDate)",
@@ -34,11 +34,11 @@ extension BearAPI {
             },
             countryCode: vehicle.config.countryCode,
             regionCode: vehicle.config.regionCode,
-            edition: String(describing: vehicle.config.edition),
+            edition: Edition(proto: vehicle.config.edition),
             battery: String(describing: vehicle.config.battery),
-            interior: String(describing: vehicle.config.interior),
+            interior: Interior(proto: vehicle.config.interior),
             specialIdentifiers: nil,
-            look: String(describing: vehicle.config.look),
+            look: Look(proto: vehicle.config.look),
             exteriorColorCode: "\(vehicle.config.exteriorColorCode)",
             interiorColorCode: "\(vehicle.config.interiorColorCode)",
             frunkStrut: String(describing: vehicle.config.frunkStrut)

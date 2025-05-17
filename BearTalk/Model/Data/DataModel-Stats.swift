@@ -1,32 +1,13 @@
 //
-//  StatsViewModel.swift
+//  DataModel-Stats.swift
 //  BearTalk
 //
-//  Created by Joe Cieplinski on 11/30/23.
+//  Created by Joe Cieplinski on 5/17/25.
 //
 
 import SwiftUI
 
-@Observable final class StatsViewModel {
-    var vehicle: Vehicle?
-    var noVehicleWarning: String = ""
-    var nickname: String = ""
-    var vin: String = ""
-    var year: String = ""
-    var model: String = ""
-    var trim: String = ""
-    var wheels: String = ""
-    var odometer: String = ""
-    var look: String = ""
-    var interior: String = ""
-    var paintColor: String = ""
-    var interiorTemp: String = ""
-    var exteriorTemp: String = ""
-    var softwareVersion: String = ""
-    var chargePercentage: String = ""
-    var range: String = ""
-    var DENumber: String?
-
+extension DataModel {
     func getInfoString() async -> String {
         do {
             if let vehicle {
@@ -54,64 +35,44 @@ import SwiftUI
             return ""
         }
     }
-
+    
     func updateStats() {
         guard let vehicle else { return }
-
+        
         nickname = vehicle.vehicleConfig.nickname
         vin = vehicle.vehicleConfig.vin
         year = vehicle.vehicleConfig.releaseDate ?? "Unknown"
         model = vehicle.vehicleConfig.model.title
         trim = vehicle.vehicleConfig.modelVariant.title
-        wheels = Wheels(rawValue: vehicle.vehicleConfig.wheels)?.title ?? "Unknown"
-        look = Look(rawValue: vehicle.vehicleConfig.look)?.title ?? "Unknown"
-        interior = Interior(rawValue: vehicle.vehicleConfig.interior)?.title ?? "Unknown"
+        wheels = vehicle.vehicleConfig.wheels.title
+        look = vehicle.vehicleConfig.look.title
+        interior = vehicle.vehicleConfig.interior.title
         paintColor = vehicle.vehicleConfig.paintColor.title
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
-
+        
         let interiorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.interiorTemp, unit: UnitTemperature.celsius)
         let interiorTempMeasurementConverted = interiorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
-
+        
         let exteriorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.exteriorTemp, unit: UnitTemperature.celsius)
         let exteriorTempMeasurementConverted = exteriorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
-
+        
         interiorTemp = "\(interiorTempMeasurementConverted.value.rounded()) \(interiorTempMeasurementConverted.unit.symbol)"
         exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
-
+        
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
-
+        
         let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
         let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
-
+        
         range = rangeMeasurementConverted
-
+        
         let odometerMeasurement = Measurement(value: Double(vehicle.vehicleState.chassisState.odometerKm), unit: UnitLength.kilometers)
         let odometerMeasurementConverted = odometerMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
-
+        
         odometer = odometerMeasurementConverted
-
+        
         if let doorPlateNumber = vehicle.vehicleConfig.specialIdentifiers?["doorPlate"] {
             DENumber = doorPlateNumber
         }
-    }
-
-    func fetchVehicle() async {
-        do {
-            if let fetched = try await BearAPI.fetchCurrentVehicle() {
-                vehicle = fetched
-                updateStats()
-            }
-        } catch let error {
-            print("Error fetching vehicles \(error)")
-            noVehicleWarning = "No vehicles found"
-        }
-    }
-
-    // MARK: - Preview
-    static var preview: StatsViewModel {
-        let model = StatsViewModel()
-        model.vehicle = Vehicle.example()
-
-        return model
     }
 }

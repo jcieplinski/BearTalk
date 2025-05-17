@@ -11,8 +11,7 @@ import MapKit
 struct MapView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject private var appState: AppState
-
-    @Bindable var model: MapViewModel
+    @Environment(DataModel.self) var model
 
     @State var position: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
 
@@ -41,7 +40,6 @@ struct MapView: View {
 
                 }
                 .task {
-                    await model.fetchVehicle()
                     position = .region(MKCoordinateRegion(center: model.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
                 }
             }
@@ -55,7 +53,8 @@ struct MapView: View {
 }
 
 #Preview {
-    MapView(model: MapViewModel())
+    MapView()
         .environmentObject(AppState())
+        .environment(DataModel())
 }
 

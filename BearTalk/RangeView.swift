@@ -10,12 +10,15 @@ import AVFoundation
 
 struct RangeView: View {
     @EnvironmentObject private var appState: AppState
-    @Bindable var model: RangeViewModel
+    @Environment(DataModel.self) var model
+    
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
     @State private var speechTimer: Timer?
 
     var body: some View {
+        @Bindable var model = model
+        
         NavigationStack {
             ScrollView {
                 VStack(spacing: 22) {
@@ -76,9 +79,6 @@ struct RangeView: View {
                 .tint(.accent)
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .task {
-                    await model.fetchVehicle()
-                }
                 .navigationTitle("Range")
                 .navigationBarTitleDisplayMode(.inline)
                 .alert("What is your current efficiency?", isPresented: $model.showingEfficiencyPrompt) {
@@ -143,6 +143,7 @@ struct RangeView: View {
 }
 
 #Preview {
-    RangeView(model: RangeViewModel())
+    RangeView()
         .environmentObject(AppState())
+        .environment(DataModel())
 }

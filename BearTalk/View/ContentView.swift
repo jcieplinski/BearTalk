@@ -9,14 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
+    @Environment(DataModel.self) var model
     @EnvironmentObject private var appState: AppState
     @AppStorage(DefaultsKey.refreshToken) var refreshToken: String = ""
-
-    var homeViewModel: HomeViewModel = HomeViewModel()
-    var controlsViewModel: ControlsViewModel = ControlsViewModel()
-    var statsViewModel: StatsViewModel = StatsViewModel()
-    var mapViewModel: MapViewModel = MapViewModel()
-    var rangeViewModel: RangeViewModel = RangeViewModel()
 
     @State var refreshTimer: Timer?
 
@@ -28,25 +23,25 @@ struct ContentView: View {
                 Spacer()
             } else if appState.loggedIn {
                 TabView(selection: $appState.selectedTab) {
-                    ControlsView(model: controlsViewModel)
+                    ControlsView()
                         .tabItem {
                             Image("home")
                             Text("Home")
                         }
                         .tag(AppTab.home)
-                    MapView(model: mapViewModel)
+                    MapView()
                         .tabItem {
                             Image("location")
                             Text("Location")
                         }
                         .tag(AppTab.map)
-                    RangeView(model: rangeViewModel)
+                    RangeView()
                         .tabItem {
                             Image("range")
                             Text("Range")
                         }
                         .tag(AppTab.range)
-                    StatsView(model: statsViewModel)
+                    StatsView()
                         .tabItem {
                             Image("stats")
                             Text("Stats")
@@ -61,11 +56,16 @@ struct ContentView: View {
         .background(
             LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
         )
+        .onAppear {
+            model.startRefreshing()
+        }
         .onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
             case .inactive, .background:
                 refreshTimer?.invalidate()
                 refreshTimer = nil
+                
+                model.stopRefreshing()
             case .active:
                 Task {
                     // Check to be sure we have a refresh token. If not, show log in.
@@ -77,11 +77,14 @@ struct ContentView: View {
                     // Refresh our auth and set a timer to do it again before expiry
                     await refreshAuth()
 
+                    model.startRefreshing()
                     appState.appHoldScreen = false
                 }
             @unknown default:
                 refreshTimer?.invalidate()
                 refreshTimer = nil
+                
+                model.stopRefreshing()
             }
         }
     }
@@ -114,6 +117,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(controlsViewModel: ControlsViewModel.preview)
+    ContentView()
         .environmentObject(AppState.preview)
+        .environment(DataModel())
 }

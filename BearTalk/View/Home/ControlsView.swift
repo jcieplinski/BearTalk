@@ -10,8 +10,7 @@ import SwiftUI
 struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject private var appState: AppState
-
-    @Bindable var model: ControlsViewModel
+    @Environment(DataModel.self) var model
 
     @State var showLogOutWarning: Bool = false
 
@@ -225,10 +224,6 @@ struct ControlsView: View {
             .tint(.accent)
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .task {
-                await model.fetchVehicle()
-                model.update()
-            }
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -238,23 +233,6 @@ struct ControlsView: View {
                     } label: {
                         Image(systemName: "person.circle")
                     }
-                }
-            }
-            .onChange(of: model.vehicle) { _, newValue in
-                guard newValue != nil else { return }
-
-                model.update()
-            }
-            .onChange(of: scenePhase) { _, newPhase in
-                switch newPhase {
-                case .inactive, .background:
-                    break
-                case .active:
-                    Task {
-                        await model.fetchVehicle()
-                    }
-                @unknown default:
-                    break
                 }
             }
             .background(
@@ -271,10 +249,11 @@ struct ControlsView: View {
                 Text("Do you wish to log out of your Lucid account?")
             }
         }
-        }
+    }
 }
 
 #Preview {
-    ControlsView(model: ControlsViewModel.preview)
+    ControlsView()
         .environmentObject(AppState())
+        .environment(DataModel())
 }

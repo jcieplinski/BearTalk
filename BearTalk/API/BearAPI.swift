@@ -185,7 +185,7 @@ final class BearAPI {
             
             do {
                 let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let response = try await client.wakeupVehicle(
+                let _ = try await client.wakeupVehicle(
                     request,
                     metadata: metadata
                 )
@@ -211,7 +211,7 @@ final class BearAPI {
             
             do {
                 let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let response = try await client.honkHorn(
+                let _ = try await client.honkHorn(
                     request,
                     metadata: metadata
                 )
@@ -225,25 +225,32 @@ final class BearAPI {
     }
 
     static func doorLockControl(lockState: LockState) async throws -> Bool {
-//        let request = URLRequest(url: URL(string: .baseAPI + .doorLocksControl)!)
-//        var authRequest = addAuthHeader(to: request)
-//
-//        authRequest.httpMethod = "POST"
-//        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-//
-//        let parameters: [String : Any] = ["vehicle_id": vehicleID, "lock_state": lockState.rawValue, "door_location": [1,2,3,4]]
-//
-//        do {
-//            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-//            let _ = try await URLSession.shared.data(for: authRequest)
-//
-//            return true
-//        } catch let error {
-//            print(error)
-//            return false
-//        }
-        
-        return false
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_DoorLocksControlRequest()
+            request.vehicleID = vehicleID
+            request.lockState = Mobilegateway_Protos_LockState(rawValue: lockState.intValue) ?? Mobilegateway_Protos_LockState.unknown
+            request.doorLocation = [1, 2, 3, 4]
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.doorLocksControl(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
     }
 
     static func cargoControl(area: Cargo, closureState: DoorState) async throws -> Bool {
@@ -263,7 +270,7 @@ final class BearAPI {
                 
                 do {
                     let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                    let response = try await client.frontCargoControl(
+                    let _ = try await client.frontCargoControl(
                         request,
                         metadata: metadata
                     )
@@ -282,7 +289,7 @@ final class BearAPI {
                 
                 do {
                     let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                    let response = try await client.rearCargoControl(
+                    let _ = try await client.rearCargoControl(
                         request,
                         metadata: metadata
                     )
@@ -311,7 +318,7 @@ final class BearAPI {
             
             do {
                 let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let response = try await client.controlChargePort(
+                let _ = try await client.controlChargePort(
                     request,
                     metadata: metadata
                 )
@@ -339,7 +346,7 @@ final class BearAPI {
             
             do {
                 let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let response = try await client.lightsControl(
+                let _ = try await client.lightsControl(
                     request,
                     metadata: metadata
                 )
