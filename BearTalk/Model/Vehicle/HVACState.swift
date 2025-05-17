@@ -75,6 +75,18 @@ enum LightAction: Codable, Equatable {
         }
     }
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .flash: return 1
+        case .on: return 2
+        case .off: return 3
+        case .hazardOn: return 4
+        case .hazardOff: return 5
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     var lightsImage: String {
         switch self {
         case .on:

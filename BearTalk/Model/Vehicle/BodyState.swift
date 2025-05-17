@@ -56,6 +56,16 @@ enum DoorState: Codable, Equatable {
         }
     }
     
+    var intValue: Int {
+        switch self {
+        case .unknown: 0
+        case .open: 1
+        case .closed: 2
+        case .ajar: 3
+        case .UNRECOGNIZED(let int): int
+        }
+    }
+    
     var frunkImage: String {
         switch self {
         case .open, .ajar:

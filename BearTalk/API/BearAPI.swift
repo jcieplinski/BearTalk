@@ -173,42 +173,54 @@ final class BearAPI {
     }
 
     static func wakeUp() async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + .wakeUp)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_WakeupVehicleRequest()
+            request.vehicleID = vehicleID
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let response = try await client.wakeupVehicle(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
         }
     }
 
     static func honkHorn() async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + .honkHorn)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_HonkHornRequest()
+            request.vehicleID = vehicleID
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let response = try await client.honkHorn(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
         }
     }
 
@@ -234,63 +246,109 @@ final class BearAPI {
         return false
     }
 
-    static func cargoControl(area: Cargo, closureState: ClosureState) async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + area.controlURL)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID, "closure_state": closureState.rawValue]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+    static func cargoControl(area: Cargo, closureState: DoorState) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            switch area {
+            case .frunk:
+                var request = Mobilegateway_Protos_FrontCargoControlRequest()
+                request.vehicleID = vehicleID
+                request.closureState = Mobilegateway_Protos_DoorState(rawValue: closureState.intValue) ?? Mobilegateway_Protos_DoorState.unknown
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let response = try await client.frontCargoControl(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
+            case .trunk:
+                var request = Mobilegateway_Protos_RearCargoControlRequest()
+                request.vehicleID = vehicleID
+                request.closureState = Mobilegateway_Protos_DoorState(rawValue: closureState.intValue) ?? Mobilegateway_Protos_DoorState.unknown
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let response = try await client.rearCargoControl(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
+            }
         }
     }
 
-    static func chargePortControl(closureState: ClosureState) async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + .chargePortControl)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID, "closure_state": closureState.rawValue]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+    static func chargePortControl(closureState: DoorState) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_ControlChargePortRequest()
+            request.vehicleID = vehicleID
+            request.closureState = Mobilegateway_Protos_DoorState(rawValue: closureState.intValue) ?? Mobilegateway_Protos_DoorState.unknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let response = try await client.controlChargePort(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
         }
     }
 
-    static func lightsControl(action: LightsAction) async throws -> Bool {
-        let request = URLRequest(url: URL(string: .baseAPI + .lightsControl)!)
-        var authRequest = addAuthHeader(to: request)
-
-        authRequest.httpMethod = "POST"
-        authRequest.addValue("application/JSON", forHTTPHeaderField: "Content-Type")
-
-        let parameters: [String : Any] = ["vehicle_id": vehicleID, "action": action.rawValue]
-
-        do {
-            authRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            let _ = try await URLSession.shared.data(for: authRequest)
-
-            return true
-        } catch let error {
-            print(error)
-            return false
+    static func lightsControl(action: LightAction) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_LightsControlRequest()
+            request.vehicleID = vehicleID
+            request.action = Mobilegateway_Protos_LightAction(rawValue: action.intValue) ?? Mobilegateway_Protos_LightAction.unknown
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let response = try await client.lightsControl(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
         }
     }
 
