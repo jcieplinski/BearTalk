@@ -58,7 +58,7 @@ struct ControlsView: View {
                                 }
                                 .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
-                                    if model.requestInProgress == .chargePort {
+                                    if model.requestInProgress.contains(.chargePort) {
                                         ProgressView()
                                             .frame(maxWidth: .infinity)
                                     }
@@ -82,7 +82,7 @@ struct ControlsView: View {
                                 }
                                 .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
-                                    if model.requestInProgress == .doorLocks {
+                                    if model.requestInProgress.contains(.doorLocks) {
                                         ProgressView()
                                             .frame(maxWidth: .infinity)
                                     }
@@ -123,7 +123,7 @@ struct ControlsView: View {
                                 }
                                 .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
-                                    if model.requestInProgress == .frunk {
+                                    if model.requestInProgress.contains(.frunk) {
                                         ProgressView()
                                             .frame(maxWidth: .infinity)
                                     }
@@ -145,7 +145,7 @@ struct ControlsView: View {
                                 }
                                 .disabled(model.allFunctionsDisable)
                                 .overlay(alignment: .center) {
-                                    if model.requestInProgress == .trunk {
+                                    if model.requestInProgress.contains(.trunk) {
                                         ProgressView()
                                             .frame(maxWidth: .infinity)
                                     }
@@ -164,7 +164,7 @@ struct ControlsView: View {
                                     .tint(model.defrostState == .defrostOn ? .active : .inactive)
                             }
                             .overlay(alignment: .center) {
-                                if model.requestInProgress == .defrost {
+                                if model.requestInProgress.contains(.defrost) {
                                     ProgressView()
                                         .frame(maxWidth: .infinity)
                                 }
@@ -179,7 +179,7 @@ struct ControlsView: View {
                                     .tint(model.lightsState == .on ? .active : .inactive)
                             }
                             .overlay(alignment: .center) {
-                                if model.requestInProgress == .lights {
+                                if model.requestInProgress.contains(.lights) {
                                     ProgressView()
                                         .frame(maxWidth: .infinity)
                                 }
@@ -194,7 +194,7 @@ struct ControlsView: View {
                                     .tint(model.lightsFlashActive ? .active : .inactive)
                             }
                             .overlay(alignment: .center) {
-                                if model.requestInProgress == .flash {
+                                if model.requestInProgress.contains(.flash) {
                                     ProgressView()
                                         .frame(maxWidth: .infinity)
                                 }
@@ -209,7 +209,7 @@ struct ControlsView: View {
                                     .tint(model.hornActive ? .active : .inactive)
                             }
                             .overlay(alignment: .center) {
-                                if model.requestInProgress == .horn {
+                                if model.requestInProgress.contains(.horn) {
                                     ProgressView()
                                         .frame(maxWidth: .infinity)
                                 }

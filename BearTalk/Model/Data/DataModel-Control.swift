@@ -25,7 +25,7 @@ extension DataModel {
                         let _ = try await BearAPI.wakeUp()
                     }
                     
-                    requestInProgress = .doorLocks
+                    requestInProgress.insert(.doorLocks)
                     
                     switch lockState {
                     case .unknown:
@@ -66,7 +66,7 @@ extension DataModel {
                         let _ = try await BearAPI.wakeUp()
                     }
                     
-                    requestInProgress = area == .frunk ? .frunk : .trunk
+                    requestInProgress.insert(area == .frunk ? .frunk : .trunk)
                     
                     switch closureState {
                     case .open, .ajar:
@@ -101,7 +101,7 @@ extension DataModel {
                         let _ = try await BearAPI.wakeUp()
                     }
                     
-                    requestInProgress = .chargePort
+                    requestInProgress.insert(.chargePort)
                     
                     switch closureState {
                     case .open, .ajar:
@@ -132,7 +132,7 @@ extension DataModel {
                         let _ = try await BearAPI.wakeUp()
                     }
                     
-                    requestInProgress = .defrost
+                    requestInProgress.insert(.defrost)
                     
                     switch action {
                     case .defrostOn:
@@ -189,14 +189,14 @@ extension DataModel {
                 
                 switch action {
                 case .on:
-                    requestInProgress = .lights
+                    requestInProgress.insert(.lights)
                     
                     let success = try await BearAPI.lightsControl(action: .off)
                     if !success {
                         // put up an alert
                     }
                 case .off:
-                    requestInProgress = .lights
+                    requestInProgress.insert(.lights)
                     
                     let success = try await BearAPI.lightsControl(action: .on)
                     if !success {
@@ -204,7 +204,7 @@ extension DataModel {
                     }
                 case .flash:
                     lightsFlashActive = true
-                    requestInProgress = .flash
+                    requestInProgress.insert(.flash)
                     
                     let success = try await BearAPI.lightsControl(action: .flash)
                     if !success {
@@ -224,7 +224,7 @@ extension DataModel {
                     let _ = try await BearAPI.wakeUp()
                 }
                 
-                requestInProgress = .horn
+                requestInProgress.insert(.horn)
                 
                 let success = try await BearAPI.honkHorn()
                 if !success {
@@ -239,13 +239,57 @@ extension DataModel {
     func wakeUpCar() {
         Task {
             do {
-                requestInProgress = .wake
+                requestInProgress.insert(.wake)
                 let success = try await BearAPI.wakeUp()
                 if !success {
                     // put up an alert
                 }
             } catch {
                 print("Could not wake car: \(error)")
+            }
+        }
+    }
+    
+    func resetControlFunction(oldState: VehicleState?, newState: VehicleState?) {
+        guard let oldState, let newState else {
+            requestInProgress = []
+            return
+        }
+        
+        requestInProgress.forEach { request in
+            switch request {
+            case .doorLocks:
+                if oldState.bodyState.doorLocks != newState.bodyState.doorLocks {
+                    requestInProgress.remove(.doorLocks)
+                }
+            case .frunk:
+                if oldState.bodyState.frontCargo != newState.bodyState.frontCargo {
+                    requestInProgress.remove(.frunk)
+                }
+            case .trunk:
+                if oldState.bodyState.rearCargo != newState.bodyState.rearCargo {
+                    requestInProgress.remove(.trunk)
+                }
+            case .chargePort:
+                if oldState.bodyState.chargePortState != newState.bodyState.chargePortState {
+                    requestInProgress.remove(.chargePort)
+                }
+            case .defrost:
+                if oldState.hvacState.defrost != newState.hvacState.defrost {
+                    requestInProgress.remove(.defrost)
+                }
+            case .lights:
+                if oldState.chassisState.headlights != newState.chassisState.headlights {
+                    requestInProgress.remove(.lights)
+                }
+            case .flash:
+                requestInProgress.remove(.flash)
+            case .horn:
+                requestInProgress.remove(.horn)
+            case .wake:
+                if oldState.powerState != newState.powerState {
+                    requestInProgress.remove(.wake)
+                }
             }
         }
     }

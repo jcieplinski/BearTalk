@@ -68,7 +68,7 @@ import OSLog
         refreshTimer != nil
     }
     
-    var requestInProgress: ControlFunction?
+    var requestInProgress: Set<ControlFunction> = []
     
     var vehicleIsReady: Bool {
         guard let vehicle else { return false }
@@ -110,15 +110,17 @@ import OSLog
     }
     
     private func setRefreshVehicleTimer() {
-        refreshTimer = Timer
-            .scheduledTimer(
-                withTimeInterval: TimeInterval(4),
-                repeats: true
-            ) { _ in
+        DispatchQueue.main.async { [weak self] in
+            self?.refreshTimer = Timer
+                .scheduledTimer(
+                    withTimeInterval: TimeInterval(4),
+                    repeats: true
+                ) { _ in
                     Task { [weak self] in
                         await self?.refreshVehicle()
                     }
                 }
+        }
     }
     
     private func refreshVehicle() async {
@@ -126,6 +128,7 @@ import OSLog
             let refreshedVehicle = try await BearAPI.fetchCurrentVehicle()
             
             Task { @MainActor in
+                resetControlFunction(oldState: vehicle?.vehicleState, newState: refreshedVehicle?.vehicleState)
                 vehicle = refreshedVehicle
                 update()
                 updateStats()
