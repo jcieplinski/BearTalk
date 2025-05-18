@@ -91,10 +91,30 @@ final class BearAPI {
     }
 
     static func logOut() async throws -> Bool {
-        authorization = ""
-        refreshToken = ""
-
-        return true
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            let request = Mobilegateway_Protos_LogoutRequest()
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
+                let _ = try await client.logout(
+                    request,
+                    metadata: metadata
+                )
+                
+                authorization = ""
+                refreshToken = ""
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
     }
 
     @MainActor

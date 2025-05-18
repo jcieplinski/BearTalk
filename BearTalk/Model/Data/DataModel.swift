@@ -130,6 +130,7 @@ import OSLog
             Task { @MainActor in
                 resetControlFunction(oldState: vehicle?.vehicleState, newState: refreshedVehicle?.vehicleState)
                 vehicle = refreshedVehicle
+                gps = refreshedVehicle?.vehicleState.gps
                 update()
                 updateStats()
                 updateRangeStats()
