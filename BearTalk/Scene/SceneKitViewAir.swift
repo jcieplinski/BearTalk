@@ -155,7 +155,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         var scene: SCNScene?
         
         // Approach 1: Try loading directly from the main bundle
-        if let sceneURL = Bundle.main.url(forResource: "Air", withExtension: "scn", subdirectory: "Scene") {
+        if let sceneURL = Bundle.main.url(forResource: "Air", withExtension: "scn") {
             do {
                 scene = try SCNScene(url: sceneURL, options: nil)
             } catch {
@@ -180,13 +180,13 @@ struct SceneKitViewAir: UIViewRepresentable {
         if let loadedScene = scene { 
             sceneView.scene = loadedScene
             
-            // Set scene background to black
-            loadedScene.background.contents = UIColor.black
+            // Set scene background to clear
+            loadedScene.background.contents = UIColor.clear
             
             // Configure lighting
             sceneView.autoenablesDefaultLighting = true
             sceneView.allowsCameraControl = true
-            sceneView.backgroundColor = .black
+            sceneView.backgroundColor = .clear
             
             // Add ambient light to ensure proper lighting
             let ambientLight = SCNNode()
@@ -244,7 +244,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .black
+        sceneView.backgroundColor = .clear
         if let loadedScene = scene {
             loadedScene.isPaused = true  // Pause the scene instead of the view
         }

@@ -115,7 +115,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         
         var scene: SCNScene?
         
-        if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn", subdirectory: "Scene") {
+        if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn") {
             do {
                 scene = try SCNScene(url: sceneURL, options: nil)
             } catch {
@@ -125,11 +125,11 @@ struct SceneKitViewGravity: UIViewRepresentable {
         
         if let loadedScene = scene {
             sceneView.scene = loadedScene
-            loadedScene.background.contents = UIColor.black
+            loadedScene.background.contents = UIColor.clear
             
             sceneView.autoenablesDefaultLighting = true
             sceneView.allowsCameraControl = true
-            sceneView.backgroundColor = .black
+            sceneView.backgroundColor = .clear
             
             let ambientLight = SCNNode()
             ambientLight.light = SCNLight()
@@ -173,7 +173,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .black
+        sceneView.backgroundColor = .clear
         if let loadedScene = scene {
             loadedScene.isPaused = true
         }

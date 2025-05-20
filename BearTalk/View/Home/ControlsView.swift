@@ -16,7 +16,7 @@ struct ControlsView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 22) {
+            VStack(spacing: 12) {
                 if model.vehicle != nil {
                     // Top Row Status
                     Text(model.chargePercentage)
@@ -37,185 +37,11 @@ struct ControlsView: View {
                             Text(model.exteriorTemp)
                                 .font(.body)
                         }
+                    
                     VStack {
-                        HStack(spacing: 6) {
-                            // Left Side Controls
-                            VStack {
-                                Spacer()
-                                Button {
-                                    model.toggleChargePort()
-                                } label: {
-                                    Image(model.chargePortImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 52)
-                                        .overlay(alignment: .trailing) {
-                                            Rectangle()
-                                                .frame(width: 110, height: 1)
-                                                .offset(x: 110)
-                                        }
-                                        .tint(model.chargePortClosureState == .open ? .active : .inactive)
-                                }
-                                .disabled(model.allFunctionsDisable)
-                                .overlay(alignment: .center) {
-                                    if model.requestInProgress.contains(.chargePort) {
-                                        ProgressView()
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                }
-                                Rectangle()
-                                    .foregroundStyle(.clear)
-                                    .frame(width: 11, height: 50)
-                                Button {
-                                    model.toggleDoorLocks()
-                                } label: {
-                                    Image(model.doorImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 52)
-                                        .overlay(alignment: .trailing) {
-                                            Rectangle()
-                                                .frame(width: 110, height: 1)
-                                                .offset(x: 110)
-                                        }
-                                        .tint(model.lockState == .locked ? .active : .inactive)
-                                }
-                                .disabled(model.allFunctionsDisable)
-                                .overlay(alignment: .center) {
-                                    if model.requestInProgress.contains(.doorLocks) {
-                                        ProgressView()
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                }
-                                Rectangle()
-                                    .foregroundStyle(.clear)
-                                    .frame(width: 11, height: 30)
-                                Spacer()
-                            }
-                            // Car
-                            HStack {
-                                Rectangle()
-                                    .foregroundStyle(.clear)
-                                    .frame(maxHeight: 400)
-                                    .background(
-                                        Image(appState.carColor)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .padding(8)
-                                    )
-                            }
-                            // Right Side Controls
-                            VStack {
-                                Button {
-                                    model.toggleFrunk()
-                                } label: {
-                                    Image(model.frunkImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 52)
-                                        .overlay(alignment: .leading) {
-                                            Rectangle()
-                                                .frame(width: 110, height: 1)
-                                                .offset(x: -110)
-                                        }
-                                        .tint(model.frunkClosureState == .open ? .active : .inactive)
-                                        .padding(.bottom, 120)
-                                }
-                                .disabled(model.allFunctionsDisable)
-                                .overlay(alignment: .center) {
-                                    if model.requestInProgress.contains(.frunk) {
-                                        ProgressView()
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                }
-                                Button {
-                                    model.toggleTrunk()
-                                } label: {
-                                    Image(model.trunkImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 52)
-                                        .overlay(alignment: .leading) {
-                                            Rectangle()
-                                                .frame(width: 110, height: 1)
-                                                .offset(x: -110)
-                                        }
-                                        .tint(model.trunkClosureState == .open ? .active : .inactive)
-                                        .padding(.top, 120)
-                                }
-                                .disabled(model.allFunctionsDisable)
-                                .overlay(alignment: .center) {
-                                    if model.requestInProgress.contains(.trunk) {
-                                        ProgressView()
-                                            .frame(maxWidth: .infinity)
-                                    }
-                                }
-                            }
-                        }
-                        Spacer()
-                        HStack(spacing: 44) {
-                            Button {
-                                model.toggleDefost()
-                            } label: {
-                                Image(model.defrostImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52)
-                                    .tint(model.defrostState == .defrostOn ? .active : .inactive)
-                            }
-                            .overlay(alignment: .center) {
-                                if model.requestInProgress.contains(.defrost) {
-                                    ProgressView()
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
-                            Button {
-                                model.toggleLights()
-                            } label: {
-                                Image(model.lightsImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52)
-                                    .tint(model.lightsState == .on ? .active : .inactive)
-                            }
-                            .overlay(alignment: .center) {
-                                if model.requestInProgress.contains(.lights) {
-                                    ProgressView()
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
-                            Button {
-                                model.flashLights()
-                            } label: {
-                                Image(model.flashLightsImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52)
-                                    .tint(model.lightsFlashActive ? .active : .inactive)
-                            }
-                            .overlay(alignment: .center) {
-                                if model.requestInProgress.contains(.flash) {
-                                    ProgressView()
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
-                            Button {
-                                model.honkHorn()
-                            } label: {
-                                Image(model.hornImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52)
-                                    .tint(model.hornActive ? .active : .inactive)
-                            }
-                            .overlay(alignment: .center) {
-                                if model.requestInProgress.contains(.horn) {
-                                    ProgressView()
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
-                        }
+                        CarView()
                     }
+                    
                     Spacer()
                 } else {
                     EmptyView()

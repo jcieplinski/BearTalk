@@ -59,6 +59,5 @@ struct CarView: View {
             }
         }
         .frame(height: 340)
-        .background(Color.black)
     }
 }
