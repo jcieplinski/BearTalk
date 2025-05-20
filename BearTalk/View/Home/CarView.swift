@@ -58,6 +58,6 @@ struct CarView: View {
                 })
             }
         }
-        .frame(height: 340)
+        .frame(height: 300)
     }
 }
