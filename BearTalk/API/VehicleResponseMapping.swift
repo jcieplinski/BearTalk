@@ -39,6 +39,7 @@ extension BearAPI {
             interior: Interior(proto: vehicle.config.interior),
             specialIdentifiers: nil,
             look: Look(proto: vehicle.config.look),
+            roof: RoofType(proto: vehicle.config.roof),
             exteriorColorCode: "\(vehicle.config.exteriorColorCode)",
             interiorColorCode: "\(vehicle.config.interiorColorCode)",
             frunkStrut: String(describing: vehicle.config.frunkStrut)

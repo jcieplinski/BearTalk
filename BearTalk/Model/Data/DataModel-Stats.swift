@@ -47,7 +47,7 @@ extension DataModel {
         wheels = vehicle.vehicleConfig.wheels.title
         look = vehicle.vehicleConfig.look.title
         interior = vehicle.vehicleConfig.interior.title
-        paintColor = vehicle.vehicleConfig.paintColor.title
+        paintColor = vehicle.vehicleConfig.paintColor
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
         
         let interiorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.interiorTemp, unit: UnitTemperature.celsius)

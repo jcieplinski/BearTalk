@@ -25,6 +25,7 @@ struct VehicleConfig: Codable, Equatable {
     let interior: Interior
     let specialIdentifiers: [String: String]?
     let look: Look
+    let roof: RoofType
     let exteriorColorCode: String
     let interiorColorCode: String
     let frunkStrut: String
@@ -48,6 +49,7 @@ struct VehicleConfig: Codable, Equatable {
             interior: .santaCruz,
             specialIdentifiers: nil,
             look: .platinum,
+            roof: .glassCanopy,
             exteriorColorCode: "L102",
             interiorColorCode: "INT12",
             frunkStrut: "POWER_STRUT")
@@ -77,6 +79,34 @@ enum Edition: Codable, Equatable {
         case .performance: self = .performance
         case .range: self = .range
         case .standard: self = .standard
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum RoofType: Codable, Equatable {
+    case unknown // = 0
+    case glassCanopy // = 1
+    case metal // = 2
+    case carbonFiber // = 3
+    case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .glassCanopy: return 1
+        case .metal: return 2
+        case .carbonFiber: return 3
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
+    init(proto: Mobilegateway_Protos_RoofType) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .glassCanopy: self = .glassCanopy
+        case .metal: self = .metal
+        case .carbonFiber: self = .carbonFiber
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }

@@ -13,7 +13,7 @@ struct SceneKitViewAir: UIViewRepresentable {
     @Binding var showPlatinum: Bool
     @Binding var showGlassRoof: Bool
     @Binding var carPaintColor: PaintColor
-    @Binding var selectedWheel: AirWheelOption?
+    @Binding var selectedWheel: Wheels
     @Binding var isGT: Bool
     @Binding var shouldResetCamera: Bool
     let onViewCreated: (SCNView) -> Void
@@ -255,7 +255,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum, showGlassRoof: showGlassRoof)
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
-            updateWheelVisibility(in: scene, selectedWheel: selectedWheel?.nodeTitle)
+            updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset
             if shouldResetCamera && !context.coordinator.isResetting {

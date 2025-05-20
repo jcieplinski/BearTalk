@@ -14,6 +14,15 @@ import OSLog
     var vehicle: Vehicle?
     var refreshTimer: Timer?
     
+    // Car Scene
+    var selectedModel: CarSceneModel = CarSceneModel.allCases.randomElement() ?? .air
+    var showPlatinum: Bool = false
+    var showGlassRoof: Bool = true
+    var paintColor: PaintColor = .eurekaGold
+    var selectedWheel: Wheels = .dream
+    var isGT: Bool = true
+    var shouldResetCamera: Bool = false
+    
     // Control
     var noVehicleWarning: String = ""
     var powerState: PowerState = .sleep
@@ -59,7 +68,6 @@ import OSLog
     var odometer: String = ""
     var look: String = ""
     var interior: String = ""
-    var paintColor: String = ""
     var interiorTemp: String = ""
     var softwareVersion: String = ""
     var DENumber: String?
@@ -143,6 +151,33 @@ import OSLog
     func update() {
         guard let vehicle else { return }
         
+        switch vehicle.vehicleConfig.model {
+        case .unknown, .UNRECOGNIZED:
+            selectedModel = .air
+        case .air:
+            if vehicle.vehicleConfig.modelVariant == .sapphire {
+                selectedModel = .sapphire
+            } else {
+                selectedModel = .air
+            }
+        case .gravity:
+            selectedModel = .gravity
+        }
+        
+        switch vehicle.vehicleConfig.look {
+        case .unknown, .UNRECOGNIZED, .platinum, .surfrider, .base:
+            showPlatinum = true
+        case .stealth, .sapphire:
+            showPlatinum = false
+        }
+        
+        switch vehicle.vehicleConfig.roof {
+        case .unknown, .glassCanopy, .UNRECOGNIZED:
+            showGlassRoof = true
+        case .metal, .carbonFiber:
+            showGlassRoof = false
+        }
+        
         gearPosition = vehicle.vehicleState.gearPosition
         
         lockState = vehicle.vehicleState.bodyState.doorLocks
@@ -169,3 +204,8 @@ import OSLog
         exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
     }
 }
+
+var paintColor: PaintColor = .eurekaGold
+var selectedWheel: Wheels = .dream
+var isGT: Bool = true
+var shouldResetCamera: Bool = false

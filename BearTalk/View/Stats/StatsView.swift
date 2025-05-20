@@ -47,7 +47,7 @@ struct StatsView: View {
                 }
 
                 Section("Configuration") {
-                    StatsCell(title: "Color", stat: model.paintColor)
+                    StatsCell(title: "Color", stat: model.paintColor.title)
                     StatsCell(title: "Interior", stat: model.interior)
                     StatsCell(title: "Look", stat: model.look)
                     StatsCell(title: "Wheels", stat: model.wheels)

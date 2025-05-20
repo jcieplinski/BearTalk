@@ -4,7 +4,7 @@ import SceneKit
 struct SceneKitViewGravity: UIViewRepresentable {
     @Binding var showPlatinum: Bool
     @Binding var carPaintColor: PaintColor
-    @Binding var selectedWheel: GravityWheelOption?
+    @Binding var selectedWheel: Wheels
     @Binding var shouldResetCamera: Bool
     let onViewCreated: (SCNView) -> Void
     
@@ -184,7 +184,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         if let scene = uiView.scene {
             updatePlatinumMaterials(in: scene, showPlatinum: showPlatinum)
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
-            updateWheelVisibility(in: scene, selectedWheel: selectedWheel?.nodeTitle)
+            updateWheelVisibility(in: scene, selectedWheel: GravityWheelOption.aether.nodeTitle)
             
             if shouldResetCamera && !context.coordinator.isResetting {
                 if let cameraNode = uiView.pointOfView {
