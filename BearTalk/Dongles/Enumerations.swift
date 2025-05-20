@@ -161,54 +161,6 @@ enum DefrostAction: String {
     }
 }
 
-enum CarColor: String {
-    case eureka = "EUREKA_GOLD"
-    case stellar = "STELLAR_WHITE"
-    case quantum = "QUANTUM_GREY"
-    case zenith = "ZENITH_RED"
-    case cosmos = "COSMOS_SILVER"
-    case infinite = "INFINITE_BLACK"
-    case fathom = "FATHOM_BLUE"
-
-    var image: String {
-        switch self {
-        case .eureka:
-            return "eureka"
-        case .stellar:
-            return "stellar"
-        case .quantum:
-            return "quantum"
-        case .zenith:
-            return "zenith"
-        case .cosmos:
-            return "cosmos"
-        case .infinite:
-            return "infinite"
-        case .fathom:
-            return "fathom"
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .eureka:
-            return "Eureka Gold"
-        case .stellar:
-            return "Stellar White"
-        case .quantum:
-            return "Quantum Grey"
-        case .zenith:
-            return "Zenith Red"
-        case .cosmos:
-            return "Cosmos Silver"
-        case .infinite:
-            return "Infinite Black"
-        case .fathom:
-            return "Fathom Blue"
-        }
-    }
-}
-
 enum Interior: Codable, Equatable {
     case unknown // = 0
     case santaCruz // = 1
@@ -451,114 +403,6 @@ enum ControlFunction {
     case wake
 }
 
-enum PaintColor: Codable, Equatable {
-    case unknown // = 0
-    case eurekaGold // = 1
-    case stellarWhite // = 2
-    case infiniteBlack // = 3
-    case cosmosSilver // = 4
-    case quantumGrey // = 5
-    case zenithRed // = 6
-    case fathomBlue // = 7
-    case custom // = 8
-    case sapphireBlue // = 9
-    case lunarTitanium // = 10
-    case auroraGreen // = 11
-    case supernovaBronze // = 12
-    case glossBlackPrimary // = 13
-    case UNRECOGNIZED(Int)
-    
-    init(proto: Mobilegateway_Protos_PaintColor) {
-        switch proto {
-        case .unknown: self = .unknown
-        case .eurekaGold: self = .eurekaGold
-        case .stellarWhite: self = .stellarWhite
-        case .infiniteBlack: self = .infiniteBlack
-        case .cosmosSilver: self = .cosmosSilver
-        case .quantumGrey: self = .quantumGrey
-        case .zenithRed: self = .zenithRed
-        case .fathomBlue: self = .fathomBlue
-        case .custom: self = .custom
-        case .sapphireBlue: self = .sapphireBlue
-        case .lunarTitanium: self = .lunarTitanium
-        case .auroraGreen: self = .auroraGreen
-        case .supernovaBronze: self = .supernovaBronze
-        case .glossBlackPrimary: self = .glossBlackPrimary
-        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
-        }
-    }
-    
-    var image: String {
-        switch self {
-        case .eurekaGold:
-            return "eureka"
-        case .stellarWhite:
-            return "stellar"
-        case .quantumGrey:
-            return "quantum"
-        case .zenithRed:
-            return "zenith"
-        case .cosmosSilver:
-            return "cosmos"
-        case .infiniteBlack:
-            return "infinite"
-        case .fathomBlue:
-            return "fathom"
-        case .unknown:
-            return "euereka"
-        case .custom:
-            return "stellar"
-        case .sapphireBlue:
-            return "stellar"
-        case .lunarTitanium:
-            return "stellar"
-        case .auroraGreen:
-            return "stellar"
-        case .supernovaBronze:
-            return "stellar"
-        case .glossBlackPrimary:
-            return "stellar"
-        case .UNRECOGNIZED(_):
-            return "stellar"
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .eurekaGold:
-            return "Eureka Gold"
-        case .stellarWhite:
-            return "Stellar White"
-        case .quantumGrey:
-            return "Quantum Grey"
-        case .zenithRed:
-            return "Zenith Red"
-        case .cosmosSilver:
-            return "Cosmos Silver"
-        case .infiniteBlack:
-            return "Infinite Black"
-        case .fathomBlue:
-            return "Fathom Blue"
-        case .unknown:
-            return "Unknown"
-        case .custom:
-            return "Custom"
-        case .sapphireBlue:
-            return "Sapphire Blue"
-        case .lunarTitanium:
-            return "Lunar Titanium"
-        case .auroraGreen:
-            return "Aurora Green"
-        case .supernovaBronze:
-            return "Supernova Bronze"
-        case .glossBlackPrimary:
-            return "Gloss Black"
-        case .UNRECOGNIZED(_):
-            return "Unrecognized"
-        }
-    }
-}
-
 enum LucidModel: Codable, Equatable {
     case unknown // = 0
     case air // = 1
@@ -654,4 +498,21 @@ enum SeatAssignment: Codable, Equatable {
     case rearPassengerHeatLeft(mode: SeatClimateMode)
     case rearPassengerHeatCenter(mode: SeatClimateMode)
     case rearPassengerHeatRight(mode: SeatClimateMode)
+}
+
+enum ControlType: Codable, Equatable, CaseIterable, Identifiable {
+    case doorLocks
+    case frunk
+    case trunk
+    case chargePort
+    case defrost
+    case maxAC
+    case seatClimate
+    case steeringWheelClimate
+    case horn
+    case lights
+    case batteryPrecondition
+    case climateControl
+    
+    var id: Self { self }
 }

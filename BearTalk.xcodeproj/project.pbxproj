@@ -55,6 +55,19 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"Scene/air_tex/black_gloss-s.png",
+				"Scene/air_tex/carpaint-s.png",
+				"Scene/air_tex/chrome_gloss-s.png",
+				"Scene/air_tex/chrome_matte-s.png",
+				"Scene/air_tex/chrome_polish-s.png",
+				Scene/air_tex/metal_dark_grey.png,
+				"Scene/air_tex/rim_black_gloss_aero-darker.png",
+				Scene/air_tex/rim_black_gloss.png,
+				"Scene/air_tex/tire_AO-darker.png",
+				Scene/air_tex/tire_darkenfx_MASK_ALPHA.png,
+				Scene/air_tex/tire_NORMAL.png,
+				Scene/air_tex/tire_ROUGHNESS.png,
+				Scene/air_tex/white_opacity.png,
 			);
 			target = D8CA9DA62B166B3300BC35F8 /* BearTalk */;
 		};
