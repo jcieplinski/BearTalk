@@ -9,26 +9,21 @@ import SwiftUI
 import SceneKit
 
 struct CarView: View {
-    @Binding var selectedModel: CarSceneModel
-    @Binding var showPlatinum: Bool
-    @Binding var showGlassRoof: Bool
-    @Binding var paintColor: PaintColor
-    @Binding var selectedWheel: Wheels
-    @Binding var isGT: Bool
-    @Binding var shouldResetCamera: Bool
+    @Environment(DataModel.self) var model
     
     @State private var currentSceneView: SCNView?
     
     var body: some View {
         ZStack {
-            if selectedModel == .air {
+            @Bindable var model = model
+            if model.selectedModel == .air {
                 SceneKitViewAir(sceneName: "Air.scn",
-                                showPlatinum: $showPlatinum,
-                                showGlassRoof: $showGlassRoof,
-                                carPaintColor: $paintColor,
-                                selectedWheel: $selectedWheel,
-                                isGT: $isGT,
-                                shouldResetCamera: $shouldResetCamera,
+                                showPlatinum: $model.showPlatinum,
+                                showGlassRoof: $model.showGlassRoof,
+                                carPaintColor: $model.paintColor,
+                                selectedWheel: $model.selectedWheel,
+                                isGT: $model.fancyMirrorCaps,
+                                shouldResetCamera: $model.shouldResetCamera,
                                 onViewCreated: { view in
                     DispatchQueue.main.async {
                         // Configure view for transparency
@@ -37,11 +32,11 @@ struct CarView: View {
                         currentSceneView = view
                     }
                 })
-            } else if selectedModel == .gravity {
-                SceneKitViewGravity(showPlatinum: $showPlatinum,
-                                    carPaintColor: $paintColor,
-                                    selectedWheel: $selectedWheel,
-                                    shouldResetCamera: $shouldResetCamera,
+            } else if model.selectedModel == .gravity {
+                SceneKitViewGravity(showPlatinum: $model.showPlatinum,
+                                    carPaintColor: $model.paintColor,
+                                    selectedWheel: $model.selectedWheel,
+                                    shouldResetCamera: $model.shouldResetCamera,
                                     onViewCreated: { view in
                     DispatchQueue.main.async {
                         // Configure view for transparency
@@ -51,8 +46,9 @@ struct CarView: View {
                     }
                 })
             } else {
-                SceneKitViewSapphire(shouldResetCamera: $shouldResetCamera,
-                                     onViewCreated: { view in
+                SceneKitViewSapphire(
+                    shouldResetCamera: $model.shouldResetCamera,
+                    onViewCreated: { view in
                     DispatchQueue.main.async {
                         // Configure view for transparency
                         view.backgroundColor = .clear

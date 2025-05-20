@@ -20,7 +20,7 @@ import OSLog
     var showGlassRoof: Bool = true
     var paintColor: PaintColor = .eurekaGold
     var selectedWheel: Wheels = .dream
-    var isGT: Bool = true
+    var fancyMirrorCaps: Bool = true
     var shouldResetCamera: Bool = false
     
     // Control
@@ -178,6 +178,15 @@ import OSLog
             showGlassRoof = false
         }
         
+        self.selectedWheel = vehicle.vehicleConfig.wheels
+        
+        switch vehicle.vehicleConfig.modelVariant {
+        case .unknown, .UNRECOGNIZED, .touring, .pure:
+            fancyMirrorCaps = false
+        case .dreamEdition, .grandTouring, .sapphire, .hyper, .executive:
+            fancyMirrorCaps = true
+        }
+        
         gearPosition = vehicle.vehicleState.gearPosition
         
         lockState = vehicle.vehicleState.bodyState.doorLocks
@@ -204,8 +213,3 @@ import OSLog
         exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
     }
 }
-
-var paintColor: PaintColor = .eurekaGold
-var selectedWheel: Wheels = .dream
-var isGT: Bool = true
-var shouldResetCamera: Bool = false
