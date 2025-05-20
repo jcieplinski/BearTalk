@@ -14,7 +14,7 @@ struct SceneKitViewAir: UIViewRepresentable {
     @Binding var showGlassRoof: Bool
     @Binding var carPaintColor: PaintColor
     @Binding var selectedWheel: Wheels
-    @Binding var isGT: Bool
+    @Binding var fancyMirrorCaps: Bool
     @Binding var shouldResetCamera: Bool
     let onViewCreated: (SCNView) -> Void
     
@@ -371,7 +371,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
         
         // Handle mirror caps based on GT state
-        if isGT {
+        if fancyMirrorCaps {
             // GT mode: show platinum/stealth based on showPlatinum
             mirrorCapPlatinumNodes.forEach { node in
                 var parent = node.parent

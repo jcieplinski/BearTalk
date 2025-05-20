@@ -22,7 +22,7 @@ struct CarView: View {
                                 showGlassRoof: $model.showGlassRoof,
                                 carPaintColor: $model.paintColor,
                                 selectedWheel: $model.selectedWheel,
-                                isGT: $model.fancyMirrorCaps,
+                                fancyMirrorCaps: $model.fancyMirrorCaps,
                                 shouldResetCamera: $model.shouldResetCamera,
                                 onViewCreated: { view in
                     DispatchQueue.main.async {
