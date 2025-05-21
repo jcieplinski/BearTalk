@@ -32,7 +32,7 @@ extension DataModel {
         case .climateControl:
             break
         case .maxAC:
-            break
+            toggleMaxAC()
         case .seatClimate:
             break
         case .steeringWheelClimate:
@@ -241,6 +241,37 @@ extension DataModel {
                         }
                     case .unknown, .UNRECOGNIZED(_):
                         break
+                    }
+                } catch let error {
+                    print("Could not toggle defrost state: \(error)")
+                }
+            }
+        }
+    }
+    
+    func toggleMaxAC() {
+        if let action = maxACState {
+            Task {
+                do {
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
+                    
+                    requestInProgress.insert(.defrost)
+                    
+                    switch action {
+                    case .unknown, .UNRECOGNIZED:
+                        break
+                    case .off:
+                        let success = try await BearAPI.setMaxAC(state: .on)
+                        if !success {
+                            // put up an alert
+                        }
+                    case .on:
+                        let success = try await BearAPI.setMaxAC(state: .off)
+                        if !success {
+                            // put up an alert
+                        }
                     }
                 } catch let error {
                     print("Could not toggle defrost state: \(error)")
