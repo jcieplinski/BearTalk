@@ -58,6 +58,16 @@ struct CarView: View {
                 })
             }
         }
-        .frame(height: 300)
+        .overlay(alignment: .bottomLeading) {
+            Button {
+                model.shouldResetCamera.toggle()
+            } label: {
+                Label("Reset view", systemImage: "arrow.clockwise.circle.fill")
+                    .labelStyle(.iconOnly)
+                    .padding()
+                    .foregroundStyle(.accent)
+            }
+        }
+        .frame(height: 250)
     }
 }

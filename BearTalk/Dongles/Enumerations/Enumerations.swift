@@ -5,7 +5,8 @@
 //  Created by Joe Cieplinski on 11/28/23.
 //
 
-import Foundation
+import SwiftUI
+import UniformTypeIdentifiers
 
 enum DefaultsKey {
     static let authorization: String = "authorization"
@@ -15,6 +16,7 @@ enum DefaultsKey {
     static let vehicleID: String = "vehicleID"
     static let carColor: String = "carColor"
     static let lastEfficiency: String = "lastEfficiency"
+    static let controlsFavorites: String = "controlsFavorites"
 }
 
 enum LockState: Codable, Equatable {
@@ -435,19 +437,126 @@ enum SeatAssignment: Codable, Equatable {
     case rearPassengerHeatRight(mode: SeatClimateMode)
 }
 
-enum ControlType: Codable, Equatable, CaseIterable, Identifiable {
+extension UTType {
+    static let controlType = UTType(exportedAs: "com.joecieplinski.bearTalk.controlType")
+}
+
+enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .controlType)
+    }
+    
+    case wake
     case doorLocks
     case frunk
     case trunk
     case chargePort
-    case defrost
+    case climateControl
     case maxAC
     case seatClimate
     case steeringWheelClimate
+    case defrost
     case horn
     case lights
     case batteryPrecondition
-    case climateControl
     
     var id: Self { self }
+    
+    static var allCases: [ControlType] {
+        // We remove wake from allCases here. We don't want it as its own button
+        return [.doorLocks, .frunk, .trunk, .chargePort, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .batteryPrecondition]
+    }
+    
+    var title: LocalizedStringKey {
+        switch self {
+        case .wake:
+            "Wake Up"
+        case .doorLocks:
+            "Door Locks"
+        case .frunk:
+            "Frunk"
+        case .trunk:
+            "Trunk"
+        case .chargePort:
+            "Charge Port"
+        case .defrost:
+            "Defrost"
+        case .maxAC:
+            "Max AC"
+        case .seatClimate:
+            "Seat Climate"
+        case .steeringWheelClimate:
+            "Steering Wheel Heat"
+        case .horn:
+            "Honk Horn"
+        case .lights:
+            "Lights"
+        case .batteryPrecondition:
+            "Precondition Battery"
+        case .climateControl:
+            "Climate Control"
+        }
+    }
+    
+    var offImage: String {
+        switch self {
+        case .wake:
+            ""
+        case .doorLocks:
+            "doorsUnlocked"
+        case .frunk:
+            "frunkClosed"
+        case .trunk:
+            "trunkClosed"
+        case .chargePort:
+            "chargePortClosed"
+        case .defrost:
+            "defrostOff"
+        case .maxAC:
+            "maxAcOff"
+        case .seatClimate:
+            "seatClimateOff"
+        case .steeringWheelClimate:
+            "steeringWheelOff"
+        case .horn:
+            "hornOff"
+        case .lights:
+            "lightsOff"
+        case .batteryPrecondition:
+            "batteryOff"
+        case .climateControl:
+            "climateOff"
+        }
+    }
+    
+    var onImage: String {
+        switch self {
+        case .wake:
+            ""
+        case .doorLocks:
+            "doorsLocked"
+        case .frunk:
+            "frunkOpen"
+        case .trunk:
+            "trunkOpen"
+        case .chargePort:
+            "chargePortOpen"
+        case .defrost:
+            "defrostOn"
+        case .maxAC:
+            "maxAcOn"
+        case .seatClimate:
+            "seatClimateOn"
+        case .steeringWheelClimate:
+            "steeringWheelOn"
+        case .horn:
+            "hornOn"
+        case .lights:
+            "lightsOn"
+        case .batteryPrecondition:
+            "batteryOn"
+        case .climateControl:
+            "climateOn"
+        }
+    }
 }

@@ -17,6 +17,37 @@ extension DataModel {
         return false
     }
     
+    func handleControlAction(_ controlType: ControlType) {
+        switch controlType {
+        case .wake:
+            break
+        case .doorLocks:
+            toggleDoorLocks()
+        case .frunk:
+            toggleFrunk()
+        case .trunk:
+            toggleTrunk()
+        case .chargePort:
+            toggleChargePort()
+        case .climateControl:
+            break
+        case .maxAC:
+            break
+        case .seatClimate:
+            break
+        case .steeringWheelClimate:
+            break
+        case .defrost:
+            toggleDefost()
+        case .horn:
+            honkHorn()
+        case .lights:
+            toggleLights()
+        case .batteryPrecondition:
+            break
+        }
+    }
+    
     func toggleDoorLocks() {
         if let lockState {
             Task {
@@ -204,7 +235,7 @@ extension DataModel {
                     }
                 case .flash:
                     lightsFlashActive = true
-                    requestInProgress.insert(.flash)
+                   // requestInProgress.insert(.flash)
                     
                     let success = try await BearAPI.lightsControl(action: .flash)
                     if !success {
@@ -282,13 +313,31 @@ extension DataModel {
                 if oldState.chassisState.headlights != newState.chassisState.headlights {
                     requestInProgress.remove(.lights)
                 }
-            case .flash:
-                requestInProgress.remove(.flash)
             case .horn:
                 requestInProgress.remove(.horn)
             case .wake:
                 if oldState.powerState != newState.powerState {
                     requestInProgress.remove(.wake)
+                }
+            case .climateControl:
+                if oldState.hvacState.power != newState.hvacState.power {
+                    requestInProgress.remove(.climateControl)
+                }
+            case .maxAC:
+                if oldState.hvacState.maxAcStatus != newState.hvacState.maxAcStatus {
+                    requestInProgress.remove(.maxAC)
+                }
+            case .seatClimate:
+                if oldState.hvacState.seats.self != newState.hvacState.seats.self {
+                    requestInProgress.remove(.seatClimate)
+                }
+            case .steeringWheelClimate:
+                if oldState.hvacState.steeringHeater != newState.hvacState.steeringHeater {
+                    requestInProgress.remove(.steeringWheelClimate)
+                }
+            case .batteryPrecondition:
+                if oldState.batteryState.preconditioningStatus != newState.batteryState.preconditioningStatus {
+                    requestInProgress.remove(.batteryPrecondition)
                 }
             }
         }

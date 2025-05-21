@@ -76,7 +76,7 @@ import OSLog
         refreshTimer != nil
     }
     
-    var requestInProgress: Set<ControlFunction> = []
+    var requestInProgress: Set<ControlType> = []
     
     var vehicleIsReady: Bool {
         guard let vehicle else { return false }

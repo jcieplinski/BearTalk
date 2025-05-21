@@ -467,6 +467,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
@@ -510,6 +511,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BearTalk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Uses FaceID to log in";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used to allow you to speak your current efficiency and calculate estimated range.";

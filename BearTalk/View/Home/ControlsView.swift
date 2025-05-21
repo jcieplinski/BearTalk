@@ -16,40 +16,44 @@ struct ControlsView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 12) {
-                if model.vehicle != nil {
-                    // Top Row Status
-                    Text(model.chargePercentage)
-                        .font(.title)
-                        .frame(maxWidth: .infinity)
-                        .overlay(alignment: .leading) {
-                            Button {
-                                if !model.vehicleIsReady {
-                                    model.wakeUpCar()
+            ScrollView {
+                VStack(spacing: 12) {
+                    if model.vehicle != nil {
+                        // Top Row Status
+                        Text(model.chargePercentage)
+                            .font(.title)
+                            .frame(maxWidth: .infinity)
+                            .overlay(alignment: .leading) {
+                                Button {
+                                    if !model.vehicleIsReady {
+                                        model.wakeUpCar()
+                                    }
+                                } label: {
+                                    Image(systemName: model.powerState.image)
+                                        .font(.body)
+                                        .fontWeight(.bold)
                                 }
-                            } label: {
-                                Image(systemName: model.powerState.image)
-                                    .font(.body)
-                                    .fontWeight(.bold)
                             }
+                            .overlay(alignment: .trailing) {
+                                Text(model.exteriorTemp)
+                                    .font(.body)
+                            }
+                        
+                        VStack {
+                            CarView()
+                            
+                            ControlGrid()
                         }
-                        .overlay(alignment: .trailing) {
-                            Text(model.exteriorTemp)
-                                .font(.body)
-                        }
-                    
-                    VStack {
-                        CarView()
+                        
+                        Spacer()
+                    } else {
+                        EmptyView()
                     }
-                    
-                    Spacer()
-                } else {
-                    EmptyView()
                 }
+                .tint(.accent)
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .tint(.accent)
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
