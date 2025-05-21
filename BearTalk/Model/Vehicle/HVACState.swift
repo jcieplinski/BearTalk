@@ -624,6 +624,17 @@ enum SteeringWheelHeaterLevel: Codable, Equatable {
     case steeringWheelHeaterLevel3 // = 4
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .off: return 1
+        case .steeringWheelHeaterLevel1: return 2
+        case .steeringWheelHeaterLevel2: return 3
+        case .steeringWheelHeaterLevel3: return 4
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_SteeringWheelHeaterLevel) {
         switch proto {
         case .unknown: self = .unknown

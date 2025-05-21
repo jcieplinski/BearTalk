@@ -553,6 +553,43 @@ final class BearAPI {
         }
     }
     
+    static func setSteeringWheelHeat(status: SteeringHeaterStatus) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SteeringWheelHeaterRequest()
+            request.vehicleID = vehicleID
+            
+            switch status {
+                
+            case .unknown, .UNRECOGNIZED:
+                break
+            case .off:
+                request.level = .off
+            case .on:
+                request.level = .steeringWheelHeaterLevel2
+            }
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.steeringWheelHeater(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
     static func setBatteryPreCondition(status: PreconditioningStatus) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(

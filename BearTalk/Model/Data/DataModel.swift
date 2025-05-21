@@ -39,7 +39,7 @@ import OSLog
     var batteryPreConditionState: PreconditioningStatus?
     var climatePowerState: HvacPower?
     var seatClimateState: SeatClimateState?
-    var steeringWheelClimateState: SteeringHeaterStatus?
+    var steeringHeaterStatus: SteeringHeaterStatus?
     var gearPosition: GearPosition = .gearUnknown
     
     // Map
@@ -183,7 +183,7 @@ import OSLog
         batteryPreConditionState = vehicle.vehicleState.batteryState.preconditioningStatus
         climatePowerState = vehicle.vehicleState.hvacState.power
         seatClimateState = vehicle.vehicleState.hvacState.seats
-        steeringWheelClimateState = vehicle.vehicleState.hvacState.steeringHeater
+        steeringHeaterStatus = vehicle.vehicleState.hvacState.steeringHeater
         
         powerState = vehicle.vehicleState.powerState
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"

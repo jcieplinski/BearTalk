@@ -36,7 +36,7 @@ extension DataModel {
         case .seatClimate:
             break
         case .steeringWheelClimate:
-            break
+            toggleSteeringWheelHeat()
         case .defrost:
             toggleDefost()
         case .horn:
@@ -44,7 +44,7 @@ extension DataModel {
         case .lights:
             toggleLights()
         case .batteryPrecondition:
-            break
+            toggleBatteryPrecondition()
         }
     }
     
@@ -150,6 +150,69 @@ extension DataModel {
                     }
                 } catch let error {
                     print("Could not toggle chargePort state: \(error)")
+                }
+            }
+        }
+    }
+    
+    func toggleSteeringWheelHeat() {
+        if let steeringHeaterStatus {
+            Task {
+                do {
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
+                    
+                    requestInProgress.insert(.steeringWheelClimate)
+                    
+                    switch steeringHeaterStatus {
+                    case .unknown, .UNRECOGNIZED:
+                        break
+                    case .off:
+                        let success = try await BearAPI.setSteeringWheelHeat(status: .on)
+                        if !success {
+                            // put up an alert
+                        }
+                    case .on:
+                        let success = try await BearAPI.setSteeringWheelHeat(status: .off)
+                        if !success {
+                            // put up an alert
+                        }
+                    }
+                } catch let error {
+                    print("Could not toggle steeringWheelHeat state: \(error)")
+                }
+            }
+        }
+    }
+    
+    func toggleBatteryPrecondition() {
+        if let preconditionState = batteryPreConditionState {
+            Task {
+                do {
+                    if !vehicleIsReady {
+                        let _ = try await BearAPI.wakeUp()
+                    }
+                    
+                    requestInProgress.insert(.batteryPrecondition)
+                    
+                    switch preconditionState {
+                        
+                    case .batteryPreconUnknown, .batteryPreconUnavailable, .UNRECOGNIZED:
+                        break
+                    case .batteryPreconOff:
+                        let success = try await BearAPI.setBatteryPreCondition(status: .batteryPreconOn)
+                        if !success {
+                            // put up an alert
+                        }
+                    case .batteryPreconOn:
+                        let success = try await BearAPI.setBatteryPreCondition(status: .batteryPreconOff)
+                        if !success {
+                            // put up an alert
+                        }
+                    }
+                } catch let error {
+                    print("Could not toggle battery precondition state: \(error)")
                 }
             }
         }
