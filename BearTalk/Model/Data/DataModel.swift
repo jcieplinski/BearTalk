@@ -29,21 +29,17 @@ import OSLog
     var chargePercentage: String = ""
     var exteriorTemp: String = ""
     
-    var doorImage: String = LockState.locked.image
-    var frunkImage: String = ClosureState.closed.frunkImage
-    var trunkImage: String = ClosureState.closed.trunkImage
-    var chargePortImage: String = ClosureState.closed.chargePortImage
-    var defrostImage: String = DefrostAction.off.defrostImage
-    var lightsImage: String = LightsAction.off.lightsImage
-    var flashLightsImage: String = LightsAction.flash.lightsImage
-    var hornImage: String = "hornOff"
-    
     var lockState: LockState?
     var frunkClosureState: DoorState?
     var trunkClosureState: DoorState?
     var chargePortClosureState: DoorState?
     var lightsState: LightAction?
     var defrostState: DefrostState?
+    var maxACState: MaxACState?
+    var batteryPreConditionState: PreconditioningStatus?
+    var climatePowerState: HvacPower?
+    var seatClimateState: SeatClimateState?
+    var steeringWheelClimateState: SteeringHeaterStatus?
     var gearPosition: GearPosition = .gearUnknown
     
     // Map
@@ -88,18 +84,6 @@ import OSLog
             return true
         case .UNRECOGNIZED(_):
             return false
-        }
-    }
-    
-    var hornActive: Bool = false {
-        didSet {
-            hornImage = hornActive ? "hornOn" : "hornOff"
-        }
-    }
-    
-    var lightsFlashActive: Bool = false {
-        didSet {
-            flashLightsImage = lightsFlashActive ? "flashLightsOn" : "flashLightsOff"
         }
     }
     
@@ -195,15 +179,12 @@ import OSLog
         chargePortClosureState = vehicle.vehicleState.bodyState.chargePortState
         lightsState = vehicle.vehicleState.mobileAppReqStatus.lightRequest
         defrostState = vehicle.vehicleState.hvacState.defrost
+        maxACState = vehicle.vehicleState.hvacState.maxAcStatus
+        batteryPreConditionState = vehicle.vehicleState.batteryState.preconditioningStatus
+        climatePowerState = vehicle.vehicleState.hvacState.power
+        seatClimateState = vehicle.vehicleState.hvacState.seats
+        steeringWheelClimateState = vehicle.vehicleState.hvacState.steeringHeater
         
-        doorImage = lockState?.image ?? "questionmark"
-        frunkImage = frunkClosureState?.frunkImage ?? "questionmark"
-        trunkImage = trunkClosureState?.trunkImage ?? "questionmark"
-        chargePortImage = chargePortClosureState?.chargePortImage ?? "questionmark"
-        lightsImage = lightsState?.lightsImage ?? "questionmark"
-        defrostImage = defrostState?.defrostImage ?? "questionmark"
-        hornImage = hornActive ? "hornOn" : "hornOff"
-        flashLightsImage = lightsFlashActive ? "flashLightsOn" : "flashLightsOff"
         powerState = vehicle.vehicleState.powerState
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
         

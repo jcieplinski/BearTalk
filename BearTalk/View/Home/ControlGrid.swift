@@ -11,7 +11,6 @@ struct ControlGrid: View {
     @Environment(DataModel.self) var model
     @AppStorage(DefaultsKey.controlsFavorites) var controlsFavorites: String = [ControlType.doorLocks.rawValue,ControlType.frunk.rawValue,ControlType.trunk.rawValue,ControlType.chargePort.rawValue].joined(separator: ",")
     
-    @State private var isActive: Bool = false
     @State private var selectedControls: [ControlType] = []
     @State private var nonSelectedControls: [ControlType] = []
     @State private var showingAvailableControls: Bool = false
@@ -32,7 +31,6 @@ struct ControlGrid: View {
                 ForEach(selectedControls) { control in
                     ControlButton(
                         controlType: control,
-                        isActive: $isActive,
                         action: model.handleControlAction
                     )
                     .draggable(control) {
@@ -101,7 +99,6 @@ struct ControlGrid: View {
                         ForEach(nonSelectedControls) { control in
                             ControlButton(
                                 controlType: control,
-                                isActive: $isActive,
                                 action: { _ in }
                             )
                             .draggable(control) {

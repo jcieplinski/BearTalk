@@ -527,6 +527,24 @@ struct SeatClimateState: Codable, Equatable {
     let rearPassengerHeatCenter: SeatClimateMode
     let rearPassengerHeatRight: SeatClimateMode
     
+    var isOn: Bool {
+        return driverHeatBackrestZone1 != .off ||
+        driverHeatBackrestZone3 != .off ||
+        driverHeatCushionZone2 != .off ||
+        driverHeatCushionZone4 != .off ||
+        driverVentBackrest != .off ||
+        driverVentCushion != .off ||
+        frontPassengerHeatBackrestZone1 != .off ||
+        frontPassengerHeatBackrestZone3 != .off ||
+        frontPassengerHeatCushionZone2 != .off ||
+        frontPassengerHeatCushionZone4 != .off ||
+        frontPassengerVentBackrest != .off ||
+        frontPassengerVentCushion != .off ||
+        rearPassengerHeatLeft != .off ||
+        rearPassengerHeatCenter != .off ||
+        rearPassengerHeatRight != .off
+    }
+    
     init(proto: Mobilegateway_Protos_SeatClimateState) {
         driverHeatBackrestZone1 = .init(proto: proto.driverHeatBackrestZone1)
         driverHeatBackrestZone3 = .init(proto: proto.driverHeatBackrestZone3)

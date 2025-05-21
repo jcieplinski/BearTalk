@@ -234,7 +234,7 @@ extension DataModel {
                         // put up an alert
                     }
                 case .flash:
-                    lightsFlashActive = true
+                 //   lightsFlashActive = true
                    // requestInProgress.insert(.flash)
                     
                     let success = try await BearAPI.lightsControl(action: .flash)
