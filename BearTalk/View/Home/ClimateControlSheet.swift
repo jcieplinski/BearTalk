@@ -7,6 +7,7 @@ struct ClimateControlSheet: View {
     @State private var temperature: Double = Locale.current.measurementSystem == .metric ? 22 : 72
     @State private var debouncedTask: Task<Void, Never>?
     @State private var isSettingTemperature = false
+    @State private var isInitialSetup = true
     
     var powerIsOn: Bool {
         guard let climatePowerState = model.climatePowerState else { return false }
@@ -38,6 +39,9 @@ struct ClimateControlSheet: View {
                     .pickerStyle(.wheel)
                     .frame(height: 100)
                     .onChange(of: temperature) { _, newValue in
+                        // Skip API call during initial setup
+                        guard !isInitialSetup else { return }
+                        
                         // Cancel any existing debounced task
                         debouncedTask?.cancel()
                         
@@ -89,6 +93,11 @@ struct ClimateControlSheet: View {
             }
             .onAppear {
                 temperature = model.selectedTemperature
+                // Set isInitialSetup to false after a brief delay to ensure the temperature change has been processed
+                Task {
+                    try? await Task.sleep(for: .milliseconds(100))
+                    isInitialSetup = false
+                }
             }
         }
         .presentationDetents([.fraction(0.4), .medium])
