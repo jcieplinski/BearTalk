@@ -53,24 +53,8 @@ struct ControlButton: View {
             Button {
                 action(controlType)
             } label: {
-                Label {
-                    Text(controlType.title)
-                } icon: {
-                    Image(isActive ? controlType.onImage : controlType.offImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 44, maxHeight: 44)
-                }
-                .labelStyle(.iconOnly)
-                
-                .padding(4)
-                .background(
-                    RoundedRectangle(cornerRadius: 13)
-                        .stroke(style: StrokeStyle(lineWidth: 1))
-                )
+                ControlButtonCore(controlType: controlType, isActive: isActive)
             }
-            .tint(isActive ? .active : .inactive)
-            .disabled(model.requestInProgress.contains(controlType))
             
             if model.requestInProgress.contains(controlType) {
                 ProgressView()

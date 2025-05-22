@@ -34,7 +34,7 @@ extension DataModel {
         case .maxAC:
             toggleMaxAC()
         case .seatClimate:
-            break
+            NotificationCenter.default.post(name: .showSeatClimate, object: nil)
         case .steeringWheelClimate:
             toggleSteeringWheelHeat()
         case .defrost:

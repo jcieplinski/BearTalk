@@ -14,6 +14,7 @@ struct ControlsView: View {
 
     @State var showLogOutWarning: Bool = false
     @State var showClimateControl: Bool = false
+    @State var showSeatClimate: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -84,6 +85,10 @@ struct ControlsView: View {
                 ClimateControlSheet()
                     .presentationBackground(.thinMaterial)
             }
+            .sheet(isPresented: $showSeatClimate) {
+                SeatClimateSheet()
+                    .presentationBackground(.thinMaterial)
+            }
             .onAppear {
                 NotificationCenter.default.addObserver(
                     forName: .showClimateControl,
@@ -91,6 +96,14 @@ struct ControlsView: View {
                     queue: .main
                 ) { _ in
                     showClimateControl = true
+                }
+                
+                NotificationCenter.default.addObserver(
+                    forName: .showSeatClimate,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    showSeatClimate = true
                 }
             }
         }

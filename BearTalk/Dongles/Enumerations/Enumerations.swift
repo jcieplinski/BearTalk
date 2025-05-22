@@ -17,6 +17,8 @@ enum DefaultsKey {
     static let carColor: String = "carColor"
     static let lastEfficiency: String = "lastEfficiency"
     static let controlsFavorites: String = "controlsFavorites"
+    static let selectedTemperature: String = "selectedTemperature"
+    static let seatClimateLevel: String = "seatClimateLevel"
 }
 
 enum LockState: Codable, Equatable {

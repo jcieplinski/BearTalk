@@ -61,7 +61,7 @@ struct ClimateControlSheet: View {
                             
                             // Set the temperature
                             isSettingTemperature = true
-                            await model.setCabinTemperature(newValue)
+                            model.setCabinTemperature(newValue)
                             isSettingTemperature = false
                         }
                     }
