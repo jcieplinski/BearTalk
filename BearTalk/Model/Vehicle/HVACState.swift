@@ -51,6 +51,26 @@ enum HvacPower: Codable, Equatable {
     case hvacKeepTemp // = 6
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .hvacOn: return 1
+        case .hvacOff: return 2
+        case .hvacPrecondition: return 3
+        case .hvacKeepTemp: return 6
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
+    var isOn: Bool {
+        switch self {
+        case .unknown, .hvacOff, .UNRECOGNIZED:
+            return false
+        case .hvacOn, .hvacPrecondition, .hvacKeepTemp:
+            return true
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_HvacPower) {
         switch proto {
         case .unknown: self = .unknown

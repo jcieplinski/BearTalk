@@ -13,6 +13,7 @@ struct ControlsView: View {
     @Environment(DataModel.self) var model
 
     @State var showLogOutWarning: Bool = false
+    @State var showClimateControl: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -54,6 +55,7 @@ struct ControlsView: View {
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .scrollBounceBehavior(.basedOnSize)
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -77,6 +79,19 @@ struct ControlsView: View {
                 }
             } message: {
                 Text("Do you wish to log out of your Lucid account?")
+            }
+            .sheet(isPresented: $showClimateControl) {
+                ClimateControlSheet()
+                    .presentationBackground(.thinMaterial)
+            }
+            .onAppear {
+                NotificationCenter.default.addObserver(
+                    forName: .showClimateControl,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    showClimateControl = true
+                }
             }
         }
     }

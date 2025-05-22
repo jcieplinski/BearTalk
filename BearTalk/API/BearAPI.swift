@@ -407,6 +407,41 @@ final class BearAPI {
         }
     }
     
+    static func setClimateControlState(state: HvacPower, temperature: Double) async throws -> Bool {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            var request = Mobilegateway_Protos_SetCabinTemperatureRequest()
+            request.vehicleID = vehicleID
+            request.state = Mobilegateway_Protos_HvacPower(rawValue: state.intValue) ?? .hvacOff
+            
+            if Locale.current.measurementSystem == .metric {
+                request.temperature = temperature
+            } else {
+                let celsiusTemp = Measurement(value: temperature, unit: UnitTemperature.fahrenheit).converted(to: .celsius)
+                request.temperature = celsiusTemp.value
+            }
+            
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                let _ = try await client.setCabinTemperature(
+                    request,
+                    metadata: metadata
+                )
+                
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
     static func setTemperature(temperature: Double) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
@@ -416,7 +451,14 @@ final class BearAPI {
         ) { client in
             var request = Mobilegateway_Protos_SetCabinTemperatureRequest()
             request.vehicleID = vehicleID
-            request.temperature = temperature
+            request.state = .hvacPrecondition
+            
+            if Locale.current.measurementSystem == .metric {
+                request.temperature = temperature
+            } else {
+                let celsiusTemp = Measurement(value: temperature, unit: UnitTemperature.fahrenheit).converted(to: .celsius)
+                request.temperature = celsiusTemp.value
+            }
             
             let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
             

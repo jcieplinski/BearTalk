@@ -41,6 +41,7 @@ import OSLog
     var seatClimateState: SeatClimateState?
     var steeringHeaterStatus: SteeringHeaterStatus?
     var gearPosition: GearPosition = .gearUnknown
+    var selectedTemperature: Double = Locale.current.measurementSystem == .metric ? 22.0 : 72.0
     
     // Map
     var gps: GPS?
@@ -184,6 +185,13 @@ import OSLog
         climatePowerState = vehicle.vehicleState.hvacState.power
         seatClimateState = vehicle.vehicleState.hvacState.seats
         steeringHeaterStatus = vehicle.vehicleState.hvacState.steeringHeater
+        
+        if Locale.current.measurementSystem == .metric {
+            selectedTemperature = vehicle.vehicleState.hvacState.frontLeftSetTemperature
+        } else {
+            let fahrenheitTemp = Measurement(value: vehicle.vehicleState.hvacState.frontLeftSetTemperature, unit: UnitTemperature.celsius).converted(to: .fahrenheit).value
+            selectedTemperature = fahrenheitTemp.rounded()
+        }
         
         powerState = vehicle.vehicleState.powerState
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"

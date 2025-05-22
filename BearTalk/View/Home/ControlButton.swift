@@ -24,7 +24,11 @@ struct ControlButton: View {
         case .chargePort:
             return model.chargePortClosureState == .open
         case .climateControl:
-            return model.climatePowerState == .hvacKeepTemp || model.climatePowerState == .hvacOn
+            guard let climatePowerState = model.climatePowerState else {
+                return false
+            }
+            
+            return climatePowerState.isOn
         case .maxAC:
             return model.maxACState == .on
         case .seatClimate:

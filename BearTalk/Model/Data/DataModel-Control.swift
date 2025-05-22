@@ -30,7 +30,7 @@ extension DataModel {
         case .chargePort:
             toggleChargePort()
         case .climateControl:
-            break
+            NotificationCenter.default.post(name: .showClimateControl, object: nil)
         case .maxAC:
             toggleMaxAC()
         case .seatClimate:
@@ -361,6 +361,52 @@ extension DataModel {
         }
     }
     
+    func toggleClimateControl() {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.climateControl)
+                
+                switch climatePowerState ?? .hvacOff {
+                case .unknown, .UNRECOGNIZED(_):
+                    break
+                case .hvacOn, .hvacPrecondition, .hvacKeepTemp:
+                    let success = try await BearAPI.setClimateControlState(state: .hvacOff, temperature: selectedTemperature)
+                    if !success {
+                        // put up an alert
+                    }
+                case .hvacOff:
+                    let success = try await BearAPI.setClimateControlState(state: .hvacPrecondition, temperature: selectedTemperature)
+                    if !success {
+                        // put up an alert
+                    }
+                }
+            }
+        }
+    }
+    
+    func setCabinTemperature(_ temperature: Double) {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.climateControl)
+                
+                let success = try await BearAPI.setTemperature(temperature: temperature)
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not set temperature: \(error)")
+            }
+        }
+    }
+    
     func wakeUpCar() {
         Task {
             do {
@@ -415,6 +461,10 @@ extension DataModel {
                 }
             case .climateControl:
                 if oldState.hvacState.power != newState.hvacState.power {
+                    requestInProgress.remove(.climateControl)
+                }
+                
+                if oldState.hvacState.frontLeftSetTemperature != newState.hvacState.frontLeftSetTemperature {
                     requestInProgress.remove(.climateControl)
                 }
             case .maxAC:
