@@ -76,6 +76,9 @@ import OSLog
     
     var requestInProgress: Set<ControlType> = []
     
+    @ObservationIgnored var seatClimateQueue: [SeatAssignment] = []
+    @ObservationIgnored var isProcessingSeatClimateQueue = false
+    
     var vehicleIsReady: Bool {
         guard let vehicle else { return false }
         

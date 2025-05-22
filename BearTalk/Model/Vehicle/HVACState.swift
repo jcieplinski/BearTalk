@@ -518,6 +518,15 @@ enum SeatClimateMode: Codable, Equatable {
         }
     }
     
+    init(levelInt: Int) {
+        switch levelInt {
+        case 1: self = .low
+        case 2: self = .medium
+        case 3: self = .high
+        default: self = .off
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_SeatClimateMode) {
         switch proto {
         case .unknown: self = .unknown

@@ -45,6 +45,8 @@ extension DataModel {
             toggleLights()
         case .batteryPrecondition:
             toggleBatteryPrecondition()
+        default:
+            break
         }
     }
     
@@ -257,7 +259,7 @@ extension DataModel {
                         let _ = try await BearAPI.wakeUp()
                     }
                     
-                    requestInProgress.insert(.defrost)
+                    requestInProgress.insert(.maxAC)
                     
                     switch action {
                     case .unknown, .UNRECOGNIZED:
@@ -407,25 +409,13 @@ extension DataModel {
         }
     }
     
-    func wakeUpCar() {
-        Task {
-            do {
-                requestInProgress.insert(.wake)
-                let success = try await BearAPI.wakeUp()
-                if !success {
-                    // put up an alert
-                }
-            } catch {
-                print("Could not wake car: \(error)")
-            }
-        }
-    }
-    
     func resetControlFunction(oldState: VehicleState?, newState: VehicleState?) {
         guard let oldState, let newState else {
             requestInProgress = []
             return
         }
+        
+        let ogRequestInProgress = requestInProgress
         
         requestInProgress.forEach { request in
             switch request {
@@ -483,6 +473,173 @@ extension DataModel {
                 if oldState.batteryState.preconditioningStatus != newState.batteryState.preconditioningStatus {
                     requestInProgress.remove(.batteryPrecondition)
                 }
+            case .driverSeatHeat:
+                if oldState.hvacState.seats.driverHeatBackrestZone1 != newState.hvacState.seats.driverHeatBackrestZone1 {
+                    requestInProgress.remove(.driverSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.driverHeatBackrestZone3 != newState.hvacState.seats.driverHeatBackrestZone3 {
+                    requestInProgress.remove(.driverSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.driverHeatCushionZone2 != newState.hvacState.seats.driverHeatCushionZone2 {
+                    requestInProgress.remove(.driverSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.driverHeatCushionZone4 != newState.hvacState.seats.driverHeatCushionZone4 {
+                    requestInProgress.remove(.driverSeatHeat)
+                }
+            case .driverSeatVent:
+                if oldState.hvacState.seats.driverVentCushion != newState.hvacState.seats.driverVentCushion {
+                    requestInProgress.remove(.driverSeatVent)
+                }
+                
+                if oldState.hvacState.seats.driverVentBackrest != newState.hvacState.seats.driverVentBackrest {
+                    requestInProgress.remove(.driverSeatVent)
+                }
+            case .passengerSeatHeat:
+                if oldState.hvacState.seats.frontPassengerHeatBackrestZone1 != newState.hvacState.seats.frontPassengerHeatBackrestZone1 {
+                    requestInProgress.remove(.passengerSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.frontPassengerHeatBackrestZone3 != newState.hvacState.seats.frontPassengerHeatBackrestZone3 {
+                    requestInProgress.remove(.passengerSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.frontPassengerHeatCushionZone2 != newState.hvacState.seats.frontPassengerHeatCushionZone2 {
+                    requestInProgress.remove(.passengerSeatHeat)
+                }
+                
+                if oldState.hvacState.seats.frontPassengerHeatCushionZone4 != newState.hvacState.seats.frontPassengerHeatCushionZone4 {
+                    requestInProgress.remove(.passengerSeatHeat)
+                }
+            case .passengerSeatVent:
+                if oldState.hvacState.seats.frontPassengerVentCushion != newState.hvacState.seats.frontPassengerVentCushion {
+                    requestInProgress.remove(.passengerSeatVent)
+                }
+                
+                if oldState.hvacState.seats.frontPassengerVentBackrest != newState.hvacState.seats.frontPassengerVentBackrest {
+                    requestInProgress.remove(.passengerSeatVent)
+                }
+            case .rearLeftSeatHeat:
+                if oldState.hvacState.seats.rearPassengerHeatLeft != newState.hvacState.seats.rearPassengerHeatLeft {
+                    requestInProgress.remove(.rearLeftSeatHeat)
+                }
+            case .rearCenterSeatHeat:
+                if oldState.hvacState.seats.rearPassengerHeatCenter != newState.hvacState.seats.rearPassengerHeatCenter {
+                    requestInProgress.remove(.rearCenterSeatHeat)
+                }
+            case .rearRightSeatHeat:
+                if oldState.hvacState.seats.rearPassengerHeatRight != newState.hvacState.seats.rearPassengerHeatRight {
+                    requestInProgress.remove(.rearRightSeatHeat)
+                }
+            }
+        }
+        
+        Task {
+            try? await Task.sleep(for: .seconds(5))
+            ogRequestInProgress.forEach { controlType in
+                requestInProgress.remove(controlType)
+            }
+        }
+    }
+    
+    func setSeatClimate(seats: [SeatAssignment]) {
+        // Add the new seats to the queue
+        seatClimateQueue.append(contentsOf: seats)
+        
+        // Start processing the queue if we're not already
+        Task { [weak self] in
+            await self?.processSeatClimateQueue()
+        }
+    }
+    
+    private func processSeatClimateQueue() async {
+        // If we're already processing or the queue is empty, return
+        guard !isProcessingSeatClimateQueue, !seatClimateQueue.isEmpty else { return }
+        
+        isProcessingSeatClimateQueue = true
+        defer { isProcessingSeatClimateQueue = false }
+        
+        // Get the current batch of seats to process
+        let seatsToProcess = seatClimateQueue
+        seatClimateQueue.removeAll()
+        
+        do {
+            // Wait a short moment to allow for more seats to be queued
+            try await Task.sleep(for: .milliseconds(100))
+            
+            // If more seats were added while we were waiting, add them back to the queue
+            if !seatClimateQueue.isEmpty {
+                seatClimateQueue.insert(contentsOf: seatsToProcess, at: 0)
+                return
+            }
+            
+            if !vehicleIsReady {
+                let _ = try await BearAPI.wakeUp()
+            }
+            
+            seatsToProcess.forEach { seatAssignment in
+                switch seatAssignment {
+                case .driverHeatBackrestZone1:
+                    requestInProgress.insert(.driverSeatHeat)
+                case .driverHeatBackrestZone3:
+                    requestInProgress.insert(.driverSeatHeat)
+                case .driverHeatCushionZone2:
+                    requestInProgress.insert(.driverSeatHeat)
+                case .driverHeatCushionZone4:
+                    requestInProgress.insert(.driverSeatHeat)
+                case .driverVentBackrest:
+                    requestInProgress.insert(.driverSeatVent)
+                case .driverVentCushion:
+                    requestInProgress.insert(.driverSeatVent)
+                case .frontPassengerHeatBackrestZone1:
+                    requestInProgress.insert(.passengerSeatHeat)
+                case .frontPassengerHeatBackrestZone3:
+                    requestInProgress.insert(.passengerSeatHeat)
+                case .frontPassengerHeatCushionZone2:
+                    requestInProgress.insert(.passengerSeatHeat)
+                case .frontPassengerHeatCushionZone4:
+                    requestInProgress.insert(.passengerSeatHeat)
+                case .frontPassengerVentBackrest:
+                    requestInProgress.insert(.passengerSeatVent)
+                case .frontPassengerVentCushion:
+                    requestInProgress.insert(.passengerSeatVent)
+                case .rearPassengerHeatLeft:
+                    requestInProgress.insert(.rearLeftSeatHeat)
+                case .rearPassengerHeatCenter:
+                    requestInProgress.insert(.rearCenterSeatHeat)
+                case .rearPassengerHeatRight:
+                    requestInProgress.insert(.rearRightSeatHeat)
+                }
+            }
+            
+            let success = try await BearAPI.setSeatClimate(seats: seatsToProcess)
+            if !success {
+                // put up an alert
+            }
+            
+            // If more seats were added while we were processing, process them
+            if !seatClimateQueue.isEmpty {
+                await processSeatClimateQueue()
+            }
+        } catch {
+            print("Could not set seat climate: \(error)")
+            // If there was an error, put the seats back in the queue to try again
+            seatClimateQueue.insert(contentsOf: seatsToProcess, at: 0)
+        }
+    }
+    
+    func wakeUpCar() {
+        Task {
+            do {
+                requestInProgress.insert(.wake)
+                let success = try await BearAPI.wakeUp()
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not wake car: \(error)")
             }
         }
     }

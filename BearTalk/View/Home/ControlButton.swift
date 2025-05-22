@@ -43,6 +43,8 @@ struct ControlButton: View {
             return model.lightsState == .on
         case .batteryPrecondition:
             return model.batteryPreConditionState == .batteryPreconOn
+        default:
+            return false
         }
     }
     

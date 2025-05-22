@@ -462,6 +462,14 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case lights
     case batteryPrecondition
     
+    case driverSeatHeat
+    case driverSeatVent
+    case passengerSeatHeat
+    case passengerSeatVent
+    case rearLeftSeatHeat
+    case rearCenterSeatHeat
+    case rearRightSeatHeat
+    
     var id: Self { self }
     
     static var allCases: [ControlType] {
@@ -497,6 +505,20 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Precondition Battery"
         case .climateControl:
             "Climate Control"
+        case .driverSeatHeat:
+            "Driver Seat Heat"
+        case .driverSeatVent:
+            "Driver Seat Vent"
+        case .passengerSeatHeat:
+            "Passenger Seat Heat"
+        case .passengerSeatVent:
+            "Passenger Seat Vent"
+        case .rearLeftSeatHeat:
+            "Rear Left Seat Heat"
+        case .rearCenterSeatHeat:
+            "Rear Center Seat Heat"
+        case .rearRightSeatHeat:
+            "Rear Right Seat Heat"
         }
     }
     
@@ -516,8 +538,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "defrostOff"
         case .maxAC:
             "maxAcOff"
-        case .seatClimate:
+        case .seatClimate, .driverSeatHeat, .passengerSeatHeat, .rearLeftSeatHeat, .rearCenterSeatHeat, .rearRightSeatHeat:
             "seatClimateOff"
+        case .driverSeatVent, .passengerSeatVent:
+            "seatVentOff"
         case .steeringWheelClimate:
             "steeringWheelOff"
         case .horn:
@@ -547,8 +571,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "defrostOn"
         case .maxAC:
             "maxAcOn"
-        case .seatClimate:
+        case .seatClimate, .driverSeatHeat, .passengerSeatHeat, .rearLeftSeatHeat, .rearCenterSeatHeat, .rearRightSeatHeat:
             "seatClimateOn"
+        case .driverSeatVent, .passengerSeatVent:
+            "seatVentOn"
         case .steeringWheelClimate:
             "steeringWheelOn"
         case .horn:

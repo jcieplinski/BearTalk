@@ -12,22 +12,56 @@ struct SeatClimateSheet: View {
                 // All On/Off Buttons
                 HStack(spacing: 20) {
                     Button {
-                        // TODO: Implement all seats on
+                        model.setSeatClimate(
+                            seats: [
+                                .driverHeatBackrestZone1(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .driverHeatBackrestZone3(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .driverHeatCushionZone2(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .driverHeatCushionZone4(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .frontPassengerHeatBackrestZone1(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .frontPassengerHeatBackrestZone3(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .frontPassengerHeatCushionZone2(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .frontPassengerHeatCushionZone4(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .rearPassengerHeatLeft(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .rearPassengerHeatCenter(mode: SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                .rearPassengerHeatRight(mode: SeatClimateMode(levelInt: model.seatClimateLevel))
+                            ]
+                        )
                     } label: {
-                        Label("All On", systemImage: "flame.fill")
+                        Text("All On")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
                     .tint(.active)
+                    .disabled(model.requestInProgress.contains(.driverSeatHeat))
                     
                     Button {
-                        // TODO: Implement all seats off
+                        model.setSeatClimate(
+                            seats: [
+                                .driverHeatBackrestZone1(mode: .off),
+                                .driverHeatBackrestZone3(mode: .off),
+                                .driverHeatCushionZone2(mode: .off),
+                                .driverHeatCushionZone4(mode: .off),
+                                .driverVentCushion(mode: .off),
+                                .driverVentBackrest(mode: .off),
+                                .frontPassengerHeatBackrestZone1(mode: .off),
+                                .frontPassengerHeatBackrestZone3(mode: .off),
+                                .frontPassengerHeatCushionZone2(mode: .off),
+                                .frontPassengerHeatCushionZone4(mode: .off),
+                                .frontPassengerVentCushion(mode: .off),
+                                .frontPassengerVentBackrest(mode: .off),
+                                .rearPassengerHeatLeft(mode: .off),
+                                .rearPassengerHeatCenter(mode: .off),
+                                .rearPassengerHeatRight(mode: .off)
+                            ]
+                        )
                     } label: {
-                        Label("All Off", systemImage: "flame.slash.fill")
+                        Text("All Off")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
                     .tint(.inactive)
+                    .disabled(model.requestInProgress.contains(.driverSeatHeat))
                 }
                 .padding(.horizontal)
                 
@@ -44,6 +78,66 @@ struct SeatClimateSheet: View {
                     }
                     .pickerStyle(.segmented)
                     .frame(width: 200)
+                    .onChange(of: model.seatClimateLevel) { _, newLevel in
+                        // Only proceed if any seats are on
+                        guard model.frontDriverSeatHeatOn || model.frontDriverSeatVentOn ||
+                              model.frontPassengerSeatHeatOn || model.frontPassengerSeatVentOn ||
+                              model.rearleftSeatHeatOn || model.rearCenterHeatOn || model.rearRightSeatHeatOn else {
+                            return
+                        }
+                        
+                        // Build array of currently active seats with new level
+                        var activeSeats: [SeatAssignment] = []
+                        
+                        if model.frontDriverSeatHeatOn {
+                            activeSeats.append(contentsOf: [
+                                .driverHeatBackrestZone1(mode: SeatClimateMode(levelInt: newLevel)),
+                                .driverHeatBackrestZone3(mode: SeatClimateMode(levelInt: newLevel)),
+                                .driverHeatCushionZone2(mode: SeatClimateMode(levelInt: newLevel)),
+                                .driverHeatCushionZone4(mode: SeatClimateMode(levelInt: newLevel))
+                            ])
+                        }
+                        
+                        if model.frontDriverSeatVentOn {
+                            activeSeats.append(contentsOf: [
+                                .driverVentCushion(mode: SeatClimateMode(levelInt: newLevel)),
+                                .driverVentBackrest(mode: SeatClimateMode(levelInt: newLevel))
+                            ])
+                        }
+                        
+                        if model.frontPassengerSeatHeatOn {
+                            activeSeats.append(contentsOf: [
+                                .frontPassengerHeatBackrestZone1(mode: SeatClimateMode(levelInt: newLevel)),
+                                .frontPassengerHeatBackrestZone3(mode: SeatClimateMode(levelInt: newLevel)),
+                                .frontPassengerHeatCushionZone2(mode: SeatClimateMode(levelInt: newLevel)),
+                                .frontPassengerHeatCushionZone4(mode: SeatClimateMode(levelInt: newLevel))
+                            ])
+                        }
+                        
+                        if model.frontPassengerSeatVentOn {
+                            activeSeats.append(contentsOf: [
+                                .frontPassengerVentCushion(mode: SeatClimateMode(levelInt: newLevel)),
+                                .frontPassengerVentBackrest(mode: SeatClimateMode(levelInt: newLevel))
+                            ])
+                        }
+                        
+                        if model.rearleftSeatHeatOn {
+                            activeSeats.append(.rearPassengerHeatLeft(mode: SeatClimateMode(levelInt: newLevel)))
+                        }
+                        
+                        if model.rearCenterHeatOn {
+                            activeSeats.append(.rearPassengerHeatCenter(mode: SeatClimateMode(levelInt: newLevel)))
+                        }
+                        
+                        if model.rearRightSeatHeatOn {
+                            activeSeats.append(.rearPassengerHeatRight(mode: SeatClimateMode(levelInt: newLevel)))
+                        }
+                        
+                        // Only call setSeatClimate if we have active seats
+                        if !activeSeats.isEmpty {
+                            model.setSeatClimate(seats: activeSeats)
+                        }
+                    }
                 }
                 .padding(.bottom, 22)
                 
@@ -73,66 +167,172 @@ struct SeatClimateSheet: View {
                     GridItem(.flexible()),
                     GridItem(.flexible())
                 ], spacing: 20) {
-                    Button {
-                        // TODO: Implement driver heat
-                    } label: {
-                        ControlButtonCore(
-                            controlType: .seatClimate,
-                            isActive: model.frontDriverSeatHeatOn
-                        )
-                    }
-                    
-                    Button {
-                        // TODO: Implement driver ventilation
-                    } label: {
-                        Label {
-                            Text("Front Driver Ventilation")
-                        } icon: {
-                            Image(model.frontDriverSeatVentOn ? "seatVentOn" : "seatVentOff")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 44, maxHeight: 44)
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .driverHeatCushionZone2(mode: model.frontDriverSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .driverHeatCushionZone4(mode: model.frontDriverSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .driverHeatBackrestZone1(mode: model.frontDriverSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .driverHeatBackrestZone3(mode: model.frontDriverSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel))
+                                ]
+                            )
+                        } label: {
+                            ControlButtonCore(
+                                controlType: .seatClimate,
+                                isActive: model.frontDriverSeatHeatOn
+                            )
                         }
-                        .labelStyle(.iconOnly)
+                        .disabled(model.requestInProgress.contains(.driverSeatHeat))
                         
-                        .padding(4)
-                        .background(
-                            RoundedRectangle(cornerRadius: 13)
-                                .stroke(style: StrokeStyle(lineWidth: 1))
-                        )
-                        .tint(model.frontDriverSeatVentOn ? .activeCool : .inactive)
-                        .disabled(model.requestInProgress.contains(.seatClimate))
-                    }
-                    
-                    Button {
-                        // TODO: Implement passenger heat
-                    } label: {
-                        ControlButtonCore(
-                            controlType: .seatClimate,
-                            isActive: model.frontPassengerSeatHeatOn
-                        )
-                    }
-                    
-                    Button {
-                        // TODO: Implement passenger ventilation
-                    } label: {
-                        Label {
-                            Text("Front Passenger Ventilation")
-                        } icon: {
-                            Image(model.frontPassengerSeatVentOn ? "seatVentOn" : "seatVentOff")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 44, maxHeight: 44)
+                        if model.requestInProgress.contains(.driverSeatHeat) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
                         }
-                        .labelStyle(.iconOnly)
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.frontDriverSeatHeatOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
+                    }
+                    
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .driverVentCushion(mode: model.frontDriverSeatVentOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .driverVentBackrest(mode: model.frontDriverSeatVentOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                ]
+                            )
+                        } label: {
+                            Label {
+                                Text("Front Driver Ventilation")
+                            } icon: {
+                                Image(model.frontDriverSeatVentOn ? "seatVentOn" : "seatVentOff")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 44, maxHeight: 44)
+                            }
+                            .labelStyle(.iconOnly)
+                            
+                            .padding(4)
+                            .background(
+                                RoundedRectangle(cornerRadius: 13)
+                                    .stroke(style: StrokeStyle(lineWidth: 1))
+                            )
+                            .tint(model.frontDriverSeatVentOn ? .activeCool : .inactive)
+                        }
+                        .disabled(model.requestInProgress.contains(.driverSeatVent))
                         
-                        .padding(4)
-                        .background(
-                            RoundedRectangle(cornerRadius: 13)
-                                .stroke(style: StrokeStyle(lineWidth: 1))
-                        )
-                        .tint(model.frontPassengerSeatVentOn ? .activeCool : .inactive)
-                        .disabled(model.requestInProgress.contains(.seatClimate))
+                        if model.requestInProgress.contains(.driverSeatVent) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.frontDriverSeatVentOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
+                    }
+                    
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .frontPassengerHeatCushionZone2(mode: model.frontPassengerSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .frontPassengerHeatCushionZone4(mode: model.frontPassengerSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .frontPassengerHeatBackrestZone1(mode: model.frontPassengerSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .frontPassengerHeatBackrestZone3(mode: model.frontPassengerSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel))
+                                ]
+                            )
+                        } label: {
+                            ControlButtonCore(
+                                controlType: .seatClimate,
+                                isActive: model.frontPassengerSeatHeatOn
+                            )
+                        }
+                        .disabled(model.requestInProgress.contains(.passengerSeatHeat))
+                        
+                        if model.requestInProgress.contains(.passengerSeatHeat) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.frontPassengerSeatHeatOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
+                    }
+                    
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .frontPassengerVentCushion(mode: model.frontPassengerSeatVentOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                    .frontPassengerVentBackrest(mode: model.frontPassengerSeatVentOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel)),
+                                ]
+                            )
+                        } label: {
+                            Label {
+                                Text("Front Passenger Ventilation")
+                            } icon: {
+                                Image(model.frontPassengerSeatVentOn ? "seatVentOn" : "seatVentOff")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 44, maxHeight: 44)
+                            }
+                            .labelStyle(.iconOnly)
+                            
+                            .padding(4)
+                            .background(
+                                RoundedRectangle(cornerRadius: 13)
+                                    .stroke(style: StrokeStyle(lineWidth: 1))
+                            )
+                            .tint(model.frontPassengerSeatVentOn ? .activeCool : .inactive)
+                        }
+                        .disabled(model.requestInProgress.contains(.passengerSeatVent))
+                        
+                        if model.requestInProgress.contains(.passengerSeatVent) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.frontPassengerSeatVentOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -154,7 +354,6 @@ struct SeatClimateSheet: View {
                         Text("Rear Center")
                     }
                     
-                    
                     ZStack {
                         RoundedRectangle(cornerRadius: 13)
                             .frame(maxHeight: 44)
@@ -172,33 +371,108 @@ struct SeatClimateSheet: View {
                     GridItem(.flexible())
                 ], spacing: 20) {
                     // Rear Left
-                    Button {
-                        // TODO: Implement rear left heat
-                    } label: {
-                        ControlButtonCore(
-                            controlType: .seatClimate,
-                            isActive: model.rearleftSeatHeatOn
-                        )
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .rearPassengerHeatLeft(mode: model.rearleftSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel))
+                                ]
+                            )
+                        } label: {
+                            ControlButtonCore(
+                                controlType: .seatClimate,
+                                isActive: model.rearleftSeatHeatOn
+                            )
+                        }
+                        .disabled(model.requestInProgress.contains(.rearLeftSeatHeat))
+                        
+                        if model.requestInProgress.contains(.rearLeftSeatHeat) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.rearleftSeatHeatOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
                     }
                     
                     // Rear Middle
-                    Button {
-                        // TODO: Implement rear middle heat
-                    } label: {
-                        ControlButtonCore(
-                            controlType: .seatClimate,
-                            isActive: model.rearCenterHeatOn
-                        )
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .rearPassengerHeatCenter(mode: model.rearCenterHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel))
+                                ]
+                            )
+                        } label: {
+                            ControlButtonCore(
+                                controlType: .seatClimate,
+                                isActive: model.rearCenterHeatOn
+                            )
+                        }
+                        .disabled(model.requestInProgress.contains(.rearCenterSeatHeat))
+                        
+                        if model.requestInProgress.contains(.rearCenterSeatHeat) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.rearCenterHeatOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
                     }
                     
                     // Rear Right
-                    Button {
-                        // TODO: Implement rear right heat
-                    } label: {
-                        ControlButtonCore(
-                            controlType: .seatClimate,
-                            isActive: model.rearRightSeatHeatOn
-                        )
+                    ZStack {
+                        Button {
+                            model.setSeatClimate(
+                                seats: [
+                                    .rearPassengerHeatRight(mode: model.rearRightSeatHeatOn ? .off : SeatClimateMode(levelInt: model.seatClimateLevel))
+                                ]
+                            )
+                        } label: {
+                            ControlButtonCore(
+                                controlType: .seatClimate,
+                                isActive: model.rearRightSeatHeatOn
+                            )
+                        }
+                        .disabled(model.requestInProgress.contains(.rearRightSeatHeat))
+                        
+                        if model.requestInProgress.contains(.rearRightSeatHeat) {
+                            ProgressView()
+                                .fontWeight(.thin)
+                                .controlSize(.large)
+                                .foregroundStyle(.active)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if model.rearRightSeatHeatOn {
+                            Text("\(model.seatClimateLevel)")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Circle().fill(.active))
+                                .offset(x: 10, y: 10)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        }
                     }
                 }
                 .padding(.horizontal)
