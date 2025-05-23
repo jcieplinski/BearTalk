@@ -119,6 +119,9 @@ final class BearAPI {
                 return true
             } catch {
                 print(error)
+                authorization = ""
+                refreshToken = ""
+                
                 return false
             }
         }

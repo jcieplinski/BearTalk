@@ -9,8 +9,8 @@ extension BearAPI {
     static func mapVehicleResponse(_ vehicle: Mobilegateway_Protos_Vehicle) -> Vehicle {
         let config = VehicleConfig(
             vin: vehicle.config.vin,
-            model: LucidModel(proto: vehicle.config.model),
-            modelVariant: ModelVariant(proto: vehicle.config.variant),
+            model: .air,
+            modelVariant: .sapphire,
             releaseDate: nil,
             nickname: vehicle.config.nickname,
             paintColor: PaintColor(proto: vehicle.config.paintColor),

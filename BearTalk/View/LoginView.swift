@@ -62,24 +62,16 @@ struct LoginView: View {
                                     focused = nil
                                 }
                         }
-                    Image(appState.carColor)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .frame(width: 120)
-                        .frame(maxWidth: .infinity)
-                        .padding(.top)
-                    Button {
-                        appState.logIn()
-                        showingProgress = true
-                    } label: {
-                        Text("Log In")
-                            .padding(.horizontal)
-                            .frame(maxWidth: .infinity)
-                            .frame(minHeight: 28)
+                    SceneKitViewLogin { view in
+                        DispatchQueue.main.async {
+                            // Configure view for transparency
+                            view.backgroundColor = .clear
+                            view.scene?.background.contents = nil
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
+                    .frame(height: 200)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .tint(.accentColor)
@@ -98,6 +90,18 @@ struct LoginView: View {
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
+                .safeAreaInset(edge: .bottom, content: {
+                    Button {
+                        appState.logIn()
+                        showingProgress = true
+                    } label: {
+                        Text("Log In")
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity)
+                            .frame(minHeight: 28)
+                    }
+                    .buttonStyle(.borderedProminent)
+                })
                 .padding()
 
             }
