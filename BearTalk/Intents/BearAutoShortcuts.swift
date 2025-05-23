@@ -10,7 +10,7 @@ import AppIntents
 struct BearAutoShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         return  [
-                 AppShortcut(intent: UnlockIntent(),
+                 AppShortcut(intent: DoorLockIntent(),
                              phrases: ["Unlock with \(.applicationName)"],
                              shortTitle: "Bear Unlock",
                              systemImageName: "lock.open.fill"),

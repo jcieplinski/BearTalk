@@ -18,7 +18,7 @@ struct CurrentRangeIntent: AppIntent {
 
     @MainActor func perform() async throws -> some ProvidesDialog {
         let _ = try await BearAPI.refreshToken()
-        let vehicle = try await BearAPI.fetchCurrentVehicle()
+        let vehicle = try await BearAPI.fetchVehicles()?.first(where: { $0.vehicleId == self.vehicle?.id })
 
         if let kWh = vehicle?.vehicleState.batteryState.kwHr {
             let range = (kWh * efficiency).rounded().stringWithLocale()

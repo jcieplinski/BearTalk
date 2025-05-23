@@ -15,7 +15,7 @@ struct CurrentElevationIntent: AppIntent {
 
     @MainActor func perform() async throws -> some ProvidesDialog {
         let _ = try await BearAPI.refreshToken()
-        let vehicle = try await BearAPI.fetchCurrentVehicle()
+        let vehicle = try await BearAPI.fetchVehicles()?.first(where: { $0.vehicleId == self.vehicle?.id })
         let nickname = vehicle?.vehicleConfig.nickname ?? "Your Car"
 
         if let elevation = vehicle?.vehicleState.gps.elevation {
