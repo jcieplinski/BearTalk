@@ -9,6 +9,9 @@ import AppIntents
 
 struct LightsOutIntent: AppIntent {
     static var title: LocalizedStringResource = "Car Lights Out"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @MainActor func perform() async throws -> some ProvidesDialog {
         let _ = try await BearAPI.refreshToken()

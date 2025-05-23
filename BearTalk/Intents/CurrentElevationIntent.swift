@@ -9,6 +9,9 @@ import AppIntents
 
 struct CurrentElevationIntent: AppIntent {
     static var title: LocalizedStringResource = "Elevation"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @MainActor func perform() async throws -> some ProvidesDialog {
         let _ = try await BearAPI.refreshToken()

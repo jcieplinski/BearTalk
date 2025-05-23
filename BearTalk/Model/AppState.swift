@@ -14,9 +14,9 @@ final class AppState: ObservableObject {
 
     @Published var noCarMode: Bool = false
 
-    @AppStorage(DefaultsKey.userName) var userName: String = ""
+    @AppStorage(DefaultsKey.userName, store: .appGroup) var userName: String = ""
     @Published var password: String = ""
-    @AppStorage(DefaultsKey.carColor) var carColor: String = "eureka"
+    @AppStorage(DefaultsKey.carColor, store: .appGroup) var carColor: String = "eureka"
 
     var backgroundColors: [Color] {
         let top = Color(uiColor: .systemBackground)

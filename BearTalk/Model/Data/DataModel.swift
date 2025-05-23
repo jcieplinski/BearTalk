@@ -9,7 +9,7 @@ import SwiftUI
 import OSLog
 
 @Observable final class DataModel {
-    @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency) var lastEfficiency: Double = 3.2
+    @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
     
     var vehicle: Vehicle?
     var refreshTimer: Timer?

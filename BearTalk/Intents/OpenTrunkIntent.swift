@@ -9,6 +9,9 @@ import AppIntents
 
 struct OpenTrunkIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Trunk"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @MainActor func perform() async throws -> some IntentResult {
         let _ = try await BearAPI.refreshToken()

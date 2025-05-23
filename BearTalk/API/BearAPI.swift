@@ -6,24 +6,31 @@
 //
 
 import SwiftUI
+import SwiftData
 import GRPCCore
 import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 
 final class BearAPI {
-    @AppStorage(DefaultsKey.authorization) static var authorization: String = ""
-    @AppStorage(DefaultsKey.refreshToken) static var refreshToken: String = ""
-    @AppStorage(DefaultsKey.vehicleID) static var vehicleID: String = ""
-    @AppStorage(DefaultsKey.carColor) static var carColor: String = "eurekaGold"
-    @AppStorage(DefaultsKey.lastEfficiency) var lastEfficiency: Double = 3.2
-
-    private static func addAuthHeader(to urlRequest: URLRequest) -> URLRequest {
-        var request = urlRequest
-        if authorization.isNotBlank {
-            request.addValue("Bearer \(authorization)", forHTTPHeaderField: "authorization")
+    @AppStorage(DefaultsKey.authorization, store: .appGroup) static var authorization: String = ""
+    @AppStorage(DefaultsKey.refreshToken, store: .appGroup) static var refreshToken: String = ""
+    @AppStorage(DefaultsKey.vehicleID, store: .appGroup) static var vehicleID: String = ""
+    @AppStorage(DefaultsKey.carColor, store: .appGroup) static var carColor: String = "eurekaGold"
+    @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
+    
+    static var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            VehicleIdentifier.self,
+        ])
+        
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
         }
-        return request
-    }
+    }()
 
     @MainActor
     static func logIn(userName: String, password: String) async throws -> (loginResponse: LoginResponse?, response: URLResponse?) {
@@ -164,6 +171,12 @@ final class BearAPI {
                     metadata: metadata
                 )
                 
+                let vehicleEntities = response.userVehicleData.map { vehicle -> VehicleIdentifierEntity in
+                    return VehicleIdentifierEntity(id: vehicle.vehicleID, nickname: vehicle.config.nickname)
+                }
+                
+                try await VehicleIdentifierHandler(modelContainer: sharedModelContainer).add(vehicleEntities)
+                
                 return response.userVehicleData.map { vehicle in
                     return mapVehicleResponse(vehicle)
                 }
@@ -192,7 +205,7 @@ final class BearAPI {
         }
     }
 
-    static func wakeUp() async throws -> Bool {
+    static func wakeUp(vehicleID: String = vehicleID) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -218,7 +231,7 @@ final class BearAPI {
         }
     }
 
-    static func honkHorn() async throws -> Bool {
+    static func honkHorn(vehicleID: String = vehicleID) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -244,7 +257,7 @@ final class BearAPI {
         }
     }
 
-    static func doorLockControl(lockState: LockState) async throws -> Bool {
+    static func doorLockControl(vehicleID: String = vehicleID, lockState: LockState) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -273,7 +286,7 @@ final class BearAPI {
         }
     }
 
-    static func cargoControl(area: Cargo, closureState: DoorState) async throws -> Bool {
+    static func cargoControl(vehicleID: String = vehicleID, area: Cargo, closureState: DoorState) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -323,7 +336,7 @@ final class BearAPI {
         }
     }
 
-    static func chargePortControl(closureState: DoorState) async throws -> Bool {
+    static func chargePortControl(vehicleID: String = vehicleID, closureState: DoorState) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -351,7 +364,7 @@ final class BearAPI {
         }
     }
     
-    static func setChargeLimit(percentage: UInt32) async throws -> Bool {
+    static func setChargeLimit(vehicleID: String = vehicleID, percentage: UInt32) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -379,7 +392,7 @@ final class BearAPI {
         }
     }
 
-    static func lightsControl(action: LightAction) async throws -> Bool {
+    static func lightsControl(vehicleID: String = vehicleID, action: LightAction) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -407,7 +420,7 @@ final class BearAPI {
         }
     }
     
-    static func setClimateControlState(state: HvacPower, temperature: Double) async throws -> Bool {
+    static func setClimateControlState(vehicleID: String = vehicleID, state: HvacPower, temperature: Double) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -442,7 +455,7 @@ final class BearAPI {
         }
     }
     
-    static func setTemperature(temperature: Double) async throws -> Bool {
+    static func setTemperature(vehicleID: String = vehicleID, temperature: Double) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -477,7 +490,7 @@ final class BearAPI {
         }
     }
     
-    static func setMaxAC(state: MaxACState) async throws -> Bool {
+    static func setMaxAC(vehicleID: String = vehicleID, state: MaxACState) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -505,7 +518,7 @@ final class BearAPI {
         }
     }
 
-    static func defrostControl(action: DefrostState) async throws -> Bool {
+    static func defrostControl(vehicleID: String = vehicleID, action: DefrostState) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -533,7 +546,7 @@ final class BearAPI {
         }
     }
     
-    static func setSeatClimate(seats: [SeatAssignment]) async throws -> Bool {
+    static func setSeatClimate(vehicleID: String = vehicleID, seats: [SeatAssignment]) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -595,7 +608,7 @@ final class BearAPI {
         }
     }
     
-    static func setSteeringWheelHeat(status: SteeringHeaterStatus) async throws -> Bool {
+    static func setSteeringWheelHeat(vehicleID: String = vehicleID, status: SteeringHeaterStatus) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -632,7 +645,7 @@ final class BearAPI {
         }
     }
     
-    static func setBatteryPreCondition(status: PreconditioningStatus) async throws -> Bool {
+    static func setBatteryPreCondition(vehicleID: String = vehicleID, status: PreconditioningStatus) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -660,7 +673,7 @@ final class BearAPI {
         }
     }
     
-    static func setShockAndTilt(mode: AlarmMode) async throws -> Bool {
+    static func setShockAndTilt(vehicleID: String = vehicleID, mode: AlarmMode) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -688,7 +701,7 @@ final class BearAPI {
         }
     }
     
-    static func startSoftwareUpdate() async throws -> Bool {
+    static func startSoftwareUpdate(vehicleID: String = vehicleID) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),

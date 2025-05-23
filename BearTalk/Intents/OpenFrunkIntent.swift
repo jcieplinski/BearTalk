@@ -9,6 +9,9 @@ import AppIntents
 
 struct OpenFrunkIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Frunk"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @MainActor func perform() async throws -> some IntentResult {
         let _ = try await BearAPI.refreshToken()

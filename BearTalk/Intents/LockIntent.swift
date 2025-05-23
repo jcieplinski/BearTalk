@@ -9,6 +9,9 @@ import AppIntents
 
 struct LockIntent: AppIntent {
     static var title: LocalizedStringResource = "Lock"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @MainActor func perform() async throws -> some IntentResult {
         let _ = try await BearAPI.refreshToken()

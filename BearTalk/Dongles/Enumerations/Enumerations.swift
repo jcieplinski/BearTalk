@@ -14,6 +14,7 @@ enum DefaultsKey {
     static let password: String = "password"
     static let userName: String = "userName"
     static let vehicleID: String = "vehicleID"
+    static let allVehicles: String = "allVehicles"
     static let carColor: String = "carColor"
     static let lastEfficiency: String = "lastEfficiency"
     static let controlsFavorites: String = "controlsFavorites"

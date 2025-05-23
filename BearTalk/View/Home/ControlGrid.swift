@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ControlGrid: View {
     @Environment(DataModel.self) var model
-    @AppStorage(DefaultsKey.controlsFavorites) var controlsFavorites: String = [ControlType.doorLocks.rawValue,ControlType.frunk.rawValue,ControlType.trunk.rawValue,ControlType.chargePort.rawValue].joined(separator: ",")
+    @AppStorage(DefaultsKey.controlsFavorites, store: .appGroup) var controlsFavorites: String = [ControlType.doorLocks.rawValue,ControlType.frunk.rawValue,ControlType.trunk.rawValue,ControlType.chargePort.rawValue].joined(separator: ",")
     
     @State private var selectedControls: [ControlType] = []
     @State private var nonSelectedControls: [ControlType] = []

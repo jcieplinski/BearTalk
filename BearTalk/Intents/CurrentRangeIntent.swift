@@ -9,6 +9,9 @@ import AppIntents
 
 struct CurrentRangeIntent: AppIntent {
     static var title: LocalizedStringResource = "Calculate Range"
+    
+    @Parameter(title: "Vehicle")
+    var vehicle: VehicleIdentifierEntity?
 
     @Parameter(title: "Current efficiency")
     var efficiency: Double

@@ -9,22 +9,7 @@ import AppIntents
 
 struct BearAutoShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
-        return  [AppShortcut(intent: OpenFrunkIntent(),
-                             phrases: ["Open Frunk with \(.applicationName)"],
-                             shortTitle: "Bear Frunk Open",
-                             systemImageName: "car.side.front.open.fill"),
-                 AppShortcut(intent: CloseFrunkIntent(),
-                             phrases: ["Close Frunk with \(.applicationName)"],
-                             shortTitle: "Bear Frunk Close",
-                             systemImageName: "car.side.fill"),
-                 AppShortcut(intent: OpenTrunkIntent(),
-                             phrases: ["Open Trunk with \(.applicationName)"],
-                             shortTitle: "Bear Trunk Open",
-                             systemImageName: "car.side.rear.open.fill"),
-                 AppShortcut(intent: CloseTrunkIntent(),
-                             phrases: ["Close Trunk with \(.applicationName)"],
-                             shortTitle: "Bear Trunk Close",
-                             systemImageName: "car.side.fill"),
+        return  [
                  AppShortcut(intent: UnlockIntent(),
                              phrases: ["Unlock with \(.applicationName)"],
                              shortTitle: "Bear Unlock",
@@ -48,7 +33,12 @@ struct BearAutoShortcuts: AppShortcutsProvider {
                  AppShortcut(intent: CurrentRangeIntent(),
                              phrases: ["What's my Range in \(.applicationName)?"],
                              shortTitle: "Range",
-                             systemImageName: "ruler.fill")
+                             systemImageName: "ruler.fill"),
+                 AppShortcut(intent: SeatClimateIntent(),
+                             phrases: ["\(.applicationName) seats"],
+                             shortTitle: "Seat Climate",
+                             systemImageName: "sun.min"
+                            )
         ]
     }
 }

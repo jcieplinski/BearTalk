@@ -11,7 +11,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(DataModel.self) var model
     @EnvironmentObject private var appState: AppState
-    @AppStorage(DefaultsKey.refreshToken) var refreshToken: String = ""
+    @AppStorage(DefaultsKey.refreshToken, store: .appGroup) var refreshToken: String = ""
 
     @State var refreshTimer: Timer?
 
@@ -57,7 +57,10 @@ struct ContentView: View {
             LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
         )
         .onAppear {
-            model.startRefreshing()
+            Task {
+                await refreshAuth()
+                model.startRefreshing()
+            }
         }
         .onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
