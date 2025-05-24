@@ -20,7 +20,7 @@ final class AppState: ObservableObject {
 
     var backgroundColors: [Color] {
         let top = Color(uiColor: .systemBackground)
-        let bottom = Color.gray.opacity(0.55)
+        let bottom = Color.gray.opacity(0.35)
 
         return [top, bottom]
     }

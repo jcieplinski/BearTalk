@@ -4,6 +4,8 @@ struct SeatClimateSheet: View {
     @Environment(DataModel.self) var model
     @Environment(\.dismiss) var dismiss
     
+    let modalPresented: Bool
+    
     var body: some View {
         NavigationStack {
             @Bindable var model = model
@@ -483,18 +485,21 @@ struct SeatClimateSheet: View {
             .navigationTitle("Seat Climate")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                if modalPresented {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }
+            .toolbarVisibility(modalPresented ? .hidden : .automatic, for: .navigationBar)
         }
         .presentationDetents([.medium, .large])
     }
 }
 
 #Preview {
-    SeatClimateSheet()
+    SeatClimateSheet(modalPresented: true)
         .environment(DataModel())
 }

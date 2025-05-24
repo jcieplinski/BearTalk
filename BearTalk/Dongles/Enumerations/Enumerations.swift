@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 enum DefaultsKey {
     static let authorization: String = "authorization"
     static let refreshToken: String = "refreshToken"
+    static let tokenExpiryTime: String = "tokenExpiryTime"
     static let password: String = "password"
     static let userName: String = "userName"
     static let vehicleID: String = "vehicleID"
@@ -464,6 +465,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case lights
     case batteryPrecondition
     
+    case chargeLimit
     case driverSeatHeat
     case driverSeatVent
     case passengerSeatHeat
@@ -505,6 +507,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Lights"
         case .batteryPrecondition:
             "Precondition Battery"
+        case .chargeLimit:
+            "Charge Limit"
         case .climateControl:
             "Climate Control"
         case .driverSeatHeat:
@@ -552,6 +556,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "lightsOff"
         case .batteryPrecondition:
             "batteryOff"
+        case .chargeLimit:
+            ""
         case .climateControl:
             "climateOff"
         }
@@ -585,6 +591,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "lightsOn"
         case .batteryPrecondition:
             "batteryOn"
+        case .chargeLimit:
+            ""
         case .climateControl:
             "climateOn"
         }

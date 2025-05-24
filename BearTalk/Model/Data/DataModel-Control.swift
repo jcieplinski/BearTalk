@@ -400,6 +400,7 @@ extension DataModel {
                 requestInProgress.insert(.climateControl)
                 
                 let success = try await BearAPI.setTemperature(temperature: temperature)
+                selectedTemperature = temperature
                 if !success {
                     // put up an alert
                 }
@@ -533,6 +534,10 @@ extension DataModel {
                 if oldState.hvacState.seats.rearPassengerHeatRight != newState.hvacState.seats.rearPassengerHeatRight {
                     requestInProgress.remove(.rearRightSeatHeat)
                 }
+            case .chargeLimit:
+                if oldState.chargingState.chargeLimit != newState.chargingState.chargeLimit {
+                    requestInProgress.remove(.chargeLimit)
+                }
             }
         }
         
@@ -640,6 +645,54 @@ extension DataModel {
                 }
             } catch {
                 print("Could not wake car: \(error)")
+            }
+        }
+    }
+    
+    func setChargeLimit(_ percentage: UInt32) {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.chargeLimit)
+                
+                let success = try await BearAPI.setChargeLimit(percentage: percentage)
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not set charge limit: \(error)")
+            }
+        }
+    }
+    
+    func toggleBatteryPreconditioning() {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.batteryPrecondition)
+                
+                switch batteryPreConditionState ?? .batteryPreconUnknown {
+                case .batteryPreconUnknown, .UNRECOGNIZED(_), .batteryPreconUnavailable:
+                    break
+                case .batteryPreconOn:
+                    let success = try await BearAPI.setBatteryPreCondition(status: .batteryPreconOff)
+                    if !success {
+                        // put up an alert
+                    }
+                case .batteryPreconOff:
+                    let success = try await BearAPI.setBatteryPreCondition(status: .batteryPreconOn)
+                    if !success {
+                        // put up an alert
+                    }
+                }
+            } catch {
+                print("Could not toggle battery preconditioning: \(error)")
             }
         }
     }

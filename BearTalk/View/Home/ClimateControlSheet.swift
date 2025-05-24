@@ -9,6 +9,8 @@ struct ClimateControlSheet: View {
     @State private var isSettingTemperature = false
     @State private var isInitialSetup = true
     
+    let modalPresented: Bool
+    
     var powerIsOn: Bool {
         guard let climatePowerState = model.climatePowerState else { return false }
         
@@ -23,11 +25,20 @@ struct ClimateControlSheet: View {
                     Button {
                         model.toggleClimateControl()
                     } label: {
-                        Image(systemName: powerIsOn ? "power.circle.fill" : "power.circle")
-                            .font(.system(size: 44))
-                            .fontWeight(.thin)
-                            .foregroundStyle(powerIsOn ? .active : .inactive)
+                        ZStack {
+                            Image(systemName: powerIsOn ? "power.circle.fill" : "power.circle")
+                                .font(.system(size: 44))
+                                .fontWeight(.thin)
+                                .foregroundStyle(powerIsOn ? .active : .inactive)
+                            
+                            if model.requestInProgress.contains(.climateControl) {
+                                ProgressView()
+                                    .controlSize(.large)
+                                    .foregroundStyle(.active)
+                            }
+                        }
                     }
+                    .disabled(model.requestInProgress.contains(.climateControl))
                     
                     // Temperature Picker
                     Picker("Temperature", selection: $temperature) {
@@ -85,9 +96,11 @@ struct ClimateControlSheet: View {
             .navigationTitle("Climate Control")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                if modalPresented {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }
@@ -99,6 +112,7 @@ struct ClimateControlSheet: View {
                     isInitialSetup = false
                 }
             }
+            .toolbarVisibility(modalPresented ? .hidden : .automatic, for: .navigationBar)
         }
         .presentationDetents([.fraction(0.4), .medium])
     }
@@ -115,6 +129,6 @@ struct ClimateControlSheet: View {
 }
 
 #Preview {
-    ClimateControlSheet()
+    ClimateControlSheet(modalPresented: true)
         .environment(DataModel())
 } 

@@ -47,9 +47,11 @@ struct ControlsView: View {
                             ControlGrid()
                         }
                         
-                        VStack {
-                            
+                        VStack(spacing: 16) {
+                            ClimateControlsCell()
+                            ChargingCell()
                         }
+                        .padding()
                         
                         Spacer()
                     } else {
@@ -115,11 +117,11 @@ struct ControlsView: View {
                 Text("Do you wish to log out of your Lucid account?")
             }
             .sheet(isPresented: $showClimateControl) {
-                ClimateControlSheet()
+                ClimateControlSheet(modalPresented: true)
                     .presentationBackground(.thinMaterial)
             }
             .sheet(isPresented: $showSeatClimate) {
-                SeatClimateSheet()
+                SeatClimateSheet(modalPresented: true)
                     .presentationBackground(.thinMaterial)
             }
             .onAppear {
