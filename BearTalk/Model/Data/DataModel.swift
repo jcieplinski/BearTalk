@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import OSLog
 
 @Observable final class DataModel {
@@ -14,6 +15,7 @@ import OSLog
     var vehicle: Vehicle?
     var userProfile: UserProfile?
     var refreshTimer: Timer?
+    var vehicleIdentifiers: [VehicleIdentifierEntity]?
     
     // Car Scene
     var selectedModel: CarSceneModel = CarSceneModel.allCases.randomElement() ?? .air
@@ -96,6 +98,7 @@ import OSLog
     func getUserProfile() async throws {
         do {
             userProfile = try await BearAPI.fetchUserProfile()
+            vehicleIdentifiers = try await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
         } catch {
             print(error)
         }
@@ -129,7 +132,7 @@ import OSLog
         }
     }
     
-    private func refreshVehicle() async {
+    func refreshVehicle() async {
         do {
             let refreshedVehicle = try await BearAPI.fetchCurrentVehicle()
             

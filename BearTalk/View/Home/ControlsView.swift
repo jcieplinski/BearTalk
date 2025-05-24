@@ -61,8 +61,25 @@ struct ControlsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showLogOutWarning = true
+                    Menu {
+                        ForEach(model.vehicleIdentifiers ?? [], id: \.id) { vehicle in
+                            Button {
+                                BearAPI.vehicleID = vehicle.id
+                                Task {
+                                    await model.refreshVehicle()
+                                }
+                            } label: {
+                                Text(vehicle.nickname)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        Button(role: .destructive) {
+                            showLogOutWarning = true
+                        } label: {
+                            Label("Log Out", systemImage: "person.circle")
+                        }
                     } label: {
                         if let photoUrl = model.userProfile?.photoUrl {
                             AsyncImage(url: URL(string: photoUrl)) { image in
