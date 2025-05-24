@@ -12,6 +12,7 @@ import OSLog
     @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
     
     var vehicle: Vehicle?
+    var userProfile: UserProfile?
     var refreshTimer: Timer?
     
     // Car Scene
@@ -89,6 +90,14 @@ import OSLog
             return true
         case .UNRECOGNIZED(_):
             return false
+        }
+    }
+    
+    func getUserProfile() async throws {
+        do {
+            userProfile = try await BearAPI.fetchUserProfile()
+        } catch {
+            print(error)
         }
     }
     

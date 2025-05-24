@@ -5,12 +5,27 @@
 //  Created by Joe Cieplinski on 5/12/25.
 //
 
+import Foundation
+import SwiftProtobuf
+
 extension BearAPI {
+    static func mapUserProfileResponse(_ userProfile: Mobilegateway_Protos_UserProfileData) -> UserProfile {
+        return UserProfile(
+            email: userProfile.email,
+            locale: userProfile.locale,
+            username: "",
+            photoUrl: userProfile.photoURL,
+            firstName: userProfile.firstName,
+            lastName: userProfile.lastName,
+            emaId: ""
+        )
+    }
+    
     static func mapVehicleResponse(_ vehicle: Mobilegateway_Protos_Vehicle) -> Vehicle {
         let config = VehicleConfig(
             vin: vehicle.config.vin,
-            model: .air,
-            modelVariant: .sapphire,
+            model: LucidModel(proto: vehicle.config.model),
+            modelVariant: ModelVariant(proto: vehicle.config.variant),
             releaseDate: nil,
             nickname: vehicle.config.nickname,
             paintColor: PaintColor(proto: vehicle.config.paintColor),

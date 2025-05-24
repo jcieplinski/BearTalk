@@ -20,6 +20,7 @@ enum DefaultsKey {
     static let controlsFavorites: String = "controlsFavorites"
     static let selectedTemperature: String = "selectedTemperature"
     static let seatClimateLevel: String = "seatClimateLevel"
+    static let photoURL: String = "photoURL"
 }
 
 enum LockState: Codable, Equatable {

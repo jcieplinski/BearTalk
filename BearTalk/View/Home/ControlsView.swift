@@ -64,7 +64,19 @@ struct ControlsView: View {
                     Button {
                         showLogOutWarning = true
                     } label: {
-                        Image(systemName: "person.circle")
+                        if let photoUrl = model.userProfile?.photoUrl {
+                            AsyncImage(url: URL(string: photoUrl)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                Image(systemName: "person.circle")
+                            }
+                        } else {
+                            Image(systemName: "person.circle")
+                        }
                     }
                 }
             }

@@ -59,7 +59,12 @@ struct ContentView: View {
         .onAppear {
             Task {
                 await refreshAuth()
-                model.startRefreshing()
+                
+                if appState.loggedIn {
+                    model.startRefreshing()
+                }
+                
+                try await model.getUserProfile()
             }
         }
         .onChange(of: scenePhase) { _, newPhase in
@@ -80,7 +85,10 @@ struct ContentView: View {
                     // Refresh our auth and set a timer to do it again before expiry
                     await refreshAuth()
 
-                    model.startRefreshing()
+                    if appState.loggedIn {
+                        model.startRefreshing()
+                    }
+                    
                     appState.appHoldScreen = false
                 }
             @unknown default:

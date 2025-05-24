@@ -104,7 +104,8 @@ final class BearAPI {
                 transportSecurity: .tls
             )
         ) { client in
-            let request = Mobilegateway_Protos_LogoutRequest()
+            var request = Mobilegateway_Protos_LogoutRequest()
+            request.notificationDeviceToken = "1234"
             let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
             
             do {
@@ -152,6 +153,32 @@ final class BearAPI {
                 authorization = ""
                 refreshToken = ""
                 throw error
+            }
+        }
+    }
+    
+    @MainActor
+    static func fetchUserProfile() async throws -> UserProfile? {
+        try await withGRPCClient(
+            transport: .http2NIOPosix(
+                target: .dns(host: String.grpcAPI),
+                transportSecurity: .tls
+            )
+        ) { client in
+            let request = Mobilegateway_Protos_GetUserProfileRequest()
+            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+            
+            do {
+                let fetchClient = Mobilegateway_Protos_UserProfileService.Client(wrapping: client)
+                let response = try await fetchClient.getUserProfile(
+                    request,
+                    metadata: metadata
+                )
+                
+                return mapUserProfileResponse(response.profile)
+            } catch {
+                print(error)
+                return nil
             }
         }
     }

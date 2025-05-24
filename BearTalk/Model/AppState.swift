@@ -34,32 +34,45 @@ final class AppState: ObservableObject {
         return appState
     }
 
-    func logIn() {
+    func logIn() async throws -> UserProfile? {
         guard userName.isNotBlank, password.isNotBlank else {
-            return
+            return nil
         }
 
-        Task {
-            do {
-                if let _ = try await BearAPI.logIn(
-                    userName: userName,
-                    password: password)
-                    .loginResponse {
-
-                    saveOrUpdatePassword()
-
-                    Task { @MainActor in
-                        loggedIn = true
-                    }
-                }
-
-            } catch let error {
-                print("Could not log in: \(error)")
+        do {
+            if let response = try await BearAPI.logIn(
+                userName: userName,
+                password: password)
+                .loginResponse {
+                
+                saveOrUpdatePassword()
                 
                 Task { @MainActor in
-                    noCarMode = true
+                    loggedIn = true
                 }
+                
+                let userProfile: UserProfile? = UserProfile(
+                    email: response.userProfile.email,
+                    locale: response.userProfile.locale,
+                    username: response.userProfile.username,
+                    photoUrl: response.userProfile.photoUrl,
+                    firstName: response.userProfile.firstName,
+                    lastName: response.userProfile.locale,
+                    emaId: response.userProfile.emaId
+                )
+                
+                return userProfile
             }
+            
+            return nil
+        } catch let error {
+            print("Could not log in: \(error)")
+            
+            Task { @MainActor in
+                loggedIn = false
+            }
+            
+            return nil
         }
     }
 

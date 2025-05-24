@@ -10,6 +10,7 @@ import LocalAuthentication
 
 struct LoginView: View {
     @EnvironmentObject private var appState: AppState
+    @Environment(DataModel.self) var model: DataModel
 
     @FocusState var focused: FocusableField?
     @State var showingProgress: Bool = false
@@ -92,8 +93,12 @@ struct LoginView: View {
                 .listStyle(.plain)
                 .safeAreaInset(edge: .bottom, content: {
                     Button {
-                        appState.logIn()
                         showingProgress = true
+                        Task { @MainActor in
+                            let userProfile = try await appState.logIn()
+                            model.userProfile = userProfile
+                            model.startRefreshing()
+                        }
                     } label: {
                         Text("Log In")
                             .padding(.horizontal)

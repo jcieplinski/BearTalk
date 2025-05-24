@@ -84,6 +84,15 @@ public struct Mobilegateway_Protos_UserProfileData: Sendable {
 
   public var locale: String = String()
 
+  public var photoURL: String {
+    get {return _photoURL ?? String()}
+    set {_photoURL = newValue}
+  }
+  /// Returns true if `photoURL` has been explicitly set.
+  public var hasPhotoURL: Bool {return self._photoURL != nil}
+  /// Clears the value of `photoURL`. Subsequent reads from it will return its default value.
+  public mutating func clearPhotoURL() {self._photoURL = nil}
+
   public var address: String = String()
 
   public var city: String = String()
@@ -107,6 +116,7 @@ public struct Mobilegateway_Protos_UserProfileData: Sendable {
 
   public init() {}
 
+  fileprivate var _photoURL: String? = nil
   fileprivate var _phone: Mobilegateway_Protos_PhoneNumber? = nil
 }
 
@@ -314,6 +324,7 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     2: .standard(proto: "last_name"),
     3: .same(proto: "email"),
     4: .same(proto: "locale"),
+    5: .standard(proto: "photo_url"),
     6: .same(proto: "address"),
     7: .same(proto: "city"),
     8: .same(proto: "state"),
@@ -332,6 +343,7 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
       case 2: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.email) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.locale) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._photoURL) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.address) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self.city) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self.state) }()
@@ -360,6 +372,9 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     if !self.locale.isEmpty {
       try visitor.visitSingularStringField(value: self.locale, fieldNumber: 4)
     }
+    try { if let v = self._photoURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+    } }()
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 6)
     }
@@ -386,6 +401,7 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     if lhs.lastName != rhs.lastName {return false}
     if lhs.email != rhs.email {return false}
     if lhs.locale != rhs.locale {return false}
+    if lhs._photoURL != rhs._photoURL {return false}
     if lhs.address != rhs.address {return false}
     if lhs.city != rhs.city {return false}
     if lhs.state != rhs.state {return false}

@@ -405,6 +405,8 @@ public struct Mobilegateway_Protos_LogoutRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var notificationDeviceToken: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -932,18 +934,31 @@ extension Mobilegateway_Protos_GetUserVehiclesResponse: SwiftProtobuf.Message, S
 
 extension Mobilegateway_Protos_LogoutRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LogoutRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "notification_device_token"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.notificationDeviceToken) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.notificationDeviceToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.notificationDeviceToken, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_LogoutRequest, rhs: Mobilegateway_Protos_LogoutRequest) -> Bool {
+    if lhs.notificationDeviceToken != rhs.notificationDeviceToken {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
