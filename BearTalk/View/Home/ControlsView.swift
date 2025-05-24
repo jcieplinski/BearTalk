@@ -47,6 +47,10 @@ struct ControlsView: View {
                             ControlGrid()
                         }
                         
+                        VStack {
+                            
+                        }
+                        
                         Spacer()
                     } else {
                         EmptyView()

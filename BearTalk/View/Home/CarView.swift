@@ -68,6 +68,6 @@ struct CarView: View {
                     .foregroundStyle(.accent)
             }
         }
-        .frame(height: 250)
+        .frame(height: 200)
     }
 }
