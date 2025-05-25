@@ -78,7 +78,7 @@ final class TokenManager {
         
         // End any background task
         if backgroundTask != .invalid {
-            UIApplication.shared.endBackgroundTask(backgroundTask)
+            await UIApplication.shared.endBackgroundTask(backgroundTask)
             backgroundTask = .invalid
         }
         
@@ -340,7 +340,7 @@ final class TokenManager {
             
             // End background task
             if backgroundTask != .invalid {
-                UIApplication.shared.endBackgroundTask(backgroundTask)
+                await UIApplication.shared.endBackgroundTask(backgroundTask)
                 backgroundTask = .invalid
             }
         }

@@ -42,7 +42,16 @@ struct ChargingView: View {
                     
                     Text("Current Charge: \(model.chargePercentage)")
                 }
-                    .font(.title2)
+                .font(.title2)
+                
+                // Charging Status
+                if let vehicle = model.vehicle {
+                    ChargingStatusView(
+                        chargingState: vehicle.vehicleState.chargingState.chargeState,
+                        sessionMinutesRemaining: vehicle.vehicleState.chargingState.sessionMinutesRemaining
+                    )
+                }
+                
                 // Charge Limit Slider
                 VStack(spacing: 16) {
                     HStack {

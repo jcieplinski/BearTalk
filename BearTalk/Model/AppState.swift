@@ -97,7 +97,7 @@ final class AppState: ObservableObject {
 
             let loggedOut = try await BearAPI.logOut()
             if loggedOut {
-                await TokenManager.shared.logout()
+                TokenManager.shared.logout()
             }
         }
     }

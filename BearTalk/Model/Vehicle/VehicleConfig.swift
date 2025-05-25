@@ -29,6 +29,10 @@ struct VehicleConfig: Codable, Equatable {
     let exteriorColorCode: String
     let interiorColorCode: String
     let frunkStrut: String
+    let frontSeatsHeating: FrontSeatsHeatingAvailability
+    let frontSeatsVentilation: FrontSeatsVentilationAvailability
+    let secondRowHeatedSeats: SecondRowHeatedSeatsAvailability
+    let heatedSteeringWheel: HeatedSteeringWheelAvailability
 
     static func empty() -> VehicleConfig {
         return VehicleConfig(
@@ -52,7 +56,11 @@ struct VehicleConfig: Codable, Equatable {
             roof: .glassCanopy,
             exteriorColorCode: "L102",
             interiorColorCode: "INT12",
-            frunkStrut: "POWER_STRUT")
+            frunkStrut: "POWER_STRUT",
+            frontSeatsHeating: .frontSeatsHeatingUnknown,
+            frontSeatsVentilation: .frontSeatsVentilationUnknown,
+            secondRowHeatedSeats: .secondRowHeatedSeatsUnknown,
+            heatedSteeringWheel: .heatedSteeringWheelUnknown)
     }
 }
 
@@ -107,6 +115,70 @@ enum RoofType: Codable, Equatable {
         case .glassCanopy: self = .glassCanopy
         case .metal: self = .metal
         case .carbonFiber: self = .carbonFiber
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum FrontSeatsHeatingAvailability: Codable, Equatable {
+    case frontSeatsHeatingUnknown // = 0
+    case frontSeatsHeatingUnavailable // = 1
+    case frontSeatsHeatingAvailable // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_FrontSeatsHeatingAvailability) {
+        switch proto {
+        case .frontSeatsHeatingUnknown: self = .frontSeatsHeatingUnknown
+        case .frontSeatsHeatingUnavailable: self = .frontSeatsHeatingUnavailable
+        case .frontSeatsHeatingAvailable: self = .frontSeatsHeatingAvailable
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum FrontSeatsVentilationAvailability: Codable, Equatable {
+    case frontSeatsVentilationUnknown // = 0
+    case frontSeatsVentilationUnavailable // = 1
+    case frontSeatsVentilationAvailable // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_FrontSeatsVentilationAvailability) {
+        switch proto {
+        case .frontSeatsVentilationUnknown: self = .frontSeatsVentilationUnknown
+        case .frontSeatsVentilationUnavailable: self = .frontSeatsVentilationUnavailable
+        case .frontSeatsVentilationAvailable: self = .frontSeatsVentilationAvailable
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum SecondRowHeatedSeatsAvailability: Codable, Equatable {
+    case secondRowHeatedSeatsUnknown // = 0
+    case secondRowHeatedSeatsUnavailable // = 1
+    case secondRowHeatedSeatsAvailable // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_SecondRowHeatedSeatsAvailability) {
+        switch proto {
+        case .secondRowHeatedSeatsUnknown: self = .secondRowHeatedSeatsUnknown
+        case .secondRowHeatedSeatsUnavailable: self = .secondRowHeatedSeatsUnavailable
+        case .secondRowHeatedSeatsAvailable: self = .secondRowHeatedSeatsAvailable
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum HeatedSteeringWheelAvailability: Codable, Equatable {
+    case heatedSteeringWheelUnknown // = 0
+    case heatedSteeringWheelUnavailable // = 1
+    case heatedSteeringWheelAvailable // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_HeatedSteeringWheelAvailability) {
+        switch proto {
+        case .heatedSteeringWheelUnknown: self = .heatedSteeringWheelUnknown
+        case .heatedSteeringWheelUnavailable: self = .heatedSteeringWheelUnavailable
+        case .heatedSteeringWheelAvailable: self = .heatedSteeringWheelAvailable
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }

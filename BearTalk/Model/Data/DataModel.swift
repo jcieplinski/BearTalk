@@ -11,7 +11,16 @@ import OSLog
 import GRPCCore
 
 @Observable final class DataModel {
-    @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
+    @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) private var _lastEfficiency: Double = 3.2
+    
+    // Add a new observable property for the view
+    var lastEfficiency: Double {
+        get { _lastEfficiency }
+        set {
+            _lastEfficiency = newValue
+            updateRangeStats()  // Update range stats whenever efficiency changes
+        }
+    }
     
     // Efficiency tracking
     private struct EfficiencyReading {
@@ -64,7 +73,11 @@ import GRPCCore
     
     // Range
     var range: String = ""
-    var estimatedRange: String = ""
+    @ObservationIgnored var _estimatedRange: String = ""
+    var estimatedRange: String {
+        get { _estimatedRange }
+        set { _estimatedRange = newValue }
+    }
     var realRange: String = ""
     var kWh: Double = 0.0
     var unitLabel: String = "mi"
@@ -108,6 +121,28 @@ import GRPCCore
         case .UNRECOGNIZED(_):
             return false
         }
+    }
+    
+    // MARK: - Climate Feature Availability
+    
+    var hasFrontSeatHeating: Bool {
+        guard let vehicle else { return false }
+        return vehicle.vehicleConfig.frontSeatsHeating == .frontSeatsHeatingAvailable
+    }
+    
+    var hasFrontSeatVentilation: Bool {
+        guard let vehicle else { return false }
+        return vehicle.vehicleConfig.frontSeatsVentilation == .frontSeatsVentilationAvailable
+    }
+    
+    var hasRearSeatHeating: Bool {
+        guard let vehicle else { return false }
+        return vehicle.vehicleConfig.secondRowHeatedSeats == .secondRowHeatedSeatsAvailable
+    }
+    
+    var hasSteeringWheelHeat: Bool {
+        guard let vehicle else { return false }
+        return vehicle.vehicleConfig.heatedSteeringWheel == .heatedSteeringWheelAvailable
     }
     
     func getUserProfile() async throws {
@@ -243,7 +278,7 @@ import GRPCCore
             return
         }
         
-        let currentOdometer = vehicle.vehicleState.chassisState.odometerKm
+        let currentOdometer = vehicle.vehicleState.chassisState.odometerKm  // This is in km
         let currentBattery = vehicle.vehicleState.batteryState.kwHr
         
         // Add new reading
@@ -269,30 +304,41 @@ import GRPCCore
         let oldestReading = efficiencyReadings.first!
         let newestReading = efficiencyReadings.last!
         
-        // Calculate distance traveled in meters
-        let distanceTraveled = newestReading.odometer - oldestReading.odometer
+        // Calculate distance traveled in kilometers (odometer is always in km)
+        let distanceTraveledKm = newestReading.odometer - oldestReading.odometer
         
         // Calculate energy used in kWh
         let energyUsed = oldestReading.batteryLevel - newestReading.batteryLevel
         
         // Only calculate if we've used energy and moved
-        guard energyUsed > 0 && distanceTraveled > 0 else {
+        guard energyUsed > 0 && distanceTraveledKm > 0 else {
             isCalculatingEfficiency = true
             return
         }
         
-        // Convert distance to miles or kilometers based on locale
-        let distanceUnit: UnitLength = Locale.current.measurementSystem == .metric ? .kilometers : .miles
-        let distanceMeasurement = Measurement(value: distanceTraveled, unit: UnitLength.meters)
-        let convertedDistance = distanceMeasurement.converted(to: distanceUnit).value
+        // Calculate efficiency in km/kWh first (since distance is in km)
+        let efficiencyKmPerKWh = distanceTraveledKm / energyUsed
         
-        // Calculate efficiency (distance per kWh)
-        let calculatedEfficiency = convertedDistance / energyUsed
+        // Convert to miles/kWh if user's locale is imperial
+        let calculatedEfficiency: Double
+        if Locale.current.measurementSystem == .metric {
+            calculatedEfficiency = efficiencyKmPerKWh
+        } else {
+            // Convert km to miles for imperial users
+            let distanceInMiles = distanceTraveledKm * 0.621371  // Convert km to miles
+            calculatedEfficiency = distanceInMiles / energyUsed  // Now in miles/kWh
+        }
         
-        // Update the stored efficiency if it's a reasonable value (between 1 and 10)
-        if calculatedEfficiency >= 1.0 && calculatedEfficiency <= 10.0 {
-            lastEfficiency = calculatedEfficiency
+        // Update the stored efficiency if it's a reasonable value
+        // For metric: typically 4-8 km/kWh
+        // For imperial: typically 2.5-5 miles/kWh
+        let minEfficiency = Locale.current.measurementSystem == .metric ? 1.0 : 0.6
+        let maxEfficiency = Locale.current.measurementSystem == .metric ? 10.0 : 6.2
+        
+        if calculatedEfficiency >= minEfficiency && calculatedEfficiency <= maxEfficiency {
+            _lastEfficiency = calculatedEfficiency
             efficiencyText = String(format: "%.1f", calculatedEfficiency)
+            updateRangeStats()
         }
         
         isCalculatingEfficiency = true

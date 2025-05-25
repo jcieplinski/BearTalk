@@ -10,7 +10,7 @@ import AVFoundation
 
 struct RangeView: View {
     @EnvironmentObject private var appState: AppState
-    @Environment(DataModel.self) var model
+    @Environment(DataModel.self) var model: DataModel
     
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
@@ -18,7 +18,6 @@ struct RangeView: View {
 
     var body: some View {
         @Bindable var model = model
-        
         NavigationStack {
             ScrollView {
                 VStack(spacing: 22) {
@@ -31,10 +30,10 @@ struct RangeView: View {
                     VStack {
                         HStack(alignment: .firstTextBaseline) {
                             Text(model.estimatedRange)
-                                .font(.system(size: 100))
+                                .font(.system(size: 88))
                                 .fontWeight(.bold)
-                            Text(model.unitLabel)
-                                .font(.title)
+//                            Text(model.unitLabel)
+//                                .font(.title)
                         }
                         Text("estimated real-world range")
                     }
@@ -126,6 +125,7 @@ struct RangeView: View {
 
         model.lastEfficiency = Double(model.efficiencyText) ?? 0.0
         model.updateStats()
+        model.updateRangeStats()
     }
 
     private func toggleRecording() {
@@ -144,6 +144,7 @@ struct RangeView: View {
             if let transcribed = Double(speechRecognizer.transcript) {
                 model.lastEfficiency = transcribed
                 model.updateStats()
+                model.updateRangeStats()
             } else {
 
             }

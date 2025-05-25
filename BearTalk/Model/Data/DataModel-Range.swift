@@ -14,12 +14,21 @@ extension DataModel {
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
         kWh = vehicle.vehicleState.batteryState.kwHr.round(to: 2)
         
-        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
-        let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+        // Calculate real-world range based on current battery level and efficiency
+        let estimatedRangeInMiles = (kWh * lastEfficiency).rounded()
+        
+        // Convert to kilometers if needed based on locale
+        let distanceUnit: UnitLength = Locale.current.measurementSystem == .metric ? .kilometers : .miles
+        let rangeMeasurement = Measurement(value: estimatedRangeInMiles, unit: UnitLength.miles)
+        let rangeMeasurementConverted = rangeMeasurement.converted(to: distanceUnit).formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
         
         unitLabel = Locale.current.measurementSystem == .metric ? "km" : "mi"
         
-        range = rangeMeasurementConverted
-        estimatedRange = (kWh * lastEfficiency).rounded().stringWithLocale()
+        // Store the EPA range from vehicle state as a reference only
+        let epaRangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
+        range = epaRangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+        
+        // Store our calculated real-world range
+        _estimatedRange = rangeMeasurementConverted
     }
 }

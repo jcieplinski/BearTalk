@@ -22,6 +22,13 @@ struct ChargingCell: View {
                     Spacer()
                 }
                 
+                if let vehicle = model.vehicle {
+                    ChargingStatusView(
+                        chargingState: vehicle.vehicleState.chargingState.chargeState,
+                        sessionMinutesRemaining: vehicle.vehicleState.chargingState.sessionMinutesRemaining
+                    )
+                }
+                
                 HStack {
                     Text("Current: \(model.chargePercentage)")
                         .font(.subheadline)

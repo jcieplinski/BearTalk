@@ -57,7 +57,11 @@ extension BearAPI {
             roof: RoofType(proto: vehicle.config.roof),
             exteriorColorCode: "\(vehicle.config.exteriorColorCode)",
             interiorColorCode: "\(vehicle.config.interiorColorCode)",
-            frunkStrut: String(describing: vehicle.config.frunkStrut)
+            frunkStrut: String(describing: vehicle.config.frunkStrut),
+            frontSeatsHeating: FrontSeatsHeatingAvailability(proto: vehicle.config.frontSeatsHeating),
+            frontSeatsVentilation: FrontSeatsVentilationAvailability(proto: vehicle.config.frontSeatsVentilation),
+            secondRowHeatedSeats: SecondRowHeatedSeatsAvailability(proto: vehicle.config.secondRowHeatedSeats),
+            heatedSteeringWheel: HeatedSteeringWheelAvailability(proto: vehicle.config.heatedSteeringWheel)
         )
         
         let vehicleState = VehicleState(
