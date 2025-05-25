@@ -13,6 +13,17 @@ import GRPCCore
 @Observable final class DataModel {
     @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
     
+    // Efficiency tracking
+    private struct EfficiencyReading {
+        let timestamp: Date
+        let odometer: Double // in meters
+        let batteryLevel: Double // in kWh
+    }
+    
+    @ObservationIgnored private var efficiencyReadings: [EfficiencyReading] = []
+    private let maxEfficiencyReadingsAge: TimeInterval = 600 // 10 minutes in seconds
+    private let minReadingsForEfficiency = 2 // Need at least 2 readings to calculate efficiency
+    
     var vehicle: Vehicle?
     var userProfile: UserProfile?
     var refreshTimer: Timer?
@@ -59,6 +70,7 @@ import GRPCCore
     var unitLabel: String = "mi"
     var efficiencyText: String = ""
     var showingEfficiencyPrompt: Bool = false
+    var isCalculatingEfficiency: Bool = false
     
     // Stats
     var nickname: String = ""
@@ -173,6 +185,10 @@ import GRPCCore
             Task {
                 await refreshVehicle()
                 setRefreshVehicleTimer()
+                // Prevent device from sleeping while calculating efficiency
+                DispatchQueue.main.async {
+                    UIApplication.shared.isIdleTimerDisabled = true
+                }
             }
         }
     }
@@ -180,6 +196,10 @@ import GRPCCore
     func stopRefreshing() {
         refreshTimer?.invalidate()
         refreshTimer = nil
+        // Allow device to sleep again when we stop refreshing
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
     
     private func setRefreshVehicleTimer() {
@@ -208,11 +228,74 @@ import GRPCCore
                     self.update()
                     self.updateStats()
                     self.updateRangeStats()
+                    self.updateEfficiency(vehicle: vehicle)
                 }
             }
         } catch {
             Logger.vehicle.error("Error updating Vehicle: \(error)")
         }
+    }
+    
+    private func updateEfficiency(vehicle: Vehicle) {
+        // Only calculate efficiency if the vehicle is in a state where it's moving
+        guard vehicle.vehicleState.powerState == .drive else {
+            isCalculatingEfficiency = false
+            return
+        }
+        
+        let currentOdometer = vehicle.vehicleState.chassisState.odometerKm
+        let currentBattery = vehicle.vehicleState.batteryState.kwHr
+        
+        // Add new reading
+        let newReading = EfficiencyReading(
+            timestamp: Date(),
+            odometer: currentOdometer,
+            batteryLevel: currentBattery
+        )
+        
+        // Add new reading and clean up old ones
+        efficiencyReadings.append(newReading)
+        efficiencyReadings.removeAll { reading in
+            Date().timeIntervalSince(reading.timestamp) > maxEfficiencyReadingsAge
+        }
+        
+        // Need at least 2 readings to calculate efficiency
+        guard efficiencyReadings.count >= minReadingsForEfficiency else {
+            isCalculatingEfficiency = true
+            return
+        }
+        
+        // Get the oldest and newest readings
+        let oldestReading = efficiencyReadings.first!
+        let newestReading = efficiencyReadings.last!
+        
+        // Calculate distance traveled in meters
+        let distanceTraveled = newestReading.odometer - oldestReading.odometer
+        
+        // Calculate energy used in kWh
+        let energyUsed = oldestReading.batteryLevel - newestReading.batteryLevel
+        
+        // Only calculate if we've used energy and moved
+        guard energyUsed > 0 && distanceTraveled > 0 else {
+            isCalculatingEfficiency = true
+            return
+        }
+        
+        // Convert distance to miles or kilometers based on locale
+        let distanceUnit: UnitLength = Locale.current.measurementSystem == .metric ? .kilometers : .miles
+        let distanceMeasurement = Measurement(value: distanceTraveled, unit: UnitLength.meters)
+        let convertedDistance = distanceMeasurement.converted(to: distanceUnit).value
+        
+        // Calculate efficiency (distance per kWh)
+        let calculatedEfficiency = convertedDistance / energyUsed
+        
+        // Update the stored efficiency if it's a reasonable value (between 1 and 10)
+        if calculatedEfficiency >= 1.0 && calculatedEfficiency <= 10.0 {
+            lastEfficiency = calculatedEfficiency
+            efficiencyText = String(format: "%.1f", calculatedEfficiency)
+        }
+        
+        isCalculatingEfficiency = true
     }
     
     func update() {

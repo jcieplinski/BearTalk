@@ -46,6 +46,20 @@ struct RangeView: View {
                             .multilineTextAlignment(.center)
                         Text(model.lastEfficiency.round(to: 2).stringWithLocale())
                             .font(.largeTitle)
+                        
+                        if model.isCalculatingEfficiency {
+                            HStack {
+                                ProgressView()
+                                    .controlSize(.small)
+                                Text("Calculating efficiency...")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else {
+                            Text("Vehicle not in motion")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
 
                         HStack(spacing: 66) {
                             Button {
