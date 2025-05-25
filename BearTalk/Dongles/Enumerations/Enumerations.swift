@@ -23,6 +23,7 @@ enum DefaultsKey {
     static let seatClimateLevel: String = "seatClimateLevel"
     static let photoURL: String = "photoURL"
     static let cellOrder: String = "cellOrder"
+    static let useFaceID: String = "useFaceID"
 }
 
 enum LockState: Codable, Equatable {

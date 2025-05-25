@@ -15,6 +15,10 @@ struct LoginView: View {
 
     @FocusState var focused: FocusableField?
     @State var showingProgress: Bool = false
+    @AppStorage(DefaultsKey.useFaceID, store: .appGroup) private var useFaceID: Bool = false
+    @State private var showingFaceIDError: Bool = false
+    @State private var faceIDError: String = ""
+    @State private var hasAttemptedFaceID: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -26,44 +30,58 @@ struct LoginView: View {
                         .padding(.bottom)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
-//                    Button {
-//                        authenticate()
-//                    } label: {
-//                        Text("Use FaceID")
-//                    }
-                    Capsule(style: .continuous)
-                        .foregroundStyle(Color.gray.opacity(0.3))
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .overlay {
-                            TextField("UserName", text: $appState.userName)
-                                .textFieldStyle(.plain)
-                                .textContentType(.emailAddress)
-                                .focused($focused, equals: .userName)
-                                .padding()
-                                .submitLabel(.next)
-                                .keyboardType(.emailAddress)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
-                                .onSubmit {
-                                    focused = .password
-                                }
+                        .padding([.top, .leading, .trailing])
+                    
+                    if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                        Toggle(isOn: $useFaceID) {
+                            Label("Use Face ID", systemImage: "faceid")
                         }
-
-                    Capsule(style: .continuous)
-                        .foregroundStyle(Color.gray.opacity(0.3))
-                        .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
-                        .overlay {
-                            SecureField("Password", text: $appState.password)
-                                .textFieldStyle(.plain)
-                                .textContentType(.password)
-                                .focused($focused, equals: .password)
-                                .padding()
-                                .onSubmit {
-                                    focused = nil
-                                }
+                        .listRowSeparator(.hidden)
+                        .padding(.horizontal)
+                        .onChange(of: useFaceID) { oldValue, newValue in
+                            if newValue {
+                                hasAttemptedFaceID = false
+                            }
                         }
+                    }
+                    
+                    if !useFaceID {
+                        Capsule(style: .continuous)
+                            .foregroundStyle(Color.gray.opacity(0.3))
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .overlay {
+                                TextField("UserName", text: $appState.userName)
+                                    .textFieldStyle(.plain)
+                                    .textContentType(.emailAddress)
+                                    .focused($focused, equals: .userName)
+                                    .padding()
+                                    .submitLabel(.next)
+                                    .keyboardType(.emailAddress)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .onSubmit {
+                                        focused = .password
+                                    }
+                            }
+                        
+                        Capsule(style: .continuous)
+                            .foregroundStyle(Color.gray.opacity(0.3))
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .overlay {
+                                SecureField("Password", text: $appState.password)
+                                    .textFieldStyle(.plain)
+                                    .textContentType(.password)
+                                    .focused($focused, equals: .password)
+                                    .padding()
+                                    .onSubmit {
+                                        focused = nil
+                                    }
+                            }
+                    }
+                    
                     SceneKitViewLogin { view in
                         DispatchQueue.main.async {
                             // Configure view for transparency
@@ -73,16 +91,16 @@ struct LoginView: View {
                     }
                     .frame(height: 200)
                     .frame(maxWidth: .infinity)
-                    .padding(.top)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .tint(.accentColor)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top)
+                    .padding(.top, 44)
                     Text("Your username and password will remain between you and Lucid Motors. This app does not send any authorization information to the app creators.")
                         .font(.caption)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
+                        .padding(.horizontal)
                     if showingProgress {
                         ProgressView()
                             .frame(maxWidth: .infinity)
@@ -91,80 +109,138 @@ struct LoginView: View {
                     }
                 }
                 .scrollContentBackground(.hidden)
+                .scrollBounceBehavior(.basedOnSize)
                 .listStyle(.plain)
+                .animation(.spring(duration: 0.3), value: useFaceID)
+                .animation(.spring(duration: 0.3), value: hasAttemptedFaceID)
                 .safeAreaInset(edge: .bottom, content: {
                     Button {
                         showingProgress = true
                         Task { @MainActor in
-                            let userProfile = try await appState.logIn()
-                            if userProfile != nil {
-                                // Initialize token manager after successful login
-                                await tokenManager.initialize()
+                            if useFaceID && !hasAttemptedFaceID {
+                                hasAttemptedFaceID = true
+                                await authenticateWithFaceID()
+                            } else {
+                                await performLogin()
                             }
-                            model.userProfile = userProfile
-                            model.startRefreshing()
                         }
                     } label: {
-                        Text("Log In")
+                        Text(useFaceID && !hasAttemptedFaceID ? "Log In with Face ID" : "Log In")
                             .padding(.horizontal)
                             .frame(maxWidth: .infinity)
                             .frame(minHeight: 28)
                     }
                     .buttonStyle(.borderedProminent)
+                    .padding()
                 })
-                .padding()
-
             }
-            .padding([.top, .leading, .trailing])
             .navigationTitle("Welcome")
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
-            .onAppear {
-                Task {
-                    do {
-                        let passwordData = try KeyChain.readPassword(service: DefaultsKey.password, account: appState.userName)
-
-                        appState.password = String(decoding: passwordData, as: UTF8.self)
-                    } catch let error {
-                        print("Error restoring password from KeyChain\(error)")
+            .alert("Face ID Error", isPresented: $showingFaceIDError) {
+                Button("OK", role: .cancel) { 
+                    if useFaceID {
+                        useFaceID = false
                     }
                 }
-//                DispatchQueue.main.async {
-////                    if let receivedData = KeyChain.load(key: DefaultsKey.password) {
-////
-////                        let result = receivedData.to(type: String.self)
-////                        appState.password = result
-////                    }
-//
-//
-//
-//
-//                }
+            } message: {
+                Text(faceIDError)
+            }
+            .onAppear {
+                if !useFaceID {
+                    Task {
+                        do {
+                            let passwordData = try KeyChain.readPassword(service: DefaultsKey.password, account: appState.userName)
+                            appState.password = String(decoding: passwordData, as: UTF8.self)
+                        } catch let error {
+                            print("Error restoring password from KeyChain\(error)")
+                        }
+                    }
+                }
             }
         }
     }
 
-    func authenticate() {
+    private func authenticateWithFaceID() async {
         let context = LAContext()
         var error: NSError?
-
-        // check whether biometric authentication is possible
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // it's possible, so go ahead and use it
-            let reason = "We need to unlock your data."
-
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                // authentication has now completed
-                if success {
-
-                } else {
-                    // there was a problem
-                }
-            }
-        } else {
-            // no biometrics
+        
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            faceIDError = "Face ID is not available on this device"
+            showingFaceIDError = true
+            useFaceID = false
+            hasAttemptedFaceID = false
+            return
         }
+        
+        do {
+            let reason = "Log in to your Lucid Motors account"
+            let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
+            
+            if success {
+                // If Face ID succeeds, we need to ensure we have credentials
+                if appState.userName.isBlank || appState.password.isBlank {
+                    // Try to restore credentials from KeyChain
+                    do {
+                        let passwordData = try KeyChain.readPassword(service: DefaultsKey.password, account: appState.userName)
+                        appState.password = String(decoding: passwordData, as: UTF8.self)
+                    } catch {
+                        faceIDError = "Could not restore saved credentials"
+                        showingFaceIDError = true
+                        hasAttemptedFaceID = false
+                        return
+                    }
+                }
+                
+                await performLogin()
+            } else {
+                hasAttemptedFaceID = false
+            }
+        } catch {
+            faceIDError = error.localizedDescription
+            showingFaceIDError = true
+            hasAttemptedFaceID = false
+        }
+    }
+    
+    private func performLogin() async {
+        do {
+            let response = try await BearAPI.logIn(userName: appState.userName, password: appState.password)
+            if let loginResponse = response.loginResponse {
+                // Ensure we have a valid refresh token
+                guard loginResponse.sessionInfo.refreshToken.isNotBlank else {
+                    print("Login response missing refresh token")
+                    return
+                }
+                
+                // Set the token expiry time based on the response
+                TokenManager.shared.tokenExpiryTime = Date().timeIntervalSince1970 + Double(loginResponse.sessionInfo.expiryTimeSec)
+                TokenManager.shared.refreshToken = loginResponse.sessionInfo.refreshToken
+                
+                // Initialize token manager and set login state
+                await TokenManager.shared.initialize()
+                TokenManager.shared.isLoggedIn = true
+                
+                // Update the model with user profile
+                model.userProfile = loginResponse.userProfile
+                
+                // Update vehicle identifiers from login response
+                let vehicleEntities = loginResponse.userVehicleData.map { vehicle -> VehicleIdentifierEntity in
+                    return VehicleIdentifierEntity(id: vehicle.vehicleId, nickname: vehicle.vehicleConfig.nickname)
+                }
+                try await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).add(vehicleEntities)
+                
+                // Update the vehicleIdentifiers property
+                model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
+                
+                // Start refreshing vehicle data
+                model.startRefreshing()
+            }
+        } catch {
+            print("Login failed: \(error)")
+        }
+        showingProgress = false
     }
 }
 

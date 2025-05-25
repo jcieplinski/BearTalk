@@ -33,6 +33,13 @@ final class TokenManager {
         print("TokenManager initializing")
         logTokenStatus()
         
+        // If we don't have a refresh token, we're not logged in
+        guard refreshToken.isNotBlank else {
+            print("No refresh token available, not logged in")
+            isLoggedIn = false
+            return
+        }
+        
         if !checkTokenValidity() {
             print("Token validation failed, attempting refresh")
             await refreshAuth()
@@ -73,6 +80,14 @@ final class TokenManager {
         if backgroundTask != .invalid {
             UIApplication.shared.endBackgroundTask(backgroundTask)
             backgroundTask = .invalid
+        }
+        
+        // If we don't have a refresh token, we're not logged in
+        guard refreshToken.isNotBlank else {
+            print("No refresh token available, not logged in")
+            isLoggedIn = false
+            isAppHoldScreen = false
+            return
         }
         
         if !checkTokenValidity() {
@@ -192,21 +207,21 @@ final class TokenManager {
         // Check if we have a refresh token
         guard refreshToken.isNotBlank else {
             print("No refresh token available")
-            logout()
+            isLoggedIn = false
             return false
         }
         
         // Validate the expiry time
         guard validateExpiryTime(Int(timeUntilExpiry)) else {
             print("Token has invalid expiry time, forcing refresh")
-            logout()
+            isLoggedIn = false
             return false
         }
         
         // Check if token is expired
         guard timeUntilExpiry > 0 else {
             print("Token is expired")
-            logout()
+            isLoggedIn = false
             return false
         }
         

@@ -32,11 +32,9 @@ struct RangeView: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text(model.estimatedRange)
                                 .font(.system(size: 100))
-                                .fontDesign(.rounded)
                                 .fontWeight(.bold)
                             Text(model.unitLabel)
                                 .font(.title)
-                                .fontDesign(.rounded)
                         }
                         Text("estimated real-world range")
                     }
@@ -48,7 +46,6 @@ struct RangeView: View {
                             .multilineTextAlignment(.center)
                         Text(model.lastEfficiency.round(to: 2).stringWithLocale())
                             .font(.largeTitle)
-                            .fontDesign(.rounded)
 
                         HStack(spacing: 66) {
                             Button {

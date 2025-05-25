@@ -85,7 +85,7 @@ struct SceneKitViewLogin: UIViewRepresentable {
             updateCarPaintMaterial(in: loadedScene, color: PaintColor.stellarWhite.color)
             
             // Try to find the interactive camera
-            if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_interactive", recursively: true) {
+            if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_predelivery", recursively: true) {
                 // Set as point of view
                 sceneView.pointOfView = cameraNode
             } else {
