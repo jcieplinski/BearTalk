@@ -11,10 +11,45 @@ struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject private var appState: AppState
     @Environment(DataModel.self) var model
+    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security"
 
     @State var showLogOutWarning: Bool = false
     @State var showClimateControl: Bool = false
     @State var showSeatClimate: Bool = false
+    @State private var draggedCell: String?
+    
+    private var orderedCells: [String] {
+        cellOrder.split(separator: ",").map(String.init)
+    }
+    
+    private func cellView(for type: String) -> some View {
+        Group {
+            switch type {
+            case "climate":
+                ClimateControlsCell()
+            case "charging":
+                ChargingCell()
+            case "security":
+                SecurityCell()
+            default:
+                EmptyView()
+            }
+        }
+        .onDrag {
+            draggedCell = type
+            let provider = NSItemProvider(object: type as NSString)
+            provider.suggestedName = type
+            return provider
+        } preview: {
+            EmptyView()
+        }
+        .onDrop(of: [.text], delegate: DropViewDelegate(
+            item: type,
+            items: orderedCells,
+            draggedItem: $draggedCell,
+            cellOrder: $cellOrder
+        ))
+    }
 
     var body: some View {
         NavigationStack {
@@ -50,8 +85,9 @@ struct ControlsView: View {
                         }
                         
                         VStack(spacing: 16) {
-                            ClimateControlsCell()
-                            ChargingCell()
+                            ForEach(orderedCells, id: \.self) { cellType in
+                                cellView(for: cellType)
+                            }
                         }
                         .padding()
                         
@@ -146,6 +182,38 @@ struct ControlsView: View {
                 }
             }
         }
+    }
+}
+
+struct DropViewDelegate: DropDelegate {
+    let item: String
+    let items: [String]
+    @Binding var draggedItem: String?
+    @Binding var cellOrder: String
+    
+    func performDrop(info: DropInfo) -> Bool {
+        draggedItem = nil
+        return true
+    }
+    
+    func dropEntered(info: DropInfo) {
+        guard let draggedItem = draggedItem,
+              draggedItem != item,
+              let sourceIndex = items.firstIndex(of: draggedItem),
+              let destinationIndex = items.firstIndex(of: item) else {
+            return
+        }
+        
+        withAnimation(.bouncy) {
+            var newOrder = items
+            let sourceCell = newOrder.remove(at: sourceIndex)
+            newOrder.insert(sourceCell, at: destinationIndex)
+            cellOrder = newOrder.joined(separator: ",")
+        }
+    }
+    
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        return DropProposal(operation: .move)
     }
 }
 

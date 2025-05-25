@@ -22,6 +22,7 @@ enum DefaultsKey {
     static let selectedTemperature: String = "selectedTemperature"
     static let seatClimateLevel: String = "seatClimateLevel"
     static let photoURL: String = "photoURL"
+    static let cellOrder: String = "cellOrder"
 }
 
 enum LockState: Codable, Equatable {
@@ -473,6 +474,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case rearLeftSeatHeat
     case rearCenterSeatHeat
     case rearRightSeatHeat
+    case alarm
     
     var id: Self { self }
     
@@ -525,6 +527,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Rear Center Seat Heat"
         case .rearRightSeatHeat:
             "Rear Right Seat Heat"
+        case .alarm:
+            "Shock and Tilt Alarm"
         }
     }
     
@@ -560,6 +564,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             ""
         case .climateControl:
             "climateOff"
+        case .alarm:
+            ""
         }
     }
     
@@ -595,6 +601,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             ""
         case .climateControl:
             "climateOn"
+        case .alarm:
+            ""
         }
     }
 }

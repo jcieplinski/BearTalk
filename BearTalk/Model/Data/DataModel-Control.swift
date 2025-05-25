@@ -528,6 +528,10 @@ extension DataModel {
                 if oldState.chargingState.chargeLimit != newState.chargingState.chargeLimit {
                     requestInProgress.remove(.chargeLimit)
                 }
+            case .alarm:
+                if oldState.alarmState != newState.alarmState {
+                    requestInProgress.remove(.alarm)
+                }
             }
         }
         
@@ -683,6 +687,25 @@ extension DataModel {
                 }
             } catch {
                 print("Could not toggle battery preconditioning: \(error)")
+            }
+        }
+    }
+    
+    func setShockAndTilt(enabled: Bool) async {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.alarm)
+                
+                let success = try await BearAPI.setShockAndTilt(enabled: enabled)
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not set shock and tilt alarm: \(error)")
             }
         }
     }

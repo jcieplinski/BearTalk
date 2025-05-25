@@ -129,7 +129,7 @@ struct ControlGrid: View {
                         ForEach(nonSelectedControls) { control in
                             ControlButton(
                                 controlType: control,
-                                action: { _ in }
+                                action: model.handleControlAction
                             )
                             .draggable(control) {
                                 Rectangle()

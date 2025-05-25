@@ -734,7 +734,7 @@ final class BearAPI {
         }
     }
     
-    static func setShockAndTilt(vehicleID: String = vehicleID, mode: AlarmMode) async throws -> Bool {
+    static func setShockAndTilt(vehicleID: String = vehicleID, enabled: Bool) async throws -> Bool {
         try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
@@ -743,7 +743,7 @@ final class BearAPI {
         ) { client in
             var request = Mobilegateway_Protos_SecurityAlarmControlRequest()
             request.vehicleID = vehicleID
-            request.mode = Mobilegateway_Protos_AlarmMode(rawValue: mode.intValue) ?? .unknown
+            request.mode = enabled ? .on : .off
             
             let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
             
