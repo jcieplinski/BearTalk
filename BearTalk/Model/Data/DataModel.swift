@@ -37,7 +37,7 @@ import GRPCCore
     var frunkClosureState: DoorState?
     var trunkClosureState: DoorState?
     var chargePortClosureState: DoorState?
-    var lightsState: LightAction?
+    var lightsState: LightState?
     var defrostState: DefrostState?
     var maxACState: MaxACState?
     var batteryPreConditionState: PreconditioningStatus?
@@ -260,7 +260,7 @@ import GRPCCore
         frunkClosureState = vehicle.vehicleState.bodyState.frontCargo
         trunkClosureState = vehicle.vehicleState.bodyState.rearCargo
         chargePortClosureState = vehicle.vehicleState.bodyState.chargePortState
-        lightsState = vehicle.vehicleState.mobileAppReqStatus.lightRequest
+        lightsState = vehicle.vehicleState.chassisState.headlights
         defrostState = vehicle.vehicleState.hvacState.defrost
         maxACState = vehicle.vehicleState.hvacState.maxAcStatus
         batteryPreConditionState = vehicle.vehicleState.batteryState.preconditioningStatus
@@ -275,5 +275,59 @@ import GRPCCore
         let exteriorTempMeasurementConverted = exteriorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
         
         exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
+    }
+    
+    @Sendable
+    func fetchVehicleWithRetry() async {
+        do {
+            print("Starting profile and vehicle fetch")
+            try await getUserProfile()
+            
+            // Check if we got a vehicle
+            if let vehicle = self.vehicle {
+                print("Vehicle fetched successfully: \(vehicle.vehicleId)")
+                // Only start refreshing if we successfully got the vehicle
+                startRefreshing()
+            } else {
+                print("No vehicle available after profile fetch")
+                // Try one more time after a short delay
+                print("Waiting 2 seconds before retry")
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                print("Retrying profile and vehicle fetch")
+                try? await getUserProfile()
+                
+                if let vehicle = self.vehicle {
+                    print("Vehicle fetched successfully on retry: \(vehicle.vehicleId)")
+                    startRefreshing()
+                } else {
+                    print("Still no vehicle after retry")
+                    // Check if we have a vehicle ID but failed to fetch
+                    if BearAPI.vehicleID.isNotBlank {
+                        print("Have vehicleID but failed to fetch vehicle state")
+                        // Try one final time with a wake request
+                        print("Attempting to wake vehicle")
+                        if let wakeSuccess = try? await BearAPI.wakeUp(), wakeSuccess {
+                            print("Wake request sent successfully, waiting 5 seconds")
+                            try? await Task.sleep(nanoseconds: 5_000_000_000)
+                            print("Final attempt to fetch vehicle")
+                            try? await getUserProfile()
+                            if self.vehicle != nil {
+                                print("Vehicle fetched after wake request")
+                                startRefreshing()
+                            }
+                        } else {
+                            print("Wake request failed or returned false")
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("Error fetching profile and vehicles: \(error)")
+            // If we get an auth error, try refreshing and fetching again
+            if let rpcError = error as? GRPCCore.RPCError, rpcError.code == .unauthenticated {
+                print("Auth error during profile fetch, attempting refresh")
+                await TokenManager.shared.refreshAuth()
+            }
+        }
     }
 }

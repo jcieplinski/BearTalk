@@ -14,6 +14,7 @@ struct CarView: View {
     @State private var currentSceneView: SCNView?
     @State private var isSceneLoaded = false
     @State private var sceneOpacity: Double = 0
+    @State private var rotationDegrees: Double = 0
     
     var body: some View {
         ZStack {
@@ -80,12 +81,16 @@ struct CarView: View {
         })
         .overlay(alignment: .bottomLeading) {
             Button {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    rotationDegrees += 360
+                }
                 model.shouldResetCamera.toggle()
             } label: {
                 Label("Reset view", systemImage: "arrow.clockwise.circle.fill")
                     .labelStyle(.iconOnly)
                     .font(.title)
                     .padding()
+                    .rotationEffect(.degrees(rotationDegrees))
             }
             .tint(.secondary)
             .opacity(isSceneLoaded ? sceneOpacity : 0)

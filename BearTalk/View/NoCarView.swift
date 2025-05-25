@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NoCarView: View {
     @EnvironmentObject private var appState: AppState
+    private let tokenManager = TokenManager.shared
     
     var body: some View {
         NavigationStack {
@@ -40,4 +41,5 @@ struct NoCarView: View {
 
 #Preview {
     NoCarView()
+        .environmentObject(AppState())
 }

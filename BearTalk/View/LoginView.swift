@@ -11,6 +11,7 @@ import LocalAuthentication
 struct LoginView: View {
     @EnvironmentObject private var appState: AppState
     @Environment(DataModel.self) var model: DataModel
+    private let tokenManager = TokenManager.shared
 
     @FocusState var focused: FocusableField?
     @State var showingProgress: Bool = false
@@ -96,6 +97,10 @@ struct LoginView: View {
                         showingProgress = true
                         Task { @MainActor in
                             let userProfile = try await appState.logIn()
+                            if userProfile != nil {
+                                // Initialize token manager after successful login
+                                await tokenManager.initialize()
+                            }
                             model.userProfile = userProfile
                             model.startRefreshing()
                         }

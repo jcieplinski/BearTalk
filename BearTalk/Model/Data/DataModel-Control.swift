@@ -283,22 +283,12 @@ extension DataModel {
     }
     
     func toggleLights() {
-        if let lightAction = lightsState {
-            switch lightAction {
-            case .on:
+        if let lightsState = lightsState {
+            switch lightsState {
+            case .reallyUnknown, .off, .unknown, .UNRECOGNIZED(_):
                 lights(action: .on)
-            case .off:
+            case .on:
                 lights(action: .off)
-            case .flash:
-                break
-            case .unknown:
-                break
-            case .UNRECOGNIZED(_):
-                break
-            case .hazardOn:
-                break
-            case .hazardOff:
-                break
             }
         }
     }

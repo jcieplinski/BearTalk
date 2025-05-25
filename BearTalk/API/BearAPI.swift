@@ -10,6 +10,7 @@ import SwiftData
 import GRPCCore
 import GRPCNIOTransportHTTP2
 import GRPCProtobuf
+import SwiftProtobuf
 
 final class BearAPI {
     @AppStorage(DefaultsKey.authorization, store: .appGroup) static var authorization: String = ""
@@ -474,7 +475,7 @@ final class BearAPI {
                 
                 return true
             } catch {
-                print(error)
+                print("Error in lightsControl: \(error)")
                 return false
             }
         }

@@ -8,10 +8,7 @@
 import SwiftUI
 
 final class AppState: ObservableObject {
-    @Published var loggedIn: Bool = false
-    @Published var appHoldScreen: Bool = true
     @Published var selectedTab: AppTab = .home
-
     @Published var noCarMode: Bool = false
 
     @AppStorage(DefaultsKey.userName, store: .appGroup) var userName: String = ""
@@ -27,10 +24,7 @@ final class AppState: ObservableObject {
 
     static var preview: AppState {
         let appState = AppState()
-        appState.loggedIn = true
         appState.noCarMode = false
-        appState.appHoldScreen = false
-
         return appState
     }
 
@@ -46,10 +40,6 @@ final class AppState: ObservableObject {
                 .loginResponse {
                 
                 saveOrUpdatePassword()
-                
-                Task { @MainActor in
-                    loggedIn = true
-                }
                 
                 let userProfile: UserProfile? = UserProfile(
                     email: response.userProfile.email,
@@ -67,11 +57,6 @@ final class AppState: ObservableObject {
             return nil
         } catch let error {
             print("Could not log in: \(error)")
-            
-            Task { @MainActor in
-                loggedIn = false
-            }
-            
             return nil
         }
     }
@@ -111,11 +96,8 @@ final class AppState: ObservableObject {
             }
 
             let loggedOut = try await BearAPI.logOut()
-
             if loggedOut {
-                Task { @MainActor in
-                     loggedIn = false
-                }
+                await TokenManager.shared.logout()
             }
         }
     }
