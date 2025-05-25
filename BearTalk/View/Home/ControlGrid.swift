@@ -100,7 +100,7 @@ struct ControlGrid: View {
                         .font(.title)
                         .rotationEffect(model.showingAvailableControls ? .degrees(90) : .degrees(0))
                 }
-                .tint(.active)
+                .tint(.secondary)
             }
             
             if model.showingAvailableControls {
@@ -189,7 +189,10 @@ struct ControlGrid: View {
                     }
                     .padding()
                 }
-                .transition(.move(edge: .top).combined(with: .opacity))
+                .transition(.asymmetric(
+                    insertion: .move(edge: .top).combined(with: .opacity),
+                    removal: .move(edge: .bottom).combined(with: .opacity)
+                ))
             }
         }
         .animation(.spring(duration: 0.3), value: model.showingAvailableControls)

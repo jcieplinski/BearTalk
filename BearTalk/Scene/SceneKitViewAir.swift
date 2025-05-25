@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SceneKit
+import OSLog
 
 struct SceneKitViewAir: UIViewRepresentable {
     let sceneName: String
@@ -16,6 +17,7 @@ struct SceneKitViewAir: UIViewRepresentable {
     @Binding var selectedWheel: Wheels
     @Binding var fancyMirrorCaps: Bool
     @Binding var shouldResetCamera: Bool
+    @Binding var isSceneLoaded: Bool
     let onViewCreated: (SCNView) -> Void
     
     // Add Coordinator
@@ -135,7 +137,11 @@ struct SceneKitViewAir: UIViewRepresentable {
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
-        sceneView.tag = 1  // Add tag for snapshot capture
+        sceneView.tag = 1
+        
+        // Configure view for transparency
+        sceneView.backgroundColor = .clear
+        sceneView.isOpaque = false
         
         // Store the reference in the coordinator
         context.coordinator.sceneView = sceneView
@@ -159,20 +165,20 @@ struct SceneKitViewAir: UIViewRepresentable {
             do {
                 scene = try SCNScene(url: sceneURL, options: nil)
             } catch {
-                print("Error loading scene from URL: \(error)")
+                Logger.vehicle.error("Error loading scene from URL: \(error)")
             }
         } else {
-            print("Could not find scene file in bundle")
+            Logger.vehicle.error("Could not find scene file in bundle")
             
             // Approach 2: Try loading from the main bundle without subdirectory
             if let sceneURL = Bundle.main.url(forResource: "Lucid3D96", withExtension: "scn") {
                 do {
                     scene = try SCNScene(url: sceneURL, options: nil)
                 } catch {
-                    print("Error loading scene from root URL: \(error)")
+                    Logger.vehicle.error("Error loading scene from root URL: \(error)")
                 }
             } else {
-                print("Could not find scene file at root level")
+                Logger.vehicle.error("Could not find scene file at root level")
             }
         }
         
@@ -182,11 +188,11 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Set scene background to clear
             loadedScene.background.contents = UIColor.clear
+            loadedScene.isPaused = true  // Keep scene paused
             
             // Configure lighting
             sceneView.autoenablesDefaultLighting = true
             sceneView.allowsCameraControl = true
-            sceneView.backgroundColor = .clear
             
             // Add ambient light to ensure proper lighting
             let ambientLight = SCNNode()
@@ -226,7 +232,7 @@ struct SceneKitViewAir: UIViewRepresentable {
                 // Set as point of view
                 sceneView.pointOfView = cameraNode
             } else {
-                print("Could not find defaultCamera, using default camera")
+                Logger.vehicle.error("Could not find defaultCamera, using default camera")
                 // Create a default camera if we can't find the one in the scene
                 let camera = SCNCamera()
                 let cameraNode = SCNNode()
@@ -238,16 +244,18 @@ struct SceneKitViewAir: UIViewRepresentable {
                 // Store the initial camera state
                 context.coordinator.storeInitialCameraState(cameraNode)
             }
+            
+            // Mark scene as loaded after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isSceneLoaded = true
+            }
         } else {
-            print("Failed to load scene using all available methods")
+            Logger.vehicle.error("Failed to load scene using all available methods")
         }
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .clear
-        if let loadedScene = scene {
-            loadedScene.isPaused = true  // Pause the scene instead of the view
-        }
+        
         return sceneView
     }
     

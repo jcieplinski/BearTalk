@@ -17,6 +17,7 @@ struct ContentView: View {
     
     @State var refreshTimer: Timer?
     @State var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    @State private var isInitializing = true
     
     private let REFRESH_BUFFER_SECONDS = 900 // 15 minutes before expiry
     private let MIN_REFRESH_INTERVAL = 60 // Minimum 1 minute between refresh attempts
@@ -290,7 +291,13 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if appState.noCarMode {
+            if isInitializing {
+                // Show a loading view while we validate the token
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .tint(.secondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if appState.noCarMode {
                 NoCarView()
             } else if appState.appHoldScreen {
                 Spacer()
@@ -329,17 +336,15 @@ struct ContentView: View {
         .background(
             LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
         )
-        .onAppear {
-            Task { @Sendable in
-                print("ContentView appeared")
-                logTokenStatus()
-                
-                if !checkTokenValidity() {
-                    print("Token validation failed, attempting refresh")
-                    await refreshAuth()
-                    return
-                }
-                
+        .task {
+            // Move token validation to task modifier which runs before view appears
+            print("ContentView initializing")
+            logTokenStatus()
+            
+            if !checkTokenValidity() {
+                print("Token validation failed, attempting refresh")
+                await refreshAuth()
+            } else {
                 let currentTime = Date().timeIntervalSince1970
                 let timeUntilExpiry = tokenExpiryTime - currentTime
                 
@@ -370,6 +375,9 @@ struct ContentView: View {
                     await refreshAuth()
                 }
             }
+            
+            // Mark initialization as complete
+            isInitializing = false
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             switch newPhase {

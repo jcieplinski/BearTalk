@@ -100,10 +100,8 @@ import GRPCCore
     
     func getUserProfile() async throws {
         do {
-            print("Starting getUserProfile")
             // First get the user profile
             userProfile = try await BearAPI.fetchUserProfile()
-            print("User profile fetched successfully")
             
             // Then fetch vehicles with retry
             var retryCount = 0
@@ -112,60 +110,48 @@ import GRPCCore
             
             while retryCount < maxRetries {
                 do {
-                    print("Attempting to fetch vehicles (attempt \(retryCount + 1)/\(maxRetries))")
                     // Fetch vehicles and update identifiers
                     if let vehicles = try await BearAPI.fetchVehicles() {
-                        print("Successfully fetched \(vehicles.count) vehicles")
                         // Update vehicle identifiers
                         let vehicleEntities = vehicles.map { vehicle -> VehicleIdentifierEntity in
                             return VehicleIdentifierEntity(id: vehicle.vehicleId, nickname: vehicle.vehicleConfig.nickname)
                         }
                         try await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).add(vehicleEntities)
-                        print("Updated vehicle identifiers")
+                        
+                        // Update the vehicleIdentifiers property
+                        Task { @MainActor in
+                            self.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
+                        }
                         
                         // If we have a vehicle ID, try to fetch its current state
                         let vehicleID = BearAPI.vehicleID
-                        print("Current vehicleID: \(vehicleID)")
                         if vehicleID.isNotBlank {
-                            print("Fetching current vehicle state")
                             if let currentVehicle = try await BearAPI.fetchCurrentVehicle() {
-                                print("Successfully fetched current vehicle state")
                                 Task { @MainActor in
-                                    print("Updating vehicle state on main actor")
                                     self.vehicle = currentVehicle
                                     self.update()
                                     self.updateStats()
                                     self.updateRangeStats()
-                                    print("Vehicle state update complete")
                                 }
-                            } else {
-                                print("Failed to fetch current vehicle state - no vehicle returned")
                             }
-                        } else {
-                            print("No vehicleID available, skipping current vehicle fetch")
                         }
                         return // Success, exit the function
-                    } else {
-                        print("No vehicles returned from fetchVehicles")
                     }
                 } catch let error {
-                    print("Vehicle fetch attempt \(retryCount + 1) failed: \(error)")
+                    Logger.vehicle.error("Vehicle fetch attempt \(retryCount + 1) failed: \(error)")
                     lastError = error
                     
                     // If it's an auth error, try refreshing the token
                     if let rpcError = error as? GRPCCore.RPCError, rpcError.code == .unauthenticated {
-                        print("Auth error detected, attempting token refresh")
                         do {
                             _ = try await BearAPI.refreshToken()
-                            print("Token refresh successful")
                         } catch {
-                            print("Token refresh failed during vehicle fetch: \(error)")
+                            Logger.vehicle.error("Token refresh failed during vehicle fetch: \(error)")
                         }
                     }
                     
                     // Wait before retrying
                     let delay = pow(2.0, Double(retryCount))
-                    print("Waiting \(delay)s before retry")
                     try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                     retryCount += 1
                 }
@@ -173,11 +159,11 @@ import GRPCCore
             
             // If we get here, all retries failed
             if let lastError = lastError {
-                print("All vehicle fetch attempts failed. Last error: \(lastError)")
+                Logger.vehicle.error("All vehicle fetch attempts failed. Last error: \(lastError)")
                 throw lastError
             }
         } catch {
-            print("Error in getUserProfile: \(error)")
+            Logger.vehicle.error("Error in getUserProfile: \(error)")
             throw error
         }
     }
@@ -212,27 +198,20 @@ import GRPCCore
     
     func refreshVehicle() async {
         do {
-            print("Starting vehicle refresh")
             let refreshedVehicle = try await BearAPI.fetchCurrentVehicle()
             
             if let vehicle = refreshedVehicle {
-                print("Successfully refreshed vehicle state")
                 Task { @MainActor in
-                    print("Updating vehicle state on main actor")
                     resetControlFunction(oldState: self.vehicle?.vehicleState, newState: vehicle.vehicleState)
                     self.vehicle = vehicle
                     self.gps = vehicle.vehicleState.gps
                     self.update()
                     self.updateStats()
                     self.updateRangeStats()
-                    print("Vehicle state update complete")
                 }
-            } else {
-                print("No vehicle returned from refresh")
             }
         } catch {
             Logger.vehicle.error("Error updating Vehicle: \(error)")
-            print("Error refreshing vehicle: \(error)")
         }
     }
     

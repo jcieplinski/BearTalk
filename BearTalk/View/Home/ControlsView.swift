@@ -35,10 +35,12 @@ struct ControlsView: View {
                                         .font(.body)
                                         .fontWeight(.bold)
                                 }
+                                .padding()
                             }
                             .overlay(alignment: .trailing) {
                                 Text(model.exteriorTemp)
                                     .font(.body)
+                                    .padding()
                             }
                         
                         VStack {
@@ -59,7 +61,6 @@ struct ControlsView: View {
                     }
                 }
                 .tint(.accent)
-                .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .scrollBounceBehavior(.basedOnSize)
@@ -74,6 +75,8 @@ struct ControlsView: View {
                                 BearAPI.vehicleID = vehicle.id
                                 Task {
                                     await model.refreshVehicle()
+                                    // Refresh vehicle identifiers after switching
+                                    model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
                                 }
                             } label: {
                                 Text(vehicle.nickname)

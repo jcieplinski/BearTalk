@@ -1,8 +1,10 @@
 import SwiftUI
 import SceneKit
+import OSLog
 
 struct SceneKitViewSapphire: UIViewRepresentable {
     @Binding var shouldResetCamera: Bool
+    @Binding var isSceneLoaded: Bool
     let onViewCreated: (SCNView) -> Void
     
     // Add Coordinator
@@ -96,7 +98,11 @@ struct SceneKitViewSapphire: UIViewRepresentable {
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
-        sceneView.tag = 3  // Add tag for snapshot capture
+        sceneView.tag = 1
+        
+        // Configure view for transparency
+        sceneView.backgroundColor = .clear
+        sceneView.isOpaque = false
         
         // Store the reference in the coordinator
         context.coordinator.sceneView = sceneView
@@ -104,37 +110,36 @@ struct SceneKitViewSapphire: UIViewRepresentable {
         // Call the callback
         onViewCreated(sceneView)
         
+        // Configure camera controls
         sceneView.defaultCameraController.interactionMode = .orbitAngleMapping
         sceneView.defaultCameraController.target = SCNVector3Zero
         sceneView.defaultCameraController.maximumVerticalAngle = 0
         sceneView.defaultCameraController.minimumVerticalAngle = 0
         sceneView.defaultCameraController.inertiaEnabled = true
+        sceneView.defaultCameraController.inertiaFriction = 0.1
         
-        var scene: SCNScene?
-        
-        if let sceneURL = Bundle.main.url(forResource: "Sapphire", withExtension: "scn") {
-            do {
-                scene = try SCNScene(url: sceneURL, options: nil)
-            } catch {
-                print("Error loading scene from URL: \(error)")
-            }
-        }
-        
-        if let loadedScene = scene {
-            sceneView.scene = loadedScene
-            loadedScene.background.contents = UIColor.clear
+        // Load the scene
+        if let sceneURL = Bundle.main.url(forResource: "Sapphire", withExtension: "scn"),
+           let scene = try? SCNScene(url: sceneURL, options: nil) {
+            sceneView.scene = scene
             
+            // Set scene background to clear
+            scene.background.contents = UIColor.clear
+            scene.isPaused = true  // Keep scene paused
+            
+            // Configure lighting
             sceneView.autoenablesDefaultLighting = true
             sceneView.allowsCameraControl = true
-            sceneView.backgroundColor = .clear
             
+            // Add ambient light
             let ambientLight = SCNNode()
             ambientLight.light = SCNLight()
             ambientLight.light?.type = .ambient
             ambientLight.light?.color = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
             ambientLight.light?.intensity = 300
-            loadedScene.rootNode.addChildNode(ambientLight)
+            scene.rootNode.addChildNode(ambientLight)
             
+            // Add directional light
             let directionalLight = SCNNode()
             directionalLight.light = SCNLight()
             directionalLight.light?.type = .directional
@@ -148,29 +153,34 @@ struct SceneKitViewSapphire: UIViewRepresentable {
             directionalLight.light?.shadowColor = UIColor(white: 0, alpha: 0.3)
             directionalLight.position = SCNVector3(x: 5, y: 5, z: 5)
             directionalLight.eulerAngles = SCNVector3(x: -Float.pi/4, y: Float.pi/4, z: 0)
-            loadedScene.rootNode.addChildNode(directionalLight)
+            scene.rootNode.addChildNode(directionalLight)
             
-            if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_default", recursively: true) {
+            // Set up camera
+            if let cameraNode = scene.rootNode.childNode(withName: "camera_default", recursively: true) {
                 context.coordinator.storeInitialCameraState(cameraNode)
                 sceneView.pointOfView = cameraNode
             } else {
-                print("Could not find defaultCamera, using default camera")
+                Logger.vehicle.error("Could not find defaultCamera, using default camera")
                 let camera = SCNCamera()
                 let cameraNode = SCNNode()
                 cameraNode.camera = camera
                 cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
-                loadedScene.rootNode.addChildNode(cameraNode)
+                scene.rootNode.addChildNode(cameraNode)
                 sceneView.pointOfView = cameraNode
                 context.coordinator.storeInitialCameraState(cameraNode)
             }
+            
+            // Mark scene as loaded after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isSceneLoaded = true
+            }
+        } else {
+            Logger.vehicle.error("Failed to load Sapphire scene")
         }
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .clear
-        if let loadedScene = scene {
-            loadedScene.isPaused = true
-        }
+        
         return sceneView
     }
     

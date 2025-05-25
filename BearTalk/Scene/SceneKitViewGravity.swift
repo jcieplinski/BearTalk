@@ -1,11 +1,13 @@
 import SwiftUI
 import SceneKit
+import OSLog
 
 struct SceneKitViewGravity: UIViewRepresentable {
     @Binding var showPlatinum: Bool
     @Binding var carPaintColor: PaintColor
     @Binding var selectedWheel: Wheels
     @Binding var shouldResetCamera: Bool
+    @Binding var isSceneLoaded: Bool
     let onViewCreated: (SCNView) -> Void
     
     // Add Coordinator
@@ -99,7 +101,11 @@ struct SceneKitViewGravity: UIViewRepresentable {
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
-        sceneView.tag = 2  // Add tag for snapshot capture
+        sceneView.tag = 1
+        
+        // Configure view for transparency
+        sceneView.backgroundColor = .clear
+        sceneView.isOpaque = false
         
         // Store the reference in the coordinator
         context.coordinator.sceneView = sceneView
@@ -107,37 +113,36 @@ struct SceneKitViewGravity: UIViewRepresentable {
         // Call the callback
         onViewCreated(sceneView)
         
+        // Configure camera controls
         sceneView.defaultCameraController.interactionMode = .orbitAngleMapping
         sceneView.defaultCameraController.target = SCNVector3Zero
         sceneView.defaultCameraController.maximumVerticalAngle = 0
         sceneView.defaultCameraController.minimumVerticalAngle = 0
         sceneView.defaultCameraController.inertiaEnabled = true
+        sceneView.defaultCameraController.inertiaFriction = 0.1
         
-        var scene: SCNScene?
-        
-        if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn") {
-            do {
-                scene = try SCNScene(url: sceneURL, options: nil)
-            } catch {
-                print("Error loading scene from URL: \(error)")
-            }
-        }
-        
-        if let loadedScene = scene {
-            sceneView.scene = loadedScene
-            loadedScene.background.contents = UIColor.clear
+        // Load the scene
+        if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn"),
+           let scene = try? SCNScene(url: sceneURL, options: nil) {
+            sceneView.scene = scene
             
+            // Set scene background to clear
+            scene.background.contents = UIColor.clear
+            scene.isPaused = true  // Keep scene paused
+            
+            // Configure lighting
             sceneView.autoenablesDefaultLighting = true
             sceneView.allowsCameraControl = true
-            sceneView.backgroundColor = .clear
             
+            // Add ambient light
             let ambientLight = SCNNode()
             ambientLight.light = SCNLight()
             ambientLight.light?.type = .ambient
             ambientLight.light?.color = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
             ambientLight.light?.intensity = 300
-            loadedScene.rootNode.addChildNode(ambientLight)
+            scene.rootNode.addChildNode(ambientLight)
             
+            // Add directional light
             let directionalLight = SCNNode()
             directionalLight.light = SCNLight()
             directionalLight.light?.type = .directional
@@ -151,38 +156,46 @@ struct SceneKitViewGravity: UIViewRepresentable {
             directionalLight.light?.shadowColor = UIColor(white: 0, alpha: 0.3)
             directionalLight.position = SCNVector3(x: 5, y: 5, z: 5)
             directionalLight.eulerAngles = SCNVector3(x: -Float.pi/4, y: Float.pi/4, z: 0)
-            loadedScene.rootNode.addChildNode(directionalLight)
+            scene.rootNode.addChildNode(directionalLight)
             
-            updatePlatinumMaterials(in: loadedScene, showPlatinum: showPlatinum)
-            updateCarPaintMaterial(in: loadedScene, color: carPaintColor.color)
+            // Set initial visibility
+            updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
             
-            if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_default", recursively: true) {
+            // Update paint material
+            updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            
+            // Set up camera
+            if let cameraNode = scene.rootNode.childNode(withName: "camera_default", recursively: true) {
                 context.coordinator.storeInitialCameraState(cameraNode)
                 sceneView.pointOfView = cameraNode
             } else {
-                print("Could not find defaultCamera, using default camera")
+                Logger.vehicle.error("Could not find defaultCamera, using default camera")
                 let camera = SCNCamera()
                 let cameraNode = SCNNode()
                 cameraNode.camera = camera
                 cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
-                loadedScene.rootNode.addChildNode(cameraNode)
+                scene.rootNode.addChildNode(cameraNode)
                 sceneView.pointOfView = cameraNode
                 context.coordinator.storeInitialCameraState(cameraNode)
             }
+            
+            // Mark scene as loaded after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isSceneLoaded = true
+            }
+        } else {
+            Logger.vehicle.error("Failed to load Gravity scene")
         }
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .clear
-        if let loadedScene = scene {
-            loadedScene.isPaused = true
-        }
+        
         return sceneView
     }
     
     func updateUIView(_ uiView: SCNView, context: Context) {
         if let scene = uiView.scene {
-            updatePlatinumMaterials(in: scene, showPlatinum: showPlatinum)
+            updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
             updateWheelVisibility(in: scene, selectedWheel: GravityWheelOption.aether.nodeTitle)
             
@@ -200,7 +213,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         }
     }
     
-    private func updatePlatinumMaterials(in scene: SCNScene, showPlatinum: Bool) {
+    private func updateNodeVisibility(in scene: SCNScene, showPlatinum: Bool) {
         let materialNames = [
             "Stealth_Platinum_ext_cantrail",
             "Stealth_Platinum_ext_rim_outside",
