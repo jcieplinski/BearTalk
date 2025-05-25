@@ -64,6 +64,7 @@ struct CarView: View {
             } label: {
                 Label("Reset view", systemImage: "arrow.clockwise.circle.fill")
                     .labelStyle(.iconOnly)
+                    .font(.title)
                     .padding()
                     .foregroundStyle(.accent)
             }

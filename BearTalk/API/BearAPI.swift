@@ -147,11 +147,33 @@ final class BearAPI {
                 authorization = response.sessionInfo.idToken
                 refreshToken = response.sessionInfo.refreshToken
                 
-                return Int(response.sessionInfo.expiryTimeSec)
-            } catch {
+                // The API returns an absolute timestamp, convert to relative seconds
+                let currentTime = Int(Date().timeIntervalSince1970)
+                let expiryTime = Int(response.sessionInfo.expiryTimeSec)
+                let relativeExpiryTime = expiryTime - currentTime
+                
+                print("Token refresh response:")
+                print("- Current time: \(currentTime)")
+                print("- API expiry time: \(expiryTime)")
+                print("- Relative expiry time: \(relativeExpiryTime)s")
+                
+                // Validate the relative expiry time
+                guard relativeExpiryTime > 0 else {
+                    print("Invalid relative expiry time: \(relativeExpiryTime)s")
+                    throw RPCError(code: .internalError, message: "Invalid token expiry time")
+                }
+                
+                return relativeExpiryTime
+            } catch let error {
                 print("gRPC refresh token error: \(error)")
-                authorization = ""
-                refreshToken = ""
+                
+                // Only clear tokens if we get an unauthenticated error
+                if let rpcError = error as? RPCError,
+                   rpcError.code == .unauthenticated {
+                    authorization = ""
+                    refreshToken = ""
+                }
+                
                 throw error
             }
         }
@@ -159,60 +181,64 @@ final class BearAPI {
     
     @MainActor
     static func fetchUserProfile() async throws -> UserProfile? {
-        try await withGRPCClient(
-            transport: .http2NIOPosix(
-                target: .dns(host: String.grpcAPI),
-                transportSecurity: .tls
-            )
-        ) { client in
-            let request = Mobilegateway_Protos_GetUserProfileRequest()
-            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
-            
-            do {
-                let fetchClient = Mobilegateway_Protos_UserProfileService.Client(wrapping: client)
-                let response = try await fetchClient.getUserProfile(
-                    request,
-                    metadata: metadata
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
                 )
+            ) { client in
+                let request = Mobilegateway_Protos_GetUserProfileRequest()
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
                 
-                return mapUserProfileResponse(response.profile)
-            } catch {
-                print(error)
-                return nil
+                do {
+                    let fetchClient = Mobilegateway_Protos_UserProfileService.Client(wrapping: client)
+                    let response = try await fetchClient.getUserProfile(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return mapUserProfileResponse(response.profile)
+                } catch {
+                    print(error)
+                    return nil
+                }
             }
         }
     }
 
     @MainActor
     static func fetchVehicles() async throws -> [Vehicle]? {
-        try await withGRPCClient(
-            transport: .http2NIOPosix(
-                target: .dns(host: String.grpcAPI),
-                transportSecurity: .tls
-            )
-        ) { client in
-            let request = Mobilegateway_Protos_GetUserVehiclesRequest()
-            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
-            
-            do {
-                let fetchClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
-                let response = try await fetchClient.getUserVehicles(
-                    request,
-                    metadata: metadata
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
                 )
+            ) { client in
+                let request = Mobilegateway_Protos_GetUserVehiclesRequest()
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
                 
-                let vehicleEntities = response.userVehicleData.map { vehicle -> VehicleIdentifierEntity in
-                    return VehicleIdentifierEntity(id: vehicle.vehicleID, nickname: vehicle.config.nickname)
+                do {
+                    let fetchClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
+                    let response = try await fetchClient.getUserVehicles(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    let vehicleEntities = response.userVehicleData.map { vehicle -> VehicleIdentifierEntity in
+                        return VehicleIdentifierEntity(id: vehicle.vehicleID, nickname: vehicle.config.nickname)
+                    }
+                    
+                    try await VehicleIdentifierHandler(modelContainer: sharedModelContainer).add(vehicleEntities)
+                    
+                    return response.userVehicleData.map { vehicle in
+                        return mapVehicleResponse(vehicle)
+                    }
+                } catch {
+                    print(error)
+                    return nil
                 }
-                
-                try await VehicleIdentifierHandler(modelContainer: sharedModelContainer).add(vehicleEntities)
-                
-                return response.userVehicleData.map { vehicle in
-                    return mapVehicleResponse(vehicle)
-                }
-            } catch {
-                print(error)
-                return nil
             }
         }
     }
@@ -236,53 +262,57 @@ final class BearAPI {
     }
 
     static func wakeUp(vehicleID: String = vehicleID) async throws -> Bool {
-        try await withGRPCClient(
-            transport: .http2NIOPosix(
-                target: .dns(host: String.grpcAPI),
-                transportSecurity: .tls
-            )
-        ) { client in
-            var request = Mobilegateway_Protos_WakeupVehicleRequest()
-            request.vehicleID = vehicleID
-            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
-            
-            do {
-                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let _ = try await client.wakeupVehicle(
-                    request,
-                    metadata: metadata
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
                 )
+            ) { client in
+                var request = Mobilegateway_Protos_WakeupVehicleRequest()
+                request.vehicleID = vehicleID
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
                 
-                return true
-            } catch {
-                print(error)
-                return false
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.wakeupVehicle(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
             }
         }
     }
 
     static func honkHorn(vehicleID: String = vehicleID) async throws -> Bool {
-        try await withGRPCClient(
-            transport: .http2NIOPosix(
-                target: .dns(host: String.grpcAPI),
-                transportSecurity: .tls
-            )
-        ) { client in
-            var request = Mobilegateway_Protos_HonkHornRequest()
-            request.vehicleID = vehicleID
-            let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
-            
-            do {
-                let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                let _ = try await client.honkHorn(
-                    request,
-                    metadata: metadata
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
                 )
+            ) { client in
+                var request = Mobilegateway_Protos_HonkHornRequest()
+                request.vehicleID = vehicleID
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
                 
-                return true
-            } catch {
-                print(error)
-                return false
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.honkHorn(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
             }
         }
     }
@@ -755,6 +785,83 @@ final class BearAPI {
                 print(error)
                 return false
             }
+        }
+    }
+
+    @MainActor
+    static func validateToken() -> Bool {
+        // Basic JWT validation - check for 3 segments separated by dots
+        let segments = authorization.split(separator: ".")
+        guard segments.count == 3 else {
+            print("Invalid token format: wrong number of segments")
+            return false
+        }
+        
+        // Check if token is empty or just whitespace
+        guard !authorization.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            print("Token is empty")
+            return false
+        }
+        
+        return true
+    }
+    
+    static func withAuthorization<T>(_ operation: () async throws -> T) async throws -> T {
+        // First validate the token format
+        guard await validateToken() else {
+            print("Token validation failed, attempting refresh")
+            // Try to refresh the token
+            if try await handleExpiredToken() {
+                // If refresh succeeded, retry the operation
+                return try await operation()
+            }
+            throw RPCError(code: .unauthenticated, message: "Invalid token format")
+        }
+        
+        do {
+            return try await operation()
+        } catch let error as RPCError where error.code == .unauthenticated {
+            // Check for specific token errors
+            if error.message.contains("token is expired") {
+                print("Detected expired token, attempting refresh")
+                if try await handleExpiredToken() {
+                    return try await operation()
+                }
+            } else if error.message.contains("invalid number of segments") {
+                print("Detected malformed token, attempting refresh")
+                // Clear the invalid token
+                authorization = ""
+                if try await handleExpiredToken() {
+                    return try await operation()
+                }
+            }
+            // If we get here, either it wasn't a token error or refresh failed
+            throw error
+        }
+    }
+    
+    @MainActor
+    static func handleExpiredToken() async throws -> Bool {
+        print("Handling token refresh")
+        // Clear any potentially invalid tokens before refresh
+        if !validateToken() {
+            authorization = ""
+        }
+        
+        do {
+            let refreshTimeInSec = try await refreshToken()
+            if refreshTimeInSec > 0 && validateToken() {
+                print("Token refresh successful")
+                return true
+            }
+            print("Token refresh returned invalid expiry time or invalid token")
+            return false
+        } catch {
+            print("Failed to refresh token: \(error)")
+            // Clear tokens on refresh failure
+            authorization = ""
+            refreshToken = ""
+            throw error
         }
     }
 }

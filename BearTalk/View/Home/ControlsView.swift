@@ -63,6 +63,7 @@ struct ControlsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .scrollBounceBehavior(.basedOnSize)
+            .animation(.default, value: model.showingAvailableControls)
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
