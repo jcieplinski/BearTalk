@@ -33,14 +33,16 @@ struct SceneKitViewAir: UIViewRepresentable {
         var sceneView: SCNView?
         var chargePortNode: SCNNode?
         var isChargePortOpen: Bool = false
+        var isAnimating: Bool = false
         var animationPlayer: SCNAnimationPlayer?
+        var animationTimer: Timer?
+        var onAnimationComplete: (() -> Void)?
+        var onSceneLoaded: (() -> Void)?
         private var displayLink: CADisplayLink?
         private var animationStartTime: CFTimeInterval?
         private var currentAction: SCNAction?
         private var openAction: SCNAction?
         private var closeAction: SCNAction?
-        private var isAnimating: Bool = false
-        private weak var animationTimer: Timer?
         
         deinit {
             print("🧹 Cleaning up Coordinator")
@@ -163,7 +165,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             if let node = scene.rootNode.childNode(withName: "charge_port", recursively: true) {
                 print("✅ Found charge port node by name: \(node.name ?? "unnamed")")
                 chargePortNode = node
-                setupAnimationPlayer(for: node)
+                setupAnimationPlayer(for: node, initialState: nil)  // Will be set later
             } else {
                 print("🔍 Charge port not found by name, searching all nodes...")
                 // If not found by name, try to find by searching for nodes with animations
@@ -174,7 +176,7 @@ struct SceneKitViewAir: UIViewRepresentable {
                         print("✅ Found potential charge port node: \(node.name ?? "unnamed")")
                         print("📋 Node animation keys: \(node.animationKeys)")
                         chargePortNode = node
-                        setupAnimationPlayer(for: node)
+                        setupAnimationPlayer(for: node, initialState: nil)  // Will be set later
                     }
                 }
             }
@@ -184,7 +186,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             }
         }
         
-        private func setupAnimationPlayer(for node: SCNNode) {
+        func setupAnimationPlayer(for node: SCNNode, initialState: DoorState?) {
             guard let key = node.animationKeys.first else {
                 print("❌ No animation keys found for node")
                 return
@@ -220,66 +222,82 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.animation.repeatCount = 0  // Play once
                 player.animation.autoreverses = false  // Don't reverse
                 
+                // Store the initial transform
+                let initialTransform = node.transform
+                print("📊 Initial node transform: \(initialTransform)")
+                
+                // Set the initial state
+                if let state = initialState {
+                    print("🚪 Setting up animation player with initial state: \(state)")
+                    if state == .open || state == .ajar {
+                        // Set to open position without animation
+                        print("🚪 Setting to open position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = player.animation.duration
+                        isChargePortOpen = true
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
+                            guard let self = self else { return }
+                            player.stop()
+                            print("📊 Node transform after setting open: \(node.transform)")
+                        }
+                        animationTimer = timer
+                    } else {
+                        // Set to closed position without animation
+                        print("🚪 Setting to closed position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = 0
+                        isChargePortOpen = false
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
+                            guard let self = self else { return }
+                            player.stop()
+                            print("📊 Node transform after setting closed: \(node.transform)")
+                        }
+                        animationTimer = timer
+                    }
+                } else {
+                    // No state available, default to closed
+                    print("🚪 No state available, defaulting to closed position")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    isChargePortOpen = false
+                    
+                    // Force the animation to update the node's transform
+                    player.play()
+                    // Use a timer to ensure the animation completes
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
+                        guard let self = self else { return }
+                        player.stop()
+                        print("📊 Node transform after setting default closed: \(node.transform)")
+                    }
+                    animationTimer = timer
+                }
+                
+                print("📊 Final node transform after setup: \(node.transform)")
                 print("✅ Animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
             } else {
                 print("❌ Could not get animation player for key: \(key)")
             }
         }
         
-        func setInitialChargePortState(_ state: DoorState) {
-            print("🚪 Setting initial charge port state: \(state)")
-            
-            guard let player = animationPlayer,
-                  let node = chargePortNode else {
-                print("❌ Cannot set initial state - animation player or node missing")
-                return
-            }
-            
-            print("📊 Current node state - transform: \(node.transform), position: \(node.position), rotation: \(node.rotation)")
-            
-            // Stop any existing animations
-            player.stop()
-            
-            let shouldBeOpen = state == .open || state == .ajar
-            isChargePortOpen = shouldBeOpen
-            
-            // Cancel any existing timer
-            animationTimer?.invalidate()
-            animationTimer = nil
-            
-            if shouldBeOpen {
-                print("🚪 Setting initial state to open")
-                // Set the animation to its final state
-                player.speed = 1
-                player.animation.timeOffset = player.animation.duration
-                print("📊 Setting animation to final state - timeOffset: \(player.animation.timeOffset), duration: \(player.animation.duration)")
-                
-                // Use a weak reference to self in the timer
-                let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
-                    guard let self = self,
-                          let node = self.chargePortNode else { return }
-                    print("📊 Node state after setting open - transform: \(node.transform), position: \(node.position), rotation: \(node.rotation)")
-                }
-                animationTimer = timer
-                
-                player.play()
-            } else {
-                print("🚪 Setting initial state to closed")
-                // Set the animation to its initial state
-                player.speed = 1
-                player.animation.timeOffset = 0
-                print("📊 Setting animation to initial state - timeOffset: \(player.animation.timeOffset)")
-                
-                // Use a weak reference to self in the timer
-                let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
-                    guard let self = self,
-                          let node = self.chargePortNode else { return }
-                    print("📊 Node state after setting closed - transform: \(node.transform), position: \(node.position), rotation: \(node.rotation)")
-                }
-                animationTimer = timer
-                
-                player.play()
-            }
+        func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+            print("🎬 Animation did stop - finished: \(flag)")
+            isAnimating = false
+        }
+        
+        func animationDidStart(_ anim: CAAnimation) {
+            print("🎬 Animation did start")
+            isAnimating = true
         }
         
         func handleChargePortStateChange(_ newState: DoorState) {
@@ -295,7 +313,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             if animationPlayer == nil {
                 print("⚠️ Animation player is nil, attempting to reinitialize...")
                 if let node = chargePortNode {
-                    setupAnimationPlayer(for: node)
+                    setupAnimationPlayer(for: node, initialState: nil)
                 } else {
                     print("❌ Cannot reinitialize - charge port node is nil")
                     return
@@ -322,90 +340,52 @@ struct SceneKitViewAir: UIViewRepresentable {
                 return
             }
             
-            // Verify animation player state
-            if animationPlayer == nil {
-                print("⚠️ Animation player is nil, attempting to reinitialize...")
-                if let node = chargePortNode {
-                    setupAnimationPlayer(for: node)
-                } else {
-                    print("❌ Cannot reinitialize - charge port node is nil")
-                    return
-                }
-            }
-            
             guard let player = animationPlayer,
-                  let node = chargePortNode else {
+                  let _ = chargePortNode else {
                 print("❌ Cannot toggle - animation player or node missing")
                 return
-            }
-            
-            // Stop all animations on the node first
-            node.animationKeys.forEach { key in
-                if let otherPlayer = node.animationPlayer(forKey: key) {
-                    otherPlayer.stop()
-                }
             }
             
             // Stop current animation if it's playing
             player.stop()
             
-            // Cancel any existing timer
-            animationTimer?.invalidate()
-            animationTimer = nil
-            
             // Set animating flag
             isAnimating = true
             
-            // Toggle state
-            isChargePortOpen.toggle()
-            
             if isChargePortOpen {
-                // Opening animation
-                print("▶️ Starting opening animation")
-                print("📊 Node transform before: \(node.transform)")
-                print("📊 Node position before: \(node.position)")
-                print("📊 Node rotation before: \(node.rotation)")
-                player.speed = 1
-                player.animation.timeOffset = 0
-                player.animation.repeatCount = 0  // Ensure it only plays once
-                player.play()
-                
-                // Use a weak reference to self in the timer
-                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
-                    guard let self = self else { return }
-                    print("✅ Opening animation completed")
-                    self.isAnimating = false
-                }
-                animationTimer = timer
-                
-                print("📊 Node transform after: \(node.transform)")
-                print("📊 Node position after: \(node.position)")
-                print("📊 Node rotation after: \(node.rotation)")
-            } else {
                 // Closing animation
                 print("▶️ Starting closing animation")
-                print("📊 Node transform before: \(node.transform)")
-                print("📊 Node position before: \(node.position)")
-                print("📊 Node rotation before: \(node.rotation)")
-                
-                // Reset animation state
-                player.stop()
-                player.animation.timeOffset = 0
                 player.speed = -1
-                player.animation.repeatCount = 0  // Ensure it only plays once
-                player.play()
+                player.animation.timeOffset = player.animation.duration
                 
-                // Use a weak reference to self in the timer
+                // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
-                    guard let self = self else { return }
-                    print("✅ Closing animation completed")
-                    self.isAnimating = false
+                    if let self = self {
+                        print("✅ Closing animation completed")
+                        self.isAnimating = false
+                        self.isChargePortOpen = false
+                    }
                 }
                 animationTimer = timer
                 
-                print("📊 Node transform after: \(node.transform)")
-                print("📊 Node position after: \(node.position)")
-                print("📊 Node rotation after: \(node.rotation)")
+                player.play()
+            } else {
+                // Opening animation
+                print("▶️ Starting opening animation")
+                player.speed = 1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        print("✅ Opening animation completed")
+                        self.isAnimating = false
+                        self.isChargePortOpen = true
+                    }
+                }
+                animationTimer = timer
+                
+                player.play()
             }
         }
     }
@@ -543,17 +523,59 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Check initial charge port state and set it without animation
             if let chargePortState = model.chargePortClosureState {
                 print("🚪 Initial charge port state from model: \(chargePortState)")
-                // Add a small delay to ensure scene is fully loaded
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    context.coordinator.setInitialChargePortState(chargePortState)
+                
+                // Set up the initial state immediately
+                if let node = context.coordinator.chargePortNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting initial state: \(chargePortState)")
+                    
+                    // Stop any existing animations
+                    player.stop()
+                    
+                    // Set the animation state
+                    player.speed = 1
+                    if chargePortState == .open || chargePortState == .ajar {
+                        print("🚪 Setting to open position")
+                        // Just play the animation normally
+                        player.animation.timeOffset = 0
+                        player.play()
+                        
+                        // Wait for animation to complete
+                        let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
+                            print("✅ Initial opening animation completed")
+                            context.coordinator.isChargePortOpen = true
+                            isSceneLoaded = true
+                        }
+                        context.coordinator.animationTimer = timer
+                    } else {
+                        print("🚪 Setting to closed position")
+                        player.animation.timeOffset = 0
+                        context.coordinator.isChargePortOpen = false
+                        player.play()
+                        
+                        // Mark scene as loaded after a short delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            isSceneLoaded = true
+                        }
+                    }
                 }
             } else {
                 print("❓ No charge port state available")
-            }
-            
-            // Mark scene as loaded after a short delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                isSceneLoaded = true
+                // Ensure charge port is closed by default
+                if let node = context.coordinator.chargePortNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting default closed state")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    context.coordinator.isChargePortOpen = false
+                    player.play()
+                    
+                    // Mark scene as loaded after a short delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        isSceneLoaded = true
+                    }
+                }
             }
         } else {
             Logger.vehicle.error("Failed to load scene using all available methods")
@@ -586,8 +608,9 @@ struct SceneKitViewAir: UIViewRepresentable {
                 }
             }
             
-            // Handle charge port state changes based on vehicle state
-            if let chargePortState = model.chargePortClosureState {
+            // Only handle state changes after the initial setup is complete and we're not animating
+            if isSceneLoaded && !context.coordinator.isAnimating,
+               let chargePortState = model.chargePortClosureState {
                 context.coordinator.handleChargePortStateChange(chargePortState)
             }
         }
