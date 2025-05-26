@@ -34,11 +34,27 @@ struct BearTalkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(appState)
-                .environment(dataModel)
-                .tint(.accent)
-                .modelContainer(sharedModelContainer)
+            ColorSchemeWrapper(appState: appState) {
+                ContentView()
+                    .environment(appState)
+                    .environment(dataModel)
+                    .tint(.accent)
+                    .modelContainer(sharedModelContainer)
+            }
         }
+    }
+}
+
+private struct ColorSchemeWrapper<Content: View>: View {
+    @Bindable var colorSchemeManager: ColorSchemeManager = .shared
+    let content: Content
+    
+    init(appState: AppState, @ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    
+    var body: some View {
+        content
+            .preferredColorScheme(colorSchemeManager.currentScheme)
     }
 }

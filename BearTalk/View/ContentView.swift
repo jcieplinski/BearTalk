@@ -11,12 +11,13 @@ import GRPCCore
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(DataModel.self) var model
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     private let tokenManager = TokenManager.shared
     @State private var isInitializing = true
     
     var body: some View {
         Group {
+            @Bindable var appState = appState
             if isInitializing {
                 // Show a loading view while we validate the token
                 ProgressView()
@@ -104,6 +105,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environmentObject(AppState.preview)
+        .environment(AppState.preview)
         .environment(DataModel())
 }

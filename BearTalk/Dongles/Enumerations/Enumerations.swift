@@ -24,6 +24,21 @@ enum DefaultsKey {
     static let photoURL: String = "photoURL"
     static let cellOrder: String = "cellOrder"
     static let useFaceID: String = "useFaceID"
+    static let colorScheme: String = "colorScheme"
+}
+
+enum AppColorScheme: Int, Codable {
+    case system = 0
+    case light = 1
+    case dark = 2
+    
+    var systemColorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
 }
 
 enum LockState: Codable, Equatable {

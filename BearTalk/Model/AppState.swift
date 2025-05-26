@@ -6,14 +6,50 @@
 //
 
 import SwiftUI
+import Observation
 
-final class AppState: ObservableObject {
-    @Published var selectedTab: AppTab = .home
-    @Published var noCarMode: Bool = false
+@Observable
+final class ColorSchemeManager {
+    static let shared = ColorSchemeManager()
+    
+    private(set) var currentScheme: ColorScheme?
+    
+    private init() {
+        // Initialize from UserDefaults
+        let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
+        updateScheme(from: rawValue)
+    }
+    
+    func setScheme(_ scheme: AppColorScheme) {
+        UserDefaults.appGroup.set(scheme.rawValue, forKey: DefaultsKey.colorScheme)
+        updateScheme(from: scheme.rawValue)
+    }
+    
+    private func updateScheme(from rawValue: Int) {
+        switch AppColorScheme(rawValue: rawValue) {
+        case .system:
+            currentScheme = nil
+        case .light:
+            currentScheme = .light
+        case .dark:
+            currentScheme = .dark
+        case .none:
+            currentScheme = nil
+        }
+    }
+}
 
-    @AppStorage(DefaultsKey.userName, store: .appGroup) var userName: String = ""
-    @Published var password: String = ""
-    @AppStorage(DefaultsKey.carColor, store: .appGroup) var carColor: String = "eureka"
+@Observable final class AppState {
+    var selectedTab: AppTab = .home
+    var noCarMode: Bool = false
+    
+    var colorSchemeManager: ColorSchemeManager { .shared }
+    
+    @ObservationIgnored @AppStorage(DefaultsKey.userName, store: .appGroup) var userName: String = ""
+    var password: String = ""
+    @ObservationIgnored @AppStorage(DefaultsKey.carColor, store: .appGroup) var carColor: String = "eureka"
+
+    public init() {}
 
     var backgroundColors: [Color] {
         let top = Color(uiColor: .systemBackground)

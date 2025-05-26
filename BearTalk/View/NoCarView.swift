@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NoCarView: View {
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     private let tokenManager = TokenManager.shared
     
     var body: some View {
@@ -41,5 +41,5 @@ struct NoCarView: View {
 
 #Preview {
     NoCarView()
-        .environmentObject(AppState())
+        .environment(AppState())
 }

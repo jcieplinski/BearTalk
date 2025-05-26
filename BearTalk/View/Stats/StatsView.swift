@@ -9,7 +9,7 @@ import SwiftUI
 import MessageUI
 
 struct StatsView: View {
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
 
     @State var result: Result<MFMailComposeResult, Error>? = nil
@@ -91,6 +91,6 @@ struct StatsView: View {
 
 #Preview {
     StatsView()
-        .environmentObject(AppState())
+        .environment(AppState())
         .environment(DataModel())
 }

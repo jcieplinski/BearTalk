@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
     @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security"
 
     @State var showLogOutWarning: Bool = false
     @State var showClimateControl: Bool = false
     @State var showSeatClimate: Bool = false
+    @State var showSettings: Bool = false
     @State private var draggedCell: String?
     
     private var orderedCells: [String] {
@@ -121,10 +122,10 @@ struct ControlsView: View {
                         
                         Divider()
                         
-                        Button(role: .destructive) {
-                            showLogOutWarning = true
+                        Button {
+                            showSettings = true
                         } label: {
-                            Label("Log Out", systemImage: "person.circle")
+                            Label("Settings", systemImage: "gear")
                         }
                     } label: {
                         if let photoUrl = model.userProfile?.photoUrl {
@@ -146,15 +147,10 @@ struct ControlsView: View {
             .background(
                 LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
             )
-            .alert("Are you Sure?", isPresented: $showLogOutWarning) {
-                Button("Log Out", role: .destructive) {
-                    appState.logOut()
-                }
-                Button("Cancel", role: .cancel) {
-                    showLogOutWarning = false
-                }
-            } message: {
-                Text("Do you wish to log out of your Lucid account?")
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .presentationBackground(.thinMaterial)
+                    .presentationDetents([.medium])
             }
             .sheet(isPresented: $showClimateControl) {
                 ClimateControlSheet(modalPresented: true)
@@ -219,6 +215,6 @@ struct DropViewDelegate: DropDelegate {
 
 #Preview {
     ControlsView()
-        .environmentObject(AppState())
+        .environment(AppState())
         .environment(DataModel())
 }

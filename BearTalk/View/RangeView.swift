@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct RangeView: View {
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model: DataModel
     
     @StateObject var speechRecognizer = SpeechRecognizer()
@@ -156,6 +156,6 @@ struct RangeView: View {
 
 #Preview {
     RangeView()
-        .environmentObject(AppState())
+        .environment(AppState())
         .environment(DataModel())
 }

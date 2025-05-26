@@ -10,7 +10,7 @@ import MapKit
 
 struct MapView: View {
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
     
     @State var position: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
@@ -51,7 +51,7 @@ struct MapView: View {
 
 #Preview {
     MapView()
-        .environmentObject(AppState())
+        .environment(AppState())
         .environment(DataModel())
 }
 

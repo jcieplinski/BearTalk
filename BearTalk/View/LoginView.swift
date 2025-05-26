@@ -9,7 +9,7 @@ import SwiftUI
 import LocalAuthentication
 
 struct LoginView: View {
-    @EnvironmentObject private var appState: AppState
+    @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model: DataModel
     private let tokenManager = TokenManager.shared
 
@@ -22,6 +22,7 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
+            @Bindable var appState = appState
             VStack(spacing: 22) {
                 List {
                     Text("Log in to your lucidmotors.com account to begin.")
@@ -246,5 +247,5 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
-        .environmentObject(AppState())
+        .environment(AppState())
 }
