@@ -145,6 +145,9 @@ import GRPCCore
         return vehicle.vehicleConfig.heatedSteeringWheel == .heatedSteeringWheelAvailable
     }
     
+    @ObservationIgnored private var lastRefreshTime: Date?
+    @ObservationIgnored private var refreshCheckTimer: Timer?
+    
     func getUserProfile() async throws {
         do {
             // First get the user profile
@@ -220,6 +223,7 @@ import GRPCCore
             Task {
                 await refreshVehicle()
                 setRefreshVehicleTimer()
+                startRefreshMonitoring()
                 // Prevent device from sleeping while calculating efficiency
                 DispatchQueue.main.async {
                     UIApplication.shared.isIdleTimerDisabled = true
@@ -231,6 +235,9 @@ import GRPCCore
     func stopRefreshing() {
         refreshTimer?.invalidate()
         refreshTimer = nil
+        refreshCheckTimer?.invalidate()
+        refreshCheckTimer = nil
+        lastRefreshTime = nil
         // Allow device to sleep again when we stop refreshing
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = false
@@ -251,9 +258,29 @@ import GRPCCore
         }
     }
     
+    private func startRefreshMonitoring() {
+        // Stop any existing monitoring
+        refreshCheckTimer?.invalidate()
+        
+        // Start a timer that checks if we're still refreshing every 10 seconds
+        refreshCheckTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if let lastRefresh = self.lastRefreshTime {
+                let timeSinceLastRefresh = Date().timeIntervalSince(lastRefresh)
+                if timeSinceLastRefresh > 8 { // More than 2 refresh intervals (4s * 2)
+                    let message = "🚨 Vehicle refresh appears to have stopped. Last refresh was \(Int(timeSinceLastRefresh))s ago"
+                    print(message) // More visible in Xcode debug console
+                    Logger.vehicle.error("\(message)")
+                }
+            }
+        }
+    }
+    
     func refreshVehicle() async {
         do {
             let refreshedVehicle = try await BearAPI.fetchCurrentVehicle()
+            lastRefreshTime = Date()
             
             if let vehicle = refreshedVehicle {
                 Task { @MainActor in
@@ -267,7 +294,9 @@ import GRPCCore
                 }
             }
         } catch {
-            Logger.vehicle.error("Error updating Vehicle: \(error)")
+            let message = "Error updating Vehicle: \(error)"
+            print("🚨 \(message)") // More visible in Xcode debug console
+            Logger.vehicle.error("\(message)")
         }
     }
     
