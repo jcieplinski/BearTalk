@@ -22,7 +22,7 @@ struct ControlButton: View {
         case .trunk:
             return model.trunkClosureState == .open
         case .chargePort:
-            return model.chargePortClosureState == .open
+            return model.chargePortClosureState == .open || model.chargePortClosureState == .ajar
         case .climateControl:
             guard let climatePowerState = model.climatePowerState else {
                 return false
