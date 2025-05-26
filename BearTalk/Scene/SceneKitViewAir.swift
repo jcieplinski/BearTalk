@@ -240,8 +240,7 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Force the animation to update the node's transform
                         player.play()
                         // Use a timer to ensure the animation completes
-                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
-                            guard let self = self else { return }
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
                             print("📊 Node transform after setting open: \(node.transform)")
                         }
@@ -257,8 +256,7 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Force the animation to update the node's transform
                         player.play()
                         // Use a timer to ensure the animation completes
-                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
-                            guard let self = self else { return }
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
                             print("📊 Node transform after setting closed: \(node.transform)")
                         }
@@ -275,8 +273,7 @@ struct SceneKitViewAir: UIViewRepresentable {
                     // Force the animation to update the node's transform
                     player.play()
                     // Use a timer to ensure the animation completes
-                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
-                        guard let self = self else { return }
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                         player.stop()
                         print("📊 Node transform after setting default closed: \(node.transform)")
                     }
@@ -302,6 +299,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         
         func handleChargePortStateChange(_ newState: DoorState) {
             print("🔄 Handling charge port state change to: \(newState)")
+            print("📊 Current animation state - isAnimating: \(isAnimating), isChargePortOpen: \(isChargePortOpen)")
             
             // Don't handle state changes while animating
             if isAnimating {
@@ -333,6 +331,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         
         func toggleChargePort() {
             print("🔄 Toggling charge port...")
+            print("📊 Pre-toggle state - isAnimating: \(isAnimating), isChargePortOpen: \(isChargePortOpen)")
             
             // Don't start new animation if one is in progress
             if isAnimating {
@@ -340,9 +339,8 @@ struct SceneKitViewAir: UIViewRepresentable {
                 return
             }
             
-            guard let player = animationPlayer,
-                  let _ = chargePortNode else {
-                print("❌ Cannot toggle - animation player or node missing")
+            guard let player = animationPlayer else {
+                print("❌ Cannot toggle - animation player missing")
                 return
             }
             
@@ -351,12 +349,13 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Set animating flag
             isAnimating = true
+            print("📊 Set isAnimating to true")
             
             if isChargePortOpen {
                 // Closing animation
                 print("▶️ Starting closing animation")
                 player.speed = -1
-                player.animation.timeOffset = player.animation.duration
+                player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
@@ -609,9 +608,20 @@ struct SceneKitViewAir: UIViewRepresentable {
             }
             
             // Only handle state changes after the initial setup is complete and we're not animating
-            if isSceneLoaded && !context.coordinator.isAnimating,
-               let chargePortState = model.chargePortClosureState {
-                context.coordinator.handleChargePortStateChange(chargePortState)
+            if isSceneLoaded {
+                print("📊 updateUIView state check - isAnimating: \(context.coordinator.isAnimating), isChargePortOpen: \(context.coordinator.isChargePortOpen)")
+                if let chargePortState = model.chargePortClosureState {
+                    print("📊 Model state update - chargePortState: \(chargePortState)")
+                    if !context.coordinator.isAnimating {
+                        context.coordinator.handleChargePortStateChange(chargePortState)
+                    } else {
+                        print("⏳ Skipping state change due to animation in progress")
+                    }
+                } else {
+                    print("❓ No charge port state available in model")
+                }
+            } else {
+                print("⏳ Scene not yet loaded, skipping state update")
             }
         }
     }

@@ -52,7 +52,7 @@ extension DataModel {
     
     func toggleDoorLocks() {
         if let lockState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -93,7 +93,7 @@ extension DataModel {
     
     func toggleCargo(area: Cargo) {
         if let closureState = area == .frunk ? frunkClosureState : trunkClosureState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -128,7 +128,7 @@ extension DataModel {
     
     func toggleChargePort() {
         if let closureState = chargePortClosureState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -159,7 +159,7 @@ extension DataModel {
     
     func toggleSteeringWheelHeat() {
         if let steeringHeaterStatus {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -190,7 +190,7 @@ extension DataModel {
     
     func toggleBatteryPrecondition() {
         if let preconditionState = batteryPreConditionState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -222,7 +222,7 @@ extension DataModel {
     
     func toggleDefost() {
         if let action = defrostState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -253,7 +253,7 @@ extension DataModel {
     
     func toggleMaxAC() {
         if let action = maxACState {
-            Task {
+            Task { @MainActor in
                 do {
                     if !vehicleIsReady {
                         let _ = try await BearAPI.wakeUp()
@@ -298,7 +298,7 @@ extension DataModel {
     }
     
     func lights(action: LightsAction) {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -335,7 +335,7 @@ extension DataModel {
     }
     
     func honkHorn() {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -354,7 +354,7 @@ extension DataModel {
     }
     
     func toggleClimateControl() {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -381,7 +381,7 @@ extension DataModel {
     }
     
     func setCabinTemperature(_ temperature: Double) {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -400,6 +400,7 @@ extension DataModel {
         }
     }
     
+    @MainActor
     func resetControlFunction(oldState: VehicleState?, newState: VehicleState?) {
         guard let oldState, let newState else {
             requestInProgress = []
@@ -557,6 +558,7 @@ extension DataModel {
         }
     }
     
+    @MainActor
     private func processSeatClimateQueue() async {
         // If we're already processing or the queue is empty, return
         guard !isProcessingSeatClimateQueue, !seatClimateQueue.isEmpty else { return }
@@ -634,7 +636,7 @@ extension DataModel {
     }
     
     func wakeUpCar() {
-        Task {
+        Task { @MainActor in
             do {
                 requestInProgress.insert(.wake)
                 let success = try await BearAPI.wakeUp()
@@ -648,7 +650,7 @@ extension DataModel {
     }
     
     func setChargeLimit(_ percentage: UInt32) {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -667,7 +669,7 @@ extension DataModel {
     }
     
     func toggleBatteryPreconditioning() {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
@@ -696,7 +698,7 @@ extension DataModel {
     }
     
     func setShockAndTilt(enabled: Bool) async {
-        Task {
+        Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()

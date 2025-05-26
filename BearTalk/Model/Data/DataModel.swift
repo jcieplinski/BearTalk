@@ -105,6 +105,7 @@ import GRPCCore
         refreshTimer != nil
     }
     
+    @MainActor
     var requestInProgress: Set<ControlType> = []
     
     @ObservationIgnored var seatClimateQueue: [SeatAssignment] = []
