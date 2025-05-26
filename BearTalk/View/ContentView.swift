@@ -23,40 +23,45 @@ struct ContentView: View {
                     .progressViewStyle(.circular)
                     .tint(.secondary)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if appState.noCarMode {
-                NoCarView()
-            } else if tokenManager.isAppHoldScreen {
-                Spacer()
-            } else if tokenManager.isLoggedIn {
-                TabView(selection: $appState.selectedTab) {
-                    ControlsView()
-                        .tabItem {
-                            Image("home")
-                            Text("Home")
-                        }
-                        .tag(AppTab.home)
-                    MapView()
-                        .tabItem {
-                            Image("location")
-                            Text("Location")
-                        }
-                        .tag(AppTab.map)
-                    RangeView()
-                        .tabItem {
-                            Image("range")
-                            Text("Range")
-                        }
-                        .tag(AppTab.range)
-                    StatsView()
-                        .tabItem {
-                            Image("stats")
-                            Text("Stats")
-                        }
-                        .tag(AppTab.stats)
-                }
-                .tint(Color(uiColor: .label))
             } else {
-                LoginView()
+                // Only show content views after initialization is complete
+                Group {
+                    if appState.noCarMode {
+                        NoCarView()
+                    } else if tokenManager.isAppHoldScreen {
+                        Spacer()
+                    } else if tokenManager.isLoggedIn {
+                        TabView(selection: $appState.selectedTab) {
+                            ControlsView()
+                                .tabItem {
+                                    Image("home")
+                                    Text("Home")
+                                }
+                                .tag(AppTab.home)
+                            MapView()
+                                .tabItem {
+                                    Image("location")
+                                    Text("Location")
+                                }
+                                .tag(AppTab.map)
+                            RangeView()
+                                .tabItem {
+                                    Image("range")
+                                    Text("Range")
+                                }
+                                .tag(AppTab.range)
+                            StatsView()
+                                .tabItem {
+                                    Image("stats")
+                                    Text("Stats")
+                                }
+                                .tag(AppTab.stats)
+                        }
+                        .tint(Color(uiColor: .label))
+                    } else {
+                        LoginView()
+                    }
+                }
             }
         }
         .background(
