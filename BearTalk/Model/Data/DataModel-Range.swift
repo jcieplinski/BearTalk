@@ -11,7 +11,9 @@ extension DataModel {
     func updateRangeStats() {
         guard let vehicle else { return }
         
-        chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
+        // Clamp battery percentage to 100% maximum
+        let clampedBatteryPercent = min(vehicle.vehicleState.batteryState.chargePercent, 100.0)
+        chargePercentage = "\(clampedBatteryPercent.rounded())%"
         kWh = vehicle.vehicleState.batteryState.kwHr.round(to: 2)
         
         // Calculate real-world range based on current battery level and efficiency

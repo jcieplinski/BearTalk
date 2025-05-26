@@ -59,7 +59,9 @@ extension DataModel {
         interiorTemp = "\(interiorTempMeasurementConverted.value.rounded()) \(interiorTempMeasurementConverted.unit.symbol)"
         exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
         
-        chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
+        // Clamp battery percentage to 100% maximum
+        let clampedBatteryPercent = min(vehicle.vehicleState.batteryState.chargePercent, 100.0)
+        chargePercentage = "\(clampedBatteryPercent.rounded())%"
         
         let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
         let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))

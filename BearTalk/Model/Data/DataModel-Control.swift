@@ -423,6 +423,10 @@ extension DataModel {
                     requestInProgress.remove(.trunk)
                 }
             case .chargePort:
+                guard oldState.bodyState.chargePortState != .ajar, newState.bodyState.chargePortState != .ajar else {
+                    return
+                }
+                
                 if oldState.bodyState.chargePortState != newState.bodyState.chargePortState {
                     requestInProgress.remove(.chargePort)
                 }

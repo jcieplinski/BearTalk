@@ -55,6 +55,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Proto/charging_service.proto,
+				Proto/generate.sh,
+				Proto/login_session.proto,
+				Proto/salesforce_service.proto,
+				Proto/sentry_service.proto,
+				Proto/subscription_service.proto,
+				Proto/trip_service.proto,
+				Proto/user_preferences_service.proto,
+				Proto/user_profile_service.proto,
+				Proto/vehicle_state_service.proto,
 				"Scene/air_tex/black_gloss-s.png",
 				"Scene/air_tex/carpaint-s.png",
 				"Scene/air_tex/chrome_gloss-s.png",
