@@ -85,71 +85,15 @@ class UnknownFieldVisitor: SwiftProtobuf.Visitor {
         print("Unknown field \(fieldNumber) with repeated enum value: \(value)")
     }
     
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == String {
-        print("Unknown field \(fieldNumber) with repeated string value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Data {
-        print("Unknown field \(fieldNumber) with repeated bytes value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == UInt32 {
-        print("Unknown field \(fieldNumber) with repeated uint32 value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == UInt64 {
-        print("Unknown field \(fieldNumber) with repeated uint64 value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Int32 {
-        print("Unknown field \(fieldNumber) with repeated int32 value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Int64 {
-        print("Unknown field \(fieldNumber) with repeated int64 value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Bool {
-        print("Unknown field \(fieldNumber) with repeated bool value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Float {
-        print("Unknown field \(fieldNumber) with repeated float value: \(value)")
-    }
-    
-    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Double {
-        print("Unknown field \(fieldNumber) with repeated double value: \(value)")
+    func visitRepeatedField<Element>(value: [Element], fieldNumber: Int) {
+        print("Unknown field \(fieldNumber) with repeated value: \(value)")
     }
     
     func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element : SwiftProtobuf.Enum {
         print("Unknown field \(fieldNumber) with packed enum value: \(value)")
     }
     
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == UInt32 {
-        print("Unknown field \(fieldNumber) with packed uint32 value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == UInt64 {
-        print("Unknown field \(fieldNumber) with packed uint64 value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Int32 {
-        print("Unknown field \(fieldNumber) with packed int32 value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Int64 {
-        print("Unknown field \(fieldNumber) with packed int64 value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Bool {
-        print("Unknown field \(fieldNumber) with packed bool value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Float {
-        print("Unknown field \(fieldNumber) with packed float value: \(value)")
-    }
-    
-    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws where Element == Double {
-        print("Unknown field \(fieldNumber) with packed double value: \(value)")
+    func visitPackedField<Element>(value: [Element], fieldNumber: Int) throws {
+        print("Unknown field \(fieldNumber) with packed value: \(value)")
     }
 } 
