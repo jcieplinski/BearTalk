@@ -56,8 +56,12 @@ import GRPCCore
     var lockState: LockState?
     var frunkClosureState: DoorState?
     var trunkClosureState: DoorState?
-    var chargePortClosureState: DoorState?
-    var lightsState: LightState?
+    var chargePortClosureState: DoorState = .unknown
+    var frontLeftDoorClosureState: DoorState = .unknown
+    var frontRightDoorClosureState: DoorState = .unknown
+    var rearLeftDoorClosureState: DoorState = .unknown
+    var rearRightDoorClosureState: DoorState = .unknown
+    var lightsState: LightState = .unknown
     var windowPosition: WindowPosition?
     var defrostState: DefrostState?
     var maxACState: MaxACState?
@@ -420,6 +424,10 @@ import GRPCCore
         frunkClosureState = vehicle.vehicleState.bodyState.frontCargo
         trunkClosureState = vehicle.vehicleState.bodyState.rearCargo
         chargePortClosureState = vehicle.vehicleState.bodyState.chargePortState
+        frontLeftDoorClosureState = vehicle.vehicleState.bodyState.frontLeftDoor
+        frontRightDoorClosureState = vehicle.vehicleState.bodyState.frontRightDoor
+        rearLeftDoorClosureState = vehicle.vehicleState.bodyState.rearLeftDoor
+        rearRightDoorClosureState = vehicle.vehicleState.bodyState.rearRightDoor
         lightsState = vehicle.vehicleState.chassisState.headlights
         windowPosition = vehicle.vehicleState.bodyState.windowPosition
         defrostState = vehicle.vehicleState.hvacState.defrost

@@ -31,21 +31,54 @@ struct SceneKitViewAir: UIViewRepresentable {
         var initialLookAtPoint: SCNVector3?
         var isResetting = false
         var sceneView: SCNView?
+        
+        // Charge port state
         var chargePortNode: SCNNode?
-        var frunkNode: SCNNode?
-        var trunkNode: SCNNode?
         var isChargePortOpen: Bool = false
-        var isFrunkOpen: Bool = false
-        var isTrunkOpen: Bool = false
         var isAnimating: Bool = false
-        var isFrunkAnimating: Bool = false
-        var isTrunkAnimating: Bool = false
         var animationPlayer: SCNAnimationPlayer?
-        var frunkAnimationPlayer: SCNAnimationPlayer?
-        var trunkAnimationPlayer: SCNAnimationPlayer?
         var animationTimer: Timer?
+        
+        // Frunk state
+        var frunkNode: SCNNode?
+        var isFrunkOpen: Bool = false
+        var isFrunkAnimating: Bool = false
+        var frunkAnimationPlayer: SCNAnimationPlayer?
         var frunkAnimationTimer: Timer?
+        
+        // Trunk state
+        var trunkNode: SCNNode?
+        var isTrunkOpen: Bool = false
+        var isTrunkAnimating: Bool = false
+        var trunkAnimationPlayer: SCNAnimationPlayer?
         var trunkAnimationTimer: Timer?
+        
+        // Door states
+        var frontLeftDoorNode: SCNNode?
+        var frontRightDoorNode: SCNNode?
+        var rearLeftDoorNode: SCNNode?
+        var rearRightDoorNode: SCNNode?
+        
+        var isFrontLeftDoorOpen: Bool = false
+        var isFrontRightDoorOpen: Bool = false
+        var isRearLeftDoorOpen: Bool = false
+        var isRearRightDoorOpen: Bool = false
+        
+        var isFrontLeftDoorAnimating: Bool = false
+        var isFrontRightDoorAnimating: Bool = false
+        var isRearLeftDoorAnimating: Bool = false
+        var isRearRightDoorAnimating: Bool = false
+        
+        var frontLeftDoorAnimationPlayer: SCNAnimationPlayer?
+        var frontRightDoorAnimationPlayer: SCNAnimationPlayer?
+        var rearLeftDoorAnimationPlayer: SCNAnimationPlayer?
+        var rearRightDoorAnimationPlayer: SCNAnimationPlayer?
+        
+        var frontLeftDoorAnimationTimer: Timer?
+        var frontRightDoorAnimationTimer: Timer?
+        var rearLeftDoorAnimationTimer: Timer?
+        var rearRightDoorAnimationTimer: Timer?
+        
         var onAnimationComplete: (() -> Void)?
         var onSceneLoaded: (() -> Void)?
         private var displayLink: CADisplayLink?
@@ -55,7 +88,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         private var closeAction: SCNAction?
         
         deinit {
-            print("🧹 Cleaning up Coordinator")
+            // Clean up existing timers
             animationTimer?.invalidate()
             animationTimer = nil
             frunkAnimationTimer?.invalidate()
@@ -63,7 +96,17 @@ struct SceneKitViewAir: UIViewRepresentable {
             trunkAnimationTimer?.invalidate()
             trunkAnimationTimer = nil
             
-            // Clean up animation players
+            // Clean up door timers
+            frontLeftDoorAnimationTimer?.invalidate()
+            frontLeftDoorAnimationTimer = nil
+            frontRightDoorAnimationTimer?.invalidate()
+            frontRightDoorAnimationTimer = nil
+            rearLeftDoorAnimationTimer?.invalidate()
+            rearLeftDoorAnimationTimer = nil
+            rearRightDoorAnimationTimer?.invalidate()
+            rearRightDoorAnimationTimer = nil
+            
+            // Clean up existing animation players
             if let player = animationPlayer {
                 player.stop()
                 animationPlayer = nil
@@ -77,10 +120,32 @@ struct SceneKitViewAir: UIViewRepresentable {
                 trunkAnimationPlayer = nil
             }
             
+            // Clean up door animation players
+            if let player = frontLeftDoorAnimationPlayer {
+                player.stop()
+                frontLeftDoorAnimationPlayer = nil
+            }
+            if let player = frontRightDoorAnimationPlayer {
+                player.stop()
+                frontRightDoorAnimationPlayer = nil
+            }
+            if let player = rearLeftDoorAnimationPlayer {
+                player.stop()
+                rearLeftDoorAnimationPlayer = nil
+            }
+            if let player = rearRightDoorAnimationPlayer {
+                player.stop()
+                rearRightDoorAnimationPlayer = nil
+            }
+            
             // Clean up nodes
             chargePortNode = nil
             frunkNode = nil
             trunkNode = nil
+            frontLeftDoorNode = nil
+            frontRightDoorNode = nil
+            rearLeftDoorNode = nil
+            rearRightDoorNode = nil
         }
         
         func storeInitialCameraState(_ node: SCNNode) {
@@ -183,8 +248,6 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
         
         func findChargePortNode(in scene: SCNScene) {
-            print("🔍 Searching for charge port node...")
-            
             // First try to find by name
             if let node = scene.rootNode.childNode(withName: "charge_port", recursively: true) {
                 print("✅ Found charge port node by name: \(node.name ?? "unnamed")")
@@ -216,9 +279,6 @@ struct SceneKitViewAir: UIViewRepresentable {
                 return
             }
             
-            print("🔍 Setting up animation player for node: \(node.name ?? "unnamed")")
-            print("📋 Animation keys: \(node.animationKeys)")
-            
             // Clean up existing animation player if any
             if let existingPlayer = animationPlayer {
                 existingPlayer.stop()
@@ -233,11 +293,6 @@ struct SceneKitViewAir: UIViewRepresentable {
             }
             
             if let player = node.animationPlayer(forKey: key) {
-                print("✅ Found animation player for key: \(key)")
-                print("📊 Animation duration: \(player.animation.duration)")
-                print("📊 Animation type: \(type(of: player.animation))")
-                print("📊 Current animation state - speed: \(player.speed), timeOffset: \(player.animation.timeOffset)")
-                
                 // Store the player
                 self.animationPlayer = player
                 
@@ -246,16 +301,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.animation.repeatCount = 0  // Play once
                 player.animation.autoreverses = false  // Don't reverse
                 
-                // Store the initial transform
-                let initialTransform = node.transform
-                print("📊 Initial node transform: \(initialTransform)")
-                
                 // Set the initial state
                 if let state = initialState {
-                    print("🚪 Setting up animation player with initial state: \(state)")
                     if state == .open || state == .ajar {
                         // Set to open position without animation
-                        print("🚪 Setting to open position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = player.animation.duration
@@ -266,12 +315,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Node transform after setting open: \(node.transform)")
                         }
                         animationTimer = timer
                     } else {
                         // Set to closed position without animation
-                        print("🚪 Setting to closed position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = 0
@@ -282,13 +329,11 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Node transform after setting closed: \(node.transform)")
                         }
                         animationTimer = timer
                     }
                 } else {
                     // No state available, default to closed
-                    print("🚪 No state available, defaulting to closed position")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -299,41 +344,30 @@ struct SceneKitViewAir: UIViewRepresentable {
                     // Use a timer to ensure the animation completes
                     let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                         player.stop()
-                        print("📊 Node transform after setting default closed: \(node.transform)")
                     }
                     animationTimer = timer
                 }
-                
-                print("📊 Final node transform after setup: \(node.transform)")
-                print("✅ Animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
             } else {
                 print("❌ Could not get animation player for key: \(key)")
             }
         }
         
         func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-            print("🎬 Animation did stop - finished: \(flag)")
             isAnimating = false
         }
         
         func animationDidStart(_ anim: CAAnimation) {
-            print("🎬 Animation did start")
             isAnimating = true
         }
         
         func handleChargePortStateChange(_ newState: DoorState) {
-            print("🔄 Handling charge port state change to: \(newState)")
-            print("📊 Current animation state - isAnimating: \(isAnimating), isChargePortOpen: \(isChargePortOpen)")
-            
             // Don't handle state changes while animating
             if isAnimating {
-                print("⏳ Animation in progress, ignoring state change")
                 return
             }
             
             // Verify animation player state
             if animationPlayer == nil {
-                print("⚠️ Animation player is nil, attempting to reinitialize...")
                 if let node = chargePortNode {
                     setupAnimationPlayer(for: node, initialState: nil)
                 } else {
@@ -346,25 +380,17 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Only trigger animation if the door's state doesn't match desired state
             if shouldBeOpen != isChargePortOpen {
-                print(shouldBeOpen ? "🚪 Opening charge port" : "🚪 Closing charge port")
                 toggleChargePort()
-            } else {
-                print("ℹ️ Door already in desired state")
             }
         }
         
         func toggleChargePort() {
-            print("🔄 Toggling charge port...")
-            print("📊 Pre-toggle state - isAnimating: \(isAnimating), isChargePortOpen: \(isChargePortOpen)")
-            
             // Don't start new animation if one is in progress
             if isAnimating {
-                print("⏳ Animation in progress, ignoring toggle")
                 return
             }
             
             guard let player = animationPlayer else {
-                print("❌ Cannot toggle - animation player missing")
                 return
             }
             
@@ -373,18 +399,15 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Set animating flag
             isAnimating = true
-            print("📊 Set isAnimating to true")
             
             if isChargePortOpen {
                 // Closing animation
-                print("▶️ Starting closing animation")
                 player.speed = -1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Closing animation completed")
                         self.isAnimating = false
                         self.isChargePortOpen = false
                     }
@@ -394,14 +417,12 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.play()
             } else {
                 // Opening animation
-                print("▶️ Starting opening animation")
                 player.speed = 1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Opening animation completed")
                         self.isAnimating = false
                         self.isChargePortOpen = true
                     }
@@ -413,22 +434,16 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
         
         func findFrunkNode(in scene: SCNScene) {
-            print("🔍 Searching for frunk node...")
-            
             // First try to find by name
             if let node = scene.rootNode.childNode(withName: "Frunk_bonnet_Animation", recursively: true) {
-                print("✅ Found frunk node by name: \(node.name ?? "unnamed")")
                 frunkNode = node
                 setupFrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
             } else {
-                print("🔍 Frunk not found by name, searching all nodes...")
                 // If not found by name, try to find by searching for nodes with animations
                 scene.rootNode.enumerateChildNodes { node, _ in
                     if !node.animationKeys.isEmpty,
                        node.name?.lowercased().contains("frunk") ?? false ||
                        node.name?.lowercased().contains("hood") ?? false {
-                        print("✅ Found potential frunk node: \(node.name ?? "unnamed")")
-                        print("📋 Node animation keys: \(node.animationKeys)")
                         frunkNode = node
                         setupFrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
                     }
@@ -446,9 +461,6 @@ struct SceneKitViewAir: UIViewRepresentable {
                 return
             }
             
-            print("🔍 Setting up frunk animation player for node: \(node.name ?? "unnamed")")
-            print("📋 Frunk animation keys: \(node.animationKeys)")
-            
             // Clean up existing animation player if any
             if let existingPlayer = frunkAnimationPlayer {
                 existingPlayer.stop()
@@ -463,11 +475,6 @@ struct SceneKitViewAir: UIViewRepresentable {
             }
             
             if let player = node.animationPlayer(forKey: key) {
-                print("✅ Found frunk animation player for key: \(key)")
-                print("📊 Frunk animation duration: \(player.animation.duration)")
-                print("📊 Frunk animation type: \(type(of: player.animation))")
-                print("📊 Current frunk animation state - speed: \(player.speed), timeOffset: \(player.animation.timeOffset)")
-                
                 // Store the player
                 self.frunkAnimationPlayer = player
                 
@@ -476,16 +483,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.animation.repeatCount = 0  // Play once
                 player.animation.autoreverses = false  // Don't reverse
                 
-                // Store the initial transform
-                let initialTransform = node.transform
-                print("📊 Initial frunk node transform: \(initialTransform)")
-                
                 // Set the initial state
                 if let state = initialState {
-                    print("🚪 Setting up frunk animation player with initial state: \(state)")
                     if state == .open || state == .ajar {
                         // Set to open position without animation
-                        print("🚪 Setting frunk to open position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = player.animation.duration
@@ -496,12 +497,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Frunk node transform after setting open: \(node.transform)")
                         }
                         frunkAnimationTimer = timer
                     } else {
                         // Set to closed position without animation
-                        print("🚪 Setting frunk to closed position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = 0
@@ -512,13 +511,11 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Frunk node transform after setting closed: \(node.transform)")
                         }
                         frunkAnimationTimer = timer
                     }
                 } else {
                     // No state available, default to closed
-                    print("🚪 No frunk state available, defaulting to closed position")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -529,35 +526,25 @@ struct SceneKitViewAir: UIViewRepresentable {
                     // Use a timer to ensure the animation completes
                     let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                         player.stop()
-                        print("📊 Frunk node transform after setting default closed: \(node.transform)")
                     }
                     frunkAnimationTimer = timer
                 }
-                
-                print("📊 Final frunk node transform after setup: \(node.transform)")
-                print("✅ Frunk animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
             } else {
                 print("❌ Could not get frunk animation player for key: \(key)")
             }
         }
         
         func handleFrunkStateChange(_ newState: DoorState) {
-            print("🔄 Handling frunk state change to: \(newState)")
-            print("📊 Current frunk animation state - isFrunkAnimating: \(isFrunkAnimating), isFrunkOpen: \(isFrunkOpen)")
-            
             // Don't handle state changes while animating
             if isFrunkAnimating {
-                print("⏳ Frunk animation in progress, ignoring state change")
                 return
             }
             
             // Verify animation player state
             if frunkAnimationPlayer == nil {
-                print("⚠️ Frunk animation player is nil, attempting to reinitialize...")
                 if let node = frunkNode {
                     setupFrunkAnimationPlayer(for: node, initialState: nil)
                 } else {
-                    print("❌ Cannot reinitialize - frunk node is nil")
                     return
                 }
             }
@@ -566,20 +553,13 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Only trigger animation if the frunk's state doesn't match desired state
             if shouldBeOpen != isFrunkOpen {
-                print(shouldBeOpen ? "🚪 Opening frunk" : "🚪 Closing frunk")
                 toggleFrunk()
-            } else {
-                print("ℹ️ Frunk already in desired state")
             }
         }
         
         func toggleFrunk() {
-            print("🔄 Toggling frunk...")
-            print("📊 Pre-toggle state - isFrunkAnimating: \(isFrunkAnimating), isFrunkOpen: \(isFrunkOpen)")
-            
             // Don't start new animation if one is in progress
             if isFrunkAnimating {
-                print("⏳ Frunk animation in progress, ignoring toggle")
                 return
             }
             
@@ -593,18 +573,15 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Set animating flag
             isFrunkAnimating = true
-            print("📊 Set isFrunkAnimating to true")
             
             if isFrunkOpen {
                 // Closing animation
-                print("▶️ Starting frunk closing animation")
                 player.speed = -1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Frunk closing animation completed")
                         self.isFrunkAnimating = false
                         self.isFrunkOpen = false
                     }
@@ -614,14 +591,12 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.play()
             } else {
                 // Opening animation
-                print("▶️ Starting frunk opening animation")
                 player.speed = 1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Frunk opening animation completed")
                         self.isFrunkAnimating = false
                         self.isFrunkOpen = true
                     }
@@ -633,22 +608,16 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
         
         func findTrunkNode(in scene: SCNScene) {
-            print("🔍 Searching for trunk node...")
-            
             // First try to find by name
             if let node = scene.rootNode.childNode(withName: "Trunk_Animation", recursively: true) {
-                print("✅ Found trunk node by name: \(node.name ?? "unnamed")")
                 trunkNode = node
                 setupTrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
             } else {
-                print("🔍 Trunk not found by name, searching all nodes...")
                 // If not found by name, try to find by searching for nodes with animations
                 scene.rootNode.enumerateChildNodes { node, _ in
                     if !node.animationKeys.isEmpty,
                        node.name?.lowercased().contains("trunk") ?? false ||
                        node.name?.lowercased().contains("boot") ?? false {
-                        print("✅ Found potential trunk node: \(node.name ?? "unnamed")")
-                        print("📋 Node animation keys: \(node.animationKeys)")
                         trunkNode = node
                         setupTrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
                     }
@@ -666,9 +635,6 @@ struct SceneKitViewAir: UIViewRepresentable {
                 return
             }
             
-            print("🔍 Setting up trunk animation player for node: \(node.name ?? "unnamed")")
-            print("📋 Trunk animation keys: \(node.animationKeys)")
-            
             // Clean up existing animation player if any
             if let existingPlayer = trunkAnimationPlayer {
                 existingPlayer.stop()
@@ -683,11 +649,6 @@ struct SceneKitViewAir: UIViewRepresentable {
             }
             
             if let player = node.animationPlayer(forKey: key) {
-                print("✅ Found trunk animation player for key: \(key)")
-                print("📊 Trunk animation duration: \(player.animation.duration)")
-                print("📊 Trunk animation type: \(type(of: player.animation))")
-                print("📊 Current trunk animation state - speed: \(player.speed), timeOffset: \(player.animation.timeOffset)")
-                
                 // Store the player
                 self.trunkAnimationPlayer = player
                 
@@ -696,16 +657,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.animation.repeatCount = 0  // Play once
                 player.animation.autoreverses = false  // Don't reverse
                 
-                // Store the initial transform
-                let initialTransform = node.transform
-                print("📊 Initial trunk node transform: \(initialTransform)")
-                
                 // Set the initial state
                 if let state = initialState {
-                    print("🚪 Setting up trunk animation player with initial state: \(state)")
                     if state == .open || state == .ajar {
                         // Set to open position without animation
-                        print("🚪 Setting trunk to open position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = player.animation.duration
@@ -716,12 +671,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Trunk node transform after setting open: \(node.transform)")
                         }
                         trunkAnimationTimer = timer
                     } else {
                         // Set to closed position without animation
-                        print("🚪 Setting trunk to closed position")
                         player.stop()
                         player.speed = 1
                         player.animation.timeOffset = 0
@@ -732,13 +685,11 @@ struct SceneKitViewAir: UIViewRepresentable {
                         // Use a timer to ensure the animation completes
                         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                             player.stop()
-                            print("📊 Trunk node transform after setting closed: \(node.transform)")
                         }
                         trunkAnimationTimer = timer
                     }
                 } else {
                     // No state available, default to closed
-                    print("🚪 No trunk state available, defaulting to closed position")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -749,35 +700,25 @@ struct SceneKitViewAir: UIViewRepresentable {
                     // Use a timer to ensure the animation completes
                     let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                         player.stop()
-                        print("📊 Trunk node transform after setting default closed: \(node.transform)")
                     }
                     trunkAnimationTimer = timer
                 }
-                
-                print("📊 Final trunk node transform after setup: \(node.transform)")
-                print("✅ Trunk animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
             } else {
                 print("❌ Could not get trunk animation player for key: \(key)")
             }
         }
         
         func handleTrunkStateChange(_ newState: DoorState) {
-            print("🔄 Handling trunk state change to: \(newState)")
-            print("📊 Current trunk animation state - isTrunkAnimating: \(isTrunkAnimating), isTrunkOpen: \(isTrunkOpen)")
-            
             // Don't handle state changes while animating
             if isTrunkAnimating {
-                print("⏳ Trunk animation in progress, ignoring state change")
                 return
             }
             
             // Verify animation player state
             if trunkAnimationPlayer == nil {
-                print("⚠️ Trunk animation player is nil, attempting to reinitialize...")
                 if let node = trunkNode {
                     setupTrunkAnimationPlayer(for: node, initialState: nil)
                 } else {
-                    print("❌ Cannot reinitialize - trunk node is nil")
                     return
                 }
             }
@@ -786,25 +727,17 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Only trigger animation if the trunk's state doesn't match desired state
             if shouldBeOpen != isTrunkOpen {
-                print(shouldBeOpen ? "🚪 Opening trunk" : "🚪 Closing trunk")
                 toggleTrunk()
-            } else {
-                print("ℹ️ Trunk already in desired state")
             }
         }
         
         func toggleTrunk() {
-            print("🔄 Toggling trunk...")
-            print("📊 Pre-toggle state - isTrunkAnimating: \(isTrunkAnimating), isTrunkOpen: \(isTrunkOpen)")
-            
             // Don't start new animation if one is in progress
             if isTrunkAnimating {
-                print("⏳ Trunk animation in progress, ignoring toggle")
                 return
             }
             
             guard let player = trunkAnimationPlayer else {
-                print("❌ Cannot toggle trunk - animation player missing")
                 return
             }
             
@@ -813,18 +746,15 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Set animating flag
             isTrunkAnimating = true
-            print("📊 Set isTrunkAnimating to true")
             
             if isTrunkOpen {
                 // Closing animation
-                print("▶️ Starting trunk closing animation")
                 player.speed = -1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Trunk closing animation completed")
                         self.isTrunkAnimating = false
                         self.isTrunkOpen = false
                     }
@@ -834,19 +764,373 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.play()
             } else {
                 // Opening animation
-                print("▶️ Starting trunk opening animation")
                 player.speed = 1
                 player.animation.timeOffset = 0
                 
                 // Use a timer to track animation completion
                 let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
                     if let self = self {
-                        print("✅ Trunk opening animation completed")
                         self.isTrunkAnimating = false
                         self.isTrunkOpen = true
                     }
                 }
                 trunkAnimationTimer = timer
+                
+                player.play()
+            }
+        }
+        
+        func findDoorNodes(in scene: SCNScene) {
+            // Find front left door
+            if let node = scene.rootNode.childNode(withName: "Door_01_FL_Animation", recursively: true) {
+                frontLeftDoorNode = node
+                setupDoorAnimationPlayer(for: node, initialState: nil, doorType: .frontLeft)
+            } else {
+                print("❌ Could not find front left door node")
+            }
+            
+            // Find front right door
+            if let node = scene.rootNode.childNode(withName: "Door_02_FR_Animation", recursively: true) {
+                frontRightDoorNode = node
+                setupDoorAnimationPlayer(for: node, initialState: nil, doorType: .frontRight)
+            } else {
+                print("❌ Could not find front right door node")
+            }
+            
+            // Find rear left door
+            if let node = scene.rootNode.childNode(withName: "Door_03_RL_Animation", recursively: true) {
+                rearLeftDoorNode = node
+                setupDoorAnimationPlayer(for: node, initialState: nil, doorType: .rearLeft)
+            } else {
+                print("❌ Could not find rear left door node")
+            }
+            
+            // Find rear right door
+            if let node = scene.rootNode.childNode(withName: "Door_04_RR_Animation", recursively: true) {
+                rearRightDoorNode = node
+                setupDoorAnimationPlayer(for: node, initialState: nil, doorType: .rearRight)
+            } else {
+                print("❌ Could not find rear right door node")
+            }
+        }
+        
+        enum DoorType {
+            case frontLeft
+            case frontRight
+            case rearLeft
+            case rearRight
+        }
+        
+        func setupDoorAnimationPlayer(for node: SCNNode, initialState: DoorState?, doorType: DoorType) {
+            guard let key = node.animationKeys.first else {
+                print("❌ No animation keys found for door node")
+                return
+            }
+            
+            // Get the appropriate animation player based on door type
+            var animationPlayer: SCNAnimationPlayer?
+            
+            switch doorType {
+            case .frontLeft:
+                animationPlayer = frontLeftDoorAnimationPlayer
+            case .frontRight:
+                animationPlayer = frontRightDoorAnimationPlayer
+            case .rearLeft:
+                animationPlayer = rearLeftDoorAnimationPlayer
+            case .rearRight:
+                animationPlayer = rearRightDoorAnimationPlayer
+            }
+            
+            // Clean up existing animation player if any
+            if let existingPlayer = animationPlayer {
+                existingPlayer.stop()
+                animationPlayer = nil
+            }
+            
+            // Stop all animations on the node first
+            node.animationKeys.forEach { key in
+                if let player = node.animationPlayer(forKey: key) {
+                    player.stop()
+                }
+            }
+            
+            if let player = node.animationPlayer(forKey: key) {
+                // Store the player based on door type
+                switch doorType {
+                case .frontLeft:
+                    self.frontLeftDoorAnimationPlayer = player
+                case .frontRight:
+                    self.frontRightDoorAnimationPlayer = player
+                case .rearLeft:
+                    self.rearLeftDoorAnimationPlayer = player
+                case .rearRight:
+                    self.rearRightDoorAnimationPlayer = player
+                }
+                
+                // Configure animation to maintain final state
+                player.animation.isRemovedOnCompletion = false
+                player.animation.repeatCount = 0  // Play once
+                player.animation.autoreverses = false  // Don't reverse
+                
+                // Set the initial state
+                if let state = initialState {
+                    if state == .open || state == .ajar {
+                        // Set to open position without animation
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = player.animation.duration
+                        
+                        // Update the appropriate open state
+                        switch doorType {
+                        case .frontLeft: self.isFrontLeftDoorOpen = true
+                        case .frontRight: self.isFrontRightDoorOpen = true
+                        case .rearLeft: self.isRearLeftDoorOpen = true
+                        case .rearRight: self.isRearRightDoorOpen = true
+                        }
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                        }
+                        
+                        // Store the timer based on door type
+                        switch doorType {
+                        case .frontLeft: self.frontLeftDoorAnimationTimer = timer
+                        case .frontRight: self.frontRightDoorAnimationTimer = timer
+                        case .rearLeft: self.rearLeftDoorAnimationTimer = timer
+                        case .rearRight: self.rearRightDoorAnimationTimer = timer
+                        }
+                    } else {
+                        // Set to closed position without animation
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = 0
+                        
+                        // Update the appropriate open state
+                        switch doorType {
+                        case .frontLeft: self.isFrontLeftDoorOpen = false
+                        case .frontRight: self.isFrontRightDoorOpen = false
+                        case .rearLeft: self.isRearLeftDoorOpen = false
+                        case .rearRight: self.isRearRightDoorOpen = false
+                        }
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                        }
+                        
+                        // Store the timer based on door type
+                        switch doorType {
+                        case .frontLeft: self.frontLeftDoorAnimationTimer = timer
+                        case .frontRight: self.frontRightDoorAnimationTimer = timer
+                        case .rearLeft: self.rearLeftDoorAnimationTimer = timer
+                        case .rearRight: self.rearRightDoorAnimationTimer = timer
+                        }
+                    }
+                } else {
+                    // No state available, default to closed
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    
+                    // Update the appropriate open state
+                    switch doorType {
+                    case .frontLeft: self.isFrontLeftDoorOpen = false
+                    case .frontRight: self.isFrontRightDoorOpen = false
+                    case .rearLeft: self.isRearLeftDoorOpen = false
+                    case .rearRight: self.isRearRightDoorOpen = false
+                    }
+                    
+                    // Force the animation to update the node's transform
+                    player.play()
+                    // Use a timer to ensure the animation completes
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                        player.stop()
+                    }
+                    
+                    // Store the timer based on door type
+                    switch doorType {
+                    case .frontLeft: self.frontLeftDoorAnimationTimer = timer
+                    case .frontRight: self.frontRightDoorAnimationTimer = timer
+                    case .rearLeft: self.rearLeftDoorAnimationTimer = timer
+                    case .rearRight: self.rearRightDoorAnimationTimer = timer
+                    }
+                }
+            } else {
+                print("❌ Could not get door animation player for key: \(key)")
+            }
+        }
+        
+        func handleDoorStateChange(_ newState: DoorState, doorType: DoorType) {
+            // Get the appropriate state variables based on door type
+            var isAnimating: Bool
+            var isOpen: Bool
+            var node: SCNNode?
+            var animationPlayer: SCNAnimationPlayer?
+            
+            switch doorType {
+            case .frontLeft:
+                isAnimating = isFrontLeftDoorAnimating
+                isOpen = isFrontLeftDoorOpen
+                node = frontLeftDoorNode
+                animationPlayer = frontLeftDoorAnimationPlayer
+            case .frontRight:
+                isAnimating = isFrontRightDoorAnimating
+                isOpen = isFrontRightDoorOpen
+                node = frontRightDoorNode
+                animationPlayer = frontRightDoorAnimationPlayer
+            case .rearLeft:
+                isAnimating = isRearLeftDoorAnimating
+                isOpen = isRearLeftDoorOpen
+                node = rearLeftDoorNode
+                animationPlayer = rearLeftDoorAnimationPlayer
+            case .rearRight:
+                isAnimating = isRearRightDoorAnimating
+                isOpen = isRearRightDoorOpen
+                node = rearRightDoorNode
+                animationPlayer = rearRightDoorAnimationPlayer
+            }
+            
+            // Don't handle state changes while animating
+            if isAnimating {
+                return
+            }
+            
+            // Verify animation player state
+            if animationPlayer == nil {
+                if let node = node {
+                    setupDoorAnimationPlayer(for: node, initialState: nil, doorType: doorType)
+                } else {
+                    print("❌ Cannot reinitialize - door node is nil")
+                    return
+                }
+            }
+            
+            let shouldBeOpen = newState == .open || newState == .ajar
+            
+            // Only trigger animation if the door's state doesn't match desired state
+            if shouldBeOpen != isOpen {
+                toggleDoor(doorType: doorType)
+            }
+        }
+        
+        func toggleDoor(doorType: DoorType) {
+            // Get the appropriate state variables based on door type
+            var isAnimating: Bool
+            var isOpen: Bool
+            var animationPlayer: SCNAnimationPlayer?
+            
+            switch doorType {
+            case .frontLeft:
+                isAnimating = isFrontLeftDoorAnimating
+                isOpen = isFrontLeftDoorOpen
+                animationPlayer = frontLeftDoorAnimationPlayer
+            case .frontRight:
+                isAnimating = isFrontRightDoorAnimating
+                isOpen = isFrontRightDoorOpen
+                animationPlayer = frontRightDoorAnimationPlayer
+            case .rearLeft:
+                isAnimating = isRearLeftDoorAnimating
+                isOpen = isRearLeftDoorOpen
+                animationPlayer = rearLeftDoorAnimationPlayer
+            case .rearRight:
+                isAnimating = isRearRightDoorAnimating
+                isOpen = isRearRightDoorOpen
+                animationPlayer = rearRightDoorAnimationPlayer
+            }
+            
+            // Don't start new animation if one is in progress
+            if isAnimating {
+                return
+            }
+            
+            guard let player = animationPlayer else {
+                return
+            }
+            
+            // Stop current animation if it's playing
+            player.stop()
+            
+            // Set animating flag based on door type
+            switch doorType {
+            case .frontLeft: isFrontLeftDoorAnimating = true
+            case .frontRight: isFrontRightDoorAnimating = true
+            case .rearLeft: isRearLeftDoorAnimating = true
+            case .rearRight: isRearRightDoorAnimating = true
+            }
+            
+            if isOpen {
+                // Closing animation
+                player.speed = -1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        // Update animating and open states based on door type
+                        switch doorType {
+                        case .frontLeft:
+                            self.isFrontLeftDoorAnimating = false
+                            self.isFrontLeftDoorOpen = false
+                        case .frontRight:
+                            self.isFrontRightDoorAnimating = false
+                            self.isFrontRightDoorOpen = false
+                        case .rearLeft:
+                            self.isRearLeftDoorAnimating = false
+                            self.isRearLeftDoorOpen = false
+                        case .rearRight:
+                            self.isRearRightDoorAnimating = false
+                            self.isRearRightDoorOpen = false
+                        }
+                    }
+                }
+                
+                // Store the timer based on door type
+                switch doorType {
+                case .frontLeft: self.frontLeftDoorAnimationTimer = timer
+                case .frontRight: self.frontRightDoorAnimationTimer = timer
+                case .rearLeft: self.rearLeftDoorAnimationTimer = timer
+                case .rearRight: self.rearRightDoorAnimationTimer = timer
+                }
+                
+                player.play()
+            } else {
+                // Opening animation
+                player.speed = 1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        // Update animating and open states based on door type
+                        switch doorType {
+                        case .frontLeft:
+                            self.isFrontLeftDoorAnimating = false
+                            self.isFrontLeftDoorOpen = true
+                        case .frontRight:
+                            self.isFrontRightDoorAnimating = false
+                            self.isFrontRightDoorOpen = true
+                        case .rearLeft:
+                            self.isRearLeftDoorAnimating = false
+                            self.isRearLeftDoorOpen = true
+                        case .rearRight:
+                            self.isRearRightDoorAnimating = false
+                            self.isRearRightDoorOpen = true
+                        }
+                    }
+                }
+                
+                // Store the timer based on door type
+                switch doorType {
+                case .frontLeft: self.frontLeftDoorAnimationTimer = timer
+                case .frontRight: self.frontRightDoorAnimationTimer = timer
+                case .rearLeft: self.rearLeftDoorAnimationTimer = timer
+                case .rearRight: self.rearRightDoorAnimationTimer = timer
+                }
                 
                 player.play()
             }
@@ -989,51 +1273,46 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Find the trunk node and its animation
             context.coordinator.findTrunkNode(in: loadedScene)
             
+            // Find the door nodes and their animations
+            context.coordinator.findDoorNodes(in: loadedScene)
+            
             // Check initial charge port state and set it without animation
-            if let chargePortState = model.chargePortClosureState {
-                print("🚪 Initial charge port state from model: \(chargePortState)")
+            let chargePortState = model.chargePortClosureState
+            
+            // Set up the initial state immediately
+            if let node = context.coordinator.chargePortNode,
+               let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
                 
-                // Set up the initial state immediately
-                if let node = context.coordinator.chargePortNode,
-                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting initial state: \(chargePortState)")
+                // Stop any existing animations
+                player.stop()
+                
+                // Set the animation state
+                player.speed = 1
+                if chargePortState == .open || chargePortState == .ajar {
+                    // Just play the animation normally
+                    player.animation.timeOffset = 0
+                    player.play()
                     
-                    // Stop any existing animations
-                    player.stop()
+                    // Wait for animation to complete
+                    let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
+                        context.coordinator.isChargePortOpen = true
+                        isSceneLoaded = true
+                    }
+                    context.coordinator.animationTimer = timer
+                } else {
+                    player.animation.timeOffset = 0
+                    context.coordinator.isChargePortOpen = false
+                    player.play()
                     
-                    // Set the animation state
-                    player.speed = 1
-                    if chargePortState == .open || chargePortState == .ajar {
-                        print("🚪 Setting to open position")
-                        // Just play the animation normally
-                        player.animation.timeOffset = 0
-                        player.play()
-                        
-                        // Wait for animation to complete
-                        let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
-                            print("✅ Initial opening animation completed")
-                            context.coordinator.isChargePortOpen = true
-                            isSceneLoaded = true
-                        }
-                        context.coordinator.animationTimer = timer
-                    } else {
-                        print("🚪 Setting to closed position")
-                        player.animation.timeOffset = 0
-                        context.coordinator.isChargePortOpen = false
-                        player.play()
-                        
-                        // Mark scene as loaded after a short delay
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            isSceneLoaded = true
-                        }
+                    // Mark scene as loaded after a short delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        isSceneLoaded = true
                     }
                 }
             } else {
-                print("❓ No charge port state available")
                 // Ensure charge port is closed by default
                 if let node = context.coordinator.chargePortNode,
                    let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting default closed state")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -1049,12 +1328,10 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Check initial frunk state and set it without animation
             if let frunkState = model.frunkClosureState {
-                print("🚪 Initial frunk state from model: \(frunkState)")
                 
                 // Set up the initial state immediately
                 if let node = context.coordinator.frunkNode,
                    let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting initial frunk state: \(frunkState)")
                     
                     // Stop any existing animations
                     player.stop()
@@ -1062,20 +1339,17 @@ struct SceneKitViewAir: UIViewRepresentable {
                     // Set the animation state
                     player.speed = 1
                     if frunkState == .open || frunkState == .ajar {
-                        print("🚪 Setting frunk to open position")
                         // Just play the animation normally
                         player.animation.timeOffset = 0
                         player.play()
                         
                         // Wait for animation to complete
                         let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
-                            print("✅ Initial frunk opening animation completed")
                             context.coordinator.isFrunkOpen = true
                             isSceneLoaded = true
                         }
                         context.coordinator.frunkAnimationTimer = timer
                     } else {
-                        print("🚪 Setting frunk to closed position")
                         player.animation.timeOffset = 0
                         context.coordinator.isFrunkOpen = false
                         player.play()
@@ -1087,11 +1361,9 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 }
             } else {
-                print("❓ No frunk state available")
                 // Ensure frunk is closed by default
                 if let node = context.coordinator.frunkNode,
                    let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting default frunk closed state")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -1107,33 +1379,26 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Check initial trunk state and set it without animation
             if let trunkState = model.trunkClosureState {
-                print("🚪 Initial trunk state from model: \(trunkState)")
-                
                 // Set up the initial state immediately
                 if let node = context.coordinator.trunkNode,
                    let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting initial trunk state: \(trunkState)")
-                    
                     // Stop any existing animations
                     player.stop()
                     
                     // Set the animation state
                     player.speed = 1
                     if trunkState == .open || trunkState == .ajar {
-                        print("🚪 Setting trunk to open position")
                         // Just play the animation normally
                         player.animation.timeOffset = 0
                         player.play()
                         
                         // Wait for animation to complete
                         let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
-                            print("✅ Initial trunk opening animation completed")
                             context.coordinator.isTrunkOpen = true
                             isSceneLoaded = true
                         }
                         context.coordinator.trunkAnimationTimer = timer
                     } else {
-                        print("🚪 Setting trunk to closed position")
                         player.animation.timeOffset = 0
                         context.coordinator.isTrunkOpen = false
                         player.play()
@@ -1145,11 +1410,9 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 }
             } else {
-                print("❓ No trunk state available")
                 // Ensure trunk is closed by default
                 if let node = context.coordinator.trunkNode,
                    let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
-                    print("🚪 Setting default trunk closed state")
                     player.stop()
                     player.speed = 1
                     player.animation.timeOffset = 0
@@ -1162,6 +1425,15 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 }
             }
+            
+            // Check initial door states and set them without animation
+            context.coordinator.handleDoorStateChange(model.frontLeftDoorClosureState, doorType: .frontLeft)
+            
+            context.coordinator.handleDoorStateChange(model.frontRightDoorClosureState, doorType: .frontRight)
+            
+            context.coordinator.handleDoorStateChange(model.rearLeftDoorClosureState, doorType: .rearLeft)
+            
+            context.coordinator.handleDoorStateChange(model.rearRightDoorClosureState, doorType: .rearRight)
         } else {
             Logger.vehicle.error("Failed to load scene using all available methods")
         }
@@ -1195,47 +1467,42 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Only handle state changes after the initial setup is complete and we're not animating
             if isSceneLoaded {
-                print("📊 updateUIView state check - isAnimating: \(context.coordinator.isAnimating), isChargePortOpen: \(context.coordinator.isChargePortOpen)")
-                print("📊 updateUIView state check - isFrunkAnimating: \(context.coordinator.isFrunkAnimating), isFrunkOpen: \(context.coordinator.isFrunkOpen)")
-                print("📊 updateUIView state check - isTrunkAnimating: \(context.coordinator.isTrunkAnimating), isTrunkOpen: \(context.coordinator.isTrunkOpen)")
-                
                 // Handle charge port state changes
-                if let chargePortState = model.chargePortClosureState {
-                    print("📊 Model state update - chargePortState: \(chargePortState)")
-                    if !context.coordinator.isAnimating {
-                        context.coordinator.handleChargePortStateChange(chargePortState)
-                    } else {
-                        print("⏳ Skipping charge port state change due to animation in progress")
-                    }
-                } else {
-                    print("❓ No charge port state available in model")
+                let chargePortState = model.chargePortClosureState
+                if !context.coordinator.isAnimating {
+                    context.coordinator.handleChargePortStateChange(chargePortState)
                 }
                 
                 // Handle frunk state changes
                 if let frunkState = model.frunkClosureState {
-                    print("📊 Model state update - frunkState: \(frunkState)")
                     if !context.coordinator.isFrunkAnimating {
                         context.coordinator.handleFrunkStateChange(frunkState)
-                    } else {
-                        print("⏳ Skipping frunk state change due to animation in progress")
                     }
-                } else {
-                    print("❓ No frunk state available in model")
                 }
                 
                 // Handle trunk state changes
                 if let trunkState = model.trunkClosureState {
-                    print("📊 Model state update - trunkState: \(trunkState)")
                     if !context.coordinator.isTrunkAnimating {
                         context.coordinator.handleTrunkStateChange(trunkState)
-                    } else {
-                        print("⏳ Skipping trunk state change due to animation in progress")
                     }
-                } else {
-                    print("❓ No trunk state available in model")
                 }
-            } else {
-                print("⏳ Scene not yet loaded, skipping state update")
+                
+                // Handle door state changes
+                if !context.coordinator.isFrontLeftDoorAnimating {
+                    context.coordinator.handleDoorStateChange(model.frontLeftDoorClosureState, doorType: .frontLeft)
+                }
+                
+                if !context.coordinator.isFrontRightDoorAnimating {
+                    context.coordinator.handleDoorStateChange(model.frontRightDoorClosureState, doorType: .frontRight)
+                }
+                
+                if !context.coordinator.isRearLeftDoorAnimating {
+                    context.coordinator.handleDoorStateChange(model.rearLeftDoorClosureState, doorType: .rearLeft)
+                }
+                
+                if !context.coordinator.isRearRightDoorAnimating {
+                    context.coordinator.handleDoorStateChange(model.rearRightDoorClosureState, doorType: .rearRight)
+                }
             }
         }
     }

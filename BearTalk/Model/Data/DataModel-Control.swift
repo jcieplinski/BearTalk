@@ -136,32 +136,30 @@ extension DataModel {
     }
     
     func toggleChargePort() {
-        if let closureState = chargePortClosureState {
-            Task { @MainActor in
-                do {
-                    if !vehicleIsReady {
-                        let _ = try await BearAPI.wakeUp()
-                    }
-                    
-                    requestInProgress.insert(.chargePort)
-                    
-                    switch closureState {
-                    case .open, .ajar:
-                        let success = try await BearAPI.chargePortControl(closureState: .closed)
-                        if !success {
-                            // put up an alert
-                        }
-                    case .closed:
-                        let success = try await BearAPI.chargePortControl(closureState: .open)
-                        if !success {
-                            // put up an alert
-                        }
-                    case .unknown, .UNRECOGNIZED(_), .closeError:
-                        break
-                    }
-                } catch let error {
-                    print("Could not toggle chargePort state: \(error)")
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
                 }
+                
+                requestInProgress.insert(.chargePort)
+                
+                switch chargePortClosureState {
+                case .open, .ajar:
+                    let success = try await BearAPI.chargePortControl(closureState: .closed)
+                    if !success {
+                        // put up an alert
+                    }
+                case .closed:
+                    let success = try await BearAPI.chargePortControl(closureState: .open)
+                    if !success {
+                        // put up an alert
+                    }
+                case .unknown, .UNRECOGNIZED(_), .closeError:
+                    break
+                }
+            } catch let error {
+                print("Could not toggle chargePort state: \(error)")
             }
         }
     }
@@ -292,19 +290,17 @@ extension DataModel {
     }
     
     func toggleLights() {
-        if let lightsState = lightsState {
-            switch lightsState {
-            case .off, .unknown, .UNRECOGNIZED(_):
-                lights(action: .on)
-            case .on:
-                lights(action: .off)
-            case .flash:
-                break
-            case .hazardOn:
-                break
-            case .hazardOff:
-                break
-            }
+        switch lightsState {
+        case .off, .unknown, .UNRECOGNIZED(_):
+            lights(action: .on)
+        case .on:
+            lights(action: .off)
+        case .flash:
+            break
+        case .hazardOn:
+            break
+        case .hazardOff:
+            break
         }
     }
     
@@ -313,19 +309,17 @@ extension DataModel {
     }
     
     func toggleHazards() {
-        if let lightsState = lightsState {
-            switch lightsState {
-            case .off, .unknown, .UNRECOGNIZED(_):
-                break
-            case .on:
-                break
-            case .flash:
-                break
-            case .hazardOn:
-                lights(action: .hazardOff)
-            case .hazardOff:
-                lights(action: .hazardOn)
-            }
+        switch lightsState {
+        case .off, .unknown, .UNRECOGNIZED(_):
+            break
+        case .on:
+            break
+        case .flash:
+            break
+        case .hazardOn:
+            lights(action: .hazardOff)
+        case .hazardOff:
+            lights(action: .hazardOn)
         }
     }
     
