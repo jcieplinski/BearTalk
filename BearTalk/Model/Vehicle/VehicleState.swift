@@ -70,6 +70,8 @@ enum PowerState: Codable, Equatable {
     case liveCharge // = 5
     case sleepCharge // = 6
     case liveUpdate // = 7
+    case sleepUpdate // = 8
+    case cloud1 // = 9
     case cloud2 // = 10
     case monitor // = 11
     case UNRECOGNIZED(Int)
@@ -84,6 +86,8 @@ enum PowerState: Codable, Equatable {
         case .liveCharge: self = .liveCharge
         case .sleepCharge: self = .sleepCharge
         case .liveUpdate: self = .liveUpdate
+        case .sleepUpdate: self = .sleepUpdate
+        case .cloud1: self = .cloud1
         case .cloud2: self = .cloud2
         case .monitor: self = .monitor
         case .UNRECOGNIZED(let value): self = .UNRECOGNIZED(value)
@@ -94,7 +98,7 @@ enum PowerState: Codable, Equatable {
         switch self {
         case .unknown:
             "questionmark"
-        case .sleep, .wink, .cloud2:
+        case .sleep, .wink, .cloud1, .cloud2:
             "zzz"
         case .liveCharge:
             "bolt.fill"
@@ -103,6 +107,8 @@ enum PowerState: Codable, Equatable {
         case .monitor, .accessory:
             "parkingsign"
         case .liveUpdate:
+            "car.rear.waves.up"
+        case .sleepUpdate:
             "car.rear.waves.up"
         case .drive:
             "car.rear.road.lane.dashed"

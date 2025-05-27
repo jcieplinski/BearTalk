@@ -22,13 +22,9 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 
 public enum Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
-
-  /// No idea what these actually mean, but these are the only accepted values 
   case notificationChannelUnknown // = 0
-
-  /// One of these is FIREBASE 
-  case notificationChannelOne // = 1
-  case notificationChannelTwo // = 2
+  case notificationChannelFirebase // = 1
+  case notificationChannelBaidu // = 2
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -38,8 +34,8 @@ public enum Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf.Enum, Sw
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .notificationChannelUnknown
-    case 1: self = .notificationChannelOne
-    case 2: self = .notificationChannelTwo
+    case 1: self = .notificationChannelFirebase
+    case 2: self = .notificationChannelBaidu
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -47,8 +43,8 @@ public enum Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf.Enum, Sw
   public var rawValue: Int {
     switch self {
     case .notificationChannelUnknown: return 0
-    case .notificationChannelOne: return 1
-    case .notificationChannelTwo: return 2
+    case .notificationChannelFirebase: return 1
+    case .notificationChannelBaidu: return 2
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -56,8 +52,8 @@ public enum Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf.Enum, Sw
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_NotificationChannelType] = [
     .notificationChannelUnknown,
-    .notificationChannelOne,
-    .notificationChannelTwo,
+    .notificationChannelFirebase,
+    .notificationChannelBaidu,
   ]
 
 }
@@ -65,8 +61,6 @@ public enum Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf.Enum, Sw
 public enum Mobilegateway_Protos_Os: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
-
-  /// Could have these backwards 
   case ios // = 1
   case android // = 2
   case UNRECOGNIZED(Int)
@@ -102,7 +96,7 @@ public enum Mobilegateway_Protos_Os: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Mobilegateway_Protos_Subscription: SwiftProtobuf.Enum, Swift.CaseIterable {
+public enum Mobilegateway_Protos_NotificationCategory: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
   case charge // = 1
@@ -112,6 +106,12 @@ public enum Mobilegateway_Protos_Subscription: SwiftProtobuf.Enum, Swift.CaseIte
   case `required` // = 5
   case cdrEmail // = 6
   case subscription // = 7
+  case referralCampaign // = 8
+  case recallCampaign // = 9
+  case closure // = 10
+  case accessories // = 11
+  case userProfile // = 12
+  case tirePressure // = 13
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -128,6 +128,12 @@ public enum Mobilegateway_Protos_Subscription: SwiftProtobuf.Enum, Swift.CaseIte
     case 5: self = .required
     case 6: self = .cdrEmail
     case 7: self = .subscription
+    case 8: self = .referralCampaign
+    case 9: self = .recallCampaign
+    case 10: self = .closure
+    case 11: self = .accessories
+    case 12: self = .userProfile
+    case 13: self = .tirePressure
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -142,12 +148,18 @@ public enum Mobilegateway_Protos_Subscription: SwiftProtobuf.Enum, Swift.CaseIte
     case .required: return 5
     case .cdrEmail: return 6
     case .subscription: return 7
+    case .referralCampaign: return 8
+    case .recallCampaign: return 9
+    case .closure: return 10
+    case .accessories: return 11
+    case .userProfile: return 12
+    case .tirePressure: return 13
     case .UNRECOGNIZED(let i): return i
     }
   }
 
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_Subscription] = [
+  public static let allCases: [Mobilegateway_Protos_NotificationCategory] = [
     .unknown,
     .charge,
     .security,
@@ -156,6 +168,12 @@ public enum Mobilegateway_Protos_Subscription: SwiftProtobuf.Enum, Swift.CaseIte
     .required,
     .cdrEmail,
     .subscription,
+    .referralCampaign,
+    .recallCampaign,
+    .closure,
+    .accessories,
+    .userProfile,
+    .tirePressure,
   ]
 
 }
@@ -164,6 +182,7 @@ public enum Mobilegateway_Protos_Encryption: SwiftProtobuf.Enum, Swift.CaseItera
   public typealias RawValue = Int
   case unknown // = 0
   case single // = 1
+  case mutual // = 2
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -174,6 +193,7 @@ public enum Mobilegateway_Protos_Encryption: SwiftProtobuf.Enum, Swift.CaseItera
     switch rawValue {
     case 0: self = .unknown
     case 1: self = .single
+    case 2: self = .mutual
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -182,6 +202,7 @@ public enum Mobilegateway_Protos_Encryption: SwiftProtobuf.Enum, Swift.CaseItera
     switch self {
     case .unknown: return 0
     case .single: return 1
+    case .mutual: return 2
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -190,6 +211,49 @@ public enum Mobilegateway_Protos_Encryption: SwiftProtobuf.Enum, Swift.CaseItera
   public static let allCases: [Mobilegateway_Protos_Encryption] = [
     .unknown,
     .single,
+    .mutual,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_ResetPinStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case pending // = 1
+  case approved // = 2
+  case denied // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .pending
+    case 2: self = .approved
+    case 3: self = .denied
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .pending: return 1
+    case .approved: return 2
+    case .denied: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_ResetPinStatus] = [
+    .unknown,
+    .pending,
+    .approved,
+    .denied,
   ]
 
 }
@@ -264,43 +328,54 @@ public struct Mobilegateway_Protos_SessionInfo: Sendable {
   fileprivate var _refreshToken: String? = nil
 }
 
-public struct Mobilegateway_Protos_LoginResponse: Sendable {
+public struct Mobilegateway_Protos_LoginResponse: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uid: String = String()
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
 
   public var sessionInfo: Mobilegateway_Protos_SessionInfo {
-    get {return _sessionInfo ?? Mobilegateway_Protos_SessionInfo()}
-    set {_sessionInfo = newValue}
+    get {return _storage._sessionInfo ?? Mobilegateway_Protos_SessionInfo()}
+    set {_uniqueStorage()._sessionInfo = newValue}
   }
   /// Returns true if `sessionInfo` has been explicitly set.
-  public var hasSessionInfo: Bool {return self._sessionInfo != nil}
+  public var hasSessionInfo: Bool {return _storage._sessionInfo != nil}
   /// Clears the value of `sessionInfo`. Subsequent reads from it will return its default value.
-  public mutating func clearSessionInfo() {self._sessionInfo = nil}
+  public mutating func clearSessionInfo() {_uniqueStorage()._sessionInfo = nil}
 
   public var userProfile: Mobilegateway_Protos_UserProfile {
-    get {return _userProfile ?? Mobilegateway_Protos_UserProfile()}
-    set {_userProfile = newValue}
+    get {return _storage._userProfile ?? Mobilegateway_Protos_UserProfile()}
+    set {_uniqueStorage()._userProfile = newValue}
   }
   /// Returns true if `userProfile` has been explicitly set.
-  public var hasUserProfile: Bool {return self._userProfile != nil}
+  public var hasUserProfile: Bool {return _storage._userProfile != nil}
   /// Clears the value of `userProfile`. Subsequent reads from it will return its default value.
-  public mutating func clearUserProfile() {self._userProfile = nil}
+  public mutating func clearUserProfile() {_uniqueStorage()._userProfile = nil}
 
-  public var userVehicleData: [Mobilegateway_Protos_Vehicle] = []
+  public var userVehicleData: [Mobilegateway_Protos_Vehicle] {
+    get {return _storage._userVehicleData}
+    set {_uniqueStorage()._userVehicleData = newValue}
+  }
 
-  public var subscriptions: [Mobilegateway_Protos_Subscription] = []
+  public var subscriptions: [Mobilegateway_Protos_NotificationCategory] {
+    get {return _storage._subscriptions}
+    set {_uniqueStorage()._subscriptions = newValue}
+  }
 
-  public var encryption: Mobilegateway_Protos_Encryption = .unknown
+  public var encryption: Mobilegateway_Protos_Encryption {
+    get {return _storage._encryption}
+    set {_uniqueStorage()._encryption = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _sessionInfo: Mobilegateway_Protos_SessionInfo? = nil
-  fileprivate var _userProfile: Mobilegateway_Protos_UserProfile? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct Mobilegateway_Protos_GetNewJWTTokenRequest: Sendable {
@@ -329,6 +404,8 @@ public struct Mobilegateway_Protos_GetNewJWTTokenResponse: Sendable {
   /// Clears the value of `sessionInfo`. Subsequent reads from it will return its default value.
   public mutating func clearSessionInfo() {self._sessionInfo = nil}
 
+  public var encryption: Mobilegateway_Protos_Encryption = .unknown
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -336,10 +413,44 @@ public struct Mobilegateway_Protos_GetNewJWTTokenResponse: Sendable {
   fileprivate var _sessionInfo: Mobilegateway_Protos_SessionInfo? = nil
 }
 
+public struct Mobilegateway_Protos_RefreshTokenRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var username: String = String()
+
+  public var password: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_RefreshTokenResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var jwtToken: String = String()
+
+  public var expiryTimeSec: Int32 = 0
+
+  public var gigyaJwt: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_ConfirmResetPinRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var resetPinID: String = String()
+
+  public var status: Mobilegateway_Protos_ResetPinStatus = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -371,7 +482,31 @@ public struct Mobilegateway_Protos_GetSubscriptionResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var subscriptions: [Mobilegateway_Protos_Subscription] = []
+  public var subscriptions: [Mobilegateway_Protos_NotificationCategory] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateSubscriptionRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var enable: [Mobilegateway_Protos_NotificationCategory] = []
+
+  public var disable: [Mobilegateway_Protos_NotificationCategory] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateSubscriptionResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -427,6 +562,16 @@ public struct Mobilegateway_Protos_RefreshNotificationTokenRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var notificationChannelType: Mobilegateway_Protos_NotificationChannelType = .notificationChannelUnknown
+
+  public var os: Mobilegateway_Protos_Os = .unknown
+
+  public var oldDeviceToken: String = String()
+
+  public var newDeviceToken: String = String()
+
+  public var locale: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -466,20 +611,59 @@ public struct Mobilegateway_Protos_SetNickNameResponse: Sendable {
   public init() {}
 }
 
-public struct Mobilegateway_Protos_SetSubscriptionRequest: Sendable {
+public struct Mobilegateway_Protos_ActivateDeviceRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var activationPin: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct Mobilegateway_Protos_SetSubscriptionResponse: Sendable {
+public struct Mobilegateway_Protos_ActivateDeviceResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var sessionInfo: Mobilegateway_Protos_SessionInfo {
+    get {return _sessionInfo ?? Mobilegateway_Protos_SessionInfo()}
+    set {_sessionInfo = newValue}
+  }
+  /// Returns true if `sessionInfo` has been explicitly set.
+  public var hasSessionInfo: Bool {return self._sessionInfo != nil}
+  /// Clears the value of `sessionInfo`. Subsequent reads from it will return its default value.
+  public mutating func clearSessionInfo() {self._sessionInfo = nil}
+
+  public var userVehicleData: [Mobilegateway_Protos_Vehicle] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _sessionInfo: Mobilegateway_Protos_SessionInfo? = nil
+}
+
+public struct Mobilegateway_Protos_DeviceEnrollRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var certificateRequest: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_DeviceEnrollResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var certificate: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -493,8 +677,8 @@ fileprivate let _protobuf_package = "mobilegateway.protos"
 extension Mobilegateway_Protos_NotificationChannelType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "NOTIFICATION_CHANNEL_UNKNOWN"),
-    1: .same(proto: "NOTIFICATION_CHANNEL_ONE"),
-    2: .same(proto: "NOTIFICATION_CHANNEL_TWO"),
+    1: .same(proto: "NOTIFICATION_CHANNEL_FIREBASE"),
+    2: .same(proto: "NOTIFICATION_CHANNEL_BAIDU"),
   ]
 }
 
@@ -506,16 +690,22 @@ extension Mobilegateway_Protos_Os: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension Mobilegateway_Protos_Subscription: SwiftProtobuf._ProtoNameProviding {
+extension Mobilegateway_Protos_NotificationCategory: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "SUBSCRIPTION_UNKNOWN"),
-    1: .same(proto: "SUBSCRIPTION_CHARGE"),
-    2: .same(proto: "SUBSCRIPTION_SECURITY"),
-    3: .same(proto: "SUBSCRIPTION_SOFTWARE"),
-    4: .same(proto: "SUBSCRIPTION_HVAC"),
-    5: .same(proto: "SUBSCRIPTION_REQUIRED"),
-    6: .same(proto: "SUBSCRIPTION_CDR_EMAIL"),
-    7: .same(proto: "SUBSCRIPTION_SUBSCRIPTION"),
+    0: .same(proto: "NOTIFICATION_CATEGORY_UNKNOWN"),
+    1: .same(proto: "NOTIFICATION_CATEGORY_CHARGE"),
+    2: .same(proto: "NOTIFICATION_CATEGORY_SECURITY"),
+    3: .same(proto: "NOTIFICATION_CATEGORY_SOFTWARE"),
+    4: .same(proto: "NOTIFICATION_CATEGORY_HVAC"),
+    5: .same(proto: "NOTIFICATION_CATEGORY_REQUIRED"),
+    6: .same(proto: "NOTIFICATION_CATEGORY_CDR_EMAIL"),
+    7: .same(proto: "NOTIFICATION_CATEGORY_SUBSCRIPTION"),
+    8: .same(proto: "NOTIFICATION_CATEGORY_REFERRAL_CAMPAIGN"),
+    9: .same(proto: "NOTIFICATION_CATEGORY_RECALL_CAMPAIGN"),
+    10: .same(proto: "NOTIFICATION_CATEGORY_CLOSURE"),
+    11: .same(proto: "NOTIFICATION_CATEGORY_ACCESSORIES"),
+    12: .same(proto: "NOTIFICATION_CATEGORY_USER_PROFILE"),
+    13: .same(proto: "NOTIFICATION_CATEGORY_TIRE_PRESSURE"),
   ]
 }
 
@@ -523,6 +713,16 @@ extension Mobilegateway_Protos_Encryption: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "ENCRYPTION_UNKNOWN"),
     1: .same(proto: "ENCRYPTION_SINGLE"),
+    2: .same(proto: "ENCRYPTION_MUTUAL"),
+  ]
+}
+
+extension Mobilegateway_Protos_ResetPinStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "RESET_PIN_STATUS_UNKNOWN"),
+    1: .same(proto: "RESET_PIN_STATUS_PENDING"),
+    2: .same(proto: "RESET_PIN_STATUS_APPROVED"),
+    3: .same(proto: "RESET_PIN_STATUS_DENIED"),
   ]
 }
 
@@ -669,56 +869,106 @@ extension Mobilegateway_Protos_LoginResponse: SwiftProtobuf.Message, SwiftProtob
     6: .same(proto: "encryption"),
   ]
 
+  fileprivate class _StorageClass {
+    var _uid: String = String()
+    var _sessionInfo: Mobilegateway_Protos_SessionInfo? = nil
+    var _userProfile: Mobilegateway_Protos_UserProfile? = nil
+    var _userVehicleData: [Mobilegateway_Protos_Vehicle] = []
+    var _subscriptions: [Mobilegateway_Protos_NotificationCategory] = []
+    var _encryption: Mobilegateway_Protos_Encryption = .unknown
+
+    #if swift(>=5.10)
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _uid = source._uid
+      _sessionInfo = source._sessionInfo
+      _userProfile = source._userProfile
+      _userVehicleData = source._userVehicleData
+      _subscriptions = source._subscriptions
+      _encryption = source._encryption
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.uid) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._sessionInfo) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._userProfile) }()
-      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.userVehicleData) }()
-      case 5: try { try decoder.decodeRepeatedEnumField(value: &self.subscriptions) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self.encryption) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._sessionInfo) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._userProfile) }()
+        case 4: try { try decoder.decodeRepeatedMessageField(value: &_storage._userVehicleData) }()
+        case 5: try { try decoder.decodeRepeatedEnumField(value: &_storage._subscriptions) }()
+        case 6: try { try decoder.decodeSingularEnumField(value: &_storage._encryption) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.uid.isEmpty {
-      try visitor.visitSingularStringField(value: self.uid, fieldNumber: 1)
-    }
-    try { if let v = self._sessionInfo {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._userProfile {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    if !self.userVehicleData.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.userVehicleData, fieldNumber: 4)
-    }
-    if !self.subscriptions.isEmpty {
-      try visitor.visitPackedEnumField(value: self.subscriptions, fieldNumber: 5)
-    }
-    if self.encryption != .unknown {
-      try visitor.visitSingularEnumField(value: self.encryption, fieldNumber: 6)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 1)
+      }
+      try { if let v = _storage._sessionInfo {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._userProfile {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      if !_storage._userVehicleData.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._userVehicleData, fieldNumber: 4)
+      }
+      if !_storage._subscriptions.isEmpty {
+        try visitor.visitPackedEnumField(value: _storage._subscriptions, fieldNumber: 5)
+      }
+      if _storage._encryption != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._encryption, fieldNumber: 6)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_LoginResponse, rhs: Mobilegateway_Protos_LoginResponse) -> Bool {
-    if lhs.uid != rhs.uid {return false}
-    if lhs._sessionInfo != rhs._sessionInfo {return false}
-    if lhs._userProfile != rhs._userProfile {return false}
-    if lhs.userVehicleData != rhs.userVehicleData {return false}
-    if lhs.subscriptions != rhs.subscriptions {return false}
-    if lhs.encryption != rhs.encryption {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._sessionInfo != rhs_storage._sessionInfo {return false}
+        if _storage._userProfile != rhs_storage._userProfile {return false}
+        if _storage._userVehicleData != rhs_storage._userVehicleData {return false}
+        if _storage._subscriptions != rhs_storage._subscriptions {return false}
+        if _storage._encryption != rhs_storage._encryption {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -760,6 +1010,7 @@ extension Mobilegateway_Protos_GetNewJWTTokenResponse: SwiftProtobuf.Message, Sw
   public static let protoMessageName: String = _protobuf_package + ".GetNewJWTTokenResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "session_info"),
+    2: .same(proto: "encryption"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -769,6 +1020,7 @@ extension Mobilegateway_Protos_GetNewJWTTokenResponse: SwiftProtobuf.Message, Sw
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._sessionInfo) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.encryption) }()
       default: break
       }
     }
@@ -782,11 +1034,97 @@ extension Mobilegateway_Protos_GetNewJWTTokenResponse: SwiftProtobuf.Message, Sw
     try { if let v = self._sessionInfo {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
+    if self.encryption != .unknown {
+      try visitor.visitSingularEnumField(value: self.encryption, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetNewJWTTokenResponse, rhs: Mobilegateway_Protos_GetNewJWTTokenResponse) -> Bool {
     if lhs._sessionInfo != rhs._sessionInfo {return false}
+    if lhs.encryption != rhs.encryption {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_RefreshTokenRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RefreshTokenRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "username"),
+    2: .same(proto: "password"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.username) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.username.isEmpty {
+      try visitor.visitSingularStringField(value: self.username, fieldNumber: 1)
+    }
+    if !self.password.isEmpty {
+      try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_RefreshTokenRequest, rhs: Mobilegateway_Protos_RefreshTokenRequest) -> Bool {
+    if lhs.username != rhs.username {return false}
+    if lhs.password != rhs.password {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_RefreshTokenResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RefreshTokenResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "jwt_token"),
+    2: .standard(proto: "expiry_time_sec"),
+    3: .standard(proto: "gigya_jwt"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.jwtToken) }()
+      case 2: try { try decoder.decodeSingularInt32Field(value: &self.expiryTimeSec) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.gigyaJwt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.jwtToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.jwtToken, fieldNumber: 1)
+    }
+    if self.expiryTimeSec != 0 {
+      try visitor.visitSingularInt32Field(value: self.expiryTimeSec, fieldNumber: 2)
+    }
+    if !self.gigyaJwt.isEmpty {
+      try visitor.visitSingularStringField(value: self.gigyaJwt, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_RefreshTokenResponse, rhs: Mobilegateway_Protos_RefreshTokenResponse) -> Bool {
+    if lhs.jwtToken != rhs.jwtToken {return false}
+    if lhs.expiryTimeSec != rhs.expiryTimeSec {return false}
+    if lhs.gigyaJwt != rhs.gigyaJwt {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -794,18 +1132,37 @@ extension Mobilegateway_Protos_GetNewJWTTokenResponse: SwiftProtobuf.Message, Sw
 
 extension Mobilegateway_Protos_ConfirmResetPinRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ConfirmResetPinRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "reset_pin_id"),
+    2: .same(proto: "status"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.resetPinID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.resetPinID.isEmpty {
+      try visitor.visitSingularStringField(value: self.resetPinID, fieldNumber: 1)
+    }
+    if self.status != .unknown {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_ConfirmResetPinRequest, rhs: Mobilegateway_Protos_ConfirmResetPinRequest) -> Bool {
+    if lhs.resetPinID != rhs.resetPinID {return false}
+    if lhs.status != rhs.status {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -876,6 +1233,63 @@ extension Mobilegateway_Protos_GetSubscriptionResponse: SwiftProtobuf.Message, S
 
   public static func ==(lhs: Mobilegateway_Protos_GetSubscriptionResponse, rhs: Mobilegateway_Protos_GetSubscriptionResponse) -> Bool {
     if lhs.subscriptions != rhs.subscriptions {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateSubscriptionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateSubscriptionRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    2: .same(proto: "enable"),
+    3: .same(proto: "disable"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeRepeatedEnumField(value: &self.enable) }()
+      case 3: try { try decoder.decodeRepeatedEnumField(value: &self.disable) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.enable.isEmpty {
+      try visitor.visitPackedEnumField(value: self.enable, fieldNumber: 2)
+    }
+    if !self.disable.isEmpty {
+      try visitor.visitPackedEnumField(value: self.disable, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateSubscriptionRequest, rhs: Mobilegateway_Protos_UpdateSubscriptionRequest) -> Bool {
+    if lhs.enable != rhs.enable {return false}
+    if lhs.disable != rhs.disable {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateSubscriptionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateSubscriptionResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateSubscriptionResponse, rhs: Mobilegateway_Protos_UpdateSubscriptionResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -985,18 +1399,55 @@ extension Mobilegateway_Protos_LogoutResponse: SwiftProtobuf.Message, SwiftProto
 
 extension Mobilegateway_Protos_RefreshNotificationTokenRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RefreshNotificationTokenRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "notification_channel_type"),
+    2: .same(proto: "os"),
+    3: .standard(proto: "old_device_token"),
+    4: .standard(proto: "new_device_token"),
+    5: .same(proto: "locale"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.notificationChannelType) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.os) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.oldDeviceToken) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.newDeviceToken) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.locale) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.notificationChannelType != .notificationChannelUnknown {
+      try visitor.visitSingularEnumField(value: self.notificationChannelType, fieldNumber: 1)
+    }
+    if self.os != .unknown {
+      try visitor.visitSingularEnumField(value: self.os, fieldNumber: 2)
+    }
+    if !self.oldDeviceToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.oldDeviceToken, fieldNumber: 3)
+    }
+    if !self.newDeviceToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.newDeviceToken, fieldNumber: 4)
+    }
+    if !self.locale.isEmpty {
+      try visitor.visitSingularStringField(value: self.locale, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_RefreshNotificationTokenRequest, rhs: Mobilegateway_Protos_RefreshNotificationTokenRequest) -> Bool {
+    if lhs.notificationChannelType != rhs.notificationChannelType {return false}
+    if lhs.os != rhs.os {return false}
+    if lhs.oldDeviceToken != rhs.oldDeviceToken {return false}
+    if lhs.newDeviceToken != rhs.newDeviceToken {return false}
+    if lhs.locale != rhs.locale {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1078,39 +1529,139 @@ extension Mobilegateway_Protos_SetNickNameResponse: SwiftProtobuf.Message, Swift
   }
 }
 
-extension Mobilegateway_Protos_SetSubscriptionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetSubscriptionRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_ActivateDeviceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ActivateDeviceRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "activation_pin"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.activationPin) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.activationPin.isEmpty {
+      try visitor.visitSingularStringField(value: self.activationPin, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_SetSubscriptionRequest, rhs: Mobilegateway_Protos_SetSubscriptionRequest) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_ActivateDeviceRequest, rhs: Mobilegateway_Protos_ActivateDeviceRequest) -> Bool {
+    if lhs.activationPin != rhs.activationPin {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Mobilegateway_Protos_SetSubscriptionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetSubscriptionResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_ActivateDeviceResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ActivateDeviceResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "session_info"),
+    2: .standard(proto: "user_vehicle_data"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._sessionInfo) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.userVehicleData) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._sessionInfo {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.userVehicleData.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.userVehicleData, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_SetSubscriptionResponse, rhs: Mobilegateway_Protos_SetSubscriptionResponse) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_ActivateDeviceResponse, rhs: Mobilegateway_Protos_ActivateDeviceResponse) -> Bool {
+    if lhs._sessionInfo != rhs._sessionInfo {return false}
+    if lhs.userVehicleData != rhs.userVehicleData {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DeviceEnrollRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DeviceEnrollRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "certificate_request"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.certificateRequest) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.certificateRequest.isEmpty {
+      try visitor.visitSingularStringField(value: self.certificateRequest, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DeviceEnrollRequest, rhs: Mobilegateway_Protos_DeviceEnrollRequest) -> Bool {
+    if lhs.certificateRequest != rhs.certificateRequest {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DeviceEnrollResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DeviceEnrollResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "certificate"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.certificate) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.certificate.isEmpty {
+      try visitor.visitSingularStringField(value: self.certificate, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DeviceEnrollResponse, rhs: Mobilegateway_Protos_DeviceEnrollResponse) -> Bool {
+    if lhs.certificate != rhs.certificate {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

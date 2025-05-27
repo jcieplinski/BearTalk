@@ -23,8 +23,8 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 public enum Mobilegateway_Protos_WaypointType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
-  case charging // = 1
-  case waypoint // = 2
+  case waypoint // = 1
+  case evCharger // = 2
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -34,8 +34,8 @@ public enum Mobilegateway_Protos_WaypointType: SwiftProtobuf.Enum, Swift.CaseIte
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unknown
-    case 1: self = .charging
-    case 2: self = .waypoint
+    case 1: self = .waypoint
+    case 2: self = .evCharger
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -43,8 +43,8 @@ public enum Mobilegateway_Protos_WaypointType: SwiftProtobuf.Enum, Swift.CaseIte
   public var rawValue: Int {
     switch self {
     case .unknown: return 0
-    case .charging: return 1
-    case .waypoint: return 2
+    case .waypoint: return 1
+    case .evCharger: return 2
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -52,8 +52,8 @@ public enum Mobilegateway_Protos_WaypointType: SwiftProtobuf.Enum, Swift.CaseIte
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_WaypointType] = [
     .unknown,
-    .charging,
     .waypoint,
+    .evCharger,
   ]
 
 }
@@ -69,7 +69,15 @@ public struct Mobilegateway_Protos_Waypoint: Sendable {
 
   public var address: String = String()
 
+  public var waypointName: String = String()
+
   public var waypointType: Mobilegateway_Protos_WaypointType = .unknown
+
+  public var arrivalChargePercent: Double = 0
+
+  public var departureChargePercent: Double = 0
+
+  public var chargeDurationSecs: UInt64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -80,6 +88,8 @@ public struct Mobilegateway_Protos_Trip: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var tripID: String = String()
 
   public var destinationName: String = String()
 
@@ -109,6 +119,8 @@ public struct Mobilegateway_Protos_Trip: Sendable {
   public var hasChargingStops: Bool {return self._chargingStops != nil}
   /// Clears the value of `chargingStops`. Subsequent reads from it will return its default value.
   public mutating func clearChargingStops() {self._chargingStops = nil}
+
+  public var createdTimeMs: UInt64 = 0
 
   public var waypoints: [Mobilegateway_Protos_Waypoint] = []
 
@@ -171,8 +183,8 @@ fileprivate let _protobuf_package = "mobilegateway.protos"
 extension Mobilegateway_Protos_WaypointType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "WAYPOINT_TYPE_UNKNOWN"),
-    1: .same(proto: "WAYPOINT_TYPE_CHARGING"),
-    2: .same(proto: "WAYPOINT_TYPE_WAYPOINT"),
+    1: .same(proto: "WAYPOINT_TYPE_WAYPOINT"),
+    2: .same(proto: "WAYPOINT_TYPE_EV_CHARGER"),
   ]
 }
 
@@ -182,7 +194,11 @@ extension Mobilegateway_Protos_Waypoint: SwiftProtobuf.Message, SwiftProtobuf._M
     1: .same(proto: "latitude"),
     2: .same(proto: "longitude"),
     3: .same(proto: "address"),
+    4: .standard(proto: "waypoint_name"),
     5: .standard(proto: "waypoint_type"),
+    6: .standard(proto: "arrival_charge_percent"),
+    7: .standard(proto: "departure_charge_percent"),
+    8: .standard(proto: "charge_duration_secs"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -194,7 +210,11 @@ extension Mobilegateway_Protos_Waypoint: SwiftProtobuf.Message, SwiftProtobuf._M
       case 1: try { try decoder.decodeSingularDoubleField(value: &self.latitude) }()
       case 2: try { try decoder.decodeSingularDoubleField(value: &self.longitude) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.address) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.waypointName) }()
       case 5: try { try decoder.decodeSingularEnumField(value: &self.waypointType) }()
+      case 6: try { try decoder.decodeSingularDoubleField(value: &self.arrivalChargePercent) }()
+      case 7: try { try decoder.decodeSingularDoubleField(value: &self.departureChargePercent) }()
+      case 8: try { try decoder.decodeSingularUInt64Field(value: &self.chargeDurationSecs) }()
       default: break
       }
     }
@@ -210,8 +230,20 @@ extension Mobilegateway_Protos_Waypoint: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 3)
     }
+    if !self.waypointName.isEmpty {
+      try visitor.visitSingularStringField(value: self.waypointName, fieldNumber: 4)
+    }
     if self.waypointType != .unknown {
       try visitor.visitSingularEnumField(value: self.waypointType, fieldNumber: 5)
+    }
+    if self.arrivalChargePercent.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.arrivalChargePercent, fieldNumber: 6)
+    }
+    if self.departureChargePercent.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.departureChargePercent, fieldNumber: 7)
+    }
+    if self.chargeDurationSecs != 0 {
+      try visitor.visitSingularUInt64Field(value: self.chargeDurationSecs, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -220,7 +252,11 @@ extension Mobilegateway_Protos_Waypoint: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.latitude != rhs.latitude {return false}
     if lhs.longitude != rhs.longitude {return false}
     if lhs.address != rhs.address {return false}
+    if lhs.waypointName != rhs.waypointName {return false}
     if lhs.waypointType != rhs.waypointType {return false}
+    if lhs.arrivalChargePercent != rhs.arrivalChargePercent {return false}
+    if lhs.departureChargePercent != rhs.departureChargePercent {return false}
+    if lhs.chargeDurationSecs != rhs.chargeDurationSecs {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -229,10 +265,12 @@ extension Mobilegateway_Protos_Waypoint: SwiftProtobuf.Message, SwiftProtobuf._M
 extension Mobilegateway_Protos_Trip: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Trip"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "trip_id"),
     2: .standard(proto: "destination_name"),
     3: .standard(proto: "distance_meters"),
     4: .standard(proto: "elapsed_time_sec"),
     5: .standard(proto: "charging_stops"),
+    6: .standard(proto: "created_time_ms"),
     7: .same(proto: "waypoints"),
     8: .same(proto: "sender"),
   ]
@@ -243,10 +281,12 @@ extension Mobilegateway_Protos_Trip: SwiftProtobuf.Message, SwiftProtobuf._Messa
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tripID) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.destinationName) }()
       case 3: try { try decoder.decodeSingularUInt64Field(value: &self._distanceMeters) }()
       case 4: try { try decoder.decodeSingularUInt64Field(value: &self._elapsedTimeSec) }()
       case 5: try { try decoder.decodeSingularUInt32Field(value: &self._chargingStops) }()
+      case 6: try { try decoder.decodeSingularUInt64Field(value: &self.createdTimeMs) }()
       case 7: try { try decoder.decodeRepeatedMessageField(value: &self.waypoints) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self._sender) }()
       default: break
@@ -259,6 +299,9 @@ extension Mobilegateway_Protos_Trip: SwiftProtobuf.Message, SwiftProtobuf._Messa
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.tripID.isEmpty {
+      try visitor.visitSingularStringField(value: self.tripID, fieldNumber: 1)
+    }
     if !self.destinationName.isEmpty {
       try visitor.visitSingularStringField(value: self.destinationName, fieldNumber: 2)
     }
@@ -271,6 +314,9 @@ extension Mobilegateway_Protos_Trip: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try { if let v = self._chargingStops {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 5)
     } }()
+    if self.createdTimeMs != 0 {
+      try visitor.visitSingularUInt64Field(value: self.createdTimeMs, fieldNumber: 6)
+    }
     if !self.waypoints.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.waypoints, fieldNumber: 7)
     }
@@ -281,10 +327,12 @@ extension Mobilegateway_Protos_Trip: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public static func ==(lhs: Mobilegateway_Protos_Trip, rhs: Mobilegateway_Protos_Trip) -> Bool {
+    if lhs.tripID != rhs.tripID {return false}
     if lhs.destinationName != rhs.destinationName {return false}
     if lhs._distanceMeters != rhs._distanceMeters {return false}
     if lhs._elapsedTimeSec != rhs._elapsedTimeSec {return false}
     if lhs._chargingStops != rhs._chargingStops {return false}
+    if lhs.createdTimeMs != rhs.createdTimeMs {return false}
     if lhs.waypoints != rhs.waypoints {return false}
     if lhs._sender != rhs._sender {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

@@ -48,7 +48,9 @@ enum HvacPower: Codable, Equatable {
     case hvacOn // = 1
     case hvacOff // = 2
     case hvacPrecondition // = 3
+    case hvacResidualHeating // = 5
     case hvacKeepTemp // = 6
+    case hvacHeatstrokePrevention // = 7
     case UNRECOGNIZED(Int)
     
     var intValue: Int {
@@ -57,7 +59,9 @@ enum HvacPower: Codable, Equatable {
         case .hvacOn: return 1
         case .hvacOff: return 2
         case .hvacPrecondition: return 3
+        case .hvacResidualHeating: return 5
         case .hvacKeepTemp: return 6
+        case .hvacHeatstrokePrevention: return 7
         case .UNRECOGNIZED(let int): return int
         }
     }
@@ -66,7 +70,7 @@ enum HvacPower: Codable, Equatable {
         switch self {
         case .unknown, .hvacOff, .UNRECOGNIZED:
             return false
-        case .hvacOn, .hvacPrecondition, .hvacKeepTemp:
+        case .hvacOn, .hvacPrecondition, .hvacKeepTemp, .hvacResidualHeating, .hvacHeatstrokePrevention:
             return true
         }
     }
@@ -77,6 +81,8 @@ enum HvacPower: Codable, Equatable {
         case .hvacOn: self = .hvacOn
         case .hvacOff: self = .hvacOff
         case .hvacPrecondition: self = .hvacPrecondition
+        case .hvacResidualHeating: self = .hvacResidualHeating
+        case .hvacHeatstrokePrevention: self = .hvacHeatstrokePrevention
         case .hvacKeepTemp: self = .hvacKeepTemp
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
@@ -137,12 +143,14 @@ enum LightAction: Codable, Equatable {
 enum PanicState: Codable, Equatable {
     case panicAlarmUnknown // = 0
     case panicAlarmOn // = 1
+    case panicAlarmOff // = 2
     case UNRECOGNIZED(Int)
     
-    init(proto: Mobilegateway_Protos_PanicState) {
+    init(proto: Mobilegateway_Protos_PanicAlarmAction) {
         switch proto {
         case .panicAlarmUnknown: self = .panicAlarmUnknown
         case .panicAlarmOn: self = .panicAlarmOn
+        case .panicAlarmOff: self = .panicAlarmOff
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }
@@ -196,6 +204,7 @@ enum TcuState: Codable, Equatable {
     case tcuUnknown // = 0
     case tcuSleep // = 1
     case tcuDrowsy // = 2
+    case tcuCloud // = 3
     case tcuFull // = 4
     
     /// State during an update
@@ -209,6 +218,7 @@ enum TcuState: Codable, Equatable {
         case .tcuUnknown: self = .tcuUnknown
         case .tcuSleep: self = .tcuSleep
         case .tcuDrowsy: self = .tcuDrowsy
+        case .tcuCloud: self = .tcuCloud
         case .tcuFull: self = .tcuFull
         case .tcuFactory: self = .tcuFactory
         case .tcuPower: self = .tcuPower
@@ -220,13 +230,17 @@ enum TcuState: Codable, Equatable {
 
 enum EnablementState: Codable, Equatable {
     case unknown // = 0
-    case idle // = 3
+    case sentryStateEnabled // = 1
+    case sentryStateDisabled // = 2
+    case sentryStateIdle // = 3
     case UNRECOGNIZED(Int)
     
-    init(proto: Mobilegateway_Protos_EnablementState) {
+    init(proto: Mobilegateway_Protos_SentryEnablementState) {
         switch proto {
         case .unknown: self = .unknown
-        case .idle: self = .idle
+        case .sentryStateEnabled: self = .sentryStateEnabled
+        case .sentryStateDisabled: self = .sentryStateDisabled
+        case .sentryStateIdle: self = .sentryStateIdle
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }
@@ -325,7 +339,13 @@ struct SentryState: Codable, Equatable {
 enum MpbFaultStatus: Codable, Equatable {
     case unknown // = 0
     case normal // = 1
+    case warning // = 2
     case critical // = 3
+    case warningHaps // = 4
+    case criticalHaps // = 5
+    case criticalHwFlt // = 6
+    case reserved // = 7
+    case invalid // = 8
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_MpbFaultStatus) {
@@ -334,6 +354,12 @@ enum MpbFaultStatus: Codable, Equatable {
         case .normal: self = .normal
         case .critical: self = .critical
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        case .warning: self = .warning
+        case .warningHaps: self = .warningHaps
+        case .criticalHaps: self = .criticalHaps
+        case .criticalHwFlt: self = .criticalHwFlt
+        case .reserved: self = .reserved
+        case .invalid: self = .invalid
         }
     }
 }
@@ -761,6 +787,14 @@ enum DriveMode: Codable, Equatable {
     case tow // = 15
     case testDrive // = 16
     case reserved3 // = 17
+    case trackModeA // = 19
+    case trackModeB // = 20
+    case trackModeC // = 21
+    case trailer // = 22
+    case youngAdult // = 23
+    case camping // = 24
+    case train // = 25
+    case custom // = 26
     case UNRECOGNIZED(Int)
     
     init (proto: Mobilegateway_Protos_DriveMode) {
@@ -784,6 +818,14 @@ enum DriveMode: Codable, Equatable {
         case .tow: self = .tow
         case .testDrive: self = .testDrive
         case .reserved3: self = .reserved3
+        case .trackModeA: self = .trackModeA
+        case .trackModeB: self = .trackModeB
+        case .trackModeC: self = .trackModeC
+        case .trailer: self = .trailer
+        case .youngAdult: self = .youngAdult
+        case .camping: self = .camping
+        case .train: self = .train
+        case .custom: self = .custom
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }

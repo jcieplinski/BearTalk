@@ -54,6 +54,60 @@ public enum Mobilegateway_Protos_ImageCategory: SwiftProtobuf.Enum, Swift.CaseIt
 
 }
 
+public enum Mobilegateway_Protos_Capability: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case chargingProfileCapable // = 1
+  case creditCardPayable // = 2
+  case remoteStartStopCapable // = 3
+  case reservable // = 4
+  case rfidReader // = 5
+  case unlockCapable // = 6
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .chargingProfileCapable
+    case 2: self = .creditCardPayable
+    case 3: self = .remoteStartStopCapable
+    case 4: self = .reservable
+    case 5: self = .rfidReader
+    case 6: self = .unlockCapable
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .chargingProfileCapable: return 1
+    case .creditCardPayable: return 2
+    case .remoteStartStopCapable: return 3
+    case .reservable: return 4
+    case .rfidReader: return 5
+    case .unlockCapable: return 6
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_Capability] = [
+    .unknown,
+    .chargingProfileCapable,
+    .creditCardPayable,
+    .remoteStartStopCapable,
+    .reservable,
+    .rfidReader,
+    .unlockCapable,
+  ]
+
+}
+
 public enum Mobilegateway_Protos_ChargingStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
@@ -88,10 +142,34 @@ public enum Mobilegateway_Protos_ChargingStatus: SwiftProtobuf.Enum, Swift.CaseI
 
 }
 
-public enum Mobilegateway_Protos_ConnectorStandard: SwiftProtobuf.Enum, Swift.CaseIterable {
+public enum Mobilegateway_Protos_ConnectorType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
+  case chademo // = 1
+  case domesticA // = 2
+  case domesticB // = 3
+  case domesticC // = 4
+  case domesticD // = 5
+  case domesticE // = 6
+  case domesticF // = 7
+  case domesticG // = 8
+  case domesticH // = 9
+  case domesticI // = 10
+  case domesticJ // = 11
+  case domesticK // = 12
+  case domesticL // = 13
+  case iec603092Single16 // = 14
+  case iec603092Three16 // = 15
+  case iec603092Three32 // = 16
+  case iec603092Three64 // = 17
+  case iec62196T1 // = 18
   case iec62196T1Combo // = 19
+  case iec62196T2 // = 20
+  case iec62196T2Combo // = 21
+  case iec62196T3A // = 22
+  case iec62196T3C // = 23
+  case teslaR // = 24
+  case teslaS // = 25
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -101,7 +179,31 @@ public enum Mobilegateway_Protos_ConnectorStandard: SwiftProtobuf.Enum, Swift.Ca
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unknown
+    case 1: self = .chademo
+    case 2: self = .domesticA
+    case 3: self = .domesticB
+    case 4: self = .domesticC
+    case 5: self = .domesticD
+    case 6: self = .domesticE
+    case 7: self = .domesticF
+    case 8: self = .domesticG
+    case 9: self = .domesticH
+    case 10: self = .domesticI
+    case 11: self = .domesticJ
+    case 12: self = .domesticK
+    case 13: self = .domesticL
+    case 14: self = .iec603092Single16
+    case 15: self = .iec603092Three16
+    case 16: self = .iec603092Three32
+    case 17: self = .iec603092Three64
+    case 18: self = .iec62196T1
     case 19: self = .iec62196T1Combo
+    case 20: self = .iec62196T2
+    case 21: self = .iec62196T2Combo
+    case 22: self = .iec62196T3A
+    case 23: self = .iec62196T3C
+    case 24: self = .teslaR
+    case 25: self = .teslaS
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -109,15 +211,63 @@ public enum Mobilegateway_Protos_ConnectorStandard: SwiftProtobuf.Enum, Swift.Ca
   public var rawValue: Int {
     switch self {
     case .unknown: return 0
+    case .chademo: return 1
+    case .domesticA: return 2
+    case .domesticB: return 3
+    case .domesticC: return 4
+    case .domesticD: return 5
+    case .domesticE: return 6
+    case .domesticF: return 7
+    case .domesticG: return 8
+    case .domesticH: return 9
+    case .domesticI: return 10
+    case .domesticJ: return 11
+    case .domesticK: return 12
+    case .domesticL: return 13
+    case .iec603092Single16: return 14
+    case .iec603092Three16: return 15
+    case .iec603092Three32: return 16
+    case .iec603092Three64: return 17
+    case .iec62196T1: return 18
     case .iec62196T1Combo: return 19
+    case .iec62196T2: return 20
+    case .iec62196T2Combo: return 21
+    case .iec62196T3A: return 22
+    case .iec62196T3C: return 23
+    case .teslaR: return 24
+    case .teslaS: return 25
     case .UNRECOGNIZED(let i): return i
     }
   }
 
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_ConnectorStandard] = [
+  public static let allCases: [Mobilegateway_Protos_ConnectorType] = [
     .unknown,
+    .chademo,
+    .domesticA,
+    .domesticB,
+    .domesticC,
+    .domesticD,
+    .domesticE,
+    .domesticF,
+    .domesticG,
+    .domesticH,
+    .domesticI,
+    .domesticJ,
+    .domesticK,
+    .domesticL,
+    .iec603092Single16,
+    .iec603092Three16,
+    .iec603092Three32,
+    .iec603092Three64,
+    .iec62196T1,
     .iec62196T1Combo,
+    .iec62196T2,
+    .iec62196T2Combo,
+    .iec62196T3A,
+    .iec62196T3C,
+    .teslaR,
+    .teslaS,
   ]
 
 }
@@ -125,6 +275,7 @@ public enum Mobilegateway_Protos_ConnectorStandard: SwiftProtobuf.Enum, Swift.Ca
 public enum Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
+  case socket // = 1
   case cable // = 2
   case UNRECOGNIZED(Int)
 
@@ -135,6 +286,7 @@ public enum Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf.Enum, Swift.Case
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unknown
+    case 1: self = .socket
     case 2: self = .cable
     default: self = .UNRECOGNIZED(rawValue)
     }
@@ -143,6 +295,7 @@ public enum Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf.Enum, Swift.Case
   public var rawValue: Int {
     switch self {
     case .unknown: return 0
+    case .socket: return 1
     case .cable: return 2
     case .UNRECOGNIZED(let i): return i
     }
@@ -151,6 +304,7 @@ public enum Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf.Enum, Swift.Case
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_ConnectorFormat] = [
     .unknown,
+    .socket,
     .cable,
   ]
 
@@ -159,6 +313,8 @@ public enum Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf.Enum, Swift.Case
 public enum Mobilegateway_Protos_PowerType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
+  case ac1Phase // = 1
+  case ac3Phase // = 2
   case dc // = 3
   case UNRECOGNIZED(Int)
 
@@ -169,6 +325,8 @@ public enum Mobilegateway_Protos_PowerType: SwiftProtobuf.Enum, Swift.CaseIterab
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unknown
+    case 1: self = .ac1Phase
+    case 2: self = .ac3Phase
     case 3: self = .dc
     default: self = .UNRECOGNIZED(rawValue)
     }
@@ -177,6 +335,8 @@ public enum Mobilegateway_Protos_PowerType: SwiftProtobuf.Enum, Swift.CaseIterab
   public var rawValue: Int {
     switch self {
     case .unknown: return 0
+    case .ac1Phase: return 1
+    case .ac3Phase: return 2
     case .dc: return 3
     case .UNRECOGNIZED(let i): return i
     }
@@ -185,7 +345,59 @@ public enum Mobilegateway_Protos_PowerType: SwiftProtobuf.Enum, Swift.CaseIterab
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_PowerType] = [
     .unknown,
+    .ac1Phase,
+    .ac3Phase,
     .dc,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_LocationType: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case onStreet // = 0
+  case parkingGarage // = 1
+  case undergroundGarage // = 2
+  case parkingLot // = 3
+  case other // = 4
+  case unknown // = 5
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .onStreet
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .onStreet
+    case 1: self = .parkingGarage
+    case 2: self = .undergroundGarage
+    case 3: self = .parkingLot
+    case 4: self = .other
+    case 5: self = .unknown
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .onStreet: return 0
+    case .parkingGarage: return 1
+    case .undergroundGarage: return 2
+    case .parkingLot: return 3
+    case .other: return 4
+    case .unknown: return 5
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_LocationType] = [
+    .onStreet,
+    .parkingGarage,
+    .undergroundGarage,
+    .parkingLot,
+    .other,
+    .unknown,
   ]
 
 }
@@ -262,6 +474,98 @@ public enum Mobilegateway_Protos_FeeType: SwiftProtobuf.Enum, Swift.CaseIterable
 
 }
 
+public enum Mobilegateway_Protos_AdditionalFilters: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case filterUnknown // = 0
+  case filterOpen24Hours // = 1
+  case filterCurrentlyAvailable // = 2
+  case filterGreenEnergyOnly // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .filterUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .filterUnknown
+    case 1: self = .filterOpen24Hours
+    case 2: self = .filterCurrentlyAvailable
+    case 3: self = .filterGreenEnergyOnly
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .filterUnknown: return 0
+    case .filterOpen24Hours: return 1
+    case .filterCurrentlyAvailable: return 2
+    case .filterGreenEnergyOnly: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_AdditionalFilters] = [
+    .filterUnknown,
+    .filterOpen24Hours,
+    .filterCurrentlyAvailable,
+    .filterGreenEnergyOnly,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_CommandResponseType: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case notSupported // = 1
+  case rejected // = 2
+  case accepted // = 3
+  case timeout // = 4
+  case unknownSession // = 5
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .notSupported
+    case 2: self = .rejected
+    case 3: self = .accepted
+    case 4: self = .timeout
+    case 5: self = .unknownSession
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .notSupported: return 1
+    case .rejected: return 2
+    case .accepted: return 3
+    case .timeout: return 4
+    case .unknownSession: return 5
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_CommandResponseType] = [
+    .unknown,
+    .notSupported,
+    .rejected,
+    .accepted,
+    .timeout,
+    .unknownSession,
+  ]
+
+}
+
 public struct Mobilegateway_Protos_DateTime: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -307,6 +611,8 @@ public struct Mobilegateway_Protos_Operator: Sendable {
 
   public var name: String = String()
 
+  public var website: String = String()
+
   public var logo: Mobilegateway_Protos_Image {
     get {return _logo ?? Mobilegateway_Protos_Image()}
     set {_logo = newValue}
@@ -330,7 +636,7 @@ public struct Mobilegateway_Protos_Connector: Sendable {
 
   public var id: String = String()
 
-  public var standard: Mobilegateway_Protos_ConnectorStandard = .unknown
+  public var standard: Mobilegateway_Protos_ConnectorType = .unknown
 
   public var format: Mobilegateway_Protos_ConnectorFormat = .unknown
 
@@ -340,9 +646,34 @@ public struct Mobilegateway_Protos_Connector: Sendable {
 
   public var amperage: UInt32 = 0
 
-  public var status: Mobilegateway_Protos_ChargingStatus = .unknown
+  public var tariffID: String = String()
 
-  public var power: UInt32 = 0
+  public var termsAndConditions: String = String()
+
+  public var lastUpdated: Mobilegateway_Protos_DateTime {
+    get {return _lastUpdated ?? Mobilegateway_Protos_DateTime()}
+    set {_lastUpdated = newValue}
+  }
+  /// Returns true if `lastUpdated` has been explicitly set.
+  public var hasLastUpdated: Bool {return self._lastUpdated != nil}
+  /// Clears the value of `lastUpdated`. Subsequent reads from it will return its default value.
+  public mutating func clearLastUpdated() {self._lastUpdated = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _lastUpdated: Mobilegateway_Protos_DateTime? = nil
+}
+
+public struct Mobilegateway_Protos_DisplayText: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var language: String = String()
+
+  public var text: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -360,7 +691,11 @@ public struct Mobilegateway_Protos_ChargingSession: Sendable {
 
   public var status: Mobilegateway_Protos_ChargingStatus = .unknown
 
+  public var capabilities: [Mobilegateway_Protos_Capability] = []
+
   public var connectors: [Mobilegateway_Protos_Connector] = []
+
+  public var floorLevel: String = String()
 
   public var coordinates: Mobilegateway_Protos_Location {
     get {return _coordinates ?? Mobilegateway_Protos_Location()}
@@ -373,11 +708,31 @@ public struct Mobilegateway_Protos_ChargingSession: Sendable {
 
   public var physicalReference: String = String()
 
+  public var directions: Mobilegateway_Protos_DisplayText {
+    get {return _directions ?? Mobilegateway_Protos_DisplayText()}
+    set {_directions = newValue}
+  }
+  /// Returns true if `directions` has been explicitly set.
+  public var hasDirections: Bool {return self._directions != nil}
+  /// Clears the value of `directions`. Subsequent reads from it will return its default value.
+  public mutating func clearDirections() {self._directions = nil}
+
+  public var lastUpdated: Mobilegateway_Protos_DateTime {
+    get {return _lastUpdated ?? Mobilegateway_Protos_DateTime()}
+    set {_lastUpdated = newValue}
+  }
+  /// Returns true if `lastUpdated` has been explicitly set.
+  public var hasLastUpdated: Bool {return self._lastUpdated != nil}
+  /// Clears the value of `lastUpdated`. Subsequent reads from it will return its default value.
+  public mutating func clearLastUpdated() {self._lastUpdated = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _coordinates: Mobilegateway_Protos_Location? = nil
+  fileprivate var _directions: Mobilegateway_Protos_DisplayText? = nil
+  fileprivate var _lastUpdated: Mobilegateway_Protos_DateTime? = nil
 }
 
 public struct Mobilegateway_Protos_OpeningTimes: Sendable {
@@ -392,6 +747,22 @@ public struct Mobilegateway_Protos_OpeningTimes: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_AdditionalLocation: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var latitude: Double = 0
+
+  public var longitude: Double = 0
+
+  public var name: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_ChargingLocation: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -400,6 +771,11 @@ public struct Mobilegateway_Protos_ChargingLocation: @unchecked Sendable {
   public var id: String {
     get {return _storage._id}
     set {_uniqueStorage()._id = newValue}
+  }
+
+  public var type: Mobilegateway_Protos_LocationType {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
   }
 
   public var name: String {
@@ -441,6 +817,11 @@ public struct Mobilegateway_Protos_ChargingLocation: @unchecked Sendable {
   /// Clears the value of `coordinates`. Subsequent reads from it will return its default value.
   public mutating func clearCoordinates() {_uniqueStorage()._coordinates = nil}
 
+  public var relatedLocations: [Mobilegateway_Protos_AdditionalLocation] {
+    get {return _storage._relatedLocations}
+    set {_uniqueStorage()._relatedLocations = newValue}
+  }
+
   public var session: Mobilegateway_Protos_ChargingSession {
     get {return _storage._session ?? Mobilegateway_Protos_ChargingSession()}
     set {_uniqueStorage()._session = newValue}
@@ -468,12 +849,20 @@ public struct Mobilegateway_Protos_ChargingLocation: @unchecked Sendable {
   /// Clears the value of `suboperator`. Subsequent reads from it will return its default value.
   public mutating func clearSuboperator() {_uniqueStorage()._suboperator = nil}
 
+  public var owner: Mobilegateway_Protos_Operator {
+    get {return _storage._owner ?? Mobilegateway_Protos_Operator()}
+    set {_uniqueStorage()._owner = newValue}
+  }
+  /// Returns true if `owner` has been explicitly set.
+  public var hasOwner: Bool {return _storage._owner != nil}
+  /// Clears the value of `owner`. Subsequent reads from it will return its default value.
+  public mutating func clearOwner() {_uniqueStorage()._owner = nil}
+
   public var timezone: String {
     get {return _storage._timezone}
     set {_uniqueStorage()._timezone = newValue}
   }
 
-  /// DateTime last_updated = ??; 
   public var openingTimes: Mobilegateway_Protos_OpeningTimes {
     get {return _storage._openingTimes ?? Mobilegateway_Protos_OpeningTimes()}
     set {_uniqueStorage()._openingTimes = newValue}
@@ -482,6 +871,25 @@ public struct Mobilegateway_Protos_ChargingLocation: @unchecked Sendable {
   public var hasOpeningTimes: Bool {return _storage._openingTimes != nil}
   /// Clears the value of `openingTimes`. Subsequent reads from it will return its default value.
   public mutating func clearOpeningTimes() {_uniqueStorage()._openingTimes = nil}
+
+  public var chargingWhenClosed: Bool {
+    get {return _storage._chargingWhenClosed}
+    set {_uniqueStorage()._chargingWhenClosed = newValue}
+  }
+
+  public var images: [Mobilegateway_Protos_Image] {
+    get {return _storage._images}
+    set {_uniqueStorage()._images = newValue}
+  }
+
+  public var lastUpdated: Mobilegateway_Protos_DateTime {
+    get {return _storage._lastUpdated ?? Mobilegateway_Protos_DateTime()}
+    set {_uniqueStorage()._lastUpdated = newValue}
+  }
+  /// Returns true if `lastUpdated` has been explicitly set.
+  public var hasLastUpdated: Bool {return _storage._lastUpdated != nil}
+  /// Clears the value of `lastUpdated`. Subsequent reads from it will return its default value.
+  public mutating func clearLastUpdated() {_uniqueStorage()._lastUpdated = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -506,8 +914,7 @@ public struct Mobilegateway_Protos_Fee: Sendable {
   public init() {}
 }
 
-/// Charging data something? Describes a charging session 
-public struct Mobilegateway_Protos_Cdr: Sendable {
+public struct Mobilegateway_Protos_ChargingDataRecord: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -571,6 +978,8 @@ public struct Mobilegateway_Protos_GetCdrRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var cdrID: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -581,9 +990,20 @@ public struct Mobilegateway_Protos_GetCdrResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var cdr: Mobilegateway_Protos_ChargingDataRecord {
+    get {return _cdr ?? Mobilegateway_Protos_ChargingDataRecord()}
+    set {_cdr = newValue}
+  }
+  /// Returns true if `cdr` has been explicitly set.
+  public var hasCdr: Bool {return self._cdr != nil}
+  /// Clears the value of `cdr`. Subsequent reads from it will return its default value.
+  public mutating func clearCdr() {self._cdr = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _cdr: Mobilegateway_Protos_ChargingDataRecord? = nil
 }
 
 public struct Mobilegateway_Protos_GetCdrsRequest: Sendable {
@@ -592,6 +1012,8 @@ public struct Mobilegateway_Protos_GetCdrsRequest: Sendable {
   // methods supported on all messages.
 
   public var emaID: String = String()
+
+  public var offset: UInt32 = 0
 
   public var limit: UInt32 = 0
 
@@ -605,27 +1027,7 @@ public struct Mobilegateway_Protos_GetCdrsResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var cdr: [Mobilegateway_Protos_Cdr] = []
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
-public struct Mobilegateway_Protos_GetLocationsBoxRequest: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
-public struct Mobilegateway_Protos_GetLocationsBoxResponse: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
+  public var cdr: [Mobilegateway_Protos_ChargingDataRecord] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -655,6 +1057,91 @@ public struct Mobilegateway_Protos_ChargingLocationDistance: Sendable {
   fileprivate var _location: Mobilegateway_Protos_ChargingLocation? = nil
 }
 
+public struct Mobilegateway_Protos_LocationFilter: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var minKw: Int32 = 0
+
+  public var brandSubstring: [String] = []
+
+  public var authType: [Mobilegateway_Protos_Capability] = []
+
+  public var plugType: [Mobilegateway_Protos_PowerType] = []
+
+  public var additionalFilters: [Mobilegateway_Protos_AdditionalFilters] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetLocationsBoxRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var neCorner: Mobilegateway_Protos_Location {
+    get {return _neCorner ?? Mobilegateway_Protos_Location()}
+    set {_neCorner = newValue}
+  }
+  /// Returns true if `neCorner` has been explicitly set.
+  public var hasNeCorner: Bool {return self._neCorner != nil}
+  /// Clears the value of `neCorner`. Subsequent reads from it will return its default value.
+  public mutating func clearNeCorner() {self._neCorner = nil}
+
+  public var swCorner: Mobilegateway_Protos_Location {
+    get {return _swCorner ?? Mobilegateway_Protos_Location()}
+    set {_swCorner = newValue}
+  }
+  /// Returns true if `swCorner` has been explicitly set.
+  public var hasSwCorner: Bool {return self._swCorner != nil}
+  /// Clears the value of `swCorner`. Subsequent reads from it will return its default value.
+  public mutating func clearSwCorner() {self._swCorner = nil}
+
+  public var origin: Mobilegateway_Protos_Location {
+    get {return _origin ?? Mobilegateway_Protos_Location()}
+    set {_origin = newValue}
+  }
+  /// Returns true if `origin` has been explicitly set.
+  public var hasOrigin: Bool {return self._origin != nil}
+  /// Clears the value of `origin`. Subsequent reads from it will return its default value.
+  public mutating func clearOrigin() {self._origin = nil}
+
+  public var limit: Int32 = 0
+
+  public var filters: Mobilegateway_Protos_LocationFilter {
+    get {return _filters ?? Mobilegateway_Protos_LocationFilter()}
+    set {_filters = newValue}
+  }
+  /// Returns true if `filters` has been explicitly set.
+  public var hasFilters: Bool {return self._filters != nil}
+  /// Clears the value of `filters`. Subsequent reads from it will return its default value.
+  public mutating func clearFilters() {self._filters = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _neCorner: Mobilegateway_Protos_Location? = nil
+  fileprivate var _swCorner: Mobilegateway_Protos_Location? = nil
+  fileprivate var _origin: Mobilegateway_Protos_Location? = nil
+  fileprivate var _filters: Mobilegateway_Protos_LocationFilter? = nil
+}
+
+public struct Mobilegateway_Protos_GetLocationsBoxResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var locations: [Mobilegateway_Protos_ChargingLocationDistance] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_GetLocationsByRadiusRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -671,11 +1158,23 @@ public struct Mobilegateway_Protos_GetLocationsByRadiusRequest: Sendable {
 
   public var radius: UInt32 = 0
 
+  public var limit: UInt32 = 0
+
+  public var filters: Mobilegateway_Protos_LocationFilter {
+    get {return _filters ?? Mobilegateway_Protos_LocationFilter()}
+    set {_filters = newValue}
+  }
+  /// Returns true if `filters` has been explicitly set.
+  public var hasFilters: Bool {return self._filters != nil}
+  /// Clears the value of `filters`. Subsequent reads from it will return its default value.
+  public mutating func clearFilters() {self._filters = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _origin: Mobilegateway_Protos_Location? = nil
+  fileprivate var _filters: Mobilegateway_Protos_LocationFilter? = nil
 }
 
 public struct Mobilegateway_Protos_GetLocationsByRadiusResponse: Sendable {
@@ -690,10 +1189,49 @@ public struct Mobilegateway_Protos_GetLocationsByRadiusResponse: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_Tariff: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var id: String = String()
+
+  public var currency: String = String()
+
+  public var tariffAltText: Mobilegateway_Protos_DisplayText {
+    get {return _tariffAltText ?? Mobilegateway_Protos_DisplayText()}
+    set {_tariffAltText = newValue}
+  }
+  /// Returns true if `tariffAltText` has been explicitly set.
+  public var hasTariffAltText: Bool {return self._tariffAltText != nil}
+  /// Clears the value of `tariffAltText`. Subsequent reads from it will return its default value.
+  public mutating func clearTariffAltText() {self._tariffAltText = nil}
+
+  public var tariffAltURL: String = String()
+
+  public var lastUpdated: Mobilegateway_Protos_DateTime {
+    get {return _lastUpdated ?? Mobilegateway_Protos_DateTime()}
+    set {_lastUpdated = newValue}
+  }
+  /// Returns true if `lastUpdated` has been explicitly set.
+  public var hasLastUpdated: Bool {return self._lastUpdated != nil}
+  /// Clears the value of `lastUpdated`. Subsequent reads from it will return its default value.
+  public mutating func clearLastUpdated() {self._lastUpdated = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _tariffAltText: Mobilegateway_Protos_DisplayText? = nil
+  fileprivate var _lastUpdated: Mobilegateway_Protos_DateTime? = nil
+}
+
 public struct Mobilegateway_Protos_GetTariffRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var tariffID: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -705,9 +1243,20 @@ public struct Mobilegateway_Protos_GetTariffResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var tariff: Mobilegateway_Protos_Tariff {
+    get {return _tariff ?? Mobilegateway_Protos_Tariff()}
+    set {_tariff = newValue}
+  }
+  /// Returns true if `tariff` has been explicitly set.
+  public var hasTariff: Bool {return self._tariff != nil}
+  /// Clears the value of `tariff`. Subsequent reads from it will return its default value.
+  public mutating func clearTariff() {self._tariff = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _tariff: Mobilegateway_Protos_Tariff? = nil
 }
 
 public struct Mobilegateway_Protos_RegisterRFIDRequest: Sendable {
@@ -729,6 +1278,42 @@ public struct Mobilegateway_Protos_RegisterRFIDResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var status: UInt64 = 0
+
+  public var statusMessage: String = String()
+
+  public var statusCode: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_DeleteRFIDRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var emaID: String = String()
+
+  public var rfidToken: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_DeleteRFIDResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: UInt64 = 0
+
+  public var statusMessage: String = String()
+
+  public var statusCode: UInt64 = 0
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -738,6 +1323,14 @@ public struct Mobilegateway_Protos_StartSessionRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var emaID: String = String()
+
+  public var locationID: String = String()
+
+  public var evseUid: String = String()
+
+  public var vendorName: Mobilegateway_Protos_ChargingVendor = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -749,6 +1342,8 @@ public struct Mobilegateway_Protos_StartSessionResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var responseType: Mobilegateway_Protos_CommandResponseType = .unknown
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -759,6 +1354,10 @@ public struct Mobilegateway_Protos_StopSessionRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var emaID: String = String()
+
+  public var vendorName: Mobilegateway_Protos_ChargingVendor = .unknown
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -768,6 +1367,53 @@ public struct Mobilegateway_Protos_StopSessionResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var responseType: Mobilegateway_Protos_CommandResponseType = .unknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetChargingAccountInfoRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetChargingAccountInfoResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var chargingAccount: Mobilegateway_Protos_ChargingAccount {
+    get {return _chargingAccount ?? Mobilegateway_Protos_ChargingAccount()}
+    set {_chargingAccount = newValue}
+  }
+  /// Returns true if `chargingAccount` has been explicitly set.
+  public var hasChargingAccount: Bool {return self._chargingAccount != nil}
+  /// Clears the value of `chargingAccount`. Subsequent reads from it will return its default value.
+  public mutating func clearChargingAccount() {self._chargingAccount = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _chargingAccount: Mobilegateway_Protos_ChargingAccount? = nil
+}
+
+public struct Mobilegateway_Protos_GetChargingAccountInfoV2Response: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var chargingAccount: [Mobilegateway_Protos_ChargingAccount] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -785,6 +1431,18 @@ extension Mobilegateway_Protos_ImageCategory: SwiftProtobuf._ProtoNameProviding 
   ]
 }
 
+extension Mobilegateway_Protos_Capability: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "CAPABILITY_UNKNOWN"),
+    1: .same(proto: "CAPABILITY_CHARGING_PROFILE_CAPABLE"),
+    2: .same(proto: "CAPABILITY_CREDIT_CARD_PAYABLE"),
+    3: .same(proto: "CAPABILITY_REMOTE_START_STOP_CAPABLE"),
+    4: .same(proto: "CAPABILITY_RESERVABLE"),
+    5: .same(proto: "CAPABILITY_RFID_READER"),
+    6: .same(proto: "CAPABILITY_UNLOCK_CAPABLE"),
+  ]
+}
+
 extension Mobilegateway_Protos_ChargingStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "CHARGING_STATUS_UNKNOWN"),
@@ -792,16 +1450,41 @@ extension Mobilegateway_Protos_ChargingStatus: SwiftProtobuf._ProtoNameProviding
   ]
 }
 
-extension Mobilegateway_Protos_ConnectorStandard: SwiftProtobuf._ProtoNameProviding {
+extension Mobilegateway_Protos_ConnectorType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "CONNECTOR_STANDARD_UNKNOWN"),
-    19: .same(proto: "CONNECTOR_STANDARD_IEC_62196_T1_COMBO"),
+    0: .same(proto: "CONNECTOR_TYPE_UNKNOWN"),
+    1: .same(proto: "CONNECTOR_TYPE_CHADEMO"),
+    2: .same(proto: "CONNECTOR_TYPE_DOMESTIC_A"),
+    3: .same(proto: "CONNECTOR_TYPE_DOMESTIC_B"),
+    4: .same(proto: "CONNECTOR_TYPE_DOMESTIC_C"),
+    5: .same(proto: "CONNECTOR_TYPE_DOMESTIC_D"),
+    6: .same(proto: "CONNECTOR_TYPE_DOMESTIC_E"),
+    7: .same(proto: "CONNECTOR_TYPE_DOMESTIC_F"),
+    8: .same(proto: "CONNECTOR_TYPE_DOMESTIC_G"),
+    9: .same(proto: "CONNECTOR_TYPE_DOMESTIC_H"),
+    10: .same(proto: "CONNECTOR_TYPE_DOMESTIC_I"),
+    11: .same(proto: "CONNECTOR_TYPE_DOMESTIC_J"),
+    12: .same(proto: "CONNECTOR_TYPE_DOMESTIC_K"),
+    13: .same(proto: "CONNECTOR_TYPE_DOMESTIC_L"),
+    14: .same(proto: "CONNECTOR_TYPE_IEC_60309_2_single_16"),
+    15: .same(proto: "CONNECTOR_TYPE_IEC_60309_2_three_16"),
+    16: .same(proto: "CONNECTOR_TYPE_IEC_60309_2_three_32"),
+    17: .same(proto: "CONNECTOR_TYPE_IEC_60309_2_three_64"),
+    18: .same(proto: "CONNECTOR_TYPE_IEC_62196_T1"),
+    19: .same(proto: "CONNECTOR_TYPE_IEC_62196_T1_COMBO"),
+    20: .same(proto: "CONNECTOR_TYPE_IEC_62196_T2"),
+    21: .same(proto: "CONNECTOR_TYPE_IEC_62196_T2_COMBO"),
+    22: .same(proto: "CONNECTOR_TYPE_IEC_62196_T3A"),
+    23: .same(proto: "CONNECTOR_TYPE_IEC_62196_T3C"),
+    24: .same(proto: "CONNECTOR_TYPE_TESLA_R"),
+    25: .same(proto: "CONNECTOR_TYPE_TESLA_S"),
   ]
 }
 
 extension Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "CONNECTOR_FORMAT_UNKNOWN"),
+    1: .same(proto: "CONNECTOR_FORMAT_SOCKET"),
     2: .same(proto: "CONNECTOR_FORMAT_CABLE"),
   ]
 }
@@ -809,7 +1492,20 @@ extension Mobilegateway_Protos_ConnectorFormat: SwiftProtobuf._ProtoNameProvidin
 extension Mobilegateway_Protos_PowerType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "POWER_TYPE_UNKNOWN"),
+    1: .same(proto: "POWER_TYPE_AC_1_PHASE"),
+    2: .same(proto: "POWER_TYPE_AC_3_PHASE"),
     3: .same(proto: "POWER_TYPE_DC"),
+  ]
+}
+
+extension Mobilegateway_Protos_LocationType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "LOCATION_TYPE_ON_STREET"),
+    1: .same(proto: "LOCATION_TYPE_PARKING_GARAGE"),
+    2: .same(proto: "LOCATION_TYPE_UNDERGROUND_GARAGE"),
+    3: .same(proto: "LOCATION_TYPE_PARKING_LOT"),
+    4: .same(proto: "LOCATION_TYPE_OTHER"),
+    5: .same(proto: "LOCATION_TYPE_UNKNOWN"),
   ]
 }
 
@@ -825,6 +1521,26 @@ extension Mobilegateway_Protos_FeeType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "FEE_TYPE_UNKNOWN"),
     1: .same(proto: "FEE_TYPE_ADD_ON_FEE_FLAT"),
+  ]
+}
+
+extension Mobilegateway_Protos_AdditionalFilters: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "FILTER_UNKNOWN"),
+    1: .same(proto: "FILTER_OPEN_24_HOURS"),
+    2: .same(proto: "FILTER_CURRENTLY_AVAILABLE"),
+    3: .same(proto: "FILTER_GREEN_ENERGY_ONLY"),
+  ]
+}
+
+extension Mobilegateway_Protos_CommandResponseType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "COMMAND_RESPONSE_TYPE_UNKNOWN"),
+    1: .same(proto: "COMMAND_RESPONSE_TYPE_NOT_SUPPORTED"),
+    2: .same(proto: "COMMAND_RESPONSE_TYPE_REJECTED"),
+    3: .same(proto: "COMMAND_RESPONSE_TYPE_ACCEPTED"),
+    4: .same(proto: "COMMAND_RESPONSE_TYPE_TIMEOUT"),
+    5: .same(proto: "COMMAND_RESPONSE_TYPE_UNKNOWN_SESSION"),
   ]
 }
 
@@ -927,6 +1643,7 @@ extension Mobilegateway_Protos_Operator: SwiftProtobuf.Message, SwiftProtobuf._M
   public static let protoMessageName: String = _protobuf_package + ".Operator"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
+    2: .same(proto: "website"),
     3: .same(proto: "logo"),
   ]
 
@@ -937,6 +1654,7 @@ extension Mobilegateway_Protos_Operator: SwiftProtobuf.Message, SwiftProtobuf._M
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.website) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._logo) }()
       default: break
       }
@@ -951,6 +1669,9 @@ extension Mobilegateway_Protos_Operator: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
     }
+    if !self.website.isEmpty {
+      try visitor.visitSingularStringField(value: self.website, fieldNumber: 2)
+    }
     try { if let v = self._logo {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
@@ -959,6 +1680,7 @@ extension Mobilegateway_Protos_Operator: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public static func ==(lhs: Mobilegateway_Protos_Operator, rhs: Mobilegateway_Protos_Operator) -> Bool {
     if lhs.name != rhs.name {return false}
+    if lhs.website != rhs.website {return false}
     if lhs._logo != rhs._logo {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -974,8 +1696,9 @@ extension Mobilegateway_Protos_Connector: SwiftProtobuf.Message, SwiftProtobuf._
     4: .standard(proto: "power_type"),
     5: .same(proto: "voltage"),
     6: .same(proto: "amperage"),
-    11: .same(proto: "status"),
-    12: .same(proto: "power"),
+    7: .standard(proto: "tariff_id"),
+    8: .standard(proto: "terms_and_conditions"),
+    9: .standard(proto: "last_updated"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -990,14 +1713,19 @@ extension Mobilegateway_Protos_Connector: SwiftProtobuf.Message, SwiftProtobuf._
       case 4: try { try decoder.decodeSingularEnumField(value: &self.powerType) }()
       case 5: try { try decoder.decodeSingularUInt32Field(value: &self.voltage) }()
       case 6: try { try decoder.decodeSingularUInt32Field(value: &self.amperage) }()
-      case 11: try { try decoder.decodeSingularEnumField(value: &self.status) }()
-      case 12: try { try decoder.decodeSingularUInt32Field(value: &self.power) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.tariffID) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.termsAndConditions) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._lastUpdated) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -1016,12 +1744,15 @@ extension Mobilegateway_Protos_Connector: SwiftProtobuf.Message, SwiftProtobuf._
     if self.amperage != 0 {
       try visitor.visitSingularUInt32Field(value: self.amperage, fieldNumber: 6)
     }
-    if self.status != .unknown {
-      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 11)
+    if !self.tariffID.isEmpty {
+      try visitor.visitSingularStringField(value: self.tariffID, fieldNumber: 7)
     }
-    if self.power != 0 {
-      try visitor.visitSingularUInt32Field(value: self.power, fieldNumber: 12)
+    if !self.termsAndConditions.isEmpty {
+      try visitor.visitSingularStringField(value: self.termsAndConditions, fieldNumber: 8)
     }
+    try { if let v = self._lastUpdated {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1032,8 +1763,47 @@ extension Mobilegateway_Protos_Connector: SwiftProtobuf.Message, SwiftProtobuf._
     if lhs.powerType != rhs.powerType {return false}
     if lhs.voltage != rhs.voltage {return false}
     if lhs.amperage != rhs.amperage {return false}
-    if lhs.status != rhs.status {return false}
-    if lhs.power != rhs.power {return false}
+    if lhs.tariffID != rhs.tariffID {return false}
+    if lhs.termsAndConditions != rhs.termsAndConditions {return false}
+    if lhs._lastUpdated != rhs._lastUpdated {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DisplayText: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DisplayText"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "language"),
+    2: .same(proto: "text"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.language) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.text) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.language.isEmpty {
+      try visitor.visitSingularStringField(value: self.language, fieldNumber: 1)
+    }
+    if !self.text.isEmpty {
+      try visitor.visitSingularStringField(value: self.text, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DisplayText, rhs: Mobilegateway_Protos_DisplayText) -> Bool {
+    if lhs.language != rhs.language {return false}
+    if lhs.text != rhs.text {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1045,9 +1815,13 @@ extension Mobilegateway_Protos_ChargingSession: SwiftProtobuf.Message, SwiftProt
     1: .same(proto: "uid"),
     2: .standard(proto: "evse_id"),
     3: .same(proto: "status"),
+    5: .same(proto: "capabilities"),
     6: .same(proto: "connectors"),
+    7: .standard(proto: "floor_level"),
     8: .same(proto: "coordinates"),
     9: .standard(proto: "physical_reference"),
+    10: .same(proto: "directions"),
+    13: .standard(proto: "last_updated"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1059,9 +1833,13 @@ extension Mobilegateway_Protos_ChargingSession: SwiftProtobuf.Message, SwiftProt
       case 1: try { try decoder.decodeSingularStringField(value: &self.uid) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.evseID) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 5: try { try decoder.decodeRepeatedEnumField(value: &self.capabilities) }()
       case 6: try { try decoder.decodeRepeatedMessageField(value: &self.connectors) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.floorLevel) }()
       case 8: try { try decoder.decodeSingularMessageField(value: &self._coordinates) }()
       case 9: try { try decoder.decodeSingularStringField(value: &self.physicalReference) }()
+      case 10: try { try decoder.decodeSingularMessageField(value: &self._directions) }()
+      case 13: try { try decoder.decodeSingularMessageField(value: &self._lastUpdated) }()
       default: break
       }
     }
@@ -1081,8 +1859,14 @@ extension Mobilegateway_Protos_ChargingSession: SwiftProtobuf.Message, SwiftProt
     if self.status != .unknown {
       try visitor.visitSingularEnumField(value: self.status, fieldNumber: 3)
     }
+    if !self.capabilities.isEmpty {
+      try visitor.visitPackedEnumField(value: self.capabilities, fieldNumber: 5)
+    }
     if !self.connectors.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.connectors, fieldNumber: 6)
+    }
+    if !self.floorLevel.isEmpty {
+      try visitor.visitSingularStringField(value: self.floorLevel, fieldNumber: 7)
     }
     try { if let v = self._coordinates {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
@@ -1090,6 +1874,12 @@ extension Mobilegateway_Protos_ChargingSession: SwiftProtobuf.Message, SwiftProt
     if !self.physicalReference.isEmpty {
       try visitor.visitSingularStringField(value: self.physicalReference, fieldNumber: 9)
     }
+    try { if let v = self._directions {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    } }()
+    try { if let v = self._lastUpdated {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1097,9 +1887,13 @@ extension Mobilegateway_Protos_ChargingSession: SwiftProtobuf.Message, SwiftProt
     if lhs.uid != rhs.uid {return false}
     if lhs.evseID != rhs.evseID {return false}
     if lhs.status != rhs.status {return false}
+    if lhs.capabilities != rhs.capabilities {return false}
     if lhs.connectors != rhs.connectors {return false}
+    if lhs.floorLevel != rhs.floorLevel {return false}
     if lhs._coordinates != rhs._coordinates {return false}
     if lhs.physicalReference != rhs.physicalReference {return false}
+    if lhs._directions != rhs._directions {return false}
+    if lhs._lastUpdated != rhs._lastUpdated {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1137,10 +1931,55 @@ extension Mobilegateway_Protos_OpeningTimes: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
+extension Mobilegateway_Protos_AdditionalLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AdditionalLocation"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "latitude"),
+    2: .same(proto: "longitude"),
+    3: .same(proto: "name"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularDoubleField(value: &self.latitude) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self.longitude) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.latitude.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.latitude, fieldNumber: 1)
+    }
+    if self.longitude.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.longitude, fieldNumber: 2)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_AdditionalLocation, rhs: Mobilegateway_Protos_AdditionalLocation) -> Bool {
+    if lhs.latitude != rhs.latitude {return false}
+    if lhs.longitude != rhs.longitude {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ChargingLocation"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
+    2: .same(proto: "type"),
     3: .same(proto: "name"),
     4: .same(proto: "address"),
     5: .same(proto: "city"),
@@ -1148,15 +1987,21 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
     7: .same(proto: "state"),
     8: .same(proto: "country"),
     9: .same(proto: "coordinates"),
+    10: .standard(proto: "related_locations"),
     11: .same(proto: "session"),
     13: .same(proto: "operator"),
     14: .same(proto: "suboperator"),
+    15: .same(proto: "owner"),
     17: .same(proto: "timezone"),
     18: .standard(proto: "opening_times"),
+    19: .standard(proto: "charging_when_closed"),
+    20: .same(proto: "images"),
+    22: .standard(proto: "last_updated"),
   ]
 
   fileprivate class _StorageClass {
     var _id: String = String()
+    var _type: Mobilegateway_Protos_LocationType = .onStreet
     var _name: String = String()
     var _address: String = String()
     var _city: String = String()
@@ -1164,11 +2009,16 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
     var _state: String = String()
     var _country: String = String()
     var _coordinates: Mobilegateway_Protos_Location? = nil
+    var _relatedLocations: [Mobilegateway_Protos_AdditionalLocation] = []
     var _session: Mobilegateway_Protos_ChargingSession? = nil
     var _operator: Mobilegateway_Protos_Operator? = nil
     var _suboperator: Mobilegateway_Protos_Operator? = nil
+    var _owner: Mobilegateway_Protos_Operator? = nil
     var _timezone: String = String()
     var _openingTimes: Mobilegateway_Protos_OpeningTimes? = nil
+    var _chargingWhenClosed: Bool = false
+    var _images: [Mobilegateway_Protos_Image] = []
+    var _lastUpdated: Mobilegateway_Protos_DateTime? = nil
 
     #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
@@ -1184,6 +2034,7 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
 
     init(copying source: _StorageClass) {
       _id = source._id
+      _type = source._type
       _name = source._name
       _address = source._address
       _city = source._city
@@ -1191,11 +2042,16 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
       _state = source._state
       _country = source._country
       _coordinates = source._coordinates
+      _relatedLocations = source._relatedLocations
       _session = source._session
       _operator = source._operator
       _suboperator = source._suboperator
+      _owner = source._owner
       _timezone = source._timezone
       _openingTimes = source._openingTimes
+      _chargingWhenClosed = source._chargingWhenClosed
+      _images = source._images
+      _lastUpdated = source._lastUpdated
     }
   }
 
@@ -1215,6 +2071,7 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._id) }()
+        case 2: try { try decoder.decodeSingularEnumField(value: &_storage._type) }()
         case 3: try { try decoder.decodeSingularStringField(value: &_storage._name) }()
         case 4: try { try decoder.decodeSingularStringField(value: &_storage._address) }()
         case 5: try { try decoder.decodeSingularStringField(value: &_storage._city) }()
@@ -1222,11 +2079,16 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
         case 7: try { try decoder.decodeSingularStringField(value: &_storage._state) }()
         case 8: try { try decoder.decodeSingularStringField(value: &_storage._country) }()
         case 9: try { try decoder.decodeSingularMessageField(value: &_storage._coordinates) }()
+        case 10: try { try decoder.decodeRepeatedMessageField(value: &_storage._relatedLocations) }()
         case 11: try { try decoder.decodeSingularMessageField(value: &_storage._session) }()
         case 13: try { try decoder.decodeSingularMessageField(value: &_storage._operator) }()
         case 14: try { try decoder.decodeSingularMessageField(value: &_storage._suboperator) }()
+        case 15: try { try decoder.decodeSingularMessageField(value: &_storage._owner) }()
         case 17: try { try decoder.decodeSingularStringField(value: &_storage._timezone) }()
         case 18: try { try decoder.decodeSingularMessageField(value: &_storage._openingTimes) }()
+        case 19: try { try decoder.decodeSingularBoolField(value: &_storage._chargingWhenClosed) }()
+        case 20: try { try decoder.decodeRepeatedMessageField(value: &_storage._images) }()
+        case 22: try { try decoder.decodeSingularMessageField(value: &_storage._lastUpdated) }()
         default: break
         }
       }
@@ -1241,6 +2103,9 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._id.isEmpty {
         try visitor.visitSingularStringField(value: _storage._id, fieldNumber: 1)
+      }
+      if _storage._type != .onStreet {
+        try visitor.visitSingularEnumField(value: _storage._type, fieldNumber: 2)
       }
       if !_storage._name.isEmpty {
         try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 3)
@@ -1263,6 +2128,9 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
       try { if let v = _storage._coordinates {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
       } }()
+      if !_storage._relatedLocations.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._relatedLocations, fieldNumber: 10)
+      }
       try { if let v = _storage._session {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
       } }()
@@ -1272,11 +2140,23 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
       try { if let v = _storage._suboperator {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
       } }()
+      try { if let v = _storage._owner {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      } }()
       if !_storage._timezone.isEmpty {
         try visitor.visitSingularStringField(value: _storage._timezone, fieldNumber: 17)
       }
       try { if let v = _storage._openingTimes {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+      } }()
+      if _storage._chargingWhenClosed != false {
+        try visitor.visitSingularBoolField(value: _storage._chargingWhenClosed, fieldNumber: 19)
+      }
+      if !_storage._images.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._images, fieldNumber: 20)
+      }
+      try { if let v = _storage._lastUpdated {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
       } }()
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -1288,6 +2168,7 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
         let _storage = _args.0
         let rhs_storage = _args.1
         if _storage._id != rhs_storage._id {return false}
+        if _storage._type != rhs_storage._type {return false}
         if _storage._name != rhs_storage._name {return false}
         if _storage._address != rhs_storage._address {return false}
         if _storage._city != rhs_storage._city {return false}
@@ -1295,11 +2176,16 @@ extension Mobilegateway_Protos_ChargingLocation: SwiftProtobuf.Message, SwiftPro
         if _storage._state != rhs_storage._state {return false}
         if _storage._country != rhs_storage._country {return false}
         if _storage._coordinates != rhs_storage._coordinates {return false}
+        if _storage._relatedLocations != rhs_storage._relatedLocations {return false}
         if _storage._session != rhs_storage._session {return false}
         if _storage._operator != rhs_storage._operator {return false}
         if _storage._suboperator != rhs_storage._suboperator {return false}
+        if _storage._owner != rhs_storage._owner {return false}
         if _storage._timezone != rhs_storage._timezone {return false}
         if _storage._openingTimes != rhs_storage._openingTimes {return false}
+        if _storage._chargingWhenClosed != rhs_storage._chargingWhenClosed {return false}
+        if _storage._images != rhs_storage._images {return false}
+        if _storage._lastUpdated != rhs_storage._lastUpdated {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -1353,8 +2239,8 @@ extension Mobilegateway_Protos_Fee: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Mobilegateway_Protos_Cdr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Cdr"
+extension Mobilegateway_Protos_ChargingDataRecord: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChargingDataRecord"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "start_datetime"),
@@ -1437,7 +2323,7 @@ extension Mobilegateway_Protos_Cdr: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_Cdr, rhs: Mobilegateway_Protos_Cdr) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_ChargingDataRecord, rhs: Mobilegateway_Protos_ChargingDataRecord) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs._startDatetime != rhs._startDatetime {return false}
     if lhs._stopDatetime != rhs._stopDatetime {return false}
@@ -1457,18 +2343,31 @@ extension Mobilegateway_Protos_Cdr: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
 extension Mobilegateway_Protos_GetCdrRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetCdrRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "cdr_id"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.cdrID) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.cdrID.isEmpty {
+      try visitor.visitSingularStringField(value: self.cdrID, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetCdrRequest, rhs: Mobilegateway_Protos_GetCdrRequest) -> Bool {
+    if lhs.cdrID != rhs.cdrID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1476,18 +2375,35 @@ extension Mobilegateway_Protos_GetCdrRequest: SwiftProtobuf.Message, SwiftProtob
 
 extension Mobilegateway_Protos_GetCdrResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetCdrResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    2: .same(proto: "cdr"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._cdr) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._cdr {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetCdrResponse, rhs: Mobilegateway_Protos_GetCdrResponse) -> Bool {
+    if lhs._cdr != rhs._cdr {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1497,6 +2413,7 @@ extension Mobilegateway_Protos_GetCdrsRequest: SwiftProtobuf.Message, SwiftProto
   public static let protoMessageName: String = _protobuf_package + ".GetCdrsRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "ema_id"),
+    2: .same(proto: "offset"),
     3: .same(proto: "limit"),
   ]
 
@@ -1507,6 +2424,7 @@ extension Mobilegateway_Protos_GetCdrsRequest: SwiftProtobuf.Message, SwiftProto
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.emaID) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.offset) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self.limit) }()
       default: break
       }
@@ -1517,6 +2435,9 @@ extension Mobilegateway_Protos_GetCdrsRequest: SwiftProtobuf.Message, SwiftProto
     if !self.emaID.isEmpty {
       try visitor.visitSingularStringField(value: self.emaID, fieldNumber: 1)
     }
+    if self.offset != 0 {
+      try visitor.visitSingularUInt32Field(value: self.offset, fieldNumber: 2)
+    }
     if self.limit != 0 {
       try visitor.visitSingularUInt32Field(value: self.limit, fieldNumber: 3)
     }
@@ -1525,6 +2446,7 @@ extension Mobilegateway_Protos_GetCdrsRequest: SwiftProtobuf.Message, SwiftProto
 
   public static func ==(lhs: Mobilegateway_Protos_GetCdrsRequest, rhs: Mobilegateway_Protos_GetCdrsRequest) -> Bool {
     if lhs.emaID != rhs.emaID {return false}
+    if lhs.offset != rhs.offset {return false}
     if lhs.limit != rhs.limit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -1558,44 +2480,6 @@ extension Mobilegateway_Protos_GetCdrsResponse: SwiftProtobuf.Message, SwiftProt
 
   public static func ==(lhs: Mobilegateway_Protos_GetCdrsResponse, rhs: Mobilegateway_Protos_GetCdrsResponse) -> Bool {
     if lhs.cdr != rhs.cdr {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Mobilegateway_Protos_GetLocationsBoxRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetLocationsBoxRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_GetLocationsBoxRequest, rhs: Mobilegateway_Protos_GetLocationsBoxRequest) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Mobilegateway_Protos_GetLocationsBoxResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetLocationsBoxResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_GetLocationsBoxResponse, rhs: Mobilegateway_Protos_GetLocationsBoxResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1643,11 +2527,161 @@ extension Mobilegateway_Protos_ChargingLocationDistance: SwiftProtobuf.Message, 
   }
 }
 
+extension Mobilegateway_Protos_LocationFilter: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocationFilter"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "min_kw"),
+    2: .standard(proto: "brand_substring"),
+    3: .standard(proto: "auth_type"),
+    4: .standard(proto: "plug_type"),
+    5: .standard(proto: "additional_filters"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.minKw) }()
+      case 2: try { try decoder.decodeRepeatedStringField(value: &self.brandSubstring) }()
+      case 3: try { try decoder.decodeRepeatedEnumField(value: &self.authType) }()
+      case 4: try { try decoder.decodeRepeatedEnumField(value: &self.plugType) }()
+      case 5: try { try decoder.decodeRepeatedEnumField(value: &self.additionalFilters) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.minKw != 0 {
+      try visitor.visitSingularInt32Field(value: self.minKw, fieldNumber: 1)
+    }
+    if !self.brandSubstring.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.brandSubstring, fieldNumber: 2)
+    }
+    if !self.authType.isEmpty {
+      try visitor.visitPackedEnumField(value: self.authType, fieldNumber: 3)
+    }
+    if !self.plugType.isEmpty {
+      try visitor.visitPackedEnumField(value: self.plugType, fieldNumber: 4)
+    }
+    if !self.additionalFilters.isEmpty {
+      try visitor.visitPackedEnumField(value: self.additionalFilters, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_LocationFilter, rhs: Mobilegateway_Protos_LocationFilter) -> Bool {
+    if lhs.minKw != rhs.minKw {return false}
+    if lhs.brandSubstring != rhs.brandSubstring {return false}
+    if lhs.authType != rhs.authType {return false}
+    if lhs.plugType != rhs.plugType {return false}
+    if lhs.additionalFilters != rhs.additionalFilters {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetLocationsBoxRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetLocationsBoxRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "ne_corner"),
+    2: .standard(proto: "sw_corner"),
+    3: .same(proto: "origin"),
+    4: .same(proto: "limit"),
+    5: .same(proto: "filters"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._neCorner) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._swCorner) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._origin) }()
+      case 4: try { try decoder.decodeSingularInt32Field(value: &self.limit) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._filters) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._neCorner {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._swCorner {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._origin {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    if self.limit != 0 {
+      try visitor.visitSingularInt32Field(value: self.limit, fieldNumber: 4)
+    }
+    try { if let v = self._filters {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetLocationsBoxRequest, rhs: Mobilegateway_Protos_GetLocationsBoxRequest) -> Bool {
+    if lhs._neCorner != rhs._neCorner {return false}
+    if lhs._swCorner != rhs._swCorner {return false}
+    if lhs._origin != rhs._origin {return false}
+    if lhs.limit != rhs.limit {return false}
+    if lhs._filters != rhs._filters {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetLocationsBoxResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetLocationsBoxResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "locations"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.locations) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.locations.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.locations, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetLocationsBoxResponse, rhs: Mobilegateway_Protos_GetLocationsBoxResponse) -> Bool {
+    if lhs.locations != rhs.locations {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_GetLocationsByRadiusRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetLocationsByRadiusRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "origin"),
     2: .same(proto: "radius"),
+    3: .same(proto: "limit"),
+    4: .same(proto: "filters"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1658,6 +2692,8 @@ extension Mobilegateway_Protos_GetLocationsByRadiusRequest: SwiftProtobuf.Messag
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._origin) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self.radius) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.limit) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._filters) }()
       default: break
       }
     }
@@ -1674,12 +2710,20 @@ extension Mobilegateway_Protos_GetLocationsByRadiusRequest: SwiftProtobuf.Messag
     if self.radius != 0 {
       try visitor.visitSingularUInt32Field(value: self.radius, fieldNumber: 2)
     }
+    if self.limit != 0 {
+      try visitor.visitSingularUInt32Field(value: self.limit, fieldNumber: 3)
+    }
+    try { if let v = self._filters {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetLocationsByRadiusRequest, rhs: Mobilegateway_Protos_GetLocationsByRadiusRequest) -> Bool {
     if lhs._origin != rhs._origin {return false}
     if lhs.radius != rhs.radius {return false}
+    if lhs.limit != rhs.limit {return false}
+    if lhs._filters != rhs._filters {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1717,20 +2761,93 @@ extension Mobilegateway_Protos_GetLocationsByRadiusResponse: SwiftProtobuf.Messa
   }
 }
 
-extension Mobilegateway_Protos_GetTariffRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetTariffRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_Tariff: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Tariff"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "currency"),
+    3: .standard(proto: "tariff_alt_text"),
+    4: .standard(proto: "tariff_alt_url"),
+    7: .standard(proto: "last_updated"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.currency) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._tariffAltText) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.tariffAltURL) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._lastUpdated) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
+    }
+    if !self.currency.isEmpty {
+      try visitor.visitSingularStringField(value: self.currency, fieldNumber: 2)
+    }
+    try { if let v = self._tariffAltText {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    if !self.tariffAltURL.isEmpty {
+      try visitor.visitSingularStringField(value: self.tariffAltURL, fieldNumber: 4)
+    }
+    try { if let v = self._lastUpdated {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_Tariff, rhs: Mobilegateway_Protos_Tariff) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.currency != rhs.currency {return false}
+    if lhs._tariffAltText != rhs._tariffAltText {return false}
+    if lhs.tariffAltURL != rhs.tariffAltURL {return false}
+    if lhs._lastUpdated != rhs._lastUpdated {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetTariffRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetTariffRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "tariff_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tariffID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tariffID.isEmpty {
+      try visitor.visitSingularStringField(value: self.tariffID, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetTariffRequest, rhs: Mobilegateway_Protos_GetTariffRequest) -> Bool {
+    if lhs.tariffID != rhs.tariffID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1738,18 +2855,35 @@ extension Mobilegateway_Protos_GetTariffRequest: SwiftProtobuf.Message, SwiftPro
 
 extension Mobilegateway_Protos_GetTariffResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetTariffResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "tariff"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._tariff) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._tariff {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetTariffResponse, rhs: Mobilegateway_Protos_GetTariffResponse) -> Bool {
+    if lhs._tariff != rhs._tariff {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1795,18 +2929,125 @@ extension Mobilegateway_Protos_RegisterRFIDRequest: SwiftProtobuf.Message, Swift
 
 extension Mobilegateway_Protos_RegisterRFIDResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RegisterRFIDResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .standard(proto: "status_message"),
+    3: .standard(proto: "status_code"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.statusMessage) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.statusCode) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.status != 0 {
+      try visitor.visitSingularUInt64Field(value: self.status, fieldNumber: 1)
+    }
+    if !self.statusMessage.isEmpty {
+      try visitor.visitSingularStringField(value: self.statusMessage, fieldNumber: 2)
+    }
+    if self.statusCode != 0 {
+      try visitor.visitSingularUInt64Field(value: self.statusCode, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_RegisterRFIDResponse, rhs: Mobilegateway_Protos_RegisterRFIDResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.statusMessage != rhs.statusMessage {return false}
+    if lhs.statusCode != rhs.statusCode {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DeleteRFIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DeleteRFIDRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "ema_id"),
+    2: .standard(proto: "rfid_token"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.emaID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.rfidToken) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.emaID.isEmpty {
+      try visitor.visitSingularStringField(value: self.emaID, fieldNumber: 1)
+    }
+    if !self.rfidToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.rfidToken, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DeleteRFIDRequest, rhs: Mobilegateway_Protos_DeleteRFIDRequest) -> Bool {
+    if lhs.emaID != rhs.emaID {return false}
+    if lhs.rfidToken != rhs.rfidToken {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DeleteRFIDResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DeleteRFIDResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .standard(proto: "status_message"),
+    3: .standard(proto: "status_code"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.statusMessage) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.statusCode) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.status != 0 {
+      try visitor.visitSingularUInt64Field(value: self.status, fieldNumber: 1)
+    }
+    if !self.statusMessage.isEmpty {
+      try visitor.visitSingularStringField(value: self.statusMessage, fieldNumber: 2)
+    }
+    if self.statusCode != 0 {
+      try visitor.visitSingularUInt64Field(value: self.statusCode, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DeleteRFIDResponse, rhs: Mobilegateway_Protos_DeleteRFIDResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.statusMessage != rhs.statusMessage {return false}
+    if lhs.statusCode != rhs.statusCode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1814,18 +3055,49 @@ extension Mobilegateway_Protos_RegisterRFIDResponse: SwiftProtobuf.Message, Swif
 
 extension Mobilegateway_Protos_StartSessionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StartSessionRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "ema_id"),
+    2: .standard(proto: "location_id"),
+    3: .standard(proto: "evse_uid"),
+    4: .standard(proto: "vendor_name"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.emaID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.locationID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.evseUid) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.vendorName) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.emaID.isEmpty {
+      try visitor.visitSingularStringField(value: self.emaID, fieldNumber: 1)
+    }
+    if !self.locationID.isEmpty {
+      try visitor.visitSingularStringField(value: self.locationID, fieldNumber: 2)
+    }
+    if !self.evseUid.isEmpty {
+      try visitor.visitSingularStringField(value: self.evseUid, fieldNumber: 3)
+    }
+    if self.vendorName != .unknown {
+      try visitor.visitSingularEnumField(value: self.vendorName, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_StartSessionRequest, rhs: Mobilegateway_Protos_StartSessionRequest) -> Bool {
+    if lhs.emaID != rhs.emaID {return false}
+    if lhs.locationID != rhs.locationID {return false}
+    if lhs.evseUid != rhs.evseUid {return false}
+    if lhs.vendorName != rhs.vendorName {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1833,18 +3105,31 @@ extension Mobilegateway_Protos_StartSessionRequest: SwiftProtobuf.Message, Swift
 
 extension Mobilegateway_Protos_StartSessionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StartSessionResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "response_type"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.responseType) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.responseType != .unknown {
+      try visitor.visitSingularEnumField(value: self.responseType, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_StartSessionResponse, rhs: Mobilegateway_Protos_StartSessionResponse) -> Bool {
+    if lhs.responseType != rhs.responseType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1852,18 +3137,37 @@ extension Mobilegateway_Protos_StartSessionResponse: SwiftProtobuf.Message, Swif
 
 extension Mobilegateway_Protos_StopSessionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StopSessionRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "ema_id"),
+    2: .standard(proto: "vendor_name"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.emaID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.vendorName) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.emaID.isEmpty {
+      try visitor.visitSingularStringField(value: self.emaID, fieldNumber: 1)
+    }
+    if self.vendorName != .unknown {
+      try visitor.visitSingularEnumField(value: self.vendorName, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_StopSessionRequest, rhs: Mobilegateway_Protos_StopSessionRequest) -> Bool {
+    if lhs.emaID != rhs.emaID {return false}
+    if lhs.vendorName != rhs.vendorName {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1871,18 +3175,131 @@ extension Mobilegateway_Protos_StopSessionRequest: SwiftProtobuf.Message, SwiftP
 
 extension Mobilegateway_Protos_StopSessionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StopSessionResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "response_type"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.responseType) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.responseType != .unknown {
+      try visitor.visitSingularEnumField(value: self.responseType, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_StopSessionResponse, rhs: Mobilegateway_Protos_StopSessionResponse) -> Bool {
+    if lhs.responseType != rhs.responseType {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetChargingAccountInfoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetChargingAccountInfoRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetChargingAccountInfoRequest, rhs: Mobilegateway_Protos_GetChargingAccountInfoRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetChargingAccountInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetChargingAccountInfoResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "charging_account"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._chargingAccount) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._chargingAccount {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetChargingAccountInfoResponse, rhs: Mobilegateway_Protos_GetChargingAccountInfoResponse) -> Bool {
+    if lhs._chargingAccount != rhs._chargingAccount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetChargingAccountInfoV2Response: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetChargingAccountInfoV2Response"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "charging_account"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.chargingAccount) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chargingAccount.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.chargingAccount, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetChargingAccountInfoV2Response, rhs: Mobilegateway_Protos_GetChargingAccountInfoV2Response) -> Bool {
+    if lhs.chargingAccount != rhs.chargingAccount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -35,10 +35,11 @@ struct BodyState: Codable, Equatable {
 
 
 enum DoorState: Codable, Equatable {
-    case unknown
-    case `open`
-    case closed
-    case ajar
+    case unknown // = 0
+    case `open` // = 1
+    case closed // = 2
+    case ajar // = 3
+    case closeError // = 4
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_DoorState) {
@@ -51,6 +52,8 @@ enum DoorState: Codable, Equatable {
             self = .closed
         case .ajar:
             self = .ajar
+        case .closeError:
+            self = .closeError
         case .UNRECOGNIZED(let int):
             self = .UNRECOGNIZED(int)
         }
@@ -62,6 +65,7 @@ enum DoorState: Codable, Equatable {
         case .open: 1
         case .closed: 2
         case .ajar: 3
+        case .closeError: 4
         case .UNRECOGNIZED(let int): int
         }
     }
@@ -72,7 +76,7 @@ enum DoorState: Codable, Equatable {
             return "frunkOpen"
         case .closed:
             return "frunkClosed"
-        case .unknown, .UNRECOGNIZED(_):
+        case .unknown, .UNRECOGNIZED(_), .closeError:
             return "frunkClosed"
         }
     }
@@ -83,7 +87,7 @@ enum DoorState: Codable, Equatable {
             return "trunkOpen"
         case .closed:
             return "trunkClosed"
-        case .unknown, .UNRECOGNIZED(_):
+        case .unknown, .UNRECOGNIZED(_), .closeError:
             return "trunkClosed"
         }
     }
@@ -94,7 +98,7 @@ enum DoorState: Codable, Equatable {
             return "chargePortOpen"
         case .closed:
             return "chargePortClosed"
-        case .unknown, .UNRECOGNIZED(_):
+        case .unknown, .UNRECOGNIZED(_), .closeError:
             return "chargePortClosed"
             
         }
@@ -102,9 +106,10 @@ enum DoorState: Codable, Equatable {
 }
 
 enum WalkawayState: Codable, Equatable {
-    case walkawayUnknown
-    case walkawayActive
-    case walkawayDisable
+    case walkawayUnknown // = 0
+    case walkawayIdle // = 1
+    case walkawayActive // = 2
+    case walkawayDisable // = 3
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_WalkawayState) {
@@ -113,6 +118,8 @@ enum WalkawayState: Codable, Equatable {
             self = .walkawayUnknown
         case .walkawayActive:
             self = .walkawayActive
+        case .walkawayIdle:
+            self = .walkawayIdle
         case .walkawayDisable:
             self = .walkawayDisable
         case .UNRECOGNIZED(let int):

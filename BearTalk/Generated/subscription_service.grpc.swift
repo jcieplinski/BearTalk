@@ -10,6 +10,7 @@
 
 import GRPCCore
 import GRPCProtobuf
+import SwiftProtobuf
 
 // MARK: - mobilegateway.protos.SubscriptionService
 

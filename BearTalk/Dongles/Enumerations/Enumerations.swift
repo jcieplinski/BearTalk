@@ -190,7 +190,12 @@ enum Interior: Codable, Equatable {
     case santaCruz // = 1
     case tahoe // = 2
     case mojave // = 3
+    case mojavePurluxe // = 4
     case santaMonica // = 5
+    case bigBasin // = 6
+    case yosemite // = 7
+    case ojai // = 8
+    case sapphire // = 9
     case UNRECOGNIZED(Int)
 
     var title: String {
@@ -202,6 +207,16 @@ enum Interior: Codable, Equatable {
         case .santaMonica: return "Santa Monica"
         case .UNRECOGNIZED(let int):
             return "Unrecognized(\(int))"
+        case .mojavePurluxe:
+            return "Mojave Purluxe"
+        case .bigBasin:
+            return "Big Basin"
+        case .yosemite:
+            return "Yosemite"
+        case .ojai:
+            return "Ojai"
+        case .sapphire:
+            return "Sapphire"
         }
     }
     
@@ -214,6 +229,16 @@ enum Interior: Codable, Equatable {
         case .santaMonica: return 5
         case .UNRECOGNIZED(let int):
             return int
+        case .mojavePurluxe:
+            return 4
+        case .bigBasin:
+            return 6
+        case .yosemite:
+            return 7
+        case .ojai:
+            return 8
+        case .sapphire:
+            return 9
         }
     }
     
@@ -231,6 +256,16 @@ enum Interior: Codable, Equatable {
             self = .santaMonica
         case .UNRECOGNIZED(let int):
             self = .UNRECOGNIZED(int)
+        case .mojavePurluxe:
+            self = .mojavePurluxe
+        case .bigBasin:
+            self = .bigBasin
+        case .yosemite:
+            self = .yosemite
+        case .ojai:
+            self = .ojai
+        case .sapphire:
+            self = .sapphire
         }
     }
 }

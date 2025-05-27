@@ -20,6 +20,10 @@ enum Wheels: Codable, Equatable {
     case sportLuster // = 9
     case sapphirePackage // = 10
     case rangeStealth // = 11
+    case dreamMagnesium // = 12
+    case aether // = 13
+    case orion // = 14
+    case voyager // = 15
     case UNRECOGNIZED(Int)
     
     var nodeTitle: String {
@@ -39,6 +43,10 @@ enum Wheels: Codable, Equatable {
         case .sapphirePackage:
             ""
         case .rangeStealth: "Wheel_Aero19"
+        case .dreamMagnesium: "Wheel_Dream21"
+        case .aether: "Wheel_Set1_Aether"
+        case .orion: "Wheel_Set2_Orion"
+        case .voyager: "Wheel_Set3_Voyager"
         case .UNRECOGNIZED(_):
             ""
         }
@@ -68,6 +76,14 @@ enum Wheels: Codable, Equatable {
             "20\" / 21\" Sapphire"
         case .rangeStealth:
             "19\" Aero Range Stealth"
+        case .dreamMagnesium:
+            "21\" Dream Magnesium"
+        case .aether:
+            "22\" / 23\" Aether"
+        case .orion:
+            "21\" / 22\" Orion"
+        case .voyager:
+            "20\" / 21\" Voyager"
         case .unknown:
             "Unknown"
         case .UNRECOGNIZED(let int):
@@ -90,6 +106,10 @@ enum Wheels: Codable, Equatable {
         case .sportLuster: self = .sportLuster
         case .sportStealth: self = .sportStealth
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        case .dreamMagnesium: self = .dreamMagnesium
+        case .aether: self = .aether
+        case .orion: self = .orion
+        case .voyager: self = .voyager
         }
     }
 }

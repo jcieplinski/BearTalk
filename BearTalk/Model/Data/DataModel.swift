@@ -115,7 +115,7 @@ import GRPCCore
         guard let vehicle else { return false }
         
         switch vehicle.vehicleState.powerState {
-        case .unknown, .sleep, .sleepCharge, .cloud2, .liveUpdate, .drive:
+        case .unknown, .sleep, .sleepCharge, .sleepUpdate, .cloud1, .cloud2, .liveUpdate, .drive:
             return false
         case .monitor, .accessory, .wink, .liveCharge:
             return true

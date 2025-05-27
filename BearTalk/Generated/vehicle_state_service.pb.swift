@@ -320,6 +320,10 @@ public enum Mobilegateway_Protos_Wheels: SwiftProtobuf.Enum, Swift.CaseIterable 
   case sportLuster // = 9
   case sapphirePackage // = 10
   case rangeStealth // = 11
+  case dreamMagnesium // = 12
+  case aether // = 13
+  case orion // = 14
+  case voyager // = 15
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -340,6 +344,10 @@ public enum Mobilegateway_Protos_Wheels: SwiftProtobuf.Enum, Swift.CaseIterable 
     case 9: self = .sportLuster
     case 10: self = .sapphirePackage
     case 11: self = .rangeStealth
+    case 12: self = .dreamMagnesium
+    case 13: self = .aether
+    case 14: self = .orion
+    case 15: self = .voyager
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -358,6 +366,10 @@ public enum Mobilegateway_Protos_Wheels: SwiftProtobuf.Enum, Swift.CaseIterable 
     case .sportLuster: return 9
     case .sapphirePackage: return 10
     case .rangeStealth: return 11
+    case .dreamMagnesium: return 12
+    case .aether: return 13
+    case .orion: return 14
+    case .voyager: return 15
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -376,6 +388,10 @@ public enum Mobilegateway_Protos_Wheels: SwiftProtobuf.Enum, Swift.CaseIterable 
     .sportLuster,
     .sapphirePackage,
     .rangeStealth,
+    .dreamMagnesium,
+    .aether,
+    .orion,
+    .voyager,
   ]
 
 }
@@ -419,6 +435,11 @@ public enum Mobilegateway_Protos_ChargingAccountStatus: SwiftProtobuf.Enum, Swif
   case unknown // = 0
   case disabled // = 1
   case enrolled // = 2
+  case enrollError // = 3
+  case terminated // = 4
+  case backedUp // = 5
+  case emailUnverified // = 6
+  case suspended // = 7
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -430,6 +451,11 @@ public enum Mobilegateway_Protos_ChargingAccountStatus: SwiftProtobuf.Enum, Swif
     case 0: self = .unknown
     case 1: self = .disabled
     case 2: self = .enrolled
+    case 3: self = .enrollError
+    case 4: self = .terminated
+    case 5: self = .backedUp
+    case 6: self = .emailUnverified
+    case 7: self = .suspended
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -439,6 +465,11 @@ public enum Mobilegateway_Protos_ChargingAccountStatus: SwiftProtobuf.Enum, Swif
     case .unknown: return 0
     case .disabled: return 1
     case .enrolled: return 2
+    case .enrollError: return 3
+    case .terminated: return 4
+    case .backedUp: return 5
+    case .emailUnverified: return 6
+    case .suspended: return 7
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -448,6 +479,11 @@ public enum Mobilegateway_Protos_ChargingAccountStatus: SwiftProtobuf.Enum, Swif
     .unknown,
     .disabled,
     .enrolled,
+    .enrollError,
+    .terminated,
+    .backedUp,
+    .emailUnverified,
+    .suspended,
   ]
 
 }
@@ -456,6 +492,7 @@ public enum Mobilegateway_Protos_ChargingVendor: SwiftProtobuf.Enum, Swift.CaseI
   public typealias RawValue = Int
   case unknown // = 0
   case electrifyAmerica // = 1
+  case electrifyCanada // = 2
   case bosch // = 3
   case UNRECOGNIZED(Int)
 
@@ -467,6 +504,7 @@ public enum Mobilegateway_Protos_ChargingVendor: SwiftProtobuf.Enum, Swift.CaseI
     switch rawValue {
     case 0: self = .unknown
     case 1: self = .electrifyAmerica
+    case 2: self = .electrifyCanada
     case 3: self = .bosch
     default: self = .UNRECOGNIZED(rawValue)
     }
@@ -476,6 +514,7 @@ public enum Mobilegateway_Protos_ChargingVendor: SwiftProtobuf.Enum, Swift.CaseI
     switch self {
     case .unknown: return 0
     case .electrifyAmerica: return 1
+    case .electrifyCanada: return 2
     case .bosch: return 3
     case .UNRECOGNIZED(let i): return i
     }
@@ -485,6 +524,7 @@ public enum Mobilegateway_Protos_ChargingVendor: SwiftProtobuf.Enum, Swift.CaseI
   public static let allCases: [Mobilegateway_Protos_ChargingVendor] = [
     .unknown,
     .electrifyAmerica,
+    .electrifyCanada,
     .bosch,
   ]
 
@@ -544,7 +584,21 @@ public enum Mobilegateway_Protos_BatteryType: SwiftProtobuf.Enum, Swift.CaseIter
   case batteryType07 // = 7
   case batteryType08 // = 8
   case batteryType09 // = 9
-  case batteryType25 // = 25
+  case batteryType13 // = 10
+  case batteryType14 // = 11
+  case batteryType15 // = 12
+  case batteryType10 // = 13
+  case batteryType11 // = 14
+  case batteryType12 // = 15
+  case batteryType16 // = 16
+  case batteryType17 // = 17
+  case batteryType18 // = 18
+  case batteryType19 // = 19
+  case batteryType20 // = 20
+  case batteryType21 // = 21
+  case batteryType22 // = 22
+  case batteryType23 // = 23
+  case batteryType24 // = 24
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -563,7 +617,21 @@ public enum Mobilegateway_Protos_BatteryType: SwiftProtobuf.Enum, Swift.CaseIter
     case 7: self = .batteryType07
     case 8: self = .batteryType08
     case 9: self = .batteryType09
-    case 25: self = .batteryType25
+    case 10: self = .batteryType13
+    case 11: self = .batteryType14
+    case 12: self = .batteryType15
+    case 13: self = .batteryType10
+    case 14: self = .batteryType11
+    case 15: self = .batteryType12
+    case 16: self = .batteryType16
+    case 17: self = .batteryType17
+    case 18: self = .batteryType18
+    case 19: self = .batteryType19
+    case 20: self = .batteryType20
+    case 21: self = .batteryType21
+    case 22: self = .batteryType22
+    case 23: self = .batteryType23
+    case 24: self = .batteryType24
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -580,7 +648,21 @@ public enum Mobilegateway_Protos_BatteryType: SwiftProtobuf.Enum, Swift.CaseIter
     case .batteryType07: return 7
     case .batteryType08: return 8
     case .batteryType09: return 9
-    case .batteryType25: return 25
+    case .batteryType13: return 10
+    case .batteryType14: return 11
+    case .batteryType15: return 12
+    case .batteryType10: return 13
+    case .batteryType11: return 14
+    case .batteryType12: return 15
+    case .batteryType16: return 16
+    case .batteryType17: return 17
+    case .batteryType18: return 18
+    case .batteryType19: return 19
+    case .batteryType20: return 20
+    case .batteryType21: return 21
+    case .batteryType22: return 22
+    case .batteryType23: return 23
+    case .batteryType24: return 24
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -597,7 +679,21 @@ public enum Mobilegateway_Protos_BatteryType: SwiftProtobuf.Enum, Swift.CaseIter
     .batteryType07,
     .batteryType08,
     .batteryType09,
-    .batteryType25,
+    .batteryType13,
+    .batteryType14,
+    .batteryType15,
+    .batteryType10,
+    .batteryType11,
+    .batteryType12,
+    .batteryType16,
+    .batteryType17,
+    .batteryType18,
+    .batteryType19,
+    .batteryType20,
+    .batteryType21,
+    .batteryType22,
+    .batteryType23,
+    .batteryType24,
   ]
 
 }
@@ -608,7 +704,12 @@ public enum Mobilegateway_Protos_Interior: SwiftProtobuf.Enum, Swift.CaseIterabl
   case santaCruz // = 1
   case tahoe // = 2
   case mojave // = 3
+  case mojavePurluxe // = 4
   case santaMonica // = 5
+  case bigBasin // = 6
+  case yosemite // = 7
+  case ojai // = 8
+  case sapphire // = 9
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -621,7 +722,12 @@ public enum Mobilegateway_Protos_Interior: SwiftProtobuf.Enum, Swift.CaseIterabl
     case 1: self = .santaCruz
     case 2: self = .tahoe
     case 3: self = .mojave
+    case 4: self = .mojavePurluxe
     case 5: self = .santaMonica
+    case 6: self = .bigBasin
+    case 7: self = .yosemite
+    case 8: self = .ojai
+    case 9: self = .sapphire
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -632,7 +738,12 @@ public enum Mobilegateway_Protos_Interior: SwiftProtobuf.Enum, Swift.CaseIterabl
     case .santaCruz: return 1
     case .tahoe: return 2
     case .mojave: return 3
+    case .mojavePurluxe: return 4
     case .santaMonica: return 5
+    case .bigBasin: return 6
+    case .yosemite: return 7
+    case .ojai: return 8
+    case .sapphire: return 9
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -643,7 +754,12 @@ public enum Mobilegateway_Protos_Interior: SwiftProtobuf.Enum, Swift.CaseIterabl
     .santaCruz,
     .tahoe,
     .mojave,
+    .mojavePurluxe,
     .santaMonica,
+    .bigBasin,
+    .yosemite,
+    .ojai,
+    .sapphire,
   ]
 
 }
@@ -1009,6 +1125,9 @@ public enum Mobilegateway_Protos_BatteryCellType: SwiftProtobuf.Enum, Swift.Case
   case sdi50G // = 2
   case pana2170M // = 3
   case sdi50Gv2 // = 4
+  case lgM52V // = 5
+  case lgM50L // = 6
+  case lgH40B // = 7
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -1022,6 +1141,9 @@ public enum Mobilegateway_Protos_BatteryCellType: SwiftProtobuf.Enum, Swift.Case
     case 2: self = .sdi50G
     case 3: self = .pana2170M
     case 4: self = .sdi50Gv2
+    case 5: self = .lgM52V
+    case 6: self = .lgM50L
+    case 7: self = .lgH40B
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -1033,6 +1155,9 @@ public enum Mobilegateway_Protos_BatteryCellType: SwiftProtobuf.Enum, Swift.Case
     case .sdi50G: return 2
     case .pana2170M: return 3
     case .sdi50Gv2: return 4
+    case .lgM52V: return 5
+    case .lgM50L: return 6
+    case .lgH40B: return 7
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1044,6 +1169,9 @@ public enum Mobilegateway_Protos_BatteryCellType: SwiftProtobuf.Enum, Swift.Case
     .sdi50G,
     .pana2170M,
     .sdi50Gv2,
+    .lgM52V,
+    .lgM50L,
+    .lgH40B,
   ]
 
 }
@@ -1100,6 +1228,8 @@ public enum Mobilegateway_Protos_PowerState: SwiftProtobuf.Enum, Swift.CaseItera
   case liveCharge // = 5
   case sleepCharge // = 6
   case liveUpdate // = 7
+  case sleepUpdate // = 8
+  case cloud1 // = 9
   case cloud2 // = 10
   case monitor // = 11
   case UNRECOGNIZED(Int)
@@ -1118,6 +1248,8 @@ public enum Mobilegateway_Protos_PowerState: SwiftProtobuf.Enum, Swift.CaseItera
     case 5: self = .liveCharge
     case 6: self = .sleepCharge
     case 7: self = .liveUpdate
+    case 8: self = .sleepUpdate
+    case 9: self = .cloud1
     case 10: self = .cloud2
     case 11: self = .monitor
     default: self = .UNRECOGNIZED(rawValue)
@@ -1134,6 +1266,8 @@ public enum Mobilegateway_Protos_PowerState: SwiftProtobuf.Enum, Swift.CaseItera
     case .liveCharge: return 5
     case .sleepCharge: return 6
     case .liveUpdate: return 7
+    case .sleepUpdate: return 8
+    case .cloud1: return 9
     case .cloud2: return 10
     case .monitor: return 11
     case .UNRECOGNIZED(let i): return i
@@ -1150,6 +1284,8 @@ public enum Mobilegateway_Protos_PowerState: SwiftProtobuf.Enum, Swift.CaseItera
     .liveCharge,
     .sleepCharge,
     .liveUpdate,
+    .sleepUpdate,
+    .cloud1,
     .cloud2,
     .monitor,
   ]
@@ -1200,6 +1336,7 @@ public enum Mobilegateway_Protos_DoorState: SwiftProtobuf.Enum, Swift.CaseIterab
   case `open` // = 1
   case closed // = 2
   case ajar // = 3
+  case closeError // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -1212,6 +1349,7 @@ public enum Mobilegateway_Protos_DoorState: SwiftProtobuf.Enum, Swift.CaseIterab
     case 1: self = .open
     case 2: self = .closed
     case 3: self = .ajar
+    case 4: self = .closeError
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -1222,6 +1360,7 @@ public enum Mobilegateway_Protos_DoorState: SwiftProtobuf.Enum, Swift.CaseIterab
     case .open: return 1
     case .closed: return 2
     case .ajar: return 3
+    case .closeError: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1232,6 +1371,7 @@ public enum Mobilegateway_Protos_DoorState: SwiftProtobuf.Enum, Swift.CaseIterab
     .open,
     .closed,
     .ajar,
+    .closeError,
   ]
 
 }
@@ -1239,6 +1379,7 @@ public enum Mobilegateway_Protos_DoorState: SwiftProtobuf.Enum, Swift.CaseIterab
 public enum Mobilegateway_Protos_WalkawayState: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case walkawayUnknown // = 0
+  case walkawayIdle // = 1
   case walkawayActive // = 2
   case walkawayDisable // = 3
   case UNRECOGNIZED(Int)
@@ -1250,6 +1391,7 @@ public enum Mobilegateway_Protos_WalkawayState: SwiftProtobuf.Enum, Swift.CaseIt
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .walkawayUnknown
+    case 1: self = .walkawayIdle
     case 2: self = .walkawayActive
     case 3: self = .walkawayDisable
     default: self = .UNRECOGNIZED(rawValue)
@@ -1259,6 +1401,7 @@ public enum Mobilegateway_Protos_WalkawayState: SwiftProtobuf.Enum, Swift.CaseIt
   public var rawValue: Int {
     switch self {
     case .walkawayUnknown: return 0
+    case .walkawayIdle: return 1
     case .walkawayActive: return 2
     case .walkawayDisable: return 3
     case .UNRECOGNIZED(let i): return i
@@ -1268,6 +1411,7 @@ public enum Mobilegateway_Protos_WalkawayState: SwiftProtobuf.Enum, Swift.CaseIt
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_WalkawayState] = [
     .walkawayUnknown,
+    .walkawayIdle,
     .walkawayActive,
     .walkawayDisable,
   ]
@@ -1414,6 +1558,7 @@ public enum Mobilegateway_Protos_WindowPositionStatus: SwiftProtobuf.Enum, Swift
   case fullyOpen // = 5
   case unknownDeInitialized // = 6
   case atpReversePosition // = 7
+  case anticlatterPosition // = 8
   case hardStopUp // = 9
   case hardStopDown // = 10
   case longDropPosition // = 11
@@ -1436,6 +1581,7 @@ public enum Mobilegateway_Protos_WindowPositionStatus: SwiftProtobuf.Enum, Swift
     case 5: self = .fullyOpen
     case 6: self = .unknownDeInitialized
     case 7: self = .atpReversePosition
+    case 8: self = .anticlatterPosition
     case 9: self = .hardStopUp
     case 10: self = .hardStopDown
     case 11: self = .longDropPosition
@@ -1456,6 +1602,7 @@ public enum Mobilegateway_Protos_WindowPositionStatus: SwiftProtobuf.Enum, Swift
     case .fullyOpen: return 5
     case .unknownDeInitialized: return 6
     case .atpReversePosition: return 7
+    case .anticlatterPosition: return 8
     case .hardStopUp: return 9
     case .hardStopDown: return 10
     case .longDropPosition: return 11
@@ -1476,6 +1623,7 @@ public enum Mobilegateway_Protos_WindowPositionStatus: SwiftProtobuf.Enum, Swift
     .fullyOpen,
     .unknownDeInitialized,
     .atpReversePosition,
+    .anticlatterPosition,
     .hardStopUp,
     .hardStopDown,
     .longDropPosition,
@@ -1578,48 +1726,52 @@ public enum Mobilegateway_Protos_LivingObjectDetectionStatus: SwiftProtobuf.Enum
 
 }
 
-public enum Mobilegateway_Protos_LightState: SwiftProtobuf.Enum, Swift.CaseIterable {
+public enum Mobilegateway_Protos_UnattendedOccupantDetectionStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
-
-  ///
-  /// There's an explicit unknown state here in addition to 0, which I guess
-  /// is more like undefined?
-  case reallyUnknown // = 0
-  case off // = 1
-  case on // = 2
-  case unknown // = 3
+  case unknown // = 0
+  case noRequest // = 1
+  case stage1 // = 2
+  case stage2 // = 3
+  case stage3 // = 4
+  case fault // = 5
   case UNRECOGNIZED(Int)
 
   public init() {
-    self = .reallyUnknown
+    self = .unknown
   }
 
   public init?(rawValue: Int) {
     switch rawValue {
-    case 0: self = .reallyUnknown
-    case 1: self = .off
-    case 2: self = .on
-    case 3: self = .unknown
+    case 0: self = .unknown
+    case 1: self = .noRequest
+    case 2: self = .stage1
+    case 3: self = .stage2
+    case 4: self = .stage3
+    case 5: self = .fault
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
 
   public var rawValue: Int {
     switch self {
-    case .reallyUnknown: return 0
-    case .off: return 1
-    case .on: return 2
-    case .unknown: return 3
+    case .unknown: return 0
+    case .noRequest: return 1
+    case .stage1: return 2
+    case .stage2: return 3
+    case .stage3: return 4
+    case .fault: return 5
     case .UNRECOGNIZED(let i): return i
     }
   }
 
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_LightState] = [
-    .reallyUnknown,
-    .off,
-    .on,
+  public static let allCases: [Mobilegateway_Protos_UnattendedOccupantDetectionStatus] = [
     .unknown,
+    .noRequest,
+    .stage1,
+    .stage2,
+    .stage3,
+    .fault,
   ]
 
 }
@@ -1770,13 +1922,26 @@ public enum Mobilegateway_Protos_ChargeState: SwiftProtobuf.Enum, Swift.CaseIter
   case chargerPreparation // = 7
   case charging // = 8
   case chargingEndOk // = 9
-  case chargingStopped // = 10
+  case chargingEndError // = 10
   case evseMalfunction // = 11
+  case authenticationFailure // = 12
+  case chargingStopped // = 13
+  case chargingPaused // = 14
+  case authenticationPncFailure // = 15
+  case internalHardwareFault // = 16
+  case readyToDischarge // = 17
+  case preparingDischarge // = 18
   case discharging // = 19
   case dischargingCompleted // = 20
   case dischargingStopped // = 21
   case dischargingFault // = 22
   case dischargingUnavailable // = 23
+  case evseNotReady // = 25
+  case acInputUnderVoltage // = 26
+  case cableLockFault // = 27
+  case cableConnectionFault // = 28
+  case tempProtection // = 29
+  case chargingScheduled // = 30
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -1795,13 +1960,26 @@ public enum Mobilegateway_Protos_ChargeState: SwiftProtobuf.Enum, Swift.CaseIter
     case 7: self = .chargerPreparation
     case 8: self = .charging
     case 9: self = .chargingEndOk
-    case 10: self = .chargingStopped
+    case 10: self = .chargingEndError
     case 11: self = .evseMalfunction
+    case 12: self = .authenticationFailure
+    case 13: self = .chargingStopped
+    case 14: self = .chargingPaused
+    case 15: self = .authenticationPncFailure
+    case 16: self = .internalHardwareFault
+    case 17: self = .readyToDischarge
+    case 18: self = .preparingDischarge
     case 19: self = .discharging
     case 20: self = .dischargingCompleted
     case 21: self = .dischargingStopped
     case 22: self = .dischargingFault
     case 23: self = .dischargingUnavailable
+    case 25: self = .evseNotReady
+    case 26: self = .acInputUnderVoltage
+    case 27: self = .cableLockFault
+    case 28: self = .cableConnectionFault
+    case 29: self = .tempProtection
+    case 30: self = .chargingScheduled
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -1818,13 +1996,26 @@ public enum Mobilegateway_Protos_ChargeState: SwiftProtobuf.Enum, Swift.CaseIter
     case .chargerPreparation: return 7
     case .charging: return 8
     case .chargingEndOk: return 9
-    case .chargingStopped: return 10
+    case .chargingEndError: return 10
     case .evseMalfunction: return 11
+    case .authenticationFailure: return 12
+    case .chargingStopped: return 13
+    case .chargingPaused: return 14
+    case .authenticationPncFailure: return 15
+    case .internalHardwareFault: return 16
+    case .readyToDischarge: return 17
+    case .preparingDischarge: return 18
     case .discharging: return 19
     case .dischargingCompleted: return 20
     case .dischargingStopped: return 21
     case .dischargingFault: return 22
     case .dischargingUnavailable: return 23
+    case .evseNotReady: return 25
+    case .acInputUnderVoltage: return 26
+    case .cableLockFault: return 27
+    case .cableConnectionFault: return 28
+    case .tempProtection: return 29
+    case .chargingScheduled: return 30
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1841,13 +2032,26 @@ public enum Mobilegateway_Protos_ChargeState: SwiftProtobuf.Enum, Swift.CaseIter
     .chargerPreparation,
     .charging,
     .chargingEndOk,
-    .chargingStopped,
+    .chargingEndError,
     .evseMalfunction,
+    .authenticationFailure,
+    .chargingStopped,
+    .chargingPaused,
+    .authenticationPncFailure,
+    .internalHardwareFault,
+    .readyToDischarge,
+    .preparingDischarge,
     .discharging,
     .dischargingCompleted,
     .dischargingStopped,
     .dischargingFault,
     .dischargingUnavailable,
+    .evseNotReady,
+    .acInputUnderVoltage,
+    .cableLockFault,
+    .cableConnectionFault,
+    .tempProtection,
+    .chargingScheduled,
   ]
 
 }
@@ -1933,7 +2137,9 @@ public enum Mobilegateway_Protos_EnergyType: SwiftProtobuf.Enum, Swift.CaseItera
   case unknown // = 0
   case ac // = 1
   case dc // = 2
+  case digital // = 3
   case v2V // = 4
+  case none // = 5
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -1945,7 +2151,9 @@ public enum Mobilegateway_Protos_EnergyType: SwiftProtobuf.Enum, Swift.CaseItera
     case 0: self = .unknown
     case 1: self = .ac
     case 2: self = .dc
+    case 3: self = .digital
     case 4: self = .v2V
+    case 5: self = .none
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -1955,7 +2163,9 @@ public enum Mobilegateway_Protos_EnergyType: SwiftProtobuf.Enum, Swift.CaseItera
     case .unknown: return 0
     case .ac: return 1
     case .dc: return 2
+    case .digital: return 3
     case .v2V: return 4
+    case .none: return 5
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1965,7 +2175,9 @@ public enum Mobilegateway_Protos_EnergyType: SwiftProtobuf.Enum, Swift.CaseItera
     .unknown,
     .ac,
     .dc,
+    .digital,
     .v2V,
+    .none,
   ]
 
 }
@@ -2150,6 +2362,186 @@ public enum Mobilegateway_Protos_AcOutletUnavailableReason: SwiftProtobuf.Enum, 
     .warningFaultCamp,
     .criticalFaultCamp,
     .lowVehRangeCamp,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_MobileChargingControlRequestEnum: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case mobileChargingControlRequestUnknown // = 0
+  case mobileChargingControlRequestIdle // = 1
+  case mobileChargingControlRequestStart // = 2
+  case mobileChargingControlRequestStop // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .mobileChargingControlRequestUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .mobileChargingControlRequestUnknown
+    case 1: self = .mobileChargingControlRequestIdle
+    case 2: self = .mobileChargingControlRequestStart
+    case 3: self = .mobileChargingControlRequestStop
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .mobileChargingControlRequestUnknown: return 0
+    case .mobileChargingControlRequestIdle: return 1
+    case .mobileChargingControlRequestStart: return 2
+    case .mobileChargingControlRequestStop: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_MobileChargingControlRequestEnum] = [
+    .mobileChargingControlRequestUnknown,
+    .mobileChargingControlRequestIdle,
+    .mobileChargingControlRequestStart,
+    .mobileChargingControlRequestStop,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_FastChargingPreConditionRequestEnum: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case fastChargingPreConditionRequestUnknown // = 0
+  case fastChargingPreConditionRequestIdle // = 1
+  case fastChargingPreConditionRequestOff // = 2
+  case fastChargingPreConditionRequestOn // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .fastChargingPreConditionRequestUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .fastChargingPreConditionRequestUnknown
+    case 1: self = .fastChargingPreConditionRequestIdle
+    case 2: self = .fastChargingPreConditionRequestOff
+    case 3: self = .fastChargingPreConditionRequestOn
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .fastChargingPreConditionRequestUnknown: return 0
+    case .fastChargingPreConditionRequestIdle: return 1
+    case .fastChargingPreConditionRequestOff: return 2
+    case .fastChargingPreConditionRequestOn: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_FastChargingPreConditionRequestEnum] = [
+    .fastChargingPreConditionRequestUnknown,
+    .fastChargingPreConditionRequestIdle,
+    .fastChargingPreConditionRequestOff,
+    .fastChargingPreConditionRequestOn,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_ChargeNotification: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case idle // = 0
+  case digitalChrgScOvride // = 1
+  case lowSoeScOvride // = 2
+  case chargingScheduled // = 3
+  case nacsDcChrgNotAllwd // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .idle
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .idle
+    case 1: self = .digitalChrgScOvride
+    case 2: self = .lowSoeScOvride
+    case 3: self = .chargingScheduled
+    case 4: self = .nacsDcChrgNotAllwd
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .idle: return 0
+    case .digitalChrgScOvride: return 1
+    case .lowSoeScOvride: return 2
+    case .chargingScheduled: return 3
+    case .nacsDcChrgNotAllwd: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_ChargeNotification] = [
+    .idle,
+    .digitalChrgScOvride,
+    .lowSoeScOvride,
+    .chargingScheduled,
+    .nacsDcChrgNotAllwd,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_HvacKeepClimateCondition: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case keepClimateConditionUnknown // = 0
+  case keepClimateConditionIdle // = 1
+  case keepClimateConditionOff // = 2
+  case keepClimateConditionOnOccupied // = 3
+  case keepClimateConditionOnNotOccupied // = 4
+  case keepClimateConditionInvalid // = 8
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .keepClimateConditionUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .keepClimateConditionUnknown
+    case 1: self = .keepClimateConditionIdle
+    case 2: self = .keepClimateConditionOff
+    case 3: self = .keepClimateConditionOnOccupied
+    case 4: self = .keepClimateConditionOnNotOccupied
+    case 8: self = .keepClimateConditionInvalid
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .keepClimateConditionUnknown: return 0
+    case .keepClimateConditionIdle: return 1
+    case .keepClimateConditionOff: return 2
+    case .keepClimateConditionOnOccupied: return 3
+    case .keepClimateConditionOnNotOccupied: return 4
+    case .keepClimateConditionInvalid: return 8
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_HvacKeepClimateCondition] = [
+    .keepClimateConditionUnknown,
+    .keepClimateConditionIdle,
+    .keepClimateConditionOff,
+    .keepClimateConditionOnOccupied,
+    .keepClimateConditionOnNotOccupied,
+    .keepClimateConditionInvalid,
   ]
 
 }
@@ -2370,6 +2762,48 @@ public enum Mobilegateway_Protos_SoftwareDownloadStatus: SwiftProtobuf.Enum, Swi
 
 }
 
+public enum Mobilegateway_Protos_SoftwareRollbackState: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case rollbackStateUnknown // = 0
+  case rollbackInProgress // = 1
+  case rollbackSuccess // = 2
+  case rollbackFailed // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .rollbackStateUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .rollbackStateUnknown
+    case 1: self = .rollbackInProgress
+    case 2: self = .rollbackSuccess
+    case 3: self = .rollbackFailed
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .rollbackStateUnknown: return 0
+    case .rollbackInProgress: return 1
+    case .rollbackSuccess: return 2
+    case .rollbackFailed: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_SoftwareRollbackState] = [
+    .rollbackStateUnknown,
+    .rollbackInProgress,
+    .rollbackSuccess,
+    .rollbackFailed,
+  ]
+
+}
+
 public enum Mobilegateway_Protos_SoftwareDownloadInterface: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
@@ -2421,6 +2855,11 @@ public enum Mobilegateway_Protos_AlarmStatus: SwiftProtobuf.Enum, Swift.CaseIter
   case unknown // = 0
   case disarmed // = 1
   case armed // = 2
+  case preAlarm // = 3
+  case tilt // = 4
+  case shock // = 5
+  case intrusion // = 6
+  case panicMode // = 7
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -2432,6 +2871,11 @@ public enum Mobilegateway_Protos_AlarmStatus: SwiftProtobuf.Enum, Swift.CaseIter
     case 0: self = .unknown
     case 1: self = .disarmed
     case 2: self = .armed
+    case 3: self = .preAlarm
+    case 4: self = .tilt
+    case 5: self = .shock
+    case 6: self = .intrusion
+    case 7: self = .panicMode
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -2441,6 +2885,11 @@ public enum Mobilegateway_Protos_AlarmStatus: SwiftProtobuf.Enum, Swift.CaseIter
     case .unknown: return 0
     case .disarmed: return 1
     case .armed: return 2
+    case .preAlarm: return 3
+    case .tilt: return 4
+    case .shock: return 5
+    case .intrusion: return 6
+    case .panicMode: return 7
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -2450,6 +2899,11 @@ public enum Mobilegateway_Protos_AlarmStatus: SwiftProtobuf.Enum, Swift.CaseIter
     .unknown,
     .disarmed,
     .armed,
+    .preAlarm,
+    .tilt,
+    .shock,
+    .intrusion,
+    .panicMode,
   ]
 
 }
@@ -2534,51 +2988,15 @@ public enum Mobilegateway_Protos_CloudConnectionState: SwiftProtobuf.Enum, Swift
 
 }
 
-public enum Mobilegateway_Protos_KeylessDrivingState: SwiftProtobuf.Enum, Swift.CaseIterable {
-  public typealias RawValue = Int
-  case keylessDrivingUnknown // = 0
-  case keylessDrivingOn // = 1
-  case keylessDrivingOff // = 2
-  case UNRECOGNIZED(Int)
-
-  public init() {
-    self = .keylessDrivingUnknown
-  }
-
-  public init?(rawValue: Int) {
-    switch rawValue {
-    case 0: self = .keylessDrivingUnknown
-    case 1: self = .keylessDrivingOn
-    case 2: self = .keylessDrivingOff
-    default: self = .UNRECOGNIZED(rawValue)
-    }
-  }
-
-  public var rawValue: Int {
-    switch self {
-    case .keylessDrivingUnknown: return 0
-    case .keylessDrivingOn: return 1
-    case .keylessDrivingOff: return 2
-    case .UNRECOGNIZED(let i): return i
-    }
-  }
-
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_KeylessDrivingState] = [
-    .keylessDrivingUnknown,
-    .keylessDrivingOn,
-    .keylessDrivingOff,
-  ]
-
-}
-
 public enum Mobilegateway_Protos_HvacPower: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
   case hvacOn // = 1
   case hvacOff // = 2
   case hvacPrecondition // = 3
+  case hvacResidualHeating // = 5
   case hvacKeepTemp // = 6
+  case hvacHeatstrokePrevention // = 7
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -2591,7 +3009,9 @@ public enum Mobilegateway_Protos_HvacPower: SwiftProtobuf.Enum, Swift.CaseIterab
     case 1: self = .hvacOn
     case 2: self = .hvacOff
     case 3: self = .hvacPrecondition
+    case 5: self = .hvacResidualHeating
     case 6: self = .hvacKeepTemp
+    case 7: self = .hvacHeatstrokePrevention
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -2602,7 +3022,9 @@ public enum Mobilegateway_Protos_HvacPower: SwiftProtobuf.Enum, Swift.CaseIterab
     case .hvacOn: return 1
     case .hvacOff: return 2
     case .hvacPrecondition: return 3
+    case .hvacResidualHeating: return 5
     case .hvacKeepTemp: return 6
+    case .hvacHeatstrokePrevention: return 7
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -2613,7 +3035,9 @@ public enum Mobilegateway_Protos_HvacPower: SwiftProtobuf.Enum, Swift.CaseIterab
     .hvacOn,
     .hvacOff,
     .hvacPrecondition,
+    .hvacResidualHeating,
     .hvacKeepTemp,
+    .hvacHeatstrokePrevention,
   ]
 
 }
@@ -2748,36 +3172,6 @@ public enum Mobilegateway_Protos_KeepClimateStatus: SwiftProtobuf.Enum, Swift.Ca
     .enabled,
     .canceled,
     .petModeOn,
-  ]
-
-}
-
-public enum Mobilegateway_Protos_KeepClimateCondition: SwiftProtobuf.Enum, Swift.CaseIterable {
-  public typealias RawValue = Int
-  case unknown // = 0
-  case UNRECOGNIZED(Int)
-
-  public init() {
-    self = .unknown
-  }
-
-  public init?(rawValue: Int) {
-    switch rawValue {
-    case 0: self = .unknown
-    default: self = .UNRECOGNIZED(rawValue)
-    }
-  }
-
-  public var rawValue: Int {
-    switch self {
-    case .unknown: return 0
-    case .UNRECOGNIZED(let i): return i
-    }
-  }
-
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_KeepClimateCondition] = [
-    .unknown,
   ]
 
 }
@@ -3012,6 +3406,14 @@ public enum Mobilegateway_Protos_DriveMode: SwiftProtobuf.Enum, Swift.CaseIterab
   case tow // = 15
   case testDrive // = 16
   case reserved3 // = 17
+  case trackModeA // = 19
+  case trackModeB // = 20
+  case trackModeC // = 21
+  case trailer // = 22
+  case youngAdult // = 23
+  case camping // = 24
+  case train // = 25
+  case custom // = 26
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -3038,6 +3440,14 @@ public enum Mobilegateway_Protos_DriveMode: SwiftProtobuf.Enum, Swift.CaseIterab
     case 15: self = .tow
     case 16: self = .testDrive
     case 17: self = .reserved3
+    case 19: self = .trackModeA
+    case 20: self = .trackModeB
+    case 21: self = .trackModeC
+    case 22: self = .trailer
+    case 23: self = .youngAdult
+    case 24: self = .camping
+    case 25: self = .train
+    case 26: self = .custom
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -3062,6 +3472,14 @@ public enum Mobilegateway_Protos_DriveMode: SwiftProtobuf.Enum, Swift.CaseIterab
     case .tow: return 15
     case .testDrive: return 16
     case .reserved3: return 17
+    case .trackModeA: return 19
+    case .trackModeB: return 20
+    case .trackModeC: return 21
+    case .trailer: return 22
+    case .youngAdult: return 23
+    case .camping: return 24
+    case .train: return 25
+    case .custom: return 26
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -3086,6 +3504,14 @@ public enum Mobilegateway_Protos_DriveMode: SwiftProtobuf.Enum, Swift.CaseIterab
     .tow,
     .testDrive,
     .reserved3,
+    .trackModeA,
+    .trackModeB,
+    .trackModeC,
+    .trailer,
+    .youngAdult,
+    .camping,
+    .train,
+    .custom,
   ]
 
 }
@@ -3212,45 +3638,12 @@ public enum Mobilegateway_Protos_SharedTripState: SwiftProtobuf.Enum, Swift.Case
 
 }
 
-public enum Mobilegateway_Protos_PanicState: SwiftProtobuf.Enum, Swift.CaseIterable {
-  public typealias RawValue = Int
-  case panicAlarmUnknown // = 0
-  case panicAlarmOn // = 1
-  case UNRECOGNIZED(Int)
-
-  public init() {
-    self = .panicAlarmUnknown
-  }
-
-  public init?(rawValue: Int) {
-    switch rawValue {
-    case 0: self = .panicAlarmUnknown
-    case 1: self = .panicAlarmOn
-    default: self = .UNRECOGNIZED(rawValue)
-    }
-  }
-
-  public var rawValue: Int {
-    switch self {
-    case .panicAlarmUnknown: return 0
-    case .panicAlarmOn: return 1
-    case .UNRECOGNIZED(let i): return i
-    }
-  }
-
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_PanicState] = [
-    .panicAlarmUnknown,
-    .panicAlarmOn,
-  ]
-
-}
-
 public enum Mobilegateway_Protos_TcuState: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case tcuUnknown // = 0
   case tcuSleep // = 1
   case tcuDrowsy // = 2
+  case tcuCloud // = 3
   case tcuFull // = 4
 
   /// State during an update 
@@ -3268,6 +3661,7 @@ public enum Mobilegateway_Protos_TcuState: SwiftProtobuf.Enum, Swift.CaseIterabl
     case 0: self = .tcuUnknown
     case 1: self = .tcuSleep
     case 2: self = .tcuDrowsy
+    case 3: self = .tcuCloud
     case 4: self = .tcuFull
     case 5: self = .tcuFactory
     case 6: self = .tcuPower
@@ -3281,6 +3675,7 @@ public enum Mobilegateway_Protos_TcuState: SwiftProtobuf.Enum, Swift.CaseIterabl
     case .tcuUnknown: return 0
     case .tcuSleep: return 1
     case .tcuDrowsy: return 2
+    case .tcuCloud: return 3
     case .tcuFull: return 4
     case .tcuFactory: return 5
     case .tcuPower: return 6
@@ -3294,6 +3689,7 @@ public enum Mobilegateway_Protos_TcuState: SwiftProtobuf.Enum, Swift.CaseIterabl
     .tcuUnknown,
     .tcuSleep,
     .tcuDrowsy,
+    .tcuCloud,
     .tcuFull,
     .tcuFactory,
     .tcuPower,
@@ -3382,7 +3778,13 @@ public enum Mobilegateway_Protos_MpbFaultStatus: SwiftProtobuf.Enum, Swift.CaseI
   public typealias RawValue = Int
   case unknown // = 0
   case normal // = 1
+  case warning // = 2
   case critical // = 3
+  case warningHaps // = 4
+  case criticalHaps // = 5
+  case criticalHwFlt // = 6
+  case reserved // = 7
+  case invalid // = 8
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -3393,7 +3795,13 @@ public enum Mobilegateway_Protos_MpbFaultStatus: SwiftProtobuf.Enum, Swift.CaseI
     switch rawValue {
     case 0: self = .unknown
     case 1: self = .normal
+    case 2: self = .warning
     case 3: self = .critical
+    case 4: self = .warningHaps
+    case 5: self = .criticalHaps
+    case 6: self = .criticalHwFlt
+    case 7: self = .reserved
+    case 8: self = .invalid
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -3402,7 +3810,13 @@ public enum Mobilegateway_Protos_MpbFaultStatus: SwiftProtobuf.Enum, Swift.CaseI
     switch self {
     case .unknown: return 0
     case .normal: return 1
+    case .warning: return 2
     case .critical: return 3
+    case .warningHaps: return 4
+    case .criticalHaps: return 5
+    case .criticalHwFlt: return 6
+    case .reserved: return 7
+    case .invalid: return 8
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -3411,7 +3825,13 @@ public enum Mobilegateway_Protos_MpbFaultStatus: SwiftProtobuf.Enum, Swift.CaseI
   public static let allCases: [Mobilegateway_Protos_MpbFaultStatus] = [
     .unknown,
     .normal,
+    .warning,
     .critical,
+    .warningHaps,
+    .criticalHaps,
+    .criticalHwFlt,
+    .reserved,
+    .invalid,
   ]
 
 }
@@ -3526,10 +3946,12 @@ public enum Mobilegateway_Protos_GeneralChargeStatus: SwiftProtobuf.Enum, Swift.
 
 }
 
-public enum Mobilegateway_Protos_EnablementState: SwiftProtobuf.Enum, Swift.CaseIterable {
+public enum Mobilegateway_Protos_SentryEnablementState: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
-  case idle // = 3
+  case sentryStateEnabled // = 1
+  case sentryStateDisabled // = 2
+  case sentryStateIdle // = 3
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -3539,7 +3961,9 @@ public enum Mobilegateway_Protos_EnablementState: SwiftProtobuf.Enum, Swift.Case
   public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unknown
-    case 3: self = .idle
+    case 1: self = .sentryStateEnabled
+    case 2: self = .sentryStateDisabled
+    case 3: self = .sentryStateIdle
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -3547,15 +3971,19 @@ public enum Mobilegateway_Protos_EnablementState: SwiftProtobuf.Enum, Swift.Case
   public var rawValue: Int {
     switch self {
     case .unknown: return 0
-    case .idle: return 3
+    case .sentryStateEnabled: return 1
+    case .sentryStateDisabled: return 2
+    case .sentryStateIdle: return 3
     case .UNRECOGNIZED(let i): return i
     }
   }
 
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Mobilegateway_Protos_EnablementState] = [
+  public static let allCases: [Mobilegateway_Protos_SentryEnablementState] = [
     .unknown,
-    .idle,
+    .sentryStateEnabled,
+    .sentryStateDisabled,
+    .sentryStateIdle,
   ]
 
 }
@@ -3736,6 +4164,144 @@ public enum Mobilegateway_Protos_SentryRemoteAlarmState: SwiftProtobuf.Enum, Swi
 
 }
 
+public enum Mobilegateway_Protos_FactoryResetState: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case idle // = 1
+  case triggered // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .idle
+    case 2: self = .triggered
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .idle: return 1
+    case .triggered: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_FactoryResetState] = [
+    .unknown,
+    .idle,
+    .triggered,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_AirSuspensionLevelStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case idle // = 1
+  case raising // = 2
+  case lowering // = 3
+  case pending // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .idle
+    case 2: self = .raising
+    case 3: self = .lowering
+    case 4: self = .pending
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .idle: return 1
+    case .raising: return 2
+    case .lowering: return 3
+    case .pending: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_AirSuspensionLevelStatus] = [
+    .unknown,
+    .idle,
+    .raising,
+    .lowering,
+    .pending,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_RideHeightStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case undefined // = 1
+  case lowest // = 2
+  case low // = 3
+  case standard // = 4
+  case high // = 5
+  case highest // = 6
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .undefined
+    case 2: self = .lowest
+    case 3: self = .low
+    case 4: self = .standard
+    case 5: self = .high
+    case 6: self = .highest
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .undefined: return 1
+    case .lowest: return 2
+    case .low: return 3
+    case .standard: return 4
+    case .high: return 5
+    case .highest: return 6
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_RideHeightStatus] = [
+    .unknown,
+    .undefined,
+    .lowest,
+    .low,
+    .standard,
+    .high,
+    .highest,
+  ]
+
+}
+
 public enum Mobilegateway_Protos_LowPowerModeStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
@@ -3812,12 +4378,69 @@ public enum Mobilegateway_Protos_ChargeAction: SwiftProtobuf.Enum, Swift.CaseIte
 
 }
 
+public enum Mobilegateway_Protos_DoorLocation: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case frontLeft // = 1
+  case frontRight // = 2
+  case rearLeft // = 3
+  case rearRight // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .frontLeft
+    case 2: self = .frontRight
+    case 3: self = .rearLeft
+    case 4: self = .rearRight
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .frontLeft: return 1
+    case .frontRight: return 2
+    case .rearLeft: return 3
+    case .rearRight: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_DoorLocation] = [
+    .unknown,
+    .frontLeft,
+    .frontRight,
+    .rearLeft,
+    .rearRight,
+  ]
+
+}
+
 public enum Mobilegateway_Protos_DocumentType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
   case releaseNotesPre // = 1
   case releaseNotesPost // = 2
   case ownersManual // = 3
+  case serviceNotice // = 4
+  case recallNotice // = 5
+  case ownersManualMobile // = 9
+  case ownersManualSapphire // = 10
+  case ownersManualSapphireMobile // = 11
+  case gtyReleaseNotesPre // = 12
+  case gtyReleaseNotesPost // = 13
+  case gtyOwnersManual // = 14
+  case gtyOwnersManualMobile // = 15
+  case gtyServiceNotice // = 16
+  case gtyRecallNotice // = 17
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -3830,6 +4453,17 @@ public enum Mobilegateway_Protos_DocumentType: SwiftProtobuf.Enum, Swift.CaseIte
     case 1: self = .releaseNotesPre
     case 2: self = .releaseNotesPost
     case 3: self = .ownersManual
+    case 4: self = .serviceNotice
+    case 5: self = .recallNotice
+    case 9: self = .ownersManualMobile
+    case 10: self = .ownersManualSapphire
+    case 11: self = .ownersManualSapphireMobile
+    case 12: self = .gtyReleaseNotesPre
+    case 13: self = .gtyReleaseNotesPost
+    case 14: self = .gtyOwnersManual
+    case 15: self = .gtyOwnersManualMobile
+    case 16: self = .gtyServiceNotice
+    case 17: self = .gtyRecallNotice
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -3840,6 +4474,17 @@ public enum Mobilegateway_Protos_DocumentType: SwiftProtobuf.Enum, Swift.CaseIte
     case .releaseNotesPre: return 1
     case .releaseNotesPost: return 2
     case .ownersManual: return 3
+    case .serviceNotice: return 4
+    case .recallNotice: return 5
+    case .ownersManualMobile: return 9
+    case .ownersManualSapphire: return 10
+    case .ownersManualSapphireMobile: return 11
+    case .gtyReleaseNotesPre: return 12
+    case .gtyReleaseNotesPost: return 13
+    case .gtyOwnersManual: return 14
+    case .gtyOwnersManualMobile: return 15
+    case .gtyServiceNotice: return 16
+    case .gtyRecallNotice: return 17
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -3850,36 +4495,93 @@ public enum Mobilegateway_Protos_DocumentType: SwiftProtobuf.Enum, Swift.CaseIte
     .releaseNotesPre,
     .releaseNotesPost,
     .ownersManual,
+    .serviceNotice,
+    .recallNotice,
+    .ownersManualMobile,
+    .ownersManualSapphire,
+    .ownersManualSapphireMobile,
+    .gtyReleaseNotesPre,
+    .gtyReleaseNotesPost,
+    .gtyOwnersManual,
+    .gtyOwnersManualMobile,
+    .gtyServiceNotice,
+    .gtyRecallNotice,
   ]
 
 }
 
-public enum Mobilegateway_Protos_DischargeCommand: SwiftProtobuf.Enum, Swift.CaseIterable {
+public enum Mobilegateway_Protos_KeylessDrivingState: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
-  case dischargeUnknown // = 0
+  case keylessDrivingUnknown // = 0
+  case keylessDrivingOn // = 1
+  case keylessDrivingOff // = 2
   case UNRECOGNIZED(Int)
 
   public init() {
-    self = .dischargeUnknown
+    self = .keylessDrivingUnknown
   }
 
   public init?(rawValue: Int) {
     switch rawValue {
-    case 0: self = .dischargeUnknown
+    case 0: self = .keylessDrivingUnknown
+    case 1: self = .keylessDrivingOn
+    case 2: self = .keylessDrivingOff
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
 
   public var rawValue: Int {
     switch self {
-    case .dischargeUnknown: return 0
+    case .keylessDrivingUnknown: return 0
+    case .keylessDrivingOn: return 1
+    case .keylessDrivingOff: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_KeylessDrivingState] = [
+    .keylessDrivingUnknown,
+    .keylessDrivingOn,
+    .keylessDrivingOff,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_DischargeCommand: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case idle // = 0
+  case start // = 1
+  case stop // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .idle
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .idle
+    case 1: self = .start
+    case 2: self = .stop
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .idle: return 0
+    case .start: return 1
+    case .stop: return 2
     case .UNRECOGNIZED(let i): return i
     }
   }
 
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Mobilegateway_Protos_DischargeCommand] = [
-    .dischargeUnknown,
+    .idle,
+    .start,
+    .stop,
   ]
 
 }
@@ -3972,6 +4674,44 @@ public enum Mobilegateway_Protos_MaxACState: SwiftProtobuf.Enum, Swift.CaseItera
 
 }
 
+public enum Mobilegateway_Protos_PanicAlarmAction: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case panicAlarmUnknown // = 0
+  case panicAlarmOn // = 1
+  case panicAlarmOff // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .panicAlarmUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .panicAlarmUnknown
+    case 1: self = .panicAlarmOn
+    case 2: self = .panicAlarmOff
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .panicAlarmUnknown: return 0
+    case .panicAlarmOn: return 1
+    case .panicAlarmOff: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_PanicAlarmAction] = [
+    .panicAlarmUnknown,
+    .panicAlarmOn,
+    .panicAlarmOff,
+  ]
+
+}
+
 public enum Mobilegateway_Protos_SteeringWheelHeaterLevel: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknown // = 0
@@ -4052,6 +4792,48 @@ public enum Mobilegateway_Protos_CreatureComfortMode: SwiftProtobuf.Enum, Swift.
     .unknown,
     .off,
     .on,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_PhoneAsKeyStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case phoneAsKeyUnknown // = 0
+  case phoneAsKeyPending // = 1
+  case phoneAsKeyMatch // = 2
+  case phoneAsKeyNoMatch // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .phoneAsKeyUnknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .phoneAsKeyUnknown
+    case 1: self = .phoneAsKeyPending
+    case 2: self = .phoneAsKeyMatch
+    case 3: self = .phoneAsKeyNoMatch
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .phoneAsKeyUnknown: return 0
+    case .phoneAsKeyPending: return 1
+    case .phoneAsKeyMatch: return 2
+    case .phoneAsKeyNoMatch: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_PhoneAsKeyStatus] = [
+    .phoneAsKeyUnknown,
+    .phoneAsKeyPending,
+    .phoneAsKeyMatch,
+    .phoneAsKeyNoMatch,
   ]
 
 }
@@ -4501,6 +5283,21 @@ public struct Mobilegateway_Protos_BodyState: @unchecked Sendable {
   /// Clears the value of `windowPosition`. Subsequent reads from it will return its default value.
   public mutating func clearWindowPosition() {_uniqueStorage()._windowPosition = nil}
 
+  public var airSuspensionLevelStatus: Mobilegateway_Protos_AirSuspensionLevelStatus {
+    get {return _storage._airSuspensionLevelStatus}
+    set {_uniqueStorage()._airSuspensionLevelStatus = newValue}
+  }
+
+  public var rideHeightStatus: Mobilegateway_Protos_RideHeightStatus {
+    get {return _storage._rideHeightStatus}
+    set {_uniqueStorage()._rideHeightStatus = newValue}
+  }
+
+  public var unattendedOccupantDetectionStatus: Mobilegateway_Protos_UnattendedOccupantDetectionStatus {
+    get {return _storage._unattendedOccupantDetectionStatus}
+    set {_uniqueStorage()._unattendedOccupantDetectionStatus = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -4538,9 +5335,14 @@ public struct Mobilegateway_Protos_ChassisState: @unchecked Sendable {
     set {_uniqueStorage()._rearRightTirePressureBar = newValue}
   }
 
-  public var headlights: Mobilegateway_Protos_LightState {
+  public var headlights: Mobilegateway_Protos_LightAction {
     get {return _storage._headlights}
     set {_uniqueStorage()._headlights = newValue}
+  }
+
+  public var hazardLights: Mobilegateway_Protos_LightAction {
+    get {return _storage._hazardLights}
+    set {_uniqueStorage()._hazardLights = newValue}
   }
 
   public var hardWarnLeftFront: Mobilegateway_Protos_WarningState {
@@ -4706,9 +5508,24 @@ public struct Mobilegateway_Protos_ChargingState: @unchecked Sendable {
     set {_uniqueStorage()._portPower = newValue}
   }
 
+  public var mobileChargingControlRequest: Mobilegateway_Protos_MobileChargingControlRequestEnum {
+    get {return _storage._mobileChargingControlRequest}
+    set {_uniqueStorage()._mobileChargingControlRequest = newValue}
+  }
+
+  public var mobileChargingTargetSoeRequest: Int32 {
+    get {return _storage._mobileChargingTargetSoeRequest}
+    set {_uniqueStorage()._mobileChargingTargetSoeRequest = newValue}
+  }
+
   public var acOutletUnavailableReason: Mobilegateway_Protos_AcOutletUnavailableReason {
     get {return _storage._acOutletUnavailableReason}
     set {_uniqueStorage()._acOutletUnavailableReason = newValue}
+  }
+
+  public var fastChargingPreConditionRequest: Mobilegateway_Protos_FastChargingPreConditionRequestEnum {
+    get {return _storage._fastChargingPreConditionRequest}
+    set {_uniqueStorage()._fastChargingPreConditionRequest = newValue}
   }
 
   public var dischargeCommand: Mobilegateway_Protos_MobileDischargingCommand {
@@ -4729,6 +5546,11 @@ public struct Mobilegateway_Protos_ChargingState: @unchecked Sendable {
   public var dischargeEnergy: Double {
     get {return _storage._dischargeEnergy}
     set {_uniqueStorage()._dischargeEnergy = newValue}
+  }
+
+  public var chargeNotification: Mobilegateway_Protos_ChargeNotification {
+    get {return _storage._chargeNotification}
+    set {_uniqueStorage()._chargeNotification = newValue}
   }
 
   public var activeSessionAcCurrentLimit: UInt32 {
@@ -4811,6 +5633,10 @@ public struct Mobilegateway_Protos_SoftwareUpdate: Sendable {
   public var percentComplete: UInt32 = 0
 
   public var state: Mobilegateway_Protos_UpdateState = .unknown
+
+  public var rollbackState: Mobilegateway_Protos_SoftwareRollbackState = .rollbackStateUnknown
+
+  public var rollbackPercentComplete: Int32 = 0
 
   public var versionAvailableRaw: UInt32 = 0
 
@@ -4908,7 +5734,11 @@ public struct Mobilegateway_Protos_HvacState: @unchecked Sendable {
     set {_uniqueStorage()._keepClimateStatus = newValue}
   }
 
-  /// KeepClimateCondition keep_climate_condition = ???; 
+  public var keepClimateCondition: Mobilegateway_Protos_HvacKeepClimateCondition {
+    get {return _storage._keepClimateCondition}
+    set {_uniqueStorage()._keepClimateCondition = newValue}
+  }
+
   public var maxAcStatus: Mobilegateway_Protos_MaxACState {
     get {return _storage._maxAcStatus}
     set {_uniqueStorage()._maxAcStatus = newValue}
@@ -4961,37 +5791,107 @@ public struct Mobilegateway_Protos_HvacState: @unchecked Sendable {
 }
 
 /// Set of pending requests from API? 
-public struct Mobilegateway_Protos_MobileAppReqState: Sendable {
+public struct Mobilegateway_Protos_MobileAppReqState: @unchecked Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var alarmSetRequest: Mobilegateway_Protos_AlarmMode = .unknown
+  public var alarmSetRequest: Mobilegateway_Protos_AlarmMode {
+    get {return _storage._alarmSetRequest}
+    set {_uniqueStorage()._alarmSetRequest = newValue}
+  }
 
-  public var chargePortRequest: Mobilegateway_Protos_DoorState = .unknown
+  public var chargePortRequest: Mobilegateway_Protos_DoorState {
+    get {return _storage._chargePortRequest}
+    set {_uniqueStorage()._chargePortRequest = newValue}
+  }
 
-  public var frunkCargoRequest: Mobilegateway_Protos_DoorState = .unknown
+  public var chargeLockReq: Mobilegateway_Protos_LockState {
+    get {return _storage._chargeLockReq}
+    set {_uniqueStorage()._chargeLockReq = newValue}
+  }
+
+  public var doorLeftFrontReq: Mobilegateway_Protos_DoorState {
+    get {return _storage._doorLeftFrontReq}
+    set {_uniqueStorage()._doorLeftFrontReq = newValue}
+  }
+
+  public var doorLeftRearReq: Mobilegateway_Protos_DoorState {
+    get {return _storage._doorLeftRearReq}
+    set {_uniqueStorage()._doorLeftRearReq = newValue}
+  }
+
+  public var doorRightFrontReq: Mobilegateway_Protos_DoorState {
+    get {return _storage._doorRightFrontReq}
+    set {_uniqueStorage()._doorRightFrontReq = newValue}
+  }
+
+  public var doorRightRearReq: Mobilegateway_Protos_DoorState {
+    get {return _storage._doorRightRearReq}
+    set {_uniqueStorage()._doorRightRearReq = newValue}
+  }
+
+  public var driveEnable: Mobilegateway_Protos_KeylessDrivingState {
+    get {return _storage._driveEnable}
+    set {_uniqueStorage()._driveEnable = newValue}
+  }
+
+  public var frunkCargoRequest: Mobilegateway_Protos_DoorState {
+    get {return _storage._frunkCargoRequest}
+    set {_uniqueStorage()._frunkCargoRequest = newValue}
+  }
 
   /// That's right, the horn is a door. 
-  public var hornRequest: Mobilegateway_Protos_DoorState = .unknown
+  public var hornRequest: Mobilegateway_Protos_DoorState {
+    get {return _storage._hornRequest}
+    set {_uniqueStorage()._hornRequest = newValue}
+  }
 
-  public var hvacDefrost: Mobilegateway_Protos_DefrostState = .unknown
+  public var hvacDefrost: Mobilegateway_Protos_DefrostState {
+    get {return _storage._hvacDefrost}
+    set {_uniqueStorage()._hvacDefrost = newValue}
+  }
 
-  public var hvacPrecondition: Mobilegateway_Protos_HvacPower = .unknown
+  public var hvacPrecondition: Mobilegateway_Protos_HvacPower {
+    get {return _storage._hvacPrecondition}
+    set {_uniqueStorage()._hvacPrecondition = newValue}
+  }
 
-  public var lightRequest: Mobilegateway_Protos_LightAction = .unknown
+  public var lightRequest: Mobilegateway_Protos_LightAction {
+    get {return _storage._lightRequest}
+    set {_uniqueStorage()._lightRequest = newValue}
+  }
 
-  public var panicRequest: Mobilegateway_Protos_PanicState = .panicAlarmUnknown
+  public var panicRequest: Mobilegateway_Protos_PanicAlarmAction {
+    get {return _storage._panicRequest}
+    set {_uniqueStorage()._panicRequest = newValue}
+  }
 
-  public var sharedTripRequest: Mobilegateway_Protos_SharedTripState = .sharedTripUnknown
+  public var sharedTripRequest: Mobilegateway_Protos_SharedTripState {
+    get {return _storage._sharedTripRequest}
+    set {_uniqueStorage()._sharedTripRequest = newValue}
+  }
 
-  public var trunkCargoRequest: Mobilegateway_Protos_DoorState = .unknown
+  public var trunkCargoRequest: Mobilegateway_Protos_DoorState {
+    get {return _storage._trunkCargoRequest}
+    set {_uniqueStorage()._trunkCargoRequest = newValue}
+  }
 
-  public var vehicleUnlockRequest: Mobilegateway_Protos_LockState = .unknown
+  public var vehicleUnlockRequest: Mobilegateway_Protos_LockState {
+    get {return _storage._vehicleUnlockRequest}
+    set {_uniqueStorage()._vehicleUnlockRequest = newValue}
+  }
+
+  public var acCurrentLimitReq: Int32 {
+    get {return _storage._acCurrentLimitReq}
+    set {_uniqueStorage()._acCurrentLimitReq = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct Mobilegateway_Protos_TcuInternetState: Sendable {
@@ -5061,47 +5961,122 @@ public struct Mobilegateway_Protos_Notifications: Sendable {
   public init() {}
 }
 
-public struct Mobilegateway_Protos_MultiplexValues: Sendable {
+public struct Mobilegateway_Protos_SentryMultiplexValues: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var sentryActiveStatusRaw: Int32 = 0
+
+  public var sentryLocationSettingsRaw: Int32 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct Mobilegateway_Protos_SentryState: Sendable {
+public struct Mobilegateway_Protos_SentryActiveState: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var enablementState: Mobilegateway_Protos_EnablementState = .unknown
+  public var isActive: Bool = false
 
-  public var threatLevel: Mobilegateway_Protos_SentryThreat = .levelUnknown
+  public var inactiveReasonLowSoc: Bool = false
 
-  public var multiplexValues: Mobilegateway_Protos_MultiplexValues {
-    get {return _multiplexValues ?? Mobilegateway_Protos_MultiplexValues()}
-    set {_multiplexValues = newValue}
+  public var inactiveReasonOta: Bool = false
+
+  public var inactiveReasonVehOccupied: Bool = false
+
+  public var inactiveReasonAtHome: Bool = false
+
+  public var inactiveReasonAtWork: Bool = false
+
+  public var inactiveReasonUsbFull: Bool = false
+
+  public var inactiveReasonUsbError: Bool = false
+
+  public var inactiveReasonTowMode: Bool = false
+
+  public var inactiveReasonCameraError: Bool = false
+
+  public var inactiveReasonUod: Bool = false
+
+  public var inactiveReasonCreatureCmftMode: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SentryState: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var enablementState: Mobilegateway_Protos_SentryEnablementState {
+    get {return _storage._enablementState}
+    set {_uniqueStorage()._enablementState = newValue}
+  }
+
+  public var threatLevel: Mobilegateway_Protos_SentryThreat {
+    get {return _storage._threatLevel}
+    set {_uniqueStorage()._threatLevel = newValue}
+  }
+
+  public var multiplexValues: Mobilegateway_Protos_SentryMultiplexValues {
+    get {return _storage._multiplexValues ?? Mobilegateway_Protos_SentryMultiplexValues()}
+    set {_uniqueStorage()._multiplexValues = newValue}
   }
   /// Returns true if `multiplexValues` has been explicitly set.
-  public var hasMultiplexValues: Bool {return self._multiplexValues != nil}
+  public var hasMultiplexValues: Bool {return _storage._multiplexValues != nil}
   /// Clears the value of `multiplexValues`. Subsequent reads from it will return its default value.
-  public mutating func clearMultiplexValues() {self._multiplexValues = nil}
+  public mutating func clearMultiplexValues() {_uniqueStorage()._multiplexValues = nil}
 
-  public var usbDriveStatus: Mobilegateway_Protos_SentryUsbDriveStatus = .unknownSentryUsbDriveStatus
+  public var usbDriveStatus: Mobilegateway_Protos_SentryUsbDriveStatus {
+    get {return _storage._usbDriveStatus}
+    set {_uniqueStorage()._usbDriveStatus = newValue}
+  }
 
-  public var enhancedDeterrenceState: Mobilegateway_Protos_EnhancedDeterrenceState = .unknown
+  public var enhancedDeterrenceState: Mobilegateway_Protos_EnhancedDeterrenceState {
+    get {return _storage._enhancedDeterrenceState}
+    set {_uniqueStorage()._enhancedDeterrenceState = newValue}
+  }
 
-  public var rangeCostPerDay: UInt32 = 0
+  public var rangeCostPerDay: UInt32 {
+    get {return _storage._rangeCostPerDay}
+    set {_uniqueStorage()._rangeCostPerDay = newValue}
+  }
 
-  public var remoteAlarmState: Mobilegateway_Protos_SentryRemoteAlarmState = .unknown
+  public var remoteAlarmState: Mobilegateway_Protos_SentryRemoteAlarmState {
+    get {return _storage._remoteAlarmState}
+    set {_uniqueStorage()._remoteAlarmState = newValue}
+  }
+
+  public var sentryActiveState: Mobilegateway_Protos_SentryActiveState {
+    get {return _storage._sentryActiveState ?? Mobilegateway_Protos_SentryActiveState()}
+    set {_uniqueStorage()._sentryActiveState = newValue}
+  }
+  /// Returns true if `sentryActiveState` has been explicitly set.
+  public var hasSentryActiveState: Bool {return _storage._sentryActiveState != nil}
+  /// Clears the value of `sentryActiveState`. Subsequent reads from it will return its default value.
+  public mutating func clearSentryActiveState() {_uniqueStorage()._sentryActiveState = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _multiplexValues: Mobilegateway_Protos_MultiplexValues? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+public struct Mobilegateway_Protos_TrailerState: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
 }
 
 public struct Mobilegateway_Protos_VehicleState: @unchecked Sendable {
@@ -5275,10 +6250,24 @@ public struct Mobilegateway_Protos_VehicleState: @unchecked Sendable {
   /// Clears the value of `notifications`. Subsequent reads from it will return its default value.
   public mutating func clearNotifications() {_uniqueStorage()._notifications = nil}
 
+  public var factoryResetState: Mobilegateway_Protos_FactoryResetState {
+    get {return _storage._factoryResetState}
+    set {_uniqueStorage()._factoryResetState = newValue}
+  }
+
   public var lowPowerModeStatus: Mobilegateway_Protos_LowPowerModeStatus {
     get {return _storage._lowPowerModeStatus}
     set {_uniqueStorage()._lowPowerModeStatus = newValue}
   }
+
+  public var trailerState: Mobilegateway_Protos_TrailerState {
+    get {return _storage._trailerState ?? Mobilegateway_Protos_TrailerState()}
+    set {_uniqueStorage()._trailerState = newValue}
+  }
+  /// Returns true if `trailerState` has been explicitly set.
+  public var hasTrailerState: Bool {return _storage._trailerState != nil}
+  /// Clears the value of `trailerState`. Subsequent reads from it will return its default value.
+  public mutating func clearTrailerState() {_uniqueStorage()._trailerState = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -5414,6 +6403,33 @@ public struct Mobilegateway_Protos_ControlChargePortResponse: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_DoorControlRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// min=1,max=4; one or more
+  public var doorLocation: [Mobilegateway_Protos_DoorLocation] = []
+
+  public var closureState: Mobilegateway_Protos_DoorState = .unknown
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_DoorControlResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_DoorLocksControlRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -5464,18 +6480,6 @@ public struct Mobilegateway_Protos_FrontCargoControlResponse: Sendable {
   public init() {}
 }
 
-public struct Mobilegateway_Protos_DocumentInfoUnknown: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var timestamp: UInt64 = 0
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
 public struct Mobilegateway_Protos_DocumentInfo: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -5485,22 +6489,24 @@ public struct Mobilegateway_Protos_DocumentInfo: Sendable {
 
   public var version: String = String()
 
+  public var revision: String = String()
+
   public var description_p: String = String()
 
-  public var unknown: Mobilegateway_Protos_DocumentInfoUnknown {
-    get {return _unknown ?? Mobilegateway_Protos_DocumentInfoUnknown()}
-    set {_unknown = newValue}
+  public var createdAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _createdAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_createdAt = newValue}
   }
-  /// Returns true if `unknown` has been explicitly set.
-  public var hasUnknown: Bool {return self._unknown != nil}
-  /// Clears the value of `unknown`. Subsequent reads from it will return its default value.
-  public mutating func clearUnknown() {self._unknown = nil}
+  /// Returns true if `createdAt` has been explicitly set.
+  public var hasCreatedAt: Bool {return self._createdAt != nil}
+  /// Clears the value of `createdAt`. Subsequent reads from it will return its default value.
+  public mutating func clearCreatedAt() {self._createdAt = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _unknown: Mobilegateway_Protos_DocumentInfoUnknown? = nil
+  fileprivate var _createdAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
 public struct Mobilegateway_Protos_GetDocumentInfoRequest: Sendable {
@@ -5508,9 +6514,15 @@ public struct Mobilegateway_Protos_GetDocumentInfoRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var vehicleID: String = String()
+
+  public var vin: String = String()
+
   public var version: String = String()
 
   public var documentType: Mobilegateway_Protos_DocumentType = .unknown
+
+  public var revision: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -5540,12 +6552,82 @@ public struct Mobilegateway_Protos_GetDocumentInfoResponse: Sendable {
   fileprivate var _info: Mobilegateway_Protos_DocumentInfo? = nil
 }
 
+public struct Mobilegateway_Protos_GetOtaVersionHistoryRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var offset: Int64 = 0
+
+  public var limit: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_OtaVersionHistoryValue: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var version: String = String()
+
+  public var name: String = String()
+
+  public var updateTime: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetOtaVersionHistoryResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var values: [Mobilegateway_Protos_OtaVersionHistoryValue] = []
+
+  public var total: Int64 = 0
+
+  public var offset: Int64 = 0
+
+  public var limit: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_GetVehicleStateRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_ChargingSchedule: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var scheduleOn: Bool = false
+
+  public var startTime: String = String()
+
+  public var endTime: String = String()
+
+  public var weekdayOn: Bool = false
+
+  public var chargingAvailable: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -5568,11 +6650,21 @@ public struct Mobilegateway_Protos_GetVehicleStateResponse: Sendable {
   /// Clears the value of `state`. Subsequent reads from it will return its default value.
   public mutating func clearState() {self._state = nil}
 
+  public var chargingSchedule: Mobilegateway_Protos_ChargingSchedule {
+    get {return _chargingSchedule ?? Mobilegateway_Protos_ChargingSchedule()}
+    set {_chargingSchedule = newValue}
+  }
+  /// Returns true if `chargingSchedule` has been explicitly set.
+  public var hasChargingSchedule: Bool {return self._chargingSchedule != nil}
+  /// Clears the value of `chargingSchedule`. Subsequent reads from it will return its default value.
+  public mutating func clearChargingSchedule() {self._chargingSchedule = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _state: Mobilegateway_Protos_VehicleState? = nil
+  fileprivate var _chargingSchedule: Mobilegateway_Protos_ChargingSchedule? = nil
 }
 
 public struct Mobilegateway_Protos_HonkHornRequest: Sendable {
@@ -5612,6 +6704,30 @@ public struct Mobilegateway_Protos_HvacDefrostControlRequest: Sendable {
 }
 
 public struct Mobilegateway_Protos_HvacDefrostControlResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_KeylessDrivingActionRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var action: Mobilegateway_Protos_KeylessDrivingState = .keylessDrivingUnknown
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_KeylessDrivingActionResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -5818,7 +6934,7 @@ public struct Mobilegateway_Protos_DischargeControlRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var dischargeCommand: Mobilegateway_Protos_DischargeCommand = .dischargeUnknown
+  public var dischargeCommand: Mobilegateway_Protos_DischargeCommand = .idle
 
   public var vehicleID: String = String()
 
@@ -5937,6 +7053,30 @@ public struct Mobilegateway_Protos_SetMaxACResponse: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_PanicAlarmActionRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var action: Mobilegateway_Protos_PanicAlarmAction = .panicAlarmUnknown
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_PanicAlarmActionResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_SteeringWheelHeaterRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -5961,6 +7101,30 @@ public struct Mobilegateway_Protos_SteeringWheelHeaterResponse: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_SetACCurrLimitRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var acCurrLim: Int32 = 0
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetACCurrLimitResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Mobilegateway_Protos_SetCreatureComfortModeRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -5976,6 +7140,117 @@ public struct Mobilegateway_Protos_SetCreatureComfortModeRequest: Sendable {
 }
 
 public struct Mobilegateway_Protos_SetCreatureComfortModeResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateChargingScheduleRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var scheduleOn: Bool = false
+
+  public var startTime: String = String()
+
+  public var endTime: String = String()
+
+  public var weekdayOn: Bool = false
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateChargingScheduleResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_InitiatePhoneAsKeyRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var uuid: String = String()
+
+  public var vin: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_InitiatePhoneAsKeyResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var uuid: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: Mobilegateway_Protos_PhoneAsKeyStatus = .phoneAsKeyUnknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetScheduledOtaRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var scheduledTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _scheduledTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_scheduledTime = newValue}
+  }
+  /// Returns true if `scheduledTime` has been explicitly set.
+  public var hasScheduledTime: Bool {return self._scheduledTime != nil}
+  /// Clears the value of `scheduledTime`. Subsequent reads from it will return its default value.
+  public mutating func clearScheduledTime() {self._scheduledTime = nil}
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _scheduledTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+}
+
+public struct Mobilegateway_Protos_SetScheduledOtaResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -6091,6 +7366,10 @@ extension Mobilegateway_Protos_Wheels: SwiftProtobuf._ProtoNameProviding {
     9: .same(proto: "WHEELS_SPORT_LUSTER"),
     10: .same(proto: "WHEELS_SAPPHIRE_PACKAGE"),
     11: .same(proto: "WHEELS_RANGE_STEALTH"),
+    12: .same(proto: "WHEELS_DREAM_MAGNESIUM"),
+    13: .same(proto: "WHEELS_AETHER"),
+    14: .same(proto: "WHEELS_ORION"),
+    15: .same(proto: "WHEELS_VOYAGER"),
   ]
 }
 
@@ -6106,6 +7385,11 @@ extension Mobilegateway_Protos_ChargingAccountStatus: SwiftProtobuf._ProtoNamePr
     0: .same(proto: "CHARGING_ACCOUNT_STATUS_UNKNOWN"),
     1: .same(proto: "CHARGING_ACCOUNT_STATUS_DISABLED"),
     2: .same(proto: "CHARGING_ACCOUNT_STATUS_ENROLLED"),
+    3: .same(proto: "CHARGING_ACCOUNT_STATUS_ENROLL_ERROR"),
+    4: .same(proto: "CHARGING_ACCOUNT_STATUS_TERMINATED"),
+    5: .same(proto: "CHARGING_ACCOUNT_STATUS_BACKED_UP"),
+    6: .same(proto: "CHARGING_ACCOUNT_STATUS_EMAIL_UNVERIFIED"),
+    7: .same(proto: "CHARGING_ACCOUNT_STATUS_SUSPENDED"),
   ]
 }
 
@@ -6113,6 +7397,7 @@ extension Mobilegateway_Protos_ChargingVendor: SwiftProtobuf._ProtoNameProviding
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "CHARGING_VENDOR_UNKNOWN"),
     1: .same(proto: "CHARGING_VENDOR_ELECTRIFY_AMERICA"),
+    2: .same(proto: "CHARGING_VENDOR_ELECTRIFY_CANADA"),
     3: .same(proto: "CHARGING_VENDOR_BOSCH"),
   ]
 }
@@ -6138,7 +7423,21 @@ extension Mobilegateway_Protos_BatteryType: SwiftProtobuf._ProtoNameProviding {
     7: .same(proto: "BATTERY_TYPE_07"),
     8: .same(proto: "BATTERY_TYPE_08"),
     9: .same(proto: "BATTERY_TYPE_09"),
-    25: .same(proto: "BATTERY_TYPE_25"),
+    10: .same(proto: "BATTERY_TYPE_13"),
+    11: .same(proto: "BATTERY_TYPE_14"),
+    12: .same(proto: "BATTERY_TYPE_15"),
+    13: .same(proto: "BATTERY_TYPE_10"),
+    14: .same(proto: "BATTERY_TYPE_11"),
+    15: .same(proto: "BATTERY_TYPE_12"),
+    16: .same(proto: "BATTERY_TYPE_16"),
+    17: .same(proto: "BATTERY_TYPE_17"),
+    18: .same(proto: "BATTERY_TYPE_18"),
+    19: .same(proto: "BATTERY_TYPE_19"),
+    20: .same(proto: "BATTERY_TYPE_20"),
+    21: .same(proto: "BATTERY_TYPE_21"),
+    22: .same(proto: "BATTERY_TYPE_22"),
+    23: .same(proto: "BATTERY_TYPE_23"),
+    24: .same(proto: "BATTERY_TYPE_24"),
   ]
 }
 
@@ -6148,7 +7447,12 @@ extension Mobilegateway_Protos_Interior: SwiftProtobuf._ProtoNameProviding {
     1: .same(proto: "INTERIOR_SANTA_CRUZ"),
     2: .same(proto: "INTERIOR_TAHOE"),
     3: .same(proto: "INTERIOR_MOJAVE"),
+    4: .same(proto: "INTERIOR_MOJAVE_PURLUXE"),
     5: .same(proto: "INTERIOR_SANTA_MONICA"),
+    6: .same(proto: "INTERIOR_BIG_BASIN"),
+    7: .same(proto: "INTERIOR_YOSEMITE"),
+    8: .same(proto: "INTERIOR_OJAI"),
+    9: .same(proto: "INTERIOR_SAPPHIRE"),
   ]
 }
 
@@ -6234,6 +7538,9 @@ extension Mobilegateway_Protos_BatteryCellType: SwiftProtobuf._ProtoNameProvidin
     2: .same(proto: "BATTERY_CELL_TYPE_SDI_50G"),
     3: .same(proto: "BATTERY_CELL_TYPE_PANA_2170M"),
     4: .same(proto: "BATTERY_CELL_TYPE_SDI_50GV2"),
+    5: .same(proto: "BATTERY_CELL_TYPE_LG_M52V"),
+    6: .same(proto: "BATTERY_CELL_TYPE_LG_M50L"),
+    7: .same(proto: "BATTERY_CELL_TYPE_LG_H40B"),
   ]
 }
 
@@ -6256,6 +7563,8 @@ extension Mobilegateway_Protos_PowerState: SwiftProtobuf._ProtoNameProviding {
     5: .same(proto: "POWER_STATE_LIVE_CHARGE"),
     6: .same(proto: "POWER_STATE_SLEEP_CHARGE"),
     7: .same(proto: "POWER_STATE_LIVE_UPDATE"),
+    8: .same(proto: "POWER_STATE_SLEEP_UPDATE"),
+    9: .same(proto: "POWER_STATE_CLOUD_1"),
     10: .same(proto: "POWER_STATE_CLOUD_2"),
     11: .same(proto: "POWER_STATE_MONITOR"),
   ]
@@ -6275,12 +7584,14 @@ extension Mobilegateway_Protos_DoorState: SwiftProtobuf._ProtoNameProviding {
     1: .same(proto: "DOOR_STATE_OPEN"),
     2: .same(proto: "DOOR_STATE_CLOSED"),
     3: .same(proto: "DOOR_STATE_AJAR"),
+    4: .same(proto: "DOOR_STATE_CLOSE_ERROR"),
   ]
 }
 
 extension Mobilegateway_Protos_WalkawayState: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "WALKAWAY_UNKNOWN"),
+    1: .same(proto: "WALKAWAY_IDLE"),
     2: .same(proto: "WALKAWAY_ACTIVE"),
     3: .same(proto: "WALKAWAY_DISABLE"),
   ]
@@ -6324,6 +7635,7 @@ extension Mobilegateway_Protos_WindowPositionStatus: SwiftProtobuf._ProtoNamePro
     5: .same(proto: "WINDOW_POSITION_STATUS_FULLY_OPEN"),
     6: .same(proto: "WINDOW_POSITION_STATUS_UNKNOWN_DE_INITIALIZED"),
     7: .same(proto: "WINDOW_POSITION_STATUS_ATP_REVERSE_POSITION"),
+    8: .same(proto: "WINDOW_POSITION_STATUS_ANTICLATTER_POSITION"),
     9: .same(proto: "WINDOW_POSITION_STATUS_HARD_STOP_UP"),
     10: .same(proto: "WINDOW_POSITION_STATUS_HARD_STOP_DOWN"),
     11: .same(proto: "WINDOW_POSITION_STATUS_LONG_DROP_POSITION"),
@@ -6353,12 +7665,14 @@ extension Mobilegateway_Protos_LivingObjectDetectionStatus: SwiftProtobuf._Proto
   ]
 }
 
-extension Mobilegateway_Protos_LightState: SwiftProtobuf._ProtoNameProviding {
+extension Mobilegateway_Protos_UnattendedOccupantDetectionStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "LIGHT_STATE_REALLY_UNKNOWN"),
-    1: .same(proto: "LIGHT_STATE_OFF"),
-    2: .same(proto: "LIGHT_STATE_ON"),
-    3: .same(proto: "LIGHT_STATE_UNKNOWN"),
+    0: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_UNKNOWN"),
+    1: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_NO_REQUEST"),
+    2: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_STAGE_1"),
+    3: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_STAGE_2"),
+    4: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_STAGE_3"),
+    5: .same(proto: "UNATTENDED_OCCUPANT_DETECTION_STATUS_FAULT"),
   ]
 }
 
@@ -6403,13 +7717,26 @@ extension Mobilegateway_Protos_ChargeState: SwiftProtobuf._ProtoNameProviding {
     7: .same(proto: "CHARGE_STATE_CHARGER_PREPARATION"),
     8: .same(proto: "CHARGE_STATE_CHARGING"),
     9: .same(proto: "CHARGE_STATE_CHARGING_END_OK"),
-    10: .same(proto: "CHARGE_STATE_CHARGING_STOPPED"),
+    10: .same(proto: "CHARGE_STATE_CHARGING_END_ERROR"),
     11: .same(proto: "CHARGE_STATE_EVSE_MALFUNCTION"),
+    12: .same(proto: "CHARGE_STATE_AUTHENTICATION_FAILURE"),
+    13: .same(proto: "CHARGE_STATE_CHARGING_STOPPED"),
+    14: .same(proto: "CHARGE_STATE_CHARGING_PAUSED"),
+    15: .same(proto: "CHARGE_STATE_AUTHENTICATION_PNC_FAILURE"),
+    16: .same(proto: "CHARGE_STATE_INTERNAL_HARDWARE_FAULT"),
+    17: .same(proto: "CHARGE_STATE_READY_TO_DISCHARGE"),
+    18: .same(proto: "CHARGE_STATE_PREPARING_DISCHARGE"),
     19: .same(proto: "CHARGE_STATE_DISCHARGING"),
     20: .same(proto: "CHARGE_STATE_DISCHARGING_COMPLETED"),
     21: .same(proto: "CHARGE_STATE_DISCHARGING_STOPPED"),
     22: .same(proto: "CHARGE_STATE_DISCHARGING_FAULT"),
     23: .same(proto: "CHARGE_STATE_DISCHARGING_UNAVAILABLE"),
+    25: .same(proto: "CHARGE_STATE_EVSE_NOT_READY"),
+    26: .same(proto: "CHARGE_STATE_AC_INPUT_UNDER_VOLTAGE"),
+    27: .same(proto: "CHARGE_STATE_CABLE_LOCK_FAULT"),
+    28: .same(proto: "CHARGE_STATE_CABLE_CONNECTION_FAULT"),
+    29: .same(proto: "CHARGE_STATE_TEMP_PROTECTION"),
+    30: .same(proto: "CHARGE_STATE_CHARGING_SCHEDULED"),
   ]
 }
 
@@ -6434,7 +7761,9 @@ extension Mobilegateway_Protos_EnergyType: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "ENERGY_TYPE_UNKNOWN"),
     1: .same(proto: "ENERGY_TYPE_AC"),
     2: .same(proto: "ENERGY_TYPE_DC"),
+    3: .same(proto: "ENERGY_TYPE_DIGITAL"),
     4: .same(proto: "ENERGY_TYPE_V2V"),
+    5: .same(proto: "ENERGY_TYPE_NONE"),
   ]
 }
 
@@ -6475,6 +7804,45 @@ extension Mobilegateway_Protos_AcOutletUnavailableReason: SwiftProtobuf._ProtoNa
     6: .same(proto: "AC_OUTLET_UNAVAILABLE_REASON_WARNING_FAULT_CAMP"),
     7: .same(proto: "AC_OUTLET_UNAVAILABLE_REASON_CRITICAL_FAULT_CAMP"),
     8: .same(proto: "AC_OUTLET_UNAVAILABLE_REASON_LOW_VEH_RANGE_CAMP"),
+  ]
+}
+
+extension Mobilegateway_Protos_MobileChargingControlRequestEnum: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "MOBILE_CHARGING_CONTROL_REQUEST_UNKNOWN"),
+    1: .same(proto: "MOBILE_CHARGING_CONTROL_REQUEST_IDLE"),
+    2: .same(proto: "MOBILE_CHARGING_CONTROL_REQUEST_START"),
+    3: .same(proto: "MOBILE_CHARGING_CONTROL_REQUEST_STOP"),
+  ]
+}
+
+extension Mobilegateway_Protos_FastChargingPreConditionRequestEnum: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "FAST_CHARGING_PRE_CONDITION_REQUEST_UNKNOWN"),
+    1: .same(proto: "FAST_CHARGING_PRE_CONDITION_REQUEST_IDLE"),
+    2: .same(proto: "FAST_CHARGING_PRE_CONDITION_REQUEST_OFF"),
+    3: .same(proto: "FAST_CHARGING_PRE_CONDITION_REQUEST_ON"),
+  ]
+}
+
+extension Mobilegateway_Protos_ChargeNotification: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "CHARGE_NOTIFICATION_IDLE"),
+    1: .same(proto: "CHARGE_NOTIFICATION_DIGITAL_CHRG_SC_OVRIDE"),
+    2: .same(proto: "CHARGE_NOTIFICATION_LOW_SOE_SC_OVRIDE"),
+    3: .same(proto: "CHARGE_NOTIFICATION_CHARGING_SCHEDULED"),
+    4: .same(proto: "CHARGE_NOTIFICATION_NACS_DC_CHRG_NOT_ALLWD"),
+  ]
+}
+
+extension Mobilegateway_Protos_HvacKeepClimateCondition: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "KEEP_CLIMATE_CONDITION_UNKNOWN"),
+    1: .same(proto: "KEEP_CLIMATE_CONDITION_IDLE"),
+    2: .same(proto: "KEEP_CLIMATE_CONDITION_OFF"),
+    3: .same(proto: "KEEP_CLIMATE_CONDITION_ON_OCCUPIED"),
+    4: .same(proto: "KEEP_CLIMATE_CONDITION_ON_NOT_OCCUPIED"),
+    8: .same(proto: "KEEP_CLIMATE_CONDITION_INVALID"),
   ]
 }
 
@@ -6526,6 +7894,15 @@ extension Mobilegateway_Protos_SoftwareDownloadStatus: SwiftProtobuf._ProtoNameP
   ]
 }
 
+extension Mobilegateway_Protos_SoftwareRollbackState: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "ROLLBACK_STATE_UNKNOWN"),
+    1: .same(proto: "ROLLBACK_IN_PROGRESS"),
+    2: .same(proto: "ROLLBACK_SUCCESS"),
+    3: .same(proto: "ROLLBACK_FAILED"),
+  ]
+}
+
 extension Mobilegateway_Protos_SoftwareDownloadInterface: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "SOFTWARE_DOWNLOAD_INTERFACE_UNKNOWN"),
@@ -6541,6 +7918,11 @@ extension Mobilegateway_Protos_AlarmStatus: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "ALARM_STATUS_UNKNOWN"),
     1: .same(proto: "ALARM_STATUS_DISARMED"),
     2: .same(proto: "ALARM_STATUS_ARMED"),
+    3: .same(proto: "ALARM_STATUS_PRE_ALARM"),
+    4: .same(proto: "ALARM_STATUS_TILT"),
+    5: .same(proto: "ALARM_STATUS_SHOCK"),
+    6: .same(proto: "ALARM_STATUS_INTRUSION"),
+    7: .same(proto: "ALARM_STATUS_PANIC_MODE"),
   ]
 }
 
@@ -6561,21 +7943,15 @@ extension Mobilegateway_Protos_CloudConnectionState: SwiftProtobuf._ProtoNamePro
   ]
 }
 
-extension Mobilegateway_Protos_KeylessDrivingState: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "KEYLESS_DRIVING_UNKNOWN"),
-    1: .same(proto: "KEYLESS_DRIVING_ON"),
-    2: .same(proto: "KEYLESS_DRIVING_OFF"),
-  ]
-}
-
 extension Mobilegateway_Protos_HvacPower: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "HVAC_POWER_UNKNOWN"),
     1: .same(proto: "HVAC_ON"),
     2: .same(proto: "HVAC_OFF"),
     3: .same(proto: "HVAC_PRECONDITION"),
+    5: .same(proto: "HVAC_RESIDUAL_HEATING"),
     6: .same(proto: "HVAC_KEEP_TEMP"),
+    7: .same(proto: "HVAC_HEATSTROKE_PREVENTION"),
   ]
 }
 
@@ -6605,12 +7981,6 @@ extension Mobilegateway_Protos_KeepClimateStatus: SwiftProtobuf._ProtoNameProvid
     2: .same(proto: "KEEP_CLIMATE_STATUS_ENABLED"),
     3: .same(proto: "KEEP_CLIMATE_STATUS_CANCELED"),
     4: .same(proto: "KEEP_CLIMATE_STATUS_PET_MODE_ON"),
-  ]
-}
-
-extension Mobilegateway_Protos_KeepClimateCondition: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "KEEP_CLIMATE_CONDITION_UNKNOWN"),
   ]
 }
 
@@ -6678,6 +8048,14 @@ extension Mobilegateway_Protos_DriveMode: SwiftProtobuf._ProtoNameProviding {
     15: .same(proto: "DRIVE_MODE_TOW"),
     16: .same(proto: "DRIVE_MODE_TEST_DRIVE"),
     17: .same(proto: "DRIVE_MODE_RESERVED_3"),
+    19: .same(proto: "DRIVEMODE_TRACK_MODE_A"),
+    20: .same(proto: "DRIVEMODE_TRACK_MODE_B"),
+    21: .same(proto: "DRIVEMODE_TRACK_MODE_C"),
+    22: .same(proto: "DRIVEMODE_TRAILER"),
+    23: .same(proto: "DRIVEMODE_YOUNG_ADULT"),
+    24: .same(proto: "DRIVEMODE_CAMPING"),
+    25: .same(proto: "DRIVEMODE_TRAIN"),
+    26: .same(proto: "DRIVEMODE_CUSTOM"),
   ]
 }
 
@@ -6707,18 +8085,12 @@ extension Mobilegateway_Protos_SharedTripState: SwiftProtobuf._ProtoNameProvidin
   ]
 }
 
-extension Mobilegateway_Protos_PanicState: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "PANIC_ALARM_UNKNOWN"),
-    1: .same(proto: "PANIC_ALARM_ON"),
-  ]
-}
-
 extension Mobilegateway_Protos_TcuState: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TCU_UNKNOWN"),
     1: .same(proto: "TCU_SLEEP"),
     2: .same(proto: "TCU_DROWSY"),
+    3: .same(proto: "TCU_CLOUD"),
     4: .same(proto: "TCU_FULL"),
     5: .same(proto: "TCU_FACTORY"),
     6: .same(proto: "TCU_POWER"),
@@ -6746,7 +8118,13 @@ extension Mobilegateway_Protos_MpbFaultStatus: SwiftProtobuf._ProtoNameProviding
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "MPB_FAULT_STATUS_UNKNOWN"),
     1: .same(proto: "MPB_FAULT_STATUS_NORMAL"),
+    2: .same(proto: "MPB_FAULT_STATUS_WARNING"),
     3: .same(proto: "MPB_FAULT_STATUS_CRITICAL"),
+    4: .same(proto: "MPB_FAULT_STATUS_WARNING_HAPS"),
+    5: .same(proto: "MPB_FAULT_STATUS_CRITICAL_HAPS"),
+    6: .same(proto: "MPB_FAULT_STATUS_CRITICAL_HW_FLT"),
+    7: .same(proto: "MPB_FAULT_STATUS_RESERVED"),
+    8: .same(proto: "MPB_FAULT_STATUS_INVALID"),
   ]
 }
 
@@ -6773,10 +8151,12 @@ extension Mobilegateway_Protos_GeneralChargeStatus: SwiftProtobuf._ProtoNameProv
   ]
 }
 
-extension Mobilegateway_Protos_EnablementState: SwiftProtobuf._ProtoNameProviding {
+extension Mobilegateway_Protos_SentryEnablementState: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "ENABLEMENT_STATE_UNKNOWN"),
-    3: .same(proto: "ENABLEMENT_STATE_IDLE"),
+    0: .same(proto: "SENTRY_ENABLEMENT_STATE_UNKNOWN"),
+    1: .same(proto: "SENTRY_STATE_ENABLED"),
+    2: .same(proto: "SENTRY_STATE_DISABLED"),
+    3: .same(proto: "SENTRY_STATE_IDLE"),
   ]
 }
 
@@ -6818,6 +8198,36 @@ extension Mobilegateway_Protos_SentryRemoteAlarmState: SwiftProtobuf._ProtoNameP
   ]
 }
 
+extension Mobilegateway_Protos_FactoryResetState: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "FACTORY_RESET_STATE_UNKNOWN"),
+    1: .same(proto: "FACTORY_RESET_STATE_IDLE"),
+    2: .same(proto: "FACTORY_RESET_STATE_TRIGGERED"),
+  ]
+}
+
+extension Mobilegateway_Protos_AirSuspensionLevelStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "AIR_SUSPENSION_LEVEL_STATUS_UNKNOWN"),
+    1: .same(proto: "AIR_SUSPENSION_LEVEL_STATUS_IDLE"),
+    2: .same(proto: "AIR_SUSPENSION_LEVEL_STATUS_RAISING"),
+    3: .same(proto: "AIR_SUSPENSION_LEVEL_STATUS_LOWERING"),
+    4: .same(proto: "AIR_SUSPENSION_LEVEL_STATUS_PENDING"),
+  ]
+}
+
+extension Mobilegateway_Protos_RideHeightStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "RIDE_HEIGHT_STATUS_UNKNOWN"),
+    1: .same(proto: "RIDE_HEIGHT_STATUS_UNDEFINED"),
+    2: .same(proto: "RIDE_HEIGHT_STATUS_LOWEST"),
+    3: .same(proto: "RIDE_HEIGHT_STATUS_LOW"),
+    4: .same(proto: "RIDE_HEIGHT_STATUS_STANDARD"),
+    5: .same(proto: "RIDE_HEIGHT_STATUS_HIGH"),
+    6: .same(proto: "RIDE_HEIGHT_STATUS_HIGHEST"),
+  ]
+}
+
 extension Mobilegateway_Protos_LowPowerModeStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "LOW_POWER_MODE_STATUS_UNKNOWN"),
@@ -6834,18 +8244,49 @@ extension Mobilegateway_Protos_ChargeAction: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
+extension Mobilegateway_Protos_DoorLocation: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "DOOR_LOCATION_UNKNOWN"),
+    1: .same(proto: "DOOR_LOCATION_FRONT_LEFT"),
+    2: .same(proto: "DOOR_LOCATION_FRONT_RIGHT"),
+    3: .same(proto: "DOOR_LOCATION_REAR_LEFT"),
+    4: .same(proto: "DOOR_LOCATION_REAR_RIGHT"),
+  ]
+}
+
 extension Mobilegateway_Protos_DocumentType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "DOCUMENT_TYPE_UNKNOWN"),
     1: .same(proto: "DOCUMENT_TYPE_RELEASE_NOTES_PRE"),
     2: .same(proto: "DOCUMENT_TYPE_RELEASE_NOTES_POST"),
     3: .same(proto: "DOCUMENT_TYPE_OWNERS_MANUAL"),
+    4: .same(proto: "DOCUMENT_TYPE_SERVICE_NOTICE"),
+    5: .same(proto: "DOCUMENT_TYPE_RECALL_NOTICE"),
+    9: .same(proto: "DOCUMENT_TYPE_OWNERS_MANUAL_MOBILE"),
+    10: .same(proto: "DOCUMENT_TYPE_OWNERS_MANUAL_SAPPHIRE"),
+    11: .same(proto: "DOCUMENT_TYPE_OWNERS_MANUAL_SAPPHIRE_MOBILE"),
+    12: .same(proto: "DOCUMENT_TYPE_GTY_RELEASE_NOTES_PRE"),
+    13: .same(proto: "DOCUMENT_TYPE_GTY_RELEASE_NOTES_POST"),
+    14: .same(proto: "DOCUMENT_TYPE_GTY_OWNERS_MANUAL"),
+    15: .same(proto: "DOCUMENT_TYPE_GTY_OWNERS_MANUAL_MOBILE"),
+    16: .same(proto: "DOCUMENT_TYPE_GTY_SERVICE_NOTICE"),
+    17: .same(proto: "DOCUMENT_TYPE_GTY_RECALL_NOTICE"),
+  ]
+}
+
+extension Mobilegateway_Protos_KeylessDrivingState: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "KEYLESS_DRIVING_UNKNOWN"),
+    1: .same(proto: "KEYLESS_DRIVING_ON"),
+    2: .same(proto: "KEYLESS_DRIVING_OFF"),
   ]
 }
 
 extension Mobilegateway_Protos_DischargeCommand: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "DISCHARGE_UNKNOWN"),
+    0: .same(proto: "DISCHARGE_COMMAND_IDLE"),
+    1: .same(proto: "DISCHARGE_COMMAND_START"),
+    2: .same(proto: "DISCHARGE_COMMAND_STOP"),
   ]
 }
 
@@ -6868,6 +8309,14 @@ extension Mobilegateway_Protos_MaxACState: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
+extension Mobilegateway_Protos_PanicAlarmAction: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "PANIC_ALARM_UNKNOWN"),
+    1: .same(proto: "PANIC_ALARM_ON"),
+    2: .same(proto: "PANIC_ALARM_OFF"),
+  ]
+}
+
 extension Mobilegateway_Protos_SteeringWheelHeaterLevel: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "STEERING_WHEEL_HEATER_LEVEL_UNKNOWN"),
@@ -6883,6 +8332,15 @@ extension Mobilegateway_Protos_CreatureComfortMode: SwiftProtobuf._ProtoNameProv
     0: .same(proto: "CREATURE_COMFORT_MODE_UNKNOWN"),
     1: .same(proto: "CREATURE_COMFORT_MODE_OFF"),
     2: .same(proto: "CREATURE_COMFORT_MODE_ON"),
+  ]
+}
+
+extension Mobilegateway_Protos_PhoneAsKeyStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "PHONE_AS_KEY_UNKNOWN"),
+    1: .same(proto: "PHONE_AS_KEY_PENDING"),
+    2: .same(proto: "PHONE_AS_KEY_MATCH"),
+    3: .same(proto: "PHONE_AS_KEY_NO_MATCH"),
   ]
 }
 
@@ -7665,6 +9123,9 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
     14: .standard(proto: "all_windows_position"),
     15: .standard(proto: "living_object_detection_status"),
     16: .standard(proto: "window_position"),
+    17: .standard(proto: "air_suspension_level_status"),
+    18: .standard(proto: "ride_height_status"),
+    19: .standard(proto: "unattended_occupant_detection_status"),
   ]
 
   fileprivate class _StorageClass {
@@ -7684,6 +9145,9 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
     var _allWindowsPosition: Mobilegateway_Protos_AllWindowPosition = .unknown
     var _livingObjectDetectionStatus: Mobilegateway_Protos_LivingObjectDetectionStatus = .unknown
     var _windowPosition: Mobilegateway_Protos_WindowPositionState? = nil
+    var _airSuspensionLevelStatus: Mobilegateway_Protos_AirSuspensionLevelStatus = .unknown
+    var _rideHeightStatus: Mobilegateway_Protos_RideHeightStatus = .unknown
+    var _unattendedOccupantDetectionStatus: Mobilegateway_Protos_UnattendedOccupantDetectionStatus = .unknown
 
     #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
@@ -7714,6 +9178,9 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
       _allWindowsPosition = source._allWindowsPosition
       _livingObjectDetectionStatus = source._livingObjectDetectionStatus
       _windowPosition = source._windowPosition
+      _airSuspensionLevelStatus = source._airSuspensionLevelStatus
+      _rideHeightStatus = source._rideHeightStatus
+      _unattendedOccupantDetectionStatus = source._unattendedOccupantDetectionStatus
     }
   }
 
@@ -7748,6 +9215,9 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
         case 14: try { try decoder.decodeSingularEnumField(value: &_storage._allWindowsPosition) }()
         case 15: try { try decoder.decodeSingularEnumField(value: &_storage._livingObjectDetectionStatus) }()
         case 16: try { try decoder.decodeSingularMessageField(value: &_storage._windowPosition) }()
+        case 17: try { try decoder.decodeSingularEnumField(value: &_storage._airSuspensionLevelStatus) }()
+        case 18: try { try decoder.decodeSingularEnumField(value: &_storage._rideHeightStatus) }()
+        case 19: try { try decoder.decodeSingularEnumField(value: &_storage._unattendedOccupantDetectionStatus) }()
         default: break
         }
       }
@@ -7808,6 +9278,15 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
       try { if let v = _storage._windowPosition {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
       } }()
+      if _storage._airSuspensionLevelStatus != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._airSuspensionLevelStatus, fieldNumber: 17)
+      }
+      if _storage._rideHeightStatus != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._rideHeightStatus, fieldNumber: 18)
+      }
+      if _storage._unattendedOccupantDetectionStatus != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._unattendedOccupantDetectionStatus, fieldNumber: 19)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -7833,6 +9312,9 @@ extension Mobilegateway_Protos_BodyState: SwiftProtobuf.Message, SwiftProtobuf._
         if _storage._allWindowsPosition != rhs_storage._allWindowsPosition {return false}
         if _storage._livingObjectDetectionStatus != rhs_storage._livingObjectDetectionStatus {return false}
         if _storage._windowPosition != rhs_storage._windowPosition {return false}
+        if _storage._airSuspensionLevelStatus != rhs_storage._airSuspensionLevelStatus {return false}
+        if _storage._rideHeightStatus != rhs_storage._rideHeightStatus {return false}
+        if _storage._unattendedOccupantDetectionStatus != rhs_storage._unattendedOccupantDetectionStatus {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -7851,6 +9333,7 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
     4: .standard(proto: "rear_left_tire_pressure_bar"),
     5: .standard(proto: "rear_right_tire_pressure_bar"),
     6: .same(proto: "headlights"),
+    7: .standard(proto: "hazard_lights"),
     8: .standard(proto: "hard_warn_left_front"),
     9: .standard(proto: "hard_warn_left_rear"),
     10: .standard(proto: "hard_warn_right_front"),
@@ -7874,7 +9357,8 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
     var _frontRightTirePressureBar: Double = 0
     var _rearLeftTirePressureBar: Double = 0
     var _rearRightTirePressureBar: Double = 0
-    var _headlights: Mobilegateway_Protos_LightState = .reallyUnknown
+    var _headlights: Mobilegateway_Protos_LightAction = .unknown
+    var _hazardLights: Mobilegateway_Protos_LightAction = .unknown
     var _hardWarnLeftFront: Mobilegateway_Protos_WarningState = .warningUnknown
     var _hardWarnLeftRear: Mobilegateway_Protos_WarningState = .warningUnknown
     var _hardWarnRightFront: Mobilegateway_Protos_WarningState = .warningUnknown
@@ -7910,6 +9394,7 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
       _rearLeftTirePressureBar = source._rearLeftTirePressureBar
       _rearRightTirePressureBar = source._rearRightTirePressureBar
       _headlights = source._headlights
+      _hazardLights = source._hazardLights
       _hardWarnLeftFront = source._hardWarnLeftFront
       _hardWarnLeftRear = source._hardWarnLeftRear
       _hardWarnRightFront = source._hardWarnRightFront
@@ -7949,6 +9434,7 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
         case 4: try { try decoder.decodeSingularDoubleField(value: &_storage._rearLeftTirePressureBar) }()
         case 5: try { try decoder.decodeSingularDoubleField(value: &_storage._rearRightTirePressureBar) }()
         case 6: try { try decoder.decodeSingularEnumField(value: &_storage._headlights) }()
+        case 7: try { try decoder.decodeSingularEnumField(value: &_storage._hazardLights) }()
         case 8: try { try decoder.decodeSingularEnumField(value: &_storage._hardWarnLeftFront) }()
         case 9: try { try decoder.decodeSingularEnumField(value: &_storage._hardWarnLeftRear) }()
         case 10: try { try decoder.decodeSingularEnumField(value: &_storage._hardWarnRightFront) }()
@@ -7987,8 +9473,11 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
       if _storage._rearRightTirePressureBar.bitPattern != 0 {
         try visitor.visitSingularDoubleField(value: _storage._rearRightTirePressureBar, fieldNumber: 5)
       }
-      if _storage._headlights != .reallyUnknown {
+      if _storage._headlights != .unknown {
         try visitor.visitSingularEnumField(value: _storage._headlights, fieldNumber: 6)
+      }
+      if _storage._hazardLights != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._hazardLights, fieldNumber: 7)
       }
       if _storage._hardWarnLeftFront != .warningUnknown {
         try visitor.visitSingularEnumField(value: _storage._hardWarnLeftFront, fieldNumber: 8)
@@ -8050,6 +9539,7 @@ extension Mobilegateway_Protos_ChassisState: SwiftProtobuf.Message, SwiftProtobu
         if _storage._rearLeftTirePressureBar != rhs_storage._rearLeftTirePressureBar {return false}
         if _storage._rearRightTirePressureBar != rhs_storage._rearRightTirePressureBar {return false}
         if _storage._headlights != rhs_storage._headlights {return false}
+        if _storage._hazardLights != rhs_storage._hazardLights {return false}
         if _storage._hardWarnLeftFront != rhs_storage._hardWarnLeftFront {return false}
         if _storage._hardWarnLeftRear != rhs_storage._hardWarnLeftRear {return false}
         if _storage._hardWarnRightFront != rhs_storage._hardWarnRightFront {return false}
@@ -8092,11 +9582,15 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
     17: .standard(proto: "scheduled_charge"),
     18: .standard(proto: "scheduled_charge_unavailable"),
     19: .standard(proto: "port_power"),
+    20: .standard(proto: "mobile_charging_control_request"),
+    21: .standard(proto: "mobile_charging_target_soe_request"),
     22: .standard(proto: "ac_outlet_unavailable_reason"),
+    23: .standard(proto: "fast_charging_pre_condition_request"),
     24: .standard(proto: "discharge_command"),
     25: .standard(proto: "discharge_soe_limit"),
     26: .standard(proto: "discharge_target_soe"),
     27: .standard(proto: "discharge_energy"),
+    28: .standard(proto: "charge_notification"),
     29: .standard(proto: "active_session_ac_current_limit"),
     30: .standard(proto: "energy_ac_current_limit"),
     31: .standard(proto: "ea_pnc_status"),
@@ -8119,11 +9613,15 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
     var _scheduledCharge: Mobilegateway_Protos_ScheduledChargeState = .unknown
     var _scheduledChargeUnavailable: Mobilegateway_Protos_ScheduledChargeUnavailableState = .scheduledChargeUnavailableUnknown
     var _portPower: Double = 0
+    var _mobileChargingControlRequest: Mobilegateway_Protos_MobileChargingControlRequestEnum = .mobileChargingControlRequestUnknown
+    var _mobileChargingTargetSoeRequest: Int32 = 0
     var _acOutletUnavailableReason: Mobilegateway_Protos_AcOutletUnavailableReason = .unknown
+    var _fastChargingPreConditionRequest: Mobilegateway_Protos_FastChargingPreConditionRequestEnum = .fastChargingPreConditionRequestUnknown
     var _dischargeCommand: Mobilegateway_Protos_MobileDischargingCommand = .unknown
     var _dischargeSoeLimit: UInt32 = 0
     var _dischargeTargetSoe: UInt32 = 0
     var _dischargeEnergy: Double = 0
+    var _chargeNotification: Mobilegateway_Protos_ChargeNotification = .idle
     var _activeSessionAcCurrentLimit: UInt32 = 0
     var _energyAcCurrentLimit: UInt32 = 0
     var _eaPncStatus: Mobilegateway_Protos_EaPncStatus = .unknown
@@ -8157,11 +9655,15 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
       _scheduledCharge = source._scheduledCharge
       _scheduledChargeUnavailable = source._scheduledChargeUnavailable
       _portPower = source._portPower
+      _mobileChargingControlRequest = source._mobileChargingControlRequest
+      _mobileChargingTargetSoeRequest = source._mobileChargingTargetSoeRequest
       _acOutletUnavailableReason = source._acOutletUnavailableReason
+      _fastChargingPreConditionRequest = source._fastChargingPreConditionRequest
       _dischargeCommand = source._dischargeCommand
       _dischargeSoeLimit = source._dischargeSoeLimit
       _dischargeTargetSoe = source._dischargeTargetSoe
       _dischargeEnergy = source._dischargeEnergy
+      _chargeNotification = source._chargeNotification
       _activeSessionAcCurrentLimit = source._activeSessionAcCurrentLimit
       _energyAcCurrentLimit = source._energyAcCurrentLimit
       _eaPncStatus = source._eaPncStatus
@@ -8199,11 +9701,15 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
         case 17: try { try decoder.decodeSingularEnumField(value: &_storage._scheduledCharge) }()
         case 18: try { try decoder.decodeSingularEnumField(value: &_storage._scheduledChargeUnavailable) }()
         case 19: try { try decoder.decodeSingularDoubleField(value: &_storage._portPower) }()
+        case 20: try { try decoder.decodeSingularEnumField(value: &_storage._mobileChargingControlRequest) }()
+        case 21: try { try decoder.decodeSingularInt32Field(value: &_storage._mobileChargingTargetSoeRequest) }()
         case 22: try { try decoder.decodeSingularEnumField(value: &_storage._acOutletUnavailableReason) }()
+        case 23: try { try decoder.decodeSingularEnumField(value: &_storage._fastChargingPreConditionRequest) }()
         case 24: try { try decoder.decodeSingularEnumField(value: &_storage._dischargeCommand) }()
         case 25: try { try decoder.decodeSingularUInt32Field(value: &_storage._dischargeSoeLimit) }()
         case 26: try { try decoder.decodeSingularUInt32Field(value: &_storage._dischargeTargetSoe) }()
         case 27: try { try decoder.decodeSingularDoubleField(value: &_storage._dischargeEnergy) }()
+        case 28: try { try decoder.decodeSingularEnumField(value: &_storage._chargeNotification) }()
         case 29: try { try decoder.decodeSingularUInt32Field(value: &_storage._activeSessionAcCurrentLimit) }()
         case 30: try { try decoder.decodeSingularUInt32Field(value: &_storage._energyAcCurrentLimit) }()
         case 31: try { try decoder.decodeSingularEnumField(value: &_storage._eaPncStatus) }()
@@ -8261,8 +9767,17 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
       if _storage._portPower.bitPattern != 0 {
         try visitor.visitSingularDoubleField(value: _storage._portPower, fieldNumber: 19)
       }
+      if _storage._mobileChargingControlRequest != .mobileChargingControlRequestUnknown {
+        try visitor.visitSingularEnumField(value: _storage._mobileChargingControlRequest, fieldNumber: 20)
+      }
+      if _storage._mobileChargingTargetSoeRequest != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._mobileChargingTargetSoeRequest, fieldNumber: 21)
+      }
       if _storage._acOutletUnavailableReason != .unknown {
         try visitor.visitSingularEnumField(value: _storage._acOutletUnavailableReason, fieldNumber: 22)
+      }
+      if _storage._fastChargingPreConditionRequest != .fastChargingPreConditionRequestUnknown {
+        try visitor.visitSingularEnumField(value: _storage._fastChargingPreConditionRequest, fieldNumber: 23)
       }
       if _storage._dischargeCommand != .unknown {
         try visitor.visitSingularEnumField(value: _storage._dischargeCommand, fieldNumber: 24)
@@ -8275,6 +9790,9 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
       }
       if _storage._dischargeEnergy.bitPattern != 0 {
         try visitor.visitSingularDoubleField(value: _storage._dischargeEnergy, fieldNumber: 27)
+      }
+      if _storage._chargeNotification != .idle {
+        try visitor.visitSingularEnumField(value: _storage._chargeNotification, fieldNumber: 28)
       }
       if _storage._activeSessionAcCurrentLimit != 0 {
         try visitor.visitSingularUInt32Field(value: _storage._activeSessionAcCurrentLimit, fieldNumber: 29)
@@ -8312,11 +9830,15 @@ extension Mobilegateway_Protos_ChargingState: SwiftProtobuf.Message, SwiftProtob
         if _storage._scheduledCharge != rhs_storage._scheduledCharge {return false}
         if _storage._scheduledChargeUnavailable != rhs_storage._scheduledChargeUnavailable {return false}
         if _storage._portPower != rhs_storage._portPower {return false}
+        if _storage._mobileChargingControlRequest != rhs_storage._mobileChargingControlRequest {return false}
+        if _storage._mobileChargingTargetSoeRequest != rhs_storage._mobileChargingTargetSoeRequest {return false}
         if _storage._acOutletUnavailableReason != rhs_storage._acOutletUnavailableReason {return false}
+        if _storage._fastChargingPreConditionRequest != rhs_storage._fastChargingPreConditionRequest {return false}
         if _storage._dischargeCommand != rhs_storage._dischargeCommand {return false}
         if _storage._dischargeSoeLimit != rhs_storage._dischargeSoeLimit {return false}
         if _storage._dischargeTargetSoe != rhs_storage._dischargeTargetSoe {return false}
         if _storage._dischargeEnergy != rhs_storage._dischargeEnergy {return false}
+        if _storage._chargeNotification != rhs_storage._chargeNotification {return false}
         if _storage._activeSessionAcCurrentLimit != rhs_storage._activeSessionAcCurrentLimit {return false}
         if _storage._energyAcCurrentLimit != rhs_storage._energyAcCurrentLimit {return false}
         if _storage._eaPncStatus != rhs_storage._eaPncStatus {return false}
@@ -8429,6 +9951,8 @@ extension Mobilegateway_Protos_SoftwareUpdate: SwiftProtobuf.Message, SwiftProto
     2: .standard(proto: "install_duration_minutes"),
     4: .standard(proto: "percent_complete"),
     5: .same(proto: "state"),
+    6: .standard(proto: "rollback_state"),
+    7: .standard(proto: "rollback_percent_complete"),
     8: .standard(proto: "version_available_raw"),
     9: .standard(proto: "update_available"),
     10: .standard(proto: "scheduled_start_time_sec"),
@@ -8447,6 +9971,8 @@ extension Mobilegateway_Protos_SoftwareUpdate: SwiftProtobuf.Message, SwiftProto
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self.installDurationMinutes) }()
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self.percentComplete) }()
       case 5: try { try decoder.decodeSingularEnumField(value: &self.state) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.rollbackState) }()
+      case 7: try { try decoder.decodeSingularInt32Field(value: &self.rollbackPercentComplete) }()
       case 8: try { try decoder.decodeSingularUInt32Field(value: &self.versionAvailableRaw) }()
       case 9: try { try decoder.decodeSingularEnumField(value: &self.updateAvailable) }()
       case 10: try { try decoder.decodeSingularUInt64Field(value: &self.scheduledStartTimeSec) }()
@@ -8470,6 +9996,12 @@ extension Mobilegateway_Protos_SoftwareUpdate: SwiftProtobuf.Message, SwiftProto
     }
     if self.state != .unknown {
       try visitor.visitSingularEnumField(value: self.state, fieldNumber: 5)
+    }
+    if self.rollbackState != .rollbackStateUnknown {
+      try visitor.visitSingularEnumField(value: self.rollbackState, fieldNumber: 6)
+    }
+    if self.rollbackPercentComplete != 0 {
+      try visitor.visitSingularInt32Field(value: self.rollbackPercentComplete, fieldNumber: 7)
     }
     if self.versionAvailableRaw != 0 {
       try visitor.visitSingularUInt32Field(value: self.versionAvailableRaw, fieldNumber: 8)
@@ -8497,6 +10029,8 @@ extension Mobilegateway_Protos_SoftwareUpdate: SwiftProtobuf.Message, SwiftProto
     if lhs.installDurationMinutes != rhs.installDurationMinutes {return false}
     if lhs.percentComplete != rhs.percentComplete {return false}
     if lhs.state != rhs.state {return false}
+    if lhs.rollbackState != rhs.rollbackState {return false}
+    if lhs.rollbackPercentComplete != rhs.rollbackPercentComplete {return false}
     if lhs.versionAvailableRaw != rhs.versionAvailableRaw {return false}
     if lhs.updateAvailable != rhs.updateAvailable {return false}
     if lhs.scheduledStartTimeSec != rhs.scheduledStartTimeSec {return false}
@@ -8669,6 +10203,7 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
     2: .same(proto: "defrost"),
     3: .standard(proto: "precondition_status"),
     5: .standard(proto: "keep_climate_status"),
+    6: .standard(proto: "keep_climate_condition"),
     7: .standard(proto: "max_ac_status"),
     8: .same(proto: "seats"),
     9: .standard(proto: "sync_set"),
@@ -8684,6 +10219,7 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
     var _defrost: Mobilegateway_Protos_DefrostState = .unknown
     var _preconditionStatus: Mobilegateway_Protos_HvacPreconditionStatus = .unknown
     var _keepClimateStatus: Mobilegateway_Protos_KeepClimateStatus = .unknown
+    var _keepClimateCondition: Mobilegateway_Protos_HvacKeepClimateCondition = .keepClimateConditionUnknown
     var _maxAcStatus: Mobilegateway_Protos_MaxACState = .unknown
     var _seats: Mobilegateway_Protos_SeatClimateState? = nil
     var _syncSet: Mobilegateway_Protos_SyncSet = .unknown
@@ -8710,6 +10246,7 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
       _defrost = source._defrost
       _preconditionStatus = source._preconditionStatus
       _keepClimateStatus = source._keepClimateStatus
+      _keepClimateCondition = source._keepClimateCondition
       _maxAcStatus = source._maxAcStatus
       _seats = source._seats
       _syncSet = source._syncSet
@@ -8740,6 +10277,7 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
         case 2: try { try decoder.decodeSingularEnumField(value: &_storage._defrost) }()
         case 3: try { try decoder.decodeSingularEnumField(value: &_storage._preconditionStatus) }()
         case 5: try { try decoder.decodeSingularEnumField(value: &_storage._keepClimateStatus) }()
+        case 6: try { try decoder.decodeSingularEnumField(value: &_storage._keepClimateCondition) }()
         case 7: try { try decoder.decodeSingularEnumField(value: &_storage._maxAcStatus) }()
         case 8: try { try decoder.decodeSingularMessageField(value: &_storage._seats) }()
         case 9: try { try decoder.decodeSingularEnumField(value: &_storage._syncSet) }()
@@ -8771,6 +10309,9 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
       }
       if _storage._keepClimateStatus != .unknown {
         try visitor.visitSingularEnumField(value: _storage._keepClimateStatus, fieldNumber: 5)
+      }
+      if _storage._keepClimateCondition != .keepClimateConditionUnknown {
+        try visitor.visitSingularEnumField(value: _storage._keepClimateCondition, fieldNumber: 6)
       }
       if _storage._maxAcStatus != .unknown {
         try visitor.visitSingularEnumField(value: _storage._maxAcStatus, fieldNumber: 7)
@@ -8809,6 +10350,7 @@ extension Mobilegateway_Protos_HvacState: SwiftProtobuf.Message, SwiftProtobuf._
         if _storage._defrost != rhs_storage._defrost {return false}
         if _storage._preconditionStatus != rhs_storage._preconditionStatus {return false}
         if _storage._keepClimateStatus != rhs_storage._keepClimateStatus {return false}
+        if _storage._keepClimateCondition != rhs_storage._keepClimateCondition {return false}
         if _storage._maxAcStatus != rhs_storage._maxAcStatus {return false}
         if _storage._seats != rhs_storage._seats {return false}
         if _storage._syncSet != rhs_storage._syncSet {return false}
@@ -8831,6 +10373,12 @@ extension Mobilegateway_Protos_MobileAppReqState: SwiftProtobuf.Message, SwiftPr
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "alarm_set_request"),
     2: .standard(proto: "charge_port_request"),
+    3: .standard(proto: "charge_lock_req"),
+    4: .standard(proto: "door_left_front_req"),
+    5: .standard(proto: "door_left_rear_req"),
+    6: .standard(proto: "door_right_front_req"),
+    7: .standard(proto: "door_right_rear_req"),
+    8: .standard(proto: "drive_enable"),
     9: .standard(proto: "frunk_cargo_request"),
     10: .standard(proto: "horn_request"),
     11: .standard(proto: "hvac_defrost"),
@@ -8840,79 +10388,189 @@ extension Mobilegateway_Protos_MobileAppReqState: SwiftProtobuf.Message, SwiftPr
     15: .standard(proto: "shared_trip_request"),
     16: .standard(proto: "trunk_cargo_request"),
     17: .standard(proto: "vehicle_unlock_request"),
+    18: .standard(proto: "ac_current_limit_req"),
   ]
 
+  fileprivate class _StorageClass {
+    var _alarmSetRequest: Mobilegateway_Protos_AlarmMode = .unknown
+    var _chargePortRequest: Mobilegateway_Protos_DoorState = .unknown
+    var _chargeLockReq: Mobilegateway_Protos_LockState = .unknown
+    var _doorLeftFrontReq: Mobilegateway_Protos_DoorState = .unknown
+    var _doorLeftRearReq: Mobilegateway_Protos_DoorState = .unknown
+    var _doorRightFrontReq: Mobilegateway_Protos_DoorState = .unknown
+    var _doorRightRearReq: Mobilegateway_Protos_DoorState = .unknown
+    var _driveEnable: Mobilegateway_Protos_KeylessDrivingState = .keylessDrivingUnknown
+    var _frunkCargoRequest: Mobilegateway_Protos_DoorState = .unknown
+    var _hornRequest: Mobilegateway_Protos_DoorState = .unknown
+    var _hvacDefrost: Mobilegateway_Protos_DefrostState = .unknown
+    var _hvacPrecondition: Mobilegateway_Protos_HvacPower = .unknown
+    var _lightRequest: Mobilegateway_Protos_LightAction = .unknown
+    var _panicRequest: Mobilegateway_Protos_PanicAlarmAction = .panicAlarmUnknown
+    var _sharedTripRequest: Mobilegateway_Protos_SharedTripState = .sharedTripUnknown
+    var _trunkCargoRequest: Mobilegateway_Protos_DoorState = .unknown
+    var _vehicleUnlockRequest: Mobilegateway_Protos_LockState = .unknown
+    var _acCurrentLimitReq: Int32 = 0
+
+    #if swift(>=5.10)
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _alarmSetRequest = source._alarmSetRequest
+      _chargePortRequest = source._chargePortRequest
+      _chargeLockReq = source._chargeLockReq
+      _doorLeftFrontReq = source._doorLeftFrontReq
+      _doorLeftRearReq = source._doorLeftRearReq
+      _doorRightFrontReq = source._doorRightFrontReq
+      _doorRightRearReq = source._doorRightRearReq
+      _driveEnable = source._driveEnable
+      _frunkCargoRequest = source._frunkCargoRequest
+      _hornRequest = source._hornRequest
+      _hvacDefrost = source._hvacDefrost
+      _hvacPrecondition = source._hvacPrecondition
+      _lightRequest = source._lightRequest
+      _panicRequest = source._panicRequest
+      _sharedTripRequest = source._sharedTripRequest
+      _trunkCargoRequest = source._trunkCargoRequest
+      _vehicleUnlockRequest = source._vehicleUnlockRequest
+      _acCurrentLimitReq = source._acCurrentLimitReq
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularEnumField(value: &self.alarmSetRequest) }()
-      case 2: try { try decoder.decodeSingularEnumField(value: &self.chargePortRequest) }()
-      case 9: try { try decoder.decodeSingularEnumField(value: &self.frunkCargoRequest) }()
-      case 10: try { try decoder.decodeSingularEnumField(value: &self.hornRequest) }()
-      case 11: try { try decoder.decodeSingularEnumField(value: &self.hvacDefrost) }()
-      case 12: try { try decoder.decodeSingularEnumField(value: &self.hvacPrecondition) }()
-      case 13: try { try decoder.decodeSingularEnumField(value: &self.lightRequest) }()
-      case 14: try { try decoder.decodeSingularEnumField(value: &self.panicRequest) }()
-      case 15: try { try decoder.decodeSingularEnumField(value: &self.sharedTripRequest) }()
-      case 16: try { try decoder.decodeSingularEnumField(value: &self.trunkCargoRequest) }()
-      case 17: try { try decoder.decodeSingularEnumField(value: &self.vehicleUnlockRequest) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularEnumField(value: &_storage._alarmSetRequest) }()
+        case 2: try { try decoder.decodeSingularEnumField(value: &_storage._chargePortRequest) }()
+        case 3: try { try decoder.decodeSingularEnumField(value: &_storage._chargeLockReq) }()
+        case 4: try { try decoder.decodeSingularEnumField(value: &_storage._doorLeftFrontReq) }()
+        case 5: try { try decoder.decodeSingularEnumField(value: &_storage._doorLeftRearReq) }()
+        case 6: try { try decoder.decodeSingularEnumField(value: &_storage._doorRightFrontReq) }()
+        case 7: try { try decoder.decodeSingularEnumField(value: &_storage._doorRightRearReq) }()
+        case 8: try { try decoder.decodeSingularEnumField(value: &_storage._driveEnable) }()
+        case 9: try { try decoder.decodeSingularEnumField(value: &_storage._frunkCargoRequest) }()
+        case 10: try { try decoder.decodeSingularEnumField(value: &_storage._hornRequest) }()
+        case 11: try { try decoder.decodeSingularEnumField(value: &_storage._hvacDefrost) }()
+        case 12: try { try decoder.decodeSingularEnumField(value: &_storage._hvacPrecondition) }()
+        case 13: try { try decoder.decodeSingularEnumField(value: &_storage._lightRequest) }()
+        case 14: try { try decoder.decodeSingularEnumField(value: &_storage._panicRequest) }()
+        case 15: try { try decoder.decodeSingularEnumField(value: &_storage._sharedTripRequest) }()
+        case 16: try { try decoder.decodeSingularEnumField(value: &_storage._trunkCargoRequest) }()
+        case 17: try { try decoder.decodeSingularEnumField(value: &_storage._vehicleUnlockRequest) }()
+        case 18: try { try decoder.decodeSingularInt32Field(value: &_storage._acCurrentLimitReq) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.alarmSetRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.alarmSetRequest, fieldNumber: 1)
-    }
-    if self.chargePortRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.chargePortRequest, fieldNumber: 2)
-    }
-    if self.frunkCargoRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.frunkCargoRequest, fieldNumber: 9)
-    }
-    if self.hornRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.hornRequest, fieldNumber: 10)
-    }
-    if self.hvacDefrost != .unknown {
-      try visitor.visitSingularEnumField(value: self.hvacDefrost, fieldNumber: 11)
-    }
-    if self.hvacPrecondition != .unknown {
-      try visitor.visitSingularEnumField(value: self.hvacPrecondition, fieldNumber: 12)
-    }
-    if self.lightRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.lightRequest, fieldNumber: 13)
-    }
-    if self.panicRequest != .panicAlarmUnknown {
-      try visitor.visitSingularEnumField(value: self.panicRequest, fieldNumber: 14)
-    }
-    if self.sharedTripRequest != .sharedTripUnknown {
-      try visitor.visitSingularEnumField(value: self.sharedTripRequest, fieldNumber: 15)
-    }
-    if self.trunkCargoRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.trunkCargoRequest, fieldNumber: 16)
-    }
-    if self.vehicleUnlockRequest != .unknown {
-      try visitor.visitSingularEnumField(value: self.vehicleUnlockRequest, fieldNumber: 17)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._alarmSetRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._alarmSetRequest, fieldNumber: 1)
+      }
+      if _storage._chargePortRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._chargePortRequest, fieldNumber: 2)
+      }
+      if _storage._chargeLockReq != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._chargeLockReq, fieldNumber: 3)
+      }
+      if _storage._doorLeftFrontReq != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._doorLeftFrontReq, fieldNumber: 4)
+      }
+      if _storage._doorLeftRearReq != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._doorLeftRearReq, fieldNumber: 5)
+      }
+      if _storage._doorRightFrontReq != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._doorRightFrontReq, fieldNumber: 6)
+      }
+      if _storage._doorRightRearReq != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._doorRightRearReq, fieldNumber: 7)
+      }
+      if _storage._driveEnable != .keylessDrivingUnknown {
+        try visitor.visitSingularEnumField(value: _storage._driveEnable, fieldNumber: 8)
+      }
+      if _storage._frunkCargoRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._frunkCargoRequest, fieldNumber: 9)
+      }
+      if _storage._hornRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._hornRequest, fieldNumber: 10)
+      }
+      if _storage._hvacDefrost != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._hvacDefrost, fieldNumber: 11)
+      }
+      if _storage._hvacPrecondition != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._hvacPrecondition, fieldNumber: 12)
+      }
+      if _storage._lightRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._lightRequest, fieldNumber: 13)
+      }
+      if _storage._panicRequest != .panicAlarmUnknown {
+        try visitor.visitSingularEnumField(value: _storage._panicRequest, fieldNumber: 14)
+      }
+      if _storage._sharedTripRequest != .sharedTripUnknown {
+        try visitor.visitSingularEnumField(value: _storage._sharedTripRequest, fieldNumber: 15)
+      }
+      if _storage._trunkCargoRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._trunkCargoRequest, fieldNumber: 16)
+      }
+      if _storage._vehicleUnlockRequest != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._vehicleUnlockRequest, fieldNumber: 17)
+      }
+      if _storage._acCurrentLimitReq != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._acCurrentLimitReq, fieldNumber: 18)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_MobileAppReqState, rhs: Mobilegateway_Protos_MobileAppReqState) -> Bool {
-    if lhs.alarmSetRequest != rhs.alarmSetRequest {return false}
-    if lhs.chargePortRequest != rhs.chargePortRequest {return false}
-    if lhs.frunkCargoRequest != rhs.frunkCargoRequest {return false}
-    if lhs.hornRequest != rhs.hornRequest {return false}
-    if lhs.hvacDefrost != rhs.hvacDefrost {return false}
-    if lhs.hvacPrecondition != rhs.hvacPrecondition {return false}
-    if lhs.lightRequest != rhs.lightRequest {return false}
-    if lhs.panicRequest != rhs.panicRequest {return false}
-    if lhs.sharedTripRequest != rhs.sharedTripRequest {return false}
-    if lhs.trunkCargoRequest != rhs.trunkCargoRequest {return false}
-    if lhs.vehicleUnlockRequest != rhs.vehicleUnlockRequest {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._alarmSetRequest != rhs_storage._alarmSetRequest {return false}
+        if _storage._chargePortRequest != rhs_storage._chargePortRequest {return false}
+        if _storage._chargeLockReq != rhs_storage._chargeLockReq {return false}
+        if _storage._doorLeftFrontReq != rhs_storage._doorLeftFrontReq {return false}
+        if _storage._doorLeftRearReq != rhs_storage._doorLeftRearReq {return false}
+        if _storage._doorRightFrontReq != rhs_storage._doorRightFrontReq {return false}
+        if _storage._doorRightRearReq != rhs_storage._doorRightRearReq {return false}
+        if _storage._driveEnable != rhs_storage._driveEnable {return false}
+        if _storage._frunkCargoRequest != rhs_storage._frunkCargoRequest {return false}
+        if _storage._hornRequest != rhs_storage._hornRequest {return false}
+        if _storage._hvacDefrost != rhs_storage._hvacDefrost {return false}
+        if _storage._hvacPrecondition != rhs_storage._hvacPrecondition {return false}
+        if _storage._lightRequest != rhs_storage._lightRequest {return false}
+        if _storage._panicRequest != rhs_storage._panicRequest {return false}
+        if _storage._sharedTripRequest != rhs_storage._sharedTripRequest {return false}
+        if _storage._trunkCargoRequest != rhs_storage._trunkCargoRequest {return false}
+        if _storage._vehicleUnlockRequest != rhs_storage._vehicleUnlockRequest {return false}
+        if _storage._acCurrentLimitReq != rhs_storage._acCurrentLimitReq {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -9060,20 +10718,137 @@ extension Mobilegateway_Protos_Notifications: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Mobilegateway_Protos_MultiplexValues: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".MultiplexValues"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_SentryMultiplexValues: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SentryMultiplexValues"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "sentry_active_status_raw"),
+    2: .standard(proto: "sentry_location_settings_raw"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.sentryActiveStatusRaw) }()
+      case 2: try { try decoder.decodeSingularInt32Field(value: &self.sentryLocationSettingsRaw) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.sentryActiveStatusRaw != 0 {
+      try visitor.visitSingularInt32Field(value: self.sentryActiveStatusRaw, fieldNumber: 1)
+    }
+    if self.sentryLocationSettingsRaw != 0 {
+      try visitor.visitSingularInt32Field(value: self.sentryLocationSettingsRaw, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_MultiplexValues, rhs: Mobilegateway_Protos_MultiplexValues) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_SentryMultiplexValues, rhs: Mobilegateway_Protos_SentryMultiplexValues) -> Bool {
+    if lhs.sentryActiveStatusRaw != rhs.sentryActiveStatusRaw {return false}
+    if lhs.sentryLocationSettingsRaw != rhs.sentryLocationSettingsRaw {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SentryActiveState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SentryActiveState"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "is_active"),
+    2: .standard(proto: "inactive_reason_low_soc"),
+    3: .standard(proto: "inactive_reason_ota"),
+    4: .standard(proto: "inactive_reason_veh_occupied"),
+    5: .standard(proto: "inactive_reason_at_home"),
+    6: .standard(proto: "inactive_reason_at_work"),
+    7: .standard(proto: "inactive_reason_usb_full"),
+    8: .standard(proto: "inactive_reason_usb_error"),
+    9: .standard(proto: "inactive_reason_tow_mode"),
+    10: .standard(proto: "inactive_reason_camera_error"),
+    11: .standard(proto: "inactive_reason_uod"),
+    12: .standard(proto: "inactive_reason_creature_cmft_mode"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.isActive) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonLowSoc) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonOta) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonVehOccupied) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonAtHome) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonAtWork) }()
+      case 7: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonUsbFull) }()
+      case 8: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonUsbError) }()
+      case 9: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonTowMode) }()
+      case 10: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonCameraError) }()
+      case 11: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonUod) }()
+      case 12: try { try decoder.decodeSingularBoolField(value: &self.inactiveReasonCreatureCmftMode) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.isActive != false {
+      try visitor.visitSingularBoolField(value: self.isActive, fieldNumber: 1)
+    }
+    if self.inactiveReasonLowSoc != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonLowSoc, fieldNumber: 2)
+    }
+    if self.inactiveReasonOta != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonOta, fieldNumber: 3)
+    }
+    if self.inactiveReasonVehOccupied != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonVehOccupied, fieldNumber: 4)
+    }
+    if self.inactiveReasonAtHome != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonAtHome, fieldNumber: 5)
+    }
+    if self.inactiveReasonAtWork != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonAtWork, fieldNumber: 6)
+    }
+    if self.inactiveReasonUsbFull != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonUsbFull, fieldNumber: 7)
+    }
+    if self.inactiveReasonUsbError != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonUsbError, fieldNumber: 8)
+    }
+    if self.inactiveReasonTowMode != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonTowMode, fieldNumber: 9)
+    }
+    if self.inactiveReasonCameraError != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonCameraError, fieldNumber: 10)
+    }
+    if self.inactiveReasonUod != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonUod, fieldNumber: 11)
+    }
+    if self.inactiveReasonCreatureCmftMode != false {
+      try visitor.visitSingularBoolField(value: self.inactiveReasonCreatureCmftMode, fieldNumber: 12)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SentryActiveState, rhs: Mobilegateway_Protos_SentryActiveState) -> Bool {
+    if lhs.isActive != rhs.isActive {return false}
+    if lhs.inactiveReasonLowSoc != rhs.inactiveReasonLowSoc {return false}
+    if lhs.inactiveReasonOta != rhs.inactiveReasonOta {return false}
+    if lhs.inactiveReasonVehOccupied != rhs.inactiveReasonVehOccupied {return false}
+    if lhs.inactiveReasonAtHome != rhs.inactiveReasonAtHome {return false}
+    if lhs.inactiveReasonAtWork != rhs.inactiveReasonAtWork {return false}
+    if lhs.inactiveReasonUsbFull != rhs.inactiveReasonUsbFull {return false}
+    if lhs.inactiveReasonUsbError != rhs.inactiveReasonUsbError {return false}
+    if lhs.inactiveReasonTowMode != rhs.inactiveReasonTowMode {return false}
+    if lhs.inactiveReasonCameraError != rhs.inactiveReasonCameraError {return false}
+    if lhs.inactiveReasonUod != rhs.inactiveReasonUod {return false}
+    if lhs.inactiveReasonCreatureCmftMode != rhs.inactiveReasonCreatureCmftMode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -9089,63 +10864,142 @@ extension Mobilegateway_Protos_SentryState: SwiftProtobuf.Message, SwiftProtobuf
     5: .standard(proto: "enhanced_deterrence_state"),
     6: .standard(proto: "range_cost_per_day"),
     7: .standard(proto: "remote_alarm_state"),
+    9: .standard(proto: "sentry_active_state"),
   ]
 
+  fileprivate class _StorageClass {
+    var _enablementState: Mobilegateway_Protos_SentryEnablementState = .unknown
+    var _threatLevel: Mobilegateway_Protos_SentryThreat = .levelUnknown
+    var _multiplexValues: Mobilegateway_Protos_SentryMultiplexValues? = nil
+    var _usbDriveStatus: Mobilegateway_Protos_SentryUsbDriveStatus = .unknownSentryUsbDriveStatus
+    var _enhancedDeterrenceState: Mobilegateway_Protos_EnhancedDeterrenceState = .unknown
+    var _rangeCostPerDay: UInt32 = 0
+    var _remoteAlarmState: Mobilegateway_Protos_SentryRemoteAlarmState = .unknown
+    var _sentryActiveState: Mobilegateway_Protos_SentryActiveState? = nil
+
+    #if swift(>=5.10)
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _enablementState = source._enablementState
+      _threatLevel = source._threatLevel
+      _multiplexValues = source._multiplexValues
+      _usbDriveStatus = source._usbDriveStatus
+      _enhancedDeterrenceState = source._enhancedDeterrenceState
+      _rangeCostPerDay = source._rangeCostPerDay
+      _remoteAlarmState = source._remoteAlarmState
+      _sentryActiveState = source._sentryActiveState
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularEnumField(value: &self.enablementState) }()
-      case 2: try { try decoder.decodeSingularEnumField(value: &self.threatLevel) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._multiplexValues) }()
-      case 4: try { try decoder.decodeSingularEnumField(value: &self.usbDriveStatus) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self.enhancedDeterrenceState) }()
-      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.rangeCostPerDay) }()
-      case 7: try { try decoder.decodeSingularEnumField(value: &self.remoteAlarmState) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularEnumField(value: &_storage._enablementState) }()
+        case 2: try { try decoder.decodeSingularEnumField(value: &_storage._threatLevel) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._multiplexValues) }()
+        case 4: try { try decoder.decodeSingularEnumField(value: &_storage._usbDriveStatus) }()
+        case 5: try { try decoder.decodeSingularEnumField(value: &_storage._enhancedDeterrenceState) }()
+        case 6: try { try decoder.decodeSingularUInt32Field(value: &_storage._rangeCostPerDay) }()
+        case 7: try { try decoder.decodeSingularEnumField(value: &_storage._remoteAlarmState) }()
+        case 9: try { try decoder.decodeSingularMessageField(value: &_storage._sentryActiveState) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if self.enablementState != .unknown {
-      try visitor.visitSingularEnumField(value: self.enablementState, fieldNumber: 1)
-    }
-    if self.threatLevel != .levelUnknown {
-      try visitor.visitSingularEnumField(value: self.threatLevel, fieldNumber: 2)
-    }
-    try { if let v = self._multiplexValues {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    if self.usbDriveStatus != .unknownSentryUsbDriveStatus {
-      try visitor.visitSingularEnumField(value: self.usbDriveStatus, fieldNumber: 4)
-    }
-    if self.enhancedDeterrenceState != .unknown {
-      try visitor.visitSingularEnumField(value: self.enhancedDeterrenceState, fieldNumber: 5)
-    }
-    if self.rangeCostPerDay != 0 {
-      try visitor.visitSingularUInt32Field(value: self.rangeCostPerDay, fieldNumber: 6)
-    }
-    if self.remoteAlarmState != .unknown {
-      try visitor.visitSingularEnumField(value: self.remoteAlarmState, fieldNumber: 7)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if _storage._enablementState != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._enablementState, fieldNumber: 1)
+      }
+      if _storage._threatLevel != .levelUnknown {
+        try visitor.visitSingularEnumField(value: _storage._threatLevel, fieldNumber: 2)
+      }
+      try { if let v = _storage._multiplexValues {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      if _storage._usbDriveStatus != .unknownSentryUsbDriveStatus {
+        try visitor.visitSingularEnumField(value: _storage._usbDriveStatus, fieldNumber: 4)
+      }
+      if _storage._enhancedDeterrenceState != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._enhancedDeterrenceState, fieldNumber: 5)
+      }
+      if _storage._rangeCostPerDay != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._rangeCostPerDay, fieldNumber: 6)
+      }
+      if _storage._remoteAlarmState != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._remoteAlarmState, fieldNumber: 7)
+      }
+      try { if let v = _storage._sentryActiveState {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_SentryState, rhs: Mobilegateway_Protos_SentryState) -> Bool {
-    if lhs.enablementState != rhs.enablementState {return false}
-    if lhs.threatLevel != rhs.threatLevel {return false}
-    if lhs._multiplexValues != rhs._multiplexValues {return false}
-    if lhs.usbDriveStatus != rhs.usbDriveStatus {return false}
-    if lhs.enhancedDeterrenceState != rhs.enhancedDeterrenceState {return false}
-    if lhs.rangeCostPerDay != rhs.rangeCostPerDay {return false}
-    if lhs.remoteAlarmState != rhs.remoteAlarmState {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._enablementState != rhs_storage._enablementState {return false}
+        if _storage._threatLevel != rhs_storage._threatLevel {return false}
+        if _storage._multiplexValues != rhs_storage._multiplexValues {return false}
+        if _storage._usbDriveStatus != rhs_storage._usbDriveStatus {return false}
+        if _storage._enhancedDeterrenceState != rhs_storage._enhancedDeterrenceState {return false}
+        if _storage._rangeCostPerDay != rhs_storage._rangeCostPerDay {return false}
+        if _storage._remoteAlarmState != rhs_storage._remoteAlarmState {return false}
+        if _storage._sentryActiveState != rhs_storage._sentryActiveState {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_TrailerState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TrailerState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_TrailerState, rhs: Mobilegateway_Protos_TrailerState) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -9176,7 +11030,9 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
     24: .standard(proto: "sentry_state"),
     25: .standard(proto: "fault_state"),
     26: .same(proto: "notifications"),
+    27: .standard(proto: "factory_reset_state"),
     28: .standard(proto: "low_power_mode_status"),
+    29: .standard(proto: "trailer_state"),
   ]
 
   fileprivate class _StorageClass {
@@ -9202,7 +11058,9 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
     var _sentryState: Mobilegateway_Protos_SentryState? = nil
     var _faultState: Mobilegateway_Protos_FaultState? = nil
     var _notifications: Mobilegateway_Protos_Notifications? = nil
+    var _factoryResetState: Mobilegateway_Protos_FactoryResetState = .unknown
     var _lowPowerModeStatus: Mobilegateway_Protos_LowPowerModeStatus = .unknown
+    var _trailerState: Mobilegateway_Protos_TrailerState? = nil
 
     #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
@@ -9239,7 +11097,9 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
       _sentryState = source._sentryState
       _faultState = source._faultState
       _notifications = source._notifications
+      _factoryResetState = source._factoryResetState
       _lowPowerModeStatus = source._lowPowerModeStatus
+      _trailerState = source._trailerState
     }
   }
 
@@ -9280,7 +11140,9 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
         case 24: try { try decoder.decodeSingularMessageField(value: &_storage._sentryState) }()
         case 25: try { try decoder.decodeSingularMessageField(value: &_storage._faultState) }()
         case 26: try { try decoder.decodeSingularMessageField(value: &_storage._notifications) }()
+        case 27: try { try decoder.decodeSingularEnumField(value: &_storage._factoryResetState) }()
         case 28: try { try decoder.decodeSingularEnumField(value: &_storage._lowPowerModeStatus) }()
+        case 29: try { try decoder.decodeSingularMessageField(value: &_storage._trailerState) }()
         default: break
         }
       }
@@ -9359,9 +11221,15 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
       try { if let v = _storage._notifications {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
       } }()
+      if _storage._factoryResetState != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._factoryResetState, fieldNumber: 27)
+      }
       if _storage._lowPowerModeStatus != .unknown {
         try visitor.visitSingularEnumField(value: _storage._lowPowerModeStatus, fieldNumber: 28)
       }
+      try { if let v = _storage._trailerState {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 29)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -9393,7 +11261,9 @@ extension Mobilegateway_Protos_VehicleState: SwiftProtobuf.Message, SwiftProtobu
         if _storage._sentryState != rhs_storage._sentryState {return false}
         if _storage._faultState != rhs_storage._faultState {return false}
         if _storage._notifications != rhs_storage._notifications {return false}
+        if _storage._factoryResetState != rhs_storage._factoryResetState {return false}
         if _storage._lowPowerModeStatus != rhs_storage._lowPowerModeStatus {return false}
+        if _storage._trailerState != rhs_storage._trailerState {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -9673,6 +11543,69 @@ extension Mobilegateway_Protos_ControlChargePortResponse: SwiftProtobuf.Message,
   }
 }
 
+extension Mobilegateway_Protos_DoorControlRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DoorControlRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "door_location"),
+    2: .standard(proto: "closure_state"),
+    3: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedEnumField(value: &self.doorLocation) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.closureState) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.doorLocation.isEmpty {
+      try visitor.visitPackedEnumField(value: self.doorLocation, fieldNumber: 1)
+    }
+    if self.closureState != .unknown {
+      try visitor.visitSingularEnumField(value: self.closureState, fieldNumber: 2)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DoorControlRequest, rhs: Mobilegateway_Protos_DoorControlRequest) -> Bool {
+    if lhs.doorLocation != rhs.doorLocation {return false}
+    if lhs.closureState != rhs.closureState {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DoorControlResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DoorControlResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DoorControlResponse, rhs: Mobilegateway_Protos_DoorControlResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_DoorLocksControlRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DoorLocksControlRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -9793,45 +11726,14 @@ extension Mobilegateway_Protos_FrontCargoControlResponse: SwiftProtobuf.Message,
   }
 }
 
-extension Mobilegateway_Protos_DocumentInfoUnknown: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".DocumentInfoUnknown"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "timestamp"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.timestamp) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.timestamp != 0 {
-      try visitor.visitSingularUInt64Field(value: self.timestamp, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_DocumentInfoUnknown, rhs: Mobilegateway_Protos_DocumentInfoUnknown) -> Bool {
-    if lhs.timestamp != rhs.timestamp {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
 extension Mobilegateway_Protos_DocumentInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DocumentInfo"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "version"),
+    3: .same(proto: "revision"),
     4: .same(proto: "description"),
-    5: .same(proto: "unknown"),
+    5: .standard(proto: "created_at"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -9842,8 +11744,9 @@ extension Mobilegateway_Protos_DocumentInfo: SwiftProtobuf.Message, SwiftProtobu
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.type) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.version) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.revision) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._unknown) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._createdAt) }()
       default: break
       }
     }
@@ -9860,10 +11763,13 @@ extension Mobilegateway_Protos_DocumentInfo: SwiftProtobuf.Message, SwiftProtobu
     if !self.version.isEmpty {
       try visitor.visitSingularStringField(value: self.version, fieldNumber: 2)
     }
+    if !self.revision.isEmpty {
+      try visitor.visitSingularStringField(value: self.revision, fieldNumber: 3)
+    }
     if !self.description_p.isEmpty {
       try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 4)
     }
-    try { if let v = self._unknown {
+    try { if let v = self._createdAt {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     } }()
     try unknownFields.traverse(visitor: &visitor)
@@ -9872,8 +11778,9 @@ extension Mobilegateway_Protos_DocumentInfo: SwiftProtobuf.Message, SwiftProtobu
   public static func ==(lhs: Mobilegateway_Protos_DocumentInfo, rhs: Mobilegateway_Protos_DocumentInfo) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs.version != rhs.version {return false}
+    if lhs.revision != rhs.revision {return false}
     if lhs.description_p != rhs.description_p {return false}
-    if lhs._unknown != rhs._unknown {return false}
+    if lhs._createdAt != rhs._createdAt {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -9882,8 +11789,11 @@ extension Mobilegateway_Protos_DocumentInfo: SwiftProtobuf.Message, SwiftProtobu
 extension Mobilegateway_Protos_GetDocumentInfoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetDocumentInfoRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "vehicle_id"),
+    2: .same(proto: "vin"),
     3: .same(proto: "version"),
     4: .standard(proto: "document_type"),
+    5: .same(proto: "revision"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -9892,26 +11802,41 @@ extension Mobilegateway_Protos_GetDocumentInfoRequest: SwiftProtobuf.Message, Sw
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vin) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.version) }()
       case 4: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.revision) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
+    }
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 2)
+    }
     if !self.version.isEmpty {
       try visitor.visitSingularStringField(value: self.version, fieldNumber: 3)
     }
     if self.documentType != .unknown {
       try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 4)
     }
+    if !self.revision.isEmpty {
+      try visitor.visitSingularStringField(value: self.revision, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetDocumentInfoRequest, rhs: Mobilegateway_Protos_GetDocumentInfoRequest) -> Bool {
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.vin != rhs.vin {return false}
     if lhs.version != rhs.version {return false}
     if lhs.documentType != rhs.documentType {return false}
+    if lhs.revision != rhs.revision {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -9959,6 +11884,144 @@ extension Mobilegateway_Protos_GetDocumentInfoResponse: SwiftProtobuf.Message, S
   }
 }
 
+extension Mobilegateway_Protos_GetOtaVersionHistoryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetOtaVersionHistoryRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+    2: .same(proto: "offset"),
+    3: .same(proto: "limit"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.offset) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.limit) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    if self.offset != 0 {
+      try visitor.visitSingularInt64Field(value: self.offset, fieldNumber: 2)
+    }
+    if self.limit != 0 {
+      try visitor.visitSingularInt64Field(value: self.limit, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetOtaVersionHistoryRequest, rhs: Mobilegateway_Protos_GetOtaVersionHistoryRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.offset != rhs.offset {return false}
+    if lhs.limit != rhs.limit {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_OtaVersionHistoryValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OtaVersionHistoryValue"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "version"),
+    2: .same(proto: "name"),
+    3: .same(proto: "updateTime"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.version) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.updateTime) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.version.isEmpty {
+      try visitor.visitSingularStringField(value: self.version, fieldNumber: 1)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+    }
+    if !self.updateTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.updateTime, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_OtaVersionHistoryValue, rhs: Mobilegateway_Protos_OtaVersionHistoryValue) -> Bool {
+    if lhs.version != rhs.version {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.updateTime != rhs.updateTime {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetOtaVersionHistoryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetOtaVersionHistoryResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "values"),
+    2: .same(proto: "total"),
+    3: .same(proto: "offset"),
+    4: .same(proto: "limit"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.values) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.total) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.offset) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.limit) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.values.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.values, fieldNumber: 1)
+    }
+    if self.total != 0 {
+      try visitor.visitSingularInt64Field(value: self.total, fieldNumber: 2)
+    }
+    if self.offset != 0 {
+      try visitor.visitSingularInt64Field(value: self.offset, fieldNumber: 3)
+    }
+    if self.limit != 0 {
+      try visitor.visitSingularInt64Field(value: self.limit, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetOtaVersionHistoryResponse, rhs: Mobilegateway_Protos_GetOtaVersionHistoryResponse) -> Bool {
+    if lhs.values != rhs.values {return false}
+    if lhs.total != rhs.total {return false}
+    if lhs.offset != rhs.offset {return false}
+    if lhs.limit != rhs.limit {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_GetVehicleStateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetVehicleStateRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -9991,11 +12054,68 @@ extension Mobilegateway_Protos_GetVehicleStateRequest: SwiftProtobuf.Message, Sw
   }
 }
 
+extension Mobilegateway_Protos_ChargingSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChargingSchedule"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "schedule_on"),
+    2: .standard(proto: "start_time"),
+    3: .standard(proto: "end_time"),
+    4: .standard(proto: "weekday_on"),
+    5: .standard(proto: "charging_available"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.scheduleOn) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.startTime) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.endTime) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.weekdayOn) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.chargingAvailable) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.scheduleOn != false {
+      try visitor.visitSingularBoolField(value: self.scheduleOn, fieldNumber: 1)
+    }
+    if !self.startTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.startTime, fieldNumber: 2)
+    }
+    if !self.endTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.endTime, fieldNumber: 3)
+    }
+    if self.weekdayOn != false {
+      try visitor.visitSingularBoolField(value: self.weekdayOn, fieldNumber: 4)
+    }
+    if self.chargingAvailable != false {
+      try visitor.visitSingularBoolField(value: self.chargingAvailable, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_ChargingSchedule, rhs: Mobilegateway_Protos_ChargingSchedule) -> Bool {
+    if lhs.scheduleOn != rhs.scheduleOn {return false}
+    if lhs.startTime != rhs.startTime {return false}
+    if lhs.endTime != rhs.endTime {return false}
+    if lhs.weekdayOn != rhs.weekdayOn {return false}
+    if lhs.chargingAvailable != rhs.chargingAvailable {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_GetVehicleStateResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetVehicleStateResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "vehicle_id"),
     2: .same(proto: "state"),
+    3: .standard(proto: "charging_schedule"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -10006,6 +12126,7 @@ extension Mobilegateway_Protos_GetVehicleStateResponse: SwiftProtobuf.Message, S
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._state) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._chargingSchedule) }()
       default: break
       }
     }
@@ -10022,12 +12143,16 @@ extension Mobilegateway_Protos_GetVehicleStateResponse: SwiftProtobuf.Message, S
     try { if let v = self._state {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
+    try { if let v = self._chargingSchedule {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetVehicleStateResponse, rhs: Mobilegateway_Protos_GetVehicleStateResponse) -> Bool {
     if lhs.vehicleID != rhs.vehicleID {return false}
     if lhs._state != rhs._state {return false}
+    if lhs._chargingSchedule != rhs._chargingSchedule {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -10136,6 +12261,63 @@ extension Mobilegateway_Protos_HvacDefrostControlResponse: SwiftProtobuf.Message
   }
 
   public static func ==(lhs: Mobilegateway_Protos_HvacDefrostControlResponse, rhs: Mobilegateway_Protos_HvacDefrostControlResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_KeylessDrivingActionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KeylessDrivingActionRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "action"),
+    2: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.action) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.action != .keylessDrivingUnknown {
+      try visitor.visitSingularEnumField(value: self.action, fieldNumber: 1)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_KeylessDrivingActionRequest, rhs: Mobilegateway_Protos_KeylessDrivingActionRequest) -> Bool {
+    if lhs.action != rhs.action {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_KeylessDrivingActionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KeylessDrivingActionResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_KeylessDrivingActionResponse, rhs: Mobilegateway_Protos_KeylessDrivingActionResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -10618,7 +12800,7 @@ extension Mobilegateway_Protos_DischargeControlRequest: SwiftProtobuf.Message, S
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.dischargeCommand != .dischargeUnknown {
+    if self.dischargeCommand != .idle {
       try visitor.visitSingularEnumField(value: self.dischargeCommand, fieldNumber: 1)
     }
     if !self.vehicleID.isEmpty {
@@ -10909,6 +13091,63 @@ extension Mobilegateway_Protos_SetMaxACResponse: SwiftProtobuf.Message, SwiftPro
   }
 }
 
+extension Mobilegateway_Protos_PanicAlarmActionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PanicAlarmActionRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "action"),
+    2: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.action) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.action != .panicAlarmUnknown {
+      try visitor.visitSingularEnumField(value: self.action, fieldNumber: 1)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_PanicAlarmActionRequest, rhs: Mobilegateway_Protos_PanicAlarmActionRequest) -> Bool {
+    if lhs.action != rhs.action {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_PanicAlarmActionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PanicAlarmActionResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_PanicAlarmActionResponse, rhs: Mobilegateway_Protos_PanicAlarmActionResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_SteeringWheelHeaterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SteeringWheelHeaterRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -10966,6 +13205,63 @@ extension Mobilegateway_Protos_SteeringWheelHeaterResponse: SwiftProtobuf.Messag
   }
 }
 
+extension Mobilegateway_Protos_SetACCurrLimitRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetACCurrLimitRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "ac_curr_lim"),
+    2: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.acCurrLim) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.acCurrLim != 0 {
+      try visitor.visitSingularInt32Field(value: self.acCurrLim, fieldNumber: 1)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetACCurrLimitRequest, rhs: Mobilegateway_Protos_SetACCurrLimitRequest) -> Bool {
+    if lhs.acCurrLim != rhs.acCurrLim {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetACCurrLimitResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetACCurrLimitResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetACCurrLimitResponse, rhs: Mobilegateway_Protos_SetACCurrLimitResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_SetCreatureComfortModeRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetCreatureComfortModeRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -11018,6 +13314,263 @@ extension Mobilegateway_Protos_SetCreatureComfortModeResponse: SwiftProtobuf.Mes
   }
 
   public static func ==(lhs: Mobilegateway_Protos_SetCreatureComfortModeResponse, rhs: Mobilegateway_Protos_SetCreatureComfortModeResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateChargingScheduleRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateChargingScheduleRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "schedule_on"),
+    2: .standard(proto: "start_time"),
+    3: .standard(proto: "end_time"),
+    4: .standard(proto: "weekday_on"),
+    5: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.scheduleOn) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.startTime) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.endTime) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.weekdayOn) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.scheduleOn != false {
+      try visitor.visitSingularBoolField(value: self.scheduleOn, fieldNumber: 1)
+    }
+    if !self.startTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.startTime, fieldNumber: 2)
+    }
+    if !self.endTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.endTime, fieldNumber: 3)
+    }
+    if self.weekdayOn != false {
+      try visitor.visitSingularBoolField(value: self.weekdayOn, fieldNumber: 4)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateChargingScheduleRequest, rhs: Mobilegateway_Protos_UpdateChargingScheduleRequest) -> Bool {
+    if lhs.scheduleOn != rhs.scheduleOn {return false}
+    if lhs.startTime != rhs.startTime {return false}
+    if lhs.endTime != rhs.endTime {return false}
+    if lhs.weekdayOn != rhs.weekdayOn {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateChargingScheduleResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateChargingScheduleResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateChargingScheduleResponse, rhs: Mobilegateway_Protos_UpdateChargingScheduleResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_InitiatePhoneAsKeyRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".InitiatePhoneAsKeyRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uuid"),
+    2: .same(proto: "vin"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.uuid) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.uuid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uuid, fieldNumber: 1)
+    }
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_InitiatePhoneAsKeyRequest, rhs: Mobilegateway_Protos_InitiatePhoneAsKeyRequest) -> Bool {
+    if lhs.uuid != rhs.uuid {return false}
+    if lhs.vin != rhs.vin {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_InitiatePhoneAsKeyResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".InitiatePhoneAsKeyResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_InitiatePhoneAsKeyResponse, rhs: Mobilegateway_Protos_InitiatePhoneAsKeyResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ReadStatusPhoneAsKeyRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uuid"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.uuid) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.uuid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uuid, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest, rhs: Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest) -> Bool {
+    if lhs.uuid != rhs.uuid {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ReadStatusPhoneAsKeyResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.status != .phoneAsKeyUnknown {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse, rhs: Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetScheduledOtaRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetScheduledOtaRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "scheduled_time"),
+    2: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._scheduledTime) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._scheduledTime {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetScheduledOtaRequest, rhs: Mobilegateway_Protos_SetScheduledOtaRequest) -> Bool {
+    if lhs._scheduledTime != rhs._scheduledTime {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetScheduledOtaResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetScheduledOtaResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetScheduledOtaResponse, rhs: Mobilegateway_Protos_SetScheduledOtaResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

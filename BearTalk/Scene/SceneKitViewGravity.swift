@@ -197,7 +197,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
-            updateWheelVisibility(in: scene, selectedWheel: GravityWheelOption.aether.nodeTitle)
+            updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             if shouldResetCamera && !context.coordinator.isResetting {
                 if let cameraNode = uiView.pointOfView {

@@ -10,6 +10,7 @@
 
 import GRPCCore
 import GRPCProtobuf
+import SwiftProtobuf
 
 // MARK: - mobilegateway.protos.SentryService
 
@@ -19,6 +20,18 @@ public enum Mobilegateway_Protos_SentryService {
     public static let descriptor = GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService")
     /// Namespace for method metadata.
     public enum Method {
+        /// Namespace for "GetEvent" metadata.
+        public enum GetEvent {
+            /// Request type for "GetEvent".
+            public typealias Input = Mobilegateway_Protos_GetEventRequest
+            /// Response type for "GetEvent".
+            public typealias Output = Mobilegateway_Protos_GetEventResponse
+            /// Descriptor for "GetEvent".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService"),
+                method: "GetEvent"
+            )
+        }
         /// Namespace for "GetEvents" metadata.
         public enum GetEvents {
             /// Request type for "GetEvents".
@@ -43,10 +56,63 @@ public enum Mobilegateway_Protos_SentryService {
                 method: "SetSentryMode"
             )
         }
+        /// Namespace for "SetEnhancedDeterrence" metadata.
+        public enum SetEnhancedDeterrence {
+            /// Request type for "SetEnhancedDeterrence".
+            public typealias Input = Mobilegateway_Protos_SetEnhancedDeterrenceRequest
+            /// Response type for "SetEnhancedDeterrence".
+            public typealias Output = Mobilegateway_Protos_SetEnhancedDeterrenceResponse
+            /// Descriptor for "SetEnhancedDeterrence".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService"),
+                method: "SetEnhancedDeterrence"
+            )
+        }
+        /// Namespace for "SetSentryModeAtHome" metadata.
+        public enum SetSentryModeAtHome {
+            /// Request type for "SetSentryModeAtHome".
+            public typealias Input = Mobilegateway_Protos_SetSentryModeAtHomeRequest
+            /// Response type for "SetSentryModeAtHome".
+            public typealias Output = Mobilegateway_Protos_SetSentryModeAtHomeResponse
+            /// Descriptor for "SetSentryModeAtHome".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService"),
+                method: "SetSentryModeAtHome"
+            )
+        }
+        /// Namespace for "SetSentryModeAtWork" metadata.
+        public enum SetSentryModeAtWork {
+            /// Request type for "SetSentryModeAtWork".
+            public typealias Input = Mobilegateway_Protos_SetSentryModeAtWorkRequest
+            /// Response type for "SetSentryModeAtWork".
+            public typealias Output = Mobilegateway_Protos_SetSentryModeAtWorkResponse
+            /// Descriptor for "SetSentryModeAtWork".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService"),
+                method: "SetSentryModeAtWork"
+            )
+        }
+        /// Namespace for "TurnOffSentryAlarm" metadata.
+        public enum TurnOffSentryAlarm {
+            /// Request type for "TurnOffSentryAlarm".
+            public typealias Input = Mobilegateway_Protos_TurnOffSentryAlarmRequest
+            /// Response type for "TurnOffSentryAlarm".
+            public typealias Output = Mobilegateway_Protos_TurnOffSentryAlarmResponse
+            /// Descriptor for "TurnOffSentryAlarm".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SentryService"),
+                method: "TurnOffSentryAlarm"
+            )
+        }
         /// Descriptors for all methods in the "mobilegateway.protos.SentryService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
+            GetEvent.descriptor,
             GetEvents.descriptor,
-            SetSentryMode.descriptor
+            SetSentryMode.descriptor,
+            SetEnhancedDeterrence.descriptor,
+            SetSentryModeAtHome.descriptor,
+            SetSentryModeAtWork.descriptor,
+            TurnOffSentryAlarm.descriptor
         ]
     }
 }
@@ -70,6 +136,20 @@ extension Mobilegateway_Protos_SentryService {
     /// Where possible, prefer using the stricter, less-verbose ``ServiceProtocol``
     /// or ``SimpleServiceProtocol`` instead.
     public protocol StreamingServiceProtocol: GRPCCore.RegistrableRPCService {
+        /// Handle the "GetEvent" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetEventRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetEventResponse` messages.
+        func getEvent(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetEventRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetEventResponse>
+
         /// Handle the "GetEvents" method.
         ///
         /// - Parameters:
@@ -97,6 +177,62 @@ extension Mobilegateway_Protos_SentryService {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSentryModeRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSentryModeResponse>
+
+        /// Handle the "SetEnhancedDeterrence" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetEnhancedDeterrenceResponse` messages.
+        func setEnhancedDeterrence(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>
+
+        /// Handle the "SetSentryModeAtHome" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetSentryModeAtHomeRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetSentryModeAtHomeResponse` messages.
+        func setSentryModeAtHome(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>
+
+        /// Handle the "SetSentryModeAtWork" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetSentryModeAtWorkRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetSentryModeAtWorkResponse` messages.
+        func setSentryModeAtWork(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>
+
+        /// Handle the "TurnOffSentryAlarm" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_TurnOffSentryAlarmRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_TurnOffSentryAlarmResponse` messages.
+        func turnOffSentryAlarm(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>
     }
 
     /// Service protocol for the "mobilegateway.protos.SentryService" service.
@@ -107,6 +243,20 @@ extension Mobilegateway_Protos_SentryService {
     /// the ``SimpleServiceProtocol``. If you need fine grained control over your RPCs then
     /// use ``StreamingServiceProtocol``.
     public protocol ServiceProtocol: Mobilegateway_Protos_SentryService.StreamingServiceProtocol {
+        /// Handle the "GetEvent" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetEventRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetEventResponse` message.
+        func getEvent(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetEventRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetEventResponse>
+
         /// Handle the "GetEvents" method.
         ///
         /// - Parameters:
@@ -134,6 +284,62 @@ extension Mobilegateway_Protos_SentryService {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSentryModeRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeResponse>
+
+        /// Handle the "SetEnhancedDeterrence" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetEnhancedDeterrenceResponse` message.
+        func setEnhancedDeterrence(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>
+
+        /// Handle the "SetSentryModeAtHome" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtHomeRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetSentryModeAtHomeResponse` message.
+        func setSentryModeAtHome(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>
+
+        /// Handle the "SetSentryModeAtWork" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtWorkRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetSentryModeAtWorkResponse` message.
+        func setSentryModeAtWork(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>
+
+        /// Handle the "TurnOffSentryAlarm" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_TurnOffSentryAlarmRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_TurnOffSentryAlarmResponse` message.
+        func turnOffSentryAlarm(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>
     }
 
     /// Simple service protocol for the "mobilegateway.protos.SentryService" service.
@@ -142,6 +348,20 @@ extension Mobilegateway_Protos_SentryService {
     /// doesn't provide access to request or response metadata. If you need access to these
     /// then use ``ServiceProtocol`` instead.
     public protocol SimpleServiceProtocol: Mobilegateway_Protos_SentryService.ServiceProtocol {
+        /// Handle the "GetEvent" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetEventRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetEventResponse` to respond with.
+        func getEvent(
+            request: Mobilegateway_Protos_GetEventRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetEventResponse
+
         /// Handle the "GetEvents" method.
         ///
         /// - Parameters:
@@ -169,12 +389,79 @@ extension Mobilegateway_Protos_SentryService {
             request: Mobilegateway_Protos_SetSentryModeRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_SetSentryModeResponse
+
+        /// Handle the "SetEnhancedDeterrence" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetEnhancedDeterrenceResponse` to respond with.
+        func setEnhancedDeterrence(
+            request: Mobilegateway_Protos_SetEnhancedDeterrenceRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetEnhancedDeterrenceResponse
+
+        /// Handle the "SetSentryModeAtHome" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetSentryModeAtHomeRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetSentryModeAtHomeResponse` to respond with.
+        func setSentryModeAtHome(
+            request: Mobilegateway_Protos_SetSentryModeAtHomeRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetSentryModeAtHomeResponse
+
+        /// Handle the "SetSentryModeAtWork" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetSentryModeAtWorkRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetSentryModeAtWorkResponse` to respond with.
+        func setSentryModeAtWork(
+            request: Mobilegateway_Protos_SetSentryModeAtWorkRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetSentryModeAtWorkResponse
+
+        /// Handle the "TurnOffSentryAlarm" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_TurnOffSentryAlarmRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_TurnOffSentryAlarmResponse` to respond with.
+        func turnOffSentryAlarm(
+            request: Mobilegateway_Protos_TurnOffSentryAlarmRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_TurnOffSentryAlarmResponse
     }
 }
 
 // Default implementation of 'registerMethods(with:)'.
 extension Mobilegateway_Protos_SentryService.StreamingServiceProtocol {
     public func registerMethods<Transport>(with router: inout GRPCCore.RPCRouter<Transport>) where Transport: GRPCCore.ServerTransport {
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SentryService.Method.GetEvent.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetEventRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetEventResponse>(),
+            handler: { request, context in
+                try await self.getEvent(
+                    request: request,
+                    context: context
+                )
+            }
+        )
         router.registerHandler(
             forMethod: Mobilegateway_Protos_SentryService.Method.GetEvents.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetEventsRequest>(),
@@ -197,11 +484,66 @@ extension Mobilegateway_Protos_SentryService.StreamingServiceProtocol {
                 )
             }
         )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SentryService.Method.SetEnhancedDeterrence.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>(),
+            handler: { request, context in
+                try await self.setEnhancedDeterrence(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SentryService.Method.SetSentryModeAtHome.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSentryModeAtHomeRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSentryModeAtHomeResponse>(),
+            handler: { request, context in
+                try await self.setSentryModeAtHome(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SentryService.Method.SetSentryModeAtWork.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSentryModeAtWorkRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSentryModeAtWorkResponse>(),
+            handler: { request, context in
+                try await self.setSentryModeAtWork(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SentryService.Method.TurnOffSentryAlarm.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_TurnOffSentryAlarmRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_TurnOffSentryAlarmResponse>(),
+            handler: { request, context in
+                try await self.turnOffSentryAlarm(
+                    request: request,
+                    context: context
+                )
+            }
+        )
     }
 }
 
 // Default implementation of streaming methods from 'StreamingServiceProtocol'.
 extension Mobilegateway_Protos_SentryService.ServiceProtocol {
+    public func getEvent(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetEventRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetEventResponse> {
+        let response = try await self.getEvent(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func getEvents(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetEventsRequest>,
         context: GRPCCore.ServerContext
@@ -223,10 +565,67 @@ extension Mobilegateway_Protos_SentryService.ServiceProtocol {
         )
         return GRPCCore.StreamingServerResponse(single: response)
     }
+
+    public func setEnhancedDeterrence(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse> {
+        let response = try await self.setEnhancedDeterrence(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setSentryModeAtHome(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse> {
+        let response = try await self.setSentryModeAtHome(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setSentryModeAtWork(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse> {
+        let response = try await self.setSentryModeAtWork(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func turnOffSentryAlarm(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse> {
+        let response = try await self.turnOffSentryAlarm(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
 }
 
 // Default implementation of methods from 'ServiceProtocol'.
 extension Mobilegateway_Protos_SentryService.SimpleServiceProtocol {
+    public func getEvent(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetEventRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetEventResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetEventResponse>(
+            message: try await self.getEvent(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func getEvents(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetEventsRequest>,
         context: GRPCCore.ServerContext
@@ -252,6 +651,58 @@ extension Mobilegateway_Protos_SentryService.SimpleServiceProtocol {
             metadata: [:]
         )
     }
+
+    public func setEnhancedDeterrence(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>(
+            message: try await self.setEnhancedDeterrence(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setSentryModeAtHome(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>(
+            message: try await self.setSentryModeAtHome(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setSentryModeAtWork(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>(
+            message: try await self.setSentryModeAtWork(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func turnOffSentryAlarm(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>(
+            message: try await self.turnOffSentryAlarm(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
 }
 
 // MARK: mobilegateway.protos.SentryService (client)
@@ -262,6 +713,25 @@ extension Mobilegateway_Protos_SentryService {
     /// You don't need to implement this protocol directly, use the generated
     /// implementation, ``Client``.
     public protocol ClientProtocol: Sendable {
+        /// Call the "GetEvent" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetEventRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetEventRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetEventResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getEvent<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetEventRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetEventRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetEventResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetEventResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "GetEvents" method.
         ///
         /// - Parameters:
@@ -299,6 +769,82 @@ extension Mobilegateway_Protos_SentryService {
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetEnhancedDeterrence" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetEnhancedDeterrenceResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setEnhancedDeterrence<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetSentryModeAtHome" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtHomeRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSentryModeAtHomeRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSentryModeAtHomeResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setSentryModeAtHome<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSentryModeAtHomeResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetSentryModeAtWork" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtWorkRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSentryModeAtWorkRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSentryModeAtWorkResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setSentryModeAtWork<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSentryModeAtWorkResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "TurnOffSentryAlarm" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_TurnOffSentryAlarmRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_TurnOffSentryAlarmRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_TurnOffSentryAlarmResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func turnOffSentryAlarm<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_TurnOffSentryAlarmResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
     }
 
     /// Generated client for the "mobilegateway.protos.SentryService" service.
@@ -315,6 +861,36 @@ extension Mobilegateway_Protos_SentryService {
         ///   - client: A `GRPCCore.GRPCClient` providing a communication channel to the service.
         public init(wrapping client: GRPCCore.GRPCClient<Transport>) {
             self.client = client
+        }
+
+        /// Call the "GetEvent" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetEventRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetEventRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetEventResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getEvent<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetEventRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetEventRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetEventResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetEventResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SentryService.Method.GetEvent.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
         }
 
         /// Call the "GetEvents" method.
@@ -376,11 +952,156 @@ extension Mobilegateway_Protos_SentryService {
                 onResponse: handleResponse
             )
         }
+
+        /// Call the "SetEnhancedDeterrence" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetEnhancedDeterrenceResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setEnhancedDeterrence<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SentryService.Method.SetEnhancedDeterrence.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetSentryModeAtHome" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtHomeRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSentryModeAtHomeRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSentryModeAtHomeResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setSentryModeAtHome<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSentryModeAtHomeResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SentryService.Method.SetSentryModeAtHome.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetSentryModeAtWork" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtWorkRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSentryModeAtWorkRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSentryModeAtWorkResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setSentryModeAtWork<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSentryModeAtWorkResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SentryService.Method.SetSentryModeAtWork.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "TurnOffSentryAlarm" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_TurnOffSentryAlarmRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_TurnOffSentryAlarmRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_TurnOffSentryAlarmResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func turnOffSentryAlarm<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_TurnOffSentryAlarmResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SentryService.Method.TurnOffSentryAlarm.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
     }
 }
 
 // Helpers providing default arguments to 'ClientProtocol' methods.
 extension Mobilegateway_Protos_SentryService.ClientProtocol {
+    /// Call the "GetEvent" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetEventRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getEvent<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetEventRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetEventResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getEvent(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetEventRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetEventResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetEvents" method.
     ///
     /// - Parameters:
@@ -430,10 +1151,139 @@ extension Mobilegateway_Protos_SentryService.ClientProtocol {
             onResponse: handleResponse
         )
     }
+
+    /// Call the "SetEnhancedDeterrence" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetEnhancedDeterrenceRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setEnhancedDeterrence<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setEnhancedDeterrence(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetSentryModeAtHome" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtHomeRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setSentryModeAtHome<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setSentryModeAtHome(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSentryModeAtHomeRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSentryModeAtHomeResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetSentryModeAtWork" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetSentryModeAtWorkRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setSentryModeAtWork<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setSentryModeAtWork(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSentryModeAtWorkRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSentryModeAtWorkResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "TurnOffSentryAlarm" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_TurnOffSentryAlarmRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func turnOffSentryAlarm<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.turnOffSentryAlarm(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_TurnOffSentryAlarmRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_TurnOffSentryAlarmResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
 }
 
 // Helpers providing sugared APIs for 'ClientProtocol' methods.
 extension Mobilegateway_Protos_SentryService.ClientProtocol {
+    /// Call the "GetEvent" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getEvent<Result>(
+        _ message: Mobilegateway_Protos_GetEventRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetEventResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetEventRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getEvent(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetEvents" method.
     ///
     /// - Parameters:
@@ -486,6 +1336,122 @@ extension Mobilegateway_Protos_SentryService.ClientProtocol {
             metadata: metadata
         )
         return try await self.setSentryMode(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetEnhancedDeterrence" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setEnhancedDeterrence<Result>(
+        _ message: Mobilegateway_Protos_SetEnhancedDeterrenceRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetEnhancedDeterrenceResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetEnhancedDeterrenceRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setEnhancedDeterrence(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetSentryModeAtHome" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setSentryModeAtHome<Result>(
+        _ message: Mobilegateway_Protos_SetSentryModeAtHomeRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtHomeResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtHomeRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setSentryModeAtHome(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetSentryModeAtWork" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setSentryModeAtWork<Result>(
+        _ message: Mobilegateway_Protos_SetSentryModeAtWorkRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSentryModeAtWorkResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetSentryModeAtWorkRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setSentryModeAtWork(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "TurnOffSentryAlarm" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func turnOffSentryAlarm<Result>(
+        _ message: Mobilegateway_Protos_TurnOffSentryAlarmRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_TurnOffSentryAlarmResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_TurnOffSentryAlarmRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.turnOffSentryAlarm(
             request: request,
             options: options,
             onResponse: handleResponse

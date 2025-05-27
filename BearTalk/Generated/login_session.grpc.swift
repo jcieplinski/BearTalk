@@ -19,6 +19,30 @@ public enum Mobilegateway_Protos_LoginSession {
     public static let descriptor = GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession")
     /// Namespace for method metadata.
     public enum Method {
+        /// Namespace for "ActivateDevice" metadata.
+        public enum ActivateDevice {
+            /// Request type for "ActivateDevice".
+            public typealias Input = Mobilegateway_Protos_ActivateDeviceRequest
+            /// Response type for "ActivateDevice".
+            public typealias Output = Mobilegateway_Protos_ActivateDeviceResponse
+            /// Descriptor for "ActivateDevice".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
+                method: "ActivateDevice"
+            )
+        }
+        /// Namespace for "DeviceEnroll" metadata.
+        public enum DeviceEnroll {
+            /// Request type for "DeviceEnroll".
+            public typealias Input = Mobilegateway_Protos_DeviceEnrollRequest
+            /// Response type for "DeviceEnroll".
+            public typealias Output = Mobilegateway_Protos_DeviceEnrollResponse
+            /// Descriptor for "DeviceEnroll".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
+                method: "DeviceEnroll"
+            )
+        }
         /// Namespace for "ConfirmResetPin" metadata.
         public enum ConfirmResetPin {
             /// Request type for "ConfirmResetPin".
@@ -43,6 +67,18 @@ public enum Mobilegateway_Protos_LoginSession {
                 method: "GetNewJWTToken"
             )
         }
+        /// Namespace for "RefreshToken" metadata.
+        public enum RefreshToken {
+            /// Request type for "RefreshToken".
+            public typealias Input = Mobilegateway_Protos_RefreshTokenRequest
+            /// Response type for "RefreshToken".
+            public typealias Output = Mobilegateway_Protos_RefreshTokenResponse
+            /// Descriptor for "RefreshToken".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
+                method: "RefreshToken"
+            )
+        }
         /// Namespace for "GetSubscription" metadata.
         public enum GetSubscription {
             /// Request type for "GetSubscription".
@@ -53,6 +89,18 @@ public enum Mobilegateway_Protos_LoginSession {
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
                 method: "GetSubscription"
+            )
+        }
+        /// Namespace for "UpdateSubscription" metadata.
+        public enum UpdateSubscription {
+            /// Request type for "UpdateSubscription".
+            public typealias Input = Mobilegateway_Protos_UpdateSubscriptionRequest
+            /// Response type for "UpdateSubscription".
+            public typealias Output = Mobilegateway_Protos_UpdateSubscriptionResponse
+            /// Descriptor for "UpdateSubscription".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
+                method: "UpdateSubscription"
             )
         }
         /// Namespace for "GetUserVehicles" metadata.
@@ -115,29 +163,20 @@ public enum Mobilegateway_Protos_LoginSession {
                 method: "SetNickName"
             )
         }
-        /// Namespace for "SetSubscription" metadata.
-        public enum SetSubscription {
-            /// Request type for "SetSubscription".
-            public typealias Input = Mobilegateway_Protos_SetSubscriptionRequest
-            /// Response type for "SetSubscription".
-            public typealias Output = Mobilegateway_Protos_SetSubscriptionResponse
-            /// Descriptor for "SetSubscription".
-            public static let descriptor = GRPCCore.MethodDescriptor(
-                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.LoginSession"),
-                method: "SetSubscription"
-            )
-        }
         /// Descriptors for all methods in the "mobilegateway.protos.LoginSession" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
+            ActivateDevice.descriptor,
+            DeviceEnroll.descriptor,
             ConfirmResetPin.descriptor,
             GetNewJWTToken.descriptor,
+            RefreshToken.descriptor,
             GetSubscription.descriptor,
+            UpdateSubscription.descriptor,
             GetUserVehicles.descriptor,
             Login.descriptor,
             Logout.descriptor,
             RefreshNotificationToken.descriptor,
-            SetNickName.descriptor,
-            SetSubscription.descriptor
+            SetNickName.descriptor
         ]
     }
 }
@@ -161,6 +200,34 @@ extension Mobilegateway_Protos_LoginSession {
     /// Where possible, prefer using the stricter, less-verbose ``ServiceProtocol``
     /// or ``SimpleServiceProtocol`` instead.
     public protocol StreamingServiceProtocol: GRPCCore.RegistrableRPCService {
+        /// Handle the "ActivateDevice" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_ActivateDeviceRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_ActivateDeviceResponse` messages.
+        func activateDevice(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ActivateDeviceResponse>
+
+        /// Handle the "DeviceEnroll" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_DeviceEnrollRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_DeviceEnrollResponse` messages.
+        func deviceEnroll(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DeviceEnrollResponse>
+
         /// Handle the "ConfirmResetPin" method.
         ///
         /// - Parameters:
@@ -189,6 +256,20 @@ extension Mobilegateway_Protos_LoginSession {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetNewJWTTokenResponse>
 
+        /// Handle the "RefreshToken" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_RefreshTokenRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_RefreshTokenResponse` messages.
+        func refreshToken(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_RefreshTokenResponse>
+
         /// Handle the "GetSubscription" method.
         ///
         /// - Parameters:
@@ -202,6 +283,20 @@ extension Mobilegateway_Protos_LoginSession {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetSubscriptionRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetSubscriptionResponse>
+
+        /// Handle the "UpdateSubscription" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_UpdateSubscriptionRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_UpdateSubscriptionResponse` messages.
+        func updateSubscription(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>
 
         /// Handle the "GetUserVehicles" method.
         ///
@@ -272,20 +367,6 @@ extension Mobilegateway_Protos_LoginSession {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetNickNameRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetNickNameResponse>
-
-        /// Handle the "SetSubscription" method.
-        ///
-        /// - Parameters:
-        ///   - request: A streaming request of `Mobilegateway_Protos_SetSubscriptionRequest` messages.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A streaming response of `Mobilegateway_Protos_SetSubscriptionResponse` messages.
-        func setSubscription(
-            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-            context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSubscriptionResponse>
     }
 
     /// Service protocol for the "mobilegateway.protos.LoginSession" service.
@@ -296,6 +377,34 @@ extension Mobilegateway_Protos_LoginSession {
     /// the ``SimpleServiceProtocol``. If you need fine grained control over your RPCs then
     /// use ``StreamingServiceProtocol``.
     public protocol ServiceProtocol: Mobilegateway_Protos_LoginSession.StreamingServiceProtocol {
+        /// Handle the "ActivateDevice" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ActivateDeviceRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_ActivateDeviceResponse` message.
+        func activateDevice(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ActivateDeviceResponse>
+
+        /// Handle the "DeviceEnroll" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeviceEnrollRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_DeviceEnrollResponse` message.
+        func deviceEnroll(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DeviceEnrollResponse>
+
         /// Handle the "ConfirmResetPin" method.
         ///
         /// - Parameters:
@@ -324,6 +433,20 @@ extension Mobilegateway_Protos_LoginSession {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetNewJWTTokenResponse>
 
+        /// Handle the "RefreshToken" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RefreshTokenRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_RefreshTokenResponse` message.
+        func refreshToken(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_RefreshTokenResponse>
+
         /// Handle the "GetSubscription" method.
         ///
         /// - Parameters:
@@ -337,6 +460,20 @@ extension Mobilegateway_Protos_LoginSession {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetSubscriptionRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetSubscriptionResponse>
+
+        /// Handle the "UpdateSubscription" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateSubscriptionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_UpdateSubscriptionResponse` message.
+        func updateSubscription(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>
 
         /// Handle the "GetUserVehicles" method.
         ///
@@ -407,20 +544,6 @@ extension Mobilegateway_Protos_LoginSession {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetNickNameRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetNickNameResponse>
-
-        /// Handle the "SetSubscription" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_SetSubscriptionRequest` message.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A response containing a single `Mobilegateway_Protos_SetSubscriptionResponse` message.
-        func setSubscription(
-            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-            context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSubscriptionResponse>
     }
 
     /// Simple service protocol for the "mobilegateway.protos.LoginSession" service.
@@ -429,6 +552,34 @@ extension Mobilegateway_Protos_LoginSession {
     /// doesn't provide access to request or response metadata. If you need access to these
     /// then use ``ServiceProtocol`` instead.
     public protocol SimpleServiceProtocol: Mobilegateway_Protos_LoginSession.ServiceProtocol {
+        /// Handle the "ActivateDevice" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_ActivateDeviceRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_ActivateDeviceResponse` to respond with.
+        func activateDevice(
+            request: Mobilegateway_Protos_ActivateDeviceRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_ActivateDeviceResponse
+
+        /// Handle the "DeviceEnroll" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_DeviceEnrollRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_DeviceEnrollResponse` to respond with.
+        func deviceEnroll(
+            request: Mobilegateway_Protos_DeviceEnrollRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_DeviceEnrollResponse
+
         /// Handle the "ConfirmResetPin" method.
         ///
         /// - Parameters:
@@ -457,6 +608,20 @@ extension Mobilegateway_Protos_LoginSession {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_GetNewJWTTokenResponse
 
+        /// Handle the "RefreshToken" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_RefreshTokenRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_RefreshTokenResponse` to respond with.
+        func refreshToken(
+            request: Mobilegateway_Protos_RefreshTokenRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_RefreshTokenResponse
+
         /// Handle the "GetSubscription" method.
         ///
         /// - Parameters:
@@ -470,6 +635,20 @@ extension Mobilegateway_Protos_LoginSession {
             request: Mobilegateway_Protos_GetSubscriptionRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_GetSubscriptionResponse
+
+        /// Handle the "UpdateSubscription" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_UpdateSubscriptionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_UpdateSubscriptionResponse` to respond with.
+        func updateSubscription(
+            request: Mobilegateway_Protos_UpdateSubscriptionRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_UpdateSubscriptionResponse
 
         /// Handle the "GetUserVehicles" method.
         ///
@@ -540,26 +719,34 @@ extension Mobilegateway_Protos_LoginSession {
             request: Mobilegateway_Protos_SetNickNameRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_SetNickNameResponse
-
-        /// Handle the "SetSubscription" method.
-        ///
-        /// - Parameters:
-        ///   - request: A `Mobilegateway_Protos_SetSubscriptionRequest` message.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A `Mobilegateway_Protos_SetSubscriptionResponse` to respond with.
-        func setSubscription(
-            request: Mobilegateway_Protos_SetSubscriptionRequest,
-            context: GRPCCore.ServerContext
-        ) async throws -> Mobilegateway_Protos_SetSubscriptionResponse
     }
 }
 
 // Default implementation of 'registerMethods(with:)'.
 extension Mobilegateway_Protos_LoginSession.StreamingServiceProtocol {
     public func registerMethods<Transport>(with router: inout GRPCCore.RPCRouter<Transport>) where Transport: GRPCCore.ServerTransport {
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_LoginSession.Method.ActivateDevice.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ActivateDeviceRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ActivateDeviceResponse>(),
+            handler: { request, context in
+                try await self.activateDevice(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_LoginSession.Method.DeviceEnroll.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DeviceEnrollRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DeviceEnrollResponse>(),
+            handler: { request, context in
+                try await self.deviceEnroll(
+                    request: request,
+                    context: context
+                )
+            }
+        )
         router.registerHandler(
             forMethod: Mobilegateway_Protos_LoginSession.Method.ConfirmResetPin.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ConfirmResetPinRequest>(),
@@ -583,11 +770,33 @@ extension Mobilegateway_Protos_LoginSession.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
+            forMethod: Mobilegateway_Protos_LoginSession.Method.RefreshToken.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_RefreshTokenRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_RefreshTokenResponse>(),
+            handler: { request, context in
+                try await self.refreshToken(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
             forMethod: Mobilegateway_Protos_LoginSession.Method.GetSubscription.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetSubscriptionRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetSubscriptionResponse>(),
             handler: { request, context in
                 try await self.getSubscription(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_LoginSession.Method.UpdateSubscription.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateSubscriptionRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateSubscriptionResponse>(),
+            handler: { request, context in
+                try await self.updateSubscription(
                     request: request,
                     context: context
                 )
@@ -648,22 +857,33 @@ extension Mobilegateway_Protos_LoginSession.StreamingServiceProtocol {
                 )
             }
         )
-        router.registerHandler(
-            forMethod: Mobilegateway_Protos_LoginSession.Method.SetSubscription.descriptor,
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSubscriptionRequest>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSubscriptionResponse>(),
-            handler: { request, context in
-                try await self.setSubscription(
-                    request: request,
-                    context: context
-                )
-            }
-        )
     }
 }
 
 // Default implementation of streaming methods from 'StreamingServiceProtocol'.
 extension Mobilegateway_Protos_LoginSession.ServiceProtocol {
+    public func activateDevice(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ActivateDeviceResponse> {
+        let response = try await self.activateDevice(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func deviceEnroll(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DeviceEnrollResponse> {
+        let response = try await self.deviceEnroll(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func confirmResetPin(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ConfirmResetPinRequest>,
         context: GRPCCore.ServerContext
@@ -686,11 +906,33 @@ extension Mobilegateway_Protos_LoginSession.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
+    public func refreshToken(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_RefreshTokenResponse> {
+        let response = try await self.refreshToken(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func getSubscription(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetSubscriptionRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetSubscriptionResponse> {
         let response = try await self.getSubscription(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func updateSubscription(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateSubscriptionResponse> {
+        let response = try await self.updateSubscription(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -751,21 +993,36 @@ extension Mobilegateway_Protos_LoginSession.ServiceProtocol {
         )
         return GRPCCore.StreamingServerResponse(single: response)
     }
-
-    public func setSubscription(
-        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-        context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetSubscriptionResponse> {
-        let response = try await self.setSubscription(
-            request: GRPCCore.ServerRequest(stream: request),
-            context: context
-        )
-        return GRPCCore.StreamingServerResponse(single: response)
-    }
 }
 
 // Default implementation of methods from 'ServiceProtocol'.
 extension Mobilegateway_Protos_LoginSession.SimpleServiceProtocol {
+    public func activateDevice(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ActivateDeviceResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_ActivateDeviceResponse>(
+            message: try await self.activateDevice(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func deviceEnroll(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DeviceEnrollResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_DeviceEnrollResponse>(
+            message: try await self.deviceEnroll(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func confirmResetPin(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_ConfirmResetPinRequest>,
         context: GRPCCore.ServerContext
@@ -792,12 +1049,38 @@ extension Mobilegateway_Protos_LoginSession.SimpleServiceProtocol {
         )
     }
 
+    public func refreshToken(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_RefreshTokenResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_RefreshTokenResponse>(
+            message: try await self.refreshToken(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func getSubscription(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetSubscriptionRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetSubscriptionResponse> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_GetSubscriptionResponse>(
             message: try await self.getSubscription(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func updateSubscription(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateSubscriptionResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>(
+            message: try await self.updateSubscription(
                 request: request.message,
                 context: context
             ),
@@ -869,19 +1152,6 @@ extension Mobilegateway_Protos_LoginSession.SimpleServiceProtocol {
             metadata: [:]
         )
     }
-
-    public func setSubscription(
-        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-        context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetSubscriptionResponse> {
-        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetSubscriptionResponse>(
-            message: try await self.setSubscription(
-                request: request.message,
-                context: context
-            ),
-            metadata: [:]
-        )
-    }
 }
 
 // MARK: mobilegateway.protos.LoginSession (client)
@@ -892,6 +1162,44 @@ extension Mobilegateway_Protos_LoginSession {
     /// You don't need to implement this protocol directly, use the generated
     /// implementation, ``Client``.
     public protocol ClientProtocol: Sendable {
+        /// Call the "ActivateDevice" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ActivateDeviceRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ActivateDeviceRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ActivateDeviceResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func activateDevice<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ActivateDeviceRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ActivateDeviceResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ActivateDeviceResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "DeviceEnroll" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeviceEnrollRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DeviceEnrollRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DeviceEnrollResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func deviceEnroll<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DeviceEnrollRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DeviceEnrollResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeviceEnrollResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "ConfirmResetPin" method.
         ///
         /// - Parameters:
@@ -930,6 +1238,25 @@ extension Mobilegateway_Protos_LoginSession {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetNewJWTTokenResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "RefreshToken" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RefreshTokenRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_RefreshTokenRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_RefreshTokenResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func refreshToken<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_RefreshTokenRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_RefreshTokenResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RefreshTokenResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "GetSubscription" method.
         ///
         /// - Parameters:
@@ -947,6 +1274,25 @@ extension Mobilegateway_Protos_LoginSession {
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetSubscriptionResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetSubscriptionResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "UpdateSubscription" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateSubscriptionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateSubscriptionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateSubscriptionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func updateSubscription<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateSubscriptionResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "GetUserVehicles" method.
@@ -1043,25 +1389,6 @@ extension Mobilegateway_Protos_LoginSession {
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetNickNameResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
-
-        /// Call the "SetSubscription" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_SetSubscriptionRequest` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSubscriptionRequest` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSubscriptionResponse` messages.
-        ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
-        /// - Returns: The result of `handleResponse`.
-        func setSubscription<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSubscriptionRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSubscriptionResponse>,
-            options: GRPCCore.CallOptions,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSubscriptionResponse>) async throws -> Result
-        ) async throws -> Result where Result: Sendable
     }
 
     /// Generated client for the "mobilegateway.protos.LoginSession" service.
@@ -1078,6 +1405,66 @@ extension Mobilegateway_Protos_LoginSession {
         ///   - client: A `GRPCCore.GRPCClient` providing a communication channel to the service.
         public init(wrapping client: GRPCCore.GRPCClient<Transport>) {
             self.client = client
+        }
+
+        /// Call the "ActivateDevice" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ActivateDeviceRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ActivateDeviceRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ActivateDeviceResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func activateDevice<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ActivateDeviceRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ActivateDeviceResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ActivateDeviceResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_LoginSession.Method.ActivateDevice.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "DeviceEnroll" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeviceEnrollRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DeviceEnrollRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DeviceEnrollResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func deviceEnroll<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DeviceEnrollRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DeviceEnrollResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeviceEnrollResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_LoginSession.Method.DeviceEnroll.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
         }
 
         /// Call the "ConfirmResetPin" method.
@@ -1140,6 +1527,36 @@ extension Mobilegateway_Protos_LoginSession {
             )
         }
 
+        /// Call the "RefreshToken" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RefreshTokenRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_RefreshTokenRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_RefreshTokenResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func refreshToken<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_RefreshTokenRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_RefreshTokenResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RefreshTokenResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_LoginSession.Method.RefreshToken.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "GetSubscription" method.
         ///
         /// - Parameters:
@@ -1163,6 +1580,36 @@ extension Mobilegateway_Protos_LoginSession {
             try await self.client.unary(
                 request: request,
                 descriptor: Mobilegateway_Protos_LoginSession.Method.GetSubscription.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "UpdateSubscription" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateSubscriptionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateSubscriptionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateSubscriptionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func updateSubscription<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateSubscriptionResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_LoginSession.Method.UpdateSubscription.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -1319,41 +1766,61 @@ extension Mobilegateway_Protos_LoginSession {
                 onResponse: handleResponse
             )
         }
-
-        /// Call the "SetSubscription" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_SetSubscriptionRequest` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_SetSubscriptionRequest` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetSubscriptionResponse` messages.
-        ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
-        /// - Returns: The result of `handleResponse`.
-        public func setSubscription<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetSubscriptionRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetSubscriptionResponse>,
-            options: GRPCCore.CallOptions = .defaults,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSubscriptionResponse>) async throws -> Result = { response in
-                try response.message
-            }
-        ) async throws -> Result where Result: Sendable {
-            try await self.client.unary(
-                request: request,
-                descriptor: Mobilegateway_Protos_LoginSession.Method.SetSubscription.descriptor,
-                serializer: serializer,
-                deserializer: deserializer,
-                options: options,
-                onResponse: handleResponse
-            )
-        }
     }
 }
 
 // Helpers providing default arguments to 'ClientProtocol' methods.
 extension Mobilegateway_Protos_LoginSession.ClientProtocol {
+    /// Call the "ActivateDevice" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_ActivateDeviceRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func activateDevice<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_ActivateDeviceRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ActivateDeviceResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.activateDevice(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ActivateDeviceRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ActivateDeviceResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "DeviceEnroll" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_DeviceEnrollRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deviceEnroll<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeviceEnrollRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeviceEnrollResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.deviceEnroll(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DeviceEnrollRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DeviceEnrollResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "ConfirmResetPin" method.
     ///
     /// - Parameters:
@@ -1404,6 +1871,31 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
         )
     }
 
+    /// Call the "RefreshToken" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_RefreshTokenRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func refreshToken<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_RefreshTokenRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RefreshTokenResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.refreshToken(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_RefreshTokenRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_RefreshTokenResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetSubscription" method.
     ///
     /// - Parameters:
@@ -1424,6 +1916,31 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetSubscriptionRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetSubscriptionResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "UpdateSubscription" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_UpdateSubscriptionRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateSubscription<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.updateSubscription(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateSubscriptionRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateSubscriptionResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -1553,35 +2070,68 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
             onResponse: handleResponse
         )
     }
-
-    /// Call the "SetSubscription" method.
-    ///
-    /// - Parameters:
-    ///   - request: A request containing a single `Mobilegateway_Protos_SetSubscriptionRequest` message.
-    ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
-    /// - Returns: The result of `handleResponse`.
-    public func setSubscription<Result>(
-        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetSubscriptionRequest>,
-        options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSubscriptionResponse>) async throws -> Result = { response in
-            try response.message
-        }
-    ) async throws -> Result where Result: Sendable {
-        try await self.setSubscription(
-            request: request,
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetSubscriptionRequest>(),
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetSubscriptionResponse>(),
-            options: options,
-            onResponse: handleResponse
-        )
-    }
 }
 
 // Helpers providing sugared APIs for 'ClientProtocol' methods.
 extension Mobilegateway_Protos_LoginSession.ClientProtocol {
+    /// Call the "ActivateDevice" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func activateDevice<Result>(
+        _ message: Mobilegateway_Protos_ActivateDeviceRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ActivateDeviceResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_ActivateDeviceRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.activateDevice(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "DeviceEnroll" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deviceEnroll<Result>(
+        _ message: Mobilegateway_Protos_DeviceEnrollRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeviceEnrollResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_DeviceEnrollRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.deviceEnroll(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "ConfirmResetPin" method.
     ///
     /// - Parameters:
@@ -1640,6 +2190,35 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
         )
     }
 
+    /// Call the "RefreshToken" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func refreshToken<Result>(
+        _ message: Mobilegateway_Protos_RefreshTokenRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RefreshTokenResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_RefreshTokenRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.refreshToken(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "GetSubscription" method.
     ///
     /// - Parameters:
@@ -1663,6 +2242,35 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
             metadata: metadata
         )
         return try await self.getSubscription(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "UpdateSubscription" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateSubscription<Result>(
+        _ message: Mobilegateway_Protos_UpdateSubscriptionRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateSubscriptionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateSubscriptionRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.updateSubscription(
             request: request,
             options: options,
             onResponse: handleResponse
@@ -1808,35 +2416,6 @@ extension Mobilegateway_Protos_LoginSession.ClientProtocol {
             metadata: metadata
         )
         return try await self.setNickName(
-            request: request,
-            options: options,
-            onResponse: handleResponse
-        )
-    }
-
-    /// Call the "SetSubscription" method.
-    ///
-    /// - Parameters:
-    ///   - message: request message to send.
-    ///   - metadata: Additional metadata to send, defaults to empty.
-    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
-    /// - Returns: The result of `handleResponse`.
-    public func setSubscription<Result>(
-        _ message: Mobilegateway_Protos_SetSubscriptionRequest,
-        metadata: GRPCCore.Metadata = [:],
-        options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetSubscriptionResponse>) async throws -> Result = { response in
-            try response.message
-        }
-    ) async throws -> Result where Result: Sendable {
-        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetSubscriptionRequest>(
-            message: message,
-            metadata: metadata
-        )
-        return try await self.setSubscription(
             request: request,
             options: options,
             onResponse: handleResponse

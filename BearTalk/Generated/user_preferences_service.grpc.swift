@@ -48,7 +48,7 @@ public enum Mobilegateway_Protos_UserPreferencesService {
             /// Request type for "GetUserPreferencesCommitID".
             public typealias Input = Mobilegateway_Protos_Empty
             /// Response type for "GetUserPreferencesCommitID".
-            public typealias Output = Mobilegateway_Protos_Empty
+            public typealias Output = Mobilegateway_Protos_GetUserPreferencesCommitIDResponse
             /// Descriptor for "GetUserPreferencesCommitID".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
@@ -58,13 +58,109 @@ public enum Mobilegateway_Protos_UserPreferencesService {
         /// Namespace for "SetUserPreferences" metadata.
         public enum SetUserPreferences {
             /// Request type for "SetUserPreferences".
-            public typealias Input = Mobilegateway_Protos_Empty
+            public typealias Input = Mobilegateway_Protos_SetUserPreferencesRequest
             /// Response type for "SetUserPreferences".
-            public typealias Output = Mobilegateway_Protos_Empty
+            public typealias Output = Mobilegateway_Protos_SetUserPreferencesResponse
             /// Descriptor for "SetUserPreferences".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
                 method: "SetUserPreferences"
+            )
+        }
+        /// Namespace for "CreateUserVinPreferences" metadata.
+        public enum CreateUserVinPreferences {
+            /// Request type for "CreateUserVinPreferences".
+            public typealias Input = Mobilegateway_Protos_CreateUserVinPreferencesRequest
+            /// Response type for "CreateUserVinPreferences".
+            public typealias Output = Mobilegateway_Protos_CreateUserVinPreferencesResponse
+            /// Descriptor for "CreateUserVinPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "CreateUserVinPreferences"
+            )
+        }
+        /// Namespace for "GetUserVinPreferences" metadata.
+        public enum GetUserVinPreferences {
+            /// Request type for "GetUserVinPreferences".
+            public typealias Input = Mobilegateway_Protos_GetUserVinPreferencesRequest
+            /// Response type for "GetUserVinPreferences".
+            public typealias Output = Mobilegateway_Protos_GetUserVinPreferencesResponse
+            /// Descriptor for "GetUserVinPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "GetUserVinPreferences"
+            )
+        }
+        /// Namespace for "SetUserVinPreferences" metadata.
+        public enum SetUserVinPreferences {
+            /// Request type for "SetUserVinPreferences".
+            public typealias Input = Mobilegateway_Protos_SetUserVinPreferencesRequest
+            /// Response type for "SetUserVinPreferences".
+            public typealias Output = Mobilegateway_Protos_SetUserVinPreferencesResponse
+            /// Descriptor for "SetUserVinPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "SetUserVinPreferences"
+            )
+        }
+        /// Namespace for "CreateUserModelPreferences" metadata.
+        public enum CreateUserModelPreferences {
+            /// Request type for "CreateUserModelPreferences".
+            public typealias Input = Mobilegateway_Protos_CreateUserModelPreferencesRequest
+            /// Response type for "CreateUserModelPreferences".
+            public typealias Output = Mobilegateway_Protos_CreateUserModelPreferencesResponse
+            /// Descriptor for "CreateUserModelPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "CreateUserModelPreferences"
+            )
+        }
+        /// Namespace for "GetUserModelPreferences" metadata.
+        public enum GetUserModelPreferences {
+            /// Request type for "GetUserModelPreferences".
+            public typealias Input = Mobilegateway_Protos_GetUserModelPreferencesRequest
+            /// Response type for "GetUserModelPreferences".
+            public typealias Output = Mobilegateway_Protos_GetUserModelPreferencesResponse
+            /// Descriptor for "GetUserModelPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "GetUserModelPreferences"
+            )
+        }
+        /// Namespace for "SetUserModelPreferences" metadata.
+        public enum SetUserModelPreferences {
+            /// Request type for "SetUserModelPreferences".
+            public typealias Input = Mobilegateway_Protos_SetUserModelPreferencesRequest
+            /// Response type for "SetUserModelPreferences".
+            public typealias Output = Mobilegateway_Protos_SetUserModelPreferencesResponse
+            /// Descriptor for "SetUserModelPreferences".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "SetUserModelPreferences"
+            )
+        }
+        /// Namespace for "InviteSecondaryOwner" metadata.
+        public enum InviteSecondaryOwner {
+            /// Request type for "InviteSecondaryOwner".
+            public typealias Input = Mobilegateway_Protos_InviteSecondaryOwnerRequest
+            /// Response type for "InviteSecondaryOwner".
+            public typealias Output = Mobilegateway_Protos_Empty
+            /// Descriptor for "InviteSecondaryOwner".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "InviteSecondaryOwner"
+            )
+        }
+        /// Namespace for "RemoveSecondaryOwner" metadata.
+        public enum RemoveSecondaryOwner {
+            /// Request type for "RemoveSecondaryOwner".
+            public typealias Input = Mobilegateway_Protos_RemoveSecondaryOwnerRequest
+            /// Response type for "RemoveSecondaryOwner".
+            public typealias Output = Mobilegateway_Protos_Empty
+            /// Descriptor for "RemoveSecondaryOwner".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.UserPreferencesService"),
+                method: "RemoveSecondaryOwner"
             )
         }
         /// Descriptors for all methods in the "mobilegateway.protos.UserPreferencesService" service.
@@ -72,7 +168,15 @@ public enum Mobilegateway_Protos_UserPreferencesService {
             CreateUserPreferences.descriptor,
             GetUserPreferences.descriptor,
             GetUserPreferencesCommitID.descriptor,
-            SetUserPreferences.descriptor
+            SetUserPreferences.descriptor,
+            CreateUserVinPreferences.descriptor,
+            GetUserVinPreferences.descriptor,
+            SetUserVinPreferences.descriptor,
+            CreateUserModelPreferences.descriptor,
+            GetUserModelPreferences.descriptor,
+            SetUserModelPreferences.descriptor,
+            InviteSecondaryOwner.descriptor,
+            RemoveSecondaryOwner.descriptor
         ]
     }
 }
@@ -132,23 +236,135 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A streaming response of `Mobilegateway_Protos_Empty` messages.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetUserPreferencesCommitIDResponse` messages.
         func getUserPreferencesCommitID(
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_Empty>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty>
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>
 
         /// Handle the "SetUserPreferences" method.
         ///
         /// - Parameters:
-        ///   - request: A streaming request of `Mobilegateway_Protos_Empty` messages.
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetUserPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetUserPreferencesResponse` messages.
+        func setUserPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserPreferencesResponse>
+
+        /// Handle the "CreateUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_CreateUserVinPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_CreateUserVinPreferencesResponse` messages.
+        func createUserVinPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>
+
+        /// Handle the "GetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetUserVinPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetUserVinPreferencesResponse` messages.
+        func getUserVinPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>
+
+        /// Handle the "SetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetUserVinPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetUserVinPreferencesResponse` messages.
+        func setUserVinPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>
+
+        /// Handle the "CreateUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_CreateUserModelPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_CreateUserModelPreferencesResponse` messages.
+        func createUserModelPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>
+
+        /// Handle the "GetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetUserModelPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetUserModelPreferencesResponse` messages.
+        func getUserModelPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>
+
+        /// Handle the "SetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetUserModelPreferencesRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetUserModelPreferencesResponse` messages.
+        func setUserModelPreferences(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>
+
+        /// Handle the "InviteSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_InviteSecondaryOwnerRequest` messages.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
         /// - Returns: A streaming response of `Mobilegateway_Protos_Empty` messages.
-        func setUserPreferences(
-            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_Empty>,
+        func inviteSecondaryOwner(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty>
+
+        /// Handle the "RemoveSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_Empty` messages.
+        func removeSecondaryOwner(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty>
     }
@@ -197,23 +413,135 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A response containing a single `Mobilegateway_Protos_Empty` message.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetUserPreferencesCommitIDResponse` message.
         func getUserPreferencesCommitID(
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_Empty>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>
 
         /// Handle the "SetUserPreferences" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetUserPreferencesResponse` message.
+        func setUserPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserPreferencesResponse>
+
+        /// Handle the "CreateUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_CreateUserVinPreferencesResponse` message.
+        func createUserVinPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>
+
+        /// Handle the "GetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetUserVinPreferencesResponse` message.
+        func getUserVinPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>
+
+        /// Handle the "SetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetUserVinPreferencesResponse` message.
+        func setUserVinPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>
+
+        /// Handle the "CreateUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_CreateUserModelPreferencesResponse` message.
+        func createUserModelPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>
+
+        /// Handle the "GetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetUserModelPreferencesResponse` message.
+        func getUserModelPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>
+
+        /// Handle the "SetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetUserModelPreferencesResponse` message.
+        func setUserModelPreferences(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>
+
+        /// Handle the "InviteSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InviteSecondaryOwnerRequest` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
         /// - Returns: A response containing a single `Mobilegateway_Protos_Empty` message.
-        func setUserPreferences(
-            request: GRPCCore.ServerRequest<Mobilegateway_Protos_Empty>,
+        func inviteSecondaryOwner(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>
+
+        /// Handle the "RemoveSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_Empty` message.
+        func removeSecondaryOwner(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>
     }
@@ -260,23 +588,135 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A `Mobilegateway_Protos_Empty` to respond with.
+        /// - Returns: A `Mobilegateway_Protos_GetUserPreferencesCommitIDResponse` to respond with.
         func getUserPreferencesCommitID(
             request: Mobilegateway_Protos_Empty,
             context: GRPCCore.ServerContext
-        ) async throws -> Mobilegateway_Protos_Empty
+        ) async throws -> Mobilegateway_Protos_GetUserPreferencesCommitIDResponse
 
         /// Handle the "SetUserPreferences" method.
         ///
         /// - Parameters:
-        ///   - request: A `Mobilegateway_Protos_Empty` message.
+        ///   - request: A `Mobilegateway_Protos_SetUserPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetUserPreferencesResponse` to respond with.
+        func setUserPreferences(
+            request: Mobilegateway_Protos_SetUserPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetUserPreferencesResponse
+
+        /// Handle the "CreateUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_CreateUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_CreateUserVinPreferencesResponse` to respond with.
+        func createUserVinPreferences(
+            request: Mobilegateway_Protos_CreateUserVinPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_CreateUserVinPreferencesResponse
+
+        /// Handle the "GetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetUserVinPreferencesResponse` to respond with.
+        func getUserVinPreferences(
+            request: Mobilegateway_Protos_GetUserVinPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetUserVinPreferencesResponse
+
+        /// Handle the "SetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetUserVinPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetUserVinPreferencesResponse` to respond with.
+        func setUserVinPreferences(
+            request: Mobilegateway_Protos_SetUserVinPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetUserVinPreferencesResponse
+
+        /// Handle the "CreateUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_CreateUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_CreateUserModelPreferencesResponse` to respond with.
+        func createUserModelPreferences(
+            request: Mobilegateway_Protos_CreateUserModelPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_CreateUserModelPreferencesResponse
+
+        /// Handle the "GetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetUserModelPreferencesResponse` to respond with.
+        func getUserModelPreferences(
+            request: Mobilegateway_Protos_GetUserModelPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetUserModelPreferencesResponse
+
+        /// Handle the "SetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetUserModelPreferencesRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetUserModelPreferencesResponse` to respond with.
+        func setUserModelPreferences(
+            request: Mobilegateway_Protos_SetUserModelPreferencesRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetUserModelPreferencesResponse
+
+        /// Handle the "InviteSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_InviteSecondaryOwnerRequest` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
         /// - Returns: A `Mobilegateway_Protos_Empty` to respond with.
-        func setUserPreferences(
-            request: Mobilegateway_Protos_Empty,
+        func inviteSecondaryOwner(
+            request: Mobilegateway_Protos_InviteSecondaryOwnerRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_Empty
+
+        /// Handle the "RemoveSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_Empty` to respond with.
+        func removeSecondaryOwner(
+            request: Mobilegateway_Protos_RemoveSecondaryOwnerRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_Empty
     }
@@ -310,7 +750,7 @@ extension Mobilegateway_Protos_UserPreferencesService.StreamingServiceProtocol {
         router.registerHandler(
             forMethod: Mobilegateway_Protos_UserPreferencesService.Method.GetUserPreferencesCommitID.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_Empty>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>(),
             handler: { request, context in
                 try await self.getUserPreferencesCommitID(
                     request: request,
@@ -320,10 +760,98 @@ extension Mobilegateway_Protos_UserPreferencesService.StreamingServiceProtocol {
         )
         router.registerHandler(
             forMethod: Mobilegateway_Protos_UserPreferencesService.Method.SetUserPreferences.descriptor,
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_Empty>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserPreferencesResponse>(),
             handler: { request, context in
                 try await self.setUserPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.CreateUserVinPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateUserVinPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateUserVinPreferencesResponse>(),
+            handler: { request, context in
+                try await self.createUserVinPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.GetUserVinPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetUserVinPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetUserVinPreferencesResponse>(),
+            handler: { request, context in
+                try await self.getUserVinPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.SetUserVinPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserVinPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserVinPreferencesResponse>(),
+            handler: { request, context in
+                try await self.setUserVinPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.CreateUserModelPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateUserModelPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateUserModelPreferencesResponse>(),
+            handler: { request, context in
+                try await self.createUserModelPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.GetUserModelPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetUserModelPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetUserModelPreferencesResponse>(),
+            handler: { request, context in
+                try await self.getUserModelPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.SetUserModelPreferences.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserModelPreferencesRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserModelPreferencesResponse>(),
+            handler: { request, context in
+                try await self.setUserModelPreferences(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.InviteSecondaryOwner.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_InviteSecondaryOwnerRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
+            handler: { request, context in
+                try await self.inviteSecondaryOwner(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_UserPreferencesService.Method.RemoveSecondaryOwner.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
+            handler: { request, context in
+                try await self.removeSecondaryOwner(
                     request: request,
                     context: context
                 )
@@ -359,7 +887,7 @@ extension Mobilegateway_Protos_UserPreferencesService.ServiceProtocol {
     public func getUserPreferencesCommitID(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_Empty>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty> {
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse> {
         let response = try await self.getUserPreferencesCommitID(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
@@ -368,10 +896,98 @@ extension Mobilegateway_Protos_UserPreferencesService.ServiceProtocol {
     }
 
     public func setUserPreferences(
-        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_Empty>,
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserPreferencesResponse> {
+        let response = try await self.setUserPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func createUserVinPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse> {
+        let response = try await self.createUserVinPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func getUserVinPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse> {
+        let response = try await self.getUserVinPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setUserVinPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse> {
+        let response = try await self.setUserVinPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func createUserModelPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse> {
+        let response = try await self.createUserModelPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func getUserModelPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse> {
+        let response = try await self.getUserModelPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setUserModelPreferences(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse> {
+        let response = try await self.setUserModelPreferences(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func inviteSecondaryOwner(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty> {
-        let response = try await self.setUserPreferences(
+        let response = try await self.inviteSecondaryOwner(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func removeSecondaryOwner(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_Empty> {
+        let response = try await self.removeSecondaryOwner(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -410,8 +1026,8 @@ extension Mobilegateway_Protos_UserPreferencesService.SimpleServiceProtocol {
     public func getUserPreferencesCommitID(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_Empty>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty> {
-        return GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>(
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>(
             message: try await self.getUserPreferencesCommitID(
                 request: request.message,
                 context: context
@@ -421,11 +1037,115 @@ extension Mobilegateway_Protos_UserPreferencesService.SimpleServiceProtocol {
     }
 
     public func setUserPreferences(
-        request: GRPCCore.ServerRequest<Mobilegateway_Protos_Empty>,
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserPreferencesResponse>(
+            message: try await self.setUserPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func createUserVinPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>(
+            message: try await self.createUserVinPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func getUserVinPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>(
+            message: try await self.getUserVinPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setUserVinPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>(
+            message: try await self.setUserVinPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func createUserModelPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>(
+            message: try await self.createUserModelPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func getUserModelPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>(
+            message: try await self.getUserModelPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setUserModelPreferences(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>(
+            message: try await self.setUserModelPreferences(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func inviteSecondaryOwner(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>(
-            message: try await self.setUserPreferences(
+            message: try await self.inviteSecondaryOwner(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func removeSecondaryOwner(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_Empty> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_Empty>(
+            message: try await self.removeSecondaryOwner(
                 request: request.message,
                 context: context
             ),
@@ -485,7 +1205,7 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// - Parameters:
         ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
         ///   - serializer: A serializer for `Mobilegateway_Protos_Empty` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserPreferencesCommitIDResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
@@ -494,25 +1214,177 @@ extension Mobilegateway_Protos_UserPreferencesService {
         func getUserPreferencesCommitID<Result>(
             request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
             serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_Empty>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>,
             options: GRPCCore.CallOptions,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "SetUserPreferences" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_Empty` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserPreferencesResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
         func setUserPreferences<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_Empty>,
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CreateUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func createUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "GetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CreateUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func createUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "GetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "InviteSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InviteSecondaryOwnerRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_InviteSecondaryOwnerRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func inviteSecondaryOwner<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "RemoveSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func removeSecondaryOwner<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result
@@ -600,7 +1472,7 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// - Parameters:
         ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
         ///   - serializer: A serializer for `Mobilegateway_Protos_Empty` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserPreferencesCommitIDResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
@@ -609,9 +1481,9 @@ extension Mobilegateway_Protos_UserPreferencesService {
         public func getUserPreferencesCommitID<Result>(
             request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
             serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_Empty>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>,
             options: GRPCCore.CallOptions = .defaults,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>) async throws -> Result = { response in
                 try response.message
             }
         ) async throws -> Result where Result: Sendable {
@@ -628,17 +1500,227 @@ extension Mobilegateway_Protos_UserPreferencesService {
         /// Call the "SetUserPreferences" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_Empty` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserPreferencesResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
         public func setUserPreferences<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_Empty>,
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.SetUserPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "CreateUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func createUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.CreateUserVinPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "GetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.GetUserVinPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetUserVinPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserVinPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserVinPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserVinPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setUserVinPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserVinPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.SetUserVinPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "CreateUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func createUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.CreateUserModelPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "GetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.GetUserModelPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetUserModelPreferences" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetUserModelPreferencesRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetUserModelPreferencesRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetUserModelPreferencesResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setUserModelPreferences<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetUserModelPreferencesResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.SetUserModelPreferences.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "InviteSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InviteSecondaryOwnerRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_InviteSecondaryOwnerRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func inviteSecondaryOwner<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
             options: GRPCCore.CallOptions = .defaults,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
@@ -647,7 +1729,37 @@ extension Mobilegateway_Protos_UserPreferencesService {
         ) async throws -> Result where Result: Sendable {
             try await self.client.unary(
                 request: request,
-                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.SetUserPreferences.descriptor,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.InviteSecondaryOwner.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "RemoveSecondaryOwner" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_Empty` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func removeSecondaryOwner<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_Empty>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_UserPreferencesService.Method.RemoveSecondaryOwner.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -721,14 +1833,14 @@ extension Mobilegateway_Protos_UserPreferencesService.ClientProtocol {
     public func getUserPreferencesCommitID<Result>(
         request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
         try await self.getUserPreferencesCommitID(
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_Empty>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -737,22 +1849,222 @@ extension Mobilegateway_Protos_UserPreferencesService.ClientProtocol {
     /// Call the "SetUserPreferences" method.
     ///
     /// - Parameters:
-    ///   - request: A request containing a single `Mobilegateway_Protos_Empty` message.
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetUserPreferencesRequest` message.
     ///   - options: Options to apply to this RPC.
     ///   - handleResponse: A closure which handles the response, the result of which is
     ///       returned to the caller. Returning from the closure will cancel the RPC if it
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
     public func setUserPreferences<Result>(
-        request: GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>,
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserPreferencesRequest>,
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserPreferencesResponse>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
         try await self.setUserPreferences(
             request: request,
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_Empty>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserVinPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createUserVinPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.createUserVinPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateUserVinPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateUserVinPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetUserVinPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getUserVinPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getUserVinPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetUserVinPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetUserVinPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetUserVinPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setUserVinPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setUserVinPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserVinPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserVinPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_CreateUserModelPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createUserModelPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.createUserModelPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateUserModelPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateUserModelPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetUserModelPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getUserModelPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getUserModelPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetUserModelPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetUserModelPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetUserModelPreferencesRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setUserModelPreferences<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setUserModelPreferences(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetUserModelPreferencesRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetUserModelPreferencesResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "InviteSecondaryOwner" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_InviteSecondaryOwnerRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func inviteSecondaryOwner<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.inviteSecondaryOwner(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_InviteSecondaryOwnerRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_Empty>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "RemoveSecondaryOwner" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_RemoveSecondaryOwnerRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func removeSecondaryOwner<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.removeSecondaryOwner(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_Empty>(),
             options: options,
             onResponse: handleResponse
@@ -834,7 +2146,7 @@ extension Mobilegateway_Protos_UserPreferencesService.ClientProtocol {
         _ message: Mobilegateway_Protos_Empty,
         metadata: GRPCCore.Metadata = [:],
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserPreferencesCommitIDResponse>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
@@ -860,18 +2172,250 @@ extension Mobilegateway_Protos_UserPreferencesService.ClientProtocol {
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
     public func setUserPreferences<Result>(
-        _ message: Mobilegateway_Protos_Empty,
+        _ message: Mobilegateway_Protos_SetUserPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setUserPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createUserVinPreferences<Result>(
+        _ message: Mobilegateway_Protos_CreateUserVinPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserVinPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.createUserVinPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getUserVinPreferences<Result>(
+        _ message: Mobilegateway_Protos_GetUserVinPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserVinPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getUserVinPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetUserVinPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setUserVinPreferences<Result>(
+        _ message: Mobilegateway_Protos_SetUserVinPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserVinPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserVinPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setUserVinPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createUserModelPreferences<Result>(
+        _ message: Mobilegateway_Protos_CreateUserModelPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_CreateUserModelPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.createUserModelPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getUserModelPreferences<Result>(
+        _ message: Mobilegateway_Protos_GetUserModelPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetUserModelPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getUserModelPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetUserModelPreferences" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setUserModelPreferences<Result>(
+        _ message: Mobilegateway_Protos_SetUserModelPreferencesRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetUserModelPreferencesResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetUserModelPreferencesRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setUserModelPreferences(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "InviteSecondaryOwner" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func inviteSecondaryOwner<Result>(
+        _ message: Mobilegateway_Protos_InviteSecondaryOwnerRequest,
         metadata: GRPCCore.Metadata = [:],
         options: GRPCCore.CallOptions = .defaults,
         onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
-        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_Empty>(
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_InviteSecondaryOwnerRequest>(
             message: message,
             metadata: metadata
         )
-        return try await self.setUserPreferences(
+        return try await self.inviteSecondaryOwner(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "RemoveSecondaryOwner" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func removeSecondaryOwner<Result>(
+        _ message: Mobilegateway_Protos_RemoveSecondaryOwnerRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_Empty>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_RemoveSecondaryOwnerRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.removeSecondaryOwner(
             request: request,
             options: options,
             onResponse: handleResponse

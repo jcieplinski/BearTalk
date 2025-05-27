@@ -49,6 +49,11 @@ enum AlarmStatus: Codable, Equatable {
     case unknown // = 0
     case disarmed // = 1
     case armed // = 2
+    case preAlarm // = 3
+    case tilt // = 4
+    case shock // = 5
+    case intrusion // = 6
+    case panicMode // = 7
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_AlarmStatus) {
@@ -57,6 +62,11 @@ enum AlarmStatus: Codable, Equatable {
         case .disarmed: self = .disarmed
         case .armed: self = .armed
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        case .preAlarm: self = .preAlarm
+        case .tilt: self = .tilt
+        case .shock: self = .shock
+        case .intrusion: self = .intrusion
+        case .panicMode: self = .panicMode
         }
     }
 }

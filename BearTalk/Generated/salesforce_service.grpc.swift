@@ -19,28 +19,16 @@ public enum Mobilegateway_Protos_SalesforceService {
     public static let descriptor = GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService")
     /// Namespace for method metadata.
     public enum Method {
-        /// Namespace for "GetServiceAppointmentsV1" metadata.
-        public enum GetServiceAppointmentsV1 {
-            /// Request type for "GetServiceAppointmentsV1".
-            public typealias Input = Mobilegateway_Protos_GetServiceAppointmentsV1Request
-            /// Response type for "GetServiceAppointmentsV1".
-            public typealias Output = Mobilegateway_Protos_GetServiceAppointmentsV1Response
-            /// Descriptor for "GetServiceAppointmentsV1".
+        /// Namespace for "CreateLoyaltyMember" metadata.
+        public enum CreateLoyaltyMember {
+            /// Request type for "CreateLoyaltyMember".
+            public typealias Input = Mobilegateway_Protos_CreateLoyaltyMemberRequest
+            /// Response type for "CreateLoyaltyMember".
+            public typealias Output = Mobilegateway_Protos_CreateLoyaltyMemberResponse
+            /// Descriptor for "CreateLoyaltyMember".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
-                method: "GetServiceAppointmentsV1"
-            )
-        }
-        /// Namespace for "GetServiceAppointmentSlots" metadata.
-        public enum GetServiceAppointmentSlots {
-            /// Request type for "GetServiceAppointmentSlots".
-            public typealias Input = Mobilegateway_Protos_GetServiceAppointmentSlotsRequest
-            /// Response type for "GetServiceAppointmentSlots".
-            public typealias Output = Mobilegateway_Protos_GetServiceAppointmentSlotsResponse
-            /// Descriptor for "GetServiceAppointmentSlots".
-            public static let descriptor = GRPCCore.MethodDescriptor(
-                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
-                method: "GetServiceAppointmentSlots"
+                method: "CreateLoyaltyMember"
             )
         }
         /// Namespace for "ReferralHistory" metadata.
@@ -55,11 +43,88 @@ public enum Mobilegateway_Protos_SalesforceService {
                 method: "ReferralHistory"
             )
         }
+        /// Namespace for "BigCommerceLogin" metadata.
+        public enum BigCommerceLogin {
+            /// Request type for "BigCommerceLogin".
+            public typealias Input = Mobilegateway_Protos_BigCommerceLoginRequest
+            /// Response type for "BigCommerceLogin".
+            public typealias Output = Mobilegateway_Protos_BigCommerceLoginResponse
+            /// Descriptor for "BigCommerceLogin".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "BigCommerceLogin"
+            )
+        }
+        /// Namespace for "CreateServiceAppointment" metadata.
+        public enum CreateServiceAppointment {
+            /// Request type for "CreateServiceAppointment".
+            public typealias Input = Mobilegateway_Protos_CreateServiceAppointmentRequest
+            /// Response type for "CreateServiceAppointment".
+            public typealias Output = Mobilegateway_Protos_CreateServiceAppointmentResponse
+            /// Descriptor for "CreateServiceAppointment".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "CreateServiceAppointment"
+            )
+        }
+        /// Namespace for "UpdateServiceAppointment" metadata.
+        public enum UpdateServiceAppointment {
+            /// Request type for "UpdateServiceAppointment".
+            public typealias Input = Mobilegateway_Protos_UpdateServiceAppointmentRequest
+            /// Response type for "UpdateServiceAppointment".
+            public typealias Output = Mobilegateway_Protos_UpdateServiceAppointmentResponse
+            /// Descriptor for "UpdateServiceAppointment".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "UpdateServiceAppointment"
+            )
+        }
+        /// Namespace for "GetServiceAppointmentSlots" metadata.
+        public enum GetServiceAppointmentSlots {
+            /// Request type for "GetServiceAppointmentSlots".
+            public typealias Input = Mobilegateway_Protos_GetServiceAppointmentSlotsRequest
+            /// Response type for "GetServiceAppointmentSlots".
+            public typealias Output = Mobilegateway_Protos_GetServiceAppointmentSlotsResponse
+            /// Descriptor for "GetServiceAppointmentSlots".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "GetServiceAppointmentSlots"
+            )
+        }
+        /// Namespace for "GetServiceAppointmentsV1" metadata.
+        public enum GetServiceAppointmentsV1 {
+            /// Request type for "GetServiceAppointmentsV1".
+            public typealias Input = Mobilegateway_Protos_GetServiceAppointmentsV1Request
+            /// Response type for "GetServiceAppointmentsV1".
+            public typealias Output = Mobilegateway_Protos_GetServiceAppointmentsV1Response
+            /// Descriptor for "GetServiceAppointmentsV1".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "GetServiceAppointmentsV1"
+            )
+        }
+        /// Namespace for "CancelServiceAppointment" metadata.
+        public enum CancelServiceAppointment {
+            /// Request type for "CancelServiceAppointment".
+            public typealias Input = Mobilegateway_Protos_CancelServiceAppointmentRequest
+            /// Response type for "CancelServiceAppointment".
+            public typealias Output = Mobilegateway_Protos_CancelServiceAppointmentResponse
+            /// Descriptor for "CancelServiceAppointment".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.SalesforceService"),
+                method: "CancelServiceAppointment"
+            )
+        }
         /// Descriptors for all methods in the "mobilegateway.protos.SalesforceService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
-            GetServiceAppointmentsV1.descriptor,
+            CreateLoyaltyMember.descriptor,
+            ReferralHistory.descriptor,
+            BigCommerceLogin.descriptor,
+            CreateServiceAppointment.descriptor,
+            UpdateServiceAppointment.descriptor,
             GetServiceAppointmentSlots.descriptor,
-            ReferralHistory.descriptor
+            GetServiceAppointmentsV1.descriptor,
+            CancelServiceAppointment.descriptor
         ]
     }
 }
@@ -83,19 +148,75 @@ extension Mobilegateway_Protos_SalesforceService {
     /// Where possible, prefer using the stricter, less-verbose ``ServiceProtocol``
     /// or ``SimpleServiceProtocol`` instead.
     public protocol StreamingServiceProtocol: GRPCCore.RegistrableRPCService {
-        /// Handle the "GetServiceAppointmentsV1" method.
+        /// Handle the "CreateLoyaltyMember" method.
         ///
         /// - Parameters:
-        ///   - request: A streaming request of `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
+        ///   - request: A streaming request of `Mobilegateway_Protos_CreateLoyaltyMemberRequest` messages.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A streaming response of `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
-        func getServiceAppointmentsV1(
-            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+        /// - Returns: A streaming response of `Mobilegateway_Protos_CreateLoyaltyMemberResponse` messages.
+        func createLoyaltyMember(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>
+
+        /// Handle the "ReferralHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_ReferralHistoryRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_ReferralHistoryResponse` messages.
+        func referralHistory(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>
+
+        /// Handle the "BigCommerceLogin" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_BigCommerceLoginRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_BigCommerceLoginResponse` messages.
+        func bigCommerceLogin(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_BigCommerceLoginResponse>
+
+        /// Handle the "CreateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_CreateServiceAppointmentRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_CreateServiceAppointmentResponse` messages.
+        func createServiceAppointment(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>
+
+        /// Handle the "UpdateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_UpdateServiceAppointmentRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_UpdateServiceAppointmentResponse` messages.
+        func updateServiceAppointment(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>
 
         /// Handle the "GetServiceAppointmentSlots" method.
         ///
@@ -111,19 +232,33 @@ extension Mobilegateway_Protos_SalesforceService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetServiceAppointmentSlotsResponse>
 
-        /// Handle the "ReferralHistory" method.
+        /// Handle the "GetServiceAppointmentsV1" method.
         ///
         /// - Parameters:
-        ///   - request: A streaming request of `Mobilegateway_Protos_ReferralHistoryRequest` messages.
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A streaming response of `Mobilegateway_Protos_ReferralHistoryResponse` messages.
-        func referralHistory(
-            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
+        func getServiceAppointmentsV1(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>
+
+        /// Handle the "CancelServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_CancelServiceAppointmentRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_CancelServiceAppointmentResponse` messages.
+        func cancelServiceAppointment(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>
     }
 
     /// Service protocol for the "mobilegateway.protos.SalesforceService" service.
@@ -134,19 +269,75 @@ extension Mobilegateway_Protos_SalesforceService {
     /// the ``SimpleServiceProtocol``. If you need fine grained control over your RPCs then
     /// use ``StreamingServiceProtocol``.
     public protocol ServiceProtocol: Mobilegateway_Protos_SalesforceService.StreamingServiceProtocol {
-        /// Handle the "GetServiceAppointmentsV1" method.
+        /// Handle the "CreateLoyaltyMember" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateLoyaltyMemberRequest` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A response containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Response` message.
-        func getServiceAppointmentsV1(
-            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+        /// - Returns: A response containing a single `Mobilegateway_Protos_CreateLoyaltyMemberResponse` message.
+        func createLoyaltyMember(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>
+
+        /// Handle the "ReferralHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_ReferralHistoryResponse` message.
+        func referralHistory(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>
+
+        /// Handle the "BigCommerceLogin" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_BigCommerceLoginRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_BigCommerceLoginResponse` message.
+        func bigCommerceLogin(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_BigCommerceLoginResponse>
+
+        /// Handle the "CreateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_CreateServiceAppointmentResponse` message.
+        func createServiceAppointment(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>
+
+        /// Handle the "UpdateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_UpdateServiceAppointmentResponse` message.
+        func updateServiceAppointment(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>
 
         /// Handle the "GetServiceAppointmentSlots" method.
         ///
@@ -162,19 +353,33 @@ extension Mobilegateway_Protos_SalesforceService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentSlotsResponse>
 
-        /// Handle the "ReferralHistory" method.
+        /// Handle the "GetServiceAppointmentsV1" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A response containing a single `Mobilegateway_Protos_ReferralHistoryResponse` message.
-        func referralHistory(
-            request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Response` message.
+        func getServiceAppointmentsV1(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
             context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>
+
+        /// Handle the "CancelServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CancelServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_CancelServiceAppointmentResponse` message.
+        func cancelServiceAppointment(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>
     }
 
     /// Simple service protocol for the "mobilegateway.protos.SalesforceService" service.
@@ -183,19 +388,75 @@ extension Mobilegateway_Protos_SalesforceService {
     /// doesn't provide access to request or response metadata. If you need access to these
     /// then use ``ServiceProtocol`` instead.
     public protocol SimpleServiceProtocol: Mobilegateway_Protos_SalesforceService.ServiceProtocol {
-        /// Handle the "GetServiceAppointmentsV1" method.
+        /// Handle the "CreateLoyaltyMember" method.
         ///
         /// - Parameters:
-        ///   - request: A `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
+        ///   - request: A `Mobilegateway_Protos_CreateLoyaltyMemberRequest` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A `Mobilegateway_Protos_GetServiceAppointmentsV1Response` to respond with.
-        func getServiceAppointmentsV1(
-            request: Mobilegateway_Protos_GetServiceAppointmentsV1Request,
+        /// - Returns: A `Mobilegateway_Protos_CreateLoyaltyMemberResponse` to respond with.
+        func createLoyaltyMember(
+            request: Mobilegateway_Protos_CreateLoyaltyMemberRequest,
             context: GRPCCore.ServerContext
-        ) async throws -> Mobilegateway_Protos_GetServiceAppointmentsV1Response
+        ) async throws -> Mobilegateway_Protos_CreateLoyaltyMemberResponse
+
+        /// Handle the "ReferralHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_ReferralHistoryResponse` to respond with.
+        func referralHistory(
+            request: Mobilegateway_Protos_ReferralHistoryRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_ReferralHistoryResponse
+
+        /// Handle the "BigCommerceLogin" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_BigCommerceLoginRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_BigCommerceLoginResponse` to respond with.
+        func bigCommerceLogin(
+            request: Mobilegateway_Protos_BigCommerceLoginRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_BigCommerceLoginResponse
+
+        /// Handle the "CreateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_CreateServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_CreateServiceAppointmentResponse` to respond with.
+        func createServiceAppointment(
+            request: Mobilegateway_Protos_CreateServiceAppointmentRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_CreateServiceAppointmentResponse
+
+        /// Handle the "UpdateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_UpdateServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_UpdateServiceAppointmentResponse` to respond with.
+        func updateServiceAppointment(
+            request: Mobilegateway_Protos_UpdateServiceAppointmentRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_UpdateServiceAppointmentResponse
 
         /// Handle the "GetServiceAppointmentSlots" method.
         ///
@@ -211,19 +472,33 @@ extension Mobilegateway_Protos_SalesforceService {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_GetServiceAppointmentSlotsResponse
 
-        /// Handle the "ReferralHistory" method.
+        /// Handle the "GetServiceAppointmentsV1" method.
         ///
         /// - Parameters:
-        ///   - request: A `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - request: A `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
         ///   - context: Context providing information about the RPC.
         /// - Throws: Any error which occurred during the processing of the request. Thrown errors
         ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
         ///     to an internal error.
-        /// - Returns: A `Mobilegateway_Protos_ReferralHistoryResponse` to respond with.
-        func referralHistory(
-            request: Mobilegateway_Protos_ReferralHistoryRequest,
+        /// - Returns: A `Mobilegateway_Protos_GetServiceAppointmentsV1Response` to respond with.
+        func getServiceAppointmentsV1(
+            request: Mobilegateway_Protos_GetServiceAppointmentsV1Request,
             context: GRPCCore.ServerContext
-        ) async throws -> Mobilegateway_Protos_ReferralHistoryResponse
+        ) async throws -> Mobilegateway_Protos_GetServiceAppointmentsV1Response
+
+        /// Handle the "CancelServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_CancelServiceAppointmentRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_CancelServiceAppointmentResponse` to respond with.
+        func cancelServiceAppointment(
+            request: Mobilegateway_Protos_CancelServiceAppointmentRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_CancelServiceAppointmentResponse
     }
 }
 
@@ -231,11 +506,55 @@ extension Mobilegateway_Protos_SalesforceService {
 extension Mobilegateway_Protos_SalesforceService.StreamingServiceProtocol {
     public func registerMethods<Transport>(with router: inout GRPCCore.RPCRouter<Transport>) where Transport: GRPCCore.ServerTransport {
         router.registerHandler(
-            forMethod: Mobilegateway_Protos_SalesforceService.Method.GetServiceAppointmentsV1.descriptor,
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(),
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.CreateLoyaltyMember.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateLoyaltyMemberRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateLoyaltyMemberResponse>(),
             handler: { request, context in
-                try await self.getServiceAppointmentsV1(
+                try await self.createLoyaltyMember(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.ReferralHistory.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReferralHistoryRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReferralHistoryResponse>(),
+            handler: { request, context in
+                try await self.referralHistory(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.BigCommerceLogin.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_BigCommerceLoginRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_BigCommerceLoginResponse>(),
+            handler: { request, context in
+                try await self.bigCommerceLogin(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.CreateServiceAppointment.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateServiceAppointmentRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateServiceAppointmentResponse>(),
+            handler: { request, context in
+                try await self.createServiceAppointment(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.UpdateServiceAppointment.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateServiceAppointmentRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateServiceAppointmentResponse>(),
+            handler: { request, context in
+                try await self.updateServiceAppointment(
                     request: request,
                     context: context
                 )
@@ -253,11 +572,22 @@ extension Mobilegateway_Protos_SalesforceService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
-            forMethod: Mobilegateway_Protos_SalesforceService.Method.ReferralHistory.descriptor,
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReferralHistoryRequest>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReferralHistoryResponse>(),
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.GetServiceAppointmentsV1.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(),
             handler: { request, context in
-                try await self.referralHistory(
+                try await self.getServiceAppointmentsV1(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_SalesforceService.Method.CancelServiceAppointment.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CancelServiceAppointmentRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CancelServiceAppointmentResponse>(),
+            handler: { request, context in
+                try await self.cancelServiceAppointment(
                     request: request,
                     context: context
                 )
@@ -268,11 +598,55 @@ extension Mobilegateway_Protos_SalesforceService.StreamingServiceProtocol {
 
 // Default implementation of streaming methods from 'StreamingServiceProtocol'.
 extension Mobilegateway_Protos_SalesforceService.ServiceProtocol {
-    public func getServiceAppointmentsV1(
-        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+    public func createLoyaltyMember(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response> {
-        let response = try await self.getServiceAppointmentsV1(
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse> {
+        let response = try await self.createLoyaltyMember(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func referralHistory(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReferralHistoryResponse> {
+        let response = try await self.referralHistory(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func bigCommerceLogin(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_BigCommerceLoginResponse> {
+        let response = try await self.bigCommerceLogin(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func createServiceAppointment(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse> {
+        let response = try await self.createServiceAppointment(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func updateServiceAppointment(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse> {
+        let response = try await self.updateServiceAppointment(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -290,11 +664,22 @@ extension Mobilegateway_Protos_SalesforceService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
-    public func referralHistory(
-        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+    public func getServiceAppointmentsV1(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReferralHistoryResponse> {
-        let response = try await self.referralHistory(
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response> {
+        let response = try await self.getServiceAppointmentsV1(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func cancelServiceAppointment(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse> {
+        let response = try await self.cancelServiceAppointment(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -304,12 +689,64 @@ extension Mobilegateway_Protos_SalesforceService.ServiceProtocol {
 
 // Default implementation of methods from 'ServiceProtocol'.
 extension Mobilegateway_Protos_SalesforceService.SimpleServiceProtocol {
-    public func getServiceAppointmentsV1(
-        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+    public func createLoyaltyMember(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response> {
-        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(
-            message: try await self.getServiceAppointmentsV1(
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>(
+            message: try await self.createLoyaltyMember(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func referralHistory(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>(
+            message: try await self.referralHistory(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func bigCommerceLogin(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_BigCommerceLoginResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_BigCommerceLoginResponse>(
+            message: try await self.bigCommerceLogin(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func createServiceAppointment(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>(
+            message: try await self.createServiceAppointment(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func updateServiceAppointment(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>(
+            message: try await self.updateServiceAppointment(
                 request: request.message,
                 context: context
             ),
@@ -330,12 +767,25 @@ extension Mobilegateway_Protos_SalesforceService.SimpleServiceProtocol {
         )
     }
 
-    public func referralHistory(
-        request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+    public func getServiceAppointmentsV1(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
         context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse> {
-        return GRPCCore.ServerResponse<Mobilegateway_Protos_ReferralHistoryResponse>(
-            message: try await self.referralHistory(
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(
+            message: try await self.getServiceAppointmentsV1(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func cancelServiceAppointment(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>(
+            message: try await self.cancelServiceAppointment(
                 request: request.message,
                 context: context
             ),
@@ -352,23 +802,99 @@ extension Mobilegateway_Protos_SalesforceService {
     /// You don't need to implement this protocol directly, use the generated
     /// implementation, ``Client``.
     public protocol ClientProtocol: Sendable {
-        /// Call the "GetServiceAppointmentsV1" method.
+        /// Call the "CreateLoyaltyMember" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateLoyaltyMemberRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateLoyaltyMemberRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateLoyaltyMemberResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
-        func getServiceAppointmentsV1<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>,
+        func createLoyaltyMember<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateLoyaltyMemberResponse>,
             options: GRPCCore.CallOptions,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "ReferralHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ReferralHistoryRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReferralHistoryResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func referralHistory<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReferralHistoryRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "BigCommerceLogin" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_BigCommerceLoginRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_BigCommerceLoginRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_BigCommerceLoginResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func bigCommerceLogin<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_BigCommerceLoginResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_BigCommerceLoginResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CreateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func createServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "UpdateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func updateServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "GetServiceAppointmentSlots" method.
@@ -390,23 +916,42 @@ extension Mobilegateway_Protos_SalesforceService {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentSlotsResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
-        /// Call the "ReferralHistory" method.
+        /// Call the "GetServiceAppointmentsV1" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_ReferralHistoryRequest` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReferralHistoryResponse` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
-        func referralHistory<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReferralHistoryRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>,
+        func getServiceAppointmentsV1<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>,
             options: GRPCCore.CallOptions,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CancelServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CancelServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CancelServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CancelServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func cancelServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CancelServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -426,29 +971,149 @@ extension Mobilegateway_Protos_SalesforceService {
             self.client = client
         }
 
-        /// Call the "GetServiceAppointmentsV1" method.
+        /// Call the "CreateLoyaltyMember" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateLoyaltyMemberRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateLoyaltyMemberRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateLoyaltyMemberResponse` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
-        public func getServiceAppointmentsV1<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>,
+        public func createLoyaltyMember<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateLoyaltyMemberResponse>,
             options: GRPCCore.CallOptions = .defaults,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>) async throws -> Result = { response in
                 try response.message
             }
         ) async throws -> Result where Result: Sendable {
             try await self.client.unary(
                 request: request,
-                descriptor: Mobilegateway_Protos_SalesforceService.Method.GetServiceAppointmentsV1.descriptor,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.CreateLoyaltyMember.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "ReferralHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ReferralHistoryRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReferralHistoryResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func referralHistory<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReferralHistoryRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.ReferralHistory.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "BigCommerceLogin" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_BigCommerceLoginRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_BigCommerceLoginRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_BigCommerceLoginResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func bigCommerceLogin<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_BigCommerceLoginRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_BigCommerceLoginResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_BigCommerceLoginResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.BigCommerceLogin.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "CreateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CreateServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CreateServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CreateServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func createServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CreateServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.CreateServiceAppointment.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "UpdateServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func updateServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.UpdateServiceAppointment.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -486,29 +1151,59 @@ extension Mobilegateway_Protos_SalesforceService {
             )
         }
 
-        /// Call the "ReferralHistory" method.
+        /// Call the "GetServiceAppointmentsV1" method.
         ///
         /// - Parameters:
-        ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
-        ///   - serializer: A serializer for `Mobilegateway_Protos_ReferralHistoryRequest` messages.
-        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReferralHistoryResponse` messages.
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Request` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetServiceAppointmentsV1Response` messages.
         ///   - options: Options to apply to this RPC.
         ///   - handleResponse: A closure which handles the response, the result of which is
         ///       returned to the caller. Returning from the closure will cancel the RPC if it
         ///       hasn't already finished.
         /// - Returns: The result of `handleResponse`.
-        public func referralHistory<Result>(
-            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
-            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReferralHistoryRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>,
+        public func getServiceAppointmentsV1<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>,
             options: GRPCCore.CallOptions = .defaults,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
                 try response.message
             }
         ) async throws -> Result where Result: Sendable {
             try await self.client.unary(
                 request: request,
-                descriptor: Mobilegateway_Protos_SalesforceService.Method.ReferralHistory.descriptor,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.GetServiceAppointmentsV1.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "CancelServiceAppointment" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_CancelServiceAppointmentRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_CancelServiceAppointmentRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_CancelServiceAppointmentResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func cancelServiceAppointment<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_CancelServiceAppointmentResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_SalesforceService.Method.CancelServiceAppointment.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -520,26 +1215,126 @@ extension Mobilegateway_Protos_SalesforceService {
 
 // Helpers providing default arguments to 'ClientProtocol' methods.
 extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
-    /// Call the "GetServiceAppointmentsV1" method.
+    /// Call the "CreateLoyaltyMember" method.
     ///
     /// - Parameters:
-    ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
+    ///   - request: A request containing a single `Mobilegateway_Protos_CreateLoyaltyMemberRequest` message.
     ///   - options: Options to apply to this RPC.
     ///   - handleResponse: A closure which handles the response, the result of which is
     ///       returned to the caller. Returning from the closure will cancel the RPC if it
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
-    public func getServiceAppointmentsV1<Result>(
-        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
+    public func createLoyaltyMember<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>,
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
-        try await self.getServiceAppointmentsV1(
+        try await self.createLoyaltyMember(
             request: request,
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(),
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateLoyaltyMemberRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateLoyaltyMemberResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "ReferralHistory" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func referralHistory<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.referralHistory(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReferralHistoryRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "BigCommerceLogin" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_BigCommerceLoginRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func bigCommerceLogin<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_BigCommerceLoginRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_BigCommerceLoginResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.bigCommerceLogin(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_BigCommerceLoginRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_BigCommerceLoginResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_CreateServiceAppointmentRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createServiceAppointment<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.createServiceAppointment(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CreateServiceAppointmentRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CreateServiceAppointmentResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "UpdateServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_UpdateServiceAppointmentRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateServiceAppointment<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.updateServiceAppointment(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateServiceAppointmentRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateServiceAppointmentResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -570,26 +1365,51 @@ extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
         )
     }
 
-    /// Call the "ReferralHistory" method.
+    /// Call the "GetServiceAppointmentsV1" method.
     ///
     /// - Parameters:
-    ///   - request: A request containing a single `Mobilegateway_Protos_ReferralHistoryRequest` message.
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetServiceAppointmentsV1Request` message.
     ///   - options: Options to apply to this RPC.
     ///   - handleResponse: A closure which handles the response, the result of which is
     ///       returned to the caller. Returning from the closure will cancel the RPC if it
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
-    public func referralHistory<Result>(
-        request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>,
+    public func getServiceAppointmentsV1<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>,
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
-        try await self.referralHistory(
+        try await self.getServiceAppointmentsV1(
             request: request,
-            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReferralHistoryRequest>(),
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReferralHistoryResponse>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetServiceAppointmentsV1Response>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CancelServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_CancelServiceAppointmentRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func cancelServiceAppointment<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.cancelServiceAppointment(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_CancelServiceAppointmentRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_CancelServiceAppointmentResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -598,7 +1418,7 @@ extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
 
 // Helpers providing sugared APIs for 'ClientProtocol' methods.
 extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
-    /// Call the "GetServiceAppointmentsV1" method.
+    /// Call the "CreateLoyaltyMember" method.
     ///
     /// - Parameters:
     ///   - message: request message to send.
@@ -608,19 +1428,135 @@ extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
     ///       returned to the caller. Returning from the closure will cancel the RPC if it
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
-    public func getServiceAppointmentsV1<Result>(
-        _ message: Mobilegateway_Protos_GetServiceAppointmentsV1Request,
+    public func createLoyaltyMember<Result>(
+        _ message: Mobilegateway_Protos_CreateLoyaltyMemberRequest,
         metadata: GRPCCore.Metadata = [:],
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateLoyaltyMemberResponse>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
-        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_CreateLoyaltyMemberRequest>(
             message: message,
             metadata: metadata
         )
-        return try await self.getServiceAppointmentsV1(
+        return try await self.createLoyaltyMember(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "ReferralHistory" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func referralHistory<Result>(
+        _ message: Mobilegateway_Protos_ReferralHistoryRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.referralHistory(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "BigCommerceLogin" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func bigCommerceLogin<Result>(
+        _ message: Mobilegateway_Protos_BigCommerceLoginRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_BigCommerceLoginResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_BigCommerceLoginRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.bigCommerceLogin(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CreateServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createServiceAppointment<Result>(
+        _ message: Mobilegateway_Protos_CreateServiceAppointmentRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CreateServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_CreateServiceAppointmentRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.createServiceAppointment(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "UpdateServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateServiceAppointment<Result>(
+        _ message: Mobilegateway_Protos_UpdateServiceAppointmentRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateServiceAppointmentRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.updateServiceAppointment(
             request: request,
             options: options,
             onResponse: handleResponse
@@ -656,7 +1592,7 @@ extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
         )
     }
 
-    /// Call the "ReferralHistory" method.
+    /// Call the "GetServiceAppointmentsV1" method.
     ///
     /// - Parameters:
     ///   - message: request message to send.
@@ -666,19 +1602,48 @@ extension Mobilegateway_Protos_SalesforceService.ClientProtocol {
     ///       returned to the caller. Returning from the closure will cancel the RPC if it
     ///       hasn't already finished.
     /// - Returns: The result of `handleResponse`.
-    public func referralHistory<Result>(
-        _ message: Mobilegateway_Protos_ReferralHistoryRequest,
+    public func getServiceAppointmentsV1<Result>(
+        _ message: Mobilegateway_Protos_GetServiceAppointmentsV1Request,
         metadata: GRPCCore.Metadata = [:],
         options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReferralHistoryResponse>) async throws -> Result = { response in
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetServiceAppointmentsV1Response>) async throws -> Result = { response in
             try response.message
         }
     ) async throws -> Result where Result: Sendable {
-        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_ReferralHistoryRequest>(
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetServiceAppointmentsV1Request>(
             message: message,
             metadata: metadata
         )
-        return try await self.referralHistory(
+        return try await self.getServiceAppointmentsV1(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "CancelServiceAppointment" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func cancelServiceAppointment<Result>(
+        _ message: Mobilegateway_Protos_CancelServiceAppointmentRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_CancelServiceAppointmentResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_CancelServiceAppointmentRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.cancelServiceAppointment(
             request: request,
             options: options,
             onResponse: handleResponse

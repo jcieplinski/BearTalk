@@ -44,7 +44,7 @@ final class BearAPI {
             var request = Mobilegateway_Protos_LoginRequest()
             request.username = userName
             request.password = password
-            request.notificationChannelType = .notificationChannelOne
+            request.notificationChannelType = .notificationChannelUnknown
             request.os = .ios
             request.notificationDeviceToken = "1234"
             request.locale = "en_US"
@@ -71,7 +71,7 @@ final class BearAPI {
                     userProfile: UserProfile(
                         email: response.userProfile.email,
                         locale: response.userProfile.locale,
-                        username: response.userProfile.username,
+                        username: "",
                         photoUrl: response.userProfile.photoURL,
                         firstName: response.userProfile.firstName,
                         lastName: response.userProfile.lastName,

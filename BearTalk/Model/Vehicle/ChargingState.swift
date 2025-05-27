@@ -5,7 +5,7 @@
 //  Created by Joe Cieplinski on 11/28/23.
 //
 
-import Foundation
+import SwiftUI
 
 struct ChargingState: Codable, Equatable {
     let chargeState: ChargeState
@@ -154,13 +154,26 @@ enum ChargeState: Codable, Equatable {
     case chargerPreparation // = 7
     case charging // = 8
     case chargingEndOk // = 9
-    case chargingStopped // = 10
+    case chargingEndError // = 10
     case evseMalfunction // = 11
+    case authenticationFailure // = 12
+    case chargingStopped // = 13
+    case chargingPaused // = 14
+    case authenticationPncFailure // = 15
+    case internalHardwareFault // = 16
+    case readyToDischarge // = 17
+    case preparingDischarge // = 18
     case discharging // = 19
     case dischargingCompleted // = 20
     case dischargingStopped // = 21
     case dischargingFault // = 22
     case dischargingUnavailable // = 23
+    case evseNotReady // = 25
+    case acInputUnderVoltage // = 26
+    case cableLockFault // = 27
+    case cableConnectionFault // = 28
+    case tempProtection // = 29
+    case chargingScheduled // = 30
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_ChargeState) {
@@ -183,6 +196,84 @@ enum ChargeState: Codable, Equatable {
         case .dischargingFault: self = .dischargingFault
         case .dischargingUnavailable: self = .dischargingUnavailable
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        case .chargingEndError: self = .chargingEndError
+        case .authenticationFailure: self = .authenticationFailure
+        case .chargingPaused: self = .chargingPaused
+        case .authenticationPncFailure: self = .authenticationPncFailure
+        case .internalHardwareFault: self = .internalHardwareFault
+        case .readyToDischarge: self = .readyToDischarge
+        case .preparingDischarge: self = .preparingDischarge
+        case .evseNotReady: self = .evseNotReady
+        case .acInputUnderVoltage: self = .acInputUnderVoltage
+        case .cableLockFault: self = .cableLockFault
+        case .cableConnectionFault: self = .cableConnectionFault
+        case .tempProtection: self = .tempProtection
+        case .chargingScheduled: self = .chargingScheduled
+        }
+    }
+    
+    var title: LocalizedStringKey {
+        switch self {
+        case .charging:
+            "Charging in Progress"
+        case .notConnected:
+            "Not Connected"
+        case .cableConnected:
+            "Cable Connected"
+        case .establishingSession:
+            "Establishing Session"
+        case .authorizingPnc:
+            "Authorizing PNC"
+        case .authorizingExternal:
+            "Authorizing External"
+        case .authorized:
+            "Authorized"
+        case .chargerPreparation:
+            "Preparing to Charge"
+        case .chargingEndOk:
+            "Charging Complete"
+        case .chargingStopped:
+            "Charging Stopped"
+        case .evseMalfunction:
+            "Charging Error"
+        case .discharging:
+            "Discharging"
+        case .dischargingCompleted:
+            "Discharging Complete"
+        case .dischargingStopped:
+            "Discharging Stopped"
+        case .dischargingFault:
+            "Discharging Error"
+        case .dischargingUnavailable:
+            "Discharging Unavailable"
+        case .unknown, .UNRECOGNIZED:
+            "Unknown Status"
+        case .evseNotReady:
+            "EVSE Not Ready"
+        case .chargingEndError:
+            "Charging End Error"
+        case .authenticationFailure:
+            "Authentication Failure"
+        case .chargingPaused:
+            "Charging Paused"
+        case .authenticationPncFailure:
+            "Authentication PnC Failure"
+        case .internalHardwareFault:
+            "Internal Hardware Fault"
+        case .readyToDischarge:
+            "Ready to Discharge"
+        case .preparingDischarge:
+            "Preparing Discharge"
+        case .acInputUnderVoltage:
+            "AC Input Under Voltage"
+        case .cableLockFault:
+            "Cable Lock Fault"
+        case .cableConnectionFault:
+            "Cable Connection Fault"
+        case .tempProtection:
+            "Temp Protection"
+        case .chargingScheduled:
+            "Charging Scheuled"
         }
     }
 }
@@ -191,7 +282,9 @@ enum EnergyType: Codable, Equatable {
     case unknown // = 0
     case ac // = 1
     case dc // = 2
+    case digital // = 3
     case v2V // = 4
+    case none // = 5
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_EnergyType) {
@@ -199,7 +292,9 @@ enum EnergyType: Codable, Equatable {
         case .unknown: self = .unknown
         case .ac: self = .ac
         case .dc: self = .dc
+        case .digital: self = .digital
         case .v2V: self = .v2V
+        case .none: self = .none
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }

@@ -20,6 +20,389 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+public enum Mobilegateway_Protos_EventType: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case undefined // = 0
+  case collision // = 1
+  case breakin // = 2
+  case towing // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .undefined
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .undefined
+    case 1: self = .collision
+    case 2: self = .breakin
+    case 3: self = .towing
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .undefined: return 0
+    case .collision: return 1
+    case .breakin: return 2
+    case .towing: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_EventType] = [
+    .undefined,
+    .collision,
+    .breakin,
+    .towing,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_EventThreatLevel: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case undefined // = 0
+
+  /// light threat; someone walking by
+  case eventThreatLevel1 // = 1
+
+  /// high threat; someone tampering with the vehicle
+  case eventThreatLevel2 // = 2
+
+  /// security breach; collision, dent, or interior intrusion
+  case eventThreatLevel3 // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .undefined
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .undefined
+    case 1: self = .eventThreatLevel1
+    case 2: self = .eventThreatLevel2
+    case 3: self = .eventThreatLevel3
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .undefined: return 0
+    case .eventThreatLevel1: return 1
+    case .eventThreatLevel2: return 2
+    case .eventThreatLevel3: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_EventThreatLevel] = [
+    .undefined,
+    .eventThreatLevel1,
+    .eventThreatLevel2,
+    .eventThreatLevel3,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_MediaFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case undefined // = 0
+  case jpeg // = 1
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .undefined
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .undefined
+    case 1: self = .jpeg
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .undefined: return 0
+    case .jpeg: return 1
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_MediaFormat] = [
+    .undefined,
+    .jpeg,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_MediaSource: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case undefined // = 0
+  case frontLeftCamera // = 1
+  case frontRightCamera // = 2
+  case rearLeftCamera // = 3
+  case rearRightCamera // = 4
+  case interiorCamera // = 5
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .undefined
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .undefined
+    case 1: self = .frontLeftCamera
+    case 2: self = .frontRightCamera
+    case 3: self = .rearLeftCamera
+    case 4: self = .rearRightCamera
+    case 5: self = .interiorCamera
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .undefined: return 0
+    case .frontLeftCamera: return 1
+    case .frontRightCamera: return 2
+    case .rearLeftCamera: return 3
+    case .rearRightCamera: return 4
+    case .interiorCamera: return 5
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_MediaSource] = [
+    .undefined,
+    .frontLeftCamera,
+    .frontRightCamera,
+    .rearLeftCamera,
+    .rearRightCamera,
+    .interiorCamera,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_MediaType: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case undefined // = 0
+  case image // = 1
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .undefined
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .undefined
+    case 1: self = .image
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .undefined: return 0
+    case .image: return 1
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_MediaType] = [
+    .undefined,
+    .image,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_SentryModeState: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case sentryModeEnabled // = 1
+  case sentryModeDisabled // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .sentryModeEnabled
+    case 2: self = .sentryModeDisabled
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .sentryModeEnabled: return 1
+    case .sentryModeDisabled: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_SentryModeState] = [
+    .unknown,
+    .sentryModeEnabled,
+    .sentryModeDisabled,
+  ]
+
+}
+
+public struct Mobilegateway_Protos_EventGeoLocation: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var latitude: Double = 0
+
+  public var longitude: Double = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_MediaInfo: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var name: String = String()
+
+  public var mediaSize: UInt64 = 0
+
+  public var mediaFormat: Mobilegateway_Protos_MediaFormat = .undefined
+
+  public var mediaSource: Mobilegateway_Protos_MediaSource = .undefined
+
+  public var md5Checksum: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_Media: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var mediaInfo: Mobilegateway_Protos_MediaInfo {
+    get {return _mediaInfo ?? Mobilegateway_Protos_MediaInfo()}
+    set {_mediaInfo = newValue}
+  }
+  /// Returns true if `mediaInfo` has been explicitly set.
+  public var hasMediaInfo: Bool {return self._mediaInfo != nil}
+  /// Clears the value of `mediaInfo`. Subsequent reads from it will return its default value.
+  public mutating func clearMediaInfo() {self._mediaInfo = nil}
+
+  public var mediaType: Mobilegateway_Protos_MediaType = .undefined
+
+  public var mediaDownloadURL: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _mediaInfo: Mobilegateway_Protos_MediaInfo? = nil
+}
+
+public struct Mobilegateway_Protos_Event: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var eventID: String = String()
+
+  public var vehicleID: String = String()
+
+  public var hmiEventID: String = String()
+
+  public var primaryUserID: String = String()
+
+  public var eventGeoLocation: Mobilegateway_Protos_EventGeoLocation {
+    get {return _eventGeoLocation ?? Mobilegateway_Protos_EventGeoLocation()}
+    set {_eventGeoLocation = newValue}
+  }
+  /// Returns true if `eventGeoLocation` has been explicitly set.
+  public var hasEventGeoLocation: Bool {return self._eventGeoLocation != nil}
+  /// Clears the value of `eventGeoLocation`. Subsequent reads from it will return its default value.
+  public mutating func clearEventGeoLocation() {self._eventGeoLocation = nil}
+
+  public var eventThreatLevel: Mobilegateway_Protos_EventThreatLevel = .undefined
+
+  public var eventType: Mobilegateway_Protos_EventType = .undefined
+
+  public var recordedAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _recordedAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_recordedAt = newValue}
+  }
+  /// Returns true if `recordedAt` has been explicitly set.
+  public var hasRecordedAt: Bool {return self._recordedAt != nil}
+  /// Clears the value of `recordedAt`. Subsequent reads from it will return its default value.
+  public mutating func clearRecordedAt() {self._recordedAt = nil}
+
+  public var mediaList: [Mobilegateway_Protos_Media] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _eventGeoLocation: Mobilegateway_Protos_EventGeoLocation? = nil
+  fileprivate var _recordedAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+}
+
+public struct Mobilegateway_Protos_GetEventRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var eventID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetEventResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var event: Mobilegateway_Protos_Event {
+    get {return _event ?? Mobilegateway_Protos_Event()}
+    set {_event = newValue}
+  }
+  /// Returns true if `event` has been explicitly set.
+  public var hasEvent: Bool {return self._event != nil}
+  /// Clears the value of `event`. Subsequent reads from it will return its default value.
+  public mutating func clearEvent() {self._event = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _event: Mobilegateway_Protos_Event? = nil
+}
+
 public struct Mobilegateway_Protos_GetEventsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -27,21 +410,42 @@ public struct Mobilegateway_Protos_GetEventsRequest: Sendable {
 
   public var vehicleID: String = String()
 
-  public var a: String = String()
+  public var offset: UInt64 = 0
 
-  public var limit: UInt32 = 0
+  public var limit: UInt64 = 0
 
-  public var b: UInt32 = 0
+  public var startTimeUtc: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _startTimeUtc ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_startTimeUtc = newValue}
+  }
+  /// Returns true if `startTimeUtc` has been explicitly set.
+  public var hasStartTimeUtc: Bool {return self._startTimeUtc != nil}
+  /// Clears the value of `startTimeUtc`. Subsequent reads from it will return its default value.
+  public mutating func clearStartTimeUtc() {self._startTimeUtc = nil}
+
+  public var endTimeUtc: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _endTimeUtc ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_endTimeUtc = newValue}
+  }
+  /// Returns true if `endTimeUtc` has been explicitly set.
+  public var hasEndTimeUtc: Bool {return self._endTimeUtc != nil}
+  /// Clears the value of `endTimeUtc`. Subsequent reads from it will return its default value.
+  public mutating func clearEndTimeUtc() {self._endTimeUtc = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _startTimeUtc: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _endTimeUtc: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
 public struct Mobilegateway_Protos_GetEventsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var events: [Mobilegateway_Protos_Event] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -55,7 +459,7 @@ public struct Mobilegateway_Protos_SetSentryModeRequest: Sendable {
 
   public var vehicleID: String = String()
 
-  public var state: UInt32 = 0
+  public var state: Mobilegateway_Protos_SentryModeState = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -72,17 +476,457 @@ public struct Mobilegateway_Protos_SetSentryModeResponse: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_SetEnhancedDeterrenceRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vehicleID: String = String()
+
+  public var state: Mobilegateway_Protos_SentryModeState = .unknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetEnhancedDeterrenceResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetSentryModeAtHomeRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vehicleID: String = String()
+
+  public var state: Mobilegateway_Protos_SentryModeState = .unknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetSentryModeAtHomeResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetSentryModeAtWorkRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vehicleID: String = String()
+
+  public var state: Mobilegateway_Protos_SentryModeState = .unknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetSentryModeAtWorkResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_TurnOffSentryAlarmRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vehicleID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_TurnOffSentryAlarmResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "mobilegateway.protos"
+
+extension Mobilegateway_Protos_EventType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "EVENT_TYPE_UNDEFINED"),
+    1: .same(proto: "EVENT_TYPE_COLLISION"),
+    2: .same(proto: "EVENT_TYPE_BREAKIN"),
+    3: .same(proto: "EVENT_TYPE_TOWING"),
+  ]
+}
+
+extension Mobilegateway_Protos_EventThreatLevel: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "EVENT_THREAT_LEVEL_UNDEFINED"),
+    1: .same(proto: "EVENT_THREAT_LEVEL_1"),
+    2: .same(proto: "EVENT_THREAT_LEVEL_2"),
+    3: .same(proto: "EVENT_THREAT_LEVEL_3"),
+  ]
+}
+
+extension Mobilegateway_Protos_MediaFormat: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "MEDIA_FORMAT_UNDEFINED"),
+    1: .same(proto: "MEDIA_FORMAT_JPEG"),
+  ]
+}
+
+extension Mobilegateway_Protos_MediaSource: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "MEDIA_SOURCE_UNDEFINED"),
+    1: .same(proto: "MEDIA_SOURCE_FRONT_LEFT_CAMERA"),
+    2: .same(proto: "MEDIA_SOURCE_FRONT_RIGHT_CAMERA"),
+    3: .same(proto: "MEDIA_SOURCE_REAR_LEFT_CAMERA"),
+    4: .same(proto: "MEDIA_SOURCE_REAR_RIGHT_CAMERA"),
+    5: .same(proto: "MEDIA_SOURCE_INTERIOR_CAMERA"),
+  ]
+}
+
+extension Mobilegateway_Protos_MediaType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "MEDIA_TYPE_UNDEFINED"),
+    1: .same(proto: "MEDIA_TYPE_IMAGE"),
+  ]
+}
+
+extension Mobilegateway_Protos_SentryModeState: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "SENTRY_MODE_STATE_UNKNOWN"),
+    1: .same(proto: "SENTRY_MODE_ENABLED"),
+    2: .same(proto: "SENTRY_MODE_DISABLED"),
+  ]
+}
+
+extension Mobilegateway_Protos_EventGeoLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".EventGeoLocation"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "latitude"),
+    2: .same(proto: "longitude"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularDoubleField(value: &self.latitude) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self.longitude) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.latitude.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.latitude, fieldNumber: 1)
+    }
+    if self.longitude.bitPattern != 0 {
+      try visitor.visitSingularDoubleField(value: self.longitude, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_EventGeoLocation, rhs: Mobilegateway_Protos_EventGeoLocation) -> Bool {
+    if lhs.latitude != rhs.latitude {return false}
+    if lhs.longitude != rhs.longitude {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_MediaInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MediaInfo"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "name"),
+    2: .standard(proto: "media_size"),
+    3: .standard(proto: "media_format"),
+    4: .standard(proto: "media_source"),
+    5: .standard(proto: "md5_checksum"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.mediaSize) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self.mediaFormat) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.mediaSource) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.md5Checksum) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
+    }
+    if self.mediaSize != 0 {
+      try visitor.visitSingularUInt64Field(value: self.mediaSize, fieldNumber: 2)
+    }
+    if self.mediaFormat != .undefined {
+      try visitor.visitSingularEnumField(value: self.mediaFormat, fieldNumber: 3)
+    }
+    if self.mediaSource != .undefined {
+      try visitor.visitSingularEnumField(value: self.mediaSource, fieldNumber: 4)
+    }
+    if !self.md5Checksum.isEmpty {
+      try visitor.visitSingularStringField(value: self.md5Checksum, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_MediaInfo, rhs: Mobilegateway_Protos_MediaInfo) -> Bool {
+    if lhs.name != rhs.name {return false}
+    if lhs.mediaSize != rhs.mediaSize {return false}
+    if lhs.mediaFormat != rhs.mediaFormat {return false}
+    if lhs.mediaSource != rhs.mediaSource {return false}
+    if lhs.md5Checksum != rhs.md5Checksum {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_Media: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Media"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "media_info"),
+    2: .standard(proto: "media_type"),
+    3: .standard(proto: "media_download_url"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._mediaInfo) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.mediaType) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.mediaDownloadURL) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._mediaInfo {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.mediaType != .undefined {
+      try visitor.visitSingularEnumField(value: self.mediaType, fieldNumber: 2)
+    }
+    if !self.mediaDownloadURL.isEmpty {
+      try visitor.visitSingularStringField(value: self.mediaDownloadURL, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_Media, rhs: Mobilegateway_Protos_Media) -> Bool {
+    if lhs._mediaInfo != rhs._mediaInfo {return false}
+    if lhs.mediaType != rhs.mediaType {return false}
+    if lhs.mediaDownloadURL != rhs.mediaDownloadURL {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Event"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "event_id"),
+    2: .standard(proto: "vehicle_id"),
+    3: .standard(proto: "hmi_event_id"),
+    4: .standard(proto: "primary_user_id"),
+    5: .standard(proto: "event_geo_location"),
+    6: .standard(proto: "event_threat_level"),
+    7: .standard(proto: "event_type"),
+    8: .standard(proto: "recorded_at"),
+    9: .standard(proto: "media_list"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.eventID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.hmiEventID) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.primaryUserID) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._eventGeoLocation) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.eventThreatLevel) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.eventType) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._recordedAt) }()
+      case 9: try { try decoder.decodeRepeatedMessageField(value: &self.mediaList) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.eventID.isEmpty {
+      try visitor.visitSingularStringField(value: self.eventID, fieldNumber: 1)
+    }
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 2)
+    }
+    if !self.hmiEventID.isEmpty {
+      try visitor.visitSingularStringField(value: self.hmiEventID, fieldNumber: 3)
+    }
+    if !self.primaryUserID.isEmpty {
+      try visitor.visitSingularStringField(value: self.primaryUserID, fieldNumber: 4)
+    }
+    try { if let v = self._eventGeoLocation {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    if self.eventThreatLevel != .undefined {
+      try visitor.visitSingularEnumField(value: self.eventThreatLevel, fieldNumber: 6)
+    }
+    if self.eventType != .undefined {
+      try visitor.visitSingularEnumField(value: self.eventType, fieldNumber: 7)
+    }
+    try { if let v = self._recordedAt {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    if !self.mediaList.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.mediaList, fieldNumber: 9)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_Event, rhs: Mobilegateway_Protos_Event) -> Bool {
+    if lhs.eventID != rhs.eventID {return false}
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.hmiEventID != rhs.hmiEventID {return false}
+    if lhs.primaryUserID != rhs.primaryUserID {return false}
+    if lhs._eventGeoLocation != rhs._eventGeoLocation {return false}
+    if lhs.eventThreatLevel != rhs.eventThreatLevel {return false}
+    if lhs.eventType != rhs.eventType {return false}
+    if lhs._recordedAt != rhs._recordedAt {return false}
+    if lhs.mediaList != rhs.mediaList {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetEventRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "event_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.eventID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.eventID.isEmpty {
+      try visitor.visitSingularStringField(value: self.eventID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetEventRequest, rhs: Mobilegateway_Protos_GetEventRequest) -> Bool {
+    if lhs.eventID != rhs.eventID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetEventResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetEventResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "event"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._event) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._event {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetEventResponse, rhs: Mobilegateway_Protos_GetEventResponse) -> Bool {
+    if lhs._event != rhs._event {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
 
 extension Mobilegateway_Protos_GetEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetEventsRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "vehicle_id"),
-    2: .same(proto: "a"),
+    2: .same(proto: "offset"),
     3: .same(proto: "limit"),
-    4: .same(proto: "b"),
+    4: .standard(proto: "start_time_utc"),
+    5: .standard(proto: "end_time_utc"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -92,35 +936,44 @@ extension Mobilegateway_Protos_GetEventsRequest: SwiftProtobuf.Message, SwiftPro
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.a) }()
-      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.limit) }()
-      case 4: try { try decoder.decodeSingularUInt32Field(value: &self.b) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.offset) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.limit) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._startTimeUtc) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._endTimeUtc) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.vehicleID.isEmpty {
       try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
     }
-    if !self.a.isEmpty {
-      try visitor.visitSingularStringField(value: self.a, fieldNumber: 2)
+    if self.offset != 0 {
+      try visitor.visitSingularUInt64Field(value: self.offset, fieldNumber: 2)
     }
     if self.limit != 0 {
-      try visitor.visitSingularUInt32Field(value: self.limit, fieldNumber: 3)
+      try visitor.visitSingularUInt64Field(value: self.limit, fieldNumber: 3)
     }
-    if self.b != 0 {
-      try visitor.visitSingularUInt32Field(value: self.b, fieldNumber: 4)
-    }
+    try { if let v = self._startTimeUtc {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._endTimeUtc {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetEventsRequest, rhs: Mobilegateway_Protos_GetEventsRequest) -> Bool {
     if lhs.vehicleID != rhs.vehicleID {return false}
-    if lhs.a != rhs.a {return false}
+    if lhs.offset != rhs.offset {return false}
     if lhs.limit != rhs.limit {return false}
-    if lhs.b != rhs.b {return false}
+    if lhs._startTimeUtc != rhs._startTimeUtc {return false}
+    if lhs._endTimeUtc != rhs._endTimeUtc {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -128,18 +981,31 @@ extension Mobilegateway_Protos_GetEventsRequest: SwiftProtobuf.Message, SwiftPro
 
 extension Mobilegateway_Protos_GetEventsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetEventsResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "events"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.events) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.events.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetEventsResponse, rhs: Mobilegateway_Protos_GetEventsResponse) -> Bool {
+    if lhs.events != rhs.events {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -159,7 +1025,7 @@ extension Mobilegateway_Protos_SetSentryModeRequest: SwiftProtobuf.Message, Swif
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
-      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.state) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.state) }()
       default: break
       }
     }
@@ -169,8 +1035,8 @@ extension Mobilegateway_Protos_SetSentryModeRequest: SwiftProtobuf.Message, Swif
     if !self.vehicleID.isEmpty {
       try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
     }
-    if self.state != 0 {
-      try visitor.visitSingularUInt32Field(value: self.state, fieldNumber: 2)
+    if self.state != .unknown {
+      try visitor.visitSingularEnumField(value: self.state, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -197,6 +1063,228 @@ extension Mobilegateway_Protos_SetSentryModeResponse: SwiftProtobuf.Message, Swi
   }
 
   public static func ==(lhs: Mobilegateway_Protos_SetSentryModeResponse, rhs: Mobilegateway_Protos_SetSentryModeResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetEnhancedDeterrenceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetEnhancedDeterrenceRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "vehicle_id"),
+    2: .same(proto: "state"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.state) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
+    }
+    if self.state != .unknown {
+      try visitor.visitSingularEnumField(value: self.state, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetEnhancedDeterrenceRequest, rhs: Mobilegateway_Protos_SetEnhancedDeterrenceRequest) -> Bool {
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.state != rhs.state {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetEnhancedDeterrenceResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetEnhancedDeterrenceResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetEnhancedDeterrenceResponse, rhs: Mobilegateway_Protos_SetEnhancedDeterrenceResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetSentryModeAtHomeRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetSentryModeAtHomeRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "vehicle_id"),
+    2: .same(proto: "state"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.state) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
+    }
+    if self.state != .unknown {
+      try visitor.visitSingularEnumField(value: self.state, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetSentryModeAtHomeRequest, rhs: Mobilegateway_Protos_SetSentryModeAtHomeRequest) -> Bool {
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.state != rhs.state {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetSentryModeAtHomeResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetSentryModeAtHomeResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetSentryModeAtHomeResponse, rhs: Mobilegateway_Protos_SetSentryModeAtHomeResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetSentryModeAtWorkRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetSentryModeAtWorkRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "vehicle_id"),
+    2: .same(proto: "state"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.state) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
+    }
+    if self.state != .unknown {
+      try visitor.visitSingularEnumField(value: self.state, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetSentryModeAtWorkRequest, rhs: Mobilegateway_Protos_SetSentryModeAtWorkRequest) -> Bool {
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.state != rhs.state {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetSentryModeAtWorkResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetSentryModeAtWorkResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetSentryModeAtWorkResponse, rhs: Mobilegateway_Protos_SetSentryModeAtWorkResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_TurnOffSentryAlarmRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TurnOffSentryAlarmRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "vehicle_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vehicleID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vehicleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.vehicleID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_TurnOffSentryAlarmRequest, rhs: Mobilegateway_Protos_TurnOffSentryAlarmRequest) -> Bool {
+    if lhs.vehicleID != rhs.vehicleID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_TurnOffSentryAlarmResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TurnOffSentryAlarmResponse"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_TurnOffSentryAlarmResponse, rhs: Mobilegateway_Protos_TurnOffSentryAlarmResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

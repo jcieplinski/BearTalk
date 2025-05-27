@@ -9,7 +9,7 @@ import Foundation
 import SwiftProtobuf
 
 extension BearAPI {
-    static func mapUserProfileResponse(_ userProfile: Mobilegateway_Protos_UserProfileData) -> UserProfile {
+    static func mapUserProfileResponse(_ userProfile: Mobilegateway_Protos_UserProfile) -> UserProfile {
         return UserProfile(
             email: userProfile.email,
             locale: userProfile.locale,
@@ -24,13 +24,13 @@ extension BearAPI {
     static func mapVehicleResponse(_ vehicle: Mobilegateway_Protos_Vehicle) -> Vehicle {
         let config = VehicleConfig(
             vin: vehicle.config.vin,
-            model: LucidModel(proto: vehicle.config.model),
+            model: .gravity,
             modelVariant: ModelVariant(proto: vehicle.config.variant),
             releaseDate: nil,
             nickname: vehicle.config.nickname,
             paintColor: PaintColor(proto: vehicle.config.paintColor),
             emaId: "\(vehicle.config.emaID)",
-            wheels: Wheels(proto: vehicle.config.wheels),
+            wheels: .aether,
             easubscription: EASubscription(
                 name: vehicle.config.eaSubscription.name,
                 expirationDate: "\(vehicle.config.eaSubscription.expirationDate)",

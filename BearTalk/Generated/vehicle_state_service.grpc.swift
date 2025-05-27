@@ -10,6 +10,7 @@
 
 import GRPCCore
 import GRPCProtobuf
+import SwiftProtobuf
 
 // MARK: - mobilegateway.protos.VehicleStateService
 
@@ -67,6 +68,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
                 method: "ControlChargePort"
             )
         }
+        /// Namespace for "DoorControl" metadata.
+        public enum DoorControl {
+            /// Request type for "DoorControl".
+            public typealias Input = Mobilegateway_Protos_DoorControlRequest
+            /// Response type for "DoorControl".
+            public typealias Output = Mobilegateway_Protos_DoorControlResponse
+            /// Descriptor for "DoorControl".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "DoorControl"
+            )
+        }
         /// Namespace for "DoorLocksControl" metadata.
         public enum DoorLocksControl {
             /// Request type for "DoorLocksControl".
@@ -101,6 +114,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
                 method: "GetDocumentInfo"
+            )
+        }
+        /// Namespace for "GetOtaVersionHistory" metadata.
+        public enum GetOtaVersionHistory {
+            /// Request type for "GetOtaVersionHistory".
+            public typealias Input = Mobilegateway_Protos_GetOtaVersionHistoryRequest
+            /// Response type for "GetOtaVersionHistory".
+            public typealias Output = Mobilegateway_Protos_GetOtaVersionHistoryResponse
+            /// Descriptor for "GetOtaVersionHistory".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "GetOtaVersionHistory"
             )
         }
         /// Namespace for "GetVehicleState" metadata.
@@ -139,6 +164,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
                 method: "HvacDefrostControl"
             )
         }
+        /// Namespace for "KeylessDrivingAction" metadata.
+        public enum KeylessDrivingAction {
+            /// Request type for "KeylessDrivingAction".
+            public typealias Input = Mobilegateway_Protos_KeylessDrivingActionRequest
+            /// Response type for "KeylessDrivingAction".
+            public typealias Output = Mobilegateway_Protos_KeylessDrivingActionResponse
+            /// Descriptor for "KeylessDrivingAction".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "KeylessDrivingAction"
+            )
+        }
         /// Namespace for "LightsControl" metadata.
         public enum LightsControl {
             /// Request type for "LightsControl".
@@ -149,6 +186,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
                 method: "LightsControl"
+            )
+        }
+        /// Namespace for "PanicAlarmAction" metadata.
+        public enum PanicAlarmAction {
+            /// Request type for "PanicAlarmAction".
+            public typealias Input = Mobilegateway_Protos_PanicAlarmActionRequest
+            /// Response type for "PanicAlarmAction".
+            public typealias Output = Mobilegateway_Protos_PanicAlarmActionResponse
+            /// Descriptor for "PanicAlarmAction".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "PanicAlarmAction"
             )
         }
         /// Namespace for "RearCargoControl" metadata.
@@ -307,6 +356,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
                 method: "SetCreatureComfortMode"
             )
         }
+        /// Namespace for "UpdateChargingSchedule" metadata.
+        public enum UpdateChargingSchedule {
+            /// Request type for "UpdateChargingSchedule".
+            public typealias Input = Mobilegateway_Protos_UpdateChargingScheduleRequest
+            /// Response type for "UpdateChargingSchedule".
+            public typealias Output = Mobilegateway_Protos_UpdateChargingScheduleResponse
+            /// Descriptor for "UpdateChargingSchedule".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "UpdateChargingSchedule"
+            )
+        }
         /// Namespace for "WelcomeControl" metadata.
         public enum WelcomeControl {
             /// Request type for "WelcomeControl".
@@ -319,19 +380,71 @@ public enum Mobilegateway_Protos_VehicleStateService {
                 method: "WelcomeControl"
             )
         }
+        /// Namespace for "SetACCurrLimit" metadata.
+        public enum SetACCurrLimit {
+            /// Request type for "SetACCurrLimit".
+            public typealias Input = Mobilegateway_Protos_SetACCurrLimitRequest
+            /// Response type for "SetACCurrLimit".
+            public typealias Output = Mobilegateway_Protos_SetACCurrLimitResponse
+            /// Descriptor for "SetACCurrLimit".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "SetACCurrLimit"
+            )
+        }
+        /// Namespace for "InitiatePhoneAsKey" metadata.
+        public enum InitiatePhoneAsKey {
+            /// Request type for "InitiatePhoneAsKey".
+            public typealias Input = Mobilegateway_Protos_InitiatePhoneAsKeyRequest
+            /// Response type for "InitiatePhoneAsKey".
+            public typealias Output = Mobilegateway_Protos_InitiatePhoneAsKeyResponse
+            /// Descriptor for "InitiatePhoneAsKey".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "InitiatePhoneAsKey"
+            )
+        }
+        /// Namespace for "ReadStatusPhoneAsKey" metadata.
+        public enum ReadStatusPhoneAsKey {
+            /// Request type for "ReadStatusPhoneAsKey".
+            public typealias Input = Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest
+            /// Response type for "ReadStatusPhoneAsKey".
+            public typealias Output = Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse
+            /// Descriptor for "ReadStatusPhoneAsKey".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "ReadStatusPhoneAsKey"
+            )
+        }
+        /// Namespace for "SetScheduledOta" metadata.
+        public enum SetScheduledOta {
+            /// Request type for "SetScheduledOta".
+            public typealias Input = Mobilegateway_Protos_SetScheduledOtaRequest
+            /// Response type for "SetScheduledOta".
+            public typealias Output = Mobilegateway_Protos_SetScheduledOtaResponse
+            /// Descriptor for "SetScheduledOta".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "SetScheduledOta"
+            )
+        }
         /// Descriptors for all methods in the "mobilegateway.protos.VehicleStateService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             ApplySoftwareUpdate.descriptor,
             CancelScheduledUpdate.descriptor,
             ChargeControl.descriptor,
             ControlChargePort.descriptor,
+            DoorControl.descriptor,
             DoorLocksControl.descriptor,
             FrontCargoControl.descriptor,
             GetDocumentInfo.descriptor,
+            GetOtaVersionHistory.descriptor,
             GetVehicleState.descriptor,
             HonkHorn.descriptor,
             HvacDefrostControl.descriptor,
+            KeylessDrivingAction.descriptor,
             LightsControl.descriptor,
+            PanicAlarmAction.descriptor,
             RearCargoControl.descriptor,
             SecurityAlarmControl.descriptor,
             SetCabinTemperature.descriptor,
@@ -345,7 +458,12 @@ public enum Mobilegateway_Protos_VehicleStateService {
             SetMaxAC.descriptor,
             SteeringWheelHeater.descriptor,
             SetCreatureComfortMode.descriptor,
-            WelcomeControl.descriptor
+            UpdateChargingSchedule.descriptor,
+            WelcomeControl.descriptor,
+            SetACCurrLimit.descriptor,
+            InitiatePhoneAsKey.descriptor,
+            ReadStatusPhoneAsKey.descriptor,
+            SetScheduledOta.descriptor
         ]
     }
 }
@@ -425,6 +543,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ControlChargePortResponse>
 
+        /// Handle the "DoorControl" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_DoorControlRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_DoorControlResponse` messages.
+        func doorControl(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DoorControlRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DoorControlResponse>
+
         /// Handle the "DoorLocksControl" method.
         ///
         /// - Parameters:
@@ -466,6 +598,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetDocumentInfoRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetDocumentInfoResponse>
+
+        /// Handle the "GetOtaVersionHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetOtaVersionHistoryRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetOtaVersionHistoryResponse` messages.
+        func getOtaVersionHistory(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>
 
         /// Handle the "GetVehicleState" method.
         ///
@@ -509,6 +655,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_HvacDefrostControlResponse>
 
+        /// Handle the "KeylessDrivingAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_KeylessDrivingActionRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_KeylessDrivingActionResponse` messages.
+        func keylessDrivingAction(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>
+
         /// Handle the "LightsControl" method.
         ///
         /// - Parameters:
@@ -522,6 +682,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_LightsControlRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_LightsControlResponse>
+
+        /// Handle the "PanicAlarmAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_PanicAlarmActionRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_PanicAlarmActionResponse` messages.
+        func panicAlarmAction(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_PanicAlarmActionResponse>
 
         /// Handle the "RearCargoControl" method.
         ///
@@ -705,6 +879,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetCreatureComfortModeResponse>
 
+        /// Handle the "UpdateChargingSchedule" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_UpdateChargingScheduleRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_UpdateChargingScheduleResponse` messages.
+        func updateChargingSchedule(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>
+
         /// Handle the "WelcomeControl" method.
         ///
         /// - Parameters:
@@ -718,6 +906,62 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_WelcomeControlRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_WelcomeControlRequest>
+
+        /// Handle the "SetACCurrLimit" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetACCurrLimitRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetACCurrLimitResponse` messages.
+        func setACCurrLimit(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetACCurrLimitResponse>
+
+        /// Handle the "InitiatePhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_InitiatePhoneAsKeyResponse` messages.
+        func initiatePhoneAsKey(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>
+
+        /// Handle the "ReadStatusPhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse` messages.
+        func readStatusPhoneAsKey(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>
+
+        /// Handle the "SetScheduledOta" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_SetScheduledOtaRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_SetScheduledOtaResponse` messages.
+        func setScheduledOta(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetScheduledOtaResponse>
     }
 
     /// Service protocol for the "mobilegateway.protos.VehicleStateService" service.
@@ -784,6 +1028,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ControlChargePortResponse>
 
+        /// Handle the "DoorControl" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DoorControlRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_DoorControlResponse` message.
+        func doorControl(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_DoorControlRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DoorControlResponse>
+
         /// Handle the "DoorLocksControl" method.
         ///
         /// - Parameters:
@@ -825,6 +1083,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetDocumentInfoRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetDocumentInfoResponse>
+
+        /// Handle the "GetOtaVersionHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetOtaVersionHistoryRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetOtaVersionHistoryResponse` message.
+        func getOtaVersionHistory(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>
 
         /// Handle the "GetVehicleState" method.
         ///
@@ -868,6 +1140,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_HvacDefrostControlResponse>
 
+        /// Handle the "KeylessDrivingAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_KeylessDrivingActionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_KeylessDrivingActionResponse` message.
+        func keylessDrivingAction(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>
+
         /// Handle the "LightsControl" method.
         ///
         /// - Parameters:
@@ -881,6 +1167,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_LightsControlRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_LightsControlResponse>
+
+        /// Handle the "PanicAlarmAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_PanicAlarmActionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_PanicAlarmActionResponse` message.
+        func panicAlarmAction(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_PanicAlarmActionResponse>
 
         /// Handle the "RearCargoControl" method.
         ///
@@ -1064,6 +1364,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetCreatureComfortModeResponse>
 
+        /// Handle the "UpdateChargingSchedule" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateChargingScheduleRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_UpdateChargingScheduleResponse` message.
+        func updateChargingSchedule(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>
+
         /// Handle the "WelcomeControl" method.
         ///
         /// - Parameters:
@@ -1077,6 +1391,62 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_WelcomeControlRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_WelcomeControlRequest>
+
+        /// Handle the "SetACCurrLimit" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetACCurrLimitRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetACCurrLimitResponse` message.
+        func setACCurrLimit(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetACCurrLimitResponse>
+
+        /// Handle the "InitiatePhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_InitiatePhoneAsKeyResponse` message.
+        func initiatePhoneAsKey(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>
+
+        /// Handle the "ReadStatusPhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse` message.
+        func readStatusPhoneAsKey(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>
+
+        /// Handle the "SetScheduledOta" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetScheduledOtaRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_SetScheduledOtaResponse` message.
+        func setScheduledOta(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetScheduledOtaResponse>
     }
 
     /// Simple service protocol for the "mobilegateway.protos.VehicleStateService" service.
@@ -1141,6 +1511,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_ControlChargePortResponse
 
+        /// Handle the "DoorControl" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_DoorControlRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_DoorControlResponse` to respond with.
+        func doorControl(
+            request: Mobilegateway_Protos_DoorControlRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_DoorControlResponse
+
         /// Handle the "DoorLocksControl" method.
         ///
         /// - Parameters:
@@ -1182,6 +1566,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: Mobilegateway_Protos_GetDocumentInfoRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_GetDocumentInfoResponse
+
+        /// Handle the "GetOtaVersionHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetOtaVersionHistoryRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetOtaVersionHistoryResponse` to respond with.
+        func getOtaVersionHistory(
+            request: Mobilegateway_Protos_GetOtaVersionHistoryRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetOtaVersionHistoryResponse
 
         /// Handle the "GetVehicleState" method.
         ///
@@ -1225,6 +1623,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_HvacDefrostControlResponse
 
+        /// Handle the "KeylessDrivingAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_KeylessDrivingActionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_KeylessDrivingActionResponse` to respond with.
+        func keylessDrivingAction(
+            request: Mobilegateway_Protos_KeylessDrivingActionRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_KeylessDrivingActionResponse
+
         /// Handle the "LightsControl" method.
         ///
         /// - Parameters:
@@ -1238,6 +1650,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: Mobilegateway_Protos_LightsControlRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_LightsControlResponse
+
+        /// Handle the "PanicAlarmAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_PanicAlarmActionRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_PanicAlarmActionResponse` to respond with.
+        func panicAlarmAction(
+            request: Mobilegateway_Protos_PanicAlarmActionRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_PanicAlarmActionResponse
 
         /// Handle the "RearCargoControl" method.
         ///
@@ -1421,6 +1847,20 @@ extension Mobilegateway_Protos_VehicleStateService {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_SetCreatureComfortModeResponse
 
+        /// Handle the "UpdateChargingSchedule" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_UpdateChargingScheduleRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_UpdateChargingScheduleResponse` to respond with.
+        func updateChargingSchedule(
+            request: Mobilegateway_Protos_UpdateChargingScheduleRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_UpdateChargingScheduleResponse
+
         /// Handle the "WelcomeControl" method.
         ///
         /// - Parameters:
@@ -1434,6 +1874,62 @@ extension Mobilegateway_Protos_VehicleStateService {
             request: Mobilegateway_Protos_WelcomeControlRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_WelcomeControlRequest
+
+        /// Handle the "SetACCurrLimit" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetACCurrLimitRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetACCurrLimitResponse` to respond with.
+        func setACCurrLimit(
+            request: Mobilegateway_Protos_SetACCurrLimitRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetACCurrLimitResponse
+
+        /// Handle the "InitiatePhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_InitiatePhoneAsKeyResponse` to respond with.
+        func initiatePhoneAsKey(
+            request: Mobilegateway_Protos_InitiatePhoneAsKeyRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_InitiatePhoneAsKeyResponse
+
+        /// Handle the "ReadStatusPhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse` to respond with.
+        func readStatusPhoneAsKey(
+            request: Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse
+
+        /// Handle the "SetScheduledOta" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_SetScheduledOtaRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_SetScheduledOtaResponse` to respond with.
+        func setScheduledOta(
+            request: Mobilegateway_Protos_SetScheduledOtaRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_SetScheduledOtaResponse
     }
 }
 
@@ -1485,6 +1981,17 @@ extension Mobilegateway_Protos_VehicleStateService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.DoorControl.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DoorControlRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DoorControlResponse>(),
+            handler: { request, context in
+                try await self.doorControl(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
             forMethod: Mobilegateway_Protos_VehicleStateService.Method.DoorLocksControl.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DoorLocksControlRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DoorLocksControlResponse>(),
@@ -1512,6 +2019,17 @@ extension Mobilegateway_Protos_VehicleStateService.StreamingServiceProtocol {
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetDocumentInfoResponse>(),
             handler: { request, context in
                 try await self.getDocumentInfo(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.GetOtaVersionHistory.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetOtaVersionHistoryRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetOtaVersionHistoryResponse>(),
+            handler: { request, context in
+                try await self.getOtaVersionHistory(
                     request: request,
                     context: context
                 )
@@ -1551,11 +2069,33 @@ extension Mobilegateway_Protos_VehicleStateService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.KeylessDrivingAction.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_KeylessDrivingActionRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_KeylessDrivingActionResponse>(),
+            handler: { request, context in
+                try await self.keylessDrivingAction(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
             forMethod: Mobilegateway_Protos_VehicleStateService.Method.LightsControl.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_LightsControlRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_LightsControlResponse>(),
             handler: { request, context in
                 try await self.lightsControl(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.PanicAlarmAction.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_PanicAlarmActionRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_PanicAlarmActionResponse>(),
+            handler: { request, context in
+                try await self.panicAlarmAction(
                     request: request,
                     context: context
                 )
@@ -1705,11 +2245,66 @@ extension Mobilegateway_Protos_VehicleStateService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.UpdateChargingSchedule.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateChargingScheduleRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateChargingScheduleResponse>(),
+            handler: { request, context in
+                try await self.updateChargingSchedule(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
             forMethod: Mobilegateway_Protos_VehicleStateService.Method.WelcomeControl.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_WelcomeControlRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_WelcomeControlRequest>(),
             handler: { request, context in
                 try await self.welcomeControl(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.SetACCurrLimit.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetACCurrLimitRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetACCurrLimitResponse>(),
+            handler: { request, context in
+                try await self.setACCurrLimit(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.InitiatePhoneAsKey.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>(),
+            handler: { request, context in
+                try await self.initiatePhoneAsKey(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.ReadStatusPhoneAsKey.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>(),
+            handler: { request, context in
+                try await self.readStatusPhoneAsKey(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_VehicleStateService.Method.SetScheduledOta.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetScheduledOtaRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetScheduledOtaResponse>(),
+            handler: { request, context in
+                try await self.setScheduledOta(
                     request: request,
                     context: context
                 )
@@ -1764,6 +2359,17 @@ extension Mobilegateway_Protos_VehicleStateService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
+    public func doorControl(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DoorControlRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DoorControlResponse> {
+        let response = try await self.doorControl(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func doorLocksControl(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DoorLocksControlRequest>,
         context: GRPCCore.ServerContext
@@ -1791,6 +2397,17 @@ extension Mobilegateway_Protos_VehicleStateService.ServiceProtocol {
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetDocumentInfoResponse> {
         let response = try await self.getDocumentInfo(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func getOtaVersionHistory(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse> {
+        let response = try await self.getOtaVersionHistory(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -1830,11 +2447,33 @@ extension Mobilegateway_Protos_VehicleStateService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
+    public func keylessDrivingAction(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_KeylessDrivingActionResponse> {
+        let response = try await self.keylessDrivingAction(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func lightsControl(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_LightsControlRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_LightsControlResponse> {
         let response = try await self.lightsControl(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func panicAlarmAction(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_PanicAlarmActionResponse> {
+        let response = try await self.panicAlarmAction(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -1984,11 +2623,66 @@ extension Mobilegateway_Protos_VehicleStateService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
+    public func updateChargingSchedule(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse> {
+        let response = try await self.updateChargingSchedule(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func welcomeControl(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_WelcomeControlRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_WelcomeControlRequest> {
         let response = try await self.welcomeControl(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setACCurrLimit(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetACCurrLimitResponse> {
+        let response = try await self.setACCurrLimit(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func initiatePhoneAsKey(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse> {
+        let response = try await self.initiatePhoneAsKey(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func readStatusPhoneAsKey(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse> {
+        let response = try await self.readStatusPhoneAsKey(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func setScheduledOta(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_SetScheduledOtaResponse> {
+        let response = try await self.setScheduledOta(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -2050,6 +2744,19 @@ extension Mobilegateway_Protos_VehicleStateService.SimpleServiceProtocol {
         )
     }
 
+    public func doorControl(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_DoorControlRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DoorControlResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_DoorControlResponse>(
+            message: try await self.doorControl(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func doorLocksControl(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_DoorLocksControlRequest>,
         context: GRPCCore.ServerContext
@@ -2082,6 +2789,19 @@ extension Mobilegateway_Protos_VehicleStateService.SimpleServiceProtocol {
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetDocumentInfoResponse> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_GetDocumentInfoResponse>(
             message: try await self.getDocumentInfo(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func getOtaVersionHistory(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>(
+            message: try await self.getOtaVersionHistory(
                 request: request.message,
                 context: context
             ),
@@ -2128,12 +2848,38 @@ extension Mobilegateway_Protos_VehicleStateService.SimpleServiceProtocol {
         )
     }
 
+    public func keylessDrivingAction(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_KeylessDrivingActionResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>(
+            message: try await self.keylessDrivingAction(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func lightsControl(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_LightsControlRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_LightsControlResponse> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_LightsControlResponse>(
             message: try await self.lightsControl(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func panicAlarmAction(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_PanicAlarmActionResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_PanicAlarmActionResponse>(
+            message: try await self.panicAlarmAction(
                 request: request.message,
                 context: context
             ),
@@ -2310,12 +3056,77 @@ extension Mobilegateway_Protos_VehicleStateService.SimpleServiceProtocol {
         )
     }
 
+    public func updateChargingSchedule(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>(
+            message: try await self.updateChargingSchedule(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func welcomeControl(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_WelcomeControlRequest>,
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_WelcomeControlRequest> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_WelcomeControlRequest>(
             message: try await self.welcomeControl(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setACCurrLimit(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetACCurrLimitResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetACCurrLimitResponse>(
+            message: try await self.setACCurrLimit(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func initiatePhoneAsKey(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>(
+            message: try await self.initiatePhoneAsKey(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func readStatusPhoneAsKey(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>(
+            message: try await self.readStatusPhoneAsKey(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func setScheduledOta(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_SetScheduledOtaResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_SetScheduledOtaResponse>(
+            message: try await self.setScheduledOta(
                 request: request.message,
                 context: context
             ),
@@ -2408,6 +3219,25 @@ extension Mobilegateway_Protos_VehicleStateService {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ControlChargePortResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "DoorControl" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DoorControlRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DoorControlRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DoorControlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func doorControl<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DoorControlRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DoorControlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DoorControlResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DoorControlResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "DoorLocksControl" method.
         ///
         /// - Parameters:
@@ -2463,6 +3293,25 @@ extension Mobilegateway_Protos_VehicleStateService {
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetDocumentInfoResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetDocumentInfoResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "GetOtaVersionHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetOtaVersionHistoryRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetOtaVersionHistoryRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetOtaVersionHistoryResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getOtaVersionHistory<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetOtaVersionHistoryResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "GetVehicleState" method.
@@ -2522,6 +3371,25 @@ extension Mobilegateway_Protos_VehicleStateService {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_HvacDefrostControlResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "KeylessDrivingAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_KeylessDrivingActionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_KeylessDrivingActionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_KeylessDrivingActionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func keylessDrivingAction<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_KeylessDrivingActionResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "LightsControl" method.
         ///
         /// - Parameters:
@@ -2539,6 +3407,25 @@ extension Mobilegateway_Protos_VehicleStateService {
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_LightsControlResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_LightsControlResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "PanicAlarmAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_PanicAlarmActionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_PanicAlarmActionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_PanicAlarmActionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func panicAlarmAction<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_PanicAlarmActionResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_PanicAlarmActionResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "RearCargoControl" method.
@@ -2788,6 +3675,25 @@ extension Mobilegateway_Protos_VehicleStateService {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetCreatureComfortModeResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "UpdateChargingSchedule" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateChargingScheduleRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateChargingScheduleRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateChargingScheduleResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func updateChargingSchedule<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateChargingScheduleResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "WelcomeControl" method.
         ///
         /// - Parameters:
@@ -2805,6 +3711,82 @@ extension Mobilegateway_Protos_VehicleStateService {
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_WelcomeControlRequest>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_WelcomeControlRequest>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetACCurrLimit" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetACCurrLimitRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetACCurrLimitRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetACCurrLimitResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setACCurrLimit<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetACCurrLimitResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetACCurrLimitResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "InitiatePhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_InitiatePhoneAsKeyResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func initiatePhoneAsKey<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "ReadStatusPhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func readStatusPhoneAsKey<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SetScheduledOta" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetScheduledOtaRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetScheduledOtaRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetScheduledOtaResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func setScheduledOta<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetScheduledOtaResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetScheduledOtaResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -2944,6 +3926,36 @@ extension Mobilegateway_Protos_VehicleStateService {
             )
         }
 
+        /// Call the "DoorControl" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DoorControlRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DoorControlRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DoorControlResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func doorControl<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DoorControlRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DoorControlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DoorControlResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DoorControlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.DoorControl.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "DoorLocksControl" method.
         ///
         /// - Parameters:
@@ -3027,6 +4039,36 @@ extension Mobilegateway_Protos_VehicleStateService {
             try await self.client.unary(
                 request: request,
                 descriptor: Mobilegateway_Protos_VehicleStateService.Method.GetDocumentInfo.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "GetOtaVersionHistory" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetOtaVersionHistoryRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetOtaVersionHistoryRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetOtaVersionHistoryResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getOtaVersionHistory<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetOtaVersionHistoryResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.GetOtaVersionHistory.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -3124,6 +4166,36 @@ extension Mobilegateway_Protos_VehicleStateService {
             )
         }
 
+        /// Call the "KeylessDrivingAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_KeylessDrivingActionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_KeylessDrivingActionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_KeylessDrivingActionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func keylessDrivingAction<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_KeylessDrivingActionResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.KeylessDrivingAction.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "LightsControl" method.
         ///
         /// - Parameters:
@@ -3147,6 +4219,36 @@ extension Mobilegateway_Protos_VehicleStateService {
             try await self.client.unary(
                 request: request,
                 descriptor: Mobilegateway_Protos_VehicleStateService.Method.LightsControl.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "PanicAlarmAction" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_PanicAlarmActionRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_PanicAlarmActionRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_PanicAlarmActionResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func panicAlarmAction<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_PanicAlarmActionRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_PanicAlarmActionResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_PanicAlarmActionResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.PanicAlarmAction.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -3544,6 +4646,36 @@ extension Mobilegateway_Protos_VehicleStateService {
             )
         }
 
+        /// Call the "UpdateChargingSchedule" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_UpdateChargingScheduleRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_UpdateChargingScheduleRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_UpdateChargingScheduleResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func updateChargingSchedule<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_UpdateChargingScheduleResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.UpdateChargingSchedule.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "WelcomeControl" method.
         ///
         /// - Parameters:
@@ -3567,6 +4699,126 @@ extension Mobilegateway_Protos_VehicleStateService {
             try await self.client.unary(
                 request: request,
                 descriptor: Mobilegateway_Protos_VehicleStateService.Method.WelcomeControl.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetACCurrLimit" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetACCurrLimitRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetACCurrLimitRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetACCurrLimitResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setACCurrLimit<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetACCurrLimitRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetACCurrLimitResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetACCurrLimitResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.SetACCurrLimit.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "InitiatePhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_InitiatePhoneAsKeyResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func initiatePhoneAsKey<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.InitiatePhoneAsKey.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "ReadStatusPhoneAsKey" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func readStatusPhoneAsKey<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.ReadStatusPhoneAsKey.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "SetScheduledOta" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_SetScheduledOtaRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_SetScheduledOtaRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_SetScheduledOtaResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func setScheduledOta<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_SetScheduledOtaRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_SetScheduledOtaResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetScheduledOtaResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.SetScheduledOta.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -3678,6 +4930,31 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "DoorControl" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_DoorControlRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func doorControl<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_DoorControlRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DoorControlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.doorControl(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DoorControlRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DoorControlResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "DoorLocksControl" method.
     ///
     /// - Parameters:
@@ -3748,6 +5025,31 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetDocumentInfoRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetDocumentInfoResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetOtaVersionHistory" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetOtaVersionHistoryRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getOtaVersionHistory<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getOtaVersionHistory(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetOtaVersionHistoryRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetOtaVersionHistoryResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -3828,6 +5130,31 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "KeylessDrivingAction" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_KeylessDrivingActionRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func keylessDrivingAction<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.keylessDrivingAction(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_KeylessDrivingActionRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_KeylessDrivingActionResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "LightsControl" method.
     ///
     /// - Parameters:
@@ -3848,6 +5175,31 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_LightsControlRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_LightsControlResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "PanicAlarmAction" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_PanicAlarmActionRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func panicAlarmAction<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_PanicAlarmActionRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_PanicAlarmActionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.panicAlarmAction(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_PanicAlarmActionRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_PanicAlarmActionResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -4178,6 +5530,31 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "UpdateChargingSchedule" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_UpdateChargingScheduleRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateChargingSchedule<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.updateChargingSchedule(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_UpdateChargingScheduleRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_UpdateChargingScheduleResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "WelcomeControl" method.
     ///
     /// - Parameters:
@@ -4198,6 +5575,106 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_WelcomeControlRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_WelcomeControlRequest>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetACCurrLimit" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetACCurrLimitRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setACCurrLimit<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetACCurrLimitRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetACCurrLimitResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setACCurrLimit(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetACCurrLimitRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetACCurrLimitResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "InitiatePhoneAsKey" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_InitiatePhoneAsKeyRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func initiatePhoneAsKey<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.initiatePhoneAsKey(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "ReadStatusPhoneAsKey" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func readStatusPhoneAsKey<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.readStatusPhoneAsKey(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetScheduledOta" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_SetScheduledOtaRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setScheduledOta<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_SetScheduledOtaRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetScheduledOtaResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.setScheduledOta(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_SetScheduledOtaRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_SetScheduledOtaResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -4322,6 +5799,35 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "DoorControl" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func doorControl<Result>(
+        _ message: Mobilegateway_Protos_DoorControlRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DoorControlResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_DoorControlRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.doorControl(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "DoorLocksControl" method.
     ///
     /// - Parameters:
@@ -4403,6 +5909,35 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             metadata: metadata
         )
         return try await self.getDocumentInfo(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetOtaVersionHistory" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getOtaVersionHistory<Result>(
+        _ message: Mobilegateway_Protos_GetOtaVersionHistoryRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetOtaVersionHistoryResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetOtaVersionHistoryRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getOtaVersionHistory(
             request: request,
             options: options,
             onResponse: handleResponse
@@ -4496,6 +6031,35 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "KeylessDrivingAction" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func keylessDrivingAction<Result>(
+        _ message: Mobilegateway_Protos_KeylessDrivingActionRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_KeylessDrivingActionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_KeylessDrivingActionRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.keylessDrivingAction(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "LightsControl" method.
     ///
     /// - Parameters:
@@ -4519,6 +6083,35 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             metadata: metadata
         )
         return try await self.lightsControl(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "PanicAlarmAction" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func panicAlarmAction<Result>(
+        _ message: Mobilegateway_Protos_PanicAlarmActionRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_PanicAlarmActionResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_PanicAlarmActionRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.panicAlarmAction(
             request: request,
             options: options,
             onResponse: handleResponse
@@ -4902,6 +6495,35 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
         )
     }
 
+    /// Call the "UpdateChargingSchedule" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func updateChargingSchedule<Result>(
+        _ message: Mobilegateway_Protos_UpdateChargingScheduleRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_UpdateChargingScheduleResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_UpdateChargingScheduleRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.updateChargingSchedule(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "WelcomeControl" method.
     ///
     /// - Parameters:
@@ -4925,6 +6547,122 @@ extension Mobilegateway_Protos_VehicleStateService.ClientProtocol {
             metadata: metadata
         )
         return try await self.welcomeControl(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetACCurrLimit" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setACCurrLimit<Result>(
+        _ message: Mobilegateway_Protos_SetACCurrLimitRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetACCurrLimitResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetACCurrLimitRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setACCurrLimit(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "InitiatePhoneAsKey" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func initiatePhoneAsKey<Result>(
+        _ message: Mobilegateway_Protos_InitiatePhoneAsKeyRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_InitiatePhoneAsKeyResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_InitiatePhoneAsKeyRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.initiatePhoneAsKey(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "ReadStatusPhoneAsKey" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func readStatusPhoneAsKey<Result>(
+        _ message: Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_ReadStatusPhoneAsKeyResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_ReadStatusPhoneAsKeyRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.readStatusPhoneAsKey(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SetScheduledOta" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func setScheduledOta<Result>(
+        _ message: Mobilegateway_Protos_SetScheduledOtaRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_SetScheduledOtaResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_SetScheduledOtaRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.setScheduledOta(
             request: request,
             options: options,
             onResponse: handleResponse

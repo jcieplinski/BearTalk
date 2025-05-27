@@ -20,49 +20,12 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-public struct Mobilegateway_Protos_UserProfile: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var email: String = String()
-
-  public var locale: String {
-    get {return _locale ?? String()}
-    set {_locale = newValue}
-  }
-  /// Returns true if `locale` has been explicitly set.
-  public var hasLocale: Bool {return self._locale != nil}
-  /// Clears the value of `locale`. Subsequent reads from it will return its default value.
-  public mutating func clearLocale() {self._locale = nil}
-
-  public var username: String = String()
-
-  public var photoURL: String {
-    get {return _photoURL ?? String()}
-    set {_photoURL = newValue}
-  }
-  /// Returns true if `photoURL` has been explicitly set.
-  public var hasPhotoURL: Bool {return self._photoURL != nil}
-  /// Clears the value of `photoURL`. Subsequent reads from it will return its default value.
-  public mutating func clearPhotoURL() {self._photoURL = nil}
-
-  public var firstName: String = String()
-
-  public var lastName: String = String()
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-
-  fileprivate var _locale: String? = nil
-  fileprivate var _photoURL: String? = nil
-}
-
 public struct Mobilegateway_Protos_PhoneNumber: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var type: String = String()
 
   public var number: String = String()
 
@@ -71,7 +34,7 @@ public struct Mobilegateway_Protos_PhoneNumber: Sendable {
   public init() {}
 }
 
-public struct Mobilegateway_Protos_UserProfileData: Sendable {
+public struct Mobilegateway_Protos_UserProfile: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -103,41 +66,15 @@ public struct Mobilegateway_Protos_UserProfileData: Sendable {
 
   public var country: String = String()
 
-  public var phone: Mobilegateway_Protos_PhoneNumber {
-    get {return _phone ?? Mobilegateway_Protos_PhoneNumber()}
-    set {_phone = newValue}
-  }
-  /// Returns true if `phone` has been explicitly set.
-  public var hasPhone: Bool {return self._phone != nil}
-  /// Clears the value of `phone`. Subsequent reads from it will return its default value.
-  public mutating func clearPhone() {self._phone = nil}
+  public var phones: [Mobilegateway_Protos_PhoneNumber] = []
+
+  public var preferredName: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _photoURL: String? = nil
-  fileprivate var _phone: Mobilegateway_Protos_PhoneNumber? = nil
-}
-
-public struct Mobilegateway_Protos_SetUserProfileRequest: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
-public struct Mobilegateway_Protos_SetUserProfileResponse: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
 }
 
 public struct Mobilegateway_Protos_GetUserProfileRequest: Sendable {
@@ -155,8 +92,8 @@ public struct Mobilegateway_Protos_GetUserProfileResponse: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var profile: Mobilegateway_Protos_UserProfileData {
-    get {return _profile ?? Mobilegateway_Protos_UserProfileData()}
+  public var profile: Mobilegateway_Protos_UserProfile {
+    get {return _profile ?? Mobilegateway_Protos_UserProfile()}
     set {_profile = newValue}
   }
   /// Returns true if `profile` has been explicitly set.
@@ -168,7 +105,42 @@ public struct Mobilegateway_Protos_GetUserProfileResponse: Sendable {
 
   public init() {}
 
-  fileprivate var _profile: Mobilegateway_Protos_UserProfileData? = nil
+  fileprivate var _profile: Mobilegateway_Protos_UserProfile? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserProfileRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var firstName: String = String()
+
+  public var lastName: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_SetUserProfileResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var profile: Mobilegateway_Protos_UserProfile {
+    get {return _profile ?? Mobilegateway_Protos_UserProfile()}
+    set {_profile = newValue}
+  }
+  /// Returns true if `profile` has been explicitly set.
+  public var hasProfile: Bool {return self._profile != nil}
+  /// Clears the value of `profile`. Subsequent reads from it will return its default value.
+  public mutating func clearProfile() {self._profile = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _profile: Mobilegateway_Protos_UserProfile? = nil
 }
 
 public struct Mobilegateway_Protos_UploadUserProfilePhotoRequest: Sendable {
@@ -219,75 +191,10 @@ public struct Mobilegateway_Protos_ReferralHistoryApiResponse: Sendable {
 
 fileprivate let _protobuf_package = "mobilegateway.protos"
 
-extension Mobilegateway_Protos_UserProfile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserProfile"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "email"),
-    2: .same(proto: "locale"),
-    3: .same(proto: "username"),
-    4: .standard(proto: "photo_url"),
-    5: .standard(proto: "first_name"),
-    6: .standard(proto: "last_name"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.email) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self._locale) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.username) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._photoURL) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.firstName) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.email.isEmpty {
-      try visitor.visitSingularStringField(value: self.email, fieldNumber: 1)
-    }
-    try { if let v = self._locale {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
-    } }()
-    if !self.username.isEmpty {
-      try visitor.visitSingularStringField(value: self.username, fieldNumber: 3)
-    }
-    try { if let v = self._photoURL {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-    } }()
-    if !self.firstName.isEmpty {
-      try visitor.visitSingularStringField(value: self.firstName, fieldNumber: 5)
-    }
-    if !self.lastName.isEmpty {
-      try visitor.visitSingularStringField(value: self.lastName, fieldNumber: 6)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_UserProfile, rhs: Mobilegateway_Protos_UserProfile) -> Bool {
-    if lhs.email != rhs.email {return false}
-    if lhs._locale != rhs._locale {return false}
-    if lhs.username != rhs.username {return false}
-    if lhs._photoURL != rhs._photoURL {return false}
-    if lhs.firstName != rhs.firstName {return false}
-    if lhs.lastName != rhs.lastName {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
 extension Mobilegateway_Protos_PhoneNumber: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PhoneNumber"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "type"),
     2: .same(proto: "number"),
   ]
 
@@ -297,6 +204,7 @@ extension Mobilegateway_Protos_PhoneNumber: SwiftProtobuf.Message, SwiftProtobuf
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.type) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.number) }()
       default: break
       }
@@ -304,6 +212,9 @@ extension Mobilegateway_Protos_PhoneNumber: SwiftProtobuf.Message, SwiftProtobuf
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.type.isEmpty {
+      try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
+    }
     if !self.number.isEmpty {
       try visitor.visitSingularStringField(value: self.number, fieldNumber: 2)
     }
@@ -311,14 +222,15 @@ extension Mobilegateway_Protos_PhoneNumber: SwiftProtobuf.Message, SwiftProtobuf
   }
 
   public static func ==(lhs: Mobilegateway_Protos_PhoneNumber, rhs: Mobilegateway_Protos_PhoneNumber) -> Bool {
+    if lhs.type != rhs.type {return false}
     if lhs.number != rhs.number {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserProfileData"
+extension Mobilegateway_Protos_UserProfile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UserProfile"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "first_name"),
     2: .standard(proto: "last_name"),
@@ -330,7 +242,8 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     8: .same(proto: "state"),
     9: .standard(proto: "postal_code"),
     10: .same(proto: "country"),
-    11: .same(proto: "phone"),
+    11: .same(proto: "phones"),
+    12: .standard(proto: "preferred_name"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -349,7 +262,8 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
       case 8: try { try decoder.decodeSingularStringField(value: &self.state) }()
       case 9: try { try decoder.decodeSingularStringField(value: &self.postalCode) }()
       case 10: try { try decoder.decodeSingularStringField(value: &self.country) }()
-      case 11: try { try decoder.decodeSingularMessageField(value: &self._phone) }()
+      case 11: try { try decoder.decodeRepeatedMessageField(value: &self.phones) }()
+      case 12: try { try decoder.decodeSingularStringField(value: &self.preferredName) }()
       default: break
       }
     }
@@ -390,13 +304,16 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     if !self.country.isEmpty {
       try visitor.visitSingularStringField(value: self.country, fieldNumber: 10)
     }
-    try { if let v = self._phone {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
-    } }()
+    if !self.phones.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.phones, fieldNumber: 11)
+    }
+    if !self.preferredName.isEmpty {
+      try visitor.visitSingularStringField(value: self.preferredName, fieldNumber: 12)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_UserProfileData, rhs: Mobilegateway_Protos_UserProfileData) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_UserProfile, rhs: Mobilegateway_Protos_UserProfile) -> Bool {
     if lhs.firstName != rhs.firstName {return false}
     if lhs.lastName != rhs.lastName {return false}
     if lhs.email != rhs.email {return false}
@@ -407,45 +324,8 @@ extension Mobilegateway_Protos_UserProfileData: SwiftProtobuf.Message, SwiftProt
     if lhs.state != rhs.state {return false}
     if lhs.postalCode != rhs.postalCode {return false}
     if lhs.country != rhs.country {return false}
-    if lhs._phone != rhs._phone {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Mobilegateway_Protos_SetUserProfileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetUserProfileRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_SetUserProfileRequest, rhs: Mobilegateway_Protos_SetUserProfileRequest) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Mobilegateway_Protos_SetUserProfileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetUserProfileResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Mobilegateway_Protos_SetUserProfileResponse, rhs: Mobilegateway_Protos_SetUserProfileResponse) -> Bool {
+    if lhs.phones != rhs.phones {return false}
+    if lhs.preferredName != rhs.preferredName {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -500,6 +380,80 @@ extension Mobilegateway_Protos_GetUserProfileResponse: SwiftProtobuf.Message, Sw
   }
 
   public static func ==(lhs: Mobilegateway_Protos_GetUserProfileResponse, rhs: Mobilegateway_Protos_GetUserProfileResponse) -> Bool {
+    if lhs._profile != rhs._profile {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserProfileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserProfileRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "first_name"),
+    2: .standard(proto: "last_name"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.firstName) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.firstName.isEmpty {
+      try visitor.visitSingularStringField(value: self.firstName, fieldNumber: 1)
+    }
+    if !self.lastName.isEmpty {
+      try visitor.visitSingularStringField(value: self.lastName, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserProfileRequest, rhs: Mobilegateway_Protos_SetUserProfileRequest) -> Bool {
+    if lhs.firstName != rhs.firstName {return false}
+    if lhs.lastName != rhs.lastName {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserProfileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserProfileResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "profile"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._profile) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._profile {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserProfileResponse, rhs: Mobilegateway_Protos_SetUserProfileResponse) -> Bool {
     if lhs._profile != rhs._profile {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

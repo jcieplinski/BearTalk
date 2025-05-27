@@ -58,16 +58,16 @@ struct ChassisState: Codable, Equatable {
 }
 
 enum LightState: Codable, Equatable {
-    case reallyUnknown // = 0
-    case off // = 1
+    case unknown // = 0
+    case flash // = 1
     case on // = 2
-    case unknown // = 3
+    case off // = 3
+    case hazardOn // = 4
+    case hazardOff // = 5
     case UNRECOGNIZED(Int)
     
-    init(proto: Mobilegateway_Protos_LightState) {
+    init(proto: Mobilegateway_Protos_LightAction) {
         switch proto {
-        case .reallyUnknown:
-            self = .reallyUnknown
         case .off:
             self = .off
         case .on:
@@ -76,6 +76,12 @@ enum LightState: Codable, Equatable {
             self = .unknown
         case .UNRECOGNIZED(let int):
             self = .UNRECOGNIZED(int)
+        case .flash:
+            self = .flash
+        case .hazardOn:
+            self = .hazardOn
+        case .hazardOff:
+            self = .hazardOff
         }
     }
 }

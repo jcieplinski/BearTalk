@@ -91,6 +91,18 @@ public enum Mobilegateway_Protos_ChargingService {
                 method: "RegisterRFID"
             )
         }
+        /// Namespace for "DeleteRFID" metadata.
+        public enum DeleteRFID {
+            /// Request type for "DeleteRFID".
+            public typealias Input = Mobilegateway_Protos_DeleteRFIDRequest
+            /// Response type for "DeleteRFID".
+            public typealias Output = Mobilegateway_Protos_DeleteRFIDResponse
+            /// Descriptor for "DeleteRFID".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.ChargingService"),
+                method: "DeleteRFID"
+            )
+        }
         /// Namespace for "StartSession" metadata.
         public enum StartSession {
             /// Request type for "StartSession".
@@ -115,6 +127,30 @@ public enum Mobilegateway_Protos_ChargingService {
                 method: "StopSession"
             )
         }
+        /// Namespace for "GetChargingAccountInfo" metadata.
+        public enum GetChargingAccountInfo {
+            /// Request type for "GetChargingAccountInfo".
+            public typealias Input = Mobilegateway_Protos_GetChargingAccountInfoRequest
+            /// Response type for "GetChargingAccountInfo".
+            public typealias Output = Mobilegateway_Protos_GetChargingAccountInfoResponse
+            /// Descriptor for "GetChargingAccountInfo".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.ChargingService"),
+                method: "GetChargingAccountInfo"
+            )
+        }
+        /// Namespace for "GetChargingAccountInfoV2" metadata.
+        public enum GetChargingAccountInfoV2 {
+            /// Request type for "GetChargingAccountInfoV2".
+            public typealias Input = Mobilegateway_Protos_GetChargingAccountInfoRequest
+            /// Response type for "GetChargingAccountInfoV2".
+            public typealias Output = Mobilegateway_Protos_GetChargingAccountInfoV2Response
+            /// Descriptor for "GetChargingAccountInfoV2".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.ChargingService"),
+                method: "GetChargingAccountInfoV2"
+            )
+        }
         /// Descriptors for all methods in the "mobilegateway.protos.ChargingService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             GetCdr.descriptor,
@@ -123,8 +159,11 @@ public enum Mobilegateway_Protos_ChargingService {
             GetLocationsByRadius.descriptor,
             GetTariff.descriptor,
             RegisterRFID.descriptor,
+            DeleteRFID.descriptor,
             StartSession.descriptor,
-            StopSession.descriptor
+            StopSession.descriptor,
+            GetChargingAccountInfo.descriptor,
+            GetChargingAccountInfoV2.descriptor
         ]
     }
 }
@@ -232,6 +271,20 @@ extension Mobilegateway_Protos_ChargingService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_RegisterRFIDResponse>
 
+        /// Handle the "DeleteRFID" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_DeleteRFIDRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_DeleteRFIDResponse` messages.
+        func deleteRFID(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DeleteRFIDResponse>
+
         /// Handle the "StartSession" method.
         ///
         /// - Parameters:
@@ -259,6 +312,34 @@ extension Mobilegateway_Protos_ChargingService {
             request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_StopSessionRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_StopSessionResponse>
+
+        /// Handle the "GetChargingAccountInfo" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetChargingAccountInfoResponse` messages.
+        func getChargingAccountInfo(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>
+
+        /// Handle the "GetChargingAccountInfoV2" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Mobilegateway_Protos_GetChargingAccountInfoV2Response` messages.
+        func getChargingAccountInfoV2(
+            request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>
     }
 
     /// Service protocol for the "mobilegateway.protos.ChargingService" service.
@@ -353,6 +434,20 @@ extension Mobilegateway_Protos_ChargingService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_RegisterRFIDResponse>
 
+        /// Handle the "DeleteRFID" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeleteRFIDRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_DeleteRFIDResponse` message.
+        func deleteRFID(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DeleteRFIDResponse>
+
         /// Handle the "StartSession" method.
         ///
         /// - Parameters:
@@ -380,6 +475,34 @@ extension Mobilegateway_Protos_ChargingService {
             request: GRPCCore.ServerRequest<Mobilegateway_Protos_StopSessionRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_StopSessionResponse>
+
+        /// Handle the "GetChargingAccountInfo" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetChargingAccountInfoResponse` message.
+        func getChargingAccountInfo(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>
+
+        /// Handle the "GetChargingAccountInfoV2" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A response containing a single `Mobilegateway_Protos_GetChargingAccountInfoV2Response` message.
+        func getChargingAccountInfoV2(
+            request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>
     }
 
     /// Simple service protocol for the "mobilegateway.protos.ChargingService" service.
@@ -472,6 +595,20 @@ extension Mobilegateway_Protos_ChargingService {
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_RegisterRFIDResponse
 
+        /// Handle the "DeleteRFID" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_DeleteRFIDRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_DeleteRFIDResponse` to respond with.
+        func deleteRFID(
+            request: Mobilegateway_Protos_DeleteRFIDRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_DeleteRFIDResponse
+
         /// Handle the "StartSession" method.
         ///
         /// - Parameters:
@@ -499,6 +636,34 @@ extension Mobilegateway_Protos_ChargingService {
             request: Mobilegateway_Protos_StopSessionRequest,
             context: GRPCCore.ServerContext
         ) async throws -> Mobilegateway_Protos_StopSessionResponse
+
+        /// Handle the "GetChargingAccountInfo" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetChargingAccountInfoResponse` to respond with.
+        func getChargingAccountInfo(
+            request: Mobilegateway_Protos_GetChargingAccountInfoRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetChargingAccountInfoResponse
+
+        /// Handle the "GetChargingAccountInfoV2" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A `Mobilegateway_Protos_GetChargingAccountInfoV2Response` to respond with.
+        func getChargingAccountInfoV2(
+            request: Mobilegateway_Protos_GetChargingAccountInfoRequest,
+            context: GRPCCore.ServerContext
+        ) async throws -> Mobilegateway_Protos_GetChargingAccountInfoV2Response
     }
 }
 
@@ -572,6 +737,17 @@ extension Mobilegateway_Protos_ChargingService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
+            forMethod: Mobilegateway_Protos_ChargingService.Method.DeleteRFID.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DeleteRFIDRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DeleteRFIDResponse>(),
+            handler: { request, context in
+                try await self.deleteRFID(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
             forMethod: Mobilegateway_Protos_ChargingService.Method.StartSession.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_StartSessionRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_StartSessionResponse>(),
@@ -588,6 +764,28 @@ extension Mobilegateway_Protos_ChargingService.StreamingServiceProtocol {
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_StopSessionResponse>(),
             handler: { request, context in
                 try await self.stopSession(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_ChargingService.Method.GetChargingAccountInfo.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetChargingAccountInfoResponse>(),
+            handler: { request, context in
+                try await self.getChargingAccountInfo(
+                    request: request,
+                    context: context
+                )
+            }
+        )
+        router.registerHandler(
+            forMethod: Mobilegateway_Protos_ChargingService.Method.GetChargingAccountInfoV2.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetChargingAccountInfoV2Response>(),
+            handler: { request, context in
+                try await self.getChargingAccountInfoV2(
                     request: request,
                     context: context
                 )
@@ -664,6 +862,17 @@ extension Mobilegateway_Protos_ChargingService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
+    public func deleteRFID(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_DeleteRFIDResponse> {
+        let response = try await self.deleteRFID(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
     public func startSession(
         request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_StartSessionRequest>,
         context: GRPCCore.ServerContext
@@ -680,6 +889,28 @@ extension Mobilegateway_Protos_ChargingService.ServiceProtocol {
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_StopSessionResponse> {
         let response = try await self.stopSession(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func getChargingAccountInfo(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse> {
+        let response = try await self.getChargingAccountInfo(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return GRPCCore.StreamingServerResponse(single: response)
+    }
+
+    public func getChargingAccountInfoV2(
+        request: GRPCCore.StreamingServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response> {
+        let response = try await self.getChargingAccountInfoV2(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -767,6 +998,19 @@ extension Mobilegateway_Protos_ChargingService.SimpleServiceProtocol {
         )
     }
 
+    public func deleteRFID(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_DeleteRFIDResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_DeleteRFIDResponse>(
+            message: try await self.deleteRFID(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
     public func startSession(
         request: GRPCCore.ServerRequest<Mobilegateway_Protos_StartSessionRequest>,
         context: GRPCCore.ServerContext
@@ -786,6 +1030,32 @@ extension Mobilegateway_Protos_ChargingService.SimpleServiceProtocol {
     ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_StopSessionResponse> {
         return GRPCCore.ServerResponse<Mobilegateway_Protos_StopSessionResponse>(
             message: try await self.stopSession(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func getChargingAccountInfo(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>(
+            message: try await self.getChargingAccountInfo(
+                request: request.message,
+                context: context
+            ),
+            metadata: [:]
+        )
+    }
+
+    public func getChargingAccountInfoV2(
+        request: GRPCCore.ServerRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response> {
+        return GRPCCore.ServerResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>(
+            message: try await self.getChargingAccountInfoV2(
                 request: request.message,
                 context: context
             ),
@@ -916,6 +1186,25 @@ extension Mobilegateway_Protos_ChargingService {
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RegisterRFIDResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
+        /// Call the "DeleteRFID" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeleteRFIDRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DeleteRFIDRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DeleteRFIDResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func deleteRFID<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DeleteRFIDRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DeleteRFIDResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeleteRFIDResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
         /// Call the "StartSession" method.
         ///
         /// - Parameters:
@@ -952,6 +1241,44 @@ extension Mobilegateway_Protos_ChargingService {
             deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_StopSessionResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_StopSessionResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "GetChargingAccountInfo" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetChargingAccountInfoResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getChargingAccountInfo<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetChargingAccountInfoResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "GetChargingAccountInfoV2" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetChargingAccountInfoV2Response` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func getChargingAccountInfoV2<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetChargingAccountInfoV2Response>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -1151,6 +1478,36 @@ extension Mobilegateway_Protos_ChargingService {
             )
         }
 
+        /// Call the "DeleteRFID" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_DeleteRFIDRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_DeleteRFIDRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_DeleteRFIDResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func deleteRFID<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_DeleteRFIDRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_DeleteRFIDResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeleteRFIDResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_ChargingService.Method.DeleteRFID.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "StartSession" method.
         ///
         /// - Parameters:
@@ -1204,6 +1561,66 @@ extension Mobilegateway_Protos_ChargingService {
             try await self.client.unary(
                 request: request,
                 descriptor: Mobilegateway_Protos_ChargingService.Method.StopSession.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "GetChargingAccountInfo" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetChargingAccountInfoResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getChargingAccountInfo<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetChargingAccountInfoResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_ChargingService.Method.GetChargingAccountInfo.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "GetChargingAccountInfoV2" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+        ///   - serializer: A serializer for `Mobilegateway_Protos_GetChargingAccountInfoRequest` messages.
+        ///   - deserializer: A deserializer for `Mobilegateway_Protos_GetChargingAccountInfoV2Response` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func getChargingAccountInfoV2<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_GetChargingAccountInfoV2Response>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_ChargingService.Method.GetChargingAccountInfoV2.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -1365,6 +1782,31 @@ extension Mobilegateway_Protos_ChargingService.ClientProtocol {
         )
     }
 
+    /// Call the "DeleteRFID" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_DeleteRFIDRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deleteRFID<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_DeleteRFIDRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeleteRFIDResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.deleteRFID(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_DeleteRFIDRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_DeleteRFIDResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "StartSession" method.
     ///
     /// - Parameters:
@@ -1410,6 +1852,56 @@ extension Mobilegateway_Protos_ChargingService.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_StopSessionRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_StopSessionResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetChargingAccountInfo" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getChargingAccountInfo<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getChargingAccountInfo(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetChargingAccountInfoResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetChargingAccountInfoV2" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Mobilegateway_Protos_GetChargingAccountInfoRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getChargingAccountInfoV2<Result>(
+        request: GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.getChargingAccountInfoV2(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_GetChargingAccountInfoRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_GetChargingAccountInfoV2Response>(),
             options: options,
             onResponse: handleResponse
         )
@@ -1592,6 +2084,35 @@ extension Mobilegateway_Protos_ChargingService.ClientProtocol {
         )
     }
 
+    /// Call the "DeleteRFID" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deleteRFID<Result>(
+        _ message: Mobilegateway_Protos_DeleteRFIDRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_DeleteRFIDResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_DeleteRFIDRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.deleteRFID(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "StartSession" method.
     ///
     /// - Parameters:
@@ -1644,6 +2165,64 @@ extension Mobilegateway_Protos_ChargingService.ClientProtocol {
             metadata: metadata
         )
         return try await self.stopSession(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetChargingAccountInfo" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getChargingAccountInfo<Result>(
+        _ message: Mobilegateway_Protos_GetChargingAccountInfoRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getChargingAccountInfo(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "GetChargingAccountInfoV2" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func getChargingAccountInfoV2<Result>(
+        _ message: Mobilegateway_Protos_GetChargingAccountInfoRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_GetChargingAccountInfoV2Response>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Mobilegateway_Protos_GetChargingAccountInfoRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.getChargingAccountInfoV2(
             request: request,
             options: options,
             onResponse: handleResponse

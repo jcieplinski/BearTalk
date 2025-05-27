@@ -8,6 +8,7 @@
 // For information on using the generated types, please see the documentation:
 //   https://github.com/apple/swift-protobuf/
 
+import Foundation
 import SwiftProtobuf
 
 // If the compiler emits an error on this type, it is because this file
@@ -20,6 +21,504 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+public enum Mobilegateway_Protos_VinAccessType: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case primary // = 1
+  case secondary // = 2
+  case none // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .primary
+    case 2: self = .secondary
+    case 3: self = .none
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .primary: return 1
+    case .secondary: return 2
+    case .none: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_VinAccessType] = [
+    .unknown,
+    .primary,
+    .secondary,
+    .none,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_Theme: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case day // = 1
+  case night // = 2
+  case solitude // = 3
+  case serene // = 4
+  case escape // = 5
+  case space // = 6
+  case sapphire // = 7
+  case inspire // = 8
+  case wonder // = 9
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .day
+    case 2: self = .night
+    case 3: self = .solitude
+    case 4: self = .serene
+    case 5: self = .escape
+    case 6: self = .space
+    case 7: self = .sapphire
+    case 8: self = .inspire
+    case 9: self = .wonder
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .day: return 1
+    case .night: return 2
+    case .solitude: return 3
+    case .serene: return 4
+    case .escape: return 5
+    case .space: return 6
+    case .sapphire: return 7
+    case .inspire: return 8
+    case .wonder: return 9
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_Theme] = [
+    .unknown,
+    .day,
+    .night,
+    .solitude,
+    .serene,
+    .escape,
+    .space,
+    .sapphire,
+    .inspire,
+    .wonder,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_BluetoothState: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case on // = 1
+  case off // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .on
+    case 2: self = .off
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .on: return 1
+    case .off: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_BluetoothState] = [
+    .unknown,
+    .on,
+    .off,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_TemperatureUnits: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case fahrenheit // = 1
+  case celsius // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .fahrenheit
+    case 2: self = .celsius
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .fahrenheit: return 1
+    case .celsius: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_TemperatureUnits] = [
+    .unknown,
+    .fahrenheit,
+    .celsius,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_TimeFormat: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case twelveHour // = 1
+  case twentyFourHour // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .twelveHour
+    case 2: self = .twentyFourHour
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .twelveHour: return 1
+    case .twentyFourHour: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_TimeFormat] = [
+    .unknown,
+    .twelveHour,
+    .twentyFourHour,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_SystemLanguage: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case enUs // = 1
+  case enCa // = 2
+
+  /// TODO Get the list of 8
+  case todoLanguages // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .enUs
+    case 2: self = .enCa
+    case 3: self = .todoLanguages
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .enUs: return 1
+    case .enCa: return 2
+    case .todoLanguages: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_SystemLanguage] = [
+    .unknown,
+    .enUs,
+    .enCa,
+    .todoLanguages,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_BatteryUnits: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case distance // = 1
+  case percentage // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .distance
+    case 2: self = .percentage
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .distance: return 1
+    case .percentage: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_BatteryUnits] = [
+    .unknown,
+    .distance,
+    .percentage,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_TirePressureUnits: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case psi // = 1
+  case kilopascal // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .psi
+    case 2: self = .kilopascal
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .psi: return 1
+    case .kilopascal: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_TirePressureUnits] = [
+    .unknown,
+    .psi,
+    .kilopascal,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_DistanceUnits: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case miles // = 1
+  case kilometers // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .miles
+    case 2: self = .kilometers
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .miles: return 1
+    case .kilometers: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_DistanceUnits] = [
+    .unknown,
+    .miles,
+    .kilometers,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_HeightSetting: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case level1 // = 1
+  case level2 // = 2
+  case level3 // = 3
+  case level4 // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .level1
+    case 2: self = .level2
+    case 3: self = .level3
+    case 4: self = .level4
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .level1: return 1
+    case .level2: return 2
+    case .level3: return 3
+    case .level4: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_HeightSetting] = [
+    .unknown,
+    .level1,
+    .level2,
+    .level3,
+    .level4,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_EasyEntrySetting: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case seatsOnly // = 1
+  case seatsAndSteering // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .seatsOnly
+    case 2: self = .seatsAndSteering
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .seatsOnly: return 1
+    case .seatsAndSteering: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_EasyEntrySetting] = [
+    .unknown,
+    .seatsOnly,
+    .seatsAndSteering,
+  ]
+
+}
+
+public enum Mobilegateway_Protos_EasyEntryRideHeight: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case lowest // = 1
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .lowest
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .lowest: return 1
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_EasyEntryRideHeight] = [
+    .unknown,
+    .lowest,
+  ]
+
+}
+
 public struct Mobilegateway_Protos_Empty: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -30,24 +529,248 @@ public struct Mobilegateway_Protos_Empty: Sendable {
   public init() {}
 }
 
-public struct Mobilegateway_Protos_UserPreferences: Sendable {
+public struct Mobilegateway_Protos_MobileKeyPairing: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var firstName: String = String()
+  public var deviceType: Int32 = 0
 
-  public var lastName: String = String()
-
-  public var photoURL: String = String()
-
-  public var updatedNs: UInt64 = 0
-
-  public var email: String = String()
+  public var deviceID: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+}
+
+public struct Mobilegateway_Protos_KeyFobLinking: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var deviceType: Int32 = 0
+
+  public var deviceID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_PreferencesManagement: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var keyAssignment: Bool = false
+
+  public var keyReassignment: Bool = false
+
+  public var keyUnassignment: Bool = false
+
+  public var removePreferences: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_BluetoothDevice: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var deviceID: String = String()
+
+  public var macAddress: String = String()
+
+  public var pairingPriorityPhoneFunctions: Int32 = 0
+
+  public var pairingPriorityAudioFunctions: Int32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_DataSharing: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var dataSharing: Bool = false
+
+  public var vehiclePrivacyPolicy: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_VinPreferences: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var accessType: Mobilegateway_Protos_VinAccessType = .unknown
+
+  public var mobileKeyPairing: Mobilegateway_Protos_MobileKeyPairing {
+    get {return _mobileKeyPairing ?? Mobilegateway_Protos_MobileKeyPairing()}
+    set {_mobileKeyPairing = newValue}
+  }
+  /// Returns true if `mobileKeyPairing` has been explicitly set.
+  public var hasMobileKeyPairing: Bool {return self._mobileKeyPairing != nil}
+  /// Clears the value of `mobileKeyPairing`. Subsequent reads from it will return its default value.
+  public mutating func clearMobileKeyPairing() {self._mobileKeyPairing = nil}
+
+  public var keyFobLinking: Mobilegateway_Protos_KeyFobLinking {
+    get {return _keyFobLinking ?? Mobilegateway_Protos_KeyFobLinking()}
+    set {_keyFobLinking = newValue}
+  }
+  /// Returns true if `keyFobLinking` has been explicitly set.
+  public var hasKeyFobLinking: Bool {return self._keyFobLinking != nil}
+  /// Clears the value of `keyFobLinking`. Subsequent reads from it will return its default value.
+  public mutating func clearKeyFobLinking() {self._keyFobLinking = nil}
+
+  public var preferencesManagement: Mobilegateway_Protos_PreferencesManagement {
+    get {return _preferencesManagement ?? Mobilegateway_Protos_PreferencesManagement()}
+    set {_preferencesManagement = newValue}
+  }
+  /// Returns true if `preferencesManagement` has been explicitly set.
+  public var hasPreferencesManagement: Bool {return self._preferencesManagement != nil}
+  /// Clears the value of `preferencesManagement`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferencesManagement() {self._preferencesManagement = nil}
+
+  public var theme: Mobilegateway_Protos_Theme = .unknown
+
+  public var otaTriggerAndScheduling: Bool = false
+
+  public var faceID: Data = Data()
+
+  public var bluetoothState: Mobilegateway_Protos_BluetoothState = .unknown
+
+  public var bluetoothSavedDevices: [Mobilegateway_Protos_BluetoothDevice] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _mobileKeyPairing: Mobilegateway_Protos_MobileKeyPairing? = nil
+  fileprivate var _keyFobLinking: Mobilegateway_Protos_KeyFobLinking? = nil
+  fileprivate var _preferencesManagement: Mobilegateway_Protos_PreferencesManagement? = nil
+}
+
+public struct Mobilegateway_Protos_UserPreferences: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var firstName: String {
+    get {return _storage._firstName}
+    set {_uniqueStorage()._firstName = newValue}
+  }
+
+  public var lastName: String {
+    get {return _storage._lastName}
+    set {_uniqueStorage()._lastName = newValue}
+  }
+
+  public var nickname: String {
+    get {return _storage._nickname}
+    set {_uniqueStorage()._nickname = newValue}
+  }
+
+  public var photoURL: String {
+    get {return _storage._photoURL}
+    set {_uniqueStorage()._photoURL = newValue}
+  }
+
+  public var vinPreferences: [Mobilegateway_Protos_VinPreferences] {
+    get {return _storage._vinPreferences}
+    set {_uniqueStorage()._vinPreferences = newValue}
+  }
+
+  public var pin: Int32 {
+    get {return _storage._pin}
+    set {_uniqueStorage()._pin = newValue}
+  }
+
+  public var pinToSwitchToggle: Data {
+    get {return _storage._pinToSwitchToggle}
+    set {_uniqueStorage()._pinToSwitchToggle = newValue}
+  }
+
+  public var temperatureUnits: Mobilegateway_Protos_TemperatureUnits {
+    get {return _storage._temperatureUnits}
+    set {_uniqueStorage()._temperatureUnits = newValue}
+  }
+
+  public var timeFormat: Mobilegateway_Protos_TimeFormat {
+    get {return _storage._timeFormat}
+    set {_uniqueStorage()._timeFormat = newValue}
+  }
+
+  public var systemLanguage: Mobilegateway_Protos_SystemLanguage {
+    get {return _storage._systemLanguage}
+    set {_uniqueStorage()._systemLanguage = newValue}
+  }
+
+  public var batteryUnits: Mobilegateway_Protos_BatteryUnits {
+    get {return _storage._batteryUnits}
+    set {_uniqueStorage()._batteryUnits = newValue}
+  }
+
+  public var tirePressureUnits: Mobilegateway_Protos_TirePressureUnits {
+    get {return _storage._tirePressureUnits}
+    set {_uniqueStorage()._tirePressureUnits = newValue}
+  }
+
+  public var distanceUnits: Mobilegateway_Protos_DistanceUnits {
+    get {return _storage._distanceUnits}
+    set {_uniqueStorage()._distanceUnits = newValue}
+  }
+
+  public var dataSharing: Mobilegateway_Protos_DataSharing {
+    get {return _storage._dataSharing ?? Mobilegateway_Protos_DataSharing()}
+    set {_uniqueStorage()._dataSharing = newValue}
+  }
+  /// Returns true if `dataSharing` has been explicitly set.
+  public var hasDataSharing: Bool {return _storage._dataSharing != nil}
+  /// Clears the value of `dataSharing`. Subsequent reads from it will return its default value.
+  public mutating func clearDataSharing() {_uniqueStorage()._dataSharing = nil}
+
+  public var homeAddress: String {
+    get {return _storage._homeAddress}
+    set {_uniqueStorage()._homeAddress = newValue}
+  }
+
+  public var workAddress: String {
+    get {return _storage._workAddress}
+    set {_uniqueStorage()._workAddress = newValue}
+  }
+
+  public var updatedNs: UInt64 {
+    get {return _storage._updatedNs}
+    set {_uniqueStorage()._updatedNs = newValue}
+  }
+
+  public var vehicleModelPreferences: [Mobilegateway_Protos_VehicleModelPreferences] {
+    get {return _storage._vehicleModelPreferences}
+    set {_uniqueStorage()._vehicleModelPreferences = newValue}
+  }
+
+  public var email: String {
+    get {return _storage._email}
+    set {_uniqueStorage()._email = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct Mobilegateway_Protos_GetUserPreferencesResponse: Sendable {
@@ -106,9 +829,439 @@ public struct Mobilegateway_Protos_GetUserPreferencesCommitIDResponse: Sendable 
   public init() {}
 }
 
+public struct Mobilegateway_Protos_SetUserPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_UserPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_UserPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var prevCommitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_UserPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CreateUserVinPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VinPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VinPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VinPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_CreateUserVinPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetUserVinPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetUserVinPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VinPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VinPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VinPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserVinPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VinPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VinPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var prevCommitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VinPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserVinPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_AudioSettings: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var lucidUiSounds: Bool = false
+
+  public var dynamicVolume: Bool = false
+
+  public var speedCompensation: Bool = false
+
+  public var avas: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_VehicleModelPreferences: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var model: String = String()
+
+  public var heightSetting: Mobilegateway_Protos_HeightSetting = .unknown
+
+  public var passiveLock: Bool = false
+
+  public var passiveUnlock: Bool = false
+
+  public var easyEntry: Bool = false
+
+  public var easyEntrySetting: Mobilegateway_Protos_EasyEntrySetting = .unknown
+
+  public var easyEntryRideHeight: Mobilegateway_Protos_EasyEntryRideHeight = .unknown
+
+  public var screenBrightness: Int32 = 0
+
+  public var audioSettings: Mobilegateway_Protos_AudioSettings {
+    get {return _audioSettings ?? Mobilegateway_Protos_AudioSettings()}
+    set {_audioSettings = newValue}
+  }
+  /// Returns true if `audioSettings` has been explicitly set.
+  public var hasAudioSettings: Bool {return self._audioSettings != nil}
+  /// Clears the value of `audioSettings`. Subsequent reads from it will return its default value.
+  public mutating func clearAudioSettings() {self._audioSettings = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _audioSettings: Mobilegateway_Protos_AudioSettings? = nil
+}
+
+public struct Mobilegateway_Protos_CreateUserModelPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VehicleModelPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VehicleModelPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VehicleModelPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_CreateUserModelPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetUserModelPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var model: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetUserModelPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VehicleModelPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VehicleModelPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VehicleModelPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserModelPreferencesRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var preferences: Mobilegateway_Protos_VehicleModelPreferences {
+    get {return _preferences ?? Mobilegateway_Protos_VehicleModelPreferences()}
+    set {_preferences = newValue}
+  }
+  /// Returns true if `preferences` has been explicitly set.
+  public var hasPreferences: Bool {return self._preferences != nil}
+  /// Clears the value of `preferences`. Subsequent reads from it will return its default value.
+  public mutating func clearPreferences() {self._preferences = nil}
+
+  public var prevCommitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _preferences: Mobilegateway_Protos_VehicleModelPreferences? = nil
+}
+
+public struct Mobilegateway_Protos_SetUserModelPreferencesResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var commitID: UInt64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_InviteSecondaryOwnerRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var inviteEmail: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_RemoveSecondaryOwnerRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var secondaryUserID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "mobilegateway.protos"
+
+extension Mobilegateway_Protos_VinAccessType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "VIN_ACCESS_TYPE_UNKNOWN"),
+    1: .same(proto: "VIN_ACCESS_TYPE_PRIMARY"),
+    2: .same(proto: "VIN_ACCESS_TYPE_SECONDARY"),
+    3: .same(proto: "VIN_ACCESS_TYPE_NONE"),
+  ]
+}
+
+extension Mobilegateway_Protos_Theme: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "THEME_UNKNOWN"),
+    1: .same(proto: "THEME_DAY"),
+    2: .same(proto: "THEME_NIGHT"),
+    3: .same(proto: "THEME_SOLITUDE"),
+    4: .same(proto: "THEME_SERENE"),
+    5: .same(proto: "THEME_ESCAPE"),
+    6: .same(proto: "THEME_SPACE"),
+    7: .same(proto: "THEME_SAPPHIRE"),
+    8: .same(proto: "THEME_INSPIRE"),
+    9: .same(proto: "THEME_WONDER"),
+  ]
+}
+
+extension Mobilegateway_Protos_BluetoothState: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "BLUETOOTH_STATE_UNKNOWN"),
+    1: .same(proto: "BLUETOOTH_STATE_ON"),
+    2: .same(proto: "BLUETOOTH_STATE_OFF"),
+  ]
+}
+
+extension Mobilegateway_Protos_TemperatureUnits: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "TEMPERATURE_UNITS_UNKNOWN"),
+    1: .same(proto: "TEMPERATURE_UNITS_FAHRENHEIT"),
+    2: .same(proto: "TEMPERATURE_UNITS_CELSIUS"),
+  ]
+}
+
+extension Mobilegateway_Protos_TimeFormat: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "TIME_FORMAT_UNKNOWN"),
+    1: .same(proto: "TIME_FORMAT_TWELVE_HOUR"),
+    2: .same(proto: "TIME_FORMAT_TWENTY_FOUR_HOUR"),
+  ]
+}
+
+extension Mobilegateway_Protos_SystemLanguage: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "SYSTEM_LANGUAGE_UNKNOWN"),
+    1: .same(proto: "SYSTEM_LANGUAGE_EN_US"),
+    2: .same(proto: "SYSTEM_LANGUAGE_EN_CA"),
+    3: .same(proto: "SYSTEM_LANGUAGE_TODO_LANGUAGES"),
+  ]
+}
+
+extension Mobilegateway_Protos_BatteryUnits: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "BATTERY_UNITS_UNKNOWN"),
+    1: .same(proto: "BATTERY_UNITS_DISTANCE"),
+    2: .same(proto: "BATTERY_UNITS_PERCENTAGE"),
+  ]
+}
+
+extension Mobilegateway_Protos_TirePressureUnits: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "TIRE_PRESSURE_UNITS_UNKNOWN"),
+    1: .same(proto: "TIRE_PRESSURE_UNITS_PSI"),
+    2: .same(proto: "TIRE_PRESSURE_UNITS_KILOPASCAL"),
+  ]
+}
+
+extension Mobilegateway_Protos_DistanceUnits: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "DISTANCE_UNITS_UNKNOWN"),
+    1: .same(proto: "DISTANCE_UNITS_MILES"),
+    2: .same(proto: "DISTANCE_UNITS_KILOMETERS"),
+  ]
+}
+
+extension Mobilegateway_Protos_HeightSetting: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "HEIGHT_SETTING_UNKNOWN"),
+    1: .same(proto: "HEIGHT_SETTING_LEVEL_1"),
+    2: .same(proto: "HEIGHT_SETTING_LEVEL_2"),
+    3: .same(proto: "HEIGHT_SETTING_LEVEL_3"),
+    4: .same(proto: "HEIGHT_SETTING_LEVEL_4"),
+  ]
+}
+
+extension Mobilegateway_Protos_EasyEntrySetting: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "EASY_ENTRY_SETTING_UNKNOWN"),
+    1: .same(proto: "EASY_ENTRY_SETTING_SEATS_ONLY"),
+    2: .same(proto: "EASY_ENTRY_SETTING_SEATS_AND_STEERING"),
+  ]
+}
+
+extension Mobilegateway_Protos_EasyEntryRideHeight: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "EASY_ENTRY_RIDE_HEIGHT_UNKNOWN"),
+    1: .same(proto: "EASY_ENTRY_RIDE_HEIGHT_LOWEST"),
+  ]
+}
 
 extension Mobilegateway_Protos_Empty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Empty"
@@ -129,14 +1282,11 @@ extension Mobilegateway_Protos_Empty: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Mobilegateway_Protos_UserPreferences: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserPreferences"
+extension Mobilegateway_Protos_MobileKeyPairing: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MobileKeyPairing"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "first_name"),
-    2: .standard(proto: "last_name"),
-    4: .standard(proto: "photo_url"),
-    18: .standard(proto: "updated_ns"),
-    19: .same(proto: "email"),
+    1: .standard(proto: "device_type"),
+    2: .standard(proto: "device_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -145,41 +1295,512 @@ extension Mobilegateway_Protos_UserPreferences: SwiftProtobuf.Message, SwiftProt
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.firstName) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.photoURL) }()
-      case 18: try { try decoder.decodeSingularUInt64Field(value: &self.updatedNs) }()
-      case 19: try { try decoder.decodeSingularStringField(value: &self.email) }()
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.deviceType) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.deviceID) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.firstName.isEmpty {
-      try visitor.visitSingularStringField(value: self.firstName, fieldNumber: 1)
+    if self.deviceType != 0 {
+      try visitor.visitSingularInt32Field(value: self.deviceType, fieldNumber: 1)
     }
-    if !self.lastName.isEmpty {
-      try visitor.visitSingularStringField(value: self.lastName, fieldNumber: 2)
+    if !self.deviceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.deviceID, fieldNumber: 2)
     }
-    if !self.photoURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.photoURL, fieldNumber: 4)
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_MobileKeyPairing, rhs: Mobilegateway_Protos_MobileKeyPairing) -> Bool {
+    if lhs.deviceType != rhs.deviceType {return false}
+    if lhs.deviceID != rhs.deviceID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_KeyFobLinking: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KeyFobLinking"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "device_type"),
+    2: .same(proto: "deviceId"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.deviceType) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.deviceID) }()
+      default: break
+      }
     }
-    if self.updatedNs != 0 {
-      try visitor.visitSingularUInt64Field(value: self.updatedNs, fieldNumber: 18)
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.deviceType != 0 {
+      try visitor.visitSingularInt32Field(value: self.deviceType, fieldNumber: 1)
     }
-    if !self.email.isEmpty {
-      try visitor.visitSingularStringField(value: self.email, fieldNumber: 19)
+    if !self.deviceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.deviceID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_KeyFobLinking, rhs: Mobilegateway_Protos_KeyFobLinking) -> Bool {
+    if lhs.deviceType != rhs.deviceType {return false}
+    if lhs.deviceID != rhs.deviceID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_PreferencesManagement: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PreferencesManagement"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "key_assignment"),
+    2: .standard(proto: "key_reassignment"),
+    3: .standard(proto: "key_unassignment"),
+    4: .standard(proto: "remove_preferences"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.keyAssignment) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.keyReassignment) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.keyUnassignment) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.removePreferences) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.keyAssignment != false {
+      try visitor.visitSingularBoolField(value: self.keyAssignment, fieldNumber: 1)
+    }
+    if self.keyReassignment != false {
+      try visitor.visitSingularBoolField(value: self.keyReassignment, fieldNumber: 2)
+    }
+    if self.keyUnassignment != false {
+      try visitor.visitSingularBoolField(value: self.keyUnassignment, fieldNumber: 3)
+    }
+    if self.removePreferences != false {
+      try visitor.visitSingularBoolField(value: self.removePreferences, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_PreferencesManagement, rhs: Mobilegateway_Protos_PreferencesManagement) -> Bool {
+    if lhs.keyAssignment != rhs.keyAssignment {return false}
+    if lhs.keyReassignment != rhs.keyReassignment {return false}
+    if lhs.keyUnassignment != rhs.keyUnassignment {return false}
+    if lhs.removePreferences != rhs.removePreferences {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_BluetoothDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".BluetoothDevice"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "device_id"),
+    2: .standard(proto: "mac_address"),
+    3: .standard(proto: "pairing_priority_phone_functions"),
+    4: .standard(proto: "pairing_priority_audio_functions"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.deviceID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.macAddress) }()
+      case 3: try { try decoder.decodeSingularInt32Field(value: &self.pairingPriorityPhoneFunctions) }()
+      case 4: try { try decoder.decodeSingularInt32Field(value: &self.pairingPriorityAudioFunctions) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.deviceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.deviceID, fieldNumber: 1)
+    }
+    if !self.macAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.macAddress, fieldNumber: 2)
+    }
+    if self.pairingPriorityPhoneFunctions != 0 {
+      try visitor.visitSingularInt32Field(value: self.pairingPriorityPhoneFunctions, fieldNumber: 3)
+    }
+    if self.pairingPriorityAudioFunctions != 0 {
+      try visitor.visitSingularInt32Field(value: self.pairingPriorityAudioFunctions, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_BluetoothDevice, rhs: Mobilegateway_Protos_BluetoothDevice) -> Bool {
+    if lhs.deviceID != rhs.deviceID {return false}
+    if lhs.macAddress != rhs.macAddress {return false}
+    if lhs.pairingPriorityPhoneFunctions != rhs.pairingPriorityPhoneFunctions {return false}
+    if lhs.pairingPriorityAudioFunctions != rhs.pairingPriorityAudioFunctions {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_DataSharing: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DataSharing"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "data_sharing"),
+    2: .standard(proto: "vehicle_privacy_policy"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.dataSharing) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.vehiclePrivacyPolicy) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.dataSharing != false {
+      try visitor.visitSingularBoolField(value: self.dataSharing, fieldNumber: 1)
+    }
+    if self.vehiclePrivacyPolicy != false {
+      try visitor.visitSingularBoolField(value: self.vehiclePrivacyPolicy, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_DataSharing, rhs: Mobilegateway_Protos_DataSharing) -> Bool {
+    if lhs.dataSharing != rhs.dataSharing {return false}
+    if lhs.vehiclePrivacyPolicy != rhs.vehiclePrivacyPolicy {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_VinPreferences: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".VinPreferences"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+    2: .standard(proto: "access_type"),
+    3: .standard(proto: "mobile_key_pairing"),
+    4: .standard(proto: "key_fob_linking"),
+    5: .standard(proto: "preferences_management"),
+    6: .same(proto: "theme"),
+    7: .standard(proto: "ota_trigger_and_scheduling"),
+    8: .standard(proto: "face_id"),
+    9: .standard(proto: "bluetooth_state"),
+    10: .standard(proto: "bluetooth_saved_devices"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.accessType) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._mobileKeyPairing) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._keyFobLinking) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._preferencesManagement) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
+      case 7: try { try decoder.decodeSingularBoolField(value: &self.otaTriggerAndScheduling) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.faceID) }()
+      case 9: try { try decoder.decodeSingularEnumField(value: &self.bluetoothState) }()
+      case 10: try { try decoder.decodeRepeatedMessageField(value: &self.bluetoothSavedDevices) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    if self.accessType != .unknown {
+      try visitor.visitSingularEnumField(value: self.accessType, fieldNumber: 2)
+    }
+    try { if let v = self._mobileKeyPairing {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._keyFobLinking {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._preferencesManagement {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    if self.theme != .unknown {
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 6)
+    }
+    if self.otaTriggerAndScheduling != false {
+      try visitor.visitSingularBoolField(value: self.otaTriggerAndScheduling, fieldNumber: 7)
+    }
+    if !self.faceID.isEmpty {
+      try visitor.visitSingularBytesField(value: self.faceID, fieldNumber: 8)
+    }
+    if self.bluetoothState != .unknown {
+      try visitor.visitSingularEnumField(value: self.bluetoothState, fieldNumber: 9)
+    }
+    if !self.bluetoothSavedDevices.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.bluetoothSavedDevices, fieldNumber: 10)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_VinPreferences, rhs: Mobilegateway_Protos_VinPreferences) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.accessType != rhs.accessType {return false}
+    if lhs._mobileKeyPairing != rhs._mobileKeyPairing {return false}
+    if lhs._keyFobLinking != rhs._keyFobLinking {return false}
+    if lhs._preferencesManagement != rhs._preferencesManagement {return false}
+    if lhs.theme != rhs.theme {return false}
+    if lhs.otaTriggerAndScheduling != rhs.otaTriggerAndScheduling {return false}
+    if lhs.faceID != rhs.faceID {return false}
+    if lhs.bluetoothState != rhs.bluetoothState {return false}
+    if lhs.bluetoothSavedDevices != rhs.bluetoothSavedDevices {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UserPreferences: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UserPreferences"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "first_name"),
+    2: .standard(proto: "last_name"),
+    3: .same(proto: "nickname"),
+    4: .standard(proto: "photo_url"),
+    5: .standard(proto: "vin_preferences"),
+    6: .same(proto: "pin"),
+    7: .standard(proto: "pin_to_switch_toggle"),
+    8: .standard(proto: "temperature_units"),
+    9: .standard(proto: "time_format"),
+    10: .standard(proto: "system_language"),
+    11: .standard(proto: "battery_units"),
+    12: .standard(proto: "tire_pressure_units"),
+    13: .standard(proto: "distance_units"),
+    14: .standard(proto: "data_sharing"),
+    15: .standard(proto: "home_address"),
+    16: .standard(proto: "work_address"),
+    18: .standard(proto: "updated_ns"),
+    17: .standard(proto: "vehicle_model_preferences"),
+    19: .same(proto: "email"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _firstName: String = String()
+    var _lastName: String = String()
+    var _nickname: String = String()
+    var _photoURL: String = String()
+    var _vinPreferences: [Mobilegateway_Protos_VinPreferences] = []
+    var _pin: Int32 = 0
+    var _pinToSwitchToggle: Data = Data()
+    var _temperatureUnits: Mobilegateway_Protos_TemperatureUnits = .unknown
+    var _timeFormat: Mobilegateway_Protos_TimeFormat = .unknown
+    var _systemLanguage: Mobilegateway_Protos_SystemLanguage = .unknown
+    var _batteryUnits: Mobilegateway_Protos_BatteryUnits = .unknown
+    var _tirePressureUnits: Mobilegateway_Protos_TirePressureUnits = .unknown
+    var _distanceUnits: Mobilegateway_Protos_DistanceUnits = .unknown
+    var _dataSharing: Mobilegateway_Protos_DataSharing? = nil
+    var _homeAddress: String = String()
+    var _workAddress: String = String()
+    var _updatedNs: UInt64 = 0
+    var _vehicleModelPreferences: [Mobilegateway_Protos_VehicleModelPreferences] = []
+    var _email: String = String()
+
+    #if swift(>=5.10)
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _firstName = source._firstName
+      _lastName = source._lastName
+      _nickname = source._nickname
+      _photoURL = source._photoURL
+      _vinPreferences = source._vinPreferences
+      _pin = source._pin
+      _pinToSwitchToggle = source._pinToSwitchToggle
+      _temperatureUnits = source._temperatureUnits
+      _timeFormat = source._timeFormat
+      _systemLanguage = source._systemLanguage
+      _batteryUnits = source._batteryUnits
+      _tirePressureUnits = source._tirePressureUnits
+      _distanceUnits = source._distanceUnits
+      _dataSharing = source._dataSharing
+      _homeAddress = source._homeAddress
+      _workAddress = source._workAddress
+      _updatedNs = source._updatedNs
+      _vehicleModelPreferences = source._vehicleModelPreferences
+      _email = source._email
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._firstName) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._lastName) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._nickname) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._photoURL) }()
+        case 5: try { try decoder.decodeRepeatedMessageField(value: &_storage._vinPreferences) }()
+        case 6: try { try decoder.decodeSingularInt32Field(value: &_storage._pin) }()
+        case 7: try { try decoder.decodeSingularBytesField(value: &_storage._pinToSwitchToggle) }()
+        case 8: try { try decoder.decodeSingularEnumField(value: &_storage._temperatureUnits) }()
+        case 9: try { try decoder.decodeSingularEnumField(value: &_storage._timeFormat) }()
+        case 10: try { try decoder.decodeSingularEnumField(value: &_storage._systemLanguage) }()
+        case 11: try { try decoder.decodeSingularEnumField(value: &_storage._batteryUnits) }()
+        case 12: try { try decoder.decodeSingularEnumField(value: &_storage._tirePressureUnits) }()
+        case 13: try { try decoder.decodeSingularEnumField(value: &_storage._distanceUnits) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._dataSharing) }()
+        case 15: try { try decoder.decodeSingularStringField(value: &_storage._homeAddress) }()
+        case 16: try { try decoder.decodeSingularStringField(value: &_storage._workAddress) }()
+        case 17: try { try decoder.decodeRepeatedMessageField(value: &_storage._vehicleModelPreferences) }()
+        case 18: try { try decoder.decodeSingularUInt64Field(value: &_storage._updatedNs) }()
+        case 19: try { try decoder.decodeSingularStringField(value: &_storage._email) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._firstName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._firstName, fieldNumber: 1)
+      }
+      if !_storage._lastName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._lastName, fieldNumber: 2)
+      }
+      if !_storage._nickname.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nickname, fieldNumber: 3)
+      }
+      if !_storage._photoURL.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._photoURL, fieldNumber: 4)
+      }
+      if !_storage._vinPreferences.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._vinPreferences, fieldNumber: 5)
+      }
+      if _storage._pin != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._pin, fieldNumber: 6)
+      }
+      if !_storage._pinToSwitchToggle.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._pinToSwitchToggle, fieldNumber: 7)
+      }
+      if _storage._temperatureUnits != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._temperatureUnits, fieldNumber: 8)
+      }
+      if _storage._timeFormat != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._timeFormat, fieldNumber: 9)
+      }
+      if _storage._systemLanguage != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._systemLanguage, fieldNumber: 10)
+      }
+      if _storage._batteryUnits != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._batteryUnits, fieldNumber: 11)
+      }
+      if _storage._tirePressureUnits != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._tirePressureUnits, fieldNumber: 12)
+      }
+      if _storage._distanceUnits != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._distanceUnits, fieldNumber: 13)
+      }
+      try { if let v = _storage._dataSharing {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      if !_storage._homeAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._homeAddress, fieldNumber: 15)
+      }
+      if !_storage._workAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._workAddress, fieldNumber: 16)
+      }
+      if !_storage._vehicleModelPreferences.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._vehicleModelPreferences, fieldNumber: 17)
+      }
+      if _storage._updatedNs != 0 {
+        try visitor.visitSingularUInt64Field(value: _storage._updatedNs, fieldNumber: 18)
+      }
+      if !_storage._email.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._email, fieldNumber: 19)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Mobilegateway_Protos_UserPreferences, rhs: Mobilegateway_Protos_UserPreferences) -> Bool {
-    if lhs.firstName != rhs.firstName {return false}
-    if lhs.lastName != rhs.lastName {return false}
-    if lhs.photoURL != rhs.photoURL {return false}
-    if lhs.updatedNs != rhs.updatedNs {return false}
-    if lhs.email != rhs.email {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._firstName != rhs_storage._firstName {return false}
+        if _storage._lastName != rhs_storage._lastName {return false}
+        if _storage._nickname != rhs_storage._nickname {return false}
+        if _storage._photoURL != rhs_storage._photoURL {return false}
+        if _storage._vinPreferences != rhs_storage._vinPreferences {return false}
+        if _storage._pin != rhs_storage._pin {return false}
+        if _storage._pinToSwitchToggle != rhs_storage._pinToSwitchToggle {return false}
+        if _storage._temperatureUnits != rhs_storage._temperatureUnits {return false}
+        if _storage._timeFormat != rhs_storage._timeFormat {return false}
+        if _storage._systemLanguage != rhs_storage._systemLanguage {return false}
+        if _storage._batteryUnits != rhs_storage._batteryUnits {return false}
+        if _storage._tirePressureUnits != rhs_storage._tirePressureUnits {return false}
+        if _storage._distanceUnits != rhs_storage._distanceUnits {return false}
+        if _storage._dataSharing != rhs_storage._dataSharing {return false}
+        if _storage._homeAddress != rhs_storage._homeAddress {return false}
+        if _storage._workAddress != rhs_storage._workAddress {return false}
+        if _storage._updatedNs != rhs_storage._updatedNs {return false}
+        if _storage._vehicleModelPreferences != rhs_storage._vehicleModelPreferences {return false}
+        if _storage._email != rhs_storage._email {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -290,6 +1911,722 @@ extension Mobilegateway_Protos_GetUserPreferencesCommitIDResponse: SwiftProtobuf
 
   public static func ==(lhs: Mobilegateway_Protos_GetUserPreferencesCommitIDResponse, rhs: Mobilegateway_Protos_GetUserPreferencesCommitIDResponse) -> Bool {
     if lhs.commitNs != rhs.commitNs {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+    2: .standard(proto: "prev_commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.prevCommitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.prevCommitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.prevCommitID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserPreferencesRequest, rhs: Mobilegateway_Protos_SetUserPreferencesRequest) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.prevCommitID != rhs.prevCommitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserPreferencesResponse, rhs: Mobilegateway_Protos_SetUserPreferencesResponse) -> Bool {
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateUserVinPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateUserVinPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateUserVinPreferencesRequest, rhs: Mobilegateway_Protos_CreateUserVinPreferencesRequest) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateUserVinPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateUserVinPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateUserVinPreferencesResponse, rhs: Mobilegateway_Protos_CreateUserVinPreferencesResponse) -> Bool {
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetUserVinPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetUserVinPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetUserVinPreferencesRequest, rhs: Mobilegateway_Protos_GetUserVinPreferencesRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetUserVinPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetUserVinPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+    2: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetUserVinPreferencesResponse, rhs: Mobilegateway_Protos_GetUserVinPreferencesResponse) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserVinPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserVinPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+    2: .standard(proto: "prev_commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.prevCommitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.prevCommitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.prevCommitID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserVinPreferencesRequest, rhs: Mobilegateway_Protos_SetUserVinPreferencesRequest) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.prevCommitID != rhs.prevCommitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserVinPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserVinPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserVinPreferencesResponse, rhs: Mobilegateway_Protos_SetUserVinPreferencesResponse) -> Bool {
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_AudioSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AudioSettings"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "lucid_ui_sounds"),
+    2: .standard(proto: "dynamic_volume"),
+    3: .standard(proto: "speed_compensation"),
+    4: .same(proto: "avas"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.lucidUiSounds) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.dynamicVolume) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.speedCompensation) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.avas) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.lucidUiSounds != false {
+      try visitor.visitSingularBoolField(value: self.lucidUiSounds, fieldNumber: 1)
+    }
+    if self.dynamicVolume != false {
+      try visitor.visitSingularBoolField(value: self.dynamicVolume, fieldNumber: 2)
+    }
+    if self.speedCompensation != false {
+      try visitor.visitSingularBoolField(value: self.speedCompensation, fieldNumber: 3)
+    }
+    if self.avas != false {
+      try visitor.visitSingularBoolField(value: self.avas, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_AudioSettings, rhs: Mobilegateway_Protos_AudioSettings) -> Bool {
+    if lhs.lucidUiSounds != rhs.lucidUiSounds {return false}
+    if lhs.dynamicVolume != rhs.dynamicVolume {return false}
+    if lhs.speedCompensation != rhs.speedCompensation {return false}
+    if lhs.avas != rhs.avas {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_VehicleModelPreferences: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".VehicleModelPreferences"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "model"),
+    2: .standard(proto: "height_setting"),
+    3: .standard(proto: "passive_lock"),
+    4: .standard(proto: "passive_unlock"),
+    5: .standard(proto: "easy_entry"),
+    6: .standard(proto: "easy_entry_setting"),
+    7: .standard(proto: "easy_entry_ride_height"),
+    8: .standard(proto: "screen_brightness"),
+    9: .standard(proto: "audio_settings"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.model) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.heightSetting) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.passiveLock) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.passiveUnlock) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.easyEntry) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.easyEntrySetting) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.easyEntryRideHeight) }()
+      case 8: try { try decoder.decodeSingularInt32Field(value: &self.screenBrightness) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._audioSettings) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.model.isEmpty {
+      try visitor.visitSingularStringField(value: self.model, fieldNumber: 1)
+    }
+    if self.heightSetting != .unknown {
+      try visitor.visitSingularEnumField(value: self.heightSetting, fieldNumber: 2)
+    }
+    if self.passiveLock != false {
+      try visitor.visitSingularBoolField(value: self.passiveLock, fieldNumber: 3)
+    }
+    if self.passiveUnlock != false {
+      try visitor.visitSingularBoolField(value: self.passiveUnlock, fieldNumber: 4)
+    }
+    if self.easyEntry != false {
+      try visitor.visitSingularBoolField(value: self.easyEntry, fieldNumber: 5)
+    }
+    if self.easyEntrySetting != .unknown {
+      try visitor.visitSingularEnumField(value: self.easyEntrySetting, fieldNumber: 6)
+    }
+    if self.easyEntryRideHeight != .unknown {
+      try visitor.visitSingularEnumField(value: self.easyEntryRideHeight, fieldNumber: 7)
+    }
+    if self.screenBrightness != 0 {
+      try visitor.visitSingularInt32Field(value: self.screenBrightness, fieldNumber: 8)
+    }
+    try { if let v = self._audioSettings {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_VehicleModelPreferences, rhs: Mobilegateway_Protos_VehicleModelPreferences) -> Bool {
+    if lhs.model != rhs.model {return false}
+    if lhs.heightSetting != rhs.heightSetting {return false}
+    if lhs.passiveLock != rhs.passiveLock {return false}
+    if lhs.passiveUnlock != rhs.passiveUnlock {return false}
+    if lhs.easyEntry != rhs.easyEntry {return false}
+    if lhs.easyEntrySetting != rhs.easyEntrySetting {return false}
+    if lhs.easyEntryRideHeight != rhs.easyEntryRideHeight {return false}
+    if lhs.screenBrightness != rhs.screenBrightness {return false}
+    if lhs._audioSettings != rhs._audioSettings {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateUserModelPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateUserModelPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateUserModelPreferencesRequest, rhs: Mobilegateway_Protos_CreateUserModelPreferencesRequest) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateUserModelPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateUserModelPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateUserModelPreferencesResponse, rhs: Mobilegateway_Protos_CreateUserModelPreferencesResponse) -> Bool {
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetUserModelPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetUserModelPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "model"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.model) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.model.isEmpty {
+      try visitor.visitSingularStringField(value: self.model, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetUserModelPreferencesRequest, rhs: Mobilegateway_Protos_GetUserModelPreferencesRequest) -> Bool {
+    if lhs.model != rhs.model {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetUserModelPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetUserModelPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+    2: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetUserModelPreferencesResponse, rhs: Mobilegateway_Protos_GetUserModelPreferencesResponse) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserModelPreferencesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserModelPreferencesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "preferences"),
+    2: .standard(proto: "prev_commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._preferences) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.prevCommitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._preferences {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.prevCommitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.prevCommitID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserModelPreferencesRequest, rhs: Mobilegateway_Protos_SetUserModelPreferencesRequest) -> Bool {
+    if lhs._preferences != rhs._preferences {return false}
+    if lhs.prevCommitID != rhs.prevCommitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_SetUserModelPreferencesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetUserModelPreferencesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "commit_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.commitID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.commitID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.commitID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_SetUserModelPreferencesResponse, rhs: Mobilegateway_Protos_SetUserModelPreferencesResponse) -> Bool {
+    if lhs.commitID != rhs.commitID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_InviteSecondaryOwnerRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".InviteSecondaryOwnerRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+    2: .standard(proto: "invite_email"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.inviteEmail) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    if !self.inviteEmail.isEmpty {
+      try visitor.visitSingularStringField(value: self.inviteEmail, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_InviteSecondaryOwnerRequest, rhs: Mobilegateway_Protos_InviteSecondaryOwnerRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.inviteEmail != rhs.inviteEmail {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_RemoveSecondaryOwnerRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RemoveSecondaryOwnerRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+    2: .standard(proto: "secondary_user_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.secondaryUserID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    if !self.secondaryUserID.isEmpty {
+      try visitor.visitSingularStringField(value: self.secondaryUserID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_RemoveSecondaryOwnerRequest, rhs: Mobilegateway_Protos_RemoveSecondaryOwnerRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.secondaryUserID != rhs.secondaryUserID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

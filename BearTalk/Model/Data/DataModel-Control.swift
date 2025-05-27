@@ -120,7 +120,7 @@ extension DataModel {
                         if !success {
                             // put up an alert
                         }
-                    case .unknown, .UNRECOGNIZED(_):
+                    case .unknown, .UNRECOGNIZED(_), .closeError:
                         break
                     }
                 } catch let error {
@@ -151,7 +151,7 @@ extension DataModel {
                         if !success {
                             // put up an alert
                         }
-                    case .unknown, .UNRECOGNIZED(_):
+                    case .unknown, .UNRECOGNIZED(_), .closeError:
                         break
                     }
                 } catch let error {
@@ -289,10 +289,16 @@ extension DataModel {
     func toggleLights() {
         if let lightsState = lightsState {
             switch lightsState {
-            case .reallyUnknown, .off, .unknown, .UNRECOGNIZED(_):
+            case .off, .unknown, .UNRECOGNIZED(_):
                 lights(action: .on)
             case .on:
                 lights(action: .off)
+            case .flash:
+                break
+            case .hazardOn:
+                break
+            case .hazardOff:
+                break
             }
         }
     }
@@ -379,6 +385,10 @@ extension DataModel {
                     if !success {
                         // put up an alert
                     }
+                case .hvacResidualHeating:
+                    break
+                case .hvacHeatstrokePrevention:
+                    break
                 }
             }
         }

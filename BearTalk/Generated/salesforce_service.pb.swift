@@ -20,6 +20,60 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+public enum Mobilegateway_Protos_Concern: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case tireServiceTirePurchase // = 1
+  case tireServiceTireSwap // = 2
+  case tireServiceTireRotation // = 3
+  case tireServiceBalanceAndWheelAlignment // = 4
+  case tireServiceOtherTireService // = 5
+  case annualMaintenance // = 6
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .tireServiceTirePurchase
+    case 2: self = .tireServiceTireSwap
+    case 3: self = .tireServiceTireRotation
+    case 4: self = .tireServiceBalanceAndWheelAlignment
+    case 5: self = .tireServiceOtherTireService
+    case 6: self = .annualMaintenance
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .tireServiceTirePurchase: return 1
+    case .tireServiceTireSwap: return 2
+    case .tireServiceTireRotation: return 3
+    case .tireServiceBalanceAndWheelAlignment: return 4
+    case .tireServiceOtherTireService: return 5
+    case .annualMaintenance: return 6
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Mobilegateway_Protos_Concern] = [
+    .unknown,
+    .tireServiceTirePurchase,
+    .tireServiceTireSwap,
+    .tireServiceTireRotation,
+    .tireServiceBalanceAndWheelAlignment,
+    .tireServiceOtherTireService,
+    .annualMaintenance,
+  ]
+
+}
+
 public struct Mobilegateway_Protos_ReferralHistory: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -88,6 +142,91 @@ public struct Mobilegateway_Protos_ReferralData: Sendable {
   public init() {}
 }
 
+public struct Mobilegateway_Protos_BigCommerceLoginRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var email: String = String()
+
+  public var firstName: String = String()
+
+  public var lastName: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_BigCommerceLoginResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var customer: String = String()
+
+  public var url: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CreateLoyaltyMemberRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var firstName: String = String()
+
+  public var lastName: String = String()
+
+  public var preferredLanguage: String = String()
+
+  public var email: String = String()
+
+  public var referralCode: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CreateLoyaltyMemberResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var statusCode: UInt32 = 0
+
+  public var message: String = String()
+
+  public var data: Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage {
+    get {return _data ?? Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage()}
+    set {_data = newValue}
+  }
+  /// Returns true if `data` has been explicitly set.
+  public var hasData: Bool {return self._data != nil}
+  /// Clears the value of `data`. Subsequent reads from it will return its default value.
+  public mutating func clearData() {self._data = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct DataMessage: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _data: Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage? = nil
+}
+
 public struct Mobilegateway_Protos_ReferralHistoryRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -125,10 +264,122 @@ public struct Mobilegateway_Protos_ReferralHistoryResponse: Sendable {
   fileprivate var _data: Mobilegateway_Protos_ReferralData? = nil
 }
 
-public struct Mobilegateway_Protos_ServiceAppointment: Sendable {
+public struct Mobilegateway_Protos_ConcernDetail: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var concern: Mobilegateway_Protos_Concern = .unknown
+
+  public var notes: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CreateServiceAppointmentRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var vin: String = String()
+
+  public var lucidCustomerID: String = String()
+
+  public var locationID: String = String()
+
+  public var arrivalTime: String = String()
+
+  public var concernDetails: [Mobilegateway_Protos_ConcernDetail] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CreateServiceAppointmentResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: String = String()
+
+  public var message: String = String()
+
+  public var serviceApptNumber: String = String()
+
+  public var serviceApptID: String = String()
+
+  public var appointmentStatus: String = String()
+
+  public var estimatedStartTime: String = String()
+
+  public var estimatedEndTime: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateServiceAppointmentResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: String = String()
+
+  public var message: String = String()
+
+  public var serviceApptNumber: String = String()
+
+  public var serviceApptID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_UpdateServiceAppointmentRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var serviceApptID: String = String()
+
+  public var arrivalDatetime: String = String()
+
+  public var concernDetails: [Mobilegateway_Protos_ConcernDetail] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetServiceAppointmentSlotsRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var locationID: String = String()
+
+  public var serviceDate: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_GetServiceAppointmentSlotsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: String = String()
+
+  public var message: String = String()
+
+  public var timeslots: [String] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -147,33 +398,139 @@ public struct Mobilegateway_Protos_GetServiceAppointmentsV1Request: Sendable {
   public init() {}
 }
 
-/// These _used_ to be response fields, but the API has changed a lot since then 
+public struct Mobilegateway_Protos_ServiceAppointmentsV1Data: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var workOrderNumber: String {
+    get {return _storage._workOrderNumber}
+    set {_uniqueStorage()._workOrderNumber = newValue}
+  }
+
+  public var vin: String {
+    get {return _storage._vin}
+    set {_uniqueStorage()._vin = newValue}
+  }
+
+  public var timeZone: String {
+    get {return _storage._timeZone}
+    set {_uniqueStorage()._timeZone = newValue}
+  }
+
+  public var appointmentStatus: String {
+    get {return _storage._appointmentStatus}
+    set {_uniqueStorage()._appointmentStatus = newValue}
+  }
+
+  public var serviceType: String {
+    get {return _storage._serviceType}
+    set {_uniqueStorage()._serviceType = newValue}
+  }
+
+  public var locationID: String {
+    get {return _storage._locationID}
+    set {_uniqueStorage()._locationID = newValue}
+  }
+
+  public var serviceApptID: String {
+    get {return _storage._serviceApptID}
+    set {_uniqueStorage()._serviceApptID = newValue}
+  }
+
+  public var serviceApptNumber: String {
+    get {return _storage._serviceApptNumber}
+    set {_uniqueStorage()._serviceApptNumber = newValue}
+  }
+
+  public var technicianName: String {
+    get {return _storage._technicianName}
+    set {_uniqueStorage()._technicianName = newValue}
+  }
+
+  public var advisorName: String {
+    get {return _storage._advisorName}
+    set {_uniqueStorage()._advisorName = newValue}
+  }
+
+  public var lucidID: String {
+    get {return _storage._lucidID}
+    set {_uniqueStorage()._lucidID = newValue}
+  }
+
+  public var arrivalTime: String {
+    get {return _storage._arrivalTime}
+    set {_uniqueStorage()._arrivalTime = newValue}
+  }
+
+  public var createdDate: String {
+    get {return _storage._createdDate}
+    set {_uniqueStorage()._createdDate = newValue}
+  }
+
+  public var street: String {
+    get {return _storage._street}
+    set {_uniqueStorage()._street = newValue}
+  }
+
+  public var address: String {
+    get {return _storage._address}
+    set {_uniqueStorage()._address = newValue}
+  }
+
+  public var phone: String {
+    get {return _storage._phone}
+    set {_uniqueStorage()._phone = newValue}
+  }
+
+  public var concernDetails: [Mobilegateway_Protos_ConcernDetail] {
+    get {return _storage._concernDetails}
+    set {_uniqueStorage()._concernDetails = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
 public struct Mobilegateway_Protos_GetServiceAppointmentsV1Response: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var status: String = String()
 
-  public init() {}
-}
+  public var data: [Mobilegateway_Protos_ServiceAppointmentsV1Data] = []
 
-public struct Mobilegateway_Protos_GetServiceAppointmentSlotsRequest: Sendable {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var locationID: String = String()
+  public var message: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct Mobilegateway_Protos_GetServiceAppointmentSlotsResponse: Sendable {
+public struct Mobilegateway_Protos_CancelServiceAppointmentRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var serviceApptID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Mobilegateway_Protos_CancelServiceAppointmentResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: String = String()
+
+  public var message: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -184,15 +541,27 @@ public struct Mobilegateway_Protos_GetServiceAppointmentSlotsResponse: Sendable 
 
 fileprivate let _protobuf_package = "mobilegateway.protos"
 
+extension Mobilegateway_Protos_Concern: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "CONCERN_UNKNOWN"),
+    1: .same(proto: "CONCERN_TIRE_SERVICE_TIRE_PURCHASE"),
+    2: .same(proto: "CONCERN_TIRE_SERVICE_TIRE_SWAP"),
+    3: .same(proto: "CONCERN_TIRE_SERVICE_TIRE_ROTATION"),
+    4: .same(proto: "CONCERN_TIRE_SERVICE_BALANCE_AND_WHEEL_ALIGNMENT"),
+    5: .same(proto: "CONCERN_TIRE_SERVICE_OTHER_TIRE_SERVICE"),
+    6: .same(proto: "CONCERN_ANNUAL_MAINTENANCE"),
+  ]
+}
+
 extension Mobilegateway_Protos_ReferralHistory: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ReferralHistory"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "refereeEmail"),
-    2: .same(proto: "referralStatus"),
-    3: .same(proto: "referralPoints"),
-    4: .same(proto: "refereeFirstName"),
-    5: .same(proto: "refereeLastName"),
-    6: .same(proto: "referralDate"),
+    1: .standard(proto: "referee_email"),
+    2: .standard(proto: "referral_status"),
+    3: .standard(proto: "referral_points"),
+    4: .standard(proto: "referee_first_name"),
+    5: .standard(proto: "referee_last_name"),
+    6: .standard(proto: "referral_date"),
     7: .same(proto: "trim"),
   ]
 
@@ -295,13 +664,13 @@ extension Mobilegateway_Protos_ReferralData: SwiftProtobuf.Message, SwiftProtobu
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "email"),
     2: .same(proto: "status"),
-    3: .same(proto: "referralCode"),
-    4: .same(proto: "pointsBalance"),
-    5: .same(proto: "totalReferralCount"),
+    3: .standard(proto: "referral_code"),
+    4: .standard(proto: "points_balance"),
+    5: .standard(proto: "total_referral_count"),
     6: .same(proto: "referrals"),
     7: .standard(proto: "member_attributes"),
-    8: .same(proto: "validState"),
-    9: .same(proto: "validAge"),
+    8: .standard(proto: "valid_state"),
+    9: .standard(proto: "valid_age"),
     10: .same(proto: "country"),
   ]
 
@@ -376,6 +745,211 @@ extension Mobilegateway_Protos_ReferralData: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
+extension Mobilegateway_Protos_BigCommerceLoginRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".BigCommerceLoginRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "email"),
+    2: .standard(proto: "first_name"),
+    3: .standard(proto: "last_name"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.email) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.firstName) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.email.isEmpty {
+      try visitor.visitSingularStringField(value: self.email, fieldNumber: 1)
+    }
+    if !self.firstName.isEmpty {
+      try visitor.visitSingularStringField(value: self.firstName, fieldNumber: 2)
+    }
+    if !self.lastName.isEmpty {
+      try visitor.visitSingularStringField(value: self.lastName, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_BigCommerceLoginRequest, rhs: Mobilegateway_Protos_BigCommerceLoginRequest) -> Bool {
+    if lhs.email != rhs.email {return false}
+    if lhs.firstName != rhs.firstName {return false}
+    if lhs.lastName != rhs.lastName {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_BigCommerceLoginResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".BigCommerceLoginResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "customer"),
+    2: .same(proto: "url"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.customer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.url) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.customer.isEmpty {
+      try visitor.visitSingularStringField(value: self.customer, fieldNumber: 1)
+    }
+    if !self.url.isEmpty {
+      try visitor.visitSingularStringField(value: self.url, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_BigCommerceLoginResponse, rhs: Mobilegateway_Protos_BigCommerceLoginResponse) -> Bool {
+    if lhs.customer != rhs.customer {return false}
+    if lhs.url != rhs.url {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateLoyaltyMemberRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateLoyaltyMemberRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "first_name"),
+    2: .standard(proto: "last_name"),
+    3: .standard(proto: "preferred_language"),
+    4: .same(proto: "email"),
+    5: .standard(proto: "referral_code"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.firstName) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.lastName) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.preferredLanguage) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.email) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.referralCode) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.firstName.isEmpty {
+      try visitor.visitSingularStringField(value: self.firstName, fieldNumber: 1)
+    }
+    if !self.lastName.isEmpty {
+      try visitor.visitSingularStringField(value: self.lastName, fieldNumber: 2)
+    }
+    if !self.preferredLanguage.isEmpty {
+      try visitor.visitSingularStringField(value: self.preferredLanguage, fieldNumber: 3)
+    }
+    if !self.email.isEmpty {
+      try visitor.visitSingularStringField(value: self.email, fieldNumber: 4)
+    }
+    if !self.referralCode.isEmpty {
+      try visitor.visitSingularStringField(value: self.referralCode, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateLoyaltyMemberRequest, rhs: Mobilegateway_Protos_CreateLoyaltyMemberRequest) -> Bool {
+    if lhs.firstName != rhs.firstName {return false}
+    if lhs.lastName != rhs.lastName {return false}
+    if lhs.preferredLanguage != rhs.preferredLanguage {return false}
+    if lhs.email != rhs.email {return false}
+    if lhs.referralCode != rhs.referralCode {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateLoyaltyMemberResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateLoyaltyMemberResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "status_code"),
+    2: .same(proto: "message"),
+    3: .same(proto: "data"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.statusCode) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._data) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.statusCode != 0 {
+      try visitor.visitSingularUInt32Field(value: self.statusCode, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    try { if let v = self._data {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateLoyaltyMemberResponse, rhs: Mobilegateway_Protos_CreateLoyaltyMemberResponse) -> Bool {
+    if lhs.statusCode != rhs.statusCode {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs._data != rhs._data {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Mobilegateway_Protos_CreateLoyaltyMemberResponse.protoMessageName + ".Data"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    // Load everything into unknown fields
+    while try decoder.nextFieldNumber() != nil {}
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage, rhs: Mobilegateway_Protos_CreateLoyaltyMemberResponse.DataMessage) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Mobilegateway_Protos_ReferralHistoryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ReferralHistoryRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -411,7 +985,7 @@ extension Mobilegateway_Protos_ReferralHistoryRequest: SwiftProtobuf.Message, Sw
 extension Mobilegateway_Protos_ReferralHistoryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ReferralHistoryResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "statusCode"),
+    1: .standard(proto: "status_code"),
     2: .same(proto: "message"),
     3: .same(proto: "data"),
   ]
@@ -456,20 +1030,339 @@ extension Mobilegateway_Protos_ReferralHistoryResponse: SwiftProtobuf.Message, S
   }
 }
 
-extension Mobilegateway_Protos_ServiceAppointment: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".ServiceAppointment"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_ConcernDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ConcernDetail"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "concern"),
+    2: .same(proto: "notes"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.concern) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.notes) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.concern != .unknown {
+      try visitor.visitSingularEnumField(value: self.concern, fieldNumber: 1)
+    }
+    if !self.notes.isEmpty {
+      try visitor.visitSingularStringField(value: self.notes, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_ServiceAppointment, rhs: Mobilegateway_Protos_ServiceAppointment) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_ConcernDetail, rhs: Mobilegateway_Protos_ConcernDetail) -> Bool {
+    if lhs.concern != rhs.concern {return false}
+    if lhs.notes != rhs.notes {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateServiceAppointmentRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateServiceAppointmentRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "vin"),
+    2: .standard(proto: "lucid_customer_id"),
+    3: .standard(proto: "location_id"),
+    4: .standard(proto: "arrival_time"),
+    5: .standard(proto: "concern_details"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.vin) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.lucidCustomerID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.locationID) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.arrivalTime) }()
+      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.concernDetails) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.vin.isEmpty {
+      try visitor.visitSingularStringField(value: self.vin, fieldNumber: 1)
+    }
+    if !self.lucidCustomerID.isEmpty {
+      try visitor.visitSingularStringField(value: self.lucidCustomerID, fieldNumber: 2)
+    }
+    if !self.locationID.isEmpty {
+      try visitor.visitSingularStringField(value: self.locationID, fieldNumber: 3)
+    }
+    if !self.arrivalTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.arrivalTime, fieldNumber: 4)
+    }
+    if !self.concernDetails.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.concernDetails, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateServiceAppointmentRequest, rhs: Mobilegateway_Protos_CreateServiceAppointmentRequest) -> Bool {
+    if lhs.vin != rhs.vin {return false}
+    if lhs.lucidCustomerID != rhs.lucidCustomerID {return false}
+    if lhs.locationID != rhs.locationID {return false}
+    if lhs.arrivalTime != rhs.arrivalTime {return false}
+    if lhs.concernDetails != rhs.concernDetails {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CreateServiceAppointmentResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateServiceAppointmentResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .same(proto: "message"),
+    3: .standard(proto: "service_appt_number"),
+    4: .standard(proto: "service_appt_id"),
+    5: .standard(proto: "appointment_status"),
+    6: .standard(proto: "estimated_start_time"),
+    7: .standard(proto: "estimated_end_time"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.serviceApptNumber) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.serviceApptID) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.appointmentStatus) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.estimatedStartTime) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.estimatedEndTime) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    if !self.serviceApptNumber.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptNumber, fieldNumber: 3)
+    }
+    if !self.serviceApptID.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptID, fieldNumber: 4)
+    }
+    if !self.appointmentStatus.isEmpty {
+      try visitor.visitSingularStringField(value: self.appointmentStatus, fieldNumber: 5)
+    }
+    if !self.estimatedStartTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.estimatedStartTime, fieldNumber: 6)
+    }
+    if !self.estimatedEndTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.estimatedEndTime, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CreateServiceAppointmentResponse, rhs: Mobilegateway_Protos_CreateServiceAppointmentResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs.serviceApptNumber != rhs.serviceApptNumber {return false}
+    if lhs.serviceApptID != rhs.serviceApptID {return false}
+    if lhs.appointmentStatus != rhs.appointmentStatus {return false}
+    if lhs.estimatedStartTime != rhs.estimatedStartTime {return false}
+    if lhs.estimatedEndTime != rhs.estimatedEndTime {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateServiceAppointmentResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateServiceAppointmentResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .same(proto: "message"),
+    3: .standard(proto: "service_appt_number"),
+    4: .standard(proto: "service_appt_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.serviceApptNumber) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.serviceApptID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    if !self.serviceApptNumber.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptNumber, fieldNumber: 3)
+    }
+    if !self.serviceApptID.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptID, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateServiceAppointmentResponse, rhs: Mobilegateway_Protos_UpdateServiceAppointmentResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs.serviceApptNumber != rhs.serviceApptNumber {return false}
+    if lhs.serviceApptID != rhs.serviceApptID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_UpdateServiceAppointmentRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".UpdateServiceAppointmentRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "service_appt_id"),
+    2: .standard(proto: "arrival_datetime"),
+    5: .standard(proto: "concern_details"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.serviceApptID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.arrivalDatetime) }()
+      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.concernDetails) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.serviceApptID.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptID, fieldNumber: 1)
+    }
+    if !self.arrivalDatetime.isEmpty {
+      try visitor.visitSingularStringField(value: self.arrivalDatetime, fieldNumber: 2)
+    }
+    if !self.concernDetails.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.concernDetails, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_UpdateServiceAppointmentRequest, rhs: Mobilegateway_Protos_UpdateServiceAppointmentRequest) -> Bool {
+    if lhs.serviceApptID != rhs.serviceApptID {return false}
+    if lhs.arrivalDatetime != rhs.arrivalDatetime {return false}
+    if lhs.concernDetails != rhs.concernDetails {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetServiceAppointmentSlotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentSlotsRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "location_id"),
+    2: .standard(proto: "service_date"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.locationID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.serviceDate) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.locationID.isEmpty {
+      try visitor.visitSingularStringField(value: self.locationID, fieldNumber: 1)
+    }
+    if !self.serviceDate.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceDate, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentSlotsRequest, rhs: Mobilegateway_Protos_GetServiceAppointmentSlotsRequest) -> Bool {
+    if lhs.locationID != rhs.locationID {return false}
+    if lhs.serviceDate != rhs.serviceDate {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_GetServiceAppointmentSlotsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentSlotsResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .same(proto: "message"),
+    3: .same(proto: "timeslots"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 3: try { try decoder.decodeRepeatedStringField(value: &self.timeslots) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    if !self.timeslots.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.timeslots, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentSlotsResponse, rhs: Mobilegateway_Protos_GetServiceAppointmentSlotsResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs.timeslots != rhs.timeslots {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -507,29 +1400,212 @@ extension Mobilegateway_Protos_GetServiceAppointmentsV1Request: SwiftProtobuf.Me
   }
 }
 
-extension Mobilegateway_Protos_GetServiceAppointmentsV1Response: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentsV1Response"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_ServiceAppointmentsV1Data: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ServiceAppointmentsV1Data"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "work_order_number"),
+    2: .same(proto: "vin"),
+    3: .standard(proto: "time_zone"),
+    4: .standard(proto: "appointment_status"),
+    5: .standard(proto: "service_type"),
+    6: .standard(proto: "location_id"),
+    7: .standard(proto: "service_appt_id"),
+    8: .standard(proto: "service_appt_number"),
+    9: .standard(proto: "technician_name"),
+    10: .standard(proto: "advisor_name"),
+    11: .standard(proto: "lucid_id"),
+    12: .standard(proto: "arrival_time"),
+    13: .standard(proto: "created_date"),
+    14: .same(proto: "street"),
+    15: .same(proto: "address"),
+    16: .same(proto: "phone"),
+    17: .standard(proto: "concern_details"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _workOrderNumber: String = String()
+    var _vin: String = String()
+    var _timeZone: String = String()
+    var _appointmentStatus: String = String()
+    var _serviceType: String = String()
+    var _locationID: String = String()
+    var _serviceApptID: String = String()
+    var _serviceApptNumber: String = String()
+    var _technicianName: String = String()
+    var _advisorName: String = String()
+    var _lucidID: String = String()
+    var _arrivalTime: String = String()
+    var _createdDate: String = String()
+    var _street: String = String()
+    var _address: String = String()
+    var _phone: String = String()
+    var _concernDetails: [Mobilegateway_Protos_ConcernDetail] = []
+
+    #if swift(>=5.10)
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+    #else
+      static let defaultInstance = _StorageClass()
+    #endif
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _workOrderNumber = source._workOrderNumber
+      _vin = source._vin
+      _timeZone = source._timeZone
+      _appointmentStatus = source._appointmentStatus
+      _serviceType = source._serviceType
+      _locationID = source._locationID
+      _serviceApptID = source._serviceApptID
+      _serviceApptNumber = source._serviceApptNumber
+      _technicianName = source._technicianName
+      _advisorName = source._advisorName
+      _lucidID = source._lucidID
+      _arrivalTime = source._arrivalTime
+      _createdDate = source._createdDate
+      _street = source._street
+      _address = source._address
+      _phone = source._phone
+      _concernDetails = source._concernDetails
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._workOrderNumber) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._vin) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._timeZone) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._appointmentStatus) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._serviceType) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._locationID) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._serviceApptID) }()
+        case 8: try { try decoder.decodeSingularStringField(value: &_storage._serviceApptNumber) }()
+        case 9: try { try decoder.decodeSingularStringField(value: &_storage._technicianName) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._advisorName) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._lucidID) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._arrivalTime) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._createdDate) }()
+        case 14: try { try decoder.decodeSingularStringField(value: &_storage._street) }()
+        case 15: try { try decoder.decodeSingularStringField(value: &_storage._address) }()
+        case 16: try { try decoder.decodeSingularStringField(value: &_storage._phone) }()
+        case 17: try { try decoder.decodeRepeatedMessageField(value: &_storage._concernDetails) }()
+        default: break
+        }
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._workOrderNumber.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._workOrderNumber, fieldNumber: 1)
+      }
+      if !_storage._vin.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._vin, fieldNumber: 2)
+      }
+      if !_storage._timeZone.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._timeZone, fieldNumber: 3)
+      }
+      if !_storage._appointmentStatus.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._appointmentStatus, fieldNumber: 4)
+      }
+      if !_storage._serviceType.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._serviceType, fieldNumber: 5)
+      }
+      if !_storage._locationID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._locationID, fieldNumber: 6)
+      }
+      if !_storage._serviceApptID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._serviceApptID, fieldNumber: 7)
+      }
+      if !_storage._serviceApptNumber.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._serviceApptNumber, fieldNumber: 8)
+      }
+      if !_storage._technicianName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._technicianName, fieldNumber: 9)
+      }
+      if !_storage._advisorName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._advisorName, fieldNumber: 10)
+      }
+      if !_storage._lucidID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._lucidID, fieldNumber: 11)
+      }
+      if !_storage._arrivalTime.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._arrivalTime, fieldNumber: 12)
+      }
+      if !_storage._createdDate.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._createdDate, fieldNumber: 13)
+      }
+      if !_storage._street.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._street, fieldNumber: 14)
+      }
+      if !_storage._address.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._address, fieldNumber: 15)
+      }
+      if !_storage._phone.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._phone, fieldNumber: 16)
+      }
+      if !_storage._concernDetails.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._concernDetails, fieldNumber: 17)
+      }
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentsV1Response, rhs: Mobilegateway_Protos_GetServiceAppointmentsV1Response) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_ServiceAppointmentsV1Data, rhs: Mobilegateway_Protos_ServiceAppointmentsV1Data) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._workOrderNumber != rhs_storage._workOrderNumber {return false}
+        if _storage._vin != rhs_storage._vin {return false}
+        if _storage._timeZone != rhs_storage._timeZone {return false}
+        if _storage._appointmentStatus != rhs_storage._appointmentStatus {return false}
+        if _storage._serviceType != rhs_storage._serviceType {return false}
+        if _storage._locationID != rhs_storage._locationID {return false}
+        if _storage._serviceApptID != rhs_storage._serviceApptID {return false}
+        if _storage._serviceApptNumber != rhs_storage._serviceApptNumber {return false}
+        if _storage._technicianName != rhs_storage._technicianName {return false}
+        if _storage._advisorName != rhs_storage._advisorName {return false}
+        if _storage._lucidID != rhs_storage._lucidID {return false}
+        if _storage._arrivalTime != rhs_storage._arrivalTime {return false}
+        if _storage._createdDate != rhs_storage._createdDate {return false}
+        if _storage._street != rhs_storage._street {return false}
+        if _storage._address != rhs_storage._address {return false}
+        if _storage._phone != rhs_storage._phone {return false}
+        if _storage._concernDetails != rhs_storage._concernDetails {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Mobilegateway_Protos_GetServiceAppointmentSlotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentSlotsRequest"
+extension Mobilegateway_Protos_GetServiceAppointmentsV1Response: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentsV1Response"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "location_id"),
+    1: .same(proto: "status"),
+    2: .same(proto: "data"),
+    3: .same(proto: "message"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -538,40 +1614,101 @@ extension Mobilegateway_Protos_GetServiceAppointmentSlotsRequest: SwiftProtobuf.
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.locationID) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.data) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.message) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.locationID.isEmpty {
-      try visitor.visitSingularStringField(value: self.locationID, fieldNumber: 1)
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.data.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.data, fieldNumber: 2)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentSlotsRequest, rhs: Mobilegateway_Protos_GetServiceAppointmentSlotsRequest) -> Bool {
-    if lhs.locationID != rhs.locationID {return false}
+  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentsV1Response, rhs: Mobilegateway_Protos_GetServiceAppointmentsV1Response) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.data != rhs.data {return false}
+    if lhs.message != rhs.message {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Mobilegateway_Protos_GetServiceAppointmentSlotsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetServiceAppointmentSlotsResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+extension Mobilegateway_Protos_CancelServiceAppointmentRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CancelServiceAppointmentRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "service_appt_id"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    // Load everything into unknown fields
-    while try decoder.nextFieldNumber() != nil {}
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.serviceApptID) }()
+      default: break
+      }
+    }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.serviceApptID.isEmpty {
+      try visitor.visitSingularStringField(value: self.serviceApptID, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Mobilegateway_Protos_GetServiceAppointmentSlotsResponse, rhs: Mobilegateway_Protos_GetServiceAppointmentSlotsResponse) -> Bool {
+  public static func ==(lhs: Mobilegateway_Protos_CancelServiceAppointmentRequest, rhs: Mobilegateway_Protos_CancelServiceAppointmentRequest) -> Bool {
+    if lhs.serviceApptID != rhs.serviceApptID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Mobilegateway_Protos_CancelServiceAppointmentResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CancelServiceAppointmentResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .same(proto: "message"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Mobilegateway_Protos_CancelServiceAppointmentResponse, rhs: Mobilegateway_Protos_CancelServiceAppointmentResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.message != rhs.message {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

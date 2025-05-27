@@ -75,6 +75,9 @@ enum BatteryCellType: Codable, Equatable {
     case sdi50G // = 2
     case pana2170M // = 3
     case sdi50Gv2 // = 4
+    case lgM52V // = 5
+    case lgM50L // = 6
+    case lgH40B // = 7
     case UNRECOGNIZED(Int)
     
     init(proto: Mobilegateway_Protos_BatteryCellType) {
@@ -89,6 +92,12 @@ enum BatteryCellType: Codable, Equatable {
             self = .pana2170M
         case .sdi50Gv2:
             self = .sdi50Gv2
+        case .lgM52V:
+            self = .lgM52V
+        case .lgM50L:
+            self = .lgM50L
+        case .lgH40B:
+            self = .lgH40B
         case .UNRECOGNIZED(let int):
             self = .UNRECOGNIZED(int)
         }

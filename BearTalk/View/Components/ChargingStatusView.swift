@@ -22,7 +22,7 @@ struct ChargingStatusView: View {
         VStack(alignment: .leading, spacing: 4) {
             switch chargingState {
             case .charging:
-                Label("Charging in Progress", systemImage: "bolt.fill")
+                Label(chargingState.title, systemImage: "bolt.fill")
                     .foregroundStyle(.green)
                     .fixedSize(horizontal: false, vertical: true)
                 
@@ -32,41 +32,8 @@ struct ChargingStatusView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundStyle(.secondary)
                 }
-            case .notConnected:
-                Label("Not Connected", systemImage: "bolt.slash")
-                    .foregroundStyle(.secondary)
-            case .cableConnected:
-                Label("Cable Connected", systemImage: "bolt")
-                    .foregroundStyle(.yellow)
-            case .establishingSession, .authorizingPnc, .authorizingExternal, .authorized, .chargerPreparation:
-                Label("Preparing to Charge", systemImage: "bolt.circle")
-                    .foregroundStyle(.yellow)
-            case .chargingEndOk:
-                Label("Charging Complete", systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-            case .chargingStopped:
-                Label("Charging Stopped", systemImage: "stop.circle.fill")
-                    .foregroundStyle(.red)
-            case .evseMalfunction:
-                Label("Charging Error", systemImage: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-            case .discharging:
-                Label("Discharging", systemImage: "arrow.down.circle.fill")
-                    .foregroundStyle(.orange)
-            case .dischargingCompleted:
-                Label("Discharging Complete", systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-            case .dischargingStopped:
-                Label("Discharging Stopped", systemImage: "stop.circle.fill")
-                    .foregroundStyle(.red)
-            case .dischargingFault:
-                Label("Discharging Error", systemImage: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-            case .dischargingUnavailable:
-                Label("Discharging Unavailable", systemImage: "bolt.slash.fill")
-                    .foregroundStyle(.secondary)
-            case .unknown, .UNRECOGNIZED:
-                Label("Unknown Status", systemImage: "questionmark.circle")
+            default:
+                Label(chargingState.title, systemImage: "bolt.slash")
                     .foregroundStyle(.secondary)
             }
         }
