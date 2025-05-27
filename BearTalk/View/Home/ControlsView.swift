@@ -88,6 +88,12 @@ struct ControlsView: View {
                             ControlGrid()
                         }
                         
+                        // Alert Cell
+                        if !model.alerts.isEmpty {
+                            AlertCell()
+                                .padding(.horizontal)
+                        }
+                        
                         // Software Update Cell
                         SoftwareUpdateCell()
                             .padding(.horizontal)
@@ -108,7 +114,8 @@ struct ControlsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .scrollBounceBehavior(.basedOnSize)
-            .animation(.default, value: model.showingAvailableControls)
+            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: model.showingAvailableControls)
+            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: model.alerts)
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

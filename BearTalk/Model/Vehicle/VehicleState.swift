@@ -29,6 +29,22 @@ struct VehicleState: Codable, Equatable {
     let tcuInternetStatus: TCUInternetStatus
 }
 
+enum KeyfobBatteryStatus: Codable, Equatable {
+    case unknown // = 0
+    case low // = 1
+    case sufficient // = 2
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_KeyfobBatteryStatus) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .low: self = .low
+        case .sufficient: self = .sufficient
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
 enum KeylessDrivingState: Codable, Equatable {
     case keylessDrivingUnknown // = 0
     case keylessDrivingOn // = 1

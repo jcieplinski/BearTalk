@@ -17,6 +17,7 @@ struct BodyState: Codable, Equatable {
     let rearRightDoor: DoorState
     var chargePortState: DoorState
     let walkawayLockSts: WalkawayState
+    let keyfobBatteryStatus: KeyfobBatteryStatus
     let windowPosition: WindowPosition
     let accessTypeSts: AccessRequest
     
@@ -31,6 +32,7 @@ struct BodyState: Codable, Equatable {
         self.chargePortState = DoorState(proto: proto.chargePort)
         self.windowPosition = WindowPosition(proto: proto.windowPosition)
         self.walkawayLockSts = WalkawayState(proto: proto.walkawayLock)
+        self.keyfobBatteryStatus = KeyfobBatteryStatus(proto: proto.keyfobBatteryStatus)
         self.accessTypeSts = AccessRequest(proto: proto.accessTypeStatus)
     }
 }
