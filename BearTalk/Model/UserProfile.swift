@@ -11,7 +11,7 @@ struct UserProfile: Codable, Equatable {
     let email: String
     let locale: String
     let username: String
-    let photoUrl: String
+    var photoUrl: String
     let firstName: String
     let lastName: String
     let emaId: String

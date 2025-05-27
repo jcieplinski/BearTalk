@@ -489,4 +489,19 @@ import GRPCCore
             }
         }
     }
+    
+    @MainActor
+    func uploadProfilePhoto(_ imageData: Data) async throws -> String? {
+        let photoURL = try await BearAPI.uploadProfilePhoto(imageData)
+        
+        // Update the user profile with the new photo URL
+        var profile = userProfile
+        profile?.photoUrl = photoURL
+        userProfile = profile
+        
+        // Save the photo URL to UserDefaults
+        UserDefaults.appGroup.set(photoURL, forKey: DefaultsKey.photoURL)
+        
+        return photoURL
+    }
 }

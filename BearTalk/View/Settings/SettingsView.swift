@@ -4,8 +4,11 @@ import Observation
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) var appState: AppState
+    @Environment(DataModel.self) var model: DataModel
     let colorSchemeManager: ColorSchemeManager = .shared
     @State private var showLogOutWarning = false
+    @State private var showPhotoPicker = false
+    @State private var showErrorAlert: Bool = false
     
     private var currentScheme: AppColorScheme {
         let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
@@ -15,6 +18,48 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("Profile") {
+                    Button {
+                        showPhotoPicker = true
+                    } label: {
+                        HStack {
+                            if let photoUrl = model.userProfile?.photoUrl {
+                                AsyncImage(url: URL(string: photoUrl)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    Image(systemName: "person.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                        .foregroundStyle(.secondary)
+                                }
+                            } else {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text("Profile Photo")
+                                Text("Tap to change")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                
                 Section("Appearance") {
                     Menu {
                         Button {
@@ -87,6 +132,26 @@ struct SettingsView: View {
             } message: {
                 Text("Do you wish to log out of your Lucid account?")
             }
+            .sheet(isPresented: $showPhotoPicker) {
+                ProfileImageEditView(
+                    viewModel: ProfileImageEditViewModel(
+                        dataModel: model,
+                        photoURL: model.userProfile?.photoUrl
+                    ) { success in
+                        guard success else {
+                            showErrorAlert = true
+                            return
+                        }
+                    }
+                )
+            }
+            .alert("Could not update image", isPresented: $showErrorAlert) {
+                Button {
+                    showErrorAlert = false
+                } label: {
+                    Text("OK")
+                }
+            }
             .preferredColorScheme(colorSchemeManager.currentScheme)
         }
     }
@@ -95,4 +160,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environment(AppState())
+        .environment(DataModel())
 }

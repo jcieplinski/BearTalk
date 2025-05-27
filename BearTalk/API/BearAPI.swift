@@ -865,4 +865,29 @@ final class BearAPI {
             throw error
         }
     }
+
+    @MainActor
+    static func uploadProfilePhoto(_ imageData: Data) async throws -> String {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                let base64String = imageData.base64EncodedString()
+                var request = Mobilegateway_Protos_UploadUserProfilePhotoRequest()
+                request.photoBytes = base64String
+                let metadata: GRPCCore.Metadata = ["authorization": "Bearer \(authorization)"]
+                
+                let uploadClient = Mobilegateway_Protos_UserProfileService.Client(wrapping: client)
+                let response = try await uploadClient.uploadUserProfilePhoto(
+                    request,
+                    metadata: metadata
+                )
+                
+                return response.photoURL
+            }
+        }
+    }
 }
