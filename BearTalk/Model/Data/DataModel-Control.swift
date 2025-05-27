@@ -43,6 +43,11 @@ extension DataModel {
             honkHorn()
         case .lights:
             toggleLights()
+        case .hazards:
+            toggleHazards()
+        case .windows:
+            // TODO: Add window control for gravity
+            break
         case .batteryPrecondition:
             toggleBatteryPrecondition()
         case .softwareUpdate:
@@ -307,36 +312,35 @@ extension DataModel {
         lights(action: .flash)
     }
     
-    func lights(action: LightsAction) {
+    func toggleHazards() {
+        if let lightsState = lightsState {
+            switch lightsState {
+            case .off, .unknown, .UNRECOGNIZED(_):
+                break
+            case .on:
+                break
+            case .flash:
+                break
+            case .hazardOn:
+                lights(action: .hazardOff)
+            case .hazardOff:
+                lights(action: .hazardOn)
+            }
+        }
+    }
+    
+    func lights(action: LightAction) {
         Task { @MainActor in
             do {
                 if !vehicleIsReady {
                     let _ = try await BearAPI.wakeUp()
                 }
                 
-                switch action {
-                case .on:
-                    requestInProgress.insert(.lights)
-                    
-                    let success = try await BearAPI.lightsControl(action: .off)
-                    if !success {
-                        // put up an alert
-                    }
-                case .off:
-                    requestInProgress.insert(.lights)
-                    
-                    let success = try await BearAPI.lightsControl(action: .on)
-                    if !success {
-                        // put up an alert
-                    }
-                case .flash:
-                 //   lightsFlashActive = true
-                   // requestInProgress.insert(.flash)
-                    
-                    let success = try await BearAPI.lightsControl(action: .flash)
-                    if !success {
-                        // put up an alert
-                    }
+                requestInProgress.insert(.lights)
+                
+                let success = try await BearAPI.lightsControl(action: action)
+                if !success {
+                    // put up an alert
                 }
             } catch let error {
                 print("Could not toggle light state: \(error)")
@@ -452,6 +456,14 @@ extension DataModel {
             case .lights:
                 if oldState.chassisState.headlights != newState.chassisState.headlights {
                     requestInProgress.remove(.lights)
+                }
+            case .hazards:
+                if oldState.chassisState.headlights != newState.chassisState.headlights {
+                    requestInProgress.remove(.lights)
+                }
+            case .windows:
+                if oldState.bodyState.windowPosition != newState.bodyState.windowPosition {
+                    requestInProgress.remove(.windows)
                 }
             case .horn:
                 requestInProgress.remove(.horn)

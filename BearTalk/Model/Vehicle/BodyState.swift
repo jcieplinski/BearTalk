@@ -17,6 +17,7 @@ struct BodyState: Codable, Equatable {
     let rearRightDoor: DoorState
     var chargePortState: DoorState
     let walkawayLockSts: WalkawayState
+    let windowPosition: WindowPosition
     let accessTypeSts: AccessRequest
     
     internal init(proto: Mobilegateway_Protos_BodyState) {
@@ -28,11 +29,73 @@ struct BodyState: Codable, Equatable {
         self.rearLeftDoor = DoorState(proto: proto.rearLeftDoor)
         self.rearRightDoor = DoorState(proto: proto.rearRightDoor)
         self.chargePortState = DoorState(proto: proto.chargePort)
+        self.windowPosition = WindowPosition(proto: proto.windowPosition)
         self.walkawayLockSts = WalkawayState(proto: proto.walkawayLock)
         self.accessTypeSts = AccessRequest(proto: proto.accessTypeStatus)
     }
 }
 
+struct WindowPosition: Codable, Equatable {
+    var leftFront: WindowPositionStatus
+    var leftRear: WindowPositionStatus
+    var rightFront: WindowPositionStatus
+    var rightRear: WindowPositionStatus
+    
+    init(proto: Mobilegateway_Protos_WindowPositionState) {
+        leftFront = WindowPositionStatus(proto: proto.leftFront)
+        leftRear = WindowPositionStatus(proto: proto.leftRear)
+        rightFront = WindowPositionStatus(proto: proto.rightFront)
+        rightRear = WindowPositionStatus(proto: proto.rightRear)
+    }
+    
+    var isOpen: Bool {
+        return leftFront != .fullyClosed && leftRear != .fullyClosed && rightFront != .fullyClosed && rightRear != .fullyClosed
+    }
+}
+
+enum WindowPositionStatus: Codable, Equatable {
+    case unknown // = 0
+    case fullyClosed // = 1
+    case aboveShortDropPosition // = 2
+    case shortDropPosition // = 3
+    case belowShortDropPosition // = 4
+    case fullyOpen // = 5
+    case unknownDeInitialized // = 6
+    case atpReversePosition // = 7
+    case anticlatterPosition // = 8
+    case hardStopUp // = 9
+    case hardStopDown // = 10
+    case longDropPosition // = 11
+    case ventDropPosition // = 12
+    case betweenFullyClosedAndShortDropDown // = 13
+    case betweenShortDropDownAndFullyOpen // = 14
+    case UNRECOGNIZED(Int)
+    
+    var isOpen: Bool {
+        return self != .fullyClosed
+    }
+    
+    init(proto: Mobilegateway_Protos_WindowPositionStatus) {
+        switch proto {
+        case .unknown: self = .unknown
+        case .fullyClosed: self = .fullyClosed
+        case .aboveShortDropPosition: self = .aboveShortDropPosition
+        case .shortDropPosition: self = .shortDropPosition
+        case .belowShortDropPosition: self = .belowShortDropPosition
+        case .fullyOpen: self = .fullyOpen
+        case .unknownDeInitialized: self = .unknownDeInitialized
+        case .atpReversePosition: self = .atpReversePosition
+        case .anticlatterPosition: self = .anticlatterPosition
+        case .hardStopUp: self = .hardStopUp
+        case .hardStopDown: self = .hardStopDown
+        case .longDropPosition: self = .longDropPosition
+        case .ventDropPosition: self = .ventDropPosition
+        case .betweenFullyClosedAndShortDropDown: self = .betweenFullyClosedAndShortDropDown
+        case .betweenShortDropDownAndFullyOpen: self = .betweenShortDropDownAndFullyOpen
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
 
 enum DoorState: Codable, Equatable {
     case unknown // = 0

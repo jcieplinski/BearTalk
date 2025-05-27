@@ -58,6 +58,7 @@ import GRPCCore
     var trunkClosureState: DoorState?
     var chargePortClosureState: DoorState?
     var lightsState: LightState?
+    var windowPosition: WindowPosition?
     var defrostState: DefrostState?
     var maxACState: MaxACState?
     var batteryPreConditionState: PreconditioningStatus?
@@ -420,6 +421,7 @@ import GRPCCore
         trunkClosureState = vehicle.vehicleState.bodyState.rearCargo
         chargePortClosureState = vehicle.vehicleState.bodyState.chargePortState
         lightsState = vehicle.vehicleState.chassisState.headlights
+        windowPosition = vehicle.vehicleState.bodyState.windowPosition
         defrostState = vehicle.vehicleState.hvacState.defrost
         maxACState = vehicle.vehicleState.hvacState.maxAcStatus
         batteryPreConditionState = vehicle.vehicleState.batteryState.preconditioningStatus

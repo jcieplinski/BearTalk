@@ -63,7 +63,7 @@ struct ControlGrid: View {
                         }
                     }
                     
-                    if draggedItem != nil {
+                    if draggedItem != nil && model.showingAvailableControls {
                         RoundedRectangle(cornerRadius: 13)
                             .aspectRatio(1, contentMode: .fit)
                             .foregroundStyle(.thinMaterial)
@@ -161,7 +161,7 @@ struct ControlGrid: View {
                             }
                         }
                         
-                        if draggedItem != nil {
+                        if draggedItem != nil && model.showingAvailableControls {
                             RoundedRectangle(cornerRadius: 13)
                                 .aspectRatio(1, contentMode: .fit)
                                 .foregroundStyle(.thinMaterial)
@@ -199,7 +199,16 @@ struct ControlGrid: View {
         .onAppear {
             selectedControls = controlsFavorites.split(separator: ",").compactMap({ ControlType(rawValue: String($0)) })
             
-            nonSelectedControls = ControlType.allCases.filter({ !selectedControls.contains($0) })
+            switch model.vehicle?.vehicleConfig.model {
+            case .unknown, .air:
+                nonSelectedControls = ControlType.allCases.filter({ !selectedControls.contains($0) })
+            case .gravity:
+                nonSelectedControls = ControlType.allCasesGravity.filter({ !selectedControls.contains($0) })
+            case .UNRECOGNIZED:
+                break
+            case nil:
+                break
+            }
         }
         .onChange(of: selectedControls) { oldValue, newValue in
             controlsFavorites = selectedControls.map(\.rawValue).joined(separator: ",")

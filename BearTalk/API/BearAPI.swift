@@ -44,7 +44,7 @@ final class BearAPI {
             var request = Mobilegateway_Protos_LoginRequest()
             request.username = userName
             request.password = password
-            request.notificationChannelType = .notificationChannelUnknown
+            request.notificationChannelType = .notificationChannelFirebase
             request.os = .ios
             request.notificationDeviceToken = "1234"
             request.locale = "en_US"

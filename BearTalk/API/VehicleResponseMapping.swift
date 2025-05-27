@@ -24,13 +24,13 @@ extension BearAPI {
     static func mapVehicleResponse(_ vehicle: Mobilegateway_Protos_Vehicle) -> Vehicle {
         let config = VehicleConfig(
             vin: vehicle.config.vin,
-            model: .gravity,
+            model: LucidModel(proto: vehicle.config.model),
             modelVariant: ModelVariant(proto: vehicle.config.variant),
             releaseDate: nil,
             nickname: vehicle.config.nickname,
             paintColor: PaintColor(proto: vehicle.config.paintColor),
             emaId: "\(vehicle.config.emaID)",
-            wheels: .aether,
+            wheels: Wheels(proto: vehicle.config.wheels),
             easubscription: EASubscription(
                 name: vehicle.config.eaSubscription.name,
                 expirationDate: "\(vehicle.config.eaSubscription.expirationDate)",
