@@ -33,14 +33,19 @@ struct SceneKitViewAir: UIViewRepresentable {
         var sceneView: SCNView?
         var chargePortNode: SCNNode?
         var frunkNode: SCNNode?
+        var trunkNode: SCNNode?
         var isChargePortOpen: Bool = false
         var isFrunkOpen: Bool = false
+        var isTrunkOpen: Bool = false
         var isAnimating: Bool = false
         var isFrunkAnimating: Bool = false
+        var isTrunkAnimating: Bool = false
         var animationPlayer: SCNAnimationPlayer?
         var frunkAnimationPlayer: SCNAnimationPlayer?
+        var trunkAnimationPlayer: SCNAnimationPlayer?
         var animationTimer: Timer?
         var frunkAnimationTimer: Timer?
+        var trunkAnimationTimer: Timer?
         var onAnimationComplete: (() -> Void)?
         var onSceneLoaded: (() -> Void)?
         private var displayLink: CADisplayLink?
@@ -55,6 +60,8 @@ struct SceneKitViewAir: UIViewRepresentable {
             animationTimer = nil
             frunkAnimationTimer?.invalidate()
             frunkAnimationTimer = nil
+            trunkAnimationTimer?.invalidate()
+            trunkAnimationTimer = nil
             
             // Clean up animation players
             if let player = animationPlayer {
@@ -65,10 +72,15 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.stop()
                 frunkAnimationPlayer = nil
             }
+            if let player = trunkAnimationPlayer {
+                player.stop()
+                trunkAnimationPlayer = nil
+            }
             
             // Clean up nodes
             chargePortNode = nil
             frunkNode = nil
+            trunkNode = nil
         }
         
         func storeInitialCameraState(_ node: SCNNode) {
@@ -619,6 +631,226 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.play()
             }
         }
+        
+        func findTrunkNode(in scene: SCNScene) {
+            print("🔍 Searching for trunk node...")
+            
+            // First try to find by name
+            if let node = scene.rootNode.childNode(withName: "Trunk_Animation", recursively: true) {
+                print("✅ Found trunk node by name: \(node.name ?? "unnamed")")
+                trunkNode = node
+                setupTrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
+            } else {
+                print("🔍 Trunk not found by name, searching all nodes...")
+                // If not found by name, try to find by searching for nodes with animations
+                scene.rootNode.enumerateChildNodes { node, _ in
+                    if !node.animationKeys.isEmpty,
+                       node.name?.lowercased().contains("trunk") ?? false ||
+                       node.name?.lowercased().contains("boot") ?? false {
+                        print("✅ Found potential trunk node: \(node.name ?? "unnamed")")
+                        print("📋 Node animation keys: \(node.animationKeys)")
+                        trunkNode = node
+                        setupTrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
+                    }
+                }
+            }
+            
+            if trunkNode == nil {
+                print("❌ Could not find trunk node")
+            }
+        }
+        
+        func setupTrunkAnimationPlayer(for node: SCNNode, initialState: DoorState?) {
+            guard let key = node.animationKeys.first else {
+                print("❌ No animation keys found for trunk node")
+                return
+            }
+            
+            print("🔍 Setting up trunk animation player for node: \(node.name ?? "unnamed")")
+            print("📋 Trunk animation keys: \(node.animationKeys)")
+            
+            // Clean up existing animation player if any
+            if let existingPlayer = trunkAnimationPlayer {
+                existingPlayer.stop()
+                trunkAnimationPlayer = nil
+            }
+            
+            // Stop all animations on the node first
+            node.animationKeys.forEach { key in
+                if let player = node.animationPlayer(forKey: key) {
+                    player.stop()
+                }
+            }
+            
+            if let player = node.animationPlayer(forKey: key) {
+                print("✅ Found trunk animation player for key: \(key)")
+                print("📊 Trunk animation duration: \(player.animation.duration)")
+                print("📊 Trunk animation type: \(type(of: player.animation))")
+                print("📊 Current trunk animation state - speed: \(player.speed), timeOffset: \(player.animation.timeOffset)")
+                
+                // Store the player
+                self.trunkAnimationPlayer = player
+                
+                // Configure animation to maintain final state
+                player.animation.isRemovedOnCompletion = false
+                player.animation.repeatCount = 0  // Play once
+                player.animation.autoreverses = false  // Don't reverse
+                
+                // Store the initial transform
+                let initialTransform = node.transform
+                print("📊 Initial trunk node transform: \(initialTransform)")
+                
+                // Set the initial state
+                if let state = initialState {
+                    print("🚪 Setting up trunk animation player with initial state: \(state)")
+                    if state == .open || state == .ajar {
+                        // Set to open position without animation
+                        print("🚪 Setting trunk to open position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = player.animation.duration
+                        isTrunkOpen = true
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                            print("📊 Trunk node transform after setting open: \(node.transform)")
+                        }
+                        trunkAnimationTimer = timer
+                    } else {
+                        // Set to closed position without animation
+                        print("🚪 Setting trunk to closed position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = 0
+                        isTrunkOpen = false
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                            print("📊 Trunk node transform after setting closed: \(node.transform)")
+                        }
+                        trunkAnimationTimer = timer
+                    }
+                } else {
+                    // No state available, default to closed
+                    print("🚪 No trunk state available, defaulting to closed position")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    isTrunkOpen = false
+                    
+                    // Force the animation to update the node's transform
+                    player.play()
+                    // Use a timer to ensure the animation completes
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                        player.stop()
+                        print("📊 Trunk node transform after setting default closed: \(node.transform)")
+                    }
+                    trunkAnimationTimer = timer
+                }
+                
+                print("📊 Final trunk node transform after setup: \(node.transform)")
+                print("✅ Trunk animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
+            } else {
+                print("❌ Could not get trunk animation player for key: \(key)")
+            }
+        }
+        
+        func handleTrunkStateChange(_ newState: DoorState) {
+            print("🔄 Handling trunk state change to: \(newState)")
+            print("📊 Current trunk animation state - isTrunkAnimating: \(isTrunkAnimating), isTrunkOpen: \(isTrunkOpen)")
+            
+            // Don't handle state changes while animating
+            if isTrunkAnimating {
+                print("⏳ Trunk animation in progress, ignoring state change")
+                return
+            }
+            
+            // Verify animation player state
+            if trunkAnimationPlayer == nil {
+                print("⚠️ Trunk animation player is nil, attempting to reinitialize...")
+                if let node = trunkNode {
+                    setupTrunkAnimationPlayer(for: node, initialState: nil)
+                } else {
+                    print("❌ Cannot reinitialize - trunk node is nil")
+                    return
+                }
+            }
+            
+            let shouldBeOpen = newState == .open || newState == .ajar
+            
+            // Only trigger animation if the trunk's state doesn't match desired state
+            if shouldBeOpen != isTrunkOpen {
+                print(shouldBeOpen ? "🚪 Opening trunk" : "🚪 Closing trunk")
+                toggleTrunk()
+            } else {
+                print("ℹ️ Trunk already in desired state")
+            }
+        }
+        
+        func toggleTrunk() {
+            print("🔄 Toggling trunk...")
+            print("📊 Pre-toggle state - isTrunkAnimating: \(isTrunkAnimating), isTrunkOpen: \(isTrunkOpen)")
+            
+            // Don't start new animation if one is in progress
+            if isTrunkAnimating {
+                print("⏳ Trunk animation in progress, ignoring toggle")
+                return
+            }
+            
+            guard let player = trunkAnimationPlayer else {
+                print("❌ Cannot toggle trunk - animation player missing")
+                return
+            }
+            
+            // Stop current animation if it's playing
+            player.stop()
+            
+            // Set animating flag
+            isTrunkAnimating = true
+            print("📊 Set isTrunkAnimating to true")
+            
+            if isTrunkOpen {
+                // Closing animation
+                print("▶️ Starting trunk closing animation")
+                player.speed = -1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        print("✅ Trunk closing animation completed")
+                        self.isTrunkAnimating = false
+                        self.isTrunkOpen = false
+                    }
+                }
+                trunkAnimationTimer = timer
+                
+                player.play()
+            } else {
+                // Opening animation
+                print("▶️ Starting trunk opening animation")
+                player.speed = 1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        print("✅ Trunk opening animation completed")
+                        self.isTrunkAnimating = false
+                        self.isTrunkOpen = true
+                    }
+                }
+                trunkAnimationTimer = timer
+                
+                player.play()
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -754,6 +986,9 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Find the frunk node and its animation
             context.coordinator.findFrunkNode(in: loadedScene)
             
+            // Find the trunk node and its animation
+            context.coordinator.findTrunkNode(in: loadedScene)
+            
             // Check initial charge port state and set it without animation
             if let chargePortState = model.chargePortClosureState {
                 print("🚪 Initial charge port state from model: \(chargePortState)")
@@ -869,6 +1104,64 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 }
             }
+            
+            // Check initial trunk state and set it without animation
+            if let trunkState = model.trunkClosureState {
+                print("🚪 Initial trunk state from model: \(trunkState)")
+                
+                // Set up the initial state immediately
+                if let node = context.coordinator.trunkNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting initial trunk state: \(trunkState)")
+                    
+                    // Stop any existing animations
+                    player.stop()
+                    
+                    // Set the animation state
+                    player.speed = 1
+                    if trunkState == .open || trunkState == .ajar {
+                        print("🚪 Setting trunk to open position")
+                        // Just play the animation normally
+                        player.animation.timeOffset = 0
+                        player.play()
+                        
+                        // Wait for animation to complete
+                        let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
+                            print("✅ Initial trunk opening animation completed")
+                            context.coordinator.isTrunkOpen = true
+                            isSceneLoaded = true
+                        }
+                        context.coordinator.trunkAnimationTimer = timer
+                    } else {
+                        print("🚪 Setting trunk to closed position")
+                        player.animation.timeOffset = 0
+                        context.coordinator.isTrunkOpen = false
+                        player.play()
+                        
+                        // Mark scene as loaded after a short delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            isSceneLoaded = true
+                        }
+                    }
+                }
+            } else {
+                print("❓ No trunk state available")
+                // Ensure trunk is closed by default
+                if let node = context.coordinator.trunkNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting default trunk closed state")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    context.coordinator.isTrunkOpen = false
+                    player.play()
+                    
+                    // Mark scene as loaded after a short delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        isSceneLoaded = true
+                    }
+                }
+            }
         } else {
             Logger.vehicle.error("Failed to load scene using all available methods")
         }
@@ -904,6 +1197,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             if isSceneLoaded {
                 print("📊 updateUIView state check - isAnimating: \(context.coordinator.isAnimating), isChargePortOpen: \(context.coordinator.isChargePortOpen)")
                 print("📊 updateUIView state check - isFrunkAnimating: \(context.coordinator.isFrunkAnimating), isFrunkOpen: \(context.coordinator.isFrunkOpen)")
+                print("📊 updateUIView state check - isTrunkAnimating: \(context.coordinator.isTrunkAnimating), isTrunkOpen: \(context.coordinator.isTrunkOpen)")
                 
                 // Handle charge port state changes
                 if let chargePortState = model.chargePortClosureState {
@@ -927,6 +1221,18 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 } else {
                     print("❓ No frunk state available in model")
+                }
+                
+                // Handle trunk state changes
+                if let trunkState = model.trunkClosureState {
+                    print("📊 Model state update - trunkState: \(trunkState)")
+                    if !context.coordinator.isTrunkAnimating {
+                        context.coordinator.handleTrunkStateChange(trunkState)
+                    } else {
+                        print("⏳ Skipping trunk state change due to animation in progress")
+                    }
+                } else {
+                    print("❓ No trunk state available in model")
                 }
             } else {
                 print("⏳ Scene not yet loaded, skipping state update")
