@@ -53,9 +53,6 @@ struct SettingsView: View {
                             }
                             
                             Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
                         }
                     }
                 }
