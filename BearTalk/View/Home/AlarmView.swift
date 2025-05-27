@@ -27,6 +27,7 @@ struct AlarmView: View {
                             }
                         ))
                         .labelsHidden()
+                        .tint(.active)
                         .disabled(model.requestInProgress.contains(.alarm))
                     }
                     

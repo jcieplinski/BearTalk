@@ -481,6 +481,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case horn
     case lights
     case batteryPrecondition
+    case softwareUpdate
     
     case chargeLimit
     case driverSeatHeat
@@ -545,6 +546,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Rear Right Seat Heat"
         case .alarm:
             "Shock and Tilt Alarm"
+        case .softwareUpdate:
+            ""
         }
     }
     
@@ -582,6 +585,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "climateOff"
         case .alarm:
             ""
+        case .softwareUpdate:
+            ""
         }
     }
     
@@ -618,6 +623,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         case .climateControl:
             "climateOn"
         case .alarm:
+            ""
+        case .softwareUpdate:
             ""
         }
     }

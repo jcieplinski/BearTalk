@@ -45,6 +45,10 @@ extension DataModel {
             toggleLights()
         case .batteryPrecondition:
             toggleBatteryPrecondition()
+        case .softwareUpdate:
+            Task {
+                await startSoftwareUpdate()
+            }
         default:
             break
         }
@@ -537,6 +541,10 @@ extension DataModel {
                 if oldState.alarmState != newState.alarmState {
                     requestInProgress.remove(.alarm)
                 }
+            case .softwareUpdate:
+                if oldState.softwareUpdate.state != newState.softwareUpdate.state {
+                    requestInProgress.remove(.softwareUpdate)
+                }
             }
         }
         
@@ -713,6 +721,21 @@ extension DataModel {
             } catch {
                 print("Could not set shock and tilt alarm: \(error)")
             }
+        }
+    }
+    
+    @MainActor
+    func startSoftwareUpdate() async {
+        requestInProgress.insert(.softwareUpdate)
+        
+        do {
+            let success = try await BearAPI.startSoftwareUpdate()
+            if !success {
+                requestInProgress.remove(.softwareUpdate)
+            }
+        } catch {
+            print("Error starting software update: \(error)")
+            requestInProgress.remove(.softwareUpdate)
         }
     }
 }

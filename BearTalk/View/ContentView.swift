@@ -74,7 +74,9 @@ struct ContentView: View {
             
             // If we're logged in, start vehicle fetch
             if tokenManager.isLoggedIn {
-                await model.fetchVehicleWithRetry()
+                Task { @MainActor in
+                    await model.fetchVehicleWithRetry()
+                }
             }
             
             // Mark initialization as complete

@@ -265,7 +265,7 @@ struct SeatClimateSheet: View {
                                 .font(.caption2.bold())
                                 .foregroundStyle(.white)
                                 .frame(width: 20, height: 20)
-                                .background(Circle().fill(.active))
+                                .background(Circle().fill(.activeCool))
                                 .offset(x: 10, y: 10)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                         }
@@ -348,7 +348,7 @@ struct SeatClimateSheet: View {
                                 .font(.caption2.bold())
                                 .foregroundStyle(.white)
                                 .frame(width: 20, height: 20)
-                                .background(Circle().fill(.active))
+                                .background(Circle().fill(.activeCool))
                                 .offset(x: 10, y: 10)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                         }

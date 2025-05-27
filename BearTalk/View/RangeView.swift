@@ -84,6 +84,10 @@ struct RangeView: View {
                             .tint(isRecording ? Color.active : .accent)
                         }
                         .padding(.bottom, 22)
+                        
+                        Text("Efficiency and estimated range will update automatically if you leave this app open while driving. Please keep your eyes on the road at all times and obey local traffic laws.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
                 .tint(.accent)

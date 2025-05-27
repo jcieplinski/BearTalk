@@ -85,6 +85,10 @@ struct ControlsView: View {
                             ControlGrid()
                         }
                         
+                        // Software Update Cell
+                        SoftwareUpdateCell()
+                            .padding(.horizontal)
+                        
                         VStack(spacing: 16) {
                             ForEach(orderedCells, id: \.self) { cellType in
                                 cellView(for: cellType)

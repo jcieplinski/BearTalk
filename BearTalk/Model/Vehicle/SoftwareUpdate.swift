@@ -8,6 +8,19 @@
 import Foundation
 
 struct SoftwareUpdate: Codable, Equatable {
+    internal init(versionAvailable: String, installDurationMinutes: UInt32, percentComplete: UInt32, state: UpdateState, versionAvailableRaw: UInt32, updateAvailable: UpdateAvailability, scheduledStartTimeSec: UInt64, downloadStatus: SoftwareDownloadStatus, downloadInterface: SoftwareDownloadInterface, tcuDownloadStatus: TcuDownloadStatus) {
+        self.versionAvailable = versionAvailable
+        self.installDurationMinutes = installDurationMinutes
+        self.percentComplete = percentComplete
+        self.state = state
+        self.versionAvailableRaw = versionAvailableRaw
+        self.updateAvailable = updateAvailable
+        self.scheduledStartTimeSec = scheduledStartTimeSec
+        self.downloadStatus = downloadStatus
+        self.downloadInterface = downloadInterface
+        self.tcuDownloadStatus = tcuDownloadStatus
+    }
+    
     let versionAvailable: String
     let installDurationMinutes: UInt32
     let percentComplete: UInt32

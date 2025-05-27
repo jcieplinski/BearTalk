@@ -18,6 +18,7 @@ struct StatsCell: View {
                 .opacity(0.6)
             Spacer()
             Text(stat)
+                .font(.title3)
                 .fontWeight(.semibold)
                 .textSelection(.enabled)
         }
