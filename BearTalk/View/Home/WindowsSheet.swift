@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+struct WindowControlButton: View {
+    let systemImage: String
+    let title: String
+    let action: () -> Void
+    let isDisabled: Bool
+    
+    var body: some View {
+        Button(action: action) {
+            VStack {
+                Image(systemName: systemImage)
+                    .font(.title)
+                Text(title)
+                    .font(.caption)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .disabled(isDisabled)
+        .overlay {
+            if isDisabled {
+                ProgressView()
+                    .padding()
+            }
+        }
+    }
+}
+
 struct WindowsSheet: View {
     @Environment(DataModel.self) var model
     @Environment(\.dismiss) var dismiss
@@ -25,10 +54,12 @@ struct WindowsSheet: View {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
             
             Text(position.positionTitle)
                 .font(.caption2)
                 .foregroundStyle(position != .fullyClosed ? .active : .accent)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity)
         .padding()
@@ -36,100 +67,69 @@ struct WindowsSheet: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
     
+    private var windowControlButtons: some View {
+        let buttons = [
+            (systemImage: "arrow.up.circle.fill", title: "Close All", action: { model.controlAllWindows(state: .autoUpAll) }),
+            (systemImage: "arrow.down.circle.fill", title: "Open All", action: { model.controlAllWindows(state: .autoDownAll) }),
+            (systemImage: "wind", title: "Vent All", action: { model.controlAllWindows(state: .ventAll) })
+        ]
+        
+        return ViewThatFits {
+            HStack(spacing: 12) {
+                ForEach(buttons, id: \.title) { button in
+                    WindowControlButton(
+                        systemImage: button.systemImage,
+                        title: button.title,
+                        action: button.action,
+                        isDisabled: model.requestInProgress.contains(.windows)
+                    )
+                }
+            }
+            
+            VStack(spacing: 12) {
+                ForEach(buttons, id: \.title) { button in
+                    WindowControlButton(
+                        systemImage: button.systemImage,
+                        title: button.title,
+                        action: button.action,
+                        isDisabled: model.requestInProgress.contains(.windows)
+                    )
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                if let windowPosition = model.windowPosition {
-                    HStack(spacing: 12) {
-                        Button {
-                            model.controlAllWindows(state: .autoUpAll)
-                        } label: {
-                            VStack {
-                                Image(systemName: "arrow.up.circle.fill")
-                                    .font(.title)
-                                Text("Close All")
-                                    .font(.caption)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .disabled(model.requestInProgress.contains(.windows))
-                        .overlay {
-                            if model.requestInProgress.contains(.windows) {
-                                ProgressView()
-                                    .padding()
-                            }
-                        }
+            ScrollView {
+                VStack(spacing: 16) {
+                    if let windowPosition = model.windowPosition {
+                        windowControlButtons
+                            .padding(.horizontal)
                         
-                        Button {
-                            model.controlAllWindows(state: .autoDownAll)
-                        } label: {
-                            VStack {
-                                Image(systemName: "arrow.down.circle.fill")
-                                    .font(.title)
-                                Text("Open All")
-                                    .font(.caption)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        // Window Status Grid
+                        LazyVGrid(columns: [
+                            GridItem(.flexible()),
+                            GridItem(.flexible())
+                        ], spacing: 8) {
+                            windowControl(for: windowPosition.leftFront, title: "Front Left", icon: "windowClosed")
+                            windowControl(for: windowPosition.rightFront, title: "Front Right", icon: "windowClosed")
+                            windowControl(for: windowPosition.leftRear, title: "Rear Left", icon: "windowClosed")
+                            windowControl(for: windowPosition.rightRear, title: "Rear Right", icon: "windowClosed")
                         }
-                        .disabled(model.requestInProgress.contains(.windows))
-                        .overlay {
-                            if model.requestInProgress.contains(.windows) {
-                                ProgressView()
-                                    .padding()
-                            }
-                        }
+                        .padding(.horizontal)
                         
-                        Button {
-                            model.controlAllWindows(state: .ventAll)
-                        } label: {
-                            VStack {
-                                Image(systemName: "wind")
-                                    .font(.title)
-                                Text("Vent All")
-                                    .font(.caption)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        Spacer(minLength: 1)
+                    } else {
+                        ContentUnavailableView {
+                            Label("No Window Data", systemImage: "window.vertical.closed")
+                        } description: {
+                            Text("Window position data is not available")
                         }
-                        .disabled(model.requestInProgress.contains(.windows))
-                        .overlay {
-                            if model.requestInProgress.contains(.windows) {
-                                ProgressView()
-                                    .padding()
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
-                    
-                    // Window Status Grid
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ], spacing: 8) {
-                        windowControl(for: windowPosition.leftFront, title: "Front Left", icon: "windowClosed")
-                        windowControl(for: windowPosition.rightFront, title: "Front Right", icon: "windowClosed")
-                        windowControl(for: windowPosition.leftRear, title: "Rear Left", icon: "windowClosed")
-                        windowControl(for: windowPosition.rightRear, title: "Rear Right", icon: "windowClosed")
-                    }
-                    .padding(.horizontal)
-                    
-                    Spacer(minLength: 1)
-                } else {
-                    ContentUnavailableView {
-                        Label("No Window Data", systemImage: "window.vertical.closed")
-                    } description: {
-                        Text("Window position data is not available")
                     }
                 }
             }
+            .scrollBounceBehavior(.basedOnSize)
             .navigationTitle("Windows")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

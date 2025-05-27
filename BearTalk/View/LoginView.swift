@@ -33,20 +33,6 @@ struct LoginView: View {
                         .listRowBackground(Color.clear)
                         .padding([.top, .leading, .trailing])
                     
-                    if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                        Toggle(isOn: $useFaceID) {
-                            Label("Use Face ID", systemImage: "faceid")
-                        }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .padding(.horizontal)
-                        .onChange(of: useFaceID) { oldValue, newValue in
-                            if newValue {
-                                hasAttemptedFaceID = false
-                            }
-                        }
-                    }
-                    
                     if !useFaceID {
                         Capsule(style: .continuous)
                             .foregroundStyle(Color.gray.opacity(0.3))
@@ -81,6 +67,21 @@ struct LoginView: View {
                                         focused = nil
                                     }
                             }
+                    }
+                    
+                    if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                        Toggle(isOn: $useFaceID) {
+                            Label("Use Face ID", systemImage: "faceid")
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .padding(.horizontal)
+                        .onChange(of: useFaceID) { oldValue, newValue in
+                            if newValue {
+                                hasAttemptedFaceID = false
+                            }
+                        }
+                        .disabled(!useFaceID && appState.userName.isEmpty || appState.password.isEmpty)
                     }
                     
                     SceneKitViewLogin { view in

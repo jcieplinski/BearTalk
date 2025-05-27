@@ -29,16 +29,38 @@ struct ChargingCell: View {
                     )
                 }
                 
-                HStack {
-                    Text("Current: \(model.chargePercentage)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                ViewThatFits {
+                    HStack {
+                        Text("Current: \(model.chargePercentage)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                        
+                        Text("Charge Limit: \(chargeLimit)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                     
-                    Spacer()
-                    
-                    Text("Charge Limit: \(chargeLimit)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    VStack {
+                        HStack {
+                            Text("Current: \(model.chargePercentage)")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Text("Charge Limit: \(chargeLimit)")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            
+                            Spacer()
+                        }
+                    }
                 }
             }
             .padding()

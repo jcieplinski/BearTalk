@@ -63,6 +63,7 @@ struct ControlsView: View {
                         // Top Row Status
                         Text(model.chargePercentage)
                             .font(.title)
+                            .dynamicTypeSize(.large)
                             .frame(maxWidth: .infinity)
                             .overlay(alignment: .leading) {
                                 Button {
@@ -72,6 +73,7 @@ struct ControlsView: View {
                                 } label: {
                                     Image(systemName: model.powerState.image)
                                         .font(.body)
+                                        .dynamicTypeSize(.large)
                                         .fontWeight(.bold)
                                 }
                                 .padding()
@@ -79,6 +81,7 @@ struct ControlsView: View {
                             .overlay(alignment: .trailing) {
                                 Text(model.exteriorTemp)
                                     .font(.body)
+                                    .dynamicTypeSize(.large)
                                     .padding()
                             }
                         
@@ -143,17 +146,10 @@ struct ControlsView: View {
                         }
                     } label: {
                         if let photoUrl = model.userProfile?.photoUrl {
-                            AsyncImage(url: URL(string: photoUrl)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 24, height: 24)
-                                    .clipShape(Circle())
-                            } placeholder: {
-                                Image(systemName: "person.circle")
-                            }
+                            ProfileImageView(photoUrl: photoUrl)
                         } else {
                             Image(systemName: "person.circle")
+                                .font(.title2)
                         }
                     }
                 }
@@ -164,7 +160,7 @@ struct ControlsView: View {
             .sheet(isPresented: $showSettings) {
                 SettingsView()
                     .presentationBackground(.thinMaterial)
-                    .presentationDetents([.medium])
+                    .presentationDetents([.medium, .large])
             }
             .sheet(isPresented: $showClimateControl) {
                 ClimateControlSheet(modalPresented: true)
@@ -177,7 +173,7 @@ struct ControlsView: View {
             .sheet(isPresented: $showWindowControls) {
                 WindowsSheet(isModelPresntation: true)
                     .presentationBackground(.thinMaterial)
-                    .presentationDetents([.fraction(0.55)])
+                    .presentationDetents([.fraction(0.55), .large])
             }
             .onAppear {
                 NotificationCenter.default.addObserver(

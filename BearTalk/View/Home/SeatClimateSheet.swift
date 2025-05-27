@@ -169,6 +169,7 @@ struct SeatClimateSheet: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                         Text("Driver")
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     }
                     
                     
@@ -178,6 +179,7 @@ struct SeatClimateSheet: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                         Text("Passenger")
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     }
                 }
                 
@@ -363,6 +365,7 @@ struct SeatClimateSheet: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                         Text("Rear Left")
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     }
                     
                     ZStack {
@@ -371,6 +374,7 @@ struct SeatClimateSheet: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                         Text("Rear Center")
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     }
                     
                     ZStack {
@@ -379,6 +383,7 @@ struct SeatClimateSheet: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                         Text("Rear Right")
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     }
                 }
                 .padding(.top, 12)
