@@ -32,10 +32,15 @@ struct SceneKitViewAir: UIViewRepresentable {
         var isResetting = false
         var sceneView: SCNView?
         var chargePortNode: SCNNode?
+        var frunkNode: SCNNode?
         var isChargePortOpen: Bool = false
+        var isFrunkOpen: Bool = false
         var isAnimating: Bool = false
+        var isFrunkAnimating: Bool = false
         var animationPlayer: SCNAnimationPlayer?
+        var frunkAnimationPlayer: SCNAnimationPlayer?
         var animationTimer: Timer?
+        var frunkAnimationTimer: Timer?
         var onAnimationComplete: (() -> Void)?
         var onSceneLoaded: (() -> Void)?
         private var displayLink: CADisplayLink?
@@ -48,15 +53,22 @@ struct SceneKitViewAir: UIViewRepresentable {
             print("🧹 Cleaning up Coordinator")
             animationTimer?.invalidate()
             animationTimer = nil
+            frunkAnimationTimer?.invalidate()
+            frunkAnimationTimer = nil
             
-            // Clean up animation player
+            // Clean up animation players
             if let player = animationPlayer {
                 player.stop()
                 animationPlayer = nil
             }
+            if let player = frunkAnimationPlayer {
+                player.stop()
+                frunkAnimationPlayer = nil
+            }
             
-            // Clean up charge port node
+            // Clean up nodes
             chargePortNode = nil
+            frunkNode = nil
         }
         
         func storeInitialCameraState(_ node: SCNNode) {
@@ -387,6 +399,226 @@ struct SceneKitViewAir: UIViewRepresentable {
                 player.play()
             }
         }
+        
+        func findFrunkNode(in scene: SCNScene) {
+            print("🔍 Searching for frunk node...")
+            
+            // First try to find by name
+            if let node = scene.rootNode.childNode(withName: "Frunk_bonnet_Animation", recursively: true) {
+                print("✅ Found frunk node by name: \(node.name ?? "unnamed")")
+                frunkNode = node
+                setupFrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
+            } else {
+                print("🔍 Frunk not found by name, searching all nodes...")
+                // If not found by name, try to find by searching for nodes with animations
+                scene.rootNode.enumerateChildNodes { node, _ in
+                    if !node.animationKeys.isEmpty,
+                       node.name?.lowercased().contains("frunk") ?? false ||
+                       node.name?.lowercased().contains("hood") ?? false {
+                        print("✅ Found potential frunk node: \(node.name ?? "unnamed")")
+                        print("📋 Node animation keys: \(node.animationKeys)")
+                        frunkNode = node
+                        setupFrunkAnimationPlayer(for: node, initialState: nil)  // Will be set later
+                    }
+                }
+            }
+            
+            if frunkNode == nil {
+                print("❌ Could not find frunk node")
+            }
+        }
+        
+        func setupFrunkAnimationPlayer(for node: SCNNode, initialState: DoorState?) {
+            guard let key = node.animationKeys.first else {
+                print("❌ No animation keys found for frunk node")
+                return
+            }
+            
+            print("🔍 Setting up frunk animation player for node: \(node.name ?? "unnamed")")
+            print("📋 Frunk animation keys: \(node.animationKeys)")
+            
+            // Clean up existing animation player if any
+            if let existingPlayer = frunkAnimationPlayer {
+                existingPlayer.stop()
+                frunkAnimationPlayer = nil
+            }
+            
+            // Stop all animations on the node first
+            node.animationKeys.forEach { key in
+                if let player = node.animationPlayer(forKey: key) {
+                    player.stop()
+                }
+            }
+            
+            if let player = node.animationPlayer(forKey: key) {
+                print("✅ Found frunk animation player for key: \(key)")
+                print("📊 Frunk animation duration: \(player.animation.duration)")
+                print("📊 Frunk animation type: \(type(of: player.animation))")
+                print("📊 Current frunk animation state - speed: \(player.speed), timeOffset: \(player.animation.timeOffset)")
+                
+                // Store the player
+                self.frunkAnimationPlayer = player
+                
+                // Configure animation to maintain final state
+                player.animation.isRemovedOnCompletion = false
+                player.animation.repeatCount = 0  // Play once
+                player.animation.autoreverses = false  // Don't reverse
+                
+                // Store the initial transform
+                let initialTransform = node.transform
+                print("📊 Initial frunk node transform: \(initialTransform)")
+                
+                // Set the initial state
+                if let state = initialState {
+                    print("🚪 Setting up frunk animation player with initial state: \(state)")
+                    if state == .open || state == .ajar {
+                        // Set to open position without animation
+                        print("🚪 Setting frunk to open position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = player.animation.duration
+                        isFrunkOpen = true
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                            print("📊 Frunk node transform after setting open: \(node.transform)")
+                        }
+                        frunkAnimationTimer = timer
+                    } else {
+                        // Set to closed position without animation
+                        print("🚪 Setting frunk to closed position")
+                        player.stop()
+                        player.speed = 1
+                        player.animation.timeOffset = 0
+                        isFrunkOpen = false
+                        
+                        // Force the animation to update the node's transform
+                        player.play()
+                        // Use a timer to ensure the animation completes
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                            player.stop()
+                            print("📊 Frunk node transform after setting closed: \(node.transform)")
+                        }
+                        frunkAnimationTimer = timer
+                    }
+                } else {
+                    // No state available, default to closed
+                    print("🚪 No frunk state available, defaulting to closed position")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    isFrunkOpen = false
+                    
+                    // Force the animation to update the node's transform
+                    player.play()
+                    // Use a timer to ensure the animation completes
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                        player.stop()
+                        print("📊 Frunk node transform after setting default closed: \(node.transform)")
+                    }
+                    frunkAnimationTimer = timer
+                }
+                
+                print("📊 Final frunk node transform after setup: \(node.transform)")
+                print("✅ Frunk animation player configured - isRemovedOnCompletion: \(player.animation.isRemovedOnCompletion), repeatCount: \(player.animation.repeatCount), autoreverses: \(player.animation.autoreverses)")
+            } else {
+                print("❌ Could not get frunk animation player for key: \(key)")
+            }
+        }
+        
+        func handleFrunkStateChange(_ newState: DoorState) {
+            print("🔄 Handling frunk state change to: \(newState)")
+            print("📊 Current frunk animation state - isFrunkAnimating: \(isFrunkAnimating), isFrunkOpen: \(isFrunkOpen)")
+            
+            // Don't handle state changes while animating
+            if isFrunkAnimating {
+                print("⏳ Frunk animation in progress, ignoring state change")
+                return
+            }
+            
+            // Verify animation player state
+            if frunkAnimationPlayer == nil {
+                print("⚠️ Frunk animation player is nil, attempting to reinitialize...")
+                if let node = frunkNode {
+                    setupFrunkAnimationPlayer(for: node, initialState: nil)
+                } else {
+                    print("❌ Cannot reinitialize - frunk node is nil")
+                    return
+                }
+            }
+            
+            let shouldBeOpen = newState == .open || newState == .ajar
+            
+            // Only trigger animation if the frunk's state doesn't match desired state
+            if shouldBeOpen != isFrunkOpen {
+                print(shouldBeOpen ? "🚪 Opening frunk" : "🚪 Closing frunk")
+                toggleFrunk()
+            } else {
+                print("ℹ️ Frunk already in desired state")
+            }
+        }
+        
+        func toggleFrunk() {
+            print("🔄 Toggling frunk...")
+            print("📊 Pre-toggle state - isFrunkAnimating: \(isFrunkAnimating), isFrunkOpen: \(isFrunkOpen)")
+            
+            // Don't start new animation if one is in progress
+            if isFrunkAnimating {
+                print("⏳ Frunk animation in progress, ignoring toggle")
+                return
+            }
+            
+            guard let player = frunkAnimationPlayer else {
+                print("❌ Cannot toggle frunk - animation player missing")
+                return
+            }
+            
+            // Stop current animation if it's playing
+            player.stop()
+            
+            // Set animating flag
+            isFrunkAnimating = true
+            print("📊 Set isFrunkAnimating to true")
+            
+            if isFrunkOpen {
+                // Closing animation
+                print("▶️ Starting frunk closing animation")
+                player.speed = -1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        print("✅ Frunk closing animation completed")
+                        self.isFrunkAnimating = false
+                        self.isFrunkOpen = false
+                    }
+                }
+                frunkAnimationTimer = timer
+                
+                player.play()
+            } else {
+                // Opening animation
+                print("▶️ Starting frunk opening animation")
+                player.speed = 1
+                player.animation.timeOffset = 0
+                
+                // Use a timer to track animation completion
+                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
+                    if let self = self {
+                        print("✅ Frunk opening animation completed")
+                        self.isFrunkAnimating = false
+                        self.isFrunkOpen = true
+                    }
+                }
+                frunkAnimationTimer = timer
+                
+                player.play()
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -519,6 +751,9 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Find the charge port node and its animation
             context.coordinator.findChargePortNode(in: loadedScene)
             
+            // Find the frunk node and its animation
+            context.coordinator.findFrunkNode(in: loadedScene)
+            
             // Check initial charge port state and set it without animation
             if let chargePortState = model.chargePortClosureState {
                 print("🚪 Initial charge port state from model: \(chargePortState)")
@@ -576,6 +811,64 @@ struct SceneKitViewAir: UIViewRepresentable {
                     }
                 }
             }
+            
+            // Check initial frunk state and set it without animation
+            if let frunkState = model.frunkClosureState {
+                print("🚪 Initial frunk state from model: \(frunkState)")
+                
+                // Set up the initial state immediately
+                if let node = context.coordinator.frunkNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting initial frunk state: \(frunkState)")
+                    
+                    // Stop any existing animations
+                    player.stop()
+                    
+                    // Set the animation state
+                    player.speed = 1
+                    if frunkState == .open || frunkState == .ajar {
+                        print("🚪 Setting frunk to open position")
+                        // Just play the animation normally
+                        player.animation.timeOffset = 0
+                        player.play()
+                        
+                        // Wait for animation to complete
+                        let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { _ in
+                            print("✅ Initial frunk opening animation completed")
+                            context.coordinator.isFrunkOpen = true
+                            isSceneLoaded = true
+                        }
+                        context.coordinator.frunkAnimationTimer = timer
+                    } else {
+                        print("🚪 Setting frunk to closed position")
+                        player.animation.timeOffset = 0
+                        context.coordinator.isFrunkOpen = false
+                        player.play()
+                        
+                        // Mark scene as loaded after a short delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            isSceneLoaded = true
+                        }
+                    }
+                }
+            } else {
+                print("❓ No frunk state available")
+                // Ensure frunk is closed by default
+                if let node = context.coordinator.frunkNode,
+                   let player = node.animationPlayer(forKey: node.animationKeys.first ?? "") {
+                    print("🚪 Setting default frunk closed state")
+                    player.stop()
+                    player.speed = 1
+                    player.animation.timeOffset = 0
+                    context.coordinator.isFrunkOpen = false
+                    player.play()
+                    
+                    // Mark scene as loaded after a short delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        isSceneLoaded = true
+                    }
+                }
+            }
         } else {
             Logger.vehicle.error("Failed to load scene using all available methods")
         }
@@ -610,15 +903,30 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Only handle state changes after the initial setup is complete and we're not animating
             if isSceneLoaded {
                 print("📊 updateUIView state check - isAnimating: \(context.coordinator.isAnimating), isChargePortOpen: \(context.coordinator.isChargePortOpen)")
+                print("📊 updateUIView state check - isFrunkAnimating: \(context.coordinator.isFrunkAnimating), isFrunkOpen: \(context.coordinator.isFrunkOpen)")
+                
+                // Handle charge port state changes
                 if let chargePortState = model.chargePortClosureState {
                     print("📊 Model state update - chargePortState: \(chargePortState)")
                     if !context.coordinator.isAnimating {
                         context.coordinator.handleChargePortStateChange(chargePortState)
                     } else {
-                        print("⏳ Skipping state change due to animation in progress")
+                        print("⏳ Skipping charge port state change due to animation in progress")
                     }
                 } else {
                     print("❓ No charge port state available in model")
+                }
+                
+                // Handle frunk state changes
+                if let frunkState = model.frunkClosureState {
+                    print("📊 Model state update - frunkState: \(frunkState)")
+                    if !context.coordinator.isFrunkAnimating {
+                        context.coordinator.handleFrunkStateChange(frunkState)
+                    } else {
+                        print("⏳ Skipping frunk state change due to animation in progress")
+                    }
+                } else {
+                    print("❓ No frunk state available in model")
                 }
             } else {
                 print("⏳ Scene not yet loaded, skipping state update")
