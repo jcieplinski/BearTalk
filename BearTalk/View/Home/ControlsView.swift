@@ -11,12 +11,13 @@ struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
-    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security"
+    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security,windows"
 
-    @State var showLogOutWarning: Bool = false
-    @State var showClimateControl: Bool = false
-    @State var showSeatClimate: Bool = false
-    @State var showSettings: Bool = false
+    @State private var showLogOutWarning: Bool = false
+    @State private var showClimateControl: Bool = false
+    @State private var showSeatClimate: Bool = false
+    @State private var showSettings: Bool = false
+    @State private var showWindowControls: Bool = false
     @State private var draggedCell: String?
     
     private var orderedCells: [String] {
@@ -32,6 +33,8 @@ struct ControlsView: View {
                 ChargingCell()
             case "security":
                 SecurityCell()
+            case "windows":
+                WindowsCell()
             default:
                 EmptyView()
             }
@@ -164,6 +167,11 @@ struct ControlsView: View {
                 SeatClimateSheet(modalPresented: true)
                     .presentationBackground(.thinMaterial)
             }
+            .sheet(isPresented: $showWindowControls) {
+                WindowsSheet(isModelPresntation: true)
+                    .presentationBackground(.thinMaterial)
+                    .presentationDetents([.fraction(0.55)])
+            }
             .onAppear {
                 NotificationCenter.default.addObserver(
                     forName: .showClimateControl,
@@ -179,6 +187,14 @@ struct ControlsView: View {
                     queue: .main
                 ) { _ in
                     showSeatClimate = true
+                }
+                
+                NotificationCenter.default.addObserver(
+                    forName: .showWindowControl,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    showWindowControls = true
                 }
             }
         }

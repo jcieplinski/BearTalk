@@ -46,7 +46,7 @@ extension DataModel {
         case .hazards:
             toggleHazards()
         case .windows:
-            // TODO: Add window control for gravity
+            NotificationCenter.default.post(name: .showWindowControl, object: nil)
             break
         case .batteryPrecondition:
             toggleBatteryPrecondition()
@@ -758,6 +758,26 @@ extension DataModel {
         } catch {
             print("Error starting software update: \(error)")
             requestInProgress.remove(.softwareUpdate)
+        }
+    }
+    
+    @MainActor
+    func controlAllWindows(state: Mobilegateway_Protos_WindowSwitchState) {
+        Task {
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.windows)
+                
+                let success = try await BearAPI.allWindowControl(state: state)
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not control windows: \(error)")
+            }
         }
     }
 }

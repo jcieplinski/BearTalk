@@ -948,5 +948,35 @@ final class BearAPI {
             }
         }
     }
+
+    static func allWindowControl(vehicleID: String = vehicleID, state: Mobilegateway_Protos_WindowSwitchState) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_AllWindowControlRequest()
+                request.vehicleID = vehicleID
+                request.state = state
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.allWindowControl(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    return true
+                } catch {
+                    print("Error in allWindowControl: \(error)")
+                    return false
+                }
+            }
+        }
+    }
 }
 

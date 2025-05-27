@@ -75,6 +75,29 @@ enum WindowPositionStatus: Codable, Equatable {
         return self != .fullyClosed
     }
     
+    var image: String {
+        switch self {
+            
+        case .unknown, .fullyClosed, .unknownDeInitialized, .atpReversePosition, .hardStopUp, .UNRECOGNIZED:
+            "windowClosed"
+        case .aboveShortDropPosition, .shortDropPosition, .anticlatterPosition, .ventDropPosition, .betweenFullyClosedAndShortDropDown, .betweenShortDropDownAndFullyOpen:
+            "windowVent"
+        case .belowShortDropPosition, .fullyOpen, .longDropPosition, .hardStopDown:
+            "windowOpen"
+        }
+    }
+    
+    var positionTitle: String {
+        switch self {
+        case .unknown, .fullyClosed, .unknownDeInitialized, .atpReversePosition, .hardStopUp, .UNRECOGNIZED:
+            "Closed"
+        case .aboveShortDropPosition, .shortDropPosition, .anticlatterPosition, .ventDropPosition, .betweenFullyClosedAndShortDropDown, .betweenShortDropDownAndFullyOpen, .belowShortDropPosition:
+            "Partially Open"
+        case .fullyOpen, .longDropPosition, .hardStopDown:
+            "Open"
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_WindowPositionStatus) {
         switch proto {
         case .unknown: self = .unknown
