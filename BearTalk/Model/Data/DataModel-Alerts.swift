@@ -27,10 +27,10 @@ extension DataModel {
         
         // Check windows
         let windowPosition = bodyState.windowPosition
-        if windowPosition.leftFront != .fullyClosed { activeAlerts.append("Front Left Window Open") }
-        if windowPosition.rightFront != .fullyClosed { activeAlerts.append("Front Right Window Open") }
-        if windowPosition.leftRear != .fullyClosed { activeAlerts.append("Rear Left Window Open") }
-        if windowPosition.rightRear != .fullyClosed { activeAlerts.append("Rear Right Window Open") }
+        if windowPosition.leftFront.isOpen { activeAlerts.append("Front Left Window Open") }
+        if windowPosition.rightFront.isOpen { activeAlerts.append("Front Right Window Open") }
+        if windowPosition.leftRear.isOpen { activeAlerts.append("Rear Left Window Open") }
+        if windowPosition.rightRear.isOpen { activeAlerts.append("Rear Right Window Open") }
         
         // Check tire pressure warnings
         if chassisState.hardWarnLeftFront == .warningOn || chassisState.softWarnLeftFront == .warningOn { activeAlerts.append("Front Left Tire Pressure Warning") }
