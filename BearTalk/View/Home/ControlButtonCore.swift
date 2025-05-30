@@ -26,8 +26,13 @@ struct ControlButtonCore: View {
         
         .padding(4)
         .background(
-            RoundedRectangle(cornerRadius: 13)
-                .stroke(style: StrokeStyle(lineWidth: 1))
+            ZStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .foregroundStyle(isActive ? .active.opacity(0.2) : .clear)
+                
+                RoundedRectangle(cornerRadius: 13)
+                    .stroke(style: StrokeStyle(lineWidth: 1))
+            }
         )
         .tint(isActive ? .active : .inactive)
         .disabled(model.requestInProgress.contains(controlType))
