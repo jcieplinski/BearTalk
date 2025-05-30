@@ -19,12 +19,22 @@
 		AE2F600C2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600B2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices */; };
 		AE2F600F2DD10AC5003BDC36 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600E2DD10AC5003BDC36 /* GRPCProtobuf */; };
 		AE2F60112DD10AC5003BDC36 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F60102DD10AC5003BDC36 /* protoc-gen-grpc-swift */; };
+		AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */; };
+		AE9979542DEA0F5B00942DD9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */; };
+		AE9979632DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D8CA9DBD2B166B3400BC35F8 /* BearTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */; };
 		D8CA9DC72B166B3400BC35F8 /* BearTalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC62B166B3400BC35F8 /* BearTalkUITests.swift */; };
 		D8CA9DC92B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC82B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AE9979612DEA0F5B00942DD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8CA9D9F2B166B3300BC35F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE99794F2DEA0F5B00942DD9;
+			remoteInfo = "Bear Talk Widget ExtensionExtension";
+		};
 		D8CA9DB92B166B3400BC35F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D8CA9D9F2B166B3300BC35F8 /* Project object */;
@@ -41,7 +51,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AE9979642DEA0F5B00942DD9 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE9979632DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Bear Talk Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BearTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkTests.swift; sourceTree = "<group>"; };
@@ -81,13 +108,30 @@
 			);
 			target = D8CA9DA62B166B3300BC35F8 /* BearTalk */;
 		};
+		AE9979682DEA0F5B00942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE2F5F6B2DD0FAE1003BDC36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BearTalk; sourceTree = "<group>"; };
+		AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE9979682DEA0F5B00942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Bear Talk Widget Extension"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AE99794D2DEA0F5B00942DD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE9979542DEA0F5B00942DD9 /* SwiftUI.framework in Frameworks */,
+				AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8CA9DA42B166B3300BC35F8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +171,8 @@
 		AE2F5FD22DD106A6003BDC36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */,
+				AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +183,7 @@
 				AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */,
 				D8CA9DBB2B166B3400BC35F8 /* BearTalkTests */,
 				D8CA9DC52B166B3400BC35F8 /* BearTalkUITests */,
+				AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */,
 				AE2F5FD22DD106A6003BDC36 /* Frameworks */,
 				D8CA9DA82B166B3300BC35F8 /* Products */,
 			);
@@ -150,6 +197,7 @@
 				D8CA9DA72B166B3300BC35F8 /* BearTalk.app */,
 				D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */,
 				D8CA9DC22B166B3400BC35F8 /* BearTalkUITests.xctest */,
+				AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +222,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE9979672DEA0F5B00942DD9 /* Build configuration list for PBXNativeTarget "Bear Talk Widget ExtensionExtension" */;
+			buildPhases = (
+				AE99794C2DEA0F5B00942DD9 /* Sources */,
+				AE99794D2DEA0F5B00942DD9 /* Frameworks */,
+				AE99794E2DEA0F5B00942DD9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */,
+			);
+			name = "Bear Talk Widget ExtensionExtension";
+			packageProductDependencies = (
+			);
+			productName = "Bear Talk Widget ExtensionExtension";
+			productReference = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D8CA9DA62B166B3300BC35F8 /* BearTalk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8CA9DCC2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalk" */;
@@ -181,10 +251,12 @@
 				D8CA9DA32B166B3300BC35F8 /* Sources */,
 				D8CA9DA42B166B3300BC35F8 /* Frameworks */,
 				D8CA9DA52B166B3300BC35F8 /* Resources */,
+				AE9979642DEA0F5B00942DD9 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AE9979622DEA0F5B00942DD9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */,
@@ -237,9 +309,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					AE99794F2DEA0F5B00942DD9 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					D8CA9DA62B166B3300BC35F8 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -275,11 +350,19 @@
 				D8CA9DA62B166B3300BC35F8 /* BearTalk */,
 				D8CA9DB72B166B3400BC35F8 /* BearTalkTests */,
 				D8CA9DC12B166B3400BC35F8 /* BearTalkUITests */,
+				AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AE99794E2DEA0F5B00942DD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8CA9DA52B166B3300BC35F8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +387,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AE99794C2DEA0F5B00942DD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8CA9DA32B166B3300BC35F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,6 +421,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AE9979622DEA0F5B00942DD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
+			targetProxy = AE9979612DEA0F5B00942DD9 /* PBXContainerItemProxy */;
+		};
 		D8CA9DBA2B166B3400BC35F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D8CA9DA62B166B3300BC35F8 /* BearTalk */;
@@ -344,6 +439,63 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		AE9979652DEA0F5B00942DD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bear Talk Widget Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Talk Widget Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joecieplinski.BearTalk.Bear-Talk-Widget-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AE9979662DEA0F5B00942DD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bear Talk Widget Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Talk Widget Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joecieplinski.BearTalk.Bear-Talk-Widget-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D8CA9DCA2B166B3400BC35F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -641,6 +793,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AE9979672DEA0F5B00942DD9 /* Build configuration list for PBXNativeTarget "Bear Talk Widget ExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE9979652DEA0F5B00942DD9 /* Debug */,
+				AE9979662DEA0F5B00942DD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D8CA9DA22B166B3300BC35F8 /* Build configuration list for PBXProject "BearTalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
