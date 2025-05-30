@@ -12,6 +12,5 @@ import SwiftUI
 struct Bear_Talk_Widget_ExtensionBundle: WidgetBundle {
     var body: some Widget {
         Bear_Talk_Widget_Extension()
-        Bear_Talk_Widget_ExtensionControl()
     }
 }

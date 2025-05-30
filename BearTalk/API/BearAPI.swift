@@ -11,6 +11,7 @@ import GRPCCore
 import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 import SwiftProtobuf
+import WidgetKit
 
 final class BearAPI {
     @AppStorage(DefaultsKey.authorization, store: .appGroup) static var authorization: String = ""

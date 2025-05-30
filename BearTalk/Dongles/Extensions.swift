@@ -48,9 +48,3 @@ extension Double {
         return NSNumber(value: self.round(to: 2)).description(withLocale: Locale.autoupdatingCurrent)
     }
 }
-
-extension UserDefaults {
-    static var appGroup: UserDefaults {
-        UserDefaults(suiteName: "group.com.joecieplinski.bearTalk") ?? .standard
-    }
-}

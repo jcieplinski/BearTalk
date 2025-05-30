@@ -19,6 +19,13 @@
 		AE2F600C2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600B2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices */; };
 		AE2F600F2DD10AC5003BDC36 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600E2DD10AC5003BDC36 /* GRPCProtobuf */; };
 		AE2F60112DD10AC5003BDC36 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F60102DD10AC5003BDC36 /* protoc-gen-grpc-swift */; };
+		AE4A928B2DEA613300813074 /* GRPCCodeGen in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928A2DEA613300813074 /* GRPCCodeGen */; };
+		AE4A928D2DEA613300813074 /* GRPCCore in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928C2DEA613300813074 /* GRPCCore */; };
+		AE4A928F2DEA613300813074 /* GRPCInProcessTransport in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928E2DEA613300813074 /* GRPCInProcessTransport */; };
+		AE4A92912DEA613300813074 /* GRPCNIOTransportHTTP2 in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A92902DEA613300813074 /* GRPCNIOTransportHTTP2 */; };
+		AE4A92932DEA613300813074 /* GRPCNIOTransportHTTP2Posix in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A92922DEA613300813074 /* GRPCNIOTransportHTTP2Posix */; };
+		AE4A92952DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A92942DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices */; };
+		AE4A92972DEA613300813074 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A92962DEA613300813074 /* GRPCProtobuf */; };
 		AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */; };
 		AE9979542DEA0F5B00942DD9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */; };
 		AE9979632DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -69,6 +76,7 @@
 		AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Bear Talk Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AE997C0F2DEA42FF00942DD9 /* Bear Talk Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bear Talk Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BearTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkTests.swift; sourceTree = "<group>"; };
@@ -115,10 +123,71 @@
 			);
 			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
 		};
+		AE997C0C2DEA42D800942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				API/BearAPI.swift,
+				API/VehicleResponseMapping.swift,
+				Assets.xcassets,
+				Dongles/Color.swift,
+				Dongles/Enumerations/ControlType.swift,
+				Dongles/Enumerations/DefaultsKey.swift,
+				Dongles/Enumerations/Enumerations.swift,
+				Dongles/Enumerations/PaintColor.swift,
+				Dongles/Enumerations/UserDefaults.swift,
+				Dongles/Enumerations/UTType.swift,
+				Dongles/Enumerations/Wheels.swift,
+				Dongles/Extensions.swift,
+				Dongles/URLStrings.swift,
+				Generated/charging_service.grpc.swift,
+				Generated/charging_service.pb.swift,
+				Generated/login_session.grpc.swift,
+				Generated/login_session.pb.swift,
+				Generated/salesforce_service.grpc.swift,
+				Generated/salesforce_service.pb.swift,
+				Generated/sentry_service.grpc.swift,
+				Generated/sentry_service.pb.swift,
+				Generated/subscription_service.grpc.swift,
+				Generated/subscription_service.pb.swift,
+				Generated/trip_service.grpc.swift,
+				Generated/trip_service.pb.swift,
+				Generated/user_preferences_service.grpc.swift,
+				Generated/user_preferences_service.pb.swift,
+				Generated/user_profile_service.grpc.swift,
+				Generated/user_profile_service.pb.swift,
+				Generated/vehicle_state_service.grpc.swift,
+				Generated/vehicle_state_service.pb.swift,
+				Model/Responses/LoginResponse.swift,
+				Model/SessionInfo.swift,
+				Model/UserProfile.swift,
+				Model/Vehicle/AlarmState.swift,
+				Model/Vehicle/BatteryState.swift,
+				Model/Vehicle/BodyState.swift,
+				Model/Vehicle/CabinState.swift,
+				Model/Vehicle/ChargingAccount.swift,
+				Model/Vehicle/ChargingState.swift,
+				Model/Vehicle/ChassisState.swift,
+				Model/Vehicle/EASubscription.swift,
+				Model/Vehicle/GPS.swift,
+				Model/Vehicle/HVACState.swift,
+				Model/Vehicle/Location.swift,
+				Model/Vehicle/MobileAppReqStatus.swift,
+				Model/Vehicle/SoftwareUpdate.swift,
+				Model/Vehicle/TCUInternetStatus.swift,
+				Model/Vehicle/Vehicle.swift,
+				Model/Vehicle/VehicleConfig.swift,
+				Model/Vehicle/VehicleState.swift,
+				Model/VehicleIdentifier.swift,
+				Model/VehicleIdentifierEntity.swift,
+				Model/VehicleIdentifierHandler.swift,
+				Model/VehicleIdentifierQuery.swift,
+			);
+			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE2F5F6B2DD0FAE1003BDC36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BearTalk; sourceTree = "<group>"; };
+		AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE2F5F6B2DD0FAE1003BDC36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AE997C0C2DEA42D800942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BearTalk; sourceTree = "<group>"; };
 		AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE9979682DEA0F5B00942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Bear Talk Widget Extension"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -127,7 +196,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4A92972DEA613300813074 /* GRPCProtobuf in Frameworks */,
+				AE4A92952DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */,
+				AE4A92912DEA613300813074 /* GRPCNIOTransportHTTP2 in Frameworks */,
 				AE9979542DEA0F5B00942DD9 /* SwiftUI.framework in Frameworks */,
+				AE4A928D2DEA613300813074 /* GRPCCore in Frameworks */,
+				AE4A92932DEA613300813074 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
+				AE4A928F2DEA613300813074 /* GRPCInProcessTransport in Frameworks */,
+				AE4A928B2DEA613300813074 /* GRPCCodeGen in Frameworks */,
 				AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +256,7 @@
 		D8CA9D9E2B166B3300BC35F8 = {
 			isa = PBXGroup;
 			children = (
+				AE997C0F2DEA42FF00942DD9 /* Bear Talk Widget ExtensionExtension.entitlements */,
 				AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */,
 				D8CA9DBB2B166B3400BC35F8 /* BearTalkTests */,
 				D8CA9DC52B166B3400BC35F8 /* BearTalkUITests */,
@@ -239,6 +316,13 @@
 			);
 			name = "Bear Talk Widget ExtensionExtension";
 			packageProductDependencies = (
+				AE4A928A2DEA613300813074 /* GRPCCodeGen */,
+				AE4A928C2DEA613300813074 /* GRPCCore */,
+				AE4A928E2DEA613300813074 /* GRPCInProcessTransport */,
+				AE4A92902DEA613300813074 /* GRPCNIOTransportHTTP2 */,
+				AE4A92922DEA613300813074 /* GRPCNIOTransportHTTP2Posix */,
+				AE4A92942DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices */,
+				AE4A92962DEA613300813074 /* GRPCProtobuf */,
 			);
 			productName = "Bear Talk Widget ExtensionExtension";
 			productReference = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */;
@@ -444,6 +528,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Bear Talk Widget ExtensionExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -472,6 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Bear Talk Widget ExtensionExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -943,6 +1029,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
 			productName = "protoc-gen-grpc-swift";
+		};
+		AE4A928A2DEA613300813074 /* GRPCCodeGen */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCCodeGen;
+		};
+		AE4A928C2DEA613300813074 /* GRPCCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCCore;
+		};
+		AE4A928E2DEA613300813074 /* GRPCInProcessTransport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCInProcessTransport;
+		};
+		AE4A92902DEA613300813074 /* GRPCNIOTransportHTTP2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2;
+		};
+		AE4A92922DEA613300813074 /* GRPCNIOTransportHTTP2Posix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2Posix;
+		};
+		AE4A92942DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2TransportServices;
+		};
+		AE4A92962DEA613300813074 /* GRPCProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
+			productName = GRPCProtobuf;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import OSLog
+import WidgetKit
 
 extension DataModel {
     var allFunctionsDisable: Bool {
@@ -576,6 +577,10 @@ extension DataModel {
                 if oldState.softwareUpdate.state != newState.softwareUpdate.state {
                     requestInProgress.remove(.softwareUpdate)
                 }
+            }
+            
+            if oldState != newState {
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
         

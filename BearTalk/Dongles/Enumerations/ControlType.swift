@@ -6,11 +6,42 @@
 //
 
 import SwiftUI
+import AppIntents
 
-enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transferable {
+enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transferable, AppEnum {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .controlType)
     }
+    
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Contol Type")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .wake: DisplayRepresentation(title: "Wake Car"),
+        .doorLocks: DisplayRepresentation(title: "Door Locks"),
+        .frunk: DisplayRepresentation(title: "Frunk"),
+        .trunk: DisplayRepresentation(title: "Trunk"),
+        .chargePort: DisplayRepresentation(title: "Charge Port"),
+        .climateControl: DisplayRepresentation(title: "Climate Control"),
+        .maxAC: DisplayRepresentation(title: "Max AC"),
+        .seatClimate: DisplayRepresentation(title: "Seat Climate"),
+        .steeringWheelClimate: DisplayRepresentation(title: "Steering Wheel Climate"),
+        .defrost: DisplayRepresentation(title: "Defrost"),
+        .horn: DisplayRepresentation(title: "Honk"),
+        .lights: DisplayRepresentation(title: "Lights"),
+        .hazards: DisplayRepresentation(title: "Hazards"),
+        .windows: DisplayRepresentation(title: "Windows"),
+        .batteryPrecondition: DisplayRepresentation(title: "Battery Preconditioning"),
+        .softwareUpdate: DisplayRepresentation(title: "Software Update"),
+        .chargeLimit: DisplayRepresentation(title: "Charge Limit"),
+        .driverSeatHeat: DisplayRepresentation(title: "Driver Seat Chair"),
+        .driverSeatVent: DisplayRepresentation(title: "Driver Seat Vent"),
+        .passengerSeatHeat: DisplayRepresentation(title: "Passenger Seat Heat"),
+        .passengerSeatVent: DisplayRepresentation(title: "Passenger Seat Vent"),
+        .rearLeftSeatHeat: DisplayRepresentation(title: "Rear Left Seat Heat"),
+        .rearCenterSeatHeat: DisplayRepresentation(title: "Rear Center Seat Heat"),
+        .rearRightSeatHeat: DisplayRepresentation(title: "Rear Right Seat Heat"),
+        .alarm: DisplayRepresentation(title: "Alarm"),
+    ]
     
     case wake
     case doorLocks
