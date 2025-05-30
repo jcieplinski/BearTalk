@@ -18,6 +18,21 @@ extension DataModel {
     }
     
     func handleControlAction(_ controlType: ControlType) {
+        if shouldShowAlertForControl(controlType) {
+            // Post notification to show alert
+            NotificationCenter.default.post(
+                name: .showControlAlert,
+                object: nil,
+                userInfo: [
+                    "controlType": controlType,
+                    "title": getAlertTitleForControl(controlType),
+                    "message": getAlertMessageForControl(controlType)
+                ]
+            )
+            return
+        }
+        
+        // If no alert needed or alert was confirmed, proceed with action
         switch controlType {
         case .wake:
             break

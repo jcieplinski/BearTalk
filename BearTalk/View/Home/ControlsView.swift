@@ -71,10 +71,18 @@ struct ControlsView: View {
                                         model.wakeUpCar()
                                     }
                                 } label: {
-                                    Image(systemName: model.powerState.image)
-                                        .font(.body)
-                                        .dynamicTypeSize(.large)
-                                        .fontWeight(.bold)
+                                    ZStack {
+                                        Image(systemName: model.powerState.image)
+                                            .font(.body)
+                                            .dynamicTypeSize(.large)
+                                            .fontWeight(.bold)
+                                            .opacity(model.requestInProgress.contains(.wake) ? 0.3 : 1.0)
+                                            .disabled(model.requestInProgress.contains(.wake))
+                                        
+                                        if model.requestInProgress.contains(.wake) {
+                                            ProgressView()
+                                        }
+                                    }
                                 }
                                 .padding()
                             }
@@ -160,7 +168,7 @@ struct ControlsView: View {
             .sheet(isPresented: $showSettings) {
                 SettingsView()
                     .presentationBackground(.thinMaterial)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.70), .large])
             }
             .sheet(isPresented: $showClimateControl) {
                 ClimateControlSheet(modalPresented: true)

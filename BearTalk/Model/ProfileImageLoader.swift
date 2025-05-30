@@ -154,14 +154,14 @@ struct ProfileImageView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 32, height: 32)
                     .clipShape(Circle())
             } else if loadError && retryCount >= maxRetries {
                 Image(systemName: "person.circle")
                     .font(.title2)
             } else {
                 ProgressView()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 32, height: 32)
                     .task {
                         await loadImage()
                     }

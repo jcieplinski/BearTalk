@@ -25,6 +25,7 @@ enum DefaultsKey {
     static let cellOrder: String = "cellOrder"
     static let useFaceID: String = "useFaceID"
     static let colorScheme: String = "colorScheme"
+    static let showAlertsBeforeOpenActions = "showAlertsBeforeOpenActions"
 }
 
 enum AppColorScheme: Int, Codable {

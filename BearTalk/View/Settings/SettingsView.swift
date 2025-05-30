@@ -17,6 +17,7 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
+            @Bindable var model = model
             List {
                 Section("Profile") {
                     Button {
@@ -55,6 +56,11 @@ struct SettingsView: View {
                             Spacer()
                         }
                     }
+                }
+                
+                Section("Controls") {
+                    Toggle("Show Alerts before Open Actions", isOn: $model.showAlertsBeforeOpenActions)
+                        .tint(.active)
                 }
                 
                 Section("Appearance") {

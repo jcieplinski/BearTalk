@@ -66,6 +66,9 @@ struct ContentView: View {
         .background(
             LinearGradient(gradient: Gradient(colors: appState.backgroundColors), startPoint: .top, endPoint: .bottom)
         )
+        .overlay {
+            ControlAlertView()
+        }
         .task {
             // Initialize token manager
             await tokenManager.initialize()

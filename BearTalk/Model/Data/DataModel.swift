@@ -154,6 +154,61 @@ import GRPCCore
     @ObservationIgnored private var lastRefreshTime: Date?
     @ObservationIgnored private var refreshCheckTimer: Timer?
     
+    @ObservationIgnored @AppStorage(DefaultsKey.showAlertsBeforeOpenActions, store: .appGroup) var showAlertsBeforeOpenActions: Bool = true
+    
+    func shouldShowAlertForControl(_ controlType: ControlType) -> Bool {
+        guard showAlertsBeforeOpenActions else { return false }
+        
+        switch controlType {
+        case .doorLocks:
+            // Only show alert when unlocking
+            return lockState == .locked
+        case .frunk:
+            // Only show alert when opening
+            return frunkClosureState == .closed
+        case .trunk:
+            // Only show alert when opening
+            return trunkClosureState == .closed
+        case .windows:
+            // Only show alert when opening windows
+            // For windows, we'll show the alert when the window control sheet is opened
+            // since the actual window state is handled in the sheet
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func getAlertTitleForControl(_ controlType: ControlType) -> String {
+        switch controlType {
+        case .doorLocks:
+            return "Unlock Doors"
+        case .frunk:
+            return "Open Frunk"
+        case .trunk:
+            return "Open Trunk"
+        case .windows:
+            return "Windows"
+        default:
+            return ""
+        }
+    }
+    
+    func getAlertMessageForControl(_ controlType: ControlType) -> String {
+        switch controlType {
+        case .doorLocks:
+            return "Are you sure you want to unlock the doors?"
+        case .frunk:
+            return "Are you sure you want to open the frunk?"
+        case .trunk:
+            return "Are you sure you want to open the trunk?"
+        case .windows:
+            return "Are you sure you want to open the windows?"
+        default:
+            return ""
+        }
+    }
+    
     func getUserProfile() async throws {
         do {
             // First get the user profile
