@@ -29,8 +29,6 @@ struct ContentView: View {
                 Group {
                     if appState.noCarMode {
                         NoCarView()
-                    } else if tokenManager.isAppHoldScreen {
-                        Spacer()
                     } else if tokenManager.isLoggedIn {
                         TabView(selection: $appState.selectedTab) {
                             ControlsView()

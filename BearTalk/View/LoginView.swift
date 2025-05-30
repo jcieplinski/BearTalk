@@ -39,7 +39,7 @@ struct LoginView: View {
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)
                             .overlay {
-                                TextField("UserName", text: $appState.userName)
+                                TextField("username", text: $appState.userName)
                                     .textFieldStyle(.plain)
                                     .textContentType(.emailAddress)
                                     .focused($focused, equals: .userName)
@@ -58,7 +58,7 @@ struct LoginView: View {
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)
                             .overlay {
-                                SecureField("Password", text: $appState.password)
+                                SecureField("password", text: $appState.password)
                                     .textFieldStyle(.plain)
                                     .textContentType(.password)
                                     .focused($focused, equals: .password)

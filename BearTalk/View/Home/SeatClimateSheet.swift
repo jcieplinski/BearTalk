@@ -250,7 +250,7 @@ struct SeatClimateSheet: View {
                                 RoundedRectangle(cornerRadius: 13)
                                     .stroke(style: StrokeStyle(lineWidth: 1))
                             )
-                            .tint(model.frontDriverSeatVentOn ? .activeCool : .inactive)
+                            .tint(model.frontDriverSeatVentOn ? .active : .inactive)
                         }
                         .disabled(model.requestInProgress.contains(.driverSeatVent) || !model.hasFrontSeatVentilation)
                         
@@ -267,7 +267,7 @@ struct SeatClimateSheet: View {
                                 .font(.caption2.bold())
                                 .foregroundStyle(.white)
                                 .frame(width: 20, height: 20)
-                                .background(Circle().fill(.activeCool))
+                                .background(Circle().fill(.active))
                                 .offset(x: 10, y: 10)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                         }
@@ -333,7 +333,7 @@ struct SeatClimateSheet: View {
                                 RoundedRectangle(cornerRadius: 13)
                                     .stroke(style: StrokeStyle(lineWidth: 1))
                             )
-                            .tint(model.frontPassengerSeatVentOn ? .activeCool : .inactive)
+                            .tint(model.frontPassengerSeatVentOn ? .active : .inactive)
                         }
                         .disabled(model.requestInProgress.contains(.passengerSeatVent) || !model.hasFrontSeatVentilation)
                         
@@ -350,7 +350,7 @@ struct SeatClimateSheet: View {
                                 .font(.caption2.bold())
                                 .foregroundStyle(.white)
                                 .frame(width: 20, height: 20)
-                                .background(Circle().fill(.activeCool))
+                                .background(Circle().fill(.active))
                                 .offset(x: 10, y: 10)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                         }

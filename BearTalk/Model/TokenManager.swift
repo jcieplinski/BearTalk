@@ -82,16 +82,17 @@ final class TokenManager {
             backgroundTask = .invalid
         }
         
-        // If we don't have a refresh token, we're not logged in
+        // If we don't have a refresh token, we're definitely not logged in
         guard refreshToken.isNotBlank else {
             print("No refresh token available, not logged in")
             isLoggedIn = false
-            isAppHoldScreen = false
             return
         }
         
+        // Only invalidate login state if we're certain the token is invalid
         if !checkTokenValidity() {
             print("Token validation failed on app activation, attempting refresh")
+            // Don't set isLoggedIn to false yet, wait for refresh attempt
             await refreshAuth()
             return
         }
@@ -104,7 +105,7 @@ final class TokenManager {
             print("Token expires soon (\(Int(timeUntilExpiry))s), refreshing now")
             await refreshAuth()
         } else {
-            // If we have a valid token, we should be logged in
+            // Token is valid, ensure we're logged in
             isLoggedIn = true
             
             // Set refresh timer to refresh before expiry
@@ -121,8 +122,6 @@ final class TokenManager {
                 }
             }
         }
-        
-        isAppHoldScreen = false
     }
     
     func handleAppBackground() {
@@ -204,24 +203,25 @@ final class TokenManager {
         let currentTime = Date().timeIntervalSince1970
         let timeUntilExpiry = tokenExpiryTime - currentTime
         
-        // Check if we have a refresh token
+        // Check if we have a refresh token - this is the only case where we should immediately set logged out
         guard refreshToken.isNotBlank else {
             print("No refresh token available")
             isLoggedIn = false
             return false
         }
         
+        // For other validation cases, just return false without changing login state
+        // The refresh process will handle updating the login state
+        
         // Validate the expiry time
         guard validateExpiryTime(Int(timeUntilExpiry)) else {
             print("Token has invalid expiry time, forcing refresh")
-            isLoggedIn = false
             return false
         }
         
         // Check if token is expired
         guard timeUntilExpiry > 0 else {
             print("Token is expired")
-            isLoggedIn = false
             return false
         }
         
@@ -284,6 +284,9 @@ final class TokenManager {
                        rpcError.code == .unauthenticated {
                         print("Unauthenticated error, clearing tokens")
                         logout()
+                    } else {
+                        // Only set logged out if we've exhausted all retries
+                        isLoggedIn = false
                     }
                     return
                 }
