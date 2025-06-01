@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GRPCCore
+import WidgetKit
 
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
@@ -89,6 +90,7 @@ struct ContentView: View {
                 print("App entering background/inactive state")
                 tokenManager.handleAppBackground()
                 model.stopRefreshing()
+                WidgetCenter.shared.reloadAllTimelines()
             case .active:
                 print("App becoming active")
                 tokenManager.logTokenStatus()

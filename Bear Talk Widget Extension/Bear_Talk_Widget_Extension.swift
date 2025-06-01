@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import SwiftData
 import AppIntents
 
 struct Provider: AppIntentTimelineProvider {
@@ -15,7 +16,8 @@ struct Provider: AppIntentTimelineProvider {
             date: Date(),
             configuration: BearWidgetIntent(),
             nickname: "My Lucid",
-            vehicleState: nil
+            vehicleState: nil,
+            snapshotData: nil
         )
     }
 
@@ -25,11 +27,18 @@ struct Provider: AppIntentTimelineProvider {
         
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first
         
+        // Get the snapshot data using VehicleIdentifierHandler
+        var snapshotData: Data?
+        if let vehicleId = vehicle?.vehicleId {
+            snapshotData = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
+        }
+        
         return SimpleEntry(
             date: Date(),
             configuration: configuration,
             nickname: vehicle?.vehicleConfig.nickname ?? "",
-            vehicleState: vehicle?.vehicleState
+            vehicleState: vehicle?.vehicleState,
+            snapshotData: snapshotData
         )
     }
     
@@ -40,6 +49,12 @@ struct Provider: AppIntentTimelineProvider {
         let vehicles = try? await BearAPI.fetchVehicles()
         
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first
+        
+        // Get the snapshot data using VehicleIdentifierHandler
+        var snapshotData: Data?
+        if let vehicleId = vehicle?.vehicleId {
+            snapshotData = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
+        }
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
@@ -49,7 +64,8 @@ struct Provider: AppIntentTimelineProvider {
                 date: entryDate,
                 configuration: configuration,
                 nickname: vehicle?.vehicleConfig.nickname ?? "",
-                vehicleState: vehicle?.vehicleState
+                vehicleState: vehicle?.vehicleState,
+                snapshotData: snapshotData
             )
             entries.append(entry)
         }
@@ -67,6 +83,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: BearWidgetIntent
     let nickname: String
     let vehicleState: VehicleState?
+    let snapshotData: Data?
 }
 
 struct Bear_Talk_Widget_ExtensionEntryView : View {
@@ -77,35 +94,67 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         if let vehicleState = entry.vehicleState {
             switch family {
             case .systemSmall:
-                HStack {
-                    if let controlOne = entry.configuration.controlTypeOne {
-                        WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne))
-                    }
-                    
-                    if let controlTwo = entry.configuration.controlTypeTwo {
-                        WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo))
-                    }
-                }
-                
-                HStack {
-                    if let controlThree = entry.configuration.controlTypeThree {
-                        WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree))
-                    }
-                    
-                    if let controlFour = entry.configuration.controlTypeFour {
-                        WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
-                    }
-                }
-            case .systemMedium:
-                VStack(alignment: .leading) {
-                    if entry.nickname.isNotBlank {
-                        Text(entry.nickname)
+                VStack(spacing: 0) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Spacer(minLength: 1)
+                        
+                        if entry.nickname.isNotBlank {
+                            Text(entry.nickname)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .font(.caption)
+                        }
+                        
+                        Text("\(vehicleState.batteryState.chargePercent.rounded().stringWithLocale())%")
+                            .font(.title)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     
-                    Text("\(vehicleState.batteryState.chargePercent.rounded().stringWithLocale())%")
-                        .font(.title)
-                        .fixedSize(horizontal: false, vertical: true)
+                    HStack {
+                        if let controlOne = entry.configuration.controlTypeOne {
+                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne))
+                        }
+                        
+                        if let controlTwo = entry.configuration.controlTypeTwo {
+                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo))
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    HStack {
+                        if let controlThree = entry.configuration.controlTypeThree {
+                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree))
+                        }
+                        
+                        if let controlFour = entry.configuration.controlTypeFour {
+                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+            
+            case .systemMedium:
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        VStack {
+                            if entry.nickname.isNotBlank {
+                                Text(entry.nickname)
+                                    .font(.headline)
+                            }
+                            
+                            Text("\(vehicleState.batteryState.chargePercent.rounded().stringWithLocale())%")
+                                .font(.title)
+                        }
+                        
+                        if let snapshotData = entry.snapshotData,
+                           let uiImage = UIImage(data: snapshotData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(maxWidth: 400, maxHeight: 80)
+                        }
+                    }
                     
                     HStack {
                         if let controlOne = entry.configuration.controlTypeOne {
@@ -124,14 +173,22 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
                             WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
                         }
                     }
-                    .frame(maxWidth: .infinity)
                 }
-                .frame(maxWidth: .infinity)
                 .padding()
+            
             case .systemLarge:
-                VStack {
+                VStack(spacing: 0) {
+                    if let snapshotData = entry.snapshotData,
+                       let uiImage = UIImage(data: snapshotData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 500, maxHeight: 300)
+                    }
+                    
                     if entry.nickname.isNotBlank {
                         Text(entry.nickname)
+                            .font(.headline)
                     }
                     
                     Text("\(vehicleState.batteryState.chargePercent.rounded().stringWithLocale())%")
@@ -173,6 +230,8 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
                         }
                     }
                 }
+                .padding()
+            
             default:
                 EmptyView()
             }
@@ -239,35 +298,78 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
     private func intent(for controlType: ControlType) -> any AppIntent {
         switch controlType {
         case .wake:
-            break
+            return WakeIntent(vehicle: entry.configuration.$vehicle)
         case .doorLocks:
-            return ToggleLockIntent(vehicle: entry.configuration.$vehicle)
+            let action = entry.vehicleState?.bodyState.doorLocks == .locked ? LockAction.unlocked : .locked
+            let intent = DoorLockIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .frunk:
-            break
+            let action = entry.vehicleState?.bodyState.frontCargo == .closed ? OpenAction.open : .close
+            let intent = FrunkIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .trunk:
-            break
+            let action = entry.vehicleState?.bodyState.rearCargo == .closed ? OpenAction.open : .close
+            let intent = TrunkIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .chargePort:
-            break
+            let action = entry.vehicleState?.bodyState.chargePortState == .closed ? OpenAction.open : .close
+            let intent = ChargePortIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .climateControl:
-            break
+            let action = entry.vehicleState?.hvacState.power == .hvacOn ? ClimateStatus.off : .on
+            let intent = ClimateIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .maxAC:
-            break
+            let action = entry.vehicleState?.hvacState.maxAcStatus == .on ? MaxAxStatus.off : .on
+            let intent = MaxAcIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .seatClimate:
             break
         case .steeringWheelClimate:
-            break
+            let action = entry.vehicleState?.hvacState.steeringHeater == .on ? SteeringWheelHeatStatus.off : .on
+            let intent = SteeringWheelHeatIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .defrost:
-            break
+            let action = entry.vehicleState?.hvacState.defrost == .defrostOn ? DefrostStatus.off : .on
+            let intent = DefrostIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .horn:
             break
         case .lights:
-            break
+            let action = entry.vehicleState?.chassisState.headlights == .on ? LightControlAction.off : .on
+            let intent = LightsIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .hazards:
             break
         case .windows:
-            break
+            var action: WindowAction = WindowAction.closed
+            
+            switch entry.vehicleState?.bodyState.windowPosition.leftFront {
+            case .fullyClosed:
+                action = .vent
+            case .fullyOpen:
+                action = .closed
+            default:
+                action = .vent
+            }
+            
+            let intent = WindowIntent(vehicle: entry.configuration.$vehicle)
+            intent.action = action
+            return intent
         case .batteryPrecondition:
-            break
+            let action = entry.vehicleState?.batteryState.preconditioningStatus == .batteryPreconOn ? PreconditionStatus.off : .on
+            let intent = BatteryPreconditionIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .softwareUpdate:
             break
         case .chargeLimit:
@@ -290,7 +392,7 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             break
         }
         
-        return ToggleLockIntent(vehicle: entry.configuration.$vehicle)
+        return WakeIntent(vehicle: entry.configuration.$vehicle)
     }
 }
 

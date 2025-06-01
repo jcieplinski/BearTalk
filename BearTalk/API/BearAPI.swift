@@ -282,6 +282,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -341,6 +342,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -373,6 +375,7 @@ final class BearAPI {
                             metadata: metadata
                         )
                         
+                        reloadWidgetsAfterDelay()
                         return true
                     } catch {
                         print(error)
@@ -392,6 +395,7 @@ final class BearAPI {
                             metadata: metadata
                         )
                         
+                        reloadWidgetsAfterDelay()
                         return true
                     } catch {
                         print(error)
@@ -423,6 +427,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -453,6 +458,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -483,6 +489,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print("Error in lightsControl: \(error)")
@@ -520,6 +527,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -557,6 +565,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -587,6 +596,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -617,6 +627,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -681,6 +692,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -720,6 +732,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -750,6 +763,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -780,6 +794,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -809,6 +824,7 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)
@@ -977,6 +993,12 @@ final class BearAPI {
                     return false
                 }
             }
+        }
+    }
+    
+    static func reloadWidgetsAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }

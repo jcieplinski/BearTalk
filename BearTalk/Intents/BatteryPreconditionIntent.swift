@@ -7,19 +7,19 @@
 
 import AppIntents
 
-struct BatteryPreconditionIntent: AppIntent {
-    enum PreconditionStatus: Int, AppEnum {
-        case off
-        case on
-        
-        static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Battery Preconditioning")
-        
-        static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-            .off: DisplayRepresentation(title: "Off"),
-            .on: DisplayRepresentation(title: "On")
-        ]
-    }
+enum PreconditionStatus: Int, AppEnum {
+    case off
+    case on
     
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Battery Preconditioning")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .off: DisplayRepresentation(title: "Off"),
+        .on: DisplayRepresentation(title: "On")
+    ]
+}
+
+struct BatteryPreconditionIntent: AppIntent {
     static var title: LocalizedStringResource = "Battery Preconditioning"
     
     @Parameter(title: "Vehicle")

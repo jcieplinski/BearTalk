@@ -7,19 +7,19 @@
 
 import AppIntents
 
-struct DefrostIntent: AppIntent {
-    enum DefrostStatus: Int, AppEnum {
-        case off
-        case on
-        
-        static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Defrost")
-        
-        static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-            .off: DisplayRepresentation(title: "Off"),
-            .on: DisplayRepresentation(title: "On")
-        ]
-    }
+enum DefrostStatus: Int, AppEnum {
+    case off
+    case on
     
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Defrost")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .off: DisplayRepresentation(title: "Off"),
+        .on: DisplayRepresentation(title: "On")
+    ]
+}
+
+struct DefrostIntent: AppIntent {
     static var title: LocalizedStringResource = "Defrost"
     
     @Parameter(title: "Vehicle")

@@ -7,19 +7,19 @@
 
 import AppIntents
 
-struct ClimateIntent: AppIntent {
-    enum ClimateStatus: Int, AppEnum {
-        case off
-        case on
-        
-        static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Climate Power")
-        
-        static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-            .off: DisplayRepresentation(title: "Off"),
-            .on: DisplayRepresentation(title: "On")
-        ]
-    }
+enum ClimateStatus: Int, AppEnum {
+    case off
+    case on
     
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Climate Power")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .off: DisplayRepresentation(title: "Off"),
+        .on: DisplayRepresentation(title: "On")
+    ]
+}
+
+struct ClimateIntent: AppIntent {
     static var title: LocalizedStringResource = "Climate Control"
     
     @Parameter(title: "Vehicle")

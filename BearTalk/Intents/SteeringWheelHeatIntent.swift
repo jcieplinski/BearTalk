@@ -7,19 +7,19 @@
 
 import AppIntents
 
-struct SteeringWheelHeatIntent: AppIntent {
-    enum SteeringWheelHeatStatus: Int, AppEnum {
-        case off
-        case on
-        
-        static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Steering Wheel Heat")
-        
-        static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-            .off: DisplayRepresentation(title: "Off"),
-            .on: DisplayRepresentation(title: "On")
-        ]
-    }
+enum SteeringWheelHeatStatus: Int, AppEnum {
+    case off
+    case on
     
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Steering Wheel Heat")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .off: DisplayRepresentation(title: "Off"),
+        .on: DisplayRepresentation(title: "On")
+    ]
+}
+
+struct SteeringWheelHeatIntent: AppIntent {
     static var title: LocalizedStringResource = "Steering Wheel Heat"
     
     @Parameter(title: "Vehicle")

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import OSLog
 import GRPCCore
+import SceneKit
 
 @Observable final class DataModel {
     @ObservationIgnored @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) private var _lastEfficiency: Double = 3.2
@@ -156,6 +157,8 @@ import GRPCCore
     
     @ObservationIgnored @AppStorage(DefaultsKey.showAlertsBeforeOpenActions, store: .appGroup) var showAlertsBeforeOpenActions: Bool = true
     
+    @ObservationIgnored private var hasTakenSnapshots = false
+    
     func shouldShowAlertForControl(_ controlType: ControlType) -> Bool {
         guard showAlertsBeforeOpenActions else { return false }
         
@@ -209,6 +212,88 @@ import GRPCCore
         }
     }
     
+    @MainActor
+    func takeVehicleSnapshots() async {
+        // Only take snapshots once per app launch
+        guard !hasTakenSnapshots else { return }
+        
+        // Get all vehicle identifiers
+        guard let vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch() else {
+            return
+        }
+        
+        // For each vehicle, take a snapshot
+        for vehicleEntity in vehicleIdentifiers {
+            if let vehicle = vehicle, vehicle.vehicleId == vehicleEntity.id {
+                try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).takeAndSaveSnapshot(for: vehicle)
+            }
+        }
+        
+        hasTakenSnapshots = true
+    }
+    
+    private func updateSnapshotMaterials(in scene: SCNScene, vehicle: Vehicle) {
+        // Update car paint color
+        let paintUIColor = UIColor(vehicle.vehicleConfig.paintColor.color)
+        scene.rootNode.enumerateChildNodes { node, _ in
+            if let geometry = node.geometry {
+                for material in geometry.materials {
+                    if let materialName = material.name?.lowercased() {
+                        if materialName.contains("carpaint") || materialName.contains("car_paint") {
+                            material.diffuse.contents = paintUIColor
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Update wheel visibility
+        let wheelNodeName = vehicle.vehicleConfig.wheels.nodeTitle
+        scene.rootNode.enumerateChildNodes { node, _ in
+            if let nodeName = node.name {
+                if vehicle.vehicleConfig.model == .gravity {
+                    if nodeName.hasPrefix("Wheel_Set") && 
+                       !nodeName.contains("_01_") && 
+                       !nodeName.contains("_02_") && 
+                       !nodeName.contains("_03_") && 
+                       !nodeName.contains("_04_") {
+                        node.isHidden = nodeName != wheelNodeName
+                    }
+                } else {
+                    if nodeName.hasPrefix("Wheel_") && 
+                       !nodeName.contains("_01_") && 
+                       !nodeName.contains("_02_") && 
+                       !nodeName.contains("_03_") && 
+                       !nodeName.contains("_04_") {
+                        node.isHidden = nodeName != wheelNodeName
+                    }
+                }
+            }
+        }
+        
+        // Update platinum/stealth visibility
+        let showPlatinum = vehicle.vehicleConfig.look != .stealth && vehicle.vehicleConfig.look != .sapphire
+        let showGlassRoof = vehicle.vehicleConfig.roof == .glassCanopy
+        
+        scene.rootNode.enumerateChildNodes { node, _ in
+            if let nodeName = node.name?.lowercased() {
+                if nodeName.contains("platinum") {
+                    node.isHidden = !showPlatinum
+                }
+                if nodeName.contains("stealth") {
+                    node.isHidden = showPlatinum
+                }
+                if nodeName.contains("glass") {
+                    node.isHidden = !showGlassRoof
+                }
+                if nodeName.contains("metal") {
+                    node.isHidden = showGlassRoof
+                }
+            }
+        }
+    }
+    
+    @MainActor
     func getUserProfile() async throws {
         do {
             // First get the user profile
@@ -234,6 +319,9 @@ import GRPCCore
                             self.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
                         }
                         
+                        // Take snapshots for all vehicles
+                        await takeVehicleSnapshots()
+                        
                         // If we have a vehicle ID, try to fetch its current state
                         let vehicleID = BearAPI.vehicleID
                         if vehicleID.isNotBlank {
@@ -246,35 +334,22 @@ import GRPCCore
                                 }
                             }
                         }
-                        return // Success, exit the function
+                        
+                        break
                     }
-                } catch let error {
-                    Logger.vehicle.error("Vehicle fetch attempt \(retryCount + 1) failed: \(error)")
+                } catch {
                     lastError = error
-                    
-                    // If it's an auth error, try refreshing the token
-                    if let rpcError = error as? GRPCCore.RPCError, rpcError.code == .unauthenticated {
-                        do {
-                            _ = try await BearAPI.refreshToken()
-                        } catch {
-                            Logger.vehicle.error("Token refresh failed during vehicle fetch: \(error)")
-                        }
-                    }
-                    
-                    // Wait before retrying
-                    let delay = pow(2.0, Double(retryCount))
-                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                     retryCount += 1
+                    if retryCount < maxRetries {
+                        try await Task.sleep(nanoseconds: UInt64(pow(2.0, Double(retryCount)) * 1_000_000_000))
+                    }
                 }
             }
             
-            // If we get here, all retries failed
-            if let lastError = lastError {
-                Logger.vehicle.error("All vehicle fetch attempts failed. Last error: \(lastError)")
-                throw lastError
+            if retryCount == maxRetries, let error = lastError {
+                throw error
             }
         } catch {
-            Logger.vehicle.error("Error in getUserProfile: \(error)")
             throw error
         }
     }

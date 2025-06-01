@@ -7,19 +7,19 @@
 
 import AppIntents
 
-struct MaxAcIntent: AppIntent {
-    enum MaxAxStatus: Int, AppEnum {
-        case off
-        case on
-        
-        static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Max AC")
-        
-        static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-            .off: DisplayRepresentation(title: "Off"),
-            .on: DisplayRepresentation(title: "On")
-        ]
-    }
+enum MaxAxStatus: Int, AppEnum {
+    case off
+    case on
     
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Max AC")
+    
+    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .off: DisplayRepresentation(title: "Off"),
+        .on: DisplayRepresentation(title: "On")
+    ]
+}
+
+struct MaxAcIntent: AppIntent {
     static var title: LocalizedStringResource = "Max AC"
     
     @Parameter(title: "Vehicle")
