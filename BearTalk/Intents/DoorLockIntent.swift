@@ -43,6 +43,7 @@ struct DoorLockIntent: AppIntent {
             let _ = try await BearAPI.doorLockControl(lockState: action)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

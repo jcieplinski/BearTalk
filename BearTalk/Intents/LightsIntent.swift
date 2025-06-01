@@ -38,6 +38,7 @@ struct LightsIntent: AppIntent {
         let _ = try await BearAPI.refreshToken()
         let _ = try await BearAPI.lightsControl(action: state)
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

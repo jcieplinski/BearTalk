@@ -31,6 +31,7 @@ struct ChargePortIntent: AppIntent {
             let _ = try await BearAPI.chargePortControl(closureState: action)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

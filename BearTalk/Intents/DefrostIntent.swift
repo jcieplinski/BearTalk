@@ -43,6 +43,7 @@ struct DefrostIntent: AppIntent {
             let _ = try await BearAPI.defrostControl(action: power)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

@@ -50,6 +50,7 @@ struct WindowIntent: AppIntent {
             let _ = try await BearAPI.allWindowControl(state: state)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

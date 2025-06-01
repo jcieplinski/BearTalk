@@ -997,8 +997,63 @@ final class BearAPI {
     }
     
     static func reloadWidgetsAfterDelay() {
+        // For app foreground operations
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+    
+    static func scheduleWidgetReload() {
+        print("scheduleWidgetReload: Starting widget reload scheduling")
+        
+        // For widget background operations
+        let task = Task {
+            do {
+                print("scheduleWidgetReload: Starting 5 second wait")
+                // Wait for 5 seconds to allow car state to update
+                try await Task.sleep(for: .seconds(5))
+                print("scheduleWidgetReload: Wait complete, reloading widgets")
+                
+                // Reload all widget timelines
+                await MainActor.run {
+                    print("scheduleWidgetReload: Reloading widget timelines")
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            } catch {
+                print("scheduleWidgetReload: Error during reload scheduling: \(error)")
+            }
+        }
+        
+        // A Second update, just in case it takes a while
+        let taskTwo = Task {
+            do {
+                print("scheduleWidgetReload: Starting 5 second wait")
+                // Wait for 5 seconds to allow car state to update
+                try await Task.sleep(for: .seconds(10))
+                print("scheduleWidgetReload: Wait complete, reloading widgets")
+                
+                // Reload all widget timelines
+                await MainActor.run {
+                    print("scheduleWidgetReload: Reloading widget timelines")
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            } catch {
+                print("scheduleWidgetReload: Error during reload scheduling: \(error)")
+            }
+        }
+        
+        // Store the task to prevent it from being deallocated and ensure it runs to completion
+        Task.detached(priority: .background) {
+            print("scheduleWidgetReload: Task detached, waiting for completion")
+            await withTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    await task.value
+                    await taskTwo.value
+                }
+                // Wait for the task to complete
+                await group.waitForAll()
+            }
+            print("scheduleWidgetReload: Task completed")
         }
     }
 }

@@ -23,6 +23,7 @@ struct WakeIntent: AppIntent {
             let _ = try await BearAPI.wakeUp()
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result(dialog: "Waking Car…")
     }
 }

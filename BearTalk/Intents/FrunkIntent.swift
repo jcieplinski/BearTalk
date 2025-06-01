@@ -43,6 +43,7 @@ struct FrunkIntent: AppIntent {
             let _ = try await BearAPI.cargoControl(area: .frunk, closureState: action)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

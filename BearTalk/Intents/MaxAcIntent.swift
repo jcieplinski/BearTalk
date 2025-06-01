@@ -43,6 +43,7 @@ struct MaxAcIntent: AppIntent {
             let _ = try await BearAPI.setMaxAC(state: power)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

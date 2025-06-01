@@ -31,6 +31,7 @@ struct TrunkIntent: AppIntent {
             let _ = try await BearAPI.cargoControl(area: .trunk, closureState: action)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }
