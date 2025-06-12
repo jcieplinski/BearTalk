@@ -25,4 +25,5 @@ enum DefaultsKey {
     static let useFaceID: String = "useFaceID"
     static let colorScheme: String = "colorScheme"
     static let showAlertsBeforeOpenActions = "showAlertsBeforeOpenActions"
+    static let lastDismissedSoftwareVersion = "lastDismissedSoftwareVersion"
 }

@@ -11,7 +11,9 @@ struct SoftwareUpdateCell: View {
     @Environment(DataModel.self) var model
     @State private var showUpdateAlert = false
     @State private var showDismissAlert = false
-    @State private var isDismissed = false
+    @State private var isFailedOrWarningDismissed = false
+    @State private var isVisible = false
+    @AppStorage(DefaultsKey.lastDismissedSoftwareVersion) private var lastDismissedVersion: String = ""
     
     private var softwareUpdate: SoftwareUpdate? {
         model.vehicle?.vehicleState.softwareUpdate
@@ -45,8 +47,25 @@ struct SoftwareUpdateCell: View {
         softwareUpdate?.state == .updateNotstartedWithWarnings
     }
     
+    private var currentVersion: String {
+        softwareUpdate?.versionAvailable ?? ""
+    }
+    
+    private var isUpdateCompleteDismissed: Bool {
+        // Check if this specific version's update complete state has been dismissed
+        return lastDismissedVersion == currentVersion && updateComplete
+    }
+    
     private var shouldShowCell: Bool {
-        !isDismissed && (updateAvailable || updateInProgress || updateComplete || updateFailed || updateWaiting || updateNotStartedWithWarnings)
+        // Show cell if:
+        // 1. Update is available, in progress, failed, waiting, or has warnings
+        // 2. OR update is complete but hasn't been dismissed for this version
+        // 3. AND failed/warning states haven't been dismissed for this session
+        return !isFailedOrWarningDismissed && 
+               ((updateAvailable || updateInProgress || updateWaiting) ||
+                (updateFailed && !isFailedOrWarningDismissed) ||
+                (updateNotStartedWithWarnings && !isFailedOrWarningDismissed) ||
+                (updateComplete && !isUpdateCompleteDismissed))
     }
     
     private var titleForCurrentState: String {
@@ -116,9 +135,14 @@ struct SoftwareUpdateCell: View {
                             Spacer()
                             
                             Button("Dismiss") {
-                                // For now, we'll just hide the cell by not showing it
-                                // In a real implementation, you might want to call an API to clear the state
-                                isDismissed = true
+                                // Animate out first
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                    isVisible = false
+                                }
+                                // Then update the dismiss state after animation completes
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    lastDismissedVersion = currentVersion
+                                }
                             }
                             .buttonStyle(.bordered)
                         }
@@ -132,9 +156,14 @@ struct SoftwareUpdateCell: View {
                             Spacer()
                             
                             Button("Dismiss") {
-                                // For now, we'll just hide the cell by not showing it
-                                // In a real implementation, you might want to call an API to clear the state
-                                isDismissed = true
+                                // Animate out first
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                    isVisible = false
+                                }
+                                // Then update the dismiss state after animation completes
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    isFailedOrWarningDismissed = true
+                                }
                             }
                             .buttonStyle(.bordered)
                         }
@@ -160,9 +189,14 @@ struct SoftwareUpdateCell: View {
                             Spacer()
                             
                             Button("Dismiss") {
-                                // For now, we'll just hide the cell by not showing it
-                                // In a real implementation, you might want to call an API to clear the state
-                                isDismissed = true
+                                // Animate out first
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                    isVisible = false
+                                }
+                                // Then update the dismiss state after animation completes
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    isFailedOrWarningDismissed = true
+                                }
                             }
                             .buttonStyle(.bordered)
                         }
@@ -196,6 +230,10 @@ struct SoftwareUpdateCell: View {
                 }
             )
             .clipShape(RoundedRectangle(cornerRadius: 13))
+            .scaleEffect(isVisible ? 1.0 : 0.8)
+            .opacity(isVisible ? 1.0 : 0.0)
+            .frame(maxHeight: isVisible ? .infinity : 0)
+            .clipped()
             .alert("Software Update", isPresented: $showUpdateAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Begin Update") {
@@ -206,12 +244,34 @@ struct SoftwareUpdateCell: View {
             } message: {
                 Text("Be sure the car is in park and in a safe place. Your car will be unavailable while this update installs.")
             }
+            .onAppear {
+                // Handle initial state: if AppStorage is blank, set current version to prevent showing until next update
+                if lastDismissedVersion.isEmpty && !currentVersion.isEmpty {
+                    lastDismissedVersion = currentVersion
+                }
+                
+                // Animate in
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                    isVisible = true
+                }
+            }
             .onChange(of: softwareUpdate?.updateAvailable) { _, newValue in
                 // Reset dismissed state when a new update becomes available
                 if newValue == .updateAvailable {
-                    isDismissed = false
+                    lastDismissedVersion = ""
                 }
             }
+            .onChange(of: softwareUpdate?.state) { _, newState in
+                // Reset temporary dismiss state when update state changes
+                // This allows failed/warning states to be shown again if retried
+                if newState != .failed && newState != .updateFailedDriveAllowed && 
+                   newState != .updateFailedNoAction && newState != .updateNotstartedWithWarnings {
+                    isFailedOrWarningDismissed = false
+                }
+            }
+            .animation(.spring(response: 0.5, dampingFraction: 0.8), value: shouldShowCell)
+            .animation(.spring(response: 0.5, dampingFraction: 0.8), value: lastDismissedVersion)
+            .animation(.spring(response: 0.5, dampingFraction: 0.8), value: isFailedOrWarningDismissed)
         }
     }
 }

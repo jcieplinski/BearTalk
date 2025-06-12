@@ -21,8 +21,8 @@ struct LoginView: View {
     @State private var hasAttemptedFaceID: Bool = false
 
     var body: some View {
+        @Bindable var appState = appState
         NavigationStack {
-            @Bindable var appState = appState
             VStack(spacing: 22) {
                 List {
                     Text("Log in to your lucidmotors.com account to begin.")
@@ -41,13 +41,14 @@ struct LoginView: View {
                             .overlay {
                                 TextField("username", text: $appState.userName)
                                     .textFieldStyle(.plain)
-                                    .textContentType(.emailAddress)
+                                    .textContentType(.username)
                                     .focused($focused, equals: .userName)
                                     .padding()
                                     .submitLabel(.next)
                                     .keyboardType(.emailAddress)
                                     .autocorrectionDisabled()
                                     .textInputAutocapitalization(.never)
+                                    .accessibilityLabel("Lucid Motors username")
                                     .onSubmit {
                                         focused = .password
                                     }
@@ -63,6 +64,8 @@ struct LoginView: View {
                                     .textContentType(.password)
                                     .focused($focused, equals: .password)
                                     .padding()
+                                    .submitLabel(.done)
+                                    .accessibilityLabel("Lucid Motors password")
                                     .onSubmit {
                                         focused = nil
                                     }
@@ -128,6 +131,7 @@ struct LoginView: View {
                         }
                     } label: {
                         Text(useFaceID && !hasAttemptedFaceID ? "Log In with Face ID" : "Log In")
+                            .foregroundStyle(Color(uiColor: .systemBackground))
                             .padding(.horizontal)
                             .frame(maxWidth: .infinity)
                             .frame(minHeight: 28)
@@ -163,7 +167,7 @@ struct LoginView: View {
             }
         }
     }
-
+    
     private func authenticateWithFaceID() async {
         let context = LAContext()
         var error: NSError?
