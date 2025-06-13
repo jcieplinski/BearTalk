@@ -225,7 +225,7 @@ import SceneKit
         // For each vehicle, take a snapshot
         for vehicleEntity in vehicleIdentifiers {
             if let vehicle = vehicle, vehicle.vehicleId == vehicleEntity.id {
-                try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).takeAndSaveSnapshot(for: vehicle)
+                try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).takeAndSaveSnapshot(for: vehicle)
             }
         }
         

@@ -29,6 +29,18 @@
 		AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */; };
 		AE9979542DEA0F5B00942DD9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */; };
 		AE9979632DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AED7B0452DFCCEA900322C13 /* BearTalkWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AED7B03B2DFCCEA800322C13 /* BearTalkWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AED7B04D2DFCD04600322C13 /* protoc-gen-swift in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B04C2DFCD04600322C13 /* protoc-gen-swift */; };
+		AED7B04F2DFCD04600322C13 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B04E2DFCD04600322C13 /* SwiftProtobuf */; };
+		AED7B0512DFCD04600322C13 /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0502DFCD04600322C13 /* SwiftProtobufPluginLibrary */; };
+		AED7B0532DFCD04600322C13 /* GRPCCodeGen in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0522DFCD04600322C13 /* GRPCCodeGen */; };
+		AED7B0552DFCD04600322C13 /* GRPCCore in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0542DFCD04600322C13 /* GRPCCore */; };
+		AED7B0572DFCD04600322C13 /* GRPCInProcessTransport in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0562DFCD04600322C13 /* GRPCInProcessTransport */; };
+		AED7B0592DFCD04600322C13 /* GRPCNIOTransportHTTP2 in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0582DFCD04600322C13 /* GRPCNIOTransportHTTP2 */; };
+		AED7B05B2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B05A2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix */; };
+		AED7B05D2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B05C2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices */; };
+		AED7B05F2DFCD04600322C13 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B05E2DFCD04600322C13 /* GRPCProtobuf */; };
+		AED7B0612DFCD04600322C13 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = AED7B0602DFCD04600322C13 /* protoc-gen-grpc-swift */; };
 		D8CA9DBD2B166B3400BC35F8 /* BearTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */; };
 		D8CA9DC72B166B3400BC35F8 /* BearTalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC62B166B3400BC35F8 /* BearTalkUITests.swift */; };
 		D8CA9DC92B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA9DC82B166B3400BC35F8 /* BearTalkUITestsLaunchTests.swift */; };
@@ -41,6 +53,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = AE99794F2DEA0F5B00942DD9;
 			remoteInfo = "Bear Talk Widget ExtensionExtension";
+		};
+		AED7B0432DFCCEA900322C13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8CA9D9F2B166B3300BC35F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AED7B03A2DFCCEA800322C13;
+			remoteInfo = "BearTalkWatch Watch App";
 		};
 		D8CA9DB92B166B3400BC35F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -70,6 +89,17 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AED7B0462DFCCEA900322C13 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				AED7B0452DFCCEA900322C13 /* BearTalkWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +107,7 @@
 		AE9979512DEA0F5B00942DD9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AE9979532DEA0F5B00942DD9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AE997C0F2DEA42FF00942DD9 /* Bear Talk Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bear Talk Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
+		AED7B03B2DFCCEA800322C13 /* BearTalkWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BearTalkWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DA72B166B3300BC35F8 /* BearTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BearTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BearTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CA9DBC2B166B3400BC35F8 /* BearTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BearTalkTests.swift; sourceTree = "<group>"; };
@@ -193,14 +224,74 @@
 				Model/VehicleIdentifierEntity.swift,
 				Model/VehicleIdentifierHandler.swift,
 				Model/VehicleIdentifierQuery.swift,
+				Model/VehicleIdentifierSnapshotHandler.swift,
 			);
 			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
+		};
+		AED7B04B2DFCCFBA00322C13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				API/BearAPI.swift,
+				API/VehicleResponseMapping.swift,
+				Dongles/Color.swift,
+				Dongles/Enumerations/DefaultsKey.swift,
+				Dongles/Enumerations/Enumerations.swift,
+				Dongles/Enumerations/PaintColor.swift,
+				Dongles/Enumerations/UserDefaults.swift,
+				Dongles/Enumerations/Wheels.swift,
+				Dongles/Extensions.swift,
+				Dongles/URLStrings.swift,
+				Generated/charging_service.grpc.swift,
+				Generated/charging_service.pb.swift,
+				Generated/login_session.grpc.swift,
+				Generated/login_session.pb.swift,
+				Generated/salesforce_service.grpc.swift,
+				Generated/salesforce_service.pb.swift,
+				Generated/sentry_service.grpc.swift,
+				Generated/sentry_service.pb.swift,
+				Generated/subscription_service.grpc.swift,
+				Generated/subscription_service.pb.swift,
+				Generated/trip_service.grpc.swift,
+				Generated/trip_service.pb.swift,
+				Generated/user_preferences_service.grpc.swift,
+				Generated/user_preferences_service.pb.swift,
+				Generated/user_profile_service.grpc.swift,
+				Generated/user_profile_service.pb.swift,
+				Generated/vehicle_state_service.grpc.swift,
+				Generated/vehicle_state_service.pb.swift,
+				Model/Responses/LoginResponse.swift,
+				Model/SessionInfo.swift,
+				Model/UserProfile.swift,
+				Model/Vehicle/AlarmState.swift,
+				Model/Vehicle/BatteryState.swift,
+				Model/Vehicle/BodyState.swift,
+				Model/Vehicle/CabinState.swift,
+				Model/Vehicle/ChargingAccount.swift,
+				Model/Vehicle/ChargingState.swift,
+				Model/Vehicle/ChassisState.swift,
+				Model/Vehicle/EASubscription.swift,
+				Model/Vehicle/GPS.swift,
+				Model/Vehicle/HVACState.swift,
+				Model/Vehicle/Location.swift,
+				Model/Vehicle/MobileAppReqStatus.swift,
+				Model/Vehicle/SoftwareUpdate.swift,
+				Model/Vehicle/TCUInternetStatus.swift,
+				Model/Vehicle/Vehicle.swift,
+				Model/Vehicle/VehicleConfig.swift,
+				Model/Vehicle/VehicleState.swift,
+				Model/VehicleIdentifier.swift,
+				Model/VehicleIdentifierEntity.swift,
+				Model/VehicleIdentifierHandler.swift,
+				Model/VehicleIdentifierQuery.swift,
+			);
+			target = AED7B03A2DFCCEA800322C13 /* BearTalkWatch Watch App */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE2F5F6B2DD0FAE1003BDC36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AE997C0C2DEA42D800942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BearTalk; sourceTree = "<group>"; };
+		AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE2F5F6B2DD0FAE1003BDC36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AE997C0C2DEA42D800942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AED7B04B2DFCCFBA00322C13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BearTalk; sourceTree = "<group>"; };
 		AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AE9979682DEA0F5B00942DD9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Bear Talk Widget Extension"; sourceTree = "<group>"; };
+		AED7B03C2DFCCEA800322C13 /* BearTalkWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "BearTalkWatch Watch App"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +308,24 @@
 				AE4A928F2DEA613300813074 /* GRPCInProcessTransport in Frameworks */,
 				AE4A928B2DEA613300813074 /* GRPCCodeGen in Frameworks */,
 				AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AED7B0382DFCCEA800322C13 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AED7B0532DFCD04600322C13 /* GRPCCodeGen in Frameworks */,
+				AED7B0512DFCD04600322C13 /* SwiftProtobufPluginLibrary in Frameworks */,
+				AED7B0552DFCD04600322C13 /* GRPCCore in Frameworks */,
+				AED7B0592DFCD04600322C13 /* GRPCNIOTransportHTTP2 in Frameworks */,
+				AED7B05D2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */,
+				AED7B04D2DFCD04600322C13 /* protoc-gen-swift in Frameworks */,
+				AED7B04F2DFCD04600322C13 /* SwiftProtobuf in Frameworks */,
+				AED7B05B2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
+				AED7B0572DFCD04600322C13 /* GRPCInProcessTransport in Frameworks */,
+				AED7B0612DFCD04600322C13 /* protoc-gen-grpc-swift in Frameworks */,
+				AED7B05F2DFCD04600322C13 /* GRPCProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +382,7 @@
 				D8CA9DBB2B166B3400BC35F8 /* BearTalkTests */,
 				D8CA9DC52B166B3400BC35F8 /* BearTalkUITests */,
 				AE9979552DEA0F5B00942DD9 /* Bear Talk Widget Extension */,
+				AED7B03C2DFCCEA800322C13 /* BearTalkWatch Watch App */,
 				AE2F5FD22DD106A6003BDC36 /* Frameworks */,
 				D8CA9DA82B166B3300BC35F8 /* Products */,
 			);
@@ -287,6 +397,7 @@
 				D8CA9DB82B166B3400BC35F8 /* BearTalkTests.xctest */,
 				D8CA9DC22B166B3400BC35F8 /* BearTalkUITests.xctest */,
 				AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */,
+				AED7B03B2DFCCEA800322C13 /* BearTalkWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,6 +451,39 @@
 			productReference = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		AED7B03A2DFCCEA800322C13 /* BearTalkWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AED7B0492DFCCEA900322C13 /* Build configuration list for PBXNativeTarget "BearTalkWatch Watch App" */;
+			buildPhases = (
+				AED7B0372DFCCEA800322C13 /* Sources */,
+				AED7B0382DFCCEA800322C13 /* Frameworks */,
+				AED7B0392DFCCEA800322C13 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AED7B03C2DFCCEA800322C13 /* BearTalkWatch Watch App */,
+			);
+			name = "BearTalkWatch Watch App";
+			packageProductDependencies = (
+				AED7B04C2DFCD04600322C13 /* protoc-gen-swift */,
+				AED7B04E2DFCD04600322C13 /* SwiftProtobuf */,
+				AED7B0502DFCD04600322C13 /* SwiftProtobufPluginLibrary */,
+				AED7B0522DFCD04600322C13 /* GRPCCodeGen */,
+				AED7B0542DFCD04600322C13 /* GRPCCore */,
+				AED7B0562DFCD04600322C13 /* GRPCInProcessTransport */,
+				AED7B0582DFCD04600322C13 /* GRPCNIOTransportHTTP2 */,
+				AED7B05A2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix */,
+				AED7B05C2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices */,
+				AED7B05E2DFCD04600322C13 /* GRPCProtobuf */,
+				AED7B0602DFCD04600322C13 /* protoc-gen-grpc-swift */,
+			);
+			productName = "BearTalkWatch Watch App";
+			productReference = AED7B03B2DFCCEA800322C13 /* BearTalkWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D8CA9DA62B166B3300BC35F8 /* BearTalk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8CA9DCC2B166B3400BC35F8 /* Build configuration list for PBXNativeTarget "BearTalk" */;
@@ -348,11 +492,13 @@
 				D8CA9DA42B166B3300BC35F8 /* Frameworks */,
 				D8CA9DA52B166B3300BC35F8 /* Resources */,
 				AE9979642DEA0F5B00942DD9 /* Embed Foundation Extensions */,
+				AED7B0462DFCCEA900322C13 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				AE9979622DEA0F5B00942DD9 /* PBXTargetDependency */,
+				AED7B0442DFCCEA900322C13 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				AE2F5F2C2DD0FAE1003BDC36 /* BearTalk */,
@@ -411,6 +557,9 @@
 					AE99794F2DEA0F5B00942DD9 = {
 						CreatedOnToolsVersion = 16.4;
 					};
+					AED7B03A2DFCCEA800322C13 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					D8CA9DA62B166B3300BC35F8 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -447,12 +596,20 @@
 				D8CA9DB72B166B3400BC35F8 /* BearTalkTests */,
 				D8CA9DC12B166B3400BC35F8 /* BearTalkUITests */,
 				AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */,
+				AED7B03A2DFCCEA800322C13 /* BearTalkWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AE99794E2DEA0F5B00942DD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AED7B0392DFCCEA800322C13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -490,6 +647,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AED7B0372DFCCEA800322C13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8CA9DA32B166B3300BC35F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -521,6 +685,11 @@
 			isa = PBXTargetDependency;
 			target = AE99794F2DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension */;
 			targetProxy = AE9979612DEA0F5B00942DD9 /* PBXContainerItemProxy */;
+		};
+		AED7B0442DFCCEA900322C13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AED7B03A2DFCCEA800322C13 /* BearTalkWatch Watch App */;
+			targetProxy = AED7B0432DFCCEA900322C13 /* PBXContainerItemProxy */;
 		};
 		D8CA9DBA2B166B3400BC35F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -591,6 +760,65 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AED7B0472DFCCEA900322C13 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BearTalkWatch Watch App/BearTalkWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BearTalk;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.joecieplinski.BearTalk;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalk.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		AED7B0482DFCCEA900322C13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BearTalkWatch Watch App/BearTalkWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BearTalk;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.joecieplinski.BearTalk;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joecieplinski.BearTalk.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
 			};
 			name = Release;
 		};
@@ -900,6 +1128,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AED7B0492DFCCEA900322C13 /* Build configuration list for PBXNativeTarget "BearTalkWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AED7B0472DFCCEA900322C13 /* Debug */,
+				AED7B0482DFCCEA900322C13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D8CA9DA22B166B3300BC35F8 /* Build configuration list for PBXProject "BearTalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1076,6 +1313,61 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
 			productName = GRPCProtobuf;
+		};
+		AED7B04C2DFCD04600322C13 /* protoc-gen-swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FBB2DD0FF3F003BDC36 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = "protoc-gen-swift";
+		};
+		AED7B04E2DFCD04600322C13 /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FBB2DD0FF3F003BDC36 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		AED7B0502DFCD04600322C13 /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FBB2DD0FF3F003BDC36 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+		AED7B0522DFCD04600322C13 /* GRPCCodeGen */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCCodeGen;
+		};
+		AED7B0542DFCD04600322C13 /* GRPCCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCCore;
+		};
+		AED7B0562DFCD04600322C13 /* GRPCInProcessTransport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPCInProcessTransport;
+		};
+		AED7B0582DFCD04600322C13 /* GRPCNIOTransportHTTP2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2;
+		};
+		AED7B05A2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2Posix;
+		};
+		AED7B05C2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2TransportServices;
+		};
+		AED7B05E2DFCD04600322C13 /* GRPCProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
+			productName = GRPCProtobuf;
+		};
+		AED7B0602DFCD04600322C13 /* protoc-gen-grpc-swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
+			productName = "protoc-gen-grpc-swift";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

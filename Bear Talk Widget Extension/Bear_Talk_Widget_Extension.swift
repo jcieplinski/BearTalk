@@ -30,7 +30,7 @@ struct Provider: AppIntentTimelineProvider {
         // Get the snapshot data using VehicleIdentifierHandler
         var snapshotData: Data?
         if let vehicleId = vehicle?.vehicleId {
-            snapshotData = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
+            snapshotData = try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
         }
         
         return SimpleEntry(
@@ -53,7 +53,7 @@ struct Provider: AppIntentTimelineProvider {
         // Get the snapshot data using VehicleIdentifierHandler
         var snapshotData: Data?
         if let vehicleId = vehicle?.vehicleId {
-            snapshotData = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
+            snapshotData = try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
         }
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
