@@ -160,7 +160,7 @@ struct ChargingView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .buttonStyle(.plain)
-                .disabled(model.requestInProgress.contains(.batteryPrecondition))
+                .disabled(model.requestInProgress.contains(.batteryPrecondition) || model.allFunctionsDisable)
             }
             .animation(.default, value: model.requestInProgress)
             .animation(.default, value: chargeLimit)

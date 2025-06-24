@@ -48,6 +48,9 @@ extension DataModel {
         // Check keyfob battery
         if bodyState.keyfobBatteryStatus == .low { activeAlerts.append("Key Fob Battery Low") }
         
+        // Check if vehicle is in service mode
+        if vehicle.vehicleState.driveMode == .service { activeAlerts.append("Vehicle in Service Mode - Remote Controls Disabled") }
+        
         return activeAlerts
     }
 }

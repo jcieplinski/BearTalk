@@ -72,12 +72,12 @@ struct ControlsView: View {
                                     }
                                 } label: {
                                     ZStack {
-                                        Image(systemName: model.powerState.image)
+                                        Image(systemName: model.vehicle?.vehicleState.driveMode == .service ? "exclamationmark.circle" : model.powerState.image)
                                             .font(.body)
                                             .dynamicTypeSize(.large)
                                             .fontWeight(.bold)
                                             .opacity(model.requestInProgress.contains(.wake) ? 0.3 : 1.0)
-                                            .disabled(model.requestInProgress.contains(.wake))
+                                            .disabled(model.requestInProgress.contains(.wake) || model.allFunctionsDisable)
                                         
                                         if model.requestInProgress.contains(.wake) {
                                             ProgressView()
@@ -156,7 +156,7 @@ struct ControlsView: View {
                         if let photoUrl = model.userProfile?.photoUrl {
                             ProfileImageView(photoUrl: photoUrl)
                         } else {
-                            Image(systemName: "person.circle")
+                            Image(systemName: "person.fill")
                                 .font(.title2)
                         }
                     }

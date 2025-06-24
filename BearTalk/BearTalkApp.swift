@@ -18,7 +18,13 @@ struct BearTalkApp: App {
             VehicleIdentifier.self,
         ])
         
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false,
+            allowsSave: true,
+            groupContainer: .identifier("group.com.joecieplinski.bearTalk"),
+            cloudKitDatabase: .private("iCloud.com.joecieplinski.bearTalkTwo")
+        )
         
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])

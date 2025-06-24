@@ -111,22 +111,22 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
                     
                     HStack {
                         if let controlOne = entry.configuration.controlTypeOne {
-                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne))
+                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlTwo = entry.configuration.controlTypeTwo {
-                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo))
+                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo), isDisabled: vehicleState.driveMode == .service)
                         }
                     }
                     .frame(maxWidth: .infinity)
                     
                     HStack {
                         if let controlThree = entry.configuration.controlTypeThree {
-                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree))
+                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlFour = entry.configuration.controlTypeFour {
-                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
+                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour), isDisabled: vehicleState.driveMode == .service)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -158,19 +158,19 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
                     
                     HStack {
                         if let controlOne = entry.configuration.controlTypeOne {
-                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne))
+                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlTwo = entry.configuration.controlTypeTwo {
-                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo))
+                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlThree = entry.configuration.controlTypeThree {
-                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree))
+                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlFour = entry.configuration.controlTypeFour {
-                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
+                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour), isDisabled: vehicleState.driveMode == .service)
                         }
                     }
                 }
@@ -196,37 +196,37 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
                     
                     HStack {
                         if let controlOne = entry.configuration.controlTypeOne {
-                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne))
+                            WidgetControlButton(controlType: controlOne, isActive: isActive(for: controlOne), intent: intent(for: controlOne), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlTwo = entry.configuration.controlTypeTwo {
-                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo))
+                            WidgetControlButton(controlType: controlTwo, isActive: isActive(for: controlTwo), intent: intent(for: controlTwo), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlThree = entry.configuration.controlTypeThree {
-                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree))
+                            WidgetControlButton(controlType: controlThree, isActive: isActive(for: controlThree), intent: intent(for: controlThree), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlFour = entry.configuration.controlTypeFour {
-                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour))
+                            WidgetControlButton(controlType: controlFour, isActive: isActive(for: controlFour), intent: intent(for: controlFour), isDisabled: vehicleState.driveMode == .service)
                         }
                     }
                     
                     HStack {
                         if let controlFive = entry.configuration.controlTypeFive {
-                            WidgetControlButton(controlType: controlFive, isActive: isActive(for: controlFive), intent: intent(for: controlFive))
+                            WidgetControlButton(controlType: controlFive, isActive: isActive(for: controlFive), intent: intent(for: controlFive), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlSix = entry.configuration.controlTypeSix {
-                            WidgetControlButton(controlType: controlSix, isActive: isActive(for: controlSix), intent: intent(for: controlSix))
+                            WidgetControlButton(controlType: controlSix, isActive: isActive(for: controlSix), intent: intent(for: controlSix), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlSeven = entry.configuration.controlTypeSeven {
-                            WidgetControlButton(controlType: controlSeven, isActive: isActive(for: controlSeven), intent: intent(for: controlSeven))
+                            WidgetControlButton(controlType: controlSeven, isActive: isActive(for: controlSeven), intent: intent(for: controlSeven), isDisabled: vehicleState.driveMode == .service)
                         }
                         
                         if let controlEight = entry.configuration.controlTypeEight {
-                            WidgetControlButton(controlType: controlEight, isActive: isActive(for: controlEight), intent: intent(for: controlEight))
+                            WidgetControlButton(controlType: controlEight, isActive: isActive(for: controlEight), intent: intent(for: controlEight), isDisabled: vehicleState.driveMode == .service)
                         }
                     }
                 }

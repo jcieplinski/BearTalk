@@ -81,7 +81,7 @@ struct WindowsSheet: View {
                         systemImage: button.systemImage,
                         title: button.title,
                         action: button.action,
-                        isDisabled: model.requestInProgress.contains(.windows)
+                        isDisabled: model.requestInProgress.contains(.windows) || model.allFunctionsDisable
                     )
                 }
             }
@@ -92,7 +92,7 @@ struct WindowsSheet: View {
                         systemImage: button.systemImage,
                         title: button.title,
                         action: button.action,
-                        isDisabled: model.requestInProgress.contains(.windows)
+                        isDisabled: model.requestInProgress.contains(.windows) || model.allFunctionsDisable
                     )
                 }
             }

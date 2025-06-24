@@ -12,23 +12,27 @@ struct WidgetControlButton: View {
     let controlType: ControlType
     let isActive: Bool
     let intent: any AppIntent
+    let isDisabled: Bool
     
     var body: some View {
         Button(intent: intent) {
             WidgetControlButtonCore(
                 controlType: controlType,
-                isActive: isActive
+                isActive: isActive,
+                isDisabled: isDisabled
             )
         }
         .buttonStyle(.plain)
         .tint(isActive ? .active : .accentColor)
         .frame(maxWidth: .infinity)
+        .disabled(isDisabled)
     }
 }
 
 struct WidgetControlButtonCore: View {
     let controlType: ControlType
     let isActive: Bool
+    let isDisabled: Bool
     
     var body: some View {
         Label {
@@ -38,7 +42,7 @@ struct WidgetControlButtonCore: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 33, maxHeight: 33)
-                .foregroundStyle(isActive ? .active : .inactive)
+                .foregroundStyle(isDisabled ? .gray : (isActive ? .active : .inactive))
         }
         .labelStyle(.iconOnly)
         
@@ -49,10 +53,11 @@ struct WidgetControlButtonCore: View {
                     .foregroundStyle(isActive ? .active.opacity(0.2) : .clear)
                 
                 RoundedRectangle(cornerRadius: 13)
-                    .stroke(isActive ? .active : .clear, style: StrokeStyle(lineWidth: 1))
+                    .stroke(isDisabled ? .gray : (isActive ? .active : .clear), style: StrokeStyle(lineWidth: 1))
             }
         )
         .padding(4)
-        .tint(isActive ? .active : .inactive)
+        .tint(isDisabled ? .gray : (isActive ? .active : .inactive))
+        .opacity(isDisabled ? 0.5 : 1.0)
     }
 }

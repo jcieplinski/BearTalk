@@ -61,6 +61,7 @@ struct ControlButton: View {
             } label: {
                 ControlButtonCore(controlType: controlType, isActive: isActive)
             }
+            .disabled(model.allFunctionsDisable)
             
             if model.requestInProgress.contains(controlType) {
                 ProgressView()

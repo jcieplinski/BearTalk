@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    let vehicleViewModel: VehicleViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            VehicleView(model: vehicleViewModel)
         }
-        .padding()
+        .tabViewStyle(.verticalPage)
     }
-}
-
-#Preview {
-    ContentView()
 }

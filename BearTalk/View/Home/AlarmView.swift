@@ -28,7 +28,7 @@ struct AlarmView: View {
                         ))
                         .labelsHidden()
                         .tint(.active)
-                        .disabled(model.requestInProgress.contains(.alarm))
+                        .disabled(model.requestInProgress.contains(.alarm) || model.allFunctionsDisable)
                     }
                     
                     if alarmMode != .on {

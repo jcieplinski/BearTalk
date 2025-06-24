@@ -714,7 +714,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bear Talk Widget Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Bear Talk Widget Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -743,7 +743,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bear Talk Widget Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Bear Talk Widget Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -773,7 +773,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = BearTalk;
+				INFOPLIST_FILE = "BearTalkWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.joecieplinski.BearTalk;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -802,7 +803,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = BearTalk;
+				INFOPLIST_FILE = "BearTalkWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bear Assist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.joecieplinski.BearTalk;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -36,7 +36,7 @@ struct ClimateControlsCell: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .disabled(model.requestInProgress.contains(.climateControl))
+                    .disabled(model.requestInProgress.contains(.climateControl) || model.allFunctionsDisable)
                 }
                 
                 HStack {

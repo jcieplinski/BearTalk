@@ -15,6 +15,9 @@ extension DataModel {
         
         if self.powerState == .liveUpdate { return true }
         
+        // Check if vehicle is in service mode
+        if let vehicle = vehicle, vehicle.vehicleState.driveMode == .service { return true }
+        
         return false
     }
     

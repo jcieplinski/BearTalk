@@ -54,7 +54,8 @@ struct SeatClimateSheet: View {
                     .buttonStyle(.bordered)
                     .tint(.active)
                     .disabled(model.requestInProgress.contains(.driverSeatHeat) || 
-                             (!model.hasFrontSeatHeating && !model.hasFrontSeatVentilation && !model.hasRearSeatHeating))
+                             (!model.hasFrontSeatHeating && !model.hasFrontSeatVentilation && !model.hasRearSeatHeating) ||
+                             model.allFunctionsDisable)
                     
                     Button {
                         model.setSeatClimate(
@@ -82,7 +83,7 @@ struct SeatClimateSheet: View {
                     }
                     .buttonStyle(.bordered)
                     .tint(.inactive)
-                    .disabled(model.requestInProgress.contains(.driverSeatHeat))
+                    .disabled(model.requestInProgress.contains(.driverSeatHeat) || model.allFunctionsDisable)
                 }
                 .padding(.horizontal)
                 
@@ -206,7 +207,7 @@ struct SeatClimateSheet: View {
                                 isActive: model.frontDriverSeatHeatOn
                             )
                         }
-                        .disabled(model.requestInProgress.contains(.driverSeatHeat) || !model.hasFrontSeatHeating)
+                        .disabled(model.requestInProgress.contains(.driverSeatHeat) || !model.hasFrontSeatHeating || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.driverSeatHeat) {
                             ProgressView()
@@ -252,7 +253,7 @@ struct SeatClimateSheet: View {
                             )
                             .tint(model.frontDriverSeatVentOn ? .active : .inactive)
                         }
-                        .disabled(model.requestInProgress.contains(.driverSeatVent) || !model.hasFrontSeatVentilation)
+                        .disabled(model.requestInProgress.contains(.driverSeatVent) || !model.hasFrontSeatVentilation || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.driverSeatVent) {
                             ProgressView()
@@ -289,7 +290,7 @@ struct SeatClimateSheet: View {
                                 isActive: model.frontPassengerSeatHeatOn
                             )
                         }
-                        .disabled(model.requestInProgress.contains(.passengerSeatHeat) || !model.hasFrontSeatHeating)
+                        .disabled(model.requestInProgress.contains(.passengerSeatHeat) || !model.hasFrontSeatHeating || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.passengerSeatHeat) {
                             ProgressView()
@@ -335,7 +336,7 @@ struct SeatClimateSheet: View {
                             )
                             .tint(model.frontPassengerSeatVentOn ? .active : .inactive)
                         }
-                        .disabled(model.requestInProgress.contains(.passengerSeatVent) || !model.hasFrontSeatVentilation)
+                        .disabled(model.requestInProgress.contains(.passengerSeatVent) || !model.hasFrontSeatVentilation || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.passengerSeatVent) {
                             ProgressView()
@@ -408,7 +409,7 @@ struct SeatClimateSheet: View {
                                 isActive: model.rearleftSeatHeatOn
                             )
                         }
-                        .disabled(model.requestInProgress.contains(.rearLeftSeatHeat) || !model.hasRearSeatHeating)
+                        .disabled(model.requestInProgress.contains(.rearLeftSeatHeat) || !model.hasRearSeatHeating || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.rearLeftSeatHeat) {
                             ProgressView()
@@ -443,7 +444,7 @@ struct SeatClimateSheet: View {
                                 isActive: model.rearCenterHeatOn
                             )
                         }
-                        .disabled(model.requestInProgress.contains(.rearCenterSeatHeat) || !model.hasRearSeatHeating)
+                        .disabled(model.requestInProgress.contains(.rearCenterSeatHeat) || !model.hasRearSeatHeating || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.rearCenterSeatHeat) {
                             ProgressView()
@@ -478,7 +479,7 @@ struct SeatClimateSheet: View {
                                 isActive: model.rearRightSeatHeatOn
                             )
                         }
-                        .disabled(model.requestInProgress.contains(.rearRightSeatHeat) || !model.hasRearSeatHeating)
+                        .disabled(model.requestInProgress.contains(.rearRightSeatHeat) || !model.hasRearSeatHeating || model.allFunctionsDisable)
                         
                         if model.requestInProgress.contains(.rearRightSeatHeat) {
                             ProgressView()

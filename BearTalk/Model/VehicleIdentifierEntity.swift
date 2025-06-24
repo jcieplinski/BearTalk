@@ -19,17 +19,21 @@ struct VehicleIdentifierEntity: Identifiable, AppEntity {
     
     let id: String
     let nickname: String
+    let snapshotData: Data?
     
     internal init(
         id: String,
-        nickname: String
+        nickname: String,
+        snapshotData: Data? = nil
     ) {
         self.id = id
         self.nickname = nickname
+        self.snapshotData = snapshotData
     }
     
     init(identifier: VehicleIdentifier) {
         self.id = identifier.id
         self.nickname = identifier.nickname
+        self.snapshotData = identifier.snapshotData
     }
 }

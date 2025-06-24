@@ -10,8 +10,8 @@ import SwiftData
 
 @Model
 final class VehicleIdentifier: Identifiable {
-    @Attribute(.unique) var id: String
-    var nickname: String
+    var id: String = UUID().uuidString
+    var nickname: String = ""
     var snapshotData: Data?
     
     internal init(id: String, nickname: String, snapshotData: Data? = nil) {

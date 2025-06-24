@@ -38,7 +38,7 @@ struct ClimateControlSheet: View {
                             }
                         }
                     }
-                    .disabled(model.requestInProgress.contains(.climateControl))
+                    .disabled(model.requestInProgress.contains(.climateControl) || model.allFunctionsDisable)
                     
                     // Temperature Picker
                     Picker("Temperature", selection: $temperature) {
