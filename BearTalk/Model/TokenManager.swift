@@ -55,6 +55,9 @@ final class TokenManager {
                 print("Token is valid, proceeding with startup")
                 isLoggedIn = true
                 
+                // Send credentials to watch when login is successful
+                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                
                 // Set refresh timer to refresh before expiry
                 let refreshInSeconds = calculateRefreshTime(Int(timeUntilExpiry))
                 if refreshInSeconds > 0 {
@@ -255,6 +258,9 @@ final class TokenManager {
                     isLoggedIn = true
                     // Store the expiry time
                     tokenExpiryTime = Date().timeIntervalSince1970 + Double(refreshTimeInSec)
+                    
+                    // Send credentials to watch when tokens are refreshed
+                    WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
                     
                     // Calculate when to refresh next
                     let refreshInSeconds = calculateRefreshTime(refreshTimeInSec)

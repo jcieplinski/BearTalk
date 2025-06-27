@@ -35,6 +35,20 @@ struct BearTalkWatch_Watch_AppApp: App {
             ContentView(vehicleViewModel: VehicleViewModel(container: sharedModelContainer))
                 .tint(.accent)
                 .modelContainer(sharedModelContainer)
+                .onAppear {
+                    // Initialize WatchConnectivity and check for existing credentials
+                    let watchConnectivityManager = WatchConnectivityManager.shared
+                    
+                    // Check for existing application context first
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        watchConnectivityManager.checkExistingApplicationContext()
+                    }
+                    
+                    // Request credentials from phone on startup (as backup)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        watchConnectivityManager.requestCredentialsFromPhone()
+                    }
+                }
         }
     }
 }

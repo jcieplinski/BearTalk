@@ -135,6 +135,8 @@ struct ControlsView: View {
                         ForEach(model.vehicleIdentifiers ?? [], id: \.id) { vehicle in
                             Button {
                                 BearAPI.vehicleID = vehicle.id
+                                // Send updated credentials to watch when vehicle changes
+                                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
                                 Task {
                                     await model.refreshVehicle()
                                     // Refresh vehicle identifiers after switching

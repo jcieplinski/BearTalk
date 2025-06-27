@@ -15,7 +15,7 @@ struct VehicleView: View {
     @Bindable var model: VehicleViewModel
     
     var body: some View {
-        HStack {
+        VStack {
             VStack {
                 if model.nickname.isNotBlank {
                     Text(model.nickname)

@@ -331,6 +331,9 @@ import SceneKit
                                     self.update()
                                     self.updateStats()
                                     self.updateRangeStats()
+                                    
+                                    // Send vehicle state to watch
+                                    await WatchConnectivityManager.shared.sendVehicleStateToWatch()
                                 }
                             }
                         }
@@ -428,6 +431,9 @@ import SceneKit
                     self.updateRangeStats()
                     self.updateEfficiency(vehicle: vehicle)
                 }
+                
+                // Send vehicle state to watch
+                await WatchConnectivityManager.shared.sendVehicleStateToWatch()
             }
         } catch {
             let message = "Error updating Vehicle: \(error)"

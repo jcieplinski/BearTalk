@@ -228,6 +228,9 @@ struct LoginView: View {
                 await TokenManager.shared.initialize()
                 TokenManager.shared.isLoggedIn = true
                 
+                // Send credentials to watch after successful login
+                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                
                 // Update the model with user profile
                 model.userProfile = loginResponse.userProfile
                 

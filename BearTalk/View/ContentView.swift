@@ -95,6 +95,9 @@ struct ContentView: View {
                 print("App becoming active")
                 tokenManager.logTokenStatus()
                 
+                // Send credentials to watch when app becomes active
+                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                
                 Task { @Sendable in
                     await tokenManager.handleAppActivation()
                     if tokenManager.isLoggedIn {

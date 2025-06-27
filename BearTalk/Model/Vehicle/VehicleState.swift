@@ -110,6 +110,38 @@ enum PowerState: Codable, Equatable {
         }
     }
     
+    var intValue: Int {
+        switch self {
+            
+        case .unknown:
+            0
+        case .sleep:
+            1
+        case .wink:
+            2
+        case .accessory:
+            3
+        case .drive:
+            4
+        case .liveCharge:
+            5
+        case .sleepCharge:
+            6
+        case .liveUpdate:
+            7
+        case .sleepUpdate:
+            8
+        case .cloud1:
+            9
+        case .cloud2:
+            10
+        case .monitor:
+            11
+        case .UNRECOGNIZED(let int):
+            int
+        }
+    }
+    
     var image: String {
         switch self {
         case .unknown:

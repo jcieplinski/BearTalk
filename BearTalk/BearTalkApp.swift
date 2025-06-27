@@ -36,6 +36,9 @@ struct BearTalkApp: App {
     init() {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "AccentColor")
         UITabBar.appearance().unselectedItemTintColor = UIColor.label.withAlphaComponent(0.5)
+        
+        // Initialize WatchConnectivity
+        let _ = WatchConnectivityManager.shared
     }
 
     var body: some Scene {
