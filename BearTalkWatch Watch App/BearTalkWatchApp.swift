@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct BearTalkWatch_Watch_AppApp: App {
+    @Environment(\.scenePhase) private var scenePhase
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             VehicleIdentifier.self,
@@ -58,22 +60,23 @@ struct BearTalkWatch_Watch_AppApp: App {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         watchConnectivityManager.requestCredentialsFromPhone()
                     }
-                    
-                    // Set up periodic sync to ensure we stay in sync
-                    setupPeriodicSync()
                 }
-        }
-    }
-    
-    private func setupPeriodicSync() {
-        // Set up a timer to periodically check for updates
-        Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
-            // Only request vehicle state if we have credentials
-            let vehicleID = UserDefaults.appGroup.string(forKey: DefaultsKey.vehicleID) ?? ""
-            if !vehicleID.isEmpty {
-                print("Watch app: Periodic sync - requesting vehicle state")
-                WatchConnectivityManager.shared.requestVehicleStateFromPhone()
-            }
+                .onChange(of: scenePhase) { oldPhase, newPhase in
+                    switch newPhase {
+                    case .active:
+                        print("Watch app becoming active")
+                        // Request fresh vehicle state when app becomes active
+                        let vehicleID = UserDefaults.appGroup.string(forKey: DefaultsKey.vehicleID) ?? ""
+                        if !vehicleID.isEmpty {
+                            print("Watch app: App became active, requesting vehicle state")
+                            WatchConnectivityManager.shared.requestVehicleStateFromPhone()
+                        }
+                    case .inactive, .background:
+                        print("Watch app entering background/inactive")
+                    @unknown default:
+                        break
+                    }
+                }
         }
     }
 }
