@@ -20,6 +20,9 @@ struct ContentView: View {
                 
                 ControlsView(model: vehicleViewModel)
                     .tag(1)
+                
+                VehicleSwitcherView(container: modelContext.container)
+                    .tag(2)
             }
             .tabViewStyle(.verticalPage)
         }
