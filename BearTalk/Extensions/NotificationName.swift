@@ -1,5 +1,3 @@
 import Foundation
 
-extension Notification.Name {
-    static let showControlAlert = Notification.Name("showControlAlert")
-} 
+// Notification names are now defined in Model/Data/NotificationNames.swift 

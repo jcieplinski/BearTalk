@@ -566,6 +566,40 @@ enum SeatClimateMode: Codable, Equatable {
 }
 
 struct SeatClimateState: Codable, Equatable {
+    internal init(
+        driverHeatBackrestZone1: SeatClimateMode,
+        driverHeatBackrestZone3: SeatClimateMode,
+        driverHeatCushionZone2: SeatClimateMode,
+        driverHeatCushionZone4: SeatClimateMode,
+        driverVentBackrest: SeatClimateMode,
+        driverVentCushion: SeatClimateMode,
+        frontPassengerHeatBackrestZone1: SeatClimateMode,
+        frontPassengerHeatBackrestZone3: SeatClimateMode,
+        frontPassengerHeatCushionZone2: SeatClimateMode,
+        frontPassengerHeatCushionZone4: SeatClimateMode,
+        frontPassengerVentBackrest: SeatClimateMode,
+        frontPassengerVentCushion: SeatClimateMode,
+        rearPassengerHeatLeft: SeatClimateMode,
+        rearPassengerHeatCenter: SeatClimateMode,
+        rearPassengerHeatRight: SeatClimateMode
+    ) {
+        self.driverHeatBackrestZone1 = driverHeatBackrestZone1
+        self.driverHeatBackrestZone3 = driverHeatBackrestZone3
+        self.driverHeatCushionZone2 = driverHeatCushionZone2
+        self.driverHeatCushionZone4 = driverHeatCushionZone4
+        self.driverVentBackrest = driverVentBackrest
+        self.driverVentCushion = driverVentCushion
+        self.frontPassengerHeatBackrestZone1 = frontPassengerHeatBackrestZone1
+        self.frontPassengerHeatBackrestZone3 = frontPassengerHeatBackrestZone3
+        self.frontPassengerHeatCushionZone2 = frontPassengerHeatCushionZone2
+        self.frontPassengerHeatCushionZone4 = frontPassengerHeatCushionZone4
+        self.frontPassengerVentBackrest = frontPassengerVentBackrest
+        self.frontPassengerVentCushion = frontPassengerVentCushion
+        self.rearPassengerHeatLeft = rearPassengerHeatLeft
+        self.rearPassengerHeatCenter = rearPassengerHeatCenter
+        self.rearPassengerHeatRight = rearPassengerHeatRight
+    }
+    
     let driverHeatBackrestZone1: SeatClimateMode
     let driverHeatBackrestZone3: SeatClimateMode
     let driverHeatCushionZone2: SeatClimateMode
@@ -660,6 +694,15 @@ enum SteeringHeaterStatus: Codable, Equatable {
     case off // = 1
     case on // = 2
     case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .off: return 1
+        case .on: return 2
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
     
     init(proto: Mobilegateway_Protos_SteeringHeaterStatus) {
         switch proto {

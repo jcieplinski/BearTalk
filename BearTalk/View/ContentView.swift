@@ -70,6 +70,15 @@ struct ContentView: View {
         .overlay {
             ControlAlertView()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .handleWatchControlAction)) { notification in
+            if let userInfo = notification.userInfo,
+               let controlType = userInfo["controlType"] as? ControlType {
+                // Handle control action from watch without showing alerts
+                model.showAlertsBeforeOpenActions = false
+                model.handleControlAction(controlType)
+                model.showAlertsBeforeOpenActions = true
+            }
+        }
         .task {
             // Initialize token manager
             await tokenManager.initialize()
@@ -102,6 +111,10 @@ struct ContentView: View {
                     await tokenManager.handleAppActivation()
                     if tokenManager.isLoggedIn {
                         model.startRefreshing()
+                        
+                        // Proactively send vehicle state to watch after a short delay
+                        try? await Task.sleep(for: .seconds(2.0))
+                        await WatchConnectivityManager.shared.sendVehicleStateToWatchIfAvailable()
                     }
                 }
             @unknown default:

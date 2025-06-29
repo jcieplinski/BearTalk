@@ -58,4 +58,32 @@ actor VehicleIdentifierHandler {
         try await delete(expiredVehicles)
         try await update(vehicles)
     }
+    
+    public func removeDuplicates() async throws {
+        let descriptor = FetchDescriptor<VehicleIdentifier>()
+        let allVehicles = try modelContext.fetch(descriptor)
+        
+        // Group vehicles by ID and find duplicates
+        let groupedVehicles = Dictionary(grouping: allVehicles) { $0.id }
+        
+        var vehiclesToDelete: [VehicleIdentifier] = []
+        
+        for (_, vehicles) in groupedVehicles {
+            if vehicles.count > 1 {
+                // Keep the first vehicle, mark the rest for deletion
+                let duplicates = Array(vehicles.dropFirst())
+                vehiclesToDelete.append(contentsOf: duplicates)
+            }
+        }
+        
+        // Delete duplicates
+        for vehicle in vehiclesToDelete {
+            modelContext.delete(vehicle)
+        }
+        
+        if !vehiclesToDelete.isEmpty {
+            try modelContext.save()
+            print("Removed \(vehiclesToDelete.count) duplicate vehicles")
+        }
+    }
 }

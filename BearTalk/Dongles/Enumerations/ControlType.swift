@@ -7,13 +7,14 @@
 
 import SwiftUI
 import AppIntents
+import UniformTypeIdentifiers
 
 enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transferable, AppEnum {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .controlType)
     }
     
-    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Contol Type")
+    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Control Type")
     
     static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
         .wake: DisplayRepresentation(title: "Wake Car"),

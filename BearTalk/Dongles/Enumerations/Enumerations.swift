@@ -67,6 +67,18 @@ enum LockState: Codable, Equatable {
         }
     }
     
+    init(intValue: Int) {
+        if intValue == 0 {
+            self = .unknown
+        } else if intValue == 1 {
+            self = .unlocked
+        } else if intValue == 2 {
+            self = .locked
+        } else {
+            self = .UNRECOGNIZED(intValue)
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_LockState) {
         switch proto {
         case .unknown:

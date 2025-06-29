@@ -64,6 +64,26 @@ class WatchConnectivityManager: NSObject, ObservableObject {
         })
     }
     
+    func sendControlAction(_ controlType: ControlType) {
+        guard session.isReachable else {
+            print("WatchConnectivityManager: Phone is not reachable")
+            return
+        }
+        
+        print("WatchConnectivityManager: Sending control action to phone: \(controlType.rawValue)")
+        
+        let message: [String: Any] = [
+            "requestType": "controlAction",
+            "controlType": controlType.rawValue
+        ]
+        
+        session.sendMessage(message, replyHandler: { reply in
+            print("WatchConnectivityManager: Successfully sent control action to phone: \(reply)")
+        }, errorHandler: { error in
+            print("WatchConnectivityManager: Failed to send control action to phone: \(error)")
+        })
+    }
+    
     func checkExistingApplicationContext() {
         let context = session.receivedApplicationContext
         if !context.isEmpty {
@@ -72,6 +92,11 @@ class WatchConnectivityManager: NSObject, ObservableObject {
         } else {
             print("WatchConnectivityManager: No existing application context found")
         }
+    }
+    
+    // Debug method to log current session state
+    func logSessionState() {
+        print("WatchConnectivityManager: Session state - reachable: \(session.isReachable), activationState: \(session.activationState.rawValue)")
     }
     
     // Callback to notify when credentials are received

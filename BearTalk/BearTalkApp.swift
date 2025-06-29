@@ -49,6 +49,15 @@ struct BearTalkApp: App {
                     .environment(dataModel)
                     .tint(.accent)
                     .modelContainer(sharedModelContainer)
+                    .task {
+                        // Remove duplicate vehicles on startup
+                        do {
+                            let handler = VehicleIdentifierHandler(modelContainer: sharedModelContainer)
+                            try await handler.removeDuplicates()
+                        } catch {
+                            print("Failed to remove duplicate vehicles: \(error)")
+                        }
+                    }
             }
         }
     }

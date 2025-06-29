@@ -9,12 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @AppStorage("selectedTab", store: .appGroup) private var selectedTab: Int = 0
     let vehicleViewModel: VehicleViewModel
     
     var body: some View {
-        TabView {
-            VehicleView(model: vehicleViewModel)
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                VehicleView(model: vehicleViewModel)
+                    .tag(0)
+                
+                ControlsView(model: vehicleViewModel)
+                    .tag(1)
+            }
+            .tabViewStyle(.verticalPage)
         }
-        .tabViewStyle(.verticalPage)
     }
 }

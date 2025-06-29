@@ -35,20 +35,45 @@ struct BearTalkWatch_Watch_AppApp: App {
             ContentView(vehicleViewModel: VehicleViewModel(container: sharedModelContainer))
                 .tint(.accent)
                 .modelContainer(sharedModelContainer)
+                .task {
+                    // Remove duplicate vehicles on startup
+                    do {
+                        let handler = VehicleIdentifierHandler(modelContainer: sharedModelContainer)
+                        try await handler.removeDuplicates()
+                    } catch {
+                        print("Failed to remove duplicate vehicles: \(error)")
+                    }
+                }
                 .onAppear {
-                    // Initialize WatchConnectivity and check for existing credentials
+                    // Initialize WatchConnectivity and set up communication
                     let watchConnectivityManager = WatchConnectivityManager.shared
                     
-                    // Check for existing application context first
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        watchConnectivityManager.checkExistingApplicationContext()
-                    }
+                    // Log session state for debugging
+                    watchConnectivityManager.logSessionState()
                     
-                    // Request credentials from phone on startup (as backup)
+                    // Check for existing application context first (immediate)
+                    watchConnectivityManager.checkExistingApplicationContext()
+                    
+                    // Request credentials from phone after a short delay (as backup)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         watchConnectivityManager.requestCredentialsFromPhone()
                     }
+                    
+                    // Set up periodic sync to ensure we stay in sync
+                    setupPeriodicSync()
                 }
+        }
+    }
+    
+    private func setupPeriodicSync() {
+        // Set up a timer to periodically check for updates
+        Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
+            // Only request vehicle state if we have credentials
+            let vehicleID = UserDefaults.appGroup.string(forKey: DefaultsKey.vehicleID) ?? ""
+            if !vehicleID.isEmpty {
+                print("Watch app: Periodic sync - requesting vehicle state")
+                WatchConnectivityManager.shared.requestVehicleStateFromPhone()
+            }
         }
     }
 }

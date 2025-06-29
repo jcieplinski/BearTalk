@@ -38,6 +38,18 @@ struct BodyState: Codable, Equatable {
 }
 
 struct WindowPosition: Codable, Equatable {
+    internal init(
+        leftFront: WindowPositionStatus,
+        leftRear: WindowPositionStatus,
+        rightFront: WindowPositionStatus,
+        rightRear: WindowPositionStatus
+    ) {
+        self.leftFront = leftFront
+        self.leftRear = leftRear
+        self.rightFront = rightFront
+        self.rightRear = rightRear
+    }
+    
     var leftFront: WindowPositionStatus
     var leftRear: WindowPositionStatus
     var rightFront: WindowPositionStatus
@@ -72,6 +84,43 @@ enum WindowPositionStatus: Codable, Equatable {
     case betweenFullyClosedAndShortDropDown // = 13
     case betweenShortDropDownAndFullyOpen // = 14
     case UNRECOGNIZED(Int)
+    
+    var intValue: Int {
+        switch self {
+        case .unknown:
+            0
+        case .fullyClosed:
+            1
+        case .aboveShortDropPosition:
+            2
+        case .shortDropPosition:
+            3
+        case .belowShortDropPosition:
+            4
+        case .fullyOpen:
+            5
+        case .unknownDeInitialized:
+            6
+        case .atpReversePosition:
+            7
+        case .anticlatterPosition:
+            8
+        case .hardStopUp:
+            9
+        case .hardStopDown:
+            10
+        case .longDropPosition:
+            11
+        case .ventDropPosition:
+            12
+        case .betweenFullyClosedAndShortDropDown:
+            13
+        case .betweenShortDropDownAndFullyOpen:
+            14
+        case .UNRECOGNIZED(let int):
+            int
+        }
+    }
     
     var isOpen: Bool {
         return self != .fullyClosed

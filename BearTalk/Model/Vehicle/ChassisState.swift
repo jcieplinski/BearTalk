@@ -66,6 +66,18 @@ enum LightState: Codable, Equatable {
     case hazardOff // = 5
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .flash: return 1
+        case .on: return 2
+        case .off: return 3
+        case .hazardOn: return 4
+        case .hazardOff: return 5
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_LightAction) {
         switch proto {
         case .off:

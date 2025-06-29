@@ -13,17 +13,41 @@ struct VehicleView: View {
     @AppStorage(DefaultsKey.vehicleID, store: .appGroup) static var vehicleID: String = ""
     
     @Bindable var model: VehicleViewModel
+    @State private var isRefreshing = false
     
     var body: some View {
         VStack {
             VStack {
                 if model.nickname.isNotBlank {
-                    Text(model.nickname)
-                        .font(.headline)
+                    HStack {
+                        Text(model.nickname)
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        // Manual refresh button
+                        Button(action: {
+                            Task {
+                                isRefreshing = true
+                                await model.refreshVehicleState()
+                                isRefreshing = false
+                            }
+                        }) {
+                            Image(systemName: isRefreshing ? "arrow.clockwise.circle.fill" : "arrow.clockwise.circle")
+                                .font(.caption)
+                                .foregroundColor(.accentColor)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(isRefreshing)
+                    }
                 }
                 
-                Text("\(model.chargePercent.rounded().stringWithLocale())%")
-                    .font(.title)
+                HStack {
+                    Text("\(model.chargePercent.rounded().stringWithLocale())%")
+                        .font(.title)
+                    
+                    Spacer()
+                }
             }
             
             if let snapshotData = model.snapshotData,
@@ -31,7 +55,7 @@ struct VehicleView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 400, maxHeight: 80)
+                    .frame(maxWidth: 440, maxHeight: 100)
             }
         }
         .task {
