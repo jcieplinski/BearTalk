@@ -80,7 +80,7 @@ struct StatsView: View {
                     Button {
                         showingMailWarning.toggle()
                     } label: {
-                        Image(systemName: "envelope.circle")
+                        Image(systemName: "envelope")
                     }
                     .disabled(!MFMailComposeViewController.canSendMail())
                 }

@@ -31,33 +31,64 @@ struct ContentView: View {
                     if appState.noCarMode {
                         NoCarView()
                     } else if tokenManager.isLoggedIn {
-                        TabView(selection: $appState.selectedTab) {
-                            ControlsView()
-                                .tabItem {
-                                    Image("home")
-                                    Text("Home")
-                                }
-                                .tag(AppTab.home)
-                            MapView()
-                                .tabItem {
-                                    Image("location")
-                                    Text("Location")
-                                }
-                                .tag(AppTab.map)
-                            RangeView()
-                                .tabItem {
-                                    Image("range")
-                                    Text("Range")
-                                }
-                                .tag(AppTab.range)
-                            StatsView()
-                                .tabItem {
-                                    Image("stats")
-                                    Text("Stats")
-                                }
-                                .tag(AppTab.stats)
+                        if #available(iOS 26.0, *) {
+                            TabView(selection: $appState.selectedTab) {
+                                ControlsView()
+                                    .tabItem {
+                                        Image("home")
+                                        Text("Home")
+                                    }
+                                    .tag(AppTab.home)
+                                MapView()
+                                    .tabItem {
+                                        Image("location")
+                                        Text("Location")
+                                    }
+                                    .tag(AppTab.map)
+                                RangeView()
+                                    .tabItem {
+                                        Image("range")
+                                        Text("Range")
+                                    }
+                                    .tag(AppTab.range)
+                                StatsView()
+                                    .tabItem {
+                                        Image("stats")
+                                        Text("Stats")
+                                    }
+                                    .tag(AppTab.stats)
+                            }
+                            .tabBarMinimizeBehavior(.onScrollDown)
+                            .tint(Color(uiColor: .label))
+                        } else {
+                            TabView(selection: $appState.selectedTab) {
+                                ControlsView()
+                                    .tabItem {
+                                        Image("home")
+                                        Text("Home")
+                                    }
+                                    .tag(AppTab.home)
+                                MapView()
+                                    .tabItem {
+                                        Image("location")
+                                        Text("Location")
+                                    }
+                                    .tag(AppTab.map)
+                                RangeView()
+                                    .tabItem {
+                                        Image("range")
+                                        Text("Range")
+                                    }
+                                    .tag(AppTab.range)
+                                StatsView()
+                                    .tabItem {
+                                        Image("stats")
+                                        Text("Stats")
+                                    }
+                                    .tag(AppTab.stats)
+                            }
+                            .tint(Color(uiColor: .label))
                         }
-                        .tint(Color(uiColor: .label))
                     } else {
                         LoginView()
                     }

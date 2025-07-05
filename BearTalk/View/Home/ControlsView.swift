@@ -130,36 +130,73 @@ struct ControlsView: View {
             .navigationTitle(model.vehicle?.vehicleConfig.nickname ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        ForEach(model.vehicleIdentifiers ?? [], id: \.id) { vehicle in
-                            Button {
-                                BearAPI.vehicleID = vehicle.id
-                                // Send updated credentials to watch when vehicle changes
-                                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
-                                Task {
-                                    await model.refreshVehicle()
-                                    // Refresh vehicle identifiers after switching
-                                    model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
+                if #available(iOS 26.0, *) {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            ForEach(model.vehicleIdentifiers ?? [], id: \.id) { vehicle in
+                                Button {
+                                    BearAPI.vehicleID = vehicle.id
+                                    // Send updated credentials to watch when vehicle changes
+                                    WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                                    Task {
+                                        await model.refreshVehicle()
+                                        // Refresh vehicle identifiers after switching
+                                        model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
+                                    }
+                                } label: {
+                                    Text(vehicle.nickname)
                                 }
+                            }
+                            
+                            Divider()
+                            
+                            Button {
+                                showSettings = true
                             } label: {
-                                Text(vehicle.nickname)
+                                Label("Settings", systemImage: "gear")
+                            }
+                        } label: {
+                            if let photoUrl = model.userProfile?.photoUrl {
+                                ProfileImageView(photoUrl: photoUrl)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.title2)
                             }
                         }
-                        
-                        Divider()
-                        
-                        Button {
-                            showSettings = true
+                    }
+                    .sharedBackgroundVisibility(.hidden)
+                } else {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            ForEach(model.vehicleIdentifiers ?? [], id: \.id) { vehicle in
+                                Button {
+                                    BearAPI.vehicleID = vehicle.id
+                                    // Send updated credentials to watch when vehicle changes
+                                    WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                                    Task {
+                                        await model.refreshVehicle()
+                                        // Refresh vehicle identifiers after switching
+                                        model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
+                                    }
+                                } label: {
+                                    Text(vehicle.nickname)
+                                }
+                            }
+                            
+                            Divider()
+                            
+                            Button {
+                                showSettings = true
+                            } label: {
+                                Label("Settings", systemImage: "gear")
+                            }
                         } label: {
-                            Label("Settings", systemImage: "gear")
-                        }
-                    } label: {
-                        if let photoUrl = model.userProfile?.photoUrl {
-                            ProfileImageView(photoUrl: photoUrl)
-                        } else {
-                            Image(systemName: "person.fill")
-                                .font(.title2)
+                            if let photoUrl = model.userProfile?.photoUrl {
+                                ProfileImageView(photoUrl: photoUrl)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.title2)
+                            }
                         }
                     }
                 }

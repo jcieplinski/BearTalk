@@ -120,8 +120,15 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                    if #available(iOS 26.0, *) {
+                        Button(role: .confirm) {
+                            dismiss()
+                        }
+                        .tint(.active)
+                    } else {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }

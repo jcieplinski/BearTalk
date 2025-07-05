@@ -119,11 +119,18 @@ struct ProfileImageEditView: View {
                 .background(.ultraThinMaterial)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Label("Done", systemImage: "xmark.circle.fill")
-                                .labelStyle(.titleOnly)
+                        if #available(iOS 26.0, *) {
+                            Button(role: .confirm) {
+                                dismiss()
+                            }
+                            .tint(.active)
+                        } else {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Label("Done", systemImage: "xmark.circle.fill")
+                                    .labelStyle(.titleOnly)
+                            }
                         }
                     }
                 }
