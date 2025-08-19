@@ -70,8 +70,26 @@
       ],
       "layers" : [
         {
+          "glass-specializations" : [
+            {
+              "appearance" : "tinted",
+              "value" : true
+            }
+          ],
           "image-name" : "beta1.png",
-          "name" : "beta1"
+          "name" : "beta1",
+          "position-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : {
+                "scale" : 1,
+                "translation-in-points" : [
+                  0,
+                  0
+                ]
+              }
+            }
+          ]
         },
         {
           "blend-mode-specializations" : [
@@ -97,7 +115,15 @@
               }
             }
           ],
-          "glass" : true,
+          "glass-specializations" : [
+            {
+              "value" : true
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
+            }
+          ],
           "image-name" : "bear1.png",
           "name" : "bear1",
           "opacity-specializations" : [
@@ -107,16 +133,30 @@
             },
             {
               "appearance" : "tinted",
-              "value" : 0.41
+              "value" : 0.56
             }
           ],
-          "position" : {
-            "scale" : 1,
-            "translation-in-points" : [
-              0.9850330965443601,
-              7.408558782460398
-            ]
-          }
+          "position-specializations" : [
+            {
+              "value" : {
+                "scale" : 1,
+                "translation-in-points" : [
+                  0.9850330965443601,
+                  7.408558782460398
+                ]
+              }
+            },
+            {
+              "idiom" : "square",
+              "value" : {
+                "scale" : 1,
+                "translation-in-points" : [
+                  0.9850330965443601,
+                  7.4
+                ]
+              }
+            }
+          ]
         }
       ],
       "shadow" : {
@@ -124,10 +164,21 @@
         "opacity" : 0.5
       },
       "specular" : true,
-      "translucency" : {
-        "enabled" : true,
-        "value" : 0.5
-      }
+      "translucency-specializations" : [
+        {
+          "value" : {
+            "enabled" : true,
+            "value" : 0.5
+          }
+        },
+        {
+          "appearance" : "tinted",
+          "value" : {
+            "enabled" : true,
+            "value" : 0.05
+          }
+        }
+      ]
     }
   ],
   "supported-platforms" : {
