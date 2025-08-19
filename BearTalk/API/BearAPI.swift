@@ -473,6 +473,39 @@ final class BearAPI {
             }
         }
     }
+    
+    static func setACCurrLimit(vehicleID: String = vehicleID, acCurrLimit: Int32) async throws -> Bool {
+        print("Setting AC current limit to \(acCurrLimit)A for vehicle \(vehicleID)")
+        return try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_SetACCurrLimitRequest()
+                request.vehicleID = vehicleID
+                request.acCurrLim = acCurrLimit
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.setACCurrLimit(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    print("Successfully set AC current limit to \(acCurrLimit)A")
+                    reloadWidgetsAfterDelay()
+                    return true
+                } catch {
+                    print("Failed to set AC current limit: \(error)")
+                    return false
+                }
+            }
+        }
+    }
 
     static func lightsControl(vehicleID: String = vehicleID, action: LightAction) async throws -> Bool {
         try await withAuthorization {

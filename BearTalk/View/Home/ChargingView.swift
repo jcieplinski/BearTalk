@@ -125,6 +125,9 @@ struct ChargingView: View {
                 .background(.thinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                // AC Charge Limit
+                ACChargeLimitView()
+                
                 // Battery Preconditioning Button
                 Button {
                     model.toggleBatteryPreconditioning()

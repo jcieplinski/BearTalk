@@ -54,4 +54,4 @@ struct SecurityCell: View {
             .environment(DataModel())
             .padding()
     }
-} 
+}

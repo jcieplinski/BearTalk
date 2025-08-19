@@ -292,6 +292,8 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             return false
         case .alarm:
             return false
+        case .acCurrentLimit:
+            return false
         }
     }
     
@@ -389,6 +391,8 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .rearRightSeatHeat:
             break
         case .alarm:
+            break
+        case .acCurrentLimit:
             break
         }
         

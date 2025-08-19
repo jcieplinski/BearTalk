@@ -34,6 +34,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         .batteryPrecondition: DisplayRepresentation(title: "Battery Preconditioning"),
         .softwareUpdate: DisplayRepresentation(title: "Software Update"),
         .chargeLimit: DisplayRepresentation(title: "Charge Limit"),
+        .acCurrentLimit: DisplayRepresentation(title: "AC Current Limit"),
         .driverSeatHeat: DisplayRepresentation(title: "Driver Seat Chair"),
         .driverSeatVent: DisplayRepresentation(title: "Driver Seat Vent"),
         .passengerSeatHeat: DisplayRepresentation(title: "Passenger Seat Heat"),
@@ -62,6 +63,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case softwareUpdate
     
     case chargeLimit
+    case acCurrentLimit
     case driverSeatHeat
     case driverSeatVent
     case passengerSeatHeat
@@ -115,6 +117,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Precondition Battery"
         case .chargeLimit:
             "Charge Limit"
+        case .acCurrentLimit:
+            "AC Current Limit"
         case .climateControl:
             "Climate Control"
         case .driverSeatHeat:
@@ -178,6 +182,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             ""
         case .softwareUpdate:
             ""
+        case .acCurrentLimit:
+            ""
         }
     }
     
@@ -218,6 +224,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         case .climateControl:
             "climateOn"
         case .alarm:
+            ""
+        case .acCurrentLimit:
             ""
         case .softwareUpdate:
             ""

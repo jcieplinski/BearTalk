@@ -184,6 +184,7 @@ struct MobileAppReqState: Codable, Equatable {
     let sharedTripRequest: SharedTripState
     let trunkCargoRequest: DoorState
     let vehicleUnlockRequest: LockState
+    let acCurrentLimitReq: Int32
     
     init(proto: Mobilegateway_Protos_MobileAppReqState) {
         alarmSetRequest = .init(proto: proto.alarmSetRequest)
@@ -197,6 +198,7 @@ struct MobileAppReqState: Codable, Equatable {
         sharedTripRequest = .init(proto: proto.sharedTripRequest)
         trunkCargoRequest = .init(proto: proto.trunkCargoRequest)
         vehicleUnlockRequest = .init(proto: proto.vehicleUnlockRequest)
+        acCurrentLimitReq = proto.acCurrentLimitReq
     }
 }
 

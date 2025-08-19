@@ -129,6 +129,8 @@ struct ControlsView: View {
             return false
         case .alarm:
             return false
+        case .acCurrentLimit:
+            return false
         }
     }
     

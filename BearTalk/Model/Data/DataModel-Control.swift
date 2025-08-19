@@ -572,6 +572,10 @@ extension DataModel {
                 if oldState.chargingState.chargeLimit != newState.chargingState.chargeLimit {
                     requestInProgress.remove(.chargeLimit)
                 }
+            case .acCurrentLimit:
+                if oldState.mobileAppReqStatus.acCurrentLimitReq != newState.mobileAppReqStatus.acCurrentLimitReq {
+                    requestInProgress.remove(.acCurrentLimit)
+                }
             case .alarm:
                 if oldState.alarmState != newState.alarmState {
                     requestInProgress.remove(.alarm)
@@ -711,6 +715,33 @@ extension DataModel {
                 }
             } catch {
                 print("Could not set charge limit: \(error)")
+            }
+        }
+    }
+    
+    func setACCurrLimit(_ acCurrLimit: Int32) {
+        print("DataModel: Setting AC current limit to \(acCurrLimit)A")
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    print("DataModel: Vehicle not ready, waking up first")
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.acCurrentLimit)
+                print("DataModel: Request in progress for AC current limit")
+                
+                let success = try await BearAPI.setACCurrLimit(acCurrLimit: acCurrLimit)
+                if !success {
+                    print("DataModel: Failed to set AC current limit")
+                    // put up an alert
+                } else {
+                    print("DataModel: Successfully set AC current limit, refreshing vehicle state")
+                    // Refresh the vehicle state to get the updated AC current limit
+                    await refreshVehicle()
+                }
+            } catch {
+                print("DataModel: Could not set AC current limit: \(error)")
             }
         }
     }
