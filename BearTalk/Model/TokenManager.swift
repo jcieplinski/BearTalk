@@ -283,17 +283,42 @@ final class TokenManager {
             } catch let error {
                 print("Token refresh attempt \(currentRetry + 1) failed: \(error)")
                 
-                // If we've exhausted all retries or got an unauthenticated error, handle accordingly
-                if currentRetry == maxRetries || (error as? RPCError)?.code == .unauthenticated {
-                    print("Token refresh failed after \(currentRetry + 1) attempts")
-                    if let rpcError = error as? RPCError,
-                       rpcError.code == .unauthenticated {
+                // Handle specific gRPC error types
+                if let rpcError = error as? RPCError {
+                    print("gRPC refresh token error: \(rpcError.code): \(rpcError.message)")
+                    
+                    // Handle resourceExhausted errors (rate limiting)
+                    if rpcError.code == .resourceExhausted {
+                        print("Resource exhausted error detected - likely rate limiting")
+                        // For rate limiting, we should wait longer before retrying
+                        if currentRetry == maxRetries {
+                            print("Token refresh failed after \(currentRetry + 1) attempts due to rate limiting")
+                            // Don't log out on rate limiting, just set as not logged in temporarily
+                            isLoggedIn = false
+                            
+                            // Schedule a retry after a longer delay (5 minutes) for rate limiting
+                            Task { @Sendable [weak self] in
+                                try? await Task.sleep(nanoseconds: 5 * 60 * 1_000_000_000) // 5 minutes
+                                await self?.refreshAuth()
+                            }
+                            return
+                        }
+                        // Use longer delay for rate limiting
+                        delay = max(delay * 3, 10.0) // Minimum 10 second delay for rate limiting
+                    }
+                    // Handle unauthenticated errors
+                    else if rpcError.code == .unauthenticated {
                         print("Unauthenticated error, clearing tokens")
                         logout()
-                    } else {
-                        // Only set logged out if we've exhausted all retries
-                        isLoggedIn = false
+                        return
                     }
+                }
+                
+                // If we've exhausted all retries, handle accordingly
+                if currentRetry == maxRetries {
+                    print("Token refresh failed after \(currentRetry + 1) attempts")
+                    // Only set logged out if we've exhausted all retries
+                    isLoggedIn = false
                     return
                 }
                 
@@ -323,26 +348,21 @@ final class TokenManager {
             }
         }
         
-        // Schedule background refresh
+        // Schedule background refresh - be more conservative in background
         Task { @Sendable [weak self] in
             guard let self = self else { return }
             
             logTokenStatus()
             
-            if !checkTokenValidity() {
-                print("Token validation failed in background, attempting refresh")
-                await refreshAuthWithRetry(maxRetries: 1, initialDelay: 0.5)
-                return
-            }
-            
             let currentTime = Date().timeIntervalSince1970
             let timeUntilExpiry = tokenExpiryTime - currentTime
             
-            // Check if we need to refresh before the background task expires
-            if timeUntilExpiry <= Double(REFRESH_BUFFER_SECONDS) {
-                print("Background: Token expires soon (\(Int(timeUntilExpiry))s), refreshing now")
-                // Use a shorter retry count and delay for background refresh
-                await refreshAuthWithRetry(maxRetries: 1, initialDelay: 0.5)
+            // Only attempt refresh in background if token is very close to expiring
+            // Use a much smaller buffer (30 seconds) to avoid unnecessary background refreshes
+            if timeUntilExpiry <= 30 {
+                print("Background: Token expires very soon (\(Int(timeUntilExpiry))s), attempting refresh")
+                // Use minimal retry count and longer delay for background refresh to avoid rate limiting
+                await refreshAuthWithRetry(maxRetries: 1, initialDelay: 2.0)
             } else {
                 print("Background: Token still valid for \(Int(timeUntilExpiry))s, no refresh needed")
             }

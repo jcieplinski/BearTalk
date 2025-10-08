@@ -173,7 +173,11 @@ final class BearAPI {
                 
                 return relativeExpiryTime
             } catch let error {
-                print("gRPC refresh token error: \(error)")
+                if let rpcError = error as? RPCError {
+                    print("gRPC refresh token error: \(rpcError.code): \(rpcError.message)")
+                } else {
+                    print("gRPC refresh token error: \(error)")
+                }
                 
                 // Only clear tokens if we get an unauthenticated error
                 if let rpcError = error as? RPCError,

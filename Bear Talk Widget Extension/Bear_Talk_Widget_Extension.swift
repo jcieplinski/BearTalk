@@ -22,7 +22,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: BearWidgetIntent, in context: Context) async -> SimpleEntry {
-        let _ = try? await BearAPI.refreshToken()
+        // For snapshots, use cached data to avoid excessive API calls
         let vehicles = try? await BearAPI.fetchVehicles()
         
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first
@@ -45,7 +45,8 @@ struct Provider: AppIntentTimelineProvider {
     func timeline(for configuration: BearWidgetIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
         
-        let _ = try? await BearAPI.refreshToken()
+        // Only refresh token if we don't have valid cached data
+        // This reduces API calls that could contribute to rate limiting
         let vehicles = try? await BearAPI.fetchVehicles()
         
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first

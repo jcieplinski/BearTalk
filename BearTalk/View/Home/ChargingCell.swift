@@ -10,15 +10,6 @@ struct ChargingCell: View {
         return "80%"
     }
     
-    var currentACCurrent: String? {
-        if let vehicle = model.vehicle,
-           vehicle.vehicleState.chargingState.chargeState == .charging,
-           vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit > 0 {
-            return "\(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)A"
-        }
-        return nil
-    }
-    
     var body: some View {
         NavigationLink {
             ChargingView()
@@ -46,14 +37,6 @@ struct ChargingCell: View {
                         
                         Spacer()
                         
-                        if let currentAC = currentACCurrent {
-                            Text("AC: \(currentAC)")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            
-                            Spacer()
-                        }
-                        
                         Text("Charge Limit: \(chargeLimit)")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -66,16 +49,6 @@ struct ChargingCell: View {
                                 .foregroundStyle(.secondary)
                             
                             Spacer()
-                        }
-                        
-                        if let currentAC = currentACCurrent {
-                            HStack {
-                                Text("AC: \(currentAC)")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                                
-                                Spacer()
-                            }
                         }
                         
                         Spacer()

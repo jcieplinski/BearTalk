@@ -11,7 +11,7 @@ struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
-    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security,windows"
+    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security,windows,maintenance"
 
     @State private var showLogOutWarning: Bool = false
     @State private var showClimateControl: Bool = false
@@ -21,7 +21,19 @@ struct ControlsView: View {
     @State private var draggedCell: String?
     
     private var orderedCells: [String] {
-        cellOrder.split(separator: ",").map(String.init)
+        let currentCells = cellOrder.split(separator: ",").map(String.init)
+        
+        // If maintenance is not in the current order, add it to the end
+        if !currentCells.contains("maintenance") {
+            let updatedOrder = currentCells + ["maintenance"]
+            // Update the stored order for future app launches
+            DispatchQueue.main.async {
+                cellOrder = updatedOrder.joined(separator: ",")
+            }
+            return updatedOrder
+        }
+        
+        return currentCells
     }
     
     private func cellView(for type: String) -> some View {
@@ -35,6 +47,8 @@ struct ControlsView: View {
                 SecurityCell()
             case "windows":
                 WindowsCell()
+            case "maintenance":
+                MaintenanceCell()
             default:
                 EmptyView()
             }
