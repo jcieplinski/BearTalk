@@ -20,6 +20,15 @@ struct ControlsView: View {
     @State private var showWindowControls: Bool = false
     @State private var draggedCell: String?
     
+    private var batteryDisplayText: String {
+        let currentBatteryDisplay = UnitConverter.currentBatteryDisplay
+        if currentBatteryDisplay == .distance {
+            return model.estimatedRange
+        } else {
+            return model.chargePercentage
+        }
+    }
+    
     private var orderedCells: [String] {
         let currentCells = cellOrder.split(separator: ",").map(String.init)
         
@@ -75,7 +84,7 @@ struct ControlsView: View {
                 VStack(spacing: 12) {
                     if model.vehicle != nil {
                         // Top Row Status
-                        Text(model.chargePercentage)
+                        Text(batteryDisplayText)
                             .font(.title)
                             .dynamicTypeSize(.large)
                             .frame(maxWidth: .infinity)

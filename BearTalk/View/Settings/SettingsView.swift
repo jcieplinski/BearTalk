@@ -107,6 +107,18 @@ struct SettingsView: View {
                     }
                 }
                 
+                Section("Units") {
+                    NavigationLink(destination: UnitsView()) {
+                        HStack {
+                            Text("Units")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                                .font(.caption)
+                        }
+                    }
+                }
+                
                 Section {
                     Button(role: .destructive) {
                         showLogOutWarning = true

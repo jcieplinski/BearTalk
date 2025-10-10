@@ -19,18 +19,20 @@ extension DataModel {
         // Calculate real-world range based on current battery level and efficiency
         let estimatedRangeInMiles = (kWh * lastEfficiency).rounded()
         
-        // Convert to kilometers if needed based on locale
-        let distanceUnit: UnitLength = Locale.current.measurementSystem == .metric ? .kilometers : .miles
+        // Convert to user's preferred distance unit
+        let currentDistanceUnit = UnitConverter.currentDistanceUnit
         let rangeMeasurement = Measurement(value: estimatedRangeInMiles, unit: UnitLength.miles)
-        let rangeMeasurementConverted = rangeMeasurement.converted(to: distanceUnit).formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+        let rangeMeasurementConverted = UnitConverter.convertDistance(estimatedRangeInMiles, from: .miles, to: currentDistanceUnit)
+        let formattedRange = UnitConverter.formatDistance(rangeMeasurementConverted, unit: currentDistanceUnit)
         
-        unitLabel = Locale.current.measurementSystem == .metric ? "km" : "mi"
+        unitLabel = currentDistanceUnit == .kilometers ? "km" : "mi"
         
         // Store the EPA range from vehicle state as a reference only
-        let epaRangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
-        range = epaRangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+        let epaRangeInKm = Double(vehicle.vehicleState.batteryState.remainingRange)
+        let epaRangeConverted = UnitConverter.convertDistance(epaRangeInKm, from: .kilometers, to: currentDistanceUnit)
+        range = UnitConverter.formatDistance(epaRangeConverted, unit: currentDistanceUnit)
         
         // Store our calculated real-world range
-        _estimatedRange = rangeMeasurementConverted
+        _estimatedRange = formattedRange
     }
 }

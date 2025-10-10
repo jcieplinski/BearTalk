@@ -39,8 +39,10 @@ extension DataModel {
     
     var elevation: String {
         if let elevation = gps?.elevation {
-            let elevationMeasurement = Measurement(value: Double(elevation), unit: UnitLength.centimeters)
-            return elevationMeasurement.formatted(.measurement(width: .abbreviated, usage: .visibility).locale(Locale.autoupdatingCurrent))
+            let elevationInMeters = Double(elevation) / 100.0 // Convert cm to meters
+            let currentDistanceUnit = UnitConverter.currentDistanceUnit
+            let elevationConverted = UnitConverter.convertDistance(elevationInMeters, from: .kilometers, to: currentDistanceUnit)
+            return UnitConverter.formatDistance(elevationConverted, unit: currentDistanceUnit)
         }
         
         return "Unknown"

@@ -48,7 +48,8 @@ struct ClimateControlView: View {
     }
     
     private var temperatureRange: [Double] {
-        if Locale.current.measurementSystem == .metric {
+        let currentTempUnit = UnitConverter.currentTemperatureUnit
+        if currentTempUnit == .celsius {
             // Celsius range (15°C to 30°C)
             return Array(stride(from: 15.0, through: 30.0, by: 1.0)).reversed()
         } else {

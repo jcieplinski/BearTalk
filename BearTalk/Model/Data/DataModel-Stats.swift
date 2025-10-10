@@ -50,28 +50,23 @@ extension DataModel {
         paintColor = vehicle.vehicleConfig.paintColor
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
         
-        let interiorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.interiorTemp, unit: UnitTemperature.celsius)
-        let interiorTempMeasurementConverted = interiorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
+        let currentTempUnit = UnitConverter.currentTemperatureUnit
+        let interiorTempConverted = UnitConverter.convertTemperature(vehicle.vehicleState.cabinState.interiorTemp, from: .celsius, to: currentTempUnit)
+        let exteriorTempConverted = UnitConverter.convertTemperature(vehicle.vehicleState.cabinState.exteriorTemp, from: .celsius, to: currentTempUnit)
         
-        let exteriorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.exteriorTemp, unit: UnitTemperature.celsius)
-        let exteriorTempMeasurementConverted = exteriorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
-        
-        interiorTemp = "\(interiorTempMeasurementConverted.value.rounded()) \(interiorTempMeasurementConverted.unit.symbol)"
-        exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
+        interiorTemp = UnitConverter.formatTemperature(interiorTempConverted, unit: currentTempUnit)
+        exteriorTemp = UnitConverter.formatTemperature(exteriorTempConverted, unit: currentTempUnit)
         
         // Clamp battery percentage to 100% maximum
         let clampedBatteryPercent = min(vehicle.vehicleState.batteryState.chargePercent, 100.0)
         chargePercentage = "\(clampedBatteryPercent.rounded())%"
         
-        let rangeMeasurement = Measurement(value: Double(vehicle.vehicleState.batteryState.remainingRange), unit: UnitLength.kilometers)
-        let rangeMeasurementConverted = rangeMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
+        let currentDistanceUnit = UnitConverter.currentDistanceUnit
+        let rangeConverted = UnitConverter.convertDistance(Double(vehicle.vehicleState.batteryState.remainingRange), from: .kilometers, to: currentDistanceUnit)
+        range = UnitConverter.formatDistance(rangeConverted, unit: currentDistanceUnit)
         
-        range = rangeMeasurementConverted
-        
-        let odometerMeasurement = Measurement(value: Double(vehicle.vehicleState.chassisState.odometerKm), unit: UnitLength.kilometers)
-        let odometerMeasurementConverted = odometerMeasurement.formatted(.measurement(width: .abbreviated, usage: .road).locale(Locale.autoupdatingCurrent))
-        
-        odometer = odometerMeasurementConverted
+        let odometerConverted = UnitConverter.convertDistance(Double(vehicle.vehicleState.chassisState.odometerKm), from: .kilometers, to: currentDistanceUnit)
+        odometer = UnitConverter.formatDistance(odometerConverted, unit: currentDistanceUnit)
         
         if let doorPlateNumber = vehicle.vehicleConfig.specialIdentifiers?["doorPlate"] {
             DENumber = doorPlateNumber

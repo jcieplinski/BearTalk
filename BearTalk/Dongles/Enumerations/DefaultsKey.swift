@@ -26,4 +26,8 @@ enum DefaultsKey {
     static let colorScheme: String = "colorScheme"
     static let showAlertsBeforeOpenActions = "showAlertsBeforeOpenActions"
     static let lastDismissedSoftwareVersion = "lastDismissedSoftwareVersion"
+    static let batteryDisplay: String = "batteryDisplay"
+    static let distanceUnit: String = "distanceUnit"
+    static let temperatureUnit: String = "temperatureUnit"
+    static let tirePressureUnit: String = "tirePressureUnit"
 }

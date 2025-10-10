@@ -135,7 +135,7 @@ enum PaintColor: Codable, Equatable {
         case .zenithRed:
             "#4B1718"
         case .fathomBlue:
-            "#657286"
+            "#606e81"
         case .custom:
             "CCCCCC"
         case .sapphireBlue:

@@ -71,7 +71,7 @@ import SceneKit
     var seatClimateState: SeatClimateState?
     var steeringHeaterStatus: SteeringHeaterStatus?
     var gearPosition: GearPosition = .gearUnknown
-    var selectedTemperature: Double = Locale.current.measurementSystem == .metric ? 22 : 72
+    var selectedTemperature: Double = UnitConverter.currentTemperatureUnit == .celsius ? 22 : 72
     var seatClimateLevel: Int = 2
     
     // Map
@@ -576,10 +576,10 @@ import SceneKit
         powerState = vehicle.vehicleState.powerState
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"
         
-        let exteriorTempMeasurement = Measurement(value: vehicle.vehicleState.cabinState.exteriorTemp, unit: UnitTemperature.celsius)
-        let exteriorTempMeasurementConverted = exteriorTempMeasurement.converted(to: UnitTemperature(forLocale: Locale.autoupdatingCurrent))
+        let currentTempUnit = UnitConverter.currentTemperatureUnit
+        let exteriorTempConverted = UnitConverter.convertTemperature(vehicle.vehicleState.cabinState.exteriorTemp, from: .celsius, to: currentTempUnit)
         
-        exteriorTemp = "\(exteriorTempMeasurementConverted.value.rounded()) \(exteriorTempMeasurementConverted.unit.symbol)"
+        exteriorTemp = UnitConverter.formatTemperature(exteriorTempConverted, unit: currentTempUnit)
     }
     
     @Sendable
