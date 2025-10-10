@@ -112,9 +112,6 @@ struct SettingsView: View {
                         HStack {
                             Text("Units")
                             Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                                .font(.caption)
                         }
                     }
                 }
