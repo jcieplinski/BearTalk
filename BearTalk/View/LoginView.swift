@@ -38,12 +38,14 @@ struct LoginView: View {
                             .foregroundStyle(Color.gray.opacity(0.3))
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)
+                            .frame(minHeight: 44)
                             .overlay {
                                 TextField("username", text: $appState.userName)
                                     .textFieldStyle(.plain)
                                     .textContentType(.username)
                                     .focused($focused, equals: .userName)
                                     .padding()
+                                    .frame(minHeight: 44)
                                     .submitLabel(.next)
                                     .keyboardType(.emailAddress)
                                     .autocorrectionDisabled()
@@ -58,12 +60,14 @@ struct LoginView: View {
                             .foregroundStyle(Color.gray.opacity(0.3))
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)
+                            .frame(minHeight: 44)
                             .overlay {
                                 SecureField("password", text: $appState.password)
                                     .textFieldStyle(.plain)
                                     .textContentType(.password)
                                     .focused($focused, equals: .password)
                                     .padding()
+                                    .frame(minHeight: 44)
                                     .submitLabel(.done)
                                     .accessibilityLabel("Lucid Motors password")
                                     .onSubmit {
@@ -220,13 +224,24 @@ struct LoginView: View {
                     return
                 }
                 
-                // Set the token expiry time based on the response
-                TokenManager.shared.tokenExpiryTime = Date().timeIntervalSince1970 + Double(loginResponse.sessionInfo.expiryTimeSec)
+                // Save the password to Keychain for FaceID authentication
+                appState.saveOrUpdatePassword()
+                
+                // Set the refresh token FIRST before doing anything else
                 TokenManager.shared.refreshToken = loginResponse.sessionInfo.refreshToken
                 
-                // Initialize token manager and set login state
-                await TokenManager.shared.initialize()
+                // API returns expiry time as relative seconds (how long until expiry)
+                let currentTime = Date().timeIntervalSince1970
+                let relativeExpiryTime = Double(loginResponse.sessionInfo.expiryTimeSec)
+                
+                // Set the token expiry time as absolute timestamp
+                TokenManager.shared.tokenExpiryTime = currentTime + relativeExpiryTime
+                
+                // Set login state
                 TokenManager.shared.isLoggedIn = true
+                
+                // Initialize token manager - this will handle token refresh scheduling
+                await TokenManager.shared.initialize()
                 
                 // Send credentials to watch after successful login
                 WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
@@ -243,8 +258,19 @@ struct LoginView: View {
                 // Update the vehicleIdentifiers property
                 model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()
                 
-                // Start refreshing vehicle data
-                model.startRefreshing()
+                // Set the initial vehicle from login response to show UI immediately
+                if let firstVehicle = loginResponse.userVehicleData.first {
+                    model.vehicle = firstVehicle
+                    model.gps = firstVehicle.vehicleState.gps
+                    model.update()
+                    model.updateStats()
+                    model.updateRangeStats()
+                }
+                
+                // Then fetch fresh data in the background and start refreshing
+                Task {
+                    await model.fetchVehicleWithRetry()
+                }
             }
         } catch {
             print("Login failed: \(error)")

@@ -25,11 +25,22 @@ final class KeyChain {
     }
 
     static func save(password: Data, service: String, account: String) throws {
+        // Create an access control object that requires biometry or device passcode
+        var error: Unmanaged<CFError>?
+        guard let accessControl = SecAccessControlCreateWithFlags(
+            kCFAllocatorDefault,
+            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+            [.biometryAny, .or, .devicePasscode],
+            &error
+        ) else {
+            throw KeychainError.unexpectedStatus(errSecInternalError)
+        }
 
         let query: [String: AnyObject] = [
             kSecAttrService as String: service as AnyObject,
             kSecAttrAccount as String: account as AnyObject,
             kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccessControl as String: accessControl,
             kSecValueData as String: password as AnyObject
         ]
 
@@ -48,6 +59,17 @@ final class KeyChain {
     }
 
     static func update(password: Data, service: String, account: String) throws {
+        // Create an access control object that requires biometry or device passcode
+        var error: Unmanaged<CFError>?
+        guard let accessControl = SecAccessControlCreateWithFlags(
+            kCFAllocatorDefault,
+            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+            [.biometryAny, .or, .devicePasscode],
+            &error
+        ) else {
+            throw KeychainError.unexpectedStatus(errSecInternalError)
+        }
+        
         let query: [String: AnyObject] = [
             // kSecAttrService,  kSecAttrAccount, and kSecClass
             // uniquely identify the item to update in Keychain
@@ -57,6 +79,7 @@ final class KeyChain {
         ]
 
         let attributes: [String: AnyObject] = [
+            kSecAttrAccessControl as String: accessControl,
             kSecValueData as String: password as AnyObject
         ]
 

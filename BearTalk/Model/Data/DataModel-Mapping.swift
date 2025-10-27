@@ -41,8 +41,21 @@ extension DataModel {
         if let elevation = gps?.elevation {
             let elevationInMeters = Double(elevation) / 100.0 // Convert cm to meters
             let currentDistanceUnit = UnitConverter.currentDistanceUnit
-            let elevationConverted = UnitConverter.convertDistance(elevationInMeters, from: .kilometers, to: currentDistanceUnit)
-            return UnitConverter.formatDistance(elevationConverted, unit: currentDistanceUnit)
+            
+            let elevationMeasurement: Measurement<UnitLength>
+            if currentDistanceUnit == .kilometers {
+                // Metric: use meters
+                elevationMeasurement = Measurement(value: elevationInMeters, unit: UnitLength.meters)
+            } else {
+                // Imperial: convert to feet
+                let elevationInFeet = Measurement(value: elevationInMeters, unit: UnitLength.meters).converted(to: .feet).value
+                elevationMeasurement = Measurement(value: elevationInFeet, unit: UnitLength.feet)
+            }
+            
+            let formatter = MeasurementFormatter()
+            formatter.unitOptions = .providedUnit
+            formatter.numberFormatter.maximumFractionDigits = 1
+            return formatter.string(from: elevationMeasurement)
         }
         
         return "Unknown"

@@ -9,13 +9,18 @@ import SwiftUI
 import SceneKit
 
 struct CarView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(DataModel.self) var model
     
     @State private var currentSceneView: SCNView?
     @State private var isSceneLoaded = false
     @State private var sceneOpacity: Double = 0
     @State private var rotationDegrees: Double = 0
-    
+
+    var carHeight: CGFloat {
+        return horizontalSizeClass == .compact ? 200 : 400
+    }
+
     var body: some View {
         ZStack {
             @Bindable var model = model
@@ -68,7 +73,7 @@ struct CarView: View {
                     .opacity(sceneOpacity)
                 }
             }
-            .frame(height: 200)
+            .frame(height: carHeight)
         }
         .overlay(alignment: .center, content: {
             if !isSceneLoaded {
