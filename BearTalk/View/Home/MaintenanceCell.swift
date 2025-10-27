@@ -2,39 +2,75 @@ import SwiftUI
 
 struct MaintenanceCell: View {
     @Environment(DataModel.self) var model
+    let isWideMode: Bool
+    @State private var showSheet = false
     
     var body: some View {
-        NavigationLink {
-            MaintenanceView()
-        } label: {
-            VStack(spacing: 16) {
-                HStack {
-                    Text("Maintenance")
-                        .font(.headline)
-                    
-                    Spacer()
+        Group {
+            if isWideMode {
+                Button {
+                    showSheet = true
+                } label: {
+                    cellContent
                 }
-                
-                HStack {
-                    Text("Tire Pressure Monitoring")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    
-                    Spacer()
+                .buttonStyle(.plain)
+            } else {
+                NavigationLink {
+                    MaintenanceView()
+                } label: {
+                    cellContent
                 }
+                .buttonStyle(.plain)
             }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(.thinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .buttonStyle(.plain)
+        .sheet(isPresented: $showSheet) {
+            NavigationStack {
+                MaintenanceView()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            if #available(iOS 26.0, *) {
+                                Button(role: .confirm) {
+                                    showSheet = false
+                                }
+                            } else {
+                                Button("Done") {
+                                    showSheet = false
+                                }
+                            }
+                        }
+                    }
+            }
+            .presentationSizing(.page)
+        }
+    }
+    
+    private var cellContent: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Text("Maintenance")
+                    .font(.headline)
+                
+                Spacer()
+            }
+            
+            HStack {
+                Text("Tire Pressure Monitoring")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                
+                Spacer()
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(.thinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
 #Preview {
     NavigationStack {
-        MaintenanceCell()
+        MaintenanceCell(isWideMode: false)
             .environment(DataModel())
             .padding()
     }

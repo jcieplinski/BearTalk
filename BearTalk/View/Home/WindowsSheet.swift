@@ -135,8 +135,14 @@ struct WindowsSheet: View {
             .toolbar {
                 if isModelPresntation {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("Done") {
-                            dismiss()
+                        if #available(iOS 26.0, *) {
+                            Button(role: .confirm) {
+                                dismiss()
+                            }
+                        } else {
+                            Button("Done") {
+                                dismiss()
+                            }
                         }
                     }
                 }

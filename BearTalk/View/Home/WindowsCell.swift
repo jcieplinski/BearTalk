@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WindowsCell: View {
     @Environment(DataModel.self) var model
-    @State private var showWindowsSheet = false
+    let isWideMode: Bool
+    @State private var showSheet = false
     
     private var windowStatus: String {
         guard let windowPosition = model.windowPosition else { return "Unknown" }
@@ -37,35 +38,69 @@ struct WindowsCell: View {
     }
     
     var body: some View {
-        NavigationLink {
-            WindowsSheet(isModelPresntation: false)
-        } label: {
-            VStack(spacing: 16) {
-                HStack {
-                    Text("Windows")
-                        .font(.headline)
-                    
-                    Spacer()
+        Group {
+            if isWideMode {
+                Button {
+                    showSheet = true
+                } label: {
+                    cellContent
                 }
-                
-                HStack {
-                    Text(windowStatus)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    
-                    Spacer()
+                .buttonStyle(.plain)
+            } else {
+                NavigationLink {
+                    WindowsSheet(isModelPresntation: false)
+                } label: {
+                    cellContent
                 }
+                .buttonStyle(.plain)
             }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(.thinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .buttonStyle(.plain)
+        .sheet(isPresented: $showSheet) {
+            NavigationStack {
+                WindowsSheet(isModelPresntation: false)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            if #available(iOS 26.0, *) {
+                                Button(role: .confirm) {
+                                    showSheet = false
+                                }
+                            } else {
+                                Button("Done") {
+                                    showSheet = false
+                                }
+                            }
+                        }
+                    }
+            }
+            .presentationSizing(.page)
+        }
+    }
+    
+    private var cellContent: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Text("Windows")
+                    .font(.headline)
+                
+                Spacer()
+            }
+            
+            HStack {
+                Text(windowStatus)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                
+                Spacer()
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(.thinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
 #Preview {
-    WindowsCell()
+    WindowsCell(isWideMode: false)
         .environment(DataModel())
-} 
+}

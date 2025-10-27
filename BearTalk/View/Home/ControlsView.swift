@@ -19,6 +19,7 @@ struct ControlsView: View {
     @State private var showSettings: Bool = false
     @State private var showWindowControls: Bool = false
     @State private var draggedCell: String?
+    @State private var viewWidth: CGFloat = 0
     
     private var batteryDisplayText: String {
         let currentBatteryDisplay = UnitConverter.currentBatteryDisplay
@@ -45,19 +46,19 @@ struct ControlsView: View {
         return currentCells
     }
     
-    private func cellView(for type: String) -> some View {
+    private func cellView(for type: String, isWideMode: Bool) -> some View {
         Group {
             switch type {
             case "climate":
-                ClimateControlsCell()
+                ClimateControlsCell(isWideMode: isWideMode)
             case "charging":
-                ChargingCell()
+                ChargingCell(isWideMode: isWideMode)
             case "security":
-                SecurityCell()
+                SecurityCell(isWideMode: isWideMode)
             case "windows":
-                WindowsCell()
+                WindowsCell(isWideMode: isWideMode)
             case "maintenance":
-                MaintenanceCell()
+                MaintenanceCell(isWideMode: isWideMode)
             default:
                 EmptyView()
             }
@@ -80,11 +81,12 @@ struct ControlsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 12) {
-                    if model.vehicle != nil {
-                        // Top Row Status
-                        Text(batteryDisplayText)
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(spacing: 12) {
+                        if model.vehicle != nil {
+                            // Top Row Status
+                            Text(batteryDisplayText)
                             .font(.title)
                             .dynamicTypeSize(.large)
                             .frame(maxWidth: .infinity)
@@ -116,10 +118,24 @@ struct ControlsView: View {
                                     .padding()
                             }
                         
-                        VStack {
-                            CarView()
-                            
-                            ControlGrid()
+                        if viewWidth > 550 {
+                            GeometryReader { innerGeometry in
+                                HStack(spacing: 12) {
+                                    CarView()
+                                        .frame(width: (innerGeometry.size.width - 12) * 0.60)
+                                        .frame(maxHeight: .infinity)
+                                    
+                                    AllControlsGrid()
+                                        .frame(width: (innerGeometry.size.width - 12) * 0.40)
+                                }
+                                .frame(height: 400)
+                            }
+                            .frame(height: 400)
+                        } else {
+                            VStack {
+                                CarView()
+                                ControlGrid()
+                            }
                         }
                         
                         // Alert Cell
@@ -134,10 +150,16 @@ struct ControlsView: View {
                         
                         VStack(spacing: 16) {
                             ForEach(orderedCells, id: \.self) { cellType in
-                                cellView(for: cellType)
+                                cellView(for: cellType, isWideMode: viewWidth > 500)
                             }
                         }
                         .padding()
+                        .onAppear {
+                            viewWidth = geometry.size.width
+                        }
+                        .onChange(of: geometry.size.width) { oldValue, newValue in
+                            viewWidth = newValue
+                        }
                         
                         Spacer()
                     } else {
@@ -231,19 +253,23 @@ struct ControlsView: View {
                 SettingsView()
                     .presentationBackground(.thinMaterial)
                     .presentationDetents([.fraction(0.70), .large])
+                    .presentationSizing(.page)
             }
             .sheet(isPresented: $showClimateControl) {
                 ClimateControlSheet(modalPresented: true)
                     .presentationBackground(.thinMaterial)
+                    .presentationSizing(.page)
             }
             .sheet(isPresented: $showSeatClimate) {
                 SeatClimateSheet(modalPresented: true)
                     .presentationBackground(.thinMaterial)
+                    .presentationSizing(.page)
             }
             .sheet(isPresented: $showWindowControls) {
                 WindowsSheet(isModelPresntation: true)
                     .presentationBackground(.thinMaterial)
                     .presentationDetents([.fraction(0.55), .large])
+                    .presentationSizing(.page)
             }
             .onAppear {
                 NotificationCenter.default.addObserver(
@@ -269,6 +295,7 @@ struct ControlsView: View {
                 ) { _ in
                     showWindowControls = true
                 }
+            }
             }
         }
     }

@@ -16,10 +16,7 @@ struct CarView: View {
     @State private var isSceneLoaded = false
     @State private var sceneOpacity: Double = 0
     @State private var rotationDegrees: Double = 0
-
-    var carHeight: CGFloat {
-        return horizontalSizeClass == .compact ? 200 : 400
-    }
+    @State private var carHeight: CGFloat = 200
 
     var body: some View {
         ZStack {
@@ -75,6 +72,17 @@ struct CarView: View {
             }
             .frame(height: carHeight)
         }
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .onAppear {
+                        carHeight = geo.size.width > 600 ? 300 : 200
+                    }
+                    .onChange(of: geo.size.width) { _, newWidth in
+                        carHeight = newWidth > 600 ? 300 : 200
+                    }
+            }
+        )
         .overlay(alignment: .center, content: {
             if !isSceneLoaded {
                 ProgressView()
