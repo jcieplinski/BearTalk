@@ -22,7 +22,7 @@ struct ACChargeLimitView: View {
             
             HStack(spacing: 20) {
                 Button {
-                    adjustACLimit(by: -1)
+                    adjustACLimit(by: -5)
                 } label: {
                     Image(systemName: "minus.circle.fill")
                         .font(.largeTitle)
@@ -43,7 +43,7 @@ struct ACChargeLimitView: View {
                 Spacer()
                 
                 Button {
-                    adjustACLimit(by: 1)
+                    adjustACLimit(by: 5)
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.largeTitle)
@@ -53,25 +53,20 @@ struct ACChargeLimitView: View {
                 .disabled(model.requestInProgress.contains(.acCurrentLimit) || model.allFunctionsDisable)
             }
             
-            // Show current AC current if there's an active charging session
-            if let vehicle = model.vehicle,
-               vehicle.vehicleState.chargingState.chargeState == .charging,
-               vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit > 0 {
-                HStack {
-                    Text("Current AC: \(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)A")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+            // Show charging session info
+            if let vehicle = model.vehicle {
+                if vehicle.vehicleState.chargingState.chargeState == .charging,
+                   vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit > 0 {
+                    HStack {
+                        Text("Current session: \(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)A")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                    }
                     
-                    Spacer()
-                }
-                
-                // Debug info
-                HStack {
-                    Text("Debug - Base: \(vehicle.vehicleState.chargingState.energyAcCurrentLimit)A, Delta: \(vehicle.vehicleState.mobileAppReqStatus.acCurrentLimitReq)A")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                    
-                    Spacer()
+                    // Note: Due to current car firmware limitations, AC current limit changes 
+                    // made via the app typically apply to the next charging session, not the current one
                 }
             }
         }
@@ -105,16 +100,25 @@ struct ACChargeLimitView: View {
     
     private func updateACLimitFromModel() {
         if let vehicle = model.vehicle {
-            // The acCurrentLimitReq is a delta/change, not the absolute limit
-            // We need to add it to the current energyAcCurrentLimit to get the target limit
-            let currentLimit = Int32(vehicle.vehicleState.chargingState.energyAcCurrentLimit)
-            let requestedChange = vehicle.vehicleState.mobileAppReqStatus.acCurrentLimitReq
-            let targetLimit = currentLimit + requestedChange
+            // Display the configured AC current limit
+            let configuredLimit = Int32(vehicle.vehicleState.chargingState.energyAcCurrentLimit)
             
-            print("ACChargeLimitView: Updating from model - currentLimit: \(currentLimit), requestedChange: \(requestedChange), targetLimit: \(targetLimit), activeSessionAcCurrentLimit: \(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)")
+            print("ACChargeLimitView: Updating from model - configuredLimit: \(configuredLimit), localState: \(acCurrentLimit), activeSession: \(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)A")
             
-            // Display the target limit (current + requested change)
-            acCurrentLimit = targetLimit
+            if isInitialSetup {
+                // Initial setup - use the vehicle's configured limit
+                acCurrentLimit = configuredLimit
+            } else {
+                // After initial setup: only update if the vehicle value matches what we expect
+                // OR if we're not in the middle of a request
+                if !model.requestInProgress.contains(.acCurrentLimit) {
+                    // Not making a request, use the vehicle's value
+                    if configuredLimit != acCurrentLimit {
+                        acCurrentLimit = configuredLimit
+                    }
+                }
+                // Otherwise keep our optimistic update while request is in progress
+            }
         }
     }
     
@@ -125,7 +129,11 @@ struct ACChargeLimitView: View {
         // Clamp to reasonable range (1A to 80A)
         let clampedTargetLimit = max(1, min(80, newTargetLimit))
         
-        print("ACChargeLimitView: Button pressed - amount: \(amount), current: \(acCurrentLimit), newTarget: \(newTargetLimit), clamped: \(clampedTargetLimit), isInitialSetup: \(isInitialSetup)")
+        if let vehicle = model.vehicle {
+            print("ACChargeLimitView: Button pressed - amount: \(amount), current: \(acCurrentLimit), newTarget: \(newTargetLimit), clamped: \(clampedTargetLimit)")
+            print("ACChargeLimitView: Charge state: \(vehicle.vehicleState.chargingState.chargeState), EA PnC status: \(vehicle.vehicleState.chargingState.eaPncStatus), Restart allowed: \(vehicle.vehicleState.chargingState.chargingSessionRestartAllowed)")
+            print("ACChargeLimitView: GPS: \(vehicle.vehicleState.gps.location.latitude), \(vehicle.vehicleState.gps.location.longitude)")
+        }
         
         // Skip if no change or during initial setup
         guard clampedTargetLimit != acCurrentLimit && !isInitialSetup else { 

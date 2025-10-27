@@ -736,9 +736,14 @@ extension DataModel {
                     print("DataModel: Failed to set AC current limit")
                     // put up an alert
                 } else {
-                    print("DataModel: Successfully set AC current limit, refreshing vehicle state")
-                    // Refresh the vehicle state to get the updated AC current limit
-                    await refreshVehicle()
+                    print("DataModel: Successfully set AC current limit to \(acCurrLimit)A")
+                    // Don't immediately refresh to avoid rate limiting
+                    // The limit will apply on the next charging session
+                    // Schedule a delayed refresh to update the state
+                    Task {
+                        try? await Task.sleep(for: .seconds(10))
+                        await refreshVehicle()
+                    }
                 }
             } catch {
                 print("DataModel: Could not set AC current limit: \(error)")

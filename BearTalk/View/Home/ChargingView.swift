@@ -125,6 +125,13 @@ struct ChargingView: View {
                 .background(.thinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                // AC Charge Limit - Hidden until vehicle properly supports live updates
+                // if let vehicle = model.vehicle,
+                //    vehicle.vehicleState.chargingState.energyType == .ac,
+                //    [.charging, .cableConnected, .authorized, .chargerPreparation, .establishingSession, .authorizingExternal, .authorizingPnc].contains(vehicle.vehicleState.chargingState.chargeState) {
+                //     ACChargeLimitView()
+                // }
+                
                 // Battery Preconditioning Button
                 Button {
                     model.toggleBatteryPreconditioning()

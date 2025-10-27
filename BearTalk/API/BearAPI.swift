@@ -495,16 +495,20 @@ final class BearAPI {
                 
                 do {
                     let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                    let _ = try await client.setACCurrLimit(
+                    let response = try await client.setACCurrLimit(
                         request,
                         metadata: metadata
                     )
                     
                     print("Successfully set AC current limit to \(acCurrLimit)A")
+                    print("Response: \(response)")
                     reloadWidgetsAfterDelay()
                     return true
-                } catch {
+                } catch let   error {
                     print("Failed to set AC current limit: \(error)")
+                    if let rpcError = error as? RPCError {
+                        print("RPC Error code: \(rpcError.code), message: \(rpcError.message)")
+                    }
                     return false
                 }
             }
