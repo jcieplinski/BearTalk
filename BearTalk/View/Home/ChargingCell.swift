@@ -65,6 +65,30 @@ struct ChargingCell: View {
                     chargingState: vehicle.vehicleState.chargingState.chargeState,
                     sessionMinutesRemaining: vehicle.vehicleState.chargingState.sessionMinutesRemaining
                 )
+                
+                // Stop Charging Button - only show when actively charging
+                if vehicle.vehicleState.chargingState.chargeState == .charging {
+                    Button {
+                        model.stopCharging()
+                    } label: {
+                        HStack {
+                            Image(systemName: "stop.circle.fill")
+                                .font(.title3)
+                            
+                            Text("Stop Charging")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 12)
+                        .background(.alertRed)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(model.requestInProgress.contains(.chargeLimit) || model.allFunctionsDisable)
+                }
             }
             
             ViewThatFits {

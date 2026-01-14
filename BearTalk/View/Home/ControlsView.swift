@@ -163,7 +163,20 @@ struct ControlsView: View {
                         
                         Spacer()
                     } else {
-                        EmptyView()
+                        VStack(spacing: 20) {
+                            Spacer()
+                            
+                            ProgressView()
+                                .controlSize(.large)
+                                .tint(.accent)
+                            
+                            Text("Loading...")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
                 .tint(.accent)

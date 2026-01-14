@@ -1,7 +1,13 @@
 import SwiftUI
 import GRPCCore
 import Combine
+#if canImport(WatchConnectivity)
+import WatchConnectivity
+#endif
 import Observation
+#if canImport(ObjectiveC)
+import ObjectiveC
+#endif
 
 @Observable
 final class TokenManager {
@@ -15,7 +21,106 @@ final class TokenManager {
     
     // MARK: - Private Properties
     private var refreshTimer: Timer?
+    #if os(iOS) && !os(watchOS)
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    #else
+    private var backgroundTask: UInt = 0 // Platform-agnostic placeholder for watchOS
+    #endif
+    
+    // MARK: - Helper Methods for Extension Compatibility
+    private var isExtension: Bool {
+        #if os(iOS)
+        return Bundle.main.bundlePath.hasSuffix(".appex")
+        #else
+        return false
+        #endif
+    }
+    
+    private func sendCredentialsToWatchIfNeeded() {
+        // Only send credentials in main app, not in extensions or watch app
+        #if !os(watchOS)
+        guard !isExtension else { return }
+        
+        // Use runtime lookup to avoid direct dependency in extensions
+        guard let watchManagerClass = NSClassFromString("WatchConnectivityManager") as? NSObject.Type,
+              let sharedMethod = class_getClassMethod(watchManagerClass, NSSelectorFromString("shared")),
+              let sendMethod = class_getInstanceMethod(watchManagerClass, NSSelectorFromString("sendCredentialsToWatchIfNeeded")) else {
+            return
+        }
+        
+        typealias SharedMethod = @convention(c) (AnyObject, Selector) -> Unmanaged<AnyObject>
+        typealias SendMethod = @convention(c) (AnyObject, Selector) -> Void
+        
+        let sharedImpl = method_getImplementation(sharedMethod)
+        let sendImpl = method_getImplementation(sendMethod)
+        
+        let sharedFunc = unsafeBitCast(sharedImpl, to: SharedMethod.self)
+        let sendFunc = unsafeBitCast(sendImpl, to: SendMethod.self)
+        
+        let shared = sharedFunc(watchManagerClass, NSSelectorFromString("shared")).takeUnretainedValue()
+        sendFunc(shared, NSSelectorFromString("sendCredentialsToWatchIfNeeded"))
+        #endif
+    }
+    
+    #if os(iOS) && !os(watchOS)
+    private func endBackgroundTask(_ task: UIBackgroundTaskIdentifier) {
+        guard !isExtension else { return }
+        // UIApplication.shared is not available in extensions
+        // Access via runtime to avoid compilation errors
+        guard let appClass = NSClassFromString("UIApplication") as? NSObject.Type,
+              let sharedMethod = class_getClassMethod(appClass, NSSelectorFromString("shared")) else {
+            return
+        }
+        
+        typealias SharedMethod = @convention(c) (AnyObject, Selector) -> Unmanaged<UIApplication>
+        typealias EndTaskMethod = @convention(c) (UIApplication, Selector, UIBackgroundTaskIdentifier) -> Void
+        
+        let sharedImpl = method_getImplementation(sharedMethod)
+        let sharedFunc = unsafeBitCast(sharedImpl, to: SharedMethod.self)
+        let shared = sharedFunc(appClass, NSSelectorFromString("shared")).takeUnretainedValue()
+        
+        let endTaskSelector = NSSelectorFromString("endBackgroundTask:")
+        if let endTaskMethod = class_getInstanceMethod(appClass, endTaskSelector) {
+            let endTaskImpl = method_getImplementation(endTaskMethod)
+            let endTaskFunc = unsafeBitCast(endTaskImpl, to: EndTaskMethod.self)
+            endTaskFunc(shared, endTaskSelector, task)
+        }
+    }
+    
+    private func beginBackgroundTask(expirationHandler: @escaping () -> Void) -> UIBackgroundTaskIdentifier {
+        guard !isExtension else { return .invalid }
+        // UIApplication.shared is not available in extensions
+        // Access via runtime to avoid compilation errors
+        guard let appClass = NSClassFromString("UIApplication") as? NSObject.Type,
+              let sharedMethod = class_getClassMethod(appClass, NSSelectorFromString("shared")) else {
+            return .invalid
+        }
+        
+        typealias SharedMethod = @convention(c) (AnyObject, Selector) -> Unmanaged<UIApplication>
+        typealias BeginTaskMethod = @convention(c) (UIApplication, Selector, @escaping () -> Void) -> UIBackgroundTaskIdentifier
+        
+        let sharedImpl = method_getImplementation(sharedMethod)
+        let sharedFunc = unsafeBitCast(sharedImpl, to: SharedMethod.self)
+        let shared = sharedFunc(appClass, NSSelectorFromString("shared")).takeUnretainedValue()
+        
+        let beginTaskSelector = NSSelectorFromString("beginBackgroundTaskWithExpirationHandler:")
+        if let beginTaskMethod = class_getInstanceMethod(appClass, beginTaskSelector) {
+            let beginTaskImpl = method_getImplementation(beginTaskMethod)
+            let beginTaskFunc = unsafeBitCast(beginTaskImpl, to: BeginTaskMethod.self)
+            return beginTaskFunc(shared, beginTaskSelector, expirationHandler)
+        }
+        return .invalid
+    }
+    #else
+    private func endBackgroundTask(_ task: UInt) {
+        // Not available on watchOS
+    }
+    
+    private func beginBackgroundTask(expirationHandler: @escaping () -> Void) -> UInt {
+        // Not available on watchOS
+        return 0
+    }
+    #endif
     
     // MARK: - Constants
     private let REFRESH_BUFFER_SECONDS = 900 // 15 minutes before expiry
@@ -55,8 +160,8 @@ final class TokenManager {
                 print("Token is valid, proceeding with startup")
                 isLoggedIn = true
                 
-                // Send credentials to watch when login is successful
-                WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                // Send credentials to watch when login is successful (only in main app)
+                sendCredentialsToWatchIfNeeded()
                 
                 // Set refresh timer to refresh before expiry
                 let refreshInSeconds = calculateRefreshTime(Int(timeUntilExpiry))
@@ -79,11 +184,17 @@ final class TokenManager {
         print("TokenManager handling app activation")
         logTokenStatus()
         
-        // End any background task
+        // End any background task (only in main app, not extensions)
+        #if os(iOS) && !os(watchOS)
         if backgroundTask != .invalid {
-            await UIApplication.shared.endBackgroundTask(backgroundTask)
+            endBackgroundTask(backgroundTask)
             backgroundTask = .invalid
         }
+        #else
+        if backgroundTask != 0 {
+            backgroundTask = 0
+        }
+        #endif
         
         // If we don't have a refresh token, we're definitely not logged in
         guard refreshToken.isNotBlank else {
@@ -216,9 +327,11 @@ final class TokenManager {
         // For other validation cases, just return false without changing login state
         // The refresh process will handle updating the login state
         
-        // Validate the expiry time
-        guard validateExpiryTime(Int(timeUntilExpiry)) else {
-            print("Token has invalid expiry time, forcing refresh")
+        // Check if token expiry time is reasonable (not corrupted)
+        // Token should not be valid for more than 7 days (604800 seconds) from now
+        // This catches cases where expiry time might be stored incorrectly
+        if timeUntilExpiry > 604800 {
+            print("Token expiry time appears corrupted (valid for \(Int(timeUntilExpiry))s), forcing refresh")
             return false
         }
         
@@ -259,8 +372,8 @@ final class TokenManager {
                     // Store the expiry time
                     tokenExpiryTime = Date().timeIntervalSince1970 + Double(refreshTimeInSec)
                     
-                    // Send credentials to watch when tokens are refreshed
-                    WatchConnectivityManager.shared.sendCredentialsToWatchIfNeeded()
+                    // Send credentials to watch when tokens are refreshed (only in main app)
+                    sendCredentialsToWatchIfNeeded()
                     
                     // Calculate when to refresh next
                     let refreshInSeconds = calculateRefreshTime(refreshTimeInSec)
@@ -332,21 +445,25 @@ final class TokenManager {
     }
     
     private func startBackgroundTask() {
+        #if os(iOS) && !os(watchOS)
         print("Starting background task")
-        // End any existing background task
+        // End any existing background task (only in main app, not extensions)
         if backgroundTask != .invalid {
-            UIApplication.shared.endBackgroundTask(backgroundTask)
+            endBackgroundTask(backgroundTask)
         }
         
-        // Start new background task
-        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+        // Start new background task (only in main app, not extensions)
+        backgroundTask = beginBackgroundTask { [weak self] in
             print("Background task expiring")
             // Cleanup when background task expires
             if let self = self, self.backgroundTask != .invalid {
-                UIApplication.shared.endBackgroundTask(self.backgroundTask)
+                self.endBackgroundTask(self.backgroundTask)
                 self.backgroundTask = .invalid
             }
         }
+        #else
+        // Background tasks not available on watchOS
+        #endif
         
         // Schedule background refresh - be more conservative in background
         Task { @Sendable [weak self] in
@@ -367,11 +484,17 @@ final class TokenManager {
                 print("Background: Token still valid for \(Int(timeUntilExpiry))s, no refresh needed")
             }
             
-            // End background task
+            // End background task (only in main app, not extensions)
+            #if os(iOS) && !os(watchOS)
             if backgroundTask != .invalid {
-                await UIApplication.shared.endBackgroundTask(backgroundTask)
+                endBackgroundTask(backgroundTask)
                 backgroundTask = .invalid
             }
+            #else
+            if backgroundTask != 0 {
+                backgroundTask = 0
+            }
+            #endif
         }
     }
 } 

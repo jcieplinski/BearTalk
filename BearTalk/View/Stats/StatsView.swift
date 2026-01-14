@@ -16,12 +16,29 @@ struct StatsView: View {
     @State var showingMailView = false
     @State var showingMailWarning: Bool = false
     @State var vehicleInfo: String = ""
+    @State var showingEditNickname = false
+    @State var editedNickname: String = ""
+    
+    var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+    
+    var appBuildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 Section("Car") {
-                    StatsCell(title: "Vehicle", stat: model.nickname)
+                    EditableStatsCell(
+                        title: "Vehicle",
+                        stat: model.nickname,
+                        onEdit: {
+                            editedNickname = model.nickname
+                            showingEditNickname = true
+                        }
+                    )
                     StatsCell(title: "Vin", stat: model.vin)
                   //  StatsCell(title: "Year", stat: model.year)
                     StatsCell(title: "Model", stat: model.model)
@@ -52,6 +69,11 @@ struct StatsView: View {
                     StatsCell(title: "Look", stat: model.look)
                     StatsCell(title: "Wheels", stat: model.wheels)
                 }
+                
+                Section("App") {
+                    StatsCell(title: "Version", stat: appVersion)
+                    StatsCell(title: "Build", stat: appBuildNumber)
+                }
             }
             .scrollContentBackground(.hidden)
             .navigationTitle("Stats")
@@ -74,6 +96,22 @@ struct StatsView: View {
             }
             .sheet(isPresented: $showingMailView) {
                 MailView(result: self.$result, vehicleInfo: $vehicleInfo)
+            }
+            .sheet(isPresented: $showingEditNickname) {
+                EditNicknameSheet(
+                    nickname: $editedNickname,
+                    isPresented: $showingEditNickname,
+                    onSave: { newNickname in
+                        Task {
+                            if let vehicleID = model.vehicle?.vehicleId {
+                                let success = try? await BearAPI.setNickname(vehicleID: vehicleID, nickname: newNickname)
+                                if success == true {
+                                    await model.refreshVehicle()
+                                }
+                            }
+                        }
+                    }
+                )
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

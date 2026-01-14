@@ -66,6 +66,9 @@ final class BearAPI {
                 authorization = response.sessionInfo.idToken
                 refreshToken = response.sessionInfo.refreshToken
                 
+                // Also update TokenManager's refresh token to ensure sync
+                TokenManager.shared.refreshToken = response.sessionInfo.refreshToken
+                
                 // Convert gRPC response to our model
                 let loginResponse = LoginResponse(
                     uid: response.uid,
@@ -138,14 +141,23 @@ final class BearAPI {
 
     @MainActor
     static func refreshToken() async throws -> Int {
-        try await withGRPCClient(
+        // Read refresh token directly from UserDefaults to ensure we have the latest value
+        // This avoids timing issues with @AppStorage property wrapper
+        let storedRefreshToken = UserDefaults.appGroup.string(forKey: DefaultsKey.refreshToken) ?? ""
+        
+        guard !storedRefreshToken.isEmpty else {
+            print("Refresh token is empty, cannot refresh")
+            throw RPCError(code: .unauthenticated, message: "No refresh token available")
+        }
+        
+        return try await withGRPCClient(
             transport: .http2NIOPosix(
                 target: .dns(host: String.grpcAPI),
                 transportSecurity: .tls
             )
         ) { client in
             var request = Mobilegateway_Protos_GetNewJWTTokenRequest()
-            request.refreshToken = refreshToken
+            request.refreshToken = storedRefreshToken
             
             do {
                 let loginClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
@@ -154,6 +166,9 @@ final class BearAPI {
                 // Update stored credentials
                 authorization = response.sessionInfo.idToken
                 refreshToken = response.sessionInfo.refreshToken
+                
+                // Also update TokenManager's refresh token to ensure sync
+                TokenManager.shared.refreshToken = response.sessionInfo.refreshToken
                 
                 // The API returns an absolute timestamp, convert to relative seconds
                 let currentTime = Int(Date().timeIntervalSince1970)
@@ -214,6 +229,37 @@ final class BearAPI {
                 } catch {
                     print(error)
                     return nil
+                }
+            }
+        }
+    }
+    
+    static func setNickname(vehicleID: String = vehicleID, nickname: String) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_SetNickNameRequest()
+                request.vehicleID = vehicleID
+                request.nickname = nickname
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let loginClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
+                    let _ = try await loginClient.setNickName(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    reloadWidgetsAfterDelay()
+                    return true
+                } catch {
+                    print("Error setting nickname: \(error)")
+                    return false
                 }
             }
         }
@@ -981,9 +1027,15 @@ final class BearAPI {
             return false
         } catch {
             print("Failed to refresh token: \(error)")
-            // Clear tokens on refresh failure
-            authorization = ""
-            refreshToken = ""
+            // Only clear tokens if we get an unauthenticated error (refresh token is invalid)
+            // Don't clear on network errors or other transient failures
+            if let rpcError = error as? RPCError,
+               rpcError.code == .unauthenticated {
+                authorization = ""
+                refreshToken = ""
+                // Also clear TokenManager's refresh token
+                TokenManager.shared.refreshToken = ""
+            }
             throw error
         }
     }
@@ -1037,6 +1089,37 @@ final class BearAPI {
                     return true
                 } catch {
                     print("Error in allWindowControl: \(error)")
+                    return false
+                }
+            }
+        }
+    }
+    
+    static func stopChargingSession(emaID: String, vendorName: Mobilegateway_Protos_ChargingVendor) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_StopSessionRequest()
+                request.emaID = emaID
+                request.vendorName = vendorName
+                
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+                
+                do {
+                    let chargingClient = Mobilegateway_Protos_ChargingService.Client(wrapping: client)
+                    let response = try await chargingClient.stopSession(
+                        request,
+                        metadata: metadata
+                    )
+                    
+                    reloadWidgetsAfterDelay()
+                    return response.responseType == .accepted
+                } catch {
+                    print("Error stopping charging session: \(error)")
                     return false
                 }
             }

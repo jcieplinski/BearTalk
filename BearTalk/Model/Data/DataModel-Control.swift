@@ -572,6 +572,10 @@ extension DataModel {
                 if oldState.chargingState.chargeLimit != newState.chargingState.chargeLimit {
                     requestInProgress.remove(.chargeLimit)
                 }
+                // Also remove if charging state changes from charging to something else (stop charging succeeded)
+                if oldState.chargingState.chargeState == .charging && newState.chargingState.chargeState != .charging {
+                    requestInProgress.remove(.chargeLimit)
+                }
             case .acCurrentLimit:
                 if oldState.mobileAppReqStatus.acCurrentLimitReq != newState.mobileAppReqStatus.acCurrentLimitReq {
                     requestInProgress.remove(.acCurrentLimit)
@@ -747,6 +751,46 @@ extension DataModel {
                 }
             } catch {
                 print("DataModel: Could not set AC current limit: \(error)")
+            }
+        }
+    }
+    
+    func stopCharging() {
+        guard let vehicle = vehicle else { return }
+        
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.chargeLimit)
+                
+                // Get emaID from vehicle config
+                let emaID = vehicle.vehicleConfig.emaId
+                
+                // Get vendor from first charging account, or default to ELECTRIFY_AMERICA
+                var vendor: Mobilegateway_Protos_ChargingVendor = .electrifyAmerica
+                if let firstAccount = vehicle.vehicleConfig.chargingAccounts.first {
+                    // Convert string vendor name to enum
+                    switch firstAccount.vendorName.uppercased() {
+                    case "CHARGING_VENDOR_ELECTRIFY_AMERICA", "ELECTRIFY_AMERICA":
+                        vendor = .electrifyAmerica
+                    case "CHARGING_VENDOR_ELECTRIFY_CANADA", "ELECTRIFY_CANADA":
+                        vendor = .electrifyCanada
+                    case "CHARGING_VENDOR_BOSCH", "BOSCH":
+                        vendor = .bosch
+                    default:
+                        vendor = .electrifyAmerica
+                    }
+                }
+                
+                let success = try await BearAPI.stopChargingSession(emaID: emaID, vendorName: vendor)
+                if !success {
+                    // put up an alert
+                }
+            } catch {
+                print("Could not stop charging: \(error)")
             }
         }
     }
