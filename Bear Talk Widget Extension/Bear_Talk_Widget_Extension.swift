@@ -295,6 +295,10 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             return false
         case .acCurrentLimit:
             return false
+        case .keepClimate:
+            return entry.vehicleState?.hvacState.keepClimateStatus == .enabled
+        case .creatureComfort:
+            return entry.vehicleState?.hvacState.keepClimateStatus == .petModeOn
         }
     }
     
@@ -394,6 +398,10 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .alarm:
             break
         case .acCurrentLimit:
+            break
+        case .keepClimate:
+            break
+        case .creatureComfort:
             break
         }
         

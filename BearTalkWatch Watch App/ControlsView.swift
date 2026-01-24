@@ -131,6 +131,10 @@ struct ControlsView: View {
             return false
         case .acCurrentLimit:
             return false
+        case .creatureComfort:
+            return model.keepClimateStatus == .petModeOn
+        case .keepClimate:
+            return model.keepClimateStatus == .enabled
         }
     }
     

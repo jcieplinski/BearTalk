@@ -39,8 +39,8 @@ extension DataModel {
         if chassisState.hardWarnRightRear == .warningOn || chassisState.softWarnRightRear == .warningOn { activeAlerts.append("Rear Right Tire Pressure Warning") }
         
         // Check climate status
-        if hvacState.keepClimateStatus == .enabled { activeAlerts.append("Keep Climate On") }
-        if hvacState.keepClimateStatus == .petModeOn { activeAlerts.append("Pet Mode On") }
+        if keepClimateIsOn { activeAlerts.append("Keep Climate On") }
+        if creatureComfortIsOn { activeAlerts.append("Creature Comfort Mode On") }
         
         // Check panic alarm
         if alarmState.alarmStatus == .panicMode { activeAlerts.append("Panic Alarm On") }

@@ -87,6 +87,9 @@ struct ClimateControlSheet: View {
                     ControlButton(controlType: .maxAC) { _ in
                         model.handleControlAction(.maxAC)
                     }
+
+                    creatureComfortButton
+                    keepClimateButton
                 }
                 .padding(.top)
                 
@@ -121,6 +124,72 @@ struct ClimateControlSheet: View {
             .toolbarVisibility(modalPresented ? .hidden : .automatic, for: .navigationBar)
         }
         .presentationDetents([.fraction(0.4), .medium])
+    }
+
+    private var creatureComfortButton: some View {
+        let isActive = model.creatureComfortIsOn
+
+        return ZStack {
+            Button {
+                model.setCreatureComfort(enabled: !isActive)
+            } label: {
+                Label("Creature Comfort", systemImage: "pawprint")
+                    .labelStyle(.iconOnly)
+                    .font(.system(size: 24))
+                    .frame(maxWidth: 44, maxHeight: 44)
+                    .padding(4)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 13)
+                                .foregroundStyle(isActive ? .active.opacity(0.2) : .clear)
+
+                            RoundedRectangle(cornerRadius: 13)
+                                .stroke(style: StrokeStyle(lineWidth: 1))
+                        }
+                    )
+                    .tint(isActive ? .active : .inactive)
+            }
+            .disabled(model.requestInProgress.contains(.creatureComfort) || model.allFunctionsDisable)
+
+            if model.requestInProgress.contains(.creatureComfort) {
+                ProgressView()
+                    .controlSize(.large)
+                    .foregroundStyle(.active)
+            }
+        }
+    }
+
+    private var keepClimateButton: some View {
+        let isActive = model.keepClimateIsOn
+
+        return ZStack {
+            Button {
+                model.setKeepClimate(enabled: !isActive)
+            } label: {
+                Label("Keep Climate", systemImage: "thermometer")
+                    .labelStyle(.iconOnly)
+                    .font(.system(size: 24))
+                    .frame(maxWidth: 44, maxHeight: 44)
+                    .padding(4)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 13)
+                                .foregroundStyle(isActive ? .active.opacity(0.2) : .clear)
+
+                            RoundedRectangle(cornerRadius: 13)
+                                .stroke(style: StrokeStyle(lineWidth: 1))
+                        }
+                    )
+                    .tint(isActive ? .active : .inactive)
+            }
+            .disabled(model.requestInProgress.contains(.keepClimate) || model.allFunctionsDisable)
+
+            if model.requestInProgress.contains(.keepClimate) {
+                ProgressView()
+                    .controlSize(.large)
+                    .foregroundStyle(.active)
+            }
+        }
     }
     
     private var temperatureRange: [Double] {

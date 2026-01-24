@@ -123,13 +123,20 @@ struct ContentView: View {
             
             // Mark initialization as complete
             isInitializing = false
+            updatePollingState()
+        }
+        .onChange(of: tokenManager.isLoggedIn) { _, _ in
+            updatePollingState()
+        }
+        .onChange(of: appState.selectedTab) { _, _ in
+            updatePollingState()
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             switch newPhase {
             case .inactive, .background:
                 print("App entering background/inactive state")
                 tokenManager.handleAppBackground()
-                model.stopRefreshing()
+                model.setPollingEnabled(false)
                 WidgetCenter.shared.reloadAllTimelines()
             case .active:
                 print("App becoming active")
@@ -141,7 +148,7 @@ struct ContentView: View {
                 Task { @Sendable in
                     await tokenManager.handleAppActivation()
                     if tokenManager.isLoggedIn {
-                        model.startRefreshing()
+                        updatePollingState()
                         
                         // Proactively send vehicle state to watch after a short delay
                         try? await Task.sleep(for: .seconds(2.0))
@@ -149,9 +156,16 @@ struct ContentView: View {
                     }
                 }
             @unknown default:
-                model.stopRefreshing()
+                model.setPollingEnabled(false)
             }
         }
+    }
+    
+    private func updatePollingState() {
+        let shouldPoll = tokenManager.isLoggedIn
+            && scenePhase == .active
+            && appState.selectedTab == .home
+        model.setPollingEnabled(shouldPoll)
     }
 }
 

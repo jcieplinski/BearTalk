@@ -13,6 +13,7 @@ enum DefaultsKey {
     static let tokenExpiryTime: String = "tokenExpiryTime"
     static let password: String = "password"
     static let userName: String = "userName"
+    static let deviceID: String = "deviceID"
     static let vehicleID: String = "vehicleID"
     static let allVehicles: String = "allVehicles"
     static let carColor: String = "carColor"

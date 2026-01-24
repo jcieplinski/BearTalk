@@ -27,6 +27,7 @@ import SwiftData
     var climatePowerState: HvacPower?
     var seatClimateState: SeatClimateState?
     var steeringHeaterStatus: SteeringHeaterStatus?
+    var keepClimateStatus: KeepClimateStatus?
     
     // Sync state tracking
     private var isSetupComplete = false
@@ -263,6 +264,10 @@ import SwiftData
         if let steeringHeaterStatusValue = vehicleStateData["steeringHeaterStatus"] as? Int {
             steeringHeaterStatus = steeringHeaterStatusFromInt(steeringHeaterStatusValue)
         }
+
+        if let keepClimateStatusValue = vehicleStateData["keepClimateStatus"] as? Int {
+            keepClimateStatus = keepClimateStatusFromInt(keepClimateStatusValue)
+        }
         
         // Handle window position (complex object)
         if let windowData = vehicleStateData["windowPosition"] as? [String: Any] {
@@ -391,6 +396,17 @@ import SwiftData
         case 0: return .unknown
         case 1: return .off
         case 2: return .on
+        default: return .UNRECOGNIZED(intValue)
+        }
+    }
+
+    private func keepClimateStatusFromInt(_ intValue: Int) -> KeepClimateStatus {
+        switch intValue {
+        case 0: return .unknown
+        case 1: return .inactive
+        case 2: return .enabled
+        case 3: return .canceled
+        case 4: return .petModeOn
         default: return .UNRECOGNIZED(intValue)
         }
     }

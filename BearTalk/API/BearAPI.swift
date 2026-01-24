@@ -16,9 +16,15 @@ import WidgetKit
 final class BearAPI {
     @AppStorage(DefaultsKey.authorization, store: .appGroup) static var authorization: String = ""
     @AppStorage(DefaultsKey.refreshToken, store: .appGroup) static var refreshToken: String = ""
+    @AppStorage(DefaultsKey.deviceID, store: .appGroup) static var deviceID: String = ""
     @AppStorage(DefaultsKey.vehicleID, store: .appGroup) static var vehicleID: String = ""
     @AppStorage(DefaultsKey.carColor, store: .appGroup) static var carColor: String = "eurekaGold"
     @AppStorage(DefaultsKey.lastEfficiency, store: .appGroup) var lastEfficiency: Double = 3.2
+    
+    private static let vehicleFetchThrottleSeconds: TimeInterval = 8
+    private static var currentVehicleFetchTask: Task<Vehicle?, Never>?
+    private static var lastVehicleFetchAt: Date?
+    private static var lastVehicleCache: Vehicle?
     
     static var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -55,8 +61,8 @@ final class BearAPI {
             request.os = .ios
             request.notificationDeviceToken = "1234"
             request.locale = "en_US"
-            request.deviceID = "python-lucidmotors"
-            request.clientName = "BearTalk"
+            request.deviceID = getOrCreateDeviceID()
+            request.clientName = buildClientName()
             
             do {
                 let loginClient = Mobilegateway_Protos_LoginSession.Client(wrapping: client)
@@ -106,6 +112,29 @@ final class BearAPI {
                 throw error
             }
         }
+    }
+
+    private static func getOrCreateDeviceID() -> String {
+        if !deviceID.isEmpty {
+            return deviceID
+        }
+        let newID = UUID().uuidString
+        deviceID = newID
+        return newID
+    }
+
+    private static func buildClientName() -> String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String
+        let build = info?["CFBundleVersion"] as? String
+
+        if let version, let build {
+            return "BearTalk iOS \(version) (\(build))"
+        }
+        if let version {
+            return "BearTalk iOS \(version)"
+        }
+        return "BearTalk iOS"
     }
 
     static func logOut() async throws -> Bool {
@@ -303,20 +332,39 @@ final class BearAPI {
 
     @MainActor
     static func fetchCurrentVehicle() async throws -> Vehicle? {
-        do {
-            let vehicles = try await fetchVehicles() ?? []
-
-            let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
-
-            if let paintColor = vehicle?.vehicleConfig.paintColor {
-                carColor = paintColor.image
-            }
-
-            return vehicle
-        } catch let error {
-            print("Could not fetch current vehicle \(error)")
-            return nil
+        if let task = currentVehicleFetchTask {
+            return await task.value
         }
+        
+        let now = Date()
+        if let lastFetchAt,
+           now.timeIntervalSince(lastFetchAt) < vehicleFetchThrottleSeconds,
+           let cachedVehicle = lastVehicleCache {
+            return cachedVehicle
+        }
+        
+        let task = Task<Vehicle?, Never> { @MainActor in
+            defer { currentVehicleFetchTask = nil }
+            do {
+                let vehicles = try await fetchVehicles() ?? []
+
+                let vehicle = vehicleID.isNotBlank ? vehicles.first(where: { $0.vehicleId == vehicleID }) : vehicles.first
+
+                if let paintColor = vehicle?.vehicleConfig.paintColor {
+                    carColor = paintColor.image
+                }
+                
+                lastVehicleFetchAt = Date()
+                lastVehicleCache = vehicle
+                return vehicle
+            } catch let error {
+                print("Could not fetch current vehicle \(error)")
+                return nil
+            }
+        }
+        
+        currentVehicleFetchTask = task
+        return await task.value
     }
 
     static func wakeUp(vehicleID: String = vehicleID) async throws -> Bool {
@@ -689,6 +737,40 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    reloadWidgetsAfterDelay()
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
+            }
+        }
+    }
+
+    static func setCreatureComfortMode(
+        vehicleID: String = vehicleID,
+        mode: Mobilegateway_Protos_CreatureComfortMode
+    ) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_SetCreatureComfortModeRequest()
+                request.vehicleID = vehicleID
+                request.mode = mode
+
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let result = try await client.setCreatureComfortMode(
+                        request,
+                        metadata: metadata
+                    )
+
                     reloadWidgetsAfterDelay()
                     return true
                 } catch {

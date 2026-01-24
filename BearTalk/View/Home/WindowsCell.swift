@@ -21,16 +21,16 @@ struct WindowsCell: View {
         
         var openWindows: [String] = []
         
-        if windowPosition.leftFront != .fullyClosed {
+        if windowPosition.leftFront.isOpen {
             openWindows.append("Front Left")
         }
-        if windowPosition.rightFront != .fullyClosed {
+        if windowPosition.rightFront.isOpen {
             openWindows.append("Front Right")
         }
-        if windowPosition.leftRear != .fullyClosed {
+        if windowPosition.leftRear.isOpen {
             openWindows.append("Rear Left")
         }
-        if windowPosition.rightRear != .fullyClosed {
+        if windowPosition.rightRear.isOpen {
             openWindows.append("Rear Right")
         }
         

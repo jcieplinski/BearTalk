@@ -29,6 +29,10 @@ struct ControlButton: View {
             }
             
             return climatePowerState.isOn
+        case .keepClimate:
+            return model.keepClimateIsOn
+        case .creatureComfort:
+            return model.creatureComfortIsOn
         case .maxAC:
             return model.maxACState == .on
         case .seatClimate:

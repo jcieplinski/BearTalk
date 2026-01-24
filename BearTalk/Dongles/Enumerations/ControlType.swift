@@ -23,6 +23,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         .trunk: DisplayRepresentation(title: "Trunk"),
         .chargePort: DisplayRepresentation(title: "Charge Port"),
         .climateControl: DisplayRepresentation(title: "Climate Control"),
+        .keepClimate: DisplayRepresentation(title: "Keep Climate"),
+        .creatureComfort: DisplayRepresentation(title: "Creature Comfort"),
         .maxAC: DisplayRepresentation(title: "Max AC"),
         .seatClimate: DisplayRepresentation(title: "Seat Climate"),
         .steeringWheelClimate: DisplayRepresentation(title: "Steering Wheel Climate"),
@@ -51,6 +53,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case trunk
     case chargePort
     case climateControl
+    case keepClimate
+    case creatureComfort
     case maxAC
     case seatClimate
     case steeringWheelClimate
@@ -121,6 +125,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "AC Current Limit"
         case .climateControl:
             "Climate Control"
+        case .keepClimate:
+            "Keep Climate"
+        case .creatureComfort:
+            "Creature Comfort"
         case .driverSeatHeat:
             "Driver Seat Heat"
         case .driverSeatVent:
@@ -178,6 +186,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             ""
         case .climateControl:
             "climateOff"
+        case .keepClimate:
+            "climateOff"
+        case .creatureComfort:
+            "climateOff"
         case .alarm:
             ""
         case .softwareUpdate:
@@ -222,6 +234,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         case .chargeLimit:
             ""
         case .climateControl:
+            "climateOn"
+        case .keepClimate:
+            "climateOn"
+        case .creatureComfort:
             "climateOn"
         case .alarm:
             ""

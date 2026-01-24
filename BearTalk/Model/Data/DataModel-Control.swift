@@ -50,6 +50,10 @@ extension DataModel {
             toggleChargePort()
         case .climateControl:
             NotificationCenter.default.post(name: .showClimateControl, object: nil)
+        case .keepClimate:
+            setKeepClimate(enabled: !keepClimateIsOn)
+        case .creatureComfort:
+            toggleCreatureComfort()
         case .maxAC:
             toggleMaxAC()
         case .seatClimate:
@@ -307,6 +311,53 @@ extension DataModel {
             }
         }
     }
+
+    func toggleCreatureComfort() {
+        setCreatureComfort(enabled: !creatureComfortIsOn)
+    }
+
+    func setCreatureComfort(enabled: Bool) {
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+
+                requestInProgress.insert(.creatureComfort)
+                let targetMode: Mobilegateway_Protos_CreatureComfortMode = enabled ? .on : .off
+                let success = try await BearAPI.setCreatureComfortMode(mode: targetMode)
+                if !success {
+                    // put up an alert
+                } else if !enabled {
+                    let _ = try await BearAPI.setClimateControlState(
+                        state: .hvacOff,
+                        temperature: selectedTemperature
+                    )
+                }
+            } catch let error {
+                print("Could not set creature comfort mode: \(error)")
+            }
+        }
+    }
+
+    func setKeepClimate(enabled: Bool) {
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+
+                requestInProgress.insert(.keepClimate)
+                let targetPower: HvacPower = enabled ? .hvacKeepTemp : .hvacOff
+                let success = try await BearAPI.setClimateControlState(state: targetPower, temperature: selectedTemperature)
+                if !success {
+                    // put up an alert
+                }
+            } catch let error {
+                print("Could not set keep climate mode: \(error)")
+            }
+        }
+    }
     
     func toggleLights() {
         switch lightsState {
@@ -491,6 +542,16 @@ extension DataModel {
                 
                 if oldState.hvacState.frontLeftSetTemperature != newState.hvacState.frontLeftSetTemperature {
                     requestInProgress.remove(.climateControl)
+                }
+            case .creatureComfort:
+                if oldState.hvacState.keepClimateStatus != newState.hvacState.keepClimateStatus
+                    || oldState.hvacState.keepClimateCondition != newState.hvacState.keepClimateCondition {
+                    requestInProgress.remove(.creatureComfort)
+                }
+            case .keepClimate:
+                if oldState.hvacState.keepClimateStatus != newState.hvacState.keepClimateStatus
+                    || oldState.hvacState.keepClimateCondition != newState.hvacState.keepClimateCondition {
+                    requestInProgress.remove(.keepClimate)
                 }
             case .maxAC:
                 if oldState.hvacState.maxAcStatus != newState.hvacState.maxAcStatus {

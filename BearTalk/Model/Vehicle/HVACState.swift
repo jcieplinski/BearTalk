@@ -480,6 +480,17 @@ enum KeepClimateStatus: Codable, Equatable {
     case petModeOn // = 4
     case UNRECOGNIZED(Int)
     
+    var intValue: Int {
+        switch self {
+        case .unknown: return 0
+        case .inactive: return 1
+        case .enabled: return 2
+        case .canceled: return 3
+        case .petModeOn: return 4
+        case .UNRECOGNIZED(let int): return int
+        }
+    }
+    
     init(proto: Mobilegateway_Protos_KeepClimateStatus) {
         switch proto {
         case .unknown: self = .unknown
@@ -487,6 +498,28 @@ enum KeepClimateStatus: Codable, Equatable {
         case .enabled: self = .enabled
         case .canceled: self = .canceled
         case .petModeOn: self = .petModeOn
+        case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+}
+
+enum KeepClimateCondition: Codable, Equatable {
+    case keepClimateConditionUnknown // = 0
+    case keepClimateConditionIdle // = 1
+    case keepClimateConditionOff // = 2
+    case keepClimateConditionOnOccupied // = 3
+    case keepClimateConditionOnNotOccupied // = 4
+    case keepClimateConditionInvalid // = 8
+    case UNRECOGNIZED(Int)
+    
+    init(proto: Mobilegateway_Protos_HvacKeepClimateCondition) {
+        switch proto {
+        case .keepClimateConditionUnknown: self = .keepClimateConditionUnknown
+        case .keepClimateConditionIdle: self = .keepClimateConditionIdle
+        case .keepClimateConditionOff: self = .keepClimateConditionOff
+        case .keepClimateConditionOnOccupied: self = .keepClimateConditionOnOccupied
+        case .keepClimateConditionOnNotOccupied: self = .keepClimateConditionOnNotOccupied
+        case .keepClimateConditionInvalid: self = .keepClimateConditionInvalid
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
     }
@@ -768,6 +801,7 @@ struct HVACState: Codable, Equatable {
     var defrost: DefrostState
     let preconditionStatus: HvacPreconditionStatus
     let keepClimateStatus: KeepClimateStatus
+    let keepClimateCondition: KeepClimateCondition
     let maxAcStatus: MaxACState
     let seats: SeatClimateState
     let syncSet: SyncSet
@@ -782,6 +816,7 @@ struct HVACState: Codable, Equatable {
         defrost = .init(proto: proto.defrost)
         preconditionStatus = .init(proto: proto.preconditionStatus)
         keepClimateStatus = .init(proto: proto.keepClimateStatus)
+        keepClimateCondition = .init(proto: proto.keepClimateCondition)
         maxAcStatus = .init(proto: proto.maxAcStatus)
         seats = .init(proto: proto.seats)
         syncSet = .init(proto: proto.syncSet)

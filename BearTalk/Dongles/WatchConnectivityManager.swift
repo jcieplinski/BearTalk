@@ -93,6 +93,7 @@ class WatchConnectivityManager: NSObject, ObservableObject {
                 "batteryPreConditionState": vehicleState.batteryState.preconditioningStatus.intValue,
                 "climatePowerState": vehicleState.hvacState.power.intValue,
                 "steeringHeaterStatus": vehicleState.hvacState.steeringHeater.intValue,
+                "keepClimateStatus": vehicleState.hvacState.keepClimateStatus.intValue,
                 
                 // Complex objects as dictionaries with actual data
                 "windowPosition": [

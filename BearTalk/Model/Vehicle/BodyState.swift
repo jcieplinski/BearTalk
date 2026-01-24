@@ -63,7 +63,7 @@ struct WindowPosition: Codable, Equatable {
     }
     
     var isOpen: Bool {
-        return leftFront != .fullyClosed && leftRear != .fullyClosed && rightFront != .fullyClosed && rightRear != .fullyClosed
+        return leftFront.isOpen || leftRear.isOpen || rightFront.isOpen || rightRear.isOpen
     }
 }
 
@@ -123,7 +123,23 @@ enum WindowPositionStatus: Codable, Equatable {
     }
     
     var isOpen: Bool {
-        return self != .fullyClosed
+        switch self {
+        case .unknown, .unknownDeInitialized, .UNRECOGNIZED:
+            false
+        case .fullyClosed, .atpReversePosition, .hardStopUp:
+            false
+        case .aboveShortDropPosition,
+             .shortDropPosition,
+             .belowShortDropPosition,
+             .fullyOpen,
+             .anticlatterPosition,
+             .hardStopDown,
+             .longDropPosition,
+             .ventDropPosition,
+             .betweenFullyClosedAndShortDropDown,
+             .betweenShortDropDownAndFullyOpen:
+            true
+        }
     }
     
     var image: String {

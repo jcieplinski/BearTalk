@@ -74,6 +74,30 @@ import SceneKit
     var selectedTemperature: Double = UnitConverter.currentTemperatureUnit == .celsius ? 22 : 72
     var seatClimateLevel: Int = 2
     
+    var creatureComfortIsOn: Bool {
+        guard let vehicle else { return false }
+        let hvacState = vehicle.vehicleState.hvacState
+        if hvacState.keepClimateStatus == .petModeOn {
+            return true
+        }
+        
+        return hvacState.keepClimateCondition == .keepClimateConditionOnNotOccupied
+    }
+    
+    var keepClimateIsOn: Bool {
+        guard let vehicle else { return false }
+        let hvacState = vehicle.vehicleState.hvacState
+        if hvacState.keepClimateStatus == .petModeOn {
+            return false
+        }
+        
+        if hvacState.keepClimateStatus == .enabled {
+            return true
+        }
+        
+        return hvacState.keepClimateCondition == .keepClimateConditionOnOccupied
+    }
+    
     // Map
     var gps: GPS?
     
@@ -154,6 +178,7 @@ import SceneKit
     
     @ObservationIgnored private var lastRefreshTime: Date?
     @ObservationIgnored private var refreshCheckTimer: Timer?
+    @ObservationIgnored private var isPollingEnabled = false
     
     @ObservationIgnored @AppStorage(DefaultsKey.showAlertsBeforeOpenActions, store: .appGroup) var showAlertsBeforeOpenActions: Bool = true
     
@@ -358,6 +383,7 @@ import SceneKit
     }
     
     func startRefreshing() {
+        guard isPollingEnabled else { return }
         if !isRefreshing {
             Task {
                 await refreshVehicle()
@@ -387,7 +413,7 @@ import SceneKit
         DispatchQueue.main.async { [weak self] in
             self?.refreshTimer = Timer
                 .scheduledTimer(
-                    withTimeInterval: TimeInterval(4),
+                    withTimeInterval: TimeInterval(8),
                     repeats: true
                 ) { _ in
                     Task { [weak self] in
@@ -407,12 +433,25 @@ import SceneKit
             
             if let lastRefresh = self.lastRefreshTime {
                 let timeSinceLastRefresh = Date().timeIntervalSince(lastRefresh)
-                if timeSinceLastRefresh > 8 { // More than 2 refresh intervals (4s * 2)
+                if timeSinceLastRefresh > 16 { // More than 2 refresh intervals (8s * 2)
                     let message = "🚨 Vehicle refresh appears to have stopped. Last refresh was \(Int(timeSinceLastRefresh))s ago"
                     print(message) // More visible in Xcode debug console
                     Logger.vehicle.error("\(message)")
                 }
             }
+        }
+    }
+
+    func setPollingEnabled(_ enabled: Bool) {
+        if enabled == isPollingEnabled {
+            return
+        }
+        
+        isPollingEnabled = enabled
+        if enabled {
+            startRefreshing()
+        } else {
+            stopRefreshing()
         }
     }
     
@@ -592,7 +631,9 @@ import SceneKit
             if let vehicle = self.vehicle {
                 print("Vehicle fetched successfully: \(vehicle.vehicleId)")
                 // Only start refreshing if we successfully got the vehicle
-                startRefreshing()
+                if isPollingEnabled {
+                    startRefreshing()
+                }
             } else {
                 print("No vehicle available after profile fetch")
                 // Try one more time after a short delay
@@ -603,7 +644,9 @@ import SceneKit
                 
                 if let vehicle = self.vehicle {
                     print("Vehicle fetched successfully on retry: \(vehicle.vehicleId)")
-                    startRefreshing()
+                    if isPollingEnabled {
+                        startRefreshing()
+                    }
                 } else {
                     print("Still no vehicle after retry")
                     // Check if we have a vehicle ID but failed to fetch
@@ -618,7 +661,9 @@ import SceneKit
                             try? await getUserProfile()
                             if self.vehicle != nil {
                                 print("Vehicle fetched after wake request")
-                                startRefreshing()
+                                if isPollingEnabled {
+                                    startRefreshing()
+                                }
                             }
                         } else {
                             print("Wake request failed or returned false")

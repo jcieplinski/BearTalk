@@ -49,7 +49,7 @@ struct WindowsSheet: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 100, maxHeight: 60)
                 .font(.title)
-                .foregroundStyle(position != .fullyClosed ? .active : .accent)
+                .foregroundStyle(position.isOpen ? .active : .accent)
             
             Text(title)
                 .font(.caption)
@@ -58,7 +58,7 @@ struct WindowsSheet: View {
             
             Text(position.positionTitle)
                 .font(.caption2)
-                .foregroundStyle(position != .fullyClosed ? .active : .accent)
+                .foregroundStyle(position.isOpen ? .active : .accent)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity)
