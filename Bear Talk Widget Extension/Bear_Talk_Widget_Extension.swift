@@ -22,10 +22,20 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: BearWidgetIntent, in context: Context) async -> SimpleEntry {
-        // For snapshots, use cached data to avoid excessive API calls
-        let vehicles = try? await BearAPI.fetchVehicles()
-        
+        let vehicles = await BearAPI.fetchVehiclesForWidget()
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first
+        
+        // Fall back to cached data when API fails after retries
+        if vehicle == nil, let cached = BearAPI.loadWidgetCache(preferredVehicleId: configuration.vehicle?.id) {
+            let snapshotData = try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: cached.vehicleId)
+            return SimpleEntry(
+                date: Date(),
+                configuration: configuration,
+                nickname: cached.nickname,
+                vehicleState: cached.vehicleState,
+                snapshotData: snapshotData
+            )
+        }
         
         // Get the snapshot data using VehicleIdentifierHandler
         var snapshotData: Data?
@@ -45,17 +55,27 @@ struct Provider: AppIntentTimelineProvider {
     func timeline(for configuration: BearWidgetIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
         
-        // Only refresh token if we don't have valid cached data
-        // This reduces API calls that could contribute to rate limiting
-        let vehicles = try? await BearAPI.fetchVehicles()
-        
+        let vehicles = await BearAPI.fetchVehiclesForWidget()
         let vehicle = vehicles?.first(where: { $0.vehicleId == configuration.vehicle?.id }) ?? vehicles?.first
+        
+        // Fall back to cached data when API fails after retries
+        var cachedNickname: String?
+        var cachedVehicleState: VehicleState?
+        var cachedVehicleId: String?
+        if vehicle == nil, let cached = BearAPI.loadWidgetCache(preferredVehicleId: configuration.vehicle?.id) {
+            cachedNickname = cached.nickname
+            cachedVehicleState = cached.vehicleState
+            cachedVehicleId = cached.vehicleId
+        }
         
         // Get the snapshot data using VehicleIdentifierHandler
         var snapshotData: Data?
-        if let vehicleId = vehicle?.vehicleId {
+        if let vehicleId = vehicle?.vehicleId ?? cachedVehicleId {
             snapshotData = try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).fetchSnapshotData(for: vehicleId)
         }
+
+        let nickname = vehicle?.vehicleConfig.nickname ?? cachedNickname ?? ""
+        let vehicleState = vehicle?.vehicleState ?? cachedVehicleState
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
@@ -64,8 +84,8 @@ struct Provider: AppIntentTimelineProvider {
             let entry = SimpleEntry(
                 date: entryDate,
                 configuration: configuration,
-                nickname: vehicle?.vehicleConfig.nickname ?? "",
-                vehicleState: vehicle?.vehicleState,
+                nickname: nickname,
+                vehicleState: vehicleState,
                 snapshotData: snapshotData
             )
             entries.append(entry)

@@ -12,7 +12,6 @@ extension DataModel {
         guard let vehicle = vehicle else { return [] }
         let bodyState = vehicle.vehicleState.bodyState
         let chassisState = vehicle.vehicleState.chassisState
-        let hvacState = vehicle.vehicleState.hvacState
         let alarmState = vehicle.vehicleState.alarmState
         
         // Check doors

@@ -101,6 +101,7 @@ struct SeatClimateIntent: AppIntent {
             let _ = try await BearAPI.setSeatClimate(seats: seatAssignments)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

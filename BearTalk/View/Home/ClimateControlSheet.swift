@@ -80,6 +80,10 @@ struct ClimateControlSheet: View {
                 
                 // Control Buttons
                 HStack(spacing: 20) {
+                    ControlButton(controlType: .steeringWheelClimate) { _ in
+                        model.handleControlAction(.steeringWheelClimate)
+                    }
+                    
                     ControlButton(controlType: .defrost) { _ in
                         model.handleControlAction(.defrost)
                     }

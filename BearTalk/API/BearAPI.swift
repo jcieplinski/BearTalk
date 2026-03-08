@@ -13,6 +13,12 @@ import GRPCProtobuf
 import SwiftProtobuf
 import WidgetKit
 
+private struct CachedWidgetVehicle: Codable {
+    let vehicleId: String
+    let nickname: String
+    let vehicleState: VehicleState
+}
+
 final class BearAPI {
     @AppStorage(DefaultsKey.authorization, store: .appGroup) static var authorization: String = ""
     @AppStorage(DefaultsKey.refreshToken, store: .appGroup) static var refreshToken: String = ""
@@ -25,6 +31,23 @@ final class BearAPI {
     private static var currentVehicleFetchTask: Task<Vehicle?, Never>?
     private static var lastVehicleFetchAt: Date?
     private static var lastVehicleCache: Vehicle?
+    
+    /// Saves vehicle data to App Group for widget fallback when API is unavailable.
+    static func saveWidgetCache(vehicle: Vehicle) {
+        let payload = CachedWidgetVehicle(vehicleId: vehicle.vehicleId, nickname: vehicle.vehicleConfig.nickname, vehicleState: vehicle.vehicleState)
+        if let data = try? JSONEncoder().encode(payload) {
+            UserDefaults.appGroup.set(data, forKey: DefaultsKey.cachedWidgetVehicleData)
+        }
+    }
+    
+    /// Loads cached vehicle data for widget when API fetch fails.
+    static func loadWidgetCache(preferredVehicleId: String? = nil) -> (vehicleId: String, nickname: String, vehicleState: VehicleState)? {
+        guard let data = UserDefaults.appGroup.data(forKey: DefaultsKey.cachedWidgetVehicleData),
+              let cached = try? JSONDecoder().decode(CachedWidgetVehicle.self, from: data) else {
+            return nil
+        }
+        return (cached.vehicleId, cached.nickname, cached.vehicleState)
+    }
     
     static var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -329,6 +352,27 @@ final class BearAPI {
             }
         }
     }
+    
+    /// Fetches vehicles with retries for widget use. Refreshes token and retries on failure to improve reliability.
+    @MainActor
+    static func fetchVehiclesForWidget() async -> [Vehicle]? {
+        // First attempt
+        if let vehicles = try? await fetchVehicles(), !vehicles.isEmpty {
+            return vehicles
+        }
+        // Token may be stale; refresh and retry
+        _ = try? await refreshToken()
+        if let vehicles = try? await fetchVehicles(), !vehicles.isEmpty {
+            return vehicles
+        }
+        // Transient network issues; brief delay then retry
+        try? await Task.sleep(for: .seconds(2))
+        if let vehicles = try? await fetchVehicles(), !vehicles.isEmpty {
+            return vehicles
+        }
+        try? await Task.sleep(for: .seconds(2))
+        return try? await fetchVehicles()
+    }
 
     @MainActor
     static func fetchCurrentVehicle() async throws -> Vehicle? {
@@ -337,7 +381,7 @@ final class BearAPI {
         }
         
         let now = Date()
-        if let lastFetchAt,
+        if let lastFetchAt = lastVehicleFetchAt,
            now.timeIntervalSince(lastFetchAt) < vehicleFetchThrottleSeconds,
            let cachedVehicle = lastVehicleCache {
             return cachedVehicle
@@ -766,7 +810,7 @@ final class BearAPI {
 
                 do {
                     let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
-                    let result = try await client.setCreatureComfortMode(
+                    let _ = try await client.setCreatureComfortMode(
                         request,
                         metadata: metadata
                     )
@@ -1216,56 +1260,20 @@ final class BearAPI {
     }
     
     static func scheduleWidgetReload() {
-        print("scheduleWidgetReload: Starting widget reload scheduling")
-        
-        // For widget background operations
-        let task = Task {
-            do {
-                print("scheduleWidgetReload: Starting 5 second wait")
-                // Wait for 5 seconds to allow car state to update
-                try await Task.sleep(for: .seconds(5))
-                print("scheduleWidgetReload: Wait complete, reloading widgets")
-                
-                // Reload all widget timelines
-                await MainActor.run {
-                    print("scheduleWidgetReload: Reloading widget timelines")
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-            } catch {
-                print("scheduleWidgetReload: Error during reload scheduling: \(error)")
-            }
+        // Quick reload for fast car responses (e.g. locks, lights)
+        Task {
+            try? await Task.sleep(for: .seconds(2))
+            await MainActor.run { WidgetCenter.shared.reloadAllTimelines() }
         }
-        
-        // A Second update, just in case it takes a while
-        let taskTwo = Task {
-            do {
-                print("scheduleWidgetReload: Starting 5 second wait")
-                // Wait for 5 seconds to allow car state to update
-                try await Task.sleep(for: .seconds(10))
-                print("scheduleWidgetReload: Wait complete, reloading widgets")
-                
-                // Reload all widget timelines
-                await MainActor.run {
-                    print("scheduleWidgetReload: Reloading widget timelines")
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-            } catch {
-                print("scheduleWidgetReload: Error during reload scheduling: \(error)")
-            }
+        // Primary reload after car state propagates
+        Task {
+            try? await Task.sleep(for: .seconds(5))
+            await MainActor.run { WidgetCenter.shared.reloadAllTimelines() }
         }
-        
-        // Store the task to prevent it from being deallocated and ensure it runs to completion
-        Task.detached(priority: .background) {
-            print("scheduleWidgetReload: Task detached, waiting for completion")
-            await withTaskGroup(of: Void.self) { group in
-                group.addTask {
-                    await task.value
-                    await taskTwo.value
-                }
-                // Wait for the task to complete
-                await group.waitForAll()
-            }
-            print("scheduleWidgetReload: Task completed")
+        // Fallback for slower updates
+        Task {
+            try? await Task.sleep(for: .seconds(10))
+            await MainActor.run { WidgetCenter.shared.reloadAllTimelines() }
         }
     }
 }

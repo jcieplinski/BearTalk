@@ -147,9 +147,11 @@ struct ChargingView: View {
                 .background(.thinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                #if DEBUG
                 if model.vehicle != nil {
                     ACChargeLimitView()
                 }
+                #endif
                 
                 // Battery Preconditioning Button
                 Button {

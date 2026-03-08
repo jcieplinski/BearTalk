@@ -32,4 +32,5 @@ enum DefaultsKey {
     static let temperatureUnit: String = "temperatureUnit"
     static let tirePressureUnit: String = "tirePressureUnit"
     static let allControlsOrder: String = "allControlsOrder"
+    static let cachedWidgetVehicleData: String = "cachedWidgetVehicleData"
 }

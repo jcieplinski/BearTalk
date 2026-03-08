@@ -353,6 +353,7 @@ import SceneKit
                             if let currentVehicle = try await BearAPI.fetchCurrentVehicle() {
                                 Task { @MainActor in
                                     self.vehicle = currentVehicle
+                                    BearAPI.saveWidgetCache(vehicle: currentVehicle)
                                     self.update()
                                     self.updateStats()
                                     self.updateRangeStats()
@@ -464,6 +465,7 @@ import SceneKit
                 Task { @MainActor in
                     resetControlFunction(oldState: self.vehicle?.vehicleState, newState: vehicle.vehicleState)
                     self.vehicle = vehicle
+                    BearAPI.saveWidgetCache(vehicle: vehicle)
                     self.gps = vehicle.vehicleState.gps
                     self.update()
                     self.updateStats()

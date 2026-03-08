@@ -43,6 +43,7 @@ struct SteeringWheelHeatIntent: AppIntent {
             let _ = try await BearAPI.setSteeringWheelHeat(status: power)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

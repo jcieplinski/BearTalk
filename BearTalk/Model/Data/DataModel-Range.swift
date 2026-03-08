@@ -21,7 +21,6 @@ extension DataModel {
         
         // Convert to user's preferred distance unit
         let currentDistanceUnit = UnitConverter.currentDistanceUnit
-        let rangeMeasurement = Measurement(value: estimatedRangeInMiles, unit: UnitLength.miles)
         let rangeMeasurementConverted = UnitConverter.convertDistance(estimatedRangeInMiles, from: .miles, to: currentDistanceUnit)
         let formattedRange = UnitConverter.formatDistance(rangeMeasurementConverted, unit: currentDistanceUnit)
         

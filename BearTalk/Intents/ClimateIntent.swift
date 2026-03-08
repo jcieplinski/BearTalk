@@ -46,6 +46,7 @@ struct ClimateIntent: AppIntent {
             let _ = try await BearAPI.setClimateControlState(state: power, temperature: temperature)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }

@@ -261,6 +261,7 @@ struct LoginView: View {
                 // Set the initial vehicle from login response to show UI immediately
                 if let firstVehicle = loginResponse.userVehicleData.first {
                     model.vehicle = firstVehicle
+                    BearAPI.saveWidgetCache(vehicle: firstVehicle)
                     model.gps = firstVehicle.vehicleState.gps
                     model.update()
                     model.updateStats()

@@ -43,6 +43,7 @@ struct BatteryPreconditionIntent: AppIntent {
             let _ = try await BearAPI.setBatteryPreCondition(status: power)
         }
         
+        BearAPI.scheduleWidgetReload()
         return .result()
     }
 }
