@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BearTalkProto
 
 enum PaintColor: Codable, Equatable {
     case unknown // = 0

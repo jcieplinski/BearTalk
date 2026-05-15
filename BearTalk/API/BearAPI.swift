@@ -12,6 +12,7 @@ import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 import SwiftProtobuf
 import WidgetKit
+import BearTalkProto
 
 private struct CachedWidgetVehicle: Codable {
     let vehicleId: String

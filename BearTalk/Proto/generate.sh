@@ -6,8 +6,8 @@ set -e
 # Directory containing this script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Directory for generated files
-GENERATED_DIR="$SCRIPT_DIR/../Generated"
+# Directory for generated files (local Swift package)
+GENERATED_DIR="$SCRIPT_DIR/../../Packages/BearTalkProto/Sources/BearTalkProto"
 
 # Create generated directory if it doesn't exist
 mkdir -p "$GENERATED_DIR"

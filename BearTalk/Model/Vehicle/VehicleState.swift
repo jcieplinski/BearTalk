@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct VehicleState: Codable, Equatable {
     let batteryState: BatteryState

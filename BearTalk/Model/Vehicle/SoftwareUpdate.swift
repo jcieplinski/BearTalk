@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct SoftwareUpdate: Codable, Equatable {
     internal init(versionAvailable: String, installDurationMinutes: UInt32, percentComplete: UInt32, state: UpdateState, versionAvailableRaw: UInt32, updateAvailable: UpdateAvailability, scheduledStartTimeSec: UInt64, downloadStatus: SoftwareDownloadStatus, downloadInterface: SoftwareDownloadInterface, tcuDownloadStatus: TcuDownloadStatus) {

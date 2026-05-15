@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct CabinState: Codable, Equatable {
     let interiorTemp: Double

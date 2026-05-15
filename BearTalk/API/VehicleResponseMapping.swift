@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftProtobuf
+import BearTalkProto
 
 extension BearAPI {
     static func mapUserProfileResponse(_ userProfile: Mobilegateway_Protos_UserProfile) -> UserProfile {

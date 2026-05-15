@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct AlarmState: Codable, Equatable {
     let alarmStatus: AlarmStatus

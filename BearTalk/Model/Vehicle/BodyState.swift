@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct BodyState: Codable, Equatable {
     var doorLocks: LockState

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct MobileAppReqStatus: Codable, Equatable {
     let alarmSetRequest: AlarmMode

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 enum LteType: Codable, Equatable {
     case unknown // = 0

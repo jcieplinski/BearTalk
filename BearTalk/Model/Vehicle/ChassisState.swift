@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct ChassisState: Codable, Equatable {
     let odometerKm: Double

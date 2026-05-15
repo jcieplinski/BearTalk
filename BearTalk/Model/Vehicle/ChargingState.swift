@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BearTalkProto
 
 struct ChargingState: Codable, Equatable {
     let chargeState: ChargeState

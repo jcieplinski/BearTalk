@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import BearTalkProto
 
 enum WindowAction: Int, AppEnum {
     case closed

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct Location: Codable, Equatable {
     let latitude: Double

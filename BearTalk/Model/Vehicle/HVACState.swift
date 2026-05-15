@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 enum DefrostState: Codable, Equatable {
     case unknown // = 0

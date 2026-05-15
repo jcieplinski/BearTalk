@@ -8,6 +8,7 @@
 import SwiftUI
 import OSLog
 import WidgetKit
+import BearTalkProto
 
 extension DataModel {
     var allFunctionsDisable: Bool {

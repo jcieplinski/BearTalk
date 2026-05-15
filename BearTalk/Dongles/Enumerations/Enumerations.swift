@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import BearTalkProto
 
 enum AppColorScheme: Int, Codable {
     case system = 0

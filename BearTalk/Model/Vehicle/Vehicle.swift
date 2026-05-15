@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct Vehicle: Codable, Equatable {
     let vehicleId: String

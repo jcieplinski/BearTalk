@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BearTalkProto
 
 struct GPS: Codable, Equatable {
     let location: Location

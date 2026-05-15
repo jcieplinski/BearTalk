@@ -17,6 +17,10 @@
 		AE2F600A2DD10A99003BDC36 /* GRPCNIOTransportHTTP2Posix in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F60092DD10A99003BDC36 /* GRPCNIOTransportHTTP2Posix */; };
 		AE2F600C2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600B2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices */; };
 		AE2F600F2DD10AC5003BDC36 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = AE2F600E2DD10AC5003BDC36 /* GRPCProtobuf */; };
+		AE37053D2FB6C1C7000A9024 /* BearTalkProto in Frameworks */ = {isa = PBXBuildFile; productRef = AE37053C2FB6C1C7000A9024 /* BearTalkProto */; };
+		AE37053F2FB6C200000A9024 /* BearTalkProto in Frameworks */ = {isa = PBXBuildFile; productRef = AE37053E2FB6C200000A9024 /* BearTalkProto */; };
+		AE3705412FB6C212000A9024 /* BearTalkProto in Frameworks */ = {isa = PBXBuildFile; productRef = AE3705402FB6C212000A9024 /* BearTalkProto */; };
+		AE3705432FB6C226000A9024 /* BearTalkProto in Frameworks */ = {isa = PBXBuildFile; productRef = AE3705422FB6C226000A9024 /* BearTalkProto */; };
 		AE4A928B2DEA613300813074 /* GRPCCodeGen in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928A2DEA613300813074 /* GRPCCodeGen */; };
 		AE4A928D2DEA613300813074 /* GRPCCore in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928C2DEA613300813074 /* GRPCCore */; };
 		AE4A928F2DEA613300813074 /* GRPCInProcessTransport in Frameworks */ = {isa = PBXBuildFile; productRef = AE4A928E2DEA613300813074 /* GRPCInProcessTransport */; };
@@ -168,24 +172,6 @@
 				Dongles/Enumerations/Wheels.swift,
 				Dongles/Extensions.swift,
 				Dongles/URLStrings.swift,
-				Generated/charging_service.grpc.swift,
-				Generated/charging_service.pb.swift,
-				Generated/login_session.grpc.swift,
-				Generated/login_session.pb.swift,
-				Generated/salesforce_service.grpc.swift,
-				Generated/salesforce_service.pb.swift,
-				Generated/sentry_service.grpc.swift,
-				Generated/sentry_service.pb.swift,
-				Generated/subscription_service.grpc.swift,
-				Generated/subscription_service.pb.swift,
-				Generated/trip_service.grpc.swift,
-				Generated/trip_service.pb.swift,
-				Generated/user_preferences_service.grpc.swift,
-				Generated/user_preferences_service.pb.swift,
-				Generated/user_profile_service.grpc.swift,
-				Generated/user_profile_service.pb.swift,
-				Generated/vehicle_state_service.grpc.swift,
-				Generated/vehicle_state_service.pb.swift,
 				Intents/BatteryPreconditionIntent.swift,
 				Intents/ChargePortIntent.swift,
 				Intents/ClimateIntent.swift,
@@ -243,24 +229,6 @@
 				Dongles/Enumerations/Wheels.swift,
 				Dongles/Extensions.swift,
 				Dongles/URLStrings.swift,
-				Generated/charging_service.grpc.swift,
-				Generated/charging_service.pb.swift,
-				Generated/login_session.grpc.swift,
-				Generated/login_session.pb.swift,
-				Generated/salesforce_service.grpc.swift,
-				Generated/salesforce_service.pb.swift,
-				Generated/sentry_service.grpc.swift,
-				Generated/sentry_service.pb.swift,
-				Generated/subscription_service.grpc.swift,
-				Generated/subscription_service.pb.swift,
-				Generated/trip_service.grpc.swift,
-				Generated/trip_service.pb.swift,
-				Generated/user_preferences_service.grpc.swift,
-				Generated/user_preferences_service.pb.swift,
-				Generated/user_profile_service.grpc.swift,
-				Generated/user_profile_service.pb.swift,
-				Generated/vehicle_state_service.grpc.swift,
-				Generated/vehicle_state_service.pb.swift,
 				Model/Responses/LoginResponse.swift,
 				Model/SessionInfo.swift,
 				Model/TokenManager.swift,
@@ -309,6 +277,7 @@
 				AE4A928D2DEA613300813074 /* GRPCCore in Frameworks */,
 				AE4A92932DEA613300813074 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
 				AE4A928F2DEA613300813074 /* GRPCInProcessTransport in Frameworks */,
+				AE3705412FB6C212000A9024 /* BearTalkProto in Frameworks */,
 				AE4A928B2DEA613300813074 /* GRPCCodeGen in Frameworks */,
 				AE9979522DEA0F5B00942DD9 /* WidgetKit.framework in Frameworks */,
 			);
@@ -324,6 +293,7 @@
 				AED7B0592DFCD04600322C13 /* GRPCNIOTransportHTTP2 in Frameworks */,
 				AED7B05D2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */,
 				AED7B04D2DFCD04600322C13 /* protoc-gen-swift in Frameworks */,
+				AE3705432FB6C226000A9024 /* BearTalkProto in Frameworks */,
 				AED7B04F2DFCD04600322C13 /* SwiftProtobuf in Frameworks */,
 				AED7B05B2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
 				AED7B0572DFCD04600322C13 /* GRPCInProcessTransport in Frameworks */,
@@ -341,6 +311,8 @@
 				AE2F60012DD10A68003BDC36 /* GRPCCodeGen in Frameworks */,
 				AE2F600F2DD10AC5003BDC36 /* GRPCProtobuf in Frameworks */,
 				AE2F60052DD10A68003BDC36 /* GRPCInProcessTransport in Frameworks */,
+				AE37053D2FB6C1C7000A9024 /* BearTalkProto in Frameworks */,
+				AE37053F2FB6C200000A9024 /* BearTalkProto in Frameworks */,
 				AE2F5FBD2DD0FF3F003BDC36 /* SwiftProtobuf in Frameworks */,
 				AE2F600C2DD10A99003BDC36 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */,
 				AE2F600A2DD10A99003BDC36 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
@@ -446,6 +418,7 @@
 				AE4A92922DEA613300813074 /* GRPCNIOTransportHTTP2Posix */,
 				AE4A92942DEA613300813074 /* GRPCNIOTransportHTTP2TransportServices */,
 				AE4A92962DEA613300813074 /* GRPCProtobuf */,
+				AE3705402FB6C212000A9024 /* BearTalkProto */,
 			);
 			productName = "Bear Talk Widget ExtensionExtension";
 			productReference = AE9979502DEA0F5B00942DD9 /* Bear Talk Widget ExtensionExtension.appex */;
@@ -478,6 +451,7 @@
 				AED7B05A2DFCD04600322C13 /* GRPCNIOTransportHTTP2Posix */,
 				AED7B05C2DFCD04600322C13 /* GRPCNIOTransportHTTP2TransportServices */,
 				AED7B05E2DFCD04600322C13 /* GRPCProtobuf */,
+				AE3705422FB6C226000A9024 /* BearTalkProto */,
 			);
 			productName = "BearTalkWatch Watch App";
 			productReference = AED7B03B2DFCCEA800322C13 /* BearTalkWatch Watch App.app */;
@@ -586,6 +560,7 @@
 				AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-2" */,
 				AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */,
 				AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */,
+				AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */,
 			);
 			productRefGroup = D8CA9DA82B166B3300BC35F8 /* Products */;
 			projectDirPath = "";
@@ -1182,6 +1157,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/BearTalkProto;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		AE2F5FBB2DD0FF3F003BDC36 /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1267,6 +1249,25 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
 			productName = GRPCProtobuf;
+		};
+		AE37053C2FB6C1C7000A9024 /* BearTalkProto */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BearTalkProto;
+		};
+		AE37053E2FB6C200000A9024 /* BearTalkProto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */;
+			productName = BearTalkProto;
+		};
+		AE3705402FB6C212000A9024 /* BearTalkProto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */;
+			productName = BearTalkProto;
+		};
+		AE3705422FB6C226000A9024 /* BearTalkProto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */;
+			productName = BearTalkProto;
 		};
 		AE4A928A2DEA613300813074 /* GRPCCodeGen */ = {
 			isa = XCSwiftPackageProductDependency;
