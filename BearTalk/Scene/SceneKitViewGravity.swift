@@ -13,14 +13,8 @@ struct SceneKitViewGravity: UIViewRepresentable {
     
     // Add Coordinator
     final class Coordinator: NSObject, CAAnimationDelegate {
-        var initialCameraNode: SCNNode?
-        var initialCameraTransform: SCNMatrix4?
-        var initialCameraOrientation: SCNQuaternion?
-        var initialCameraPosition: SCNVector3?
-        var initialCameraFOV: CGFloat?
-        var initialLookAtPoint: SCNVector3?
-        var isResetting = false
         var sceneView: SCNView?
+        var orbitController: OrbitCameraController?
         
         // Charge port state
         var chargePortNode: SCNNode?
@@ -128,79 +122,6 @@ struct SceneKitViewGravity: UIViewRepresentable {
             frontRightDoorNode = nil
             rearLeftDoorNode = nil
             rearRightDoorNode = nil
-        }
-        
-        func storeInitialCameraState(_ node: SCNNode) {
-            initialCameraNode = node
-            let worldTransform = node.worldTransform
-            initialCameraTransform = worldTransform
-            initialCameraPosition = SCNVector3(worldTransform.m41, worldTransform.m42, worldTransform.m43)
-            initialCameraOrientation = node.worldOrientation
-            if let camera = node.camera {
-                initialCameraFOV = camera.fieldOfView
-            }
-        }
-        
-        func resetCamera(_ node: SCNNode, in view: SCNView) {
-            guard !isResetting,
-                  let initialTransform = initialCameraTransform,
-                  let initialFOV = initialCameraFOV,
-                  let initialOrientation = initialCameraOrientation else {
-                print("Failed to reset camera - missing initial state or already resetting")
-                return
-            }
-            
-            isResetting = true
-            view.allowsCameraControl = false
-            
-            let currentPosition = node.position
-            let currentOrientation = node.orientation
-            let currentFOV = node.camera?.fieldOfView ?? initialFOV
-            
-            let duration: TimeInterval = 0.5
-            let startTime = CACurrentMediaTime()
-            
-            func animate() {
-                let elapsed = CACurrentMediaTime() - startTime
-                let progress = min(elapsed / duration, 1.0)
-                let t = progress < 0.5 ? 2 * progress * progress : 1 - pow(-2 * progress + 2, 2) / 2
-                
-                let targetPosition = initialCameraPosition ?? SCNVector3Zero
-                let newPosition = SCNVector3(
-                    currentPosition.x + (targetPosition.x - currentPosition.x) * Float(t),
-                    currentPosition.y + (targetPosition.y - currentPosition.y) * Float(t),
-                    currentPosition.z + (targetPosition.z - currentPosition.z) * Float(t)
-                )
-                
-                let newOrientation = SCNQuaternion.slerp(
-                    currentOrientation,
-                    initialOrientation,
-                    Float(t)
-                )
-                
-                let newFOV = currentFOV + (initialFOV - currentFOV) * t
-                
-                node.position = newPosition
-                node.orientation = newOrientation
-                node.camera?.fieldOfView = newFOV
-                
-                if progress < 1.0 {
-                    DispatchQueue.main.async {
-                        animate()
-                    }
-                } else {
-                    node.transform = initialTransform
-                    node.position = initialCameraPosition ?? SCNVector3Zero
-                    node.orientation = initialOrientation
-                    if let camera = node.camera {
-                        camera.fieldOfView = initialFOV
-                    }
-                    view.allowsCameraControl = true
-                    self.isResetting = false
-                }
-            }
-            
-            animate()
         }
         
         func findChargePortNode(in scene: SCNScene) {
@@ -939,7 +860,11 @@ struct SceneKitViewGravity: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
-    
+
+    static func dismantleUIView(_ uiView: SCNView, coordinator: Coordinator) {
+        coordinator.orbitController?.persistNow()
+    }
+
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         sceneView.tag = 1
@@ -953,14 +878,6 @@ struct SceneKitViewGravity: UIViewRepresentable {
         
         // Call the callback
         onViewCreated(sceneView)
-        
-        // Configure camera controls
-        sceneView.defaultCameraController.interactionMode = .orbitAngleMapping
-        sceneView.defaultCameraController.target = SCNVector3Zero
-        sceneView.defaultCameraController.maximumVerticalAngle = 0
-        sceneView.defaultCameraController.minimumVerticalAngle = 0
-        sceneView.defaultCameraController.inertiaEnabled = true
-        sceneView.defaultCameraController.inertiaFriction = 0.1
         
         // Load the scene
         if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn"),
@@ -983,7 +900,6 @@ struct SceneKitViewGravity: UIViewRepresentable {
             
             // Configure lighting
             sceneView.autoenablesDefaultLighting = true
-            sceneView.allowsCameraControl = true
             sceneView.rendersContinuously = true
             
             // Add ambient light
@@ -1018,8 +934,9 @@ struct SceneKitViewGravity: UIViewRepresentable {
             
             // Set up camera
             if let cameraNode = scene.rootNode.childNode(withName: "camera_default", recursively: true) {
-                context.coordinator.storeInitialCameraState(cameraNode)
                 sceneView.pointOfView = cameraNode
+                context.coordinator.orbitController = OrbitCameraController(
+                    sceneView: sceneView, cameraNode: cameraNode, model: .gravity)
             } else {
                 Logger.vehicle.error("Could not find defaultCamera, using default camera")
                 let camera = SCNCamera()
@@ -1028,7 +945,8 @@ struct SceneKitViewGravity: UIViewRepresentable {
                 cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
                 scene.rootNode.addChildNode(cameraNode)
                 sceneView.pointOfView = cameraNode
-                context.coordinator.storeInitialCameraState(cameraNode)
+                context.coordinator.orbitController = OrbitCameraController(
+                    sceneView: sceneView, cameraNode: cameraNode, model: .gravity)
             }
             
             // Find and set up animation nodes
@@ -1195,7 +1113,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         }
         
         sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
+        sceneView.allowsCameraControl = false
         
         return sceneView
     }
@@ -1207,16 +1125,11 @@ struct SceneKitViewGravity: UIViewRepresentable {
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset
-            if shouldResetCamera && !context.coordinator.isResetting {
-                if let cameraNode = uiView.pointOfView {
-                    context.coordinator.resetCamera(cameraNode, in: uiView)
-                    
-                    // Only reset the flag after the animation completes
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        shouldResetCamera = false
-                    }
-                } else {
-                    print("Failed to reset camera - no camera node found")
+            if shouldResetCamera {
+                context.coordinator.orbitController?.reset()
+
+                // Only reset the flag after the animation completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     shouldResetCamera = false
                 }
             }

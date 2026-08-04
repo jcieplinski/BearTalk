@@ -23,14 +23,8 @@ struct SceneKitViewAir: UIViewRepresentable {
     
     // Add Coordinator
     final class Coordinator: NSObject, CAAnimationDelegate {
-        var initialCameraNode: SCNNode?
-        var initialCameraTransform: SCNMatrix4?
-        var initialCameraOrientation: SCNQuaternion?
-        var initialCameraPosition: SCNVector3?
-        var initialCameraFOV: CGFloat?
-        var initialLookAtPoint: SCNVector3?
-        var isResetting = false
         var sceneView: SCNView?
+        var orbitController: OrbitCameraController?
         
         // Charge port state
         var chargePortNode: SCNNode?
@@ -146,105 +140,6 @@ struct SceneKitViewAir: UIViewRepresentable {
             frontRightDoorNode = nil
             rearLeftDoorNode = nil
             rearRightDoorNode = nil
-        }
-        
-        func storeInitialCameraState(_ node: SCNNode) {
-            // Store all camera properties
-            initialCameraNode = node
-            
-            // Store the transform and orientation from the world transform
-            let worldTransform = node.worldTransform
-            initialCameraTransform = worldTransform
-            
-            // Extract position from world transform
-            initialCameraPosition = SCNVector3(worldTransform.m41, worldTransform.m42, worldTransform.m43)
-            
-            // Store the orientation directly from the node
-            initialCameraOrientation = node.worldOrientation
-            
-            // Store the initial field of view
-            if let camera = node.camera {
-                initialCameraFOV = camera.fieldOfView
-            }
-        }
-        
-        func resetCamera(_ node: SCNNode, in view: SCNView) {
-            guard !isResetting,
-                  let initialTransform = initialCameraTransform,
-                  let initialFOV = initialCameraFOV,
-                  let initialOrientation = initialCameraOrientation else {
-                print("Failed to reset camera - missing initial state or already resetting")
-                return
-            }
-            
-            isResetting = true
-            
-            
-            // Disable camera controls temporarily
-            view.allowsCameraControl = false
-            
-            // Store current camera state
-            let currentPosition = node.position
-            let currentOrientation = node.orientation
-            let currentFOV = node.camera?.fieldOfView ?? initialFOV
-            
-            // Set up animation
-            let duration: TimeInterval = 0.5
-            let startTime = CACurrentMediaTime()
-            
-            // Animation function
-            func animate() {
-                let elapsed = CACurrentMediaTime() - startTime
-                let progress = min(elapsed / duration, 1.0)
-                
-                // Use ease-in-ease-out timing
-                let t = progress < 0.5 ? 2 * progress * progress : 1 - pow(-2 * progress + 2, 2) / 2
-                
-                // Interpolate position
-                let targetPosition = initialCameraPosition ?? SCNVector3Zero
-                let newPosition = SCNVector3(
-                    currentPosition.x + (targetPosition.x - currentPosition.x) * Float(t),
-                    currentPosition.y + (targetPosition.y - currentPosition.y) * Float(t),
-                    currentPosition.z + (targetPosition.z - currentPosition.z) * Float(t)
-                )
-                
-                // Interpolate orientation using SLERP
-                let newOrientation = SCNQuaternion.slerp(
-                    currentOrientation,
-                    initialOrientation,
-                    Float(t)
-                )
-                
-                // Interpolate FOV
-                let newFOV = currentFOV + (initialFOV - currentFOV) * t
-                
-                // Update camera
-                node.position = newPosition
-                node.orientation = newOrientation
-                node.camera?.fieldOfView = newFOV
-                
-                if progress < 1.0 {
-                    // Continue animation
-                    DispatchQueue.main.async {
-                        animate()
-                    }
-                } else {
-                    // Animation complete - ensure all camera properties are exactly restored
-                    node.transform = initialTransform
-                    node.position = initialCameraPosition ?? SCNVector3Zero
-                    node.orientation = initialOrientation
-                    if let camera = node.camera {
-                        camera.fieldOfView = initialFOV
-                    }
-                    
-                    // Re-enable camera controls
-                    view.allowsCameraControl = true
-                    self.isResetting = false
-                }
-            }
-            
-            // Start animation
-            animate()
         }
         
         func findChargePortNode(in scene: SCNScene) {
@@ -1140,7 +1035,11 @@ struct SceneKitViewAir: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
-    
+
+    static func dismantleUIView(_ uiView: SCNView, coordinator: Coordinator) {
+        coordinator.orbitController?.persistNow()
+    }
+
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         sceneView.tag = 1
@@ -1154,14 +1053,6 @@ struct SceneKitViewAir: UIViewRepresentable {
         
         // Call the callback
         onViewCreated(sceneView)
-        
-        // Configure camera controls to only allow horizontal rotation
-        sceneView.defaultCameraController.interactionMode = .orbitAngleMapping
-        sceneView.defaultCameraController.target = SCNVector3Zero  // Orbit around origin
-        sceneView.defaultCameraController.maximumVerticalAngle = 0  // Prevent vertical rotation
-        sceneView.defaultCameraController.minimumVerticalAngle = 0  // Prevent vertical rotation
-        sceneView.defaultCameraController.inertiaEnabled = true     // Smooth rotation
-        sceneView.defaultCameraController.inertiaFriction = 0.1     // Adjust rotation speed
         
         // Try multiple approaches to load the scene
         var scene: SCNScene?
@@ -1211,7 +1102,6 @@ struct SceneKitViewAir: UIViewRepresentable {
             // Enable animation
             sceneView.rendersContinuously = true
             sceneView.autoenablesDefaultLighting = true
-            sceneView.allowsCameraControl = true
             
             // Add ambient light to ensure proper lighting
             let ambientLight = SCNNode()
@@ -1245,11 +1135,9 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Try to find the camera
             if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_default", recursively: true) {
-                // Store the initial camera state BEFORE setting as point of view
-                context.coordinator.storeInitialCameraState(cameraNode)
-                
-                // Set as point of view
                 sceneView.pointOfView = cameraNode
+                context.coordinator.orbitController = OrbitCameraController(
+                    sceneView: sceneView, cameraNode: cameraNode, model: .air)
             } else {
                 Logger.vehicle.error("Could not find defaultCamera, using default camera")
                 // Create a default camera if we can't find the one in the scene
@@ -1258,10 +1146,10 @@ struct SceneKitViewAir: UIViewRepresentable {
                 cameraNode.camera = camera
                 cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
                 loadedScene.rootNode.addChildNode(cameraNode)
+
                 sceneView.pointOfView = cameraNode
-                
-                // Store the initial camera state
-                context.coordinator.storeInitialCameraState(cameraNode)
+                context.coordinator.orbitController = OrbitCameraController(
+                    sceneView: sceneView, cameraNode: cameraNode, model: .air)
             }
             
             // Find the charge port node and its animation
@@ -1439,7 +1327,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
         
         sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
+        sceneView.allowsCameraControl = false
         
         return sceneView
     }
@@ -1451,16 +1339,11 @@ struct SceneKitViewAir: UIViewRepresentable {
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset
-            if shouldResetCamera && !context.coordinator.isResetting {
-                if let cameraNode = uiView.pointOfView {
-                    context.coordinator.resetCamera(cameraNode, in: uiView)
-                    
-                    // Only reset the flag after the animation completes
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        shouldResetCamera = false
-                    }
-                } else {
-                    print("Failed to reset camera - no camera node found")
+            if shouldResetCamera {
+                context.coordinator.orbitController?.reset()
+
+                // Only reset the flag after the animation completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     shouldResetCamera = false
                 }
             }
@@ -1783,57 +1666,5 @@ struct SceneKitViewAir: UIViewRepresentable {
                 }
             }
         }
-    }
-}
-
-// Helper extension for quaternion interpolation
-extension SCNQuaternion {
-    static func slerp(_ q1: SCNQuaternion, _ q2: SCNQuaternion, _ t: Float) -> SCNQuaternion {
-        var q1 = q1
-        var q2 = q2
-        
-        // Normalize inputs
-        let q1Length = sqrt(q1.x * q1.x + q1.y * q1.y + q1.z * q1.z + q1.w * q1.w)
-        let q2Length = sqrt(q2.x * q2.x + q2.y * q2.y + q2.z * q2.z + q2.w * q2.w)
-        
-        q1.x /= q1Length
-        q1.y /= q1Length
-        q1.z /= q1Length
-        q1.w /= q1Length
-        
-        q2.x /= q2Length
-        q2.y /= q2Length
-        q2.z /= q2Length
-        q2.w /= q2Length
-        
-        // Compute dot product
-        var dot = q1.x * q2.x + q1.y * q2.y + q1.z * q2.z + q1.w * q2.w
-        
-        // If dot product is negative, negate one of the quaternions
-        if dot < 0 {
-            q2.x = -q2.x
-            q2.y = -q2.y
-            q2.z = -q2.z
-            q2.w = -q2.w
-            dot = -dot
-        }
-        
-        // If the quaternions are very close, just return q1
-        if dot > 0.9995 {
-            return q1
-        }
-        
-        // Perform SLERP
-        let theta = acos(dot)
-        let sinTheta = sin(theta)
-        let w1 = sin((1 - t) * theta) / sinTheta
-        let w2 = sin(t * theta) / sinTheta
-        
-        return SCNQuaternion(
-            x: w1 * q1.x + w2 * q2.x,
-            y: w1 * q1.y + w2 * q2.y,
-            z: w1 * q1.z + w2 * q2.z,
-            w: w1 * q1.w + w2 * q2.w
-        )
     }
 }

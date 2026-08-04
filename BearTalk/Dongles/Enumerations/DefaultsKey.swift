@@ -33,4 +33,5 @@ enum DefaultsKey {
     static let tirePressureUnit: String = "tirePressureUnit"
     static let allControlsOrder: String = "allControlsOrder"
     static let cachedWidgetVehicleData: String = "cachedWidgetVehicleData"
+    static let cameraState: String = "cameraState"
 }
