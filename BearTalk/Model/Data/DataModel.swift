@@ -70,6 +70,7 @@ import SceneKit
     var climatePowerState: HvacPower?
     var seatClimateState: SeatClimateState?
     var steeringHeaterStatus: SteeringHeaterStatus?
+    var steeringWheelHeatLevel: Int = 2
     var gearPosition: GearPosition = .gearUnknown
     var selectedTemperature: Double = UnitConverter.currentTemperatureUnit == .celsius ? 22 : 72
     var seatClimateLevel: Int = 2
@@ -613,6 +614,18 @@ import SceneKit
         climatePowerState = vehicle.vehicleState.hvacState.power
         seatClimateState = vehicle.vehicleState.hvacState.seats
         steeringHeaterStatus = vehicle.vehicleState.hvacState.steeringHeater
+        
+        // Set steering wheel heat level from vehicle state
+        switch vehicle.vehicleState.hvacState.steeringHeaterLevel {
+        case .off, .unknown, .UNRECOGNIZED:
+            steeringWheelHeatLevel = 0
+        case .steeringWheelHeaterLevel1:
+            steeringWheelHeatLevel = 1
+        case .steeringWheelHeaterLevel2:
+            steeringWheelHeatLevel = 2
+        case .steeringWheelHeaterLevel3:
+            steeringWheelHeatLevel = 3
+        }
         
         powerState = vehicle.vehicleState.powerState
         chargePercentage = "\(vehicle.vehicleState.batteryState.chargePercent.rounded())%"

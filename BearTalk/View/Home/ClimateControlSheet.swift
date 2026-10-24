@@ -19,6 +19,8 @@ struct ClimateControlSheet: View {
     
     var body: some View {
         NavigationStack {
+            @Bindable var model = model
+            
             VStack(spacing: 20) {
                 HStack(spacing: 44) {
                     // Power Button
@@ -80,8 +82,11 @@ struct ClimateControlSheet: View {
                 
                 // Control Buttons
                 HStack(spacing: 20) {
-                    ControlButton(controlType: .steeringWheelClimate) { _ in
-                        model.handleControlAction(.steeringWheelClimate)
+                    // Only show steering wheel button for Air (Gravity has dedicated section below)
+                    if model.selectedModel != .gravity {
+                        ControlButton(controlType: .steeringWheelClimate) { _ in
+                            model.handleControlAction(.steeringWheelClimate)
+                        }
                     }
                     
                     ControlButton(controlType: .defrost) { _ in
@@ -96,6 +101,11 @@ struct ClimateControlSheet: View {
                     keepClimateButton
                 }
                 .padding(.top)
+                
+                // Steering Wheel Heat Section (Gravity only)
+                if model.selectedModel == .gravity {
+                    steeringWheelSection
+                }
                 
                 Spacer()
             }
@@ -123,6 +133,20 @@ struct ClimateControlSheet: View {
                 Task {
                     try? await Task.sleep(for: .milliseconds(100))
                     isInitialSetup = false
+                }
+                
+                // Initialize steering wheel heat level from vehicle state for Gravity
+                if model.selectedModel == .gravity, let vehicle = model.vehicle {
+                    switch vehicle.vehicleState.hvacState.steeringHeaterLevel {
+                    case .off, .unknown, .UNRECOGNIZED:
+                        model.steeringWheelHeatLevel = 0
+                    case .steeringWheelHeaterLevel1:
+                        model.steeringWheelHeatLevel = 1
+                    case .steeringWheelHeaterLevel2:
+                        model.steeringWheelHeatLevel = 2
+                    case .steeringWheelHeaterLevel3:
+                        model.steeringWheelHeatLevel = 3
+                    }
                 }
             }
             .toolbarVisibility(modalPresented ? .hidden : .automatic, for: .navigationBar)
@@ -194,6 +218,45 @@ struct ClimateControlSheet: View {
                     .foregroundStyle(.active)
             }
         }
+    }
+    
+    private var steeringWheelSection: some View {
+        VStack(spacing: 12) {
+            // Steering Wheel Icon
+            Image(model.steeringWheelHeatLevel > 0 ? "steeringWheelOn" : "steeringWheelOff")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 80, maxHeight: 80)
+                .foregroundStyle(model.steeringWheelHeatLevel > 0 ? .active : .inactive)
+            
+            Text("Steering Wheel Heat")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            
+            // Level Picker
+            Picker("Steering Wheel Heat Level", selection: $model.steeringWheelHeatLevel) {
+                Text("Off").tag(0)
+                Text("1").tag(1)
+                Text("2").tag(2)
+                Text("3").tag(3)
+            }
+            .pickerStyle(.segmented)
+            .frame(width: 280)
+            .onChange(of: model.steeringWheelHeatLevel) { _, newLevel in
+                model.setSteeringWheelHeat(level: newLevel)
+            }
+            .disabled(model.requestInProgress.contains(.steeringWheelClimate) || model.allFunctionsDisable)
+            
+            if model.requestInProgress.contains(.steeringWheelClimate) {
+                ProgressView()
+                    .controlSize(.regular)
+            }
+        }
+        .padding(.vertical)
+        .padding(.horizontal)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
     }
     
     private var temperatureRange: [Double] {

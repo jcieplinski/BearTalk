@@ -86,7 +86,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     
     static var allCasesGravity: [ControlType] {
         // We remove some items from allCases here. We don't want buttons for every type
-        return [.doorLocks, .frunk, .trunk, .chargePort, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .batteryPrecondition]
+        return [.doorLocks, .frunk, .trunk, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .batteryPrecondition]
     }
     
     var title: LocalizedStringKey {
