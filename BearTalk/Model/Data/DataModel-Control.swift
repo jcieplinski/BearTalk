@@ -219,6 +219,25 @@ extension DataModel {
         }
     }
     
+    func setSteeringWheelHeat(level: Int) {
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+                
+                requestInProgress.insert(.steeringWheelClimate)
+                
+                let success = try await BearAPI.setSteeringWheelHeatLevel(level: level)
+                if !success {
+                    // put up an alert
+                }
+            } catch let error {
+                print("Could not set steeringWheelHeat level: \(error)")
+            }
+        }
+    }
+    
     func toggleBatteryPrecondition() {
         if let preconditionState = batteryPreConditionState {
             Task { @MainActor in
