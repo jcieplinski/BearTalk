@@ -79,7 +79,8 @@ struct ClimateControlSheet: View {
                         }
                     }
                 }
-                
+                .padding(.horizontal)
+
                 // Control Buttons
                 HStack(spacing: 20) {
                     // Only show steering wheel button for Air (Gravity has dedicated section below)
@@ -103,48 +104,41 @@ struct ClimateControlSheet: View {
                 .padding(.top)
                 
                 // Steering Wheel Heat Section (Gravity only)
-                if model.selectedModel == .gravity {
-                    VStack(spacing: 12) {
-                        // Steering Wheel Icon
-                        Image(model.steeringWheelHeatLevel > 0 ? "steeringWheelOn" : "steeringWheelOff")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 80, maxHeight: 80)
-                            .foregroundStyle(model.steeringWheelHeatLevel > 0 ? .active : .inactive)
-                        
-                        Text("Steering Wheel Heat")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        
-                        // Level Picker
-                        Picker("Steering Wheel Heat Level", selection: $model.steeringWheelHeatLevel) {
-                            Text("Off").tag(0)
-                            Text("1").tag(1)
-                            Text("2").tag(2)
-                            Text("3").tag(3)
+          //      if model.selectedModel == .gravity {
+                    Section {
+                        HStack(spacing: 12) {
+                            // Steering Wheel Icon
+                            ControlButton(controlType: .steeringWheelClimate) { _ in }
+
+                            // Level Picker
+                            Picker("Steering Wheel Heat Level", selection: $model.steeringWheelHeatLevel) {
+                                Text("Off").tag(0)
+                                Text("1").tag(1)
+                                Text("2").tag(2)
+                                Text("3").tag(3)
+                            }
+                            .pickerStyle(.segmented)
+                            .onChange(of: model.steeringWheelHeatLevel) { _, newLevel in
+                                model.setSteeringWheelHeat(level: newLevel)
+                            }
+                            .disabled(model.requestInProgress.contains(.steeringWheelClimate) || model.allFunctionsDisable)
                         }
-                        .pickerStyle(.segmented)
-                        .frame(width: 280)
-                        .onChange(of: model.steeringWheelHeatLevel) { _, newLevel in
-                            model.setSteeringWheelHeat(level: newLevel)
+                        .padding(.vertical)
+                        .padding(.horizontal)
+                    } header: {
+                        HStack {
+                            Text("Steering Wheel")
+                                .font(.headline)
+
+                            Spacer()
                         }
-                        .disabled(model.requestInProgress.contains(.steeringWheelClimate) || model.allFunctionsDisable)
-                        
-                        if model.requestInProgress.contains(.steeringWheelClimate) {
-                            ProgressView()
-                                .controlSize(.regular)
-                        }
+                        .padding(.vertical)
                     }
-                    .padding(.vertical)
-                    .padding(.horizontal)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .padding(.horizontal)
-                }
-                
+          //      }
+
                 Spacer()
             }
-            .padding()
+            .padding(.vertical)
             .navigationTitle("Climate Control")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -38,7 +38,7 @@ struct ControlButton: View {
         case .seatClimate:
             return model.seatClimateState?.isOn ?? false
         case .steeringWheelClimate:
-            return model.steeringHeaterStatus == .on
+            return model.steeringWheelHeatLevel > 0
         case .defrost:
             return model.defrostState == .defrostOn
         case .horn:

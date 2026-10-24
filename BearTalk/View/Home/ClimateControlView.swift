@@ -16,11 +16,9 @@ struct ClimateControlView: View {
     
     var body: some View {
         ScrollView {
-            Section {
-                ClimateControlSheet(modalPresented: false)
-                    .padding(.horizontal)
-            }
-            
+            ClimateControlSheet(modalPresented: false)
+                .padding(.horizontal)
+
             Section {
                 SeatClimateSheet(modalPresented: false)
                     .padding(.horizontal)
