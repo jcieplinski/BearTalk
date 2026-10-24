@@ -43,7 +43,7 @@ import SceneKit
     var selectedModel: CarSceneModel = CarSceneModel.allCases.randomElement() ?? .air
     var showPlatinum: Bool = false
     var showGlassRoof: Bool = true
-    var paintColor: PaintColor = .eurekaGold
+    var paintColor: PaintColor = PaintColor.storedOverride ?? .eurekaGold
     var selectedWheel: Wheels = .dream
     var fancyMirrorCaps: Bool = true
     var shouldResetCamera: Bool = false

@@ -193,7 +193,8 @@ actor VehicleIdentifierSnapshotHandler {
             }
             
             // Update car paint color
-            let paintUIColor = UIColor(vehicle.vehicleConfig.paintColor.color)
+            let paintColor = PaintColor.storedOverride ?? vehicle.vehicleConfig.paintColor
+            let paintUIColor = UIColor(paintColor.color)
             scene.rootNode.enumerateChildNodes { node, _ in
                 if let geometry = node.geometry {
                     for material in geometry.materials {

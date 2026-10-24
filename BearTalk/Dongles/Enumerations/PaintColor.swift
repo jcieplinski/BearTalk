@@ -115,6 +115,103 @@ enum PaintColor: Codable, Equatable {
         }
     }
     
+    static let overrideChoices: [PaintColor] = [
+        .unknown,
+        .eurekaGold,
+        .stellarWhite,
+        .infiniteBlack,
+        .cosmosSilver,
+        .quantumGrey,
+        .zenithRed,
+        .fathomBlue,
+        .custom,
+        .sapphireBlue,
+        .lunarTitanium,
+        .auroraGreen,
+        .supernovaBronze,
+        .glossBlackPrimary
+    ]
+
+    var overrideStorageKey: String {
+        switch self {
+        case .unknown:
+            "unknown"
+        case .eurekaGold:
+            "eurekaGold"
+        case .stellarWhite:
+            "stellarWhite"
+        case .infiniteBlack:
+            "infiniteBlack"
+        case .cosmosSilver:
+            "cosmosSilver"
+        case .quantumGrey:
+            "quantumGrey"
+        case .zenithRed:
+            "zenithRed"
+        case .fathomBlue:
+            "fathomBlue"
+        case .custom:
+            "custom"
+        case .sapphireBlue:
+            "sapphireBlue"
+        case .lunarTitanium:
+            "lunarTitanium"
+        case .auroraGreen:
+            "auroraGreen"
+        case .supernovaBronze:
+            "supernovaBronze"
+        case .glossBlackPrimary:
+            "glossBlackPrimary"
+        case .UNRECOGNIZED(let value):
+            "unrecognized-\(value)"
+        }
+    }
+
+    init?(overrideStorageKey: String) {
+        switch overrideStorageKey {
+        case "unknown":
+            self = .unknown
+        case "eurekaGold":
+            self = .eurekaGold
+        case "stellarWhite":
+            self = .stellarWhite
+        case "infiniteBlack":
+            self = .infiniteBlack
+        case "cosmosSilver":
+            self = .cosmosSilver
+        case "quantumGrey":
+            self = .quantumGrey
+        case "zenithRed":
+            self = .zenithRed
+        case "fathomBlue":
+            self = .fathomBlue
+        case "custom":
+            self = .custom
+        case "sapphireBlue":
+            self = .sapphireBlue
+        case "lunarTitanium":
+            self = .lunarTitanium
+        case "auroraGreen":
+            self = .auroraGreen
+        case "supernovaBronze":
+            self = .supernovaBronze
+        case "glossBlackPrimary":
+            self = .glossBlackPrimary
+        default:
+            guard overrideStorageKey.hasPrefix("unrecognized-"),
+                  let value = Int(overrideStorageKey.dropFirst("unrecognized-".count)) else {
+                return nil
+            }
+            self = .UNRECOGNIZED(value)
+        }
+    }
+
+    static var storedOverride: PaintColor? {
+        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.carColorOverride) ?? ""
+        guard !key.isEmpty else { return nil }
+        return PaintColor(overrideStorageKey: key)
+    }
+
     var color: Color {
         return Color(hex: hex) ?? .gray
     }

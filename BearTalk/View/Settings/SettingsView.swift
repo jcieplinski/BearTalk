@@ -9,6 +9,7 @@ struct SettingsView: View {
     @State private var showLogOutWarning = false
     @State private var showPhotoPicker = false
     @State private var showErrorAlert: Bool = false
+    @AppStorage(DefaultsKey.carColorOverride, store: .appGroup) private var carColorOverride = ""
     
     private var currentScheme: AppColorScheme {
         let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
@@ -104,6 +105,22 @@ struct SettingsView: View {
                             Text(currentScheme == .system ? "System" : currentScheme == .light ? "Light" : "Dark")
                                 .foregroundStyle(.secondary)
                         }
+                    }
+
+                    Picker("Car Color Override", selection: $carColorOverride) {
+                        Text("None").tag("")
+                        ForEach(PaintColor.overrideChoices, id: \.overrideStorageKey) { color in
+                            HStack {
+                                Circle()
+                                    .fill(color.color)
+                                    .frame(width: 14, height: 14)
+                                Text(color.title)
+                            }
+                            .tag(color.overrideStorageKey)
+                        }
+                    }
+                    .onChange(of: carColorOverride) {
+                        model.applyPaintColorOverride()
                     }
                 }
                 

@@ -36,6 +36,14 @@ extension DataModel {
         }
     }
     
+    func applyPaintColorOverride() {
+        if let configColor = vehicle?.vehicleConfig.paintColor {
+            paintColor = PaintColor.storedOverride ?? configColor
+        } else if let override = PaintColor.storedOverride {
+            paintColor = override
+        }
+    }
+
     func updateStats() {
         guard let vehicle else { return }
         
@@ -57,7 +65,7 @@ extension DataModel {
             interior = vehicle.vehicleConfig.interior.title
         }
         print("Interior stats \(vehicle.vehicleConfig.nickname): display=\(interior) enum=\(vehicle.vehicleConfig.interior.title) raw=\(vehicle.vehicleConfig.interior.intValue) colorCode=\(vehicle.vehicleConfig.interiorColorCode.debugDescription)")
-        paintColor = vehicle.vehicleConfig.paintColor
+        applyPaintColorOverride()
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
         
         let currentTempUnit = UnitConverter.currentTemperatureUnit
