@@ -15,14 +15,14 @@ extension DataModel {
         let alarmState = vehicle.vehicleState.alarmState
         
         // Check doors
-        if bodyState.frontLeftDoor != .closed { activeAlerts.append("Front Left Door Open") }
-        if bodyState.frontRightDoor != .closed { activeAlerts.append("Front Right Door Open") }
-        if bodyState.rearLeftDoor != .closed { activeAlerts.append("Rear Left Door Open") }
-        if bodyState.rearRightDoor != .closed { activeAlerts.append("Rear Right Door Open") }
+        if bodyState.frontLeftDoor.isOpen { activeAlerts.append("Front Left Door Open") }
+        if bodyState.frontRightDoor.isOpen { activeAlerts.append("Front Right Door Open") }
+        if bodyState.rearLeftDoor.isOpen { activeAlerts.append("Rear Left Door Open") }
+        if bodyState.rearRightDoor.isOpen { activeAlerts.append("Rear Right Door Open") }
         
         // Check frunk and trunk
-        if bodyState.frontCargo != .closed { activeAlerts.append("Frunk Open") }
-        if bodyState.rearCargo != .closed { activeAlerts.append("Trunk Open") }
+        if bodyState.frontCargo.isOpen { activeAlerts.append("Frunk Open") }
+        if bodyState.rearCargo.isOpen { activeAlerts.append("Trunk Open") }
         
         // Check windows
         let windowPosition = bodyState.windowPosition

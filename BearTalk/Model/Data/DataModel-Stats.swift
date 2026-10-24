@@ -46,7 +46,17 @@ extension DataModel {
         trim = vehicle.vehicleConfig.modelVariant.title
         wheels = vehicle.vehicleConfig.wheels.title
         look = vehicle.vehicleConfig.look.title
-        interior = vehicle.vehicleConfig.interior.title
+        switch vehicle.vehicleConfig.interior {
+        case .unknown:
+            let code = vehicle.vehicleConfig.interiorColorCode
+            interior = code.isEmpty ? "Unknown" : "Unknown (\(code))"
+        case .UNRECOGNIZED(let int):
+            let code = vehicle.vehicleConfig.interiorColorCode
+            interior = code.isEmpty ? "Unrecognized(\(int))" : "Unrecognized(\(int), \(code))"
+        default:
+            interior = vehicle.vehicleConfig.interior.title
+        }
+        print("Interior stats \(vehicle.vehicleConfig.nickname): display=\(interior) enum=\(vehicle.vehicleConfig.interior.title) raw=\(vehicle.vehicleConfig.interior.intValue) colorCode=\(vehicle.vehicleConfig.interiorColorCode.debugDescription)")
         paintColor = vehicle.vehicleConfig.paintColor
         softwareVersion = vehicle.vehicleState.chassisState.softwareVersion
         

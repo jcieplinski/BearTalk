@@ -18,9 +18,9 @@ struct ControlButton: View {
         case .doorLocks:
             return model.lockState == .locked
         case .frunk:
-            return model.frunkClosureState == .open
+            return model.frunkClosureState?.isOpen ?? false
         case .trunk:
-            return model.trunkClosureState == .open
+            return model.trunkClosureState?.isOpen ?? false
         case .chargePort:
             return model.chargePortClosureState == .open || model.chargePortClosureState == .ajar
         case .climateControl:

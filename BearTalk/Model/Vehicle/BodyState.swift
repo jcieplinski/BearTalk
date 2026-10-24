@@ -223,6 +223,15 @@ enum DoorState: Codable, Equatable {
         case .UNRECOGNIZED(let int): int
         }
     }
+
+    var isOpen: Bool {
+        switch self {
+        case .open, .ajar:
+            true
+        case .closed, .unknown, .closeError, .UNRECOGNIZED:
+            false
+        }
+    }
     
     var frunkImage: String {
         switch self {

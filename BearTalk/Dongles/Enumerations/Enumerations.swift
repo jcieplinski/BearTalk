@@ -236,9 +236,9 @@ enum Interior: Codable, Equatable {
         }
     }
     
-    init(proto: Mobilegateway_Protos_Interior) {
+    init(proto: Mobilegateway_Protos_Interior, colorCode: String = "") {
         switch proto {
-            case .unknown:
+        case .unknown:
             self = .unknown
         case .santaCruz:
             self = .santaCruz
@@ -260,6 +260,51 @@ enum Interior: Codable, Equatable {
             self = .ojai
         case .sapphire:
             self = .sapphire
+        }
+
+        switch self {
+        case .unknown, .UNRECOGNIZED(_):
+            if let fromCode = Interior.from(colorCode: colorCode) {
+                self = fromCode
+            }
+        default:
+            break
+        }
+    }
+
+    // Gravity often leaves the proto enum at 0 and only sets interior_color_code (INT25 = Ojai).
+    static func from(colorCode: String) -> Interior? {
+        let trimmed = colorCode.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let code: String
+        if let match = trimmed.range(of: #"INT\d+"#, options: .regularExpression) {
+            code = String(trimmed[match])
+        } else {
+            code = trimmed
+        }
+
+        switch code {
+        case "INT10", "INT12":
+            return .santaCruz
+        case "INT06", "INT08", "INT24":
+            return .tahoe
+        case "INT02", "INT04":
+            return .mojave
+        case "INT18", "INT21", "INT22", "INT26", "INT30":
+            return .mojavePurluxe
+        case "INT20":
+            return .sapphire
+        case "INT23":
+            return .yosemite
+        case "INT25":
+            return .ojai
+        default:
+            if trimmed.contains("OJAI") { return .ojai }
+            if trimmed.contains("YOSEMITE") { return .yosemite }
+            if trimmed.contains("TAHOE") { return .tahoe }
+            if trimmed.contains("MOJAVE") { return .mojavePurluxe }
+            if trimmed.contains("SANTA CRUZ") || trimmed.contains("SANTACRUZ") { return .santaCruz }
+            if trimmed.contains("SANTA MONICA") || trimmed.contains("SANTAMONICA") { return .santaMonica }
+            return nil
         }
     }
 }

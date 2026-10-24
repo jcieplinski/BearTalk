@@ -560,6 +560,7 @@
 				AE2F5FFF2DD10A68003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-2" */,
 				AE2F60062DD10A99003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */,
 				AE2F600D2DD10AC5003BDC36 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */,
+				AEC4F0012FBB0001003BDC36 /* XCRemoteSwiftPackageReference "swift-crypto" */,
 				AE37053B2FB6C1C7000A9024 /* XCLocalSwiftPackageReference "Packages/BearTalkProto" */,
 			);
 			productRefGroup = D8CA9DA82B166B3300BC35F8 /* Products */;
@@ -1195,6 +1196,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
+			};
+		};
+		AEC4F0012FBB0001003BDC36 /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
