@@ -70,7 +70,6 @@ struct WindowsSheet: View {
     private var windowControlButtons: some View {
         let buttons = [
             (systemImage: "arrow.up.circle.fill", title: "Close All", action: { model.controlAllWindows(state: .autoUpAll) }),
-            (systemImage: "arrow.down.circle.fill", title: "Open All", action: { model.controlAllWindows(state: .autoDownAll) }),
             (systemImage: "wind", title: "Vent All", action: { model.controlAllWindows(state: .ventAll) })
         ]
         
