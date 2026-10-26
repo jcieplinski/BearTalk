@@ -1028,7 +1028,7 @@ extension DataModel {
         }
     }
     
-    func setShockAndTilt(enabled: Bool) async {
+    func setShockAndTilt(mode: AlarmMode) async {
         Task { @MainActor in
             do {
                 if !vehicleIsReady {
@@ -1037,7 +1037,7 @@ extension DataModel {
                 
                 requestInProgress.insert(.alarm)
                 
-                let success = try await BearAPI.setShockAndTilt(enabled: enabled)
+                let success = try await BearAPI.setShockAndTilt(mode: mode)
                 if !success {
                     // put up an alert
                 }

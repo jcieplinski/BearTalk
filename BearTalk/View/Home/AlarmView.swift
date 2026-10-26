@@ -22,7 +22,7 @@ struct AlarmView: View {
                             get: { alarmMode == .on },
                             set: { newValue in
                                 Task {
-                                    await model.setShockAndTilt(enabled: newValue)
+                                    await model.setShockAndTilt(mode: newValue ? .on : .off)
                                 }
                             }
                         ))

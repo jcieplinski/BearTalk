@@ -11,7 +11,7 @@ struct ControlsView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(AppState.self) var appState: AppState
     @Environment(DataModel.self) var model
-    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security,windows,maintenance"
+    @AppStorage(DefaultsKey.cellOrder, store: .appGroup) private var cellOrder: String = "climate,charging,security,haloSecure,windows,maintenance"
 
     @State private var showLogOutWarning: Bool = false
     @State private var showClimateControl: Bool = false
@@ -32,19 +32,45 @@ struct ControlsView: View {
     }
     
     private var orderedCells: [String] {
-        let currentCells = cellOrder.split(separator: ",").map(String.init)
-        
-        // If maintenance is not in the current order, add it to the end
+        var currentCells = cellOrder.split(separator: ",").map(String.init)
+        var didChange = false
+
         if !currentCells.contains("maintenance") {
-            let updatedOrder = currentCells + ["maintenance"]
-            // Update the stored order for future app launches
+            currentCells.append("maintenance")
+            didChange = true
+        }
+
+        if !currentCells.contains("haloSecure") {
+            if let securityIndex = currentCells.firstIndex(of: "security") {
+                currentCells.insert("haloSecure", at: securityIndex + 1)
+            } else {
+                currentCells.append("haloSecure")
+            }
+            didChange = true
+        }
+
+        if didChange {
+            let updatedOrder = currentCells
             DispatchQueue.main.async {
                 cellOrder = updatedOrder.joined(separator: ",")
             }
-            return updatedOrder
         }
-        
+
         return currentCells
+    }
+
+    private var visibleCells: [String] {
+        let vehicleModel = model.vehicle?.vehicleConfig.model
+        return orderedCells.filter { cell in
+            switch cell {
+            case "haloSecure":
+                return vehicleModel == .gravity
+            case "security":
+                return vehicleModel == .air
+            default:
+                return true
+            }
+        }
     }
     
     private func cellView(for type: String, isWideMode: Bool) -> some View {
@@ -56,6 +82,8 @@ struct ControlsView: View {
                 ChargingCell(isWideMode: isWideMode)
             case "security":
                 SecurityCell(isWideMode: isWideMode)
+            case "haloSecure":
+                HaloSecureCell(isWideMode: isWideMode)
             case "windows":
                 WindowsCell(isWideMode: isWideMode)
             case "maintenance":
@@ -150,7 +178,7 @@ struct ControlsView: View {
                             .padding(.horizontal)
                         
                         VStack(spacing: 16) {
-                            ForEach(orderedCells, id: \.self) { cellType in
+                            ForEach(visibleCells, id: \.self) { cellType in
                                 cellView(for: cellType, isWideMode: viewWidth > 500)
                             }
                         }
