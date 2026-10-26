@@ -19,6 +19,7 @@ enum DefaultsKey {
     static let carColor: String = "carColor"
     static let carColorOverride: String = "carColorOverride"
     static let lastEfficiency: String = "lastEfficiency"
+    static let efficiencyLogs: String = "efficiencyLogs"
     static let controlsFavorites: String = "controlsFavorites"
     static let selectedTemperature: String = "selectedTemperature"
     static let seatClimateLevel: String = "seatClimateLevel"

@@ -50,14 +50,15 @@ struct RangeView: View {
                             HStack {
                                 ProgressView()
                                     .controlSize(.small)
-                                Text("Calculating efficiency...")
+                                Text("Recording this drive")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
                         } else {
-                            Text("Vehicle not in motion")
+                            Text("Open the app before a drive and again after you park.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
                         }
 
                         HStack(spacing: 66) {
@@ -85,7 +86,7 @@ struct RangeView: View {
                         }
                         .padding(.bottom, 22)
                         
-                        Text("Efficiency and estimated range will update automatically if you leave this app open while driving. Please keep your eyes on the road at all times and obey local traffic laws.")
+                        Text("Efficiency updates from driving this app can see. Leave it open while you drive, or open it before a trip and again after you park. A charge between those opens is ignored. You can still enter a number yourself.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

@@ -23,16 +23,27 @@ import SceneKit
         }
     }
     
-    // Efficiency tracking
-    private struct EfficiencyReading {
-        let timestamp: Date
-        let odometer: Double // in meters
-        let batteryLevel: Double // in kWh
+    private struct EfficiencySample: Codable {
+        var odometerKm: Double
+        var kWh: Double
     }
-    
-    @ObservationIgnored private var efficiencyReadings: [EfficiencyReading] = []
-    private let maxEfficiencyReadingsAge: TimeInterval = 600 // 10 minutes in seconds
-    private let minReadingsForEfficiency = 2 // Need at least 2 readings to calculate efficiency
+
+    private struct EfficiencySegment: Codable {
+        var recordedAt: Date
+        var distanceKm: Double
+        var energyKWh: Double
+    }
+
+    private struct EfficiencyLog: Codable {
+        var baseline: EfficiencySample?
+        var segments: [EfficiencySegment]
+    }
+
+    @ObservationIgnored private var efficiencyLogs: [String: EfficiencyLog] = DataModel.loadEfficiencyLogs()
+    private let minimumSegmentDistanceKm = 0.5
+    private let minimumObservedDistanceKm = 8.0
+    private let maximumObservedDistanceKm = 500.0
+    private let maximumSegmentAge: TimeInterval = 30 * 24 * 60 * 60
     
     var vehicle: Vehicle?
     var userProfile: UserProfile?
@@ -486,76 +497,117 @@ import SceneKit
     }
     
     private func updateEfficiency(vehicle: Vehicle) {
-        // Only calculate efficiency if the vehicle is in a state where it's moving
-        guard vehicle.vehicleState.powerState == .drive else {
-            isCalculatingEfficiency = false
+        let power = vehicle.vehicleState.powerState
+        isCalculatingEfficiency = power == .drive
+
+        let odometerKm = vehicle.vehicleState.chassisState.odometerKm
+        let kWh = vehicle.vehicleState.batteryState.kwHr
+        guard odometerKm > 0, kWh > 0 else { return }
+
+        let vehicleId = vehicle.vehicleId
+        var log = efficiencyLogs[vehicleId] ?? EfficiencyLog(baseline: nil, segments: [])
+        let sample = EfficiencySample(odometerKm: odometerKm, kWh: kWh)
+        let pluggedIn = isPluggedIn(vehicle.vehicleState.chargingState.chargeState)
+            || power == .liveCharge
+            || power == .sleepCharge
+
+        if pluggedIn {
+            log.baseline = sample
+            storeEfficiencyLog(log, for: vehicleId)
             return
         }
-        
-        let currentOdometer = vehicle.vehicleState.chassisState.odometerKm  // This is in km
-        let currentBattery = vehicle.vehicleState.batteryState.kwHr
-        
-        // Add new reading
-        let newReading = EfficiencyReading(
-            timestamp: Date(),
-            odometer: currentOdometer,
-            batteryLevel: currentBattery
+
+        guard let baseline = log.baseline else {
+            log.baseline = sample
+            storeEfficiencyLog(log, for: vehicleId)
+            return
+        }
+
+        let distanceKm = odometerKm - baseline.odometerKm
+        let energyKWh = baseline.kWh - kWh
+
+        if distanceKm < 0 || energyKWh < 0 {
+            log.baseline = sample
+            storeEfficiencyLog(log, for: vehicleId)
+            return
+        }
+
+        guard distanceKm >= minimumSegmentDistanceKm, energyKWh > 0 else { return }
+
+        let usesMetric = Locale.current.measurementSystem == .metric
+        let segmentEfficiency = efficiencyValue(distanceKm: distanceKm, energyKWh: energyKWh, usesMetric: usesMetric)
+        let minEfficiency = usesMetric ? 1.0 : 0.6
+        let maxEfficiency = usesMetric ? 10.0 : 6.2
+        guard segmentEfficiency >= minEfficiency, segmentEfficiency <= maxEfficiency else {
+            log.baseline = sample
+            storeEfficiencyLog(log, for: vehicleId)
+            return
+        }
+
+        log.segments.append(
+            EfficiencySegment(recordedAt: Date(), distanceKm: distanceKm, energyKWh: energyKWh)
         )
-        
-        // Add new reading and clean up old ones
-        efficiencyReadings.append(newReading)
-        efficiencyReadings.removeAll { reading in
-            Date().timeIntervalSince(reading.timestamp) > maxEfficiencyReadingsAge
+        log.baseline = sample
+        pruneEfficiencyLog(&log)
+        storeEfficiencyLog(log, for: vehicleId)
+
+        let totalDistanceKm = log.segments.reduce(0) { $0 + $1.distanceKm }
+        let totalEnergyKWh = log.segments.reduce(0) { $0 + $1.energyKWh }
+        guard totalDistanceKm >= minimumObservedDistanceKm, totalEnergyKWh > 0 else { return }
+
+        let observed = efficiencyValue(distanceKm: totalDistanceKm, energyKWh: totalEnergyKWh, usesMetric: usesMetric)
+        efficiencyText = String(format: "%.1f", observed)
+        lastEfficiency = observed
+    }
+
+    static func observedMilesPerKWh(for vehicleId: String) -> Double? {
+        guard var log = loadEfficiencyLogs()[vehicleId] else { return nil }
+        let cutoff = Date().addingTimeInterval(-30 * 24 * 60 * 60)
+        log.segments.removeAll { $0.recordedAt < cutoff }
+        let distanceKm = log.segments.reduce(0) { $0 + $1.distanceKm }
+        let energyKWh = log.segments.reduce(0) { $0 + $1.energyKWh }
+        guard distanceKm > 0, energyKWh > 0 else { return nil }
+        return (distanceKm * 0.621371) / energyKWh
+    }
+
+    private func isPluggedIn(_ state: ChargeState) -> Bool {
+        switch state {
+        case .unknown, .notConnected, .UNRECOGNIZED:
+            false
+        default:
+            true
         }
-        
-        // Need at least 2 readings to calculate efficiency
-        guard efficiencyReadings.count >= minReadingsForEfficiency else {
-            isCalculatingEfficiency = true
-            return
+    }
+
+    private func efficiencyValue(distanceKm: Double, energyKWh: Double, usesMetric: Bool) -> Double {
+        if usesMetric {
+            return distanceKm / energyKWh
         }
-        
-        // Get the oldest and newest readings
-        let oldestReading = efficiencyReadings.first!
-        let newestReading = efficiencyReadings.last!
-        
-        // Calculate distance traveled in kilometers (odometer is always in km)
-        let distanceTraveledKm = newestReading.odometer - oldestReading.odometer
-        
-        // Calculate energy used in kWh
-        let energyUsed = oldestReading.batteryLevel - newestReading.batteryLevel
-        
-        // Only calculate if we've used energy and moved
-        guard energyUsed > 0 && distanceTraveledKm > 0 else {
-            isCalculatingEfficiency = true
-            return
+        return (distanceKm * 0.621371) / energyKWh
+    }
+
+    private func pruneEfficiencyLog(_ log: inout EfficiencyLog) {
+        let cutoff = Date().addingTimeInterval(-maximumSegmentAge)
+        log.segments.removeAll { $0.recordedAt < cutoff }
+
+        var totalDistanceKm = log.segments.reduce(0) { $0 + $1.distanceKm }
+        while totalDistanceKm > maximumObservedDistanceKm, !log.segments.isEmpty {
+            totalDistanceKm -= log.segments.removeFirst().distanceKm
         }
-        
-        // Calculate efficiency in km/kWh first (since distance is in km)
-        let efficiencyKmPerKWh = distanceTraveledKm / energyUsed
-        
-        // Convert to miles/kWh if user's locale is imperial
-        let calculatedEfficiency: Double
-        if Locale.current.measurementSystem == .metric {
-            calculatedEfficiency = efficiencyKmPerKWh
-        } else {
-            // Convert km to miles for imperial users
-            let distanceInMiles = distanceTraveledKm * 0.621371  // Convert km to miles
-            calculatedEfficiency = distanceInMiles / energyUsed  // Now in miles/kWh
+    }
+
+    private func storeEfficiencyLog(_ log: EfficiencyLog, for vehicleId: String) {
+        efficiencyLogs[vehicleId] = log
+        guard let data = try? JSONEncoder().encode(efficiencyLogs) else { return }
+        UserDefaults.appGroup.set(data, forKey: DefaultsKey.efficiencyLogs)
+    }
+
+    private static func loadEfficiencyLogs() -> [String: EfficiencyLog] {
+        guard let data = UserDefaults.appGroup.data(forKey: DefaultsKey.efficiencyLogs),
+              let logs = try? JSONDecoder().decode([String: EfficiencyLog].self, from: data) else {
+            return [:]
         }
-        
-        // Update the stored efficiency if it's a reasonable value
-        // For metric: typically 4-8 km/kWh
-        // For imperial: typically 2.5-5 miles/kWh
-        let minEfficiency = Locale.current.measurementSystem == .metric ? 1.0 : 0.6
-        let maxEfficiency = Locale.current.measurementSystem == .metric ? 10.0 : 6.2
-        
-        if calculatedEfficiency >= minEfficiency && calculatedEfficiency <= maxEfficiency {
-            _lastEfficiency = calculatedEfficiency
-            efficiencyText = String(format: "%.1f", calculatedEfficiency)
-            updateRangeStats()
-        }
-        
-        isCalculatingEfficiency = true
+        return logs
     }
     
     func update() {
