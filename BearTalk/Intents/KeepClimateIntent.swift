@@ -1,6 +1,6 @@
 import AppIntents
 
-enum KeepClimateStatus: Int, AppEnum {
+enum KeepClimateAction: Int, AppEnum {
     case off
     case on
 
@@ -19,7 +19,7 @@ struct KeepClimateIntent: AppIntent {
     var vehicle: VehicleIdentifierEntity?
 
     @Parameter(title: "Action")
-    var status: KeepClimateStatus
+    var status: KeepClimateAction
 
     @Parameter(title: "Temperature")
     var temperature: Double
