@@ -88,7 +88,7 @@ struct ControlsView: View {
         case .trunk:
             return model.trunkClosureState != .closed
         case .chargePort:
-            return model.chargePortClosureState != .closed
+            return model.chargePortClosureState.isOpen
         case .climateControl:
             return model.climatePowerState == .hvacOn
         case .maxAC:

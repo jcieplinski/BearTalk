@@ -178,6 +178,7 @@
 				Intents/DefrostIntent.swift,
 				Intents/DoorLockIntent.swift,
 				Intents/FrunkIntent.swift,
+				Intents/KeylessDrivingIntent.swift,
 				Intents/LightsIntent.swift,
 				Intents/MaxAcIntent.swift,
 				Intents/SteeringWheelHeatIntent.swift,

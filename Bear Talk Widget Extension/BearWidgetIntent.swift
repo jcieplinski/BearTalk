@@ -15,27 +15,27 @@ struct BearWidgetIntent: WidgetConfigurationIntent {
     @Parameter(title: "Vehicle")
     var vehicle: VehicleIdentifierEntity?
     
-    @Parameter(title: "Control One", default: .doorLocks)
+    @Parameter(title: "Control One", default: .doorLocks, supportedValues: ControlType.widgetControls)
     var controlTypeOne: ControlType?
     
-    @Parameter(title: "Control Two", default: .chargePort)
+    @Parameter(title: "Control Two", default: .chargePort, supportedValues: ControlType.widgetControls)
     var controlTypeTwo: ControlType?
     
-    @Parameter(title: "Control Three", default: .frunk)
+    @Parameter(title: "Control Three", default: .frunk, supportedValues: ControlType.widgetControls)
     var controlTypeThree: ControlType?
     
-    @Parameter(title: "Control Four", default: .trunk)
+    @Parameter(title: "Control Four", default: .trunk, supportedValues: ControlType.widgetControls)
     var controlTypeFour: ControlType?
     
-    @Parameter(title: "Control Five", default: .lights)
+    @Parameter(title: "Control Five", default: .lights, supportedValues: ControlType.widgetControls)
     var controlTypeFive: ControlType?
     
-    @Parameter(title: "Control Six", default: .defrost)
+    @Parameter(title: "Control Six", default: .defrost, supportedValues: ControlType.widgetControls)
     var controlTypeSix: ControlType?
     
-    @Parameter(title: "Control Seven", default: .climateControl)
+    @Parameter(title: "Control Seven", default: .climateControl, supportedValues: ControlType.widgetControls)
     var controlTypeSeven: ControlType?
     
-    @Parameter(title: "Control Eight", default: .maxAC)
+    @Parameter(title: "Control Eight", default: .maxAC, supportedValues: ControlType.widgetControls)
     var controlTypeEight: ControlType?
 }

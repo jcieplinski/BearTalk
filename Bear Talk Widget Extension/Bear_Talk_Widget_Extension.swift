@@ -272,7 +272,7 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .trunk:
             return entry.vehicleState?.bodyState.rearCargo != .closed
         case .chargePort:
-            return entry.vehicleState?.bodyState.chargePortState != .closed
+            return entry.vehicleState?.bodyState.chargePortState.isOpen ?? false
         case .climateControl:
             return entry.vehicleState?.hvacState.power == .hvacOn
         case .maxAC:
@@ -346,7 +346,7 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             intent.action = action
             return intent
         case .chargePort:
-            let action = entry.vehicleState?.bodyState.chargePortState == .closed ? OpenAction.open : .close
+            let action = entry.vehicleState?.bodyState.chargePortState.isOpen == true ? OpenAction.close : .open
             let intent = ChargePortIntent(vehicle: entry.configuration.$vehicle)
             intent.action = action
             return intent
@@ -384,7 +384,10 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .rideHeight:
             break
         case .remoteDrive:
-            break
+            let status: KeylessDrivingStatus = entry.vehicleState?.keylessDrivingState == .keylessDrivingOn ? .off : .on
+            let intent = KeylessDrivingIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = status
+            return intent
         case .windows:
             var action: WindowAction = WindowAction.closed
             

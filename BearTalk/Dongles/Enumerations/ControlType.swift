@@ -92,6 +92,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         // We remove some items from allCases here. We don't want buttons for every type
         return [.doorLocks, .frunk, .trunk, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .rideHeight, .remoteDrive, .batteryPrecondition]
     }
+
+    static var widgetControls: [ControlType] {
+        allCases + [.remoteDrive]
+    }
     
     var title: LocalizedStringKey {
         switch self {
