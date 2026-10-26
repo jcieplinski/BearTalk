@@ -341,7 +341,8 @@ final class BearAPI {
                         return VehicleIdentifierEntity(id: vehicle.vehicleID, nickname: vehicle.config.nickname)
                     }
                     
-                    try await VehicleIdentifierHandler(modelContainer: sharedModelContainer).add(vehicleEntities)
+                    let handler = VehicleIdentifierHandler(modelContainer: sharedModelContainer)
+                    try await handler.add(vehicleEntities)
                     
                     return response.userVehicleData.map { vehicle in
                         return mapVehicleResponse(vehicle)
@@ -460,6 +461,66 @@ final class BearAPI {
                         metadata: metadata
                     )
                     
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
+            }
+        }
+    }
+
+    static func keylessDrivingControl(vehicleID: String = vehicleID, enabled: Bool) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_KeylessDrivingActionRequest()
+                request.action = enabled ? .keylessDrivingOn : .keylessDrivingOff
+                request.vehicleID = vehicleID
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.keylessDrivingAction(
+                        request,
+                        metadata: metadata
+                    )
+
+                    reloadWidgetsAfterDelay()
+                    return true
+                } catch {
+                    print(error)
+                    return false
+                }
+            }
+        }
+    }
+
+    static func rideHeightControl(vehicleID: String = vehicleID, target: RideHeight) async throws -> Bool {
+        try await withAuthorization {
+            try await withGRPCClient(
+                transport: .http2NIOPosix(
+                    target: .dns(host: String.grpcAPI),
+                    transportSecurity: .tls
+                )
+            ) { client in
+                var request = Mobilegateway_Protos_RideHeightControlRequest()
+                request.targetHeight = target.proto
+                request.vehicleID = vehicleID
+                let metadata: GRPCCore.Metadata = ["authorization" : "Bearer \(authorization)"]
+
+                do {
+                    let client = Mobilegateway_Protos_VehicleStateService.Client(wrapping: client)
+                    let _ = try await client.rideHeightControl(
+                        request,
+                        metadata: metadata
+                    )
+
+                    reloadWidgetsAfterDelay()
                     return true
                 } catch {
                     print(error)

@@ -72,6 +72,10 @@ extension DataModel {
         case .windows:
             NotificationCenter.default.post(name: .showWindowControl, object: nil)
             break
+        case .rideHeight:
+            NotificationCenter.default.post(name: .showRideHeight, object: nil)
+        case .remoteDrive:
+            toggleRemoteDrive()
         case .batteryPrecondition:
             toggleBatteryPrecondition()
         case .softwareUpdate:
@@ -502,6 +506,117 @@ extension DataModel {
         }
     }
     
+    func toggleRemoteDrive() {
+        if remoteDriveDeadline != nil {
+            cancelRemoteDrive()
+            return
+        }
+
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+
+                requestInProgress.insert(.remoteDrive)
+                let success = try await BearAPI.keylessDrivingControl(enabled: true)
+                requestInProgress.remove(.remoteDrive)
+                if success {
+                    startRemoteDriveCountdown()
+                }
+            } catch {
+                requestInProgress.remove(.remoteDrive)
+                print("Could not change remote drive: \(error)")
+            }
+        }
+    }
+
+    func cancelRemoteDrive() {
+        stopRemoteDriveCountdown()
+        Task { @MainActor in
+            do {
+                requestInProgress.insert(.remoteDrive)
+                let success = try await BearAPI.keylessDrivingControl(enabled: false)
+                requestInProgress.remove(.remoteDrive)
+                if !success {
+                    print("Could not cancel remote drive")
+                }
+            } catch {
+                requestInProgress.remove(.remoteDrive)
+                print("Could not cancel remote drive: \(error)")
+            }
+        }
+    }
+
+    var remoteDriveCountdownText: String {
+        let minutes = remoteDriveSecondsRemaining / 60
+        let seconds = remoteDriveSecondsRemaining % 60
+        return String(format: "%d:%02d", minutes, seconds)
+    }
+
+    func startRemoteDriveCountdown() {
+        remoteDriveExpiryHandled = false
+        remoteDriveDeadline = Date().addingTimeInterval(120)
+        remoteDriveSecondsRemaining = 120
+        remoteDriveTimer?.invalidate()
+        DispatchQueue.main.async { [weak self] in
+            self?.remoteDriveTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                Task { @MainActor in
+                    self?.syncRemoteDriveCountdown()
+                }
+            }
+        }
+    }
+
+    func syncRemoteDriveCountdown() {
+        guard let deadline = remoteDriveDeadline else { return }
+        let remaining = Int(ceil(deadline.timeIntervalSinceNow))
+        if remaining > 0 {
+            remoteDriveSecondsRemaining = remaining
+            return
+        }
+
+        remoteDriveSecondsRemaining = 0
+        guard !remoteDriveExpiryHandled else { return }
+        remoteDriveExpiryHandled = true
+        remoteDriveTimer?.invalidate()
+        remoteDriveTimer = nil
+
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1))
+            guard self.remoteDriveDeadline == deadline else { return }
+            self.remoteDriveDeadline = nil
+            self.remoteDriveSecondsRemaining = 0
+        }
+    }
+
+    func stopRemoteDriveCountdown() {
+        remoteDriveTimer?.invalidate()
+        remoteDriveTimer = nil
+        remoteDriveDeadline = nil
+        remoteDriveSecondsRemaining = 0
+        remoteDriveExpiryHandled = true
+    }
+
+    func setRideHeight(_ height: RideHeight) {
+        Task { @MainActor in
+            do {
+                if !vehicleIsReady {
+                    let _ = try await BearAPI.wakeUp()
+                }
+
+                requestInProgress.insert(.rideHeight)
+                let success = try await BearAPI.rideHeightControl(target: height)
+                if !success {
+                    requestInProgress.remove(.rideHeight)
+                }
+            } catch {
+                requestInProgress.remove(.rideHeight)
+                print("Could not set ride height: \(error)")
+            }
+        }
+    }
+
     @MainActor
     func resetControlFunction(oldState: VehicleState?, newState: VehicleState?) {
         guard let oldState, let newState else {
@@ -548,6 +663,14 @@ extension DataModel {
             case .windows:
                 if oldState.bodyState.windowPosition != newState.bodyState.windowPosition {
                     requestInProgress.remove(.windows)
+                }
+            case .rideHeight:
+                if oldState.bodyState.rideHeight != newState.bodyState.rideHeight {
+                    requestInProgress.remove(.rideHeight)
+                }
+            case .remoteDrive:
+                if oldState.keylessDrivingState != newState.keylessDrivingState {
+                    requestInProgress.remove(.remoteDrive)
                 }
             case .horn:
                 requestInProgress.remove(.horn)

@@ -253,7 +253,8 @@ struct LoginView: View {
                 let vehicleEntities = loginResponse.userVehicleData.map { vehicle -> VehicleIdentifierEntity in
                     return VehicleIdentifierEntity(id: vehicle.vehicleId, nickname: vehicle.vehicleConfig.nickname)
                 }
-                try await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).add(vehicleEntities)
+                let handler = VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer)
+                try await handler.add(vehicleEntities)
                 
                 // Update the vehicleIdentifiers property
                 model.vehicleIdentifiers = try? await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).fetch()

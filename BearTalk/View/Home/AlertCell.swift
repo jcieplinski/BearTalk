@@ -15,6 +15,12 @@ struct AlertCell: View {
                         .foregroundStyle(.secondary)
                         .transition(.opacity.combined(with: .move(edge: .leading)))
                 }
+
+                if model.remoteDriveDeadline != nil {
+                    Text(model.remoteDriveCountdownText)
+                        .font(.title3.monospacedDigit())
+                        .foregroundStyle(.primary)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -21,6 +21,7 @@ struct BodyState: Codable, Equatable {
     let keyfobBatteryStatus: KeyfobBatteryStatus
     let windowPosition: WindowPosition
     let accessTypeSts: AccessRequest
+    var rideHeight: RideHeight
     
     internal init(proto: Mobilegateway_Protos_BodyState) {
         self.doorLocks = LockState(proto: proto.doorLocks)
@@ -35,6 +36,46 @@ struct BodyState: Codable, Equatable {
         self.walkawayLockSts = WalkawayState(proto: proto.walkawayLock)
         self.keyfobBatteryStatus = KeyfobBatteryStatus(proto: proto.keyfobBatteryStatus)
         self.accessTypeSts = AccessRequest(proto: proto.accessTypeStatus)
+        self.rideHeight = RideHeight(proto: proto.rideHeightStatus)
+    }
+}
+
+enum RideHeight: Int, Codable, Equatable, Identifiable {
+    case unknown = 0
+    case undefined = 1
+    case lowest = 2
+    case low = 3
+    case standard = 4
+    case high = 5
+    case highest = 6
+
+    var id: Int { rawValue }
+
+    static let adjustableLevels: [RideHeight] = [.highest, .high, .standard, .low, .lowest]
+
+    var title: String {
+        switch self {
+        case .unknown, .undefined:
+            "Unknown"
+        case .lowest:
+            "Lowest"
+        case .low:
+            "Low"
+        case .standard:
+            "Standard"
+        case .high:
+            "High"
+        case .highest:
+            "Highest"
+        }
+    }
+
+    init(proto: Mobilegateway_Protos_RideHeightStatus) {
+        self = RideHeight(rawValue: proto.rawValue) ?? .unknown
+    }
+
+    var proto: Mobilegateway_Protos_RideHeightStatus {
+        Mobilegateway_Protos_RideHeightStatus(rawValue: rawValue) ?? .unknown
     }
 }
 

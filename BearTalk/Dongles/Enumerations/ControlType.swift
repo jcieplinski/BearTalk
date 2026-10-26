@@ -45,6 +45,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         .rearCenterSeatHeat: DisplayRepresentation(title: "Rear Center Seat Heat"),
         .rearRightSeatHeat: DisplayRepresentation(title: "Rear Right Seat Heat"),
         .alarm: DisplayRepresentation(title: "Alarm"),
+        .rideHeight: DisplayRepresentation(title: "Ride Height"),
+        .remoteDrive: DisplayRepresentation(title: "Remote Drive"),
     ]
     
     case wake
@@ -63,6 +65,8 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     case lights
     case hazards
     case windows
+    case rideHeight
+    case remoteDrive
     case batteryPrecondition
     case softwareUpdate
     
@@ -86,7 +90,7 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
     
     static var allCasesGravity: [ControlType] {
         // We remove some items from allCases here. We don't want buttons for every type
-        return [.doorLocks, .frunk, .trunk, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .batteryPrecondition]
+        return [.doorLocks, .frunk, .trunk, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .rideHeight, .remoteDrive, .batteryPrecondition]
     }
     
     var title: LocalizedStringKey {
@@ -117,6 +121,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "Hazard Lights"
         case .windows:
             "Windows"
+        case .rideHeight:
+            "Ride Height"
+        case .remoteDrive:
+            "Remote Drive"
         case .batteryPrecondition:
             "Precondition Battery"
         case .chargeLimit:
@@ -180,6 +188,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "hazardsOff"
         case .windows:
             "windowClosed"
+        case .rideHeight:
+            "rideHeightOff"
+        case .remoteDrive:
+            "remoteDriveOff"
         case .batteryPrecondition:
             "batteryOff"
         case .chargeLimit:
@@ -229,6 +241,10 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
             "hazardsOn"
         case .windows:
             "windowOpen"
+        case .rideHeight:
+            "rideHeightOn"
+        case .remoteDrive:
+            "remoteDriveOn"
         case .batteryPrecondition:
             "batteryOn"
         case .chargeLimit:

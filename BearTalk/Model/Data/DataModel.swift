@@ -64,6 +64,12 @@ import SceneKit
     var rearRightDoorClosureState: DoorState = .unknown
     var lightsState: LightState = .unknown
     var windowPosition: WindowPosition?
+    var rideHeight: RideHeight = .unknown
+    var keylessDrivingState: KeylessDrivingState = .keylessDrivingUnknown
+    var remoteDriveDeadline: Date?
+    var remoteDriveSecondsRemaining: Int = 0
+    @ObservationIgnored var remoteDriveTimer: Timer?
+    @ObservationIgnored var remoteDriveExpiryHandled = false
     var defrostState: DefrostState?
     var maxACState: MaxACState?
     var batteryPreConditionState: PreconditioningStatus?
@@ -251,7 +257,8 @@ import SceneKit
         // For each vehicle, take a snapshot
         for vehicleEntity in vehicleIdentifiers {
             if let vehicle = vehicle, vehicle.vehicleId == vehicleEntity.id {
-                try? await VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer).takeAndSaveSnapshot(for: vehicle)
+                let handler = VehicleIdentifierSnapshotHandler(modelContainer: BearAPI.sharedModelContainer)
+                try? await handler.takeAndSaveSnapshot(for: vehicle)
             }
         }
         
@@ -338,7 +345,8 @@ import SceneKit
                         let vehicleEntities = vehicles.map { vehicle -> VehicleIdentifierEntity in
                             return VehicleIdentifierEntity(id: vehicle.vehicleId, nickname: vehicle.vehicleConfig.nickname)
                         }
-                        try await VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer).add(vehicleEntities)
+                        let handler = VehicleIdentifierHandler(modelContainer: BearAPI.sharedModelContainer)
+                        try await handler.add(vehicleEntities)
                         
                         // Update the vehicleIdentifiers property
                         Task { @MainActor in
@@ -387,14 +395,12 @@ import SceneKit
     func startRefreshing() {
         guard isPollingEnabled else { return }
         if !isRefreshing {
-            Task {
+            Task { @MainActor in
                 await refreshVehicle()
+                guard isPollingEnabled else { return }
                 setRefreshVehicleTimer()
                 startRefreshMonitoring()
-                // Prevent device from sleeping while calculating efficiency
-                DispatchQueue.main.async {
-                    UIApplication.shared.isIdleTimerDisabled = true
-                }
+                UIApplication.shared.isIdleTimerDisabled = true
             }
         }
     }
@@ -405,23 +411,17 @@ import SceneKit
         refreshCheckTimer?.invalidate()
         refreshCheckTimer = nil
         lastRefreshTime = nil
-        // Allow device to sleep again when we stop refreshing
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = false
-        }
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     private func setRefreshVehicleTimer() {
         DispatchQueue.main.async { [weak self] in
-            self?.refreshTimer = Timer
-                .scheduledTimer(
-                    withTimeInterval: TimeInterval(8),
-                    repeats: true
-                ) { _ in
-                    Task { [weak self] in
-                        await self?.refreshVehicle()
-                    }
-                }
+            guard let self, self.isPollingEnabled else { return }
+            self.refreshTimer?.invalidate()
+            self.refreshTimer = Timer.scheduledTimer(withTimeInterval: 8, repeats: true) { [weak self] _ in
+                guard let self, self.isPollingEnabled else { return }
+                Task { await self.refreshVehicle() }
+            }
         }
     }
     
@@ -469,6 +469,7 @@ import SceneKit
                     BearAPI.saveWidgetCache(vehicle: vehicle)
                     self.gps = vehicle.vehicleState.gps
                     self.update()
+                    self.syncRemoteDriveCountdown()
                     self.updateStats()
                     self.updateRangeStats()
                     self.updateEfficiency(vehicle: vehicle)
@@ -608,6 +609,8 @@ import SceneKit
         rearRightDoorClosureState = vehicle.vehicleState.bodyState.rearRightDoor
         lightsState = vehicle.vehicleState.chassisState.headlights
         windowPosition = vehicle.vehicleState.bodyState.windowPosition
+        rideHeight = vehicle.vehicleState.bodyState.rideHeight
+        keylessDrivingState = vehicle.vehicleState.keylessDrivingState
         defrostState = vehicle.vehicleState.hvacState.defrost
         maxACState = vehicle.vehicleState.hvacState.maxAcStatus
         batteryPreConditionState = vehicle.vehicleState.batteryState.preconditioningStatus

@@ -291,6 +291,10 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             return false
         case .windows:
             return entry.vehicleState?.bodyState.windowPosition.isOpen ?? false
+        case .rideHeight:
+            return false
+        case .remoteDrive:
+            return entry.vehicleState?.keylessDrivingState == .keylessDrivingOn
         case .batteryPrecondition:
             return entry.vehicleState?.batteryState.preconditioningStatus == .batteryPreconOn
         case .softwareUpdate:
@@ -376,6 +380,10 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             intent.action = action
             return intent
         case .hazards:
+            break
+        case .rideHeight:
+            break
+        case .remoteDrive:
             break
         case .windows:
             var action: WindowAction = WindowAction.closed

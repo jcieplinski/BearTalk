@@ -49,6 +49,10 @@ struct ControlButton: View {
             return model.lightsState == .hazardOn
         case .windows:
             return model.windowPosition?.isOpen ?? false
+        case .rideHeight:
+            return false
+        case .remoteDrive:
+            return model.remoteDriveDeadline != nil
         case .batteryPrecondition:
             return model.batteryPreConditionState == .batteryPreconOn
         default:

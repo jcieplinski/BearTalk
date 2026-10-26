@@ -43,6 +43,10 @@ extension DataModel {
         
         // Check panic alarm
         if alarmState.alarmStatus == .panicMode { activeAlerts.append("Panic Alarm On") }
+
+        if remoteDriveDeadline != nil {
+            activeAlerts.append("Press the driver door handle to unlock and start driving in the next 2 minutes")
+        }
         
         // Check keyfob battery
         if bodyState.keyfobBatteryStatus == .low { activeAlerts.append("Key Fob Battery Low") }

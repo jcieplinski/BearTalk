@@ -25,9 +25,12 @@ actor VehicleIdentifierHandler {
         
         let toDelete = fetchedVehicles.filter { vehicles.map(\.id).contains($0.id)}
         
+        guard !toDelete.isEmpty else { return }
+        
         toDelete.forEach { vehicle in
             modelContext.delete(vehicle)
         }
+        try modelContext.save()
     }
     
     public func update(_ vehicles: [VehicleIdentifierEntity]) async throws {
@@ -57,6 +60,10 @@ actor VehicleIdentifierHandler {
         
         try await delete(expiredVehicles)
         try await update(vehicles)
+        
+        if modelContext.hasChanges {
+            try modelContext.save()
+        }
     }
     
     public func removeDuplicates() async throws {

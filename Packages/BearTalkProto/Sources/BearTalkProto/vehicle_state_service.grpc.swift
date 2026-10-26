@@ -212,6 +212,18 @@ public enum Mobilegateway_Protos_VehicleStateService {
                 method: "RearCargoControl"
             )
         }
+        /// Namespace for "RideHeightControl" metadata.
+        public enum RideHeightControl {
+            /// Request type for "RideHeightControl".
+            public typealias Input = Mobilegateway_Protos_RideHeightControlRequest
+            /// Response type for "RideHeightControl".
+            public typealias Output = Mobilegateway_Protos_RideHeightControlResponse
+            /// Descriptor for "RideHeightControl".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "mobilegateway.protos.VehicleStateService"),
+                method: "RideHeightControl"
+            )
+        }
         /// Namespace for "SecurityAlarmControl" metadata.
         public enum SecurityAlarmControl {
             /// Request type for "SecurityAlarmControl".
@@ -446,6 +458,7 @@ public enum Mobilegateway_Protos_VehicleStateService {
             LightsControl.descriptor,
             PanicAlarmAction.descriptor,
             RearCargoControl.descriptor,
+            RideHeightControl.descriptor,
             SecurityAlarmControl.descriptor,
             SetCabinTemperature.descriptor,
             SetChargeLimit.descriptor,
@@ -4281,6 +4294,61 @@ extension Mobilegateway_Protos_VehicleStateService {
                 descriptor: Mobilegateway_Protos_VehicleStateService.Method.RearCargoControl.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "RideHeightControl" method.
+        public func rideHeightControl<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RideHeightControlRequest>,
+            serializer: some GRPCCore.MessageSerializer<Mobilegateway_Protos_RideHeightControlRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Mobilegateway_Protos_RideHeightControlResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RideHeightControlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Mobilegateway_Protos_VehicleStateService.Method.RideHeightControl.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        public func rideHeightControl<Result>(
+            request: GRPCCore.ClientRequest<Mobilegateway_Protos_RideHeightControlRequest>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RideHeightControlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.rideHeightControl(
+                request: request,
+                serializer: GRPCProtobuf.ProtobufSerializer<Mobilegateway_Protos_RideHeightControlRequest>(),
+                deserializer: GRPCProtobuf.ProtobufDeserializer<Mobilegateway_Protos_RideHeightControlResponse>(),
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        public func rideHeightControl<Result>(
+            _ message: Mobilegateway_Protos_RideHeightControlRequest,
+            metadata: GRPCCore.Metadata = [:],
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Mobilegateway_Protos_RideHeightControlResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            let request = GRPCCore.ClientRequest<Mobilegateway_Protos_RideHeightControlRequest>(
+                message: message,
+                metadata: metadata
+            )
+            return try await self.rideHeightControl(
+                request: request,
                 options: options,
                 onResponse: handleResponse
             )

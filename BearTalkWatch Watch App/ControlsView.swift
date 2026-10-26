@@ -107,6 +107,10 @@ struct ControlsView: View {
             return false
         case .windows:
             return model.windowPosition?.isOpen ?? false
+        case .rideHeight:
+            return false
+        case .remoteDrive:
+            return false
         case .batteryPrecondition:
             return model.batteryPreConditionState == .batteryPreconOn
         case .softwareUpdate:

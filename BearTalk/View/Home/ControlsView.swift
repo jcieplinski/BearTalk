@@ -18,6 +18,7 @@ struct ControlsView: View {
     @State private var showSeatClimate: Bool = false
     @State private var showSettings: Bool = false
     @State private var showWindowControls: Bool = false
+    @State private var showRideHeight: Bool = false
     @State private var draggedCell: String?
     @State private var viewWidth: CGFloat = 0
     
@@ -284,6 +285,12 @@ struct ControlsView: View {
                     .presentationDetents([.fraction(0.55), .large])
                     .presentationSizing(.page)
             }
+            .sheet(isPresented: $showRideHeight) {
+                RideHeightSheet()
+                    .presentationBackground(.thinMaterial)
+                    .presentationDetents([.medium])
+                    .presentationSizing(.page)
+            }
             .onAppear {
                 NotificationCenter.default.addObserver(
                     forName: .showClimateControl,
@@ -307,6 +314,14 @@ struct ControlsView: View {
                     queue: .main
                 ) { _ in
                     showWindowControls = true
+                }
+
+                NotificationCenter.default.addObserver(
+                    forName: .showRideHeight,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    showRideHeight = true
                 }
             }
             }
