@@ -93,10 +93,6 @@ enum ControlType: String, Codable, Equatable, CaseIterable, Identifiable, Transf
         return [.doorLocks, .frunk, .trunk, .climateControl, .defrost, .maxAC, .seatClimate, .steeringWheelClimate, .horn, .lights, .hazards, .windows, .rideHeight, .remoteDrive, .batteryPrecondition]
     }
 
-    static var widgetControls: [ControlType] {
-        allCases + [.remoteDrive]
-    }
-    
     var title: LocalizedStringKey {
         switch self {
         case .wake:
