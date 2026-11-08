@@ -10,6 +10,18 @@ struct ACChargeLimitView: View {
     @State private var hasPendingChanges = false
     @State private var isHolding = false
     
+    private let minimumAmps: Int32 = 10
+
+    /// Station maximum. `energyAcCurrentLimit` is what the plugged-in charger can supply.
+    /// 80 is only the car's own cap, used when the station has not reported one.
+    private var chargerMaxAmps: Int32 {
+        let energy = Int32(model.vehicle?.vehicleState.chargingState.energyAcCurrentLimit ?? 0)
+        if energy > 0 {
+            return min(80, energy)
+        }
+        return 80
+    }
+
     private var buttonsDisabled: Bool {
         model.requestInProgress.contains(.acCurrentLimit) || model.allFunctionsDisable
     }
@@ -26,7 +38,7 @@ struct ACChargeLimitView: View {
             HStack(spacing: 20) {
                 Image(systemName: "minus.circle.fill")
                     .font(.largeTitle)
-                    .foregroundStyle(buttonsDisabled ? Color.secondary : Color.active)
+                    .foregroundStyle(buttonsDisabled || acCurrentLimit <= minimumAmps ? Color.secondary : Color.active)
                     .onLongPressGesture(minimumDuration: 999, pressing: { isPressing in
                         guard !buttonsDisabled else { return }
                         if isPressing {
@@ -44,17 +56,22 @@ struct ACChargeLimitView: View {
                         .foregroundStyle(.active)
                         .transition(.scale)
                 } else {
-                    Text("\(acCurrentLimit)A")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .monospacedDigit()
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("\(acCurrentLimit)A")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text("/ \(chargerMaxAmps)A")
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                    }
+                    .monospacedDigit()
                 }
 
                 Spacer()
                 
                 Image(systemName: "plus.circle.fill")
                     .font(.largeTitle)
-                    .foregroundStyle(buttonsDisabled ? Color.secondary : Color.active)
+                    .foregroundStyle(buttonsDisabled || acCurrentLimit >= chargerMaxAmps ? Color.secondary : Color.active)
                     .onLongPressGesture(minimumDuration: 999, pressing: { isPressing in
                         guard !buttonsDisabled else { return }
                         if isPressing {
@@ -82,23 +99,40 @@ struct ACChargeLimitView: View {
             sendTask?.cancel()
             holdTask?.cancel()
         }
-        .onChange(of: model.vehicle?.vehicleState.chargingState.activeSessionAcCurrentLimit) { _, newValue in
+        .onChange(of: model.vehicle?.vehicleState.chargingState.activeSessionAcCurrentLimit) { _, _ in
             if !isInitialSetup {
                 updateACLimitFromModel()
             }
         }
-        .onChange(of: model.vehicle?.vehicleState.mobileAppReqStatus.acCurrentLimitReq) { _, newValue in
+        .onChange(of: model.vehicle?.vehicleState.chargingState.energyAcCurrentLimit) { _, _ in
+            if !isInitialSetup {
+                updateACLimitFromModel()
+            }
+        }
+        .onChange(of: model.vehicle?.vehicleState.mobileAppReqStatus.acCurrentLimitReq) { _, _ in
             if !isInitialSetup {
                 updateACLimitFromModel()
             }
         }
     }
+
+    /// Accepted current for this session. A session value of 0 or above the station max
+    /// means the car is still reporting its own 80A cap, so use the station max instead.
+    private func acceptedAmps(session: Int32, stationMax: Int32) -> Int32 {
+        let ceiling = stationMax > 0 ? min(80, stationMax) : 80
+        if session <= 0 || session > ceiling {
+            return ceiling
+        }
+        return max(minimumAmps, session)
+    }
     
     private func updateACLimitFromModel() {
         if let vehicle = model.vehicle {
-            let limit = Int32(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)
+            let session = Int32(vehicle.vehicleState.chargingState.activeSessionAcCurrentLimit)
+            let stationMax = Int32(vehicle.vehicleState.chargingState.energyAcCurrentLimit)
+            let limit = acceptedAmps(session: session, stationMax: stationMax)
             
-            print("ACChargeLimitView: Updating from model - activeSession: \(limit)A, localState: \(acCurrentLimit)")
+            print("ACChargeLimitView: Updating from model - session: \(session)A, station: \(stationMax)A, showing: \(limit)A")
             
             if isInitialSetup {
                 acCurrentLimit = limit
@@ -111,7 +145,7 @@ struct ACChargeLimitView: View {
     }
     
     private func adjustACLimit(by amount: Int32) {
-        let newTarget = max(1, min(80, acCurrentLimit + amount))
+        let newTarget = max(minimumAmps, min(chargerMaxAmps, acCurrentLimit + amount))
         guard newTarget != acCurrentLimit && !isInitialSetup else { return }
         acCurrentLimit = newTarget
         hasPendingChanges = true
