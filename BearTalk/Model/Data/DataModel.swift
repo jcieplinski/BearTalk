@@ -52,12 +52,22 @@ import SceneKit
     
     // Car Scene
     var selectedModel: CarSceneModel = CarSceneModel.allCases.randomElement() ?? .air
-    var showPlatinum: Bool = Look.storedOverride?.showsPlatinum ?? false
+    var sceneModel: CarSceneModel = CarSceneModel.storedOverride ?? .air
+    var showPlatinum: Bool = false
     var showGlassRoof: Bool = true
-    var paintColor: PaintColor = PaintColor.storedOverride ?? .eurekaGold
-    var selectedInterior: Interior = Interior.storedOverride ?? .yosemite
-    var selectedWheel: Wheels = Wheels.storedOverride ?? .dream
+    var paintColor: PaintColor = .stellarWhite
+    var selectedInterior: Interior = .mojavePurluxe
+    var selectedWheel: Wheels = .range
     var fancyMirrorCaps: Bool = true
+
+    var actualSceneModel: CarSceneModel {
+        if let vehicle {
+            return CarSceneModel(model: vehicle.vehicleConfig.model, variant: vehicle.vehicleConfig.modelVariant)
+        }
+        return selectedModel
+    }
+
+    var appearanceModel: CarSceneModel { sceneModel }
     var shouldResetCamera: Bool = false
     
     // Control
@@ -278,19 +288,7 @@ import SceneKit
     }
     
     private func updateSnapshotMaterials(in scene: SCNScene, vehicle: Vehicle) {
-        // Update car paint color
-        let paintUIColor = UIColor(vehicle.vehicleConfig.paintColor.color)
-        scene.rootNode.enumerateChildNodes { node, _ in
-            if let geometry = node.geometry {
-                for material in geometry.materials {
-                    if let materialName = material.name?.lowercased() {
-                        if materialName.contains("carpaint") || materialName.contains("car_paint") {
-                            material.diffuse.contents = paintUIColor
-                        }
-                    }
-                }
-            }
-        }
+        scene.applyCarPaint(vehicle.vehicleConfig.paintColor)
 
         if vehicle.vehicleConfig.model == .gravity {
             scene.tintLeather(vehicle.vehicleConfig.interior.leatherColor)
@@ -631,25 +629,7 @@ import SceneKit
             selectedModel = .gravity
         }
         
-        let look = Look.storedOverride ?? vehicle.vehicleConfig.look
-        showPlatinum = look.showsPlatinum
-        
-        switch vehicle.vehicleConfig.roof {
-        case .unknown, .glassCanopy, .UNRECOGNIZED:
-            showGlassRoof = true
-        case .metal, .carbonFiber:
-            showGlassRoof = false
-        }
-        
-        selectedInterior = Interior.storedOverride ?? vehicle.vehicleConfig.interior
-        selectedWheel = Wheels.storedOverride ?? vehicle.vehicleConfig.wheels
-        
-        switch vehicle.vehicleConfig.modelVariant {
-        case .unknown, .UNRECOGNIZED, .touring, .pure:
-            fancyMirrorCaps = false
-        case .dreamEdition, .grandTouring, .sapphire, .hyper, .executive:
-            fancyMirrorCaps = true
-        }
+        applyAppearanceOverrides()
         
         gearPosition = vehicle.vehicleState.gearPosition
         

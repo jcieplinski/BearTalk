@@ -114,23 +114,45 @@ enum Wheels: Codable, Equatable {
         }
     }
 
-    static let overrideChoices: [Wheels] = [
-        .dream,
-        .dreamMagnesium,
-        .blade,
-        .bladeGraphite,
-        .lite,
-        .liteStealth,
-        .range,
-        .rangeStealth,
-        .sport,
-        .sportStealth,
-        .sportLuster,
-        .sapphirePackage,
-        .aether,
-        .orion,
-        .voyager
-    ]
+    static func overrideChoices(for model: CarSceneModel) -> [Wheels] {
+        switch model {
+        case .gravity:
+            [.voyager, .orion, .aether]
+        case .air, .sapphire:
+            [
+                .range,
+                .rangeStealth,
+                .lite,
+                .liteStealth,
+                .blade,
+                .bladeGraphite,
+                .sport,
+                .sportStealth,
+                .dream,
+                .dreamMagnesium
+            ]
+        }
+    }
+
+    static func storedOverride(for model: CarSceneModel) -> Wheels? {
+        let raw = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.wheelsOverride, model: model)) ?? ""
+        guard !raw.isEmpty, let wheels = Wheels(overrideStorageKey: raw), overrideChoices(for: model).contains(wheels) else { return nil }
+        return wheels
+    }
+
+    static func resolved(for model: CarSceneModel, ownsCar: Bool, fallback: Wheels) -> Wheels {
+        if let stored = storedOverride(for: model) { return stored }
+        if !ownsCar, let preset = preset(for: model) { return preset }
+        return fallback
+    }
+
+    static func preset(for model: CarSceneModel) -> Wheels? {
+        switch model {
+        case .air: .range
+        case .gravity: .aether
+        case .sapphire: nil
+        }
+    }
 
     var overrideStorageKey: String {
         switch self {
@@ -181,9 +203,4 @@ enum Wheels: Codable, Equatable {
         }
     }
 
-    static var storedOverride: Wheels? {
-        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.wheelsOverride) ?? ""
-        guard !key.isEmpty else { return nil }
-        return Wheels(overrideStorageKey: key)
-    }
 }

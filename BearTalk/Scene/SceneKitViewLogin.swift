@@ -82,7 +82,7 @@ struct SceneKitViewLogin: UIViewRepresentable {
             updateNodeVisibility(in: loadedScene, showPlatinum: true, showGlassRoof: true)
             
             // Update carpaint material with initial color
-            updateCarPaintMaterial(in: loadedScene, color: PaintColor.stellarWhite.color)
+            updateCarPaintMaterial(in: loadedScene, color: .stellarWhite)
             
             // Try to find the interactive camera
             if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_predelivery", recursively: true) {
@@ -116,7 +116,7 @@ struct SceneKitViewLogin: UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: true, showGlassRoof: true)
-            updateCarPaintMaterial(in: scene, color: PaintColor.stellarWhite.color)
+            updateCarPaintMaterial(in: scene, color: .stellarWhite)
             updateWheelVisibility(in: scene, selectedWheel: Wheels.dream.nodeTitle)
         }
     }
@@ -336,21 +336,8 @@ struct SceneKitViewLogin: UIViewRepresentable {
         }
     }
     
-    private func updateCarPaintMaterial(in scene: SCNScene, color: Color) {
-        // Convert SwiftUI Color to UIColor
-        let uiColor = UIColor(color)
-        
-        // Find all nodes with materials
-        scene.rootNode.enumerateChildNodes { node, _ in
-            if let materials = node.geometry?.materials {
-                for material in materials {
-                    if material.name?.lowercased().contains("carpaint") ?? false {
-                        // Update the diffuse color
-                        material.diffuse.contents = uiColor
-                    }
-                }
-            }
-        }
+    private func updateCarPaintMaterial(in scene: SCNScene, color: PaintColor) {
+        scene.applyCarPaint(color)
     }
     
     private func updateWheelVisibility(in scene: SCNScene, selectedWheel: String?) {

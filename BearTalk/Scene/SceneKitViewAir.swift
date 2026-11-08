@@ -1131,7 +1131,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             updateNodeVisibility(in: loadedScene, showPlatinum: showPlatinum, showGlassRoof: showGlassRoof)
             
             // Update carpaint material with initial color
-            updateCarPaintMaterial(in: loadedScene, color: carPaintColor.color)
+            updateCarPaintMaterial(in: loadedScene, color: carPaintColor)
             
             // Try to find the camera
             if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_default", recursively: true) {
@@ -1335,7 +1335,7 @@ struct SceneKitViewAir: UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum, showGlassRoof: showGlassRoof)
-            updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            updateCarPaintMaterial(in: scene, color: carPaintColor)
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset
@@ -1624,21 +1624,8 @@ struct SceneKitViewAir: UIViewRepresentable {
         }
     }
     
-    private func updateCarPaintMaterial(in scene: SCNScene, color: Color) {
-        // Convert SwiftUI Color to UIColor
-        let uiColor = UIColor(color)
-        
-        // Find all nodes with materials
-        scene.rootNode.enumerateChildNodes { node, _ in
-            if let materials = node.geometry?.materials {
-                for material in materials {
-                    if material.name?.lowercased().contains("carpaint") ?? false {
-                        // Update the diffuse color
-                        material.diffuse.contents = uiColor
-                    }
-                }
-            }
-        }
+    private func updateCarPaintMaterial(in scene: SCNScene, color: PaintColor) {
+        scene.applyCarPaint(color)
     }
     
     private func updateWheelVisibility(in scene: SCNScene, selectedWheel: String?) {

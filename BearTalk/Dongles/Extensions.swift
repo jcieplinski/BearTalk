@@ -52,6 +52,20 @@ extension Double {
 }
 
 extension SCNScene {
+    /// Paints the body. Stellar White keeps the same color and uses less metalness.
+    func applyCarPaint(_ paint: PaintColor) {
+        let uiColor = UIColor(paint.color)
+        rootNode.enumerateChildNodes { node, _ in
+            guard let materials = node.geometry?.materials else { return }
+            for material in materials {
+                let name = material.name?.lowercased() ?? ""
+                guard name.contains("carpaint") || name.contains("car_paint") else { continue }
+                material.diffuse.contents = uiColor
+                material.applyStellarWhiteMetalness(paint == .stellarWhite)
+            }
+        }
+    }
+
     /// Tints Gravity seat leather. Door leather stays Mojave grey.
     func tintLeather(_ color: Color) {
         let seatColor = UIColor(color)
@@ -69,5 +83,21 @@ extension SCNScene {
                 }
             }
         }
+    }
+}
+
+private enum CarPaintMetalness {
+    static var defaults: [ObjectIdentifier: (contents: NSNumber, intensity: CGFloat)] = [:]
+}
+
+private extension SCNMaterial {
+    func applyStellarWhiteMetalness(_ enabled: Bool) {
+        let id = ObjectIdentifier(self)
+        if CarPaintMetalness.defaults[id] == nil, let number = metalness.contents as? NSNumber {
+            CarPaintMetalness.defaults[id] = (number, metalness.intensity)
+        }
+        guard let saved = CarPaintMetalness.defaults[id] else { return }
+        metalness.contents = saved.contents
+        metalness.intensity = enabled ? saved.intensity * 0.65 : saved.intensity
     }
 }

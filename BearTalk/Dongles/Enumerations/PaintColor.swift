@@ -115,22 +115,72 @@ enum PaintColor: Codable, Equatable {
         }
     }
     
-    static let overrideChoices: [PaintColor] = [
-        .unknown,
-        .eurekaGold,
-        .stellarWhite,
-        .infiniteBlack,
-        .cosmosSilver,
-        .quantumGrey,
-        .zenithRed,
-        .fathomBlue,
-        .custom,
-        .sapphireBlue,
-        .lunarTitanium,
-        .auroraGreen,
-        .supernovaBronze,
-        .glossBlackPrimary
-    ]
+    static func overrideChoices(for model: CarSceneModel) -> [PaintColor] {
+        switch model {
+        case .gravity:
+            [
+                .stellarWhite,
+                .infiniteBlack,
+                .cosmosSilver,
+                .quantumGrey,
+                .zenithRed,
+                .fathomBlue,
+                .lunarTitanium,
+                .auroraGreen,
+                .supernovaBronze,
+                .glossBlackPrimary
+            ]
+        case .sapphire:
+            [
+                .eurekaGold,
+                .stellarWhite,
+                .infiniteBlack,
+                .cosmosSilver,
+                .quantumGrey,
+                .zenithRed,
+                .fathomBlue,
+                .sapphireBlue
+            ]
+        case .air:
+            [
+                .eurekaGold,
+                .stellarWhite,
+                .infiniteBlack,
+                .cosmosSilver,
+                .quantumGrey,
+                .zenithRed,
+                .fathomBlue
+            ]
+        }
+    }
+
+    static var customSceneModel: CarSceneModel = .air
+
+    static func storedOverride(for model: CarSceneModel) -> PaintColor? {
+        let raw = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.carColorOverride, model: model)) ?? ""
+        guard !raw.isEmpty, let color = PaintColor(overrideStorageKey: raw), color != .unknown else { return nil }
+        if color == .custom { return color }
+        return overrideChoices(for: model).contains(color) ? color : nil
+    }
+
+    static func resolved(for model: CarSceneModel, ownsCar: Bool, fallback: PaintColor) -> PaintColor {
+        if let stored = storedOverride(for: model) { return stored }
+        if !ownsCar, let preset = preset(for: model) { return preset }
+        return fallback
+    }
+
+    static func preset(for model: CarSceneModel) -> PaintColor? {
+        switch model {
+        case .air: .stellarWhite
+        case .gravity: .auroraGreen
+        case .sapphire: nil
+        }
+    }
+
+    static func customHex(for model: CarSceneModel) -> String {
+        let stored = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.customPaintColor, model: model)) ?? ""
+        return stored.isEmpty ? "CCCCCC" : stored
+    }
 
     var overrideStorageKey: String {
         switch self {
@@ -206,12 +256,6 @@ enum PaintColor: Codable, Equatable {
         }
     }
 
-    static var storedOverride: PaintColor? {
-        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.carColorOverride) ?? ""
-        guard !key.isEmpty else { return nil }
-        return PaintColor(overrideStorageKey: key)
-    }
-
     var color: Color {
         return Color(hex: hex) ?? .gray
     }
@@ -227,15 +271,15 @@ enum PaintColor: Codable, Equatable {
         case .infiniteBlack:
             "#1F2022"
         case .cosmosSilver:
-            "#A3A7B0"
+            "#A6A298"
         case .quantumGrey:
             "#4E5257"
         case .zenithRed:
             "#4B1718"
         case .fathomBlue:
-            "#606e81"
+            "#687078"
         case .custom:
-            "CCCCCC"
+            PaintColor.customHex(for: PaintColor.customSceneModel)
         case .sapphireBlue:
             "012140"
         case .lunarTitanium:

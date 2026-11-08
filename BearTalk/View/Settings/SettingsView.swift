@@ -9,10 +9,7 @@ struct SettingsView: View {
     @State private var showLogOutWarning = false
     @State private var showPhotoPicker = false
     @State private var showErrorAlert: Bool = false
-    @AppStorage(DefaultsKey.carColorOverride, store: .appGroup) private var carColorOverride = ""
-    @AppStorage(DefaultsKey.interiorOverride, store: .appGroup) private var interiorOverride = ""
-    @AppStorage(DefaultsKey.lookOverride, store: .appGroup) private var lookOverride = ""
-    @AppStorage(DefaultsKey.wheelsOverride, store: .appGroup) private var wheelsOverride = ""
+    @AppStorage(DefaultsKey.carModelOverride, store: .appGroup) private var carModelOverride = ""
     
     private var currentScheme: AppColorScheme {
         let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
@@ -110,56 +107,71 @@ struct SettingsView: View {
                         }
                     }
 
-                    Picker("Car Color Override", selection: $carColorOverride) {
+                    Picker("Car Override", selection: $carModelOverride) {
                         Text("None").tag("")
-                        ForEach(PaintColor.overrideChoices, id: \.overrideStorageKey) { color in
-                            HStack {
-                                Circle()
-                                    .fill(color.color)
-                                    .frame(width: 14, height: 14)
-                                Text(color.title)
+                        ForEach(CarSceneModel.allCases, id: \.rawValue) { car in
+                            Text(car.displayTitle).tag(car.rawValue)
+                        }
+                    }
+                    .onChange(of: carModelOverride) {
+                        model.applyAppearanceOverrides()
+                    }
+
+                    if model.sceneModel != .sapphire {
+                        Group {
+                        Picker("Car Color Override", selection: paintSelection) {
+                            if ownsDisplayedCar {
+                                Text("None").tag("")
                             }
-                            .tag(color.overrideStorageKey)
-                        }
-                    }
-                    .onChange(of: carColorOverride) {
-                        model.applyAppearanceOverrides()
-                    }
-
-                    Picker("Interior Override", selection: $interiorOverride) {
-                        Text("None").tag("")
-                        ForEach(Interior.overrideChoices, id: \.overrideStorageKey) { interior in
-                            HStack {
-                                Circle()
-                                    .fill(interior.leatherColor)
-                                    .frame(width: 14, height: 14)
-                                Text(interior.title)
+                            ForEach(paintOverrideChoices, id: \.overrideStorageKey) { color in
+                                HStack {
+                                    Circle()
+                                        .fill(color.color)
+                                        .frame(width: 14, height: 14)
+                                    Text(color.title)
+                                }
+                                .tag(color.overrideStorageKey)
                             }
-                            .tag(interior.overrideStorageKey)
                         }
-                    }
-                    .onChange(of: interiorOverride) {
-                        model.applyAppearanceOverrides()
-                    }
 
-                    Picker("Look Override", selection: $lookOverride) {
-                        Text("None").tag("")
-                        ForEach(Look.overrideChoices, id: \.overrideStorageKey) { look in
-                            Text(look.title).tag(look.overrideStorageKey)
+                        if paintSelection.wrappedValue == PaintColor.custom.overrideStorageKey {
+                            ColorPicker("Custom Color", selection: customPaintColor, supportsOpacity: false)
                         }
-                    }
-                    .onChange(of: lookOverride) {
-                        model.applyAppearanceOverrides()
-                    }
 
-                    Picker("Wheels Override", selection: $wheelsOverride) {
-                        Text("None").tag("")
-                        ForEach(Wheels.overrideChoices, id: \.overrideStorageKey) { wheels in
-                            Text(wheels.title).tag(wheels.overrideStorageKey)
+                        Picker("Interior Override", selection: interiorSelection) {
+                            if ownsDisplayedCar {
+                                Text("None").tag("")
+                            }
+                            ForEach(Interior.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { interior in
+                                HStack {
+                                    Circle()
+                                        .fill(interior.leatherColor)
+                                        .frame(width: 14, height: 14)
+                                    Text(interior.title)
+                                }
+                                .tag(interior.overrideStorageKey)
+                            }
                         }
-                    }
-                    .onChange(of: wheelsOverride) {
-                        model.applyAppearanceOverrides()
+
+                        Picker("Look Override", selection: lookSelection) {
+                            if ownsDisplayedCar {
+                                Text("None").tag("")
+                            }
+                            ForEach(Look.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { look in
+                                Text(look.title).tag(look.overrideStorageKey)
+                            }
+                        }
+
+                        Picker("Wheels Override", selection: wheelSelection) {
+                            if ownsDisplayedCar {
+                                Text("None").tag("")
+                            }
+                            ForEach(Wheels.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { wheels in
+                                Text(wheels.title).tag(wheels.overrideStorageKey)
+                            }
+                        }
+                        }
+                        .id(model.sceneModel)
                     }
                 }
                 
@@ -180,6 +192,9 @@ struct SettingsView: View {
                             .foregroundStyle(.red)
                     }
                 }
+            }
+            .onAppear {
+                model.applyAppearanceOverrides()
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
@@ -230,7 +245,93 @@ struct SettingsView: View {
             .preferredColorScheme(colorSchemeManager.currentScheme)
         }
     }
+
+    private var ownsDisplayedCar: Bool {
+        model.sceneModel == model.actualSceneModel
+    }
+
+    private var paintOverrideChoices: [PaintColor] {
+        PaintColor.customSceneModel = model.sceneModel
+        return PaintColor.overrideChoices(for: model.sceneModel) + [.custom]
+    }
+
+    private var paintSelection: Binding<String> {
+        scopedSelection(
+            baseKey: DefaultsKey.carColorOverride,
+            choices: paintOverrideChoices,
+            preset: PaintColor.preset(for: model.sceneModel)
+        )
+    }
+
+    private var interiorSelection: Binding<String> {
+        scopedSelection(
+            baseKey: DefaultsKey.interiorOverride,
+            choices: Interior.overrideChoices(for: model.sceneModel),
+            preset: Interior.preset(for: model.sceneModel)
+        )
+    }
+
+    private var lookSelection: Binding<String> {
+        scopedSelection(
+            baseKey: DefaultsKey.lookOverride,
+            choices: Look.overrideChoices(for: model.sceneModel),
+            preset: Look.preset(for: model.sceneModel)
+        )
+    }
+
+    private var wheelSelection: Binding<String> {
+        scopedSelection(
+            baseKey: DefaultsKey.wheelsOverride,
+            choices: Wheels.overrideChoices(for: model.sceneModel),
+            preset: Wheels.preset(for: model.sceneModel)
+        )
+    }
+
+    private var customPaintColor: Binding<Color> {
+        let key = DefaultsKey.scoped(DefaultsKey.customPaintColor, model: model.sceneModel)
+        return Binding(
+            get: {
+                let hex = UserDefaults.appGroup.string(forKey: key) ?? "CCCCCC"
+                return Color(hex: hex) ?? .gray
+            },
+            set: { newColor in
+                guard let hex = newColor.hexRGB else { return }
+                UserDefaults.appGroup.set(hex, forKey: key)
+                model.applyAppearanceOverrides()
+            }
+        )
+    }
+
+    private func scopedSelection<Option: OverrideChoice>(
+        baseKey: String,
+        choices: [Option],
+        preset: Option?
+    ) -> Binding<String> {
+        let key = DefaultsKey.scoped(baseKey, model: model.sceneModel)
+        let keys = Set(choices.map(\.overrideStorageKey))
+        let fallback = ownsDisplayedCar ? "" : (preset?.overrideStorageKey ?? "")
+        return Binding(
+            get: {
+                let stored = UserDefaults.appGroup.string(forKey: key) ?? ""
+                if keys.contains(stored) { return stored }
+                return keys.contains(fallback) ? fallback : ""
+            },
+            set: { newValue in
+                UserDefaults.appGroup.set(newValue, forKey: key)
+                model.applyAppearanceOverrides()
+            }
+        )
+    }
 }
+
+private protocol OverrideChoice {
+    var overrideStorageKey: String { get }
+}
+
+extension PaintColor: OverrideChoice {}
+extension Interior: OverrideChoice {}
+extension Look: OverrideChoice {}
+extension Wheels: OverrideChoice {}
 
 #Preview {
     SettingsView()

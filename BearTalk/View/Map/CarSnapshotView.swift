@@ -38,6 +38,9 @@ struct CarSnapshotView: View {
         .onChange(of: model.fancyMirrorCaps) {
             generateSnapshot()
         }
+        .onChange(of: model.sceneModel) {
+            generateSnapshot()
+        }
     }
     
     private func generateSnapshot() {
@@ -58,7 +61,7 @@ struct CarSnapshotView: View {
         
         // Load the appropriate scene based on the selected model
         var scene: SCNScene?
-        if model.selectedModel == .air {
+        if model.sceneModel == .air {
             print("Loading Air scene...")
             if let sceneURL = Bundle.main.url(forResource: "Air", withExtension: "scn") {
                 do {
@@ -68,7 +71,7 @@ struct CarSnapshotView: View {
                     print("Error loading Air scene: \(error)")
                 }
             }
-        } else if model.selectedModel == .gravity {
+        } else if model.sceneModel == .gravity {
             print("Loading Gravity scene...")
             if let sceneURL = Bundle.main.url(forResource: "Gravity", withExtension: "scn") {
                 do {
@@ -78,7 +81,7 @@ struct CarSnapshotView: View {
                     print("Error loading Gravity scene: \(error)")
                 }
             }
-        } else if model.selectedModel == .sapphire {
+        } else if model.sceneModel == .sapphire {
             print("Loading Sapphire scene...")
             if let sceneURL = Bundle.main.url(forResource: "Sapphire", withExtension: "scn") {
                 do {
@@ -137,33 +140,19 @@ struct CarSnapshotView: View {
         print("Updating materials...")
         
         // Skip material updates for Sapphire
-        if model.selectedModel == .sapphire {
+        if model.sceneModel == .sapphire {
             print("Skipping material updates for Sapphire model")
             return
         }
         
-        // Update car paint color
-        let paintUIColor = UIColor(model.paintColor.color)
-        scene.rootNode.enumerateChildNodes { node, _ in
-            if let geometry = node.geometry {
-                for material in geometry.materials {
-                    if let materialName = material.name?.lowercased() {
-                        // Check for both carPaint and car_paint naming conventions
-                        if materialName.contains("carpaint") || materialName.contains("car_paint") {
-                            material.diffuse.contents = paintUIColor
-                            print("Updated paint material: \(materialName)")
-                        }
-                    }
-                }
-            }
-        }
+        scene.applyCarPaint(model.paintColor)
 
-        if model.selectedModel == .gravity {
+        if model.sceneModel == .gravity {
             scene.tintLeather(model.selectedInterior.leatherColor)
         }
         
         // Handle platinum/stealth materials differently based on model
-        if model.selectedModel == .gravity {
+        if model.sceneModel == .gravity {
             // Gravity uses material colors for platinum/stealth
             let materialNames = [
                 "Stealth_Platinum_ext_cantrail",
@@ -211,7 +200,7 @@ struct CarSnapshotView: View {
         let wheelNodeName = model.selectedWheel.nodeTitle
         scene.rootNode.enumerateChildNodes { node, _ in
             if let nodeName = node.name {
-                if model.selectedModel == .gravity {
+                if model.sceneModel == .gravity {
                     // Gravity uses Wheel_Set prefix
                     if nodeName.hasPrefix("Wheel_Set") && 
                        !nodeName.contains("_01_") && 

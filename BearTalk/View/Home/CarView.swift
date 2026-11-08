@@ -22,7 +22,7 @@ struct CarView: View {
         ZStack {
             @Bindable var model = model
             ZStack {
-                if model.selectedModel == .air {
+                if model.sceneModel == .air {
                     SceneKitViewAir(sceneName: "Air.scn",
                                     showPlatinum: $model.showPlatinum,
                                     showGlassRoof: $model.showGlassRoof,
@@ -40,7 +40,7 @@ struct CarView: View {
                         }
                     })
                     .opacity(sceneOpacity)
-                } else if model.selectedModel == .gravity {
+                } else if model.sceneModel == .gravity {
                     SceneKitViewGravity(showPlatinum: $model.showPlatinum,
                                         carPaintColor: $model.paintColor,
                                         selectedWheel: $model.selectedWheel,
@@ -119,7 +119,7 @@ struct CarView: View {
                 }
             }
         }
-        .onChange(of: model.selectedModel) { _, _ in
+        .onChange(of: model.sceneModel) { _, _ in
             // Reset states when model changes
             withAnimation(.easeOut(duration: 0.2)) {
                 sceneOpacity = 0

@@ -895,7 +895,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
             
             // Update paint material
-            updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            updateCarPaintMaterial(in: scene, color: carPaintColor)
             scene.tintLeather(interior.leatherColor)
             
             // Set up camera
@@ -1041,7 +1041,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
-            updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            updateCarPaintMaterial(in: scene, color: carPaintColor)
             scene.tintLeather(interior.leatherColor)
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
@@ -1120,18 +1120,8 @@ struct SceneKitViewGravity: UIViewRepresentable {
         }
     }
     
-    private func updateCarPaintMaterial(in scene: SCNScene, color: Color) {
-        let uiColor = UIColor(color)
-        
-        scene.rootNode.enumerateChildNodes { node, _ in
-            if let materials = node.geometry?.materials {
-                for material in materials {
-                    if material.name?.lowercased() == "car_paint" {
-                        material.diffuse.contents = uiColor
-                    }
-                }
-            }
-        }
+    private func updateCarPaintMaterial(in scene: SCNScene, color: PaintColor) {
+        scene.applyCarPaint(color)
     }
     
     private func updateWheelVisibility(in scene: SCNScene, selectedWheel: String?) {

@@ -41,29 +41,53 @@ extension DataModel {
     }
 
     func applyAppearanceOverrides() {
-        if let configColor = vehicle?.vehicleConfig.paintColor {
-            paintColor = PaintColor.storedOverride ?? configColor
-        } else if let override = PaintColor.storedOverride {
-            paintColor = override
+        let actual = actualSceneModel
+        AppearanceOverrides.migrateLegacy(into: actual)
+        let displayed = CarSceneModel.storedOverride ?? actual
+        let ownsDisplayed = displayed == actual
+        sceneModel = displayed
+
+        if ownsDisplayed, let vehicle {
+            switch vehicle.vehicleConfig.roof {
+            case .unknown, .glassCanopy, .UNRECOGNIZED:
+                showGlassRoof = true
+            case .metal, .carbonFiber:
+                showGlassRoof = false
+            }
+            switch vehicle.vehicleConfig.modelVariant {
+            case .unknown, .UNRECOGNIZED, .touring, .pure:
+                fancyMirrorCaps = false
+            case .dreamEdition, .grandTouring, .sapphire, .hyper, .executive:
+                fancyMirrorCaps = true
+            }
+        } else {
+            showGlassRoof = true
+            fancyMirrorCaps = true
         }
 
-        if let configInterior = vehicle?.vehicleConfig.interior {
-            selectedInterior = Interior.storedOverride ?? configInterior
-        } else if let override = Interior.storedOverride {
-            selectedInterior = override
-        }
+        guard displayed != .sapphire else { return }
 
-        if let configLook = vehicle?.vehicleConfig.look {
-            showPlatinum = (Look.storedOverride ?? configLook).showsPlatinum
-        } else if let override = Look.storedOverride {
-            showPlatinum = override.showsPlatinum
-        }
-
-        if let configWheels = vehicle?.vehicleConfig.wheels {
-            selectedWheel = Wheels.storedOverride ?? configWheels
-        } else if let override = Wheels.storedOverride {
-            selectedWheel = override
-        }
+        PaintColor.customSceneModel = displayed
+        paintColor = PaintColor.resolved(
+            for: displayed,
+            ownsCar: ownsDisplayed,
+            fallback: vehicle?.vehicleConfig.paintColor ?? .stellarWhite
+        )
+        selectedInterior = Interior.resolved(
+            for: displayed,
+            ownsCar: ownsDisplayed,
+            fallback: vehicle?.vehicleConfig.interior ?? .mojavePurluxe
+        )
+        showPlatinum = Look.resolved(
+            for: displayed,
+            ownsCar: ownsDisplayed,
+            fallback: vehicle?.vehicleConfig.look ?? .platinum
+        ).showsPlatinum
+        selectedWheel = Wheels.resolved(
+            for: displayed,
+            ownsCar: ownsDisplayed,
+            fallback: vehicle?.vehicleConfig.wheels ?? .range
+        )
     }
 
     func updateStats() {

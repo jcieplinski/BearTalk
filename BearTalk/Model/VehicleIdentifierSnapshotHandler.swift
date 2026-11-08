@@ -20,22 +20,14 @@ actor VehicleIdentifierSnapshotHandler {
         return vehicle?.snapshotData
     }
     
+    private func displayedScene(for vehicle: Vehicle) -> CarSceneModel {
+        let actual = CarSceneModel(model: vehicle.vehicleConfig.model, variant: vehicle.vehicleConfig.modelVariant)
+        AppearanceOverrides.migrateLegacy(into: actual)
+        return CarSceneModel.storedOverride ?? actual
+    }
+
     private func loadScene(for vehicle: Vehicle) async throws -> SCNScene? {
-        let sceneName: String
-        
-        // Determine which scene to load based on the vehicle model
-        switch vehicle.vehicleConfig.model {
-        case .air:
-            if vehicle.vehicleConfig.modelVariant == .sapphire {
-                sceneName = "Sapphire"
-            } else {
-                sceneName = "Air"
-            }
-        case .gravity:
-            sceneName = "Gravity"
-        default:
-            sceneName = "Air"
-        }
+        let sceneName = displayedScene(for: vehicle).rawValue
         
         if let sceneURL = Bundle.main.url(forResource: sceneName, withExtension: "scn") {
             do {
@@ -186,37 +178,43 @@ actor VehicleIdentifierSnapshotHandler {
             print("Roof configuration: \(vehicle.vehicleConfig.roof)")
             print("Look configuration: \(vehicle.vehicleConfig.look)")
             
+            let actual = CarSceneModel(model: vehicle.vehicleConfig.model, variant: vehicle.vehicleConfig.modelVariant)
+            let sceneModel = displayedScene(for: vehicle)
+            let ownsDisplayed = sceneModel == actual
+
             // Skip material updates for Sapphire as it has a fixed appearance
-            if vehicle.vehicleConfig.modelVariant == .sapphire {
+            if sceneModel == .sapphire {
                 print("Skipping material updates for Sapphire variant")
                 return
             }
             
             // Update car paint color
-            let paintColor = PaintColor.storedOverride ?? vehicle.vehicleConfig.paintColor
-            let paintUIColor = UIColor(paintColor.color)
-            scene.rootNode.enumerateChildNodes { node, _ in
-                if let geometry = node.geometry {
-                    for material in geometry.materials {
-                        if let materialName = material.name?.lowercased() {
-                            if materialName.contains("carpaint") || materialName.contains("car_paint") {
-                                material.diffuse.contents = paintUIColor
-                            }
-                        }
-                    }
-                }
-            }
+            PaintColor.customSceneModel = sceneModel
+            let paintColor = PaintColor.resolved(
+                for: sceneModel,
+                ownsCar: ownsDisplayed,
+                fallback: vehicle.vehicleConfig.paintColor
+            )
+            scene.applyCarPaint(paintColor)
 
-            if vehicle.vehicleConfig.model == .gravity {
-                let interior = Interior.storedOverride ?? vehicle.vehicleConfig.interior
+            if sceneModel == .gravity {
+                let interior = Interior.resolved(
+                    for: sceneModel,
+                    ownsCar: ownsDisplayed,
+                    fallback: vehicle.vehicleConfig.interior
+                )
                 scene.tintLeather(interior.leatherColor)
             }
             
             // Update wheel visibility
-            let wheelNodeName = (Wheels.storedOverride ?? vehicle.vehicleConfig.wheels).nodeTitle
+            let wheelNodeName = Wheels.resolved(
+                for: sceneModel,
+                ownsCar: ownsDisplayed,
+                fallback: vehicle.vehicleConfig.wheels
+            ).nodeTitle
             scene.rootNode.enumerateChildNodes { node, _ in
                 if let nodeName = node.name {
-                    if vehicle.vehicleConfig.model == .gravity {
+                    if sceneModel == .gravity {
                         if nodeName.hasPrefix("Wheel_Set") &&
                             !nodeName.contains("_01_") &&
                             !nodeName.contains("_02_") &&
@@ -237,8 +235,12 @@ actor VehicleIdentifierSnapshotHandler {
             }
             
             // Update platinum/stealth visibility and materials
-            let showPlatinum = (Look.storedOverride ?? vehicle.vehicleConfig.look).showsPlatinum
-            let showGlassRoof = vehicle.vehicleConfig.roof == .glassCanopy
+            let showPlatinum = Look.resolved(
+                for: sceneModel,
+                ownsCar: ownsDisplayed,
+                fallback: vehicle.vehicleConfig.look
+            ).showsPlatinum
+            let showGlassRoof = ownsDisplayed ? vehicle.vehicleConfig.roof == .glassCanopy : true
             
             print("Show platinum: \(showPlatinum)")
             print("Show glass roof: \(showGlassRoof)")

@@ -18,6 +18,12 @@ enum DefaultsKey {
     static let allVehicles: String = "allVehicles"
     static let carColor: String = "carColor"
     static let carColorOverride: String = "carColorOverride"
+    static let customPaintColor: String = "customPaintColor"
+    static let carModelOverride: String = "carModelOverride"
+
+    static func scoped(_ base: String, model: CarSceneModel) -> String {
+        "\(base).\(model.rawValue)"
+    }
     static let interiorOverride: String = "interiorOverride"
     static let lookOverride: String = "lookOverride"
     static let wheelsOverride: String = "wheelsOverride"

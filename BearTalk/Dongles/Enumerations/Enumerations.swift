@@ -325,17 +325,35 @@ enum Interior: Codable, Equatable {
         }
     }
 
-    static let overrideChoices: [Interior] = [
-        .santaCruz,
-        .tahoe,
-        .mojave,
-        .mojavePurluxe,
-        .santaMonica,
-        .bigBasin,
-        .yosemite,
-        .ojai,
-        .sapphire
-    ]
+    static func overrideChoices(for model: CarSceneModel) -> [Interior] {
+        switch model {
+        case .gravity:
+            [.mojave, .mojavePurluxe, .tahoe, .yosemite, .ojai]
+        case .sapphire:
+            [.santaCruz, .tahoe, .mojave, .mojavePurluxe, .santaMonica, .sapphire]
+        case .air:
+            [.santaCruz, .tahoe, .mojave, .mojavePurluxe, .santaMonica]
+        }
+    }
+
+    static func storedOverride(for model: CarSceneModel) -> Interior? {
+        let raw = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.interiorOverride, model: model)) ?? ""
+        guard !raw.isEmpty, let interior = Interior(overrideStorageKey: raw), overrideChoices(for: model).contains(interior) else { return nil }
+        return interior
+    }
+
+    static func resolved(for model: CarSceneModel, ownsCar: Bool, fallback: Interior) -> Interior {
+        if let stored = storedOverride(for: model) { return stored }
+        if !ownsCar, let preset = preset(for: model) { return preset }
+        return fallback
+    }
+
+    static func preset(for model: CarSceneModel) -> Interior? {
+        switch model {
+        case .air, .gravity: .mojavePurluxe
+        case .sapphire: nil
+        }
+    }
 
     var overrideStorageKey: String {
         switch self {
@@ -374,11 +392,6 @@ enum Interior: Codable, Equatable {
         }
     }
 
-    static var storedOverride: Interior? {
-        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.interiorOverride) ?? ""
-        guard !key.isEmpty else { return nil }
-        return Interior(overrideStorageKey: key)
-    }
 }
 
 enum Look: Codable, Equatable {
@@ -421,7 +434,32 @@ enum Look: Codable, Equatable {
         }
     }
 
-    static let overrideChoices: [Look] = [.platinum, .stealth]
+    static func overrideChoices(for model: CarSceneModel) -> [Look] {
+        switch model {
+        case .air, .gravity, .sapphire:
+            [.platinum, .stealth]
+        }
+    }
+
+    static func storedOverride(for model: CarSceneModel) -> Look? {
+        let raw = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.lookOverride, model: model)) ?? ""
+        guard !raw.isEmpty, let look = Look(overrideStorageKey: raw), overrideChoices(for: model).contains(look) else { return nil }
+        return look
+    }
+
+    static func resolved(for model: CarSceneModel, ownsCar: Bool, fallback: Look) -> Look {
+        if let stored = storedOverride(for: model) { return stored }
+        if !ownsCar, let preset = preset(for: model) { return preset }
+        return fallback
+    }
+
+    static func preset(for model: CarSceneModel) -> Look? {
+        switch model {
+        case .air: .platinum
+        case .gravity: .stealth
+        case .sapphire: nil
+        }
+    }
 
     var overrideStorageKey: String {
         switch self {
@@ -450,12 +488,6 @@ enum Look: Codable, Equatable {
             }
             self = .UNRECOGNIZED(value)
         }
-    }
-
-    static var storedOverride: Look? {
-        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.lookOverride) ?? ""
-        guard !key.isEmpty else { return nil }
-        return Look(overrideStorageKey: key)
     }
 
     var showsPlatinum: Bool {
