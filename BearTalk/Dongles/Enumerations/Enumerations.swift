@@ -213,6 +213,23 @@ enum Interior: Codable, Equatable {
             return "Sapphire"
         }
     }
+
+    /// Seat and door leather tint. Gravity interiors are sampled from Lucid's swatches.
+    /// Anything else keeps the light leather already in the model.
+    var leatherColor: Color {
+        switch self {
+        case .mojave, .mojavePurluxe:
+            Color(hex: "3A3A3C") ?? .gray
+        case .tahoe:
+            Color(hex: "9A7358") ?? .brown
+        case .ojai:
+            Color(hex: "74695C") ?? .gray
+        case .yosemite:
+            Color(hex: "DCDCDC") ?? .white
+        default:
+            Color(hex: "DCDCDC") ?? .white
+        }
+    }
     
     var intValue: Int {
         switch self {

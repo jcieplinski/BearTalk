@@ -6,6 +6,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
     @Binding var showPlatinum: Bool
     @Binding var carPaintColor: PaintColor
     @Binding var selectedWheel: Wheels
+    var interior: Interior
     @Binding var shouldResetCamera: Bool
     @Binding var isSceneLoaded: Bool
     @Environment(DataModel.self) var model  // Add DataModel environment
@@ -895,6 +896,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
             
             // Update paint material
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            scene.tintLeather(interior.leatherColor)
             
             // Set up camera
             if let cameraNode = scene.rootNode.childNode(withName: "camera_default", recursively: true) {
@@ -1040,6 +1042,7 @@ struct SceneKitViewGravity: UIViewRepresentable {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum)
             updateCarPaintMaterial(in: scene, color: carPaintColor.color)
+            scene.tintLeather(interior.leatherColor)
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset
@@ -1183,6 +1186,24 @@ struct SceneKitViewGravity: UIViewRepresentable {
                     node.isHidden = shouldHide
                 } else {
                     node.isHidden = false
+                }
+            }
+        }
+    }
+}
+
+extension SCNScene {
+    /// Tints Gravity leather. Textured leather keeps its grain; flat leather takes the color directly.
+    func tintLeather(_ color: Color) {
+        let uiColor = UIColor(color)
+        rootNode.enumerateChildNodes { node, _ in
+            guard let materials = node.geometry?.materials else { return }
+            for material in materials {
+                guard let name = material.name?.lowercased(), name.contains("leather") else { continue }
+                if material.diffuse.contents is UIColor {
+                    material.diffuse.contents = uiColor
+                } else {
+                    material.multiply.contents = uiColor
                 }
             }
         }

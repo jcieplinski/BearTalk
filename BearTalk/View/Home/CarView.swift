@@ -44,6 +44,7 @@ struct CarView: View {
                     SceneKitViewGravity(showPlatinum: $model.showPlatinum,
                                         carPaintColor: $model.paintColor,
                                         selectedWheel: $model.selectedWheel,
+                                        interior: model.vehicle?.vehicleConfig.interior ?? .yosemite,
                                         shouldResetCamera: $model.shouldResetCamera,
                                         isSceneLoaded: $isSceneLoaded,
                                         onViewCreated: { view in

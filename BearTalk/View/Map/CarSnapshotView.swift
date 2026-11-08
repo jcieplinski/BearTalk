@@ -154,6 +154,11 @@ struct CarSnapshotView: View {
                 }
             }
         }
+
+        if model.selectedModel == .gravity {
+            let interior = model.vehicle?.vehicleConfig.interior ?? .yosemite
+            scene.tintLeather(interior.leatherColor)
+        }
         
         // Handle platinum/stealth materials differently based on model
         if model.selectedModel == .gravity {

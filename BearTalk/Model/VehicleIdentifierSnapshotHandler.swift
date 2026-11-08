@@ -206,6 +206,10 @@ actor VehicleIdentifierSnapshotHandler {
                     }
                 }
             }
+
+            if vehicle.vehicleConfig.model == .gravity {
+                scene.tintLeather(vehicle.vehicleConfig.interior.leatherColor)
+            }
             
             // Update wheel visibility
             let wheelNodeName = vehicle.vehicleConfig.wheels.nodeTitle
