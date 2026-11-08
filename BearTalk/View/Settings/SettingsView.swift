@@ -10,6 +10,10 @@ struct SettingsView: View {
     @State private var showPhotoPicker = false
     @State private var showErrorAlert: Bool = false
     @AppStorage(DefaultsKey.carModelOverride, store: .appGroup) private var carModelOverride = ""
+    @State private var paintOverride = ""
+    @State private var interiorOverride = ""
+    @State private var lookOverride = ""
+    @State private var wheelsOverride = ""
     
     private var currentScheme: AppColorScheme {
         let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
@@ -115,6 +119,7 @@ struct SettingsView: View {
                     }
                     .onChange(of: carModelOverride) {
                         model.applyAppearanceOverrides()
+                        reloadOverrideSelections()
                     }
 
                     if model.sceneModel != .sapphire {
@@ -195,6 +200,10 @@ struct SettingsView: View {
             }
             .onAppear {
                 model.applyAppearanceOverrides()
+                reloadOverrideSelections()
+            }
+            .onChange(of: model.sceneModel) {
+                reloadOverrideSelections()
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
@@ -256,35 +265,19 @@ struct SettingsView: View {
     }
 
     private var paintSelection: Binding<String> {
-        scopedSelection(
-            baseKey: DefaultsKey.carColorOverride,
-            choices: paintOverrideChoices,
-            preset: PaintColor.preset(for: model.sceneModel)
-        )
+        overrideSelection($paintOverride, baseKey: DefaultsKey.carColorOverride)
     }
 
     private var interiorSelection: Binding<String> {
-        scopedSelection(
-            baseKey: DefaultsKey.interiorOverride,
-            choices: Interior.overrideChoices(for: model.sceneModel),
-            preset: Interior.preset(for: model.sceneModel)
-        )
+        overrideSelection($interiorOverride, baseKey: DefaultsKey.interiorOverride)
     }
 
     private var lookSelection: Binding<String> {
-        scopedSelection(
-            baseKey: DefaultsKey.lookOverride,
-            choices: Look.overrideChoices(for: model.sceneModel),
-            preset: Look.preset(for: model.sceneModel)
-        )
+        overrideSelection($lookOverride, baseKey: DefaultsKey.lookOverride)
     }
 
     private var wheelSelection: Binding<String> {
-        scopedSelection(
-            baseKey: DefaultsKey.wheelsOverride,
-            choices: Wheels.overrideChoices(for: model.sceneModel),
-            preset: Wheels.preset(for: model.sceneModel)
-        )
+        overrideSelection($wheelsOverride, baseKey: DefaultsKey.wheelsOverride)
     }
 
     private var customPaintColor: Binding<Color> {
@@ -302,25 +295,51 @@ struct SettingsView: View {
         )
     }
 
-    private func scopedSelection<Option: OverrideChoice>(
-        baseKey: String,
-        choices: [Option],
-        preset: Option?
-    ) -> Binding<String> {
-        let key = DefaultsKey.scoped(baseKey, model: model.sceneModel)
-        let keys = Set(choices.map(\.overrideStorageKey))
-        let fallback = ownsDisplayedCar ? "" : (preset?.overrideStorageKey ?? "")
-        return Binding(
-            get: {
-                let stored = UserDefaults.appGroup.string(forKey: key) ?? ""
-                if keys.contains(stored) { return stored }
-                return keys.contains(fallback) ? fallback : ""
-            },
+    private func overrideSelection(_ stored: Binding<String>, baseKey: String) -> Binding<String> {
+        Binding(
+            get: { stored.wrappedValue },
             set: { newValue in
+                stored.wrappedValue = newValue
+                let key = DefaultsKey.scoped(baseKey, model: model.sceneModel)
                 UserDefaults.appGroup.set(newValue, forKey: key)
                 model.applyAppearanceOverrides()
             }
         )
+    }
+
+    private func reloadOverrideSelections() {
+        paintOverride = readOverride(
+            DefaultsKey.carColorOverride,
+            choices: paintOverrideChoices,
+            preset: PaintColor.preset(for: model.sceneModel)
+        )
+        interiorOverride = readOverride(
+            DefaultsKey.interiorOverride,
+            choices: Interior.overrideChoices(for: model.sceneModel),
+            preset: Interior.preset(for: model.sceneModel)
+        )
+        lookOverride = readOverride(
+            DefaultsKey.lookOverride,
+            choices: Look.overrideChoices(for: model.sceneModel),
+            preset: Look.preset(for: model.sceneModel)
+        )
+        wheelsOverride = readOverride(
+            DefaultsKey.wheelsOverride,
+            choices: Wheels.overrideChoices(for: model.sceneModel),
+            preset: Wheels.preset(for: model.sceneModel)
+        )
+    }
+
+    private func readOverride<Option: OverrideChoice>(
+        _ base: String,
+        choices: [Option],
+        preset: Option?
+    ) -> String {
+        let stored = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(base, model: model.sceneModel)) ?? ""
+        let valid = Set(choices.map(\.overrideStorageKey))
+        if valid.contains(stored) { return stored }
+        let fallback = ownsDisplayedCar ? "" : (preset?.overrideStorageKey ?? "")
+        return valid.contains(fallback) ? fallback : ""
     }
 }
 

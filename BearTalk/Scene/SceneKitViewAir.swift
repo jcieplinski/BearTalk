@@ -16,6 +16,7 @@ struct SceneKitViewAir: UIViewRepresentable {
     @Binding var carPaintColor: PaintColor
     @Binding var selectedWheel: Wheels
     @Binding var fancyMirrorCaps: Bool
+    var interior: Interior
     @Binding var shouldResetCamera: Bool
     @Binding var isSceneLoaded: Bool
     @Environment(DataModel.self) var model  // Add DataModel environment
@@ -1132,6 +1133,7 @@ struct SceneKitViewAir: UIViewRepresentable {
             
             // Update carpaint material with initial color
             updateCarPaintMaterial(in: loadedScene, color: carPaintColor)
+            loadedScene.tintAirInterior(interior.leatherColor)
             
             // Try to find the camera
             if let cameraNode = loadedScene.rootNode.childNode(withName: "camera_default", recursively: true) {
@@ -1336,6 +1338,7 @@ struct SceneKitViewAir: UIViewRepresentable {
         if let scene = uiView.scene {
             updateNodeVisibility(in: scene, showPlatinum: showPlatinum, showGlassRoof: showGlassRoof)
             updateCarPaintMaterial(in: scene, color: carPaintColor)
+            scene.tintAirInterior(interior.leatherColor)
             updateWheelVisibility(in: scene, selectedWheel: selectedWheel.nodeTitle)
             
             // Handle camera reset

@@ -29,6 +29,7 @@ struct CarView: View {
                                     carPaintColor: $model.paintColor,
                                     selectedWheel: $model.selectedWheel,
                                     fancyMirrorCaps: $model.fancyMirrorCaps,
+                                    interior: model.selectedInterior,
                                     shouldResetCamera: $model.shouldResetCamera,
                                     isSceneLoaded: $isSceneLoaded,
                                     onViewCreated: { view in

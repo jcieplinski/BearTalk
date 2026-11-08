@@ -66,23 +66,85 @@ extension SCNScene {
         }
     }
 
-    /// Tints Gravity seat leather. Door leather stays Mojave grey.
+    /// Tints Air rear seats and carpets. Front seats stay Mojave.
+    func tintAirInterior(_ color: Color) {
+        let uiColor = UIColor(color)
+        let recoloredLeather: Set<String> = [
+            "LUCID_LP_leather_C",
+            "LUCID_LP_leather_C_perf",
+            "Door_01_FL_leather_C",
+            "Door_02_FR_leather_C",
+            "Door_03_RL_leather_C",
+            "Door_04_RR_leather_C"
+        ]
+        rootNode.enumerateChildNodes { node, _ in
+            guard let geometry = node.geometry else { return }
+            if let name = node.name, recoloredLeather.contains(name) {
+                geometry.materials = geometry.materials.map { material in
+                    let copy = (material.copy() as? SCNMaterial) ?? material
+                    if copy.name == "leather_C" || copy.name == "leather_C_perf" {
+                        copy.diffuse.contents = uiColor
+                    }
+                    return copy
+                }
+                return
+            }
+            for material in geometry.materials where material.name == "carpet_B" || material.name == "carpet_dark" {
+                material.diffuse.contents = uiColor
+            }
+        }
+    }
+
+    /// Tints Gravity seat leather. Other door leather stays Mojave grey.
+    /// The center armrest shares leather_black, so it gets its own copy.
     func tintLeather(_ color: Color) {
         let seatColor = UIColor(color)
         let blackLeather = UIColor(Interior.mojave.leatherColor)
         rootNode.enumerateChildNodes { node, _ in
-            guard let materials = node.geometry?.materials else { return }
-            for material in materials {
+            guard let geometry = node.geometry, !geometry.materials.isEmpty else { return }
+            if node.name == "Main_Mesh_Yosemite" {
+                geometry.materials = geometry.materials.map { material in
+                    let copy = (material.copy() as? SCNMaterial) ?? material
+                    if copy.name == "leather_black" {
+                        // This pad faces the key light, so the seat color reads lighter here.
+                        copy.diffuse.contents = seatColor.scaled(by: 0.6)
+                        copy.roughness.contents = 0.7
+                    }
+                    return copy
+                }
+                return
+            }
+            for material in geometry.materials {
                 switch material.name {
                 case "leather_black":
                     material.diffuse.contents = blackLeather
                 case "configuration_int_leather_seats":
                     material.multiply.contents = seatColor
+                case "configuration_int_middle_beltline":
+                    material.diffuse.contents = seatColor
                 default:
                     break
                 }
             }
         }
+    }
+}
+
+private extension UIColor {
+    func scaled(by factor: CGFloat) -> UIColor {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 1
+        if getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            return UIColor(red: red * factor, green: green * factor, blue: blue * factor, alpha: alpha)
+        }
+        guard let converted = cgColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil),
+              let components = converted.components,
+              components.count >= 3 else {
+            return self
+        }
+        return UIColor(red: components[0] * factor, green: components[1] * factor, blue: components[2] * factor, alpha: alpha)
     }
 }
 

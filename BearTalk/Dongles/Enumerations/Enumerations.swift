@@ -222,6 +222,10 @@ enum Interior: Codable, Equatable {
             Color(hex: "3A3A3C") ?? .gray
         case .tahoe:
             Color(hex: "9A7358") ?? .brown
+        case .santaCruz:
+            Color(hex: "C4BEB4") ?? .gray
+        case .santaMonica:
+            Color(hex: "E3E0DA") ?? .gray
         case .ojai:
             Color(hex: "74695C") ?? .gray
         case .yosemite:

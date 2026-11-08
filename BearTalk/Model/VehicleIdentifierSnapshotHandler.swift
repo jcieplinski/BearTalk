@@ -197,13 +197,17 @@ actor VehicleIdentifierSnapshotHandler {
             )
             scene.applyCarPaint(paintColor)
 
-            if sceneModel == .gravity {
+            if sceneModel == .gravity || sceneModel == .air {
                 let interior = Interior.resolved(
                     for: sceneModel,
                     ownsCar: ownsDisplayed,
                     fallback: vehicle.vehicleConfig.interior
                 )
-                scene.tintLeather(interior.leatherColor)
+                if sceneModel == .gravity {
+                    scene.tintLeather(interior.leatherColor)
+                } else {
+                    scene.tintAirInterior(interior.leatherColor)
+                }
             }
             
             // Update wheel visibility

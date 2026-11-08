@@ -149,6 +149,8 @@ struct CarSnapshotView: View {
 
         if model.sceneModel == .gravity {
             scene.tintLeather(model.selectedInterior.leatherColor)
+        } else if model.sceneModel == .air {
+            scene.tintAirInterior(model.selectedInterior.leatherColor)
         }
         
         // Handle platinum/stealth materials differently based on model

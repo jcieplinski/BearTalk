@@ -292,6 +292,8 @@ import SceneKit
 
         if vehicle.vehicleConfig.model == .gravity {
             scene.tintLeather(vehicle.vehicleConfig.interior.leatherColor)
+        } else if vehicle.vehicleConfig.model == .air, vehicle.vehicleConfig.modelVariant != .sapphire {
+            scene.tintAirInterior(vehicle.vehicleConfig.interior.leatherColor)
         }
         
         // Update wheel visibility
