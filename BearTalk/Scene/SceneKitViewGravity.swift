@@ -18,9 +18,9 @@ struct SceneKitViewGravity: UIViewRepresentable {
         
         // Charge port state
         var chargePortNode: SCNNode?
+        var chargePortPlayers: [SCNAnimationPlayer] = []
         var isChargePortOpen: Bool = false
         var isAnimating: Bool = false
-        var animationPlayer: SCNAnimationPlayer?
         var animationTimer: Timer?
         
         // Frunk state
@@ -83,10 +83,10 @@ struct SceneKitViewGravity: UIViewRepresentable {
             rearRightDoorAnimationTimer = nil
             
             // Clean up existing animation players
-            if let player = animationPlayer {
+            for player in chargePortPlayers {
                 player.stop()
-                animationPlayer = nil
             }
+            chargePortPlayers = []
             if let player = frunkAnimationPlayer {
                 player.stop()
                 frunkAnimationPlayer = nil
@@ -125,40 +125,39 @@ struct SceneKitViewGravity: UIViewRepresentable {
         }
         
         func findChargePortNode(in scene: SCNScene, state: DoorState) {
-            if let node = scene.rootNode.childNode(withName: "ChargeDoor_Pivot", recursively: true) {
-                print("✅ Found charge port node by name: \(node.name ?? "unnamed")")
-                chargePortNode = node
-                setupAnimationPlayer(for: node, initialState: state)
-            } else {
-                print("❌ Could not find charge port node")
+            var nodes: [SCNNode] = []
+            scene.rootNode.enumerateChildNodes { node, _ in
+                if node.name == "ChargeDoor_Pivot" {
+                    nodes.append(node)
+                }
             }
-        }
-        
-        func setupAnimationPlayer(for node: SCNNode, initialState: DoorState?) {
-            guard let key = node.animationKeys.first,
-                  let player = node.animationPlayer(forKey: key) else {
-                print("❌ No animation keys found for node")
+            
+            guard let node = nodes.first else {
+                print("❌ Could not find charge port node")
                 return
             }
             
-            animationPlayer?.stop()
-            node.animationKeys.forEach { key in
-                node.animationPlayer(forKey: key)?.stop()
+            print("✅ Found charge port node by name: \(node.name ?? "unnamed")")
+            chargePortNode = node
+            chargePortPlayers = nodes.compactMap { node in
+                guard let key = node.animationKeys.first else { return nil }
+                return node.animationPlayer(forKey: key)
             }
-            
-            animationPlayer = player
-            player.animation.isRemovedOnCompletion = false
-            player.animation.repeatCount = 0
-            player.animation.autoreverses = false
-            holdChargePort(player: player, open: initialState == .open || initialState == .ajar)
+            // Unknown is the proto default and is not an open door.
+            holdChargePort(open: state.isOpen)
         }
         
-        func holdChargePort(player: SCNAnimationPlayer, open: Bool) {
-            player.animation.isRemovedOnCompletion = false
-            player.stop()
-            player.speed = 0
-            player.animation.timeOffset = open ? player.animation.duration : 0
-            player.play()
+        func holdChargePort(open: Bool) {
+            for player in chargePortPlayers {
+                player.animation.isRemovedOnCompletion = false
+                player.animation.repeatCount = 0
+                player.animation.autoreverses = false
+                player.stop()
+                player.animation.timeOffset = open ? player.animation.duration : 0
+                player.speed = 0
+                player.play()
+                player.paused = true
+            }
             isChargePortOpen = open
             isAnimating = false
         }
@@ -176,18 +175,23 @@ struct SceneKitViewGravity: UIViewRepresentable {
                 return
             }
             
-            if animationPlayer == nil {
-                if let node = chargePortNode {
-                    setupAnimationPlayer(for: node, initialState: nil)
-                } else {
-                    print("❌ Cannot reinitialize - charge port node is nil")
-                    return
-                }
+            guard !chargePortPlayers.isEmpty else {
+                print("❌ Cannot reinitialize - charge port node is nil")
+                return
             }
             
-            let shouldBeOpen = newState == .open || newState == .ajar
+            let shouldBeOpen = newState.isOpen
+            if !shouldBeOpen {
+                let isRunningOpen = chargePortPlayers.contains { !$0.paused && $0.speed != 0 }
+                if isChargePortOpen {
+                    toggleChargePort()
+                } else if isRunningOpen {
+                    holdChargePort(open: false)
+                }
+                return
+            }
             
-            if shouldBeOpen != isChargePortOpen {
+            if !isChargePortOpen {
                 toggleChargePort()
             }
         }
@@ -197,39 +201,38 @@ struct SceneKitViewGravity: UIViewRepresentable {
                 return
             }
             
-            guard let player = animationPlayer else {
+            guard !chargePortPlayers.isEmpty else {
                 return
             }
             
-            player.stop()
             isAnimating = true
+            let closing = isChargePortOpen
+            var duration: TimeInterval = 0
             
-            if isChargePortOpen {
-                player.speed = -1
+            for player in chargePortPlayers {
+                player.paused = false
+                player.animation.isRemovedOnCompletion = false
+                player.animation.repeatCount = 0
+                player.animation.autoreverses = false
+                player.stop()
+                player.speed = closing ? -1 : 1
                 player.animation.timeOffset = 0
-                
-                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
-                    if let self = self {
-                        self.isAnimating = false
-                        self.isChargePortOpen = false
+                duration = max(duration, player.animation.duration)
+                player.play()
+            }
+            
+            animationTimer = Timer.scheduledTimer(withTimeInterval: duration + 0.1, repeats: false) { [weak self] _ in
+                guard let self else { return }
+                self.isAnimating = false
+                self.isChargePortOpen = !closing
+                if closing {
+                    self.holdChargePort(open: false)
+                } else {
+                    for player in self.chargePortPlayers {
+                        player.speed = 0
+                        player.paused = true
                     }
                 }
-                animationTimer = timer
-                
-                player.play()
-            } else {
-                player.speed = 1
-                player.animation.timeOffset = 0
-                
-                let timer = Timer.scheduledTimer(withTimeInterval: player.animation.duration + 0.1, repeats: false) { [weak self] _ in
-                    if let self = self {
-                        self.isAnimating = false
-                        self.isChargePortOpen = true
-                    }
-                }
-                animationTimer = timer
-                
-                player.play()
             }
         }
         
