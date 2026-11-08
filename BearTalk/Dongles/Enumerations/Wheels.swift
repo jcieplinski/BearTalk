@@ -113,4 +113,77 @@ enum Wheels: Codable, Equatable {
         case .voyager: self = .voyager
         }
     }
+
+    static let overrideChoices: [Wheels] = [
+        .dream,
+        .dreamMagnesium,
+        .blade,
+        .bladeGraphite,
+        .lite,
+        .liteStealth,
+        .range,
+        .rangeStealth,
+        .sport,
+        .sportStealth,
+        .sportLuster,
+        .sapphirePackage,
+        .aether,
+        .orion,
+        .voyager
+    ]
+
+    var overrideStorageKey: String {
+        switch self {
+        case .unknown: "unknown"
+        case .dream: "dream"
+        case .blade: "blade"
+        case .lite: "lite"
+        case .range: "range"
+        case .sport: "sport"
+        case .sportStealth: "sportStealth"
+        case .bladeGraphite: "bladeGraphite"
+        case .liteStealth: "liteStealth"
+        case .sportLuster: "sportLuster"
+        case .sapphirePackage: "sapphirePackage"
+        case .rangeStealth: "rangeStealth"
+        case .dreamMagnesium: "dreamMagnesium"
+        case .aether: "aether"
+        case .orion: "orion"
+        case .voyager: "voyager"
+        case .UNRECOGNIZED(let value): "unrecognized-\(value)"
+        }
+    }
+
+    init?(overrideStorageKey: String) {
+        switch overrideStorageKey {
+        case "unknown": self = .unknown
+        case "dream": self = .dream
+        case "blade": self = .blade
+        case "lite": self = .lite
+        case "range": self = .range
+        case "sport": self = .sport
+        case "sportStealth": self = .sportStealth
+        case "bladeGraphite": self = .bladeGraphite
+        case "liteStealth": self = .liteStealth
+        case "sportLuster": self = .sportLuster
+        case "sapphirePackage": self = .sapphirePackage
+        case "rangeStealth": self = .rangeStealth
+        case "dreamMagnesium": self = .dreamMagnesium
+        case "aether": self = .aether
+        case "orion": self = .orion
+        case "voyager": self = .voyager
+        default:
+            guard overrideStorageKey.hasPrefix("unrecognized-"),
+                  let value = Int(overrideStorageKey.dropFirst("unrecognized-".count)) else {
+                return nil
+            }
+            self = .UNRECOGNIZED(value)
+        }
+    }
+
+    static var storedOverride: Wheels? {
+        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.wheelsOverride) ?? ""
+        guard !key.isEmpty else { return nil }
+        return Wheels(overrideStorageKey: key)
+    }
 }

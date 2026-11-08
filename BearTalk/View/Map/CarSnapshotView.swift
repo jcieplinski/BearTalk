@@ -23,6 +23,9 @@ struct CarSnapshotView: View {
         .onChange(of: model.paintColor) {
             generateSnapshot()
         }
+        .onChange(of: model.selectedInterior) {
+            generateSnapshot()
+        }
         .onChange(of: model.selectedWheel) {
             generateSnapshot()
         }
@@ -156,8 +159,7 @@ struct CarSnapshotView: View {
         }
 
         if model.selectedModel == .gravity {
-            let interior = model.vehicle?.vehicleConfig.interior ?? .yosemite
-            scene.tintLeather(interior.leatherColor)
+            scene.tintLeather(model.selectedInterior.leatherColor)
         }
         
         // Handle platinum/stealth materials differently based on model

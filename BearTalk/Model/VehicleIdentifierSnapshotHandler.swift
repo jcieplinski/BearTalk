@@ -208,11 +208,12 @@ actor VehicleIdentifierSnapshotHandler {
             }
 
             if vehicle.vehicleConfig.model == .gravity {
-                scene.tintLeather(vehicle.vehicleConfig.interior.leatherColor)
+                let interior = Interior.storedOverride ?? vehicle.vehicleConfig.interior
+                scene.tintLeather(interior.leatherColor)
             }
             
             // Update wheel visibility
-            let wheelNodeName = vehicle.vehicleConfig.wheels.nodeTitle
+            let wheelNodeName = (Wheels.storedOverride ?? vehicle.vehicleConfig.wheels).nodeTitle
             scene.rootNode.enumerateChildNodes { node, _ in
                 if let nodeName = node.name {
                     if vehicle.vehicleConfig.model == .gravity {
@@ -236,7 +237,7 @@ actor VehicleIdentifierSnapshotHandler {
             }
             
             // Update platinum/stealth visibility and materials
-            let showPlatinum = vehicle.vehicleConfig.look != .stealth && vehicle.vehicleConfig.look != .sapphire
+            let showPlatinum = (Look.storedOverride ?? vehicle.vehicleConfig.look).showsPlatinum
             let showGlassRoof = vehicle.vehicleConfig.roof == .glassCanopy
             
             print("Show platinum: \(showPlatinum)")

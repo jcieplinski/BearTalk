@@ -324,6 +324,61 @@ enum Interior: Codable, Equatable {
             return nil
         }
     }
+
+    static let overrideChoices: [Interior] = [
+        .santaCruz,
+        .tahoe,
+        .mojave,
+        .mojavePurluxe,
+        .santaMonica,
+        .bigBasin,
+        .yosemite,
+        .ojai,
+        .sapphire
+    ]
+
+    var overrideStorageKey: String {
+        switch self {
+        case .unknown: "unknown"
+        case .santaCruz: "santaCruz"
+        case .tahoe: "tahoe"
+        case .mojave: "mojave"
+        case .mojavePurluxe: "mojavePurluxe"
+        case .santaMonica: "santaMonica"
+        case .bigBasin: "bigBasin"
+        case .yosemite: "yosemite"
+        case .ojai: "ojai"
+        case .sapphire: "sapphire"
+        case .UNRECOGNIZED(let value): "unrecognized-\(value)"
+        }
+    }
+
+    init?(overrideStorageKey: String) {
+        switch overrideStorageKey {
+        case "unknown": self = .unknown
+        case "santaCruz": self = .santaCruz
+        case "tahoe": self = .tahoe
+        case "mojave": self = .mojave
+        case "mojavePurluxe": self = .mojavePurluxe
+        case "santaMonica": self = .santaMonica
+        case "bigBasin": self = .bigBasin
+        case "yosemite": self = .yosemite
+        case "ojai": self = .ojai
+        case "sapphire": self = .sapphire
+        default:
+            guard overrideStorageKey.hasPrefix("unrecognized-"),
+                  let value = Int(overrideStorageKey.dropFirst("unrecognized-".count)) else {
+                return nil
+            }
+            self = .UNRECOGNIZED(value)
+        }
+    }
+
+    static var storedOverride: Interior? {
+        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.interiorOverride) ?? ""
+        guard !key.isEmpty else { return nil }
+        return Interior(overrideStorageKey: key)
+    }
 }
 
 enum Look: Codable, Equatable {
@@ -364,6 +419,47 @@ enum Look: Codable, Equatable {
         case .base: self = .base
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
         }
+    }
+
+    static let overrideChoices: [Look] = [.platinum, .stealth]
+
+    var overrideStorageKey: String {
+        switch self {
+        case .unknown: "unknown"
+        case .platinum: "platinum"
+        case .stealth: "stealth"
+        case .sapphire: "sapphire"
+        case .surfrider: "surfrider"
+        case .base: "base"
+        case .UNRECOGNIZED(let value): "unrecognized-\(value)"
+        }
+    }
+
+    init?(overrideStorageKey: String) {
+        switch overrideStorageKey {
+        case "unknown": self = .unknown
+        case "platinum": self = .platinum
+        case "stealth": self = .stealth
+        case "sapphire": self = .sapphire
+        case "surfrider": self = .surfrider
+        case "base": self = .base
+        default:
+            guard overrideStorageKey.hasPrefix("unrecognized-"),
+                  let value = Int(overrideStorageKey.dropFirst("unrecognized-".count)) else {
+                return nil
+            }
+            self = .UNRECOGNIZED(value)
+        }
+    }
+
+    static var storedOverride: Look? {
+        let key = UserDefaults.appGroup.string(forKey: DefaultsKey.lookOverride) ?? ""
+        guard !key.isEmpty else { return nil }
+        return Look(overrideStorageKey: key)
+    }
+
+    var showsPlatinum: Bool {
+        self != .stealth && self != .sapphire
     }
 }
 

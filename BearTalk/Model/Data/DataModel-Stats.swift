@@ -37,10 +37,32 @@ extension DataModel {
     }
     
     func applyPaintColorOverride() {
+        applyAppearanceOverrides()
+    }
+
+    func applyAppearanceOverrides() {
         if let configColor = vehicle?.vehicleConfig.paintColor {
             paintColor = PaintColor.storedOverride ?? configColor
         } else if let override = PaintColor.storedOverride {
             paintColor = override
+        }
+
+        if let configInterior = vehicle?.vehicleConfig.interior {
+            selectedInterior = Interior.storedOverride ?? configInterior
+        } else if let override = Interior.storedOverride {
+            selectedInterior = override
+        }
+
+        if let configLook = vehicle?.vehicleConfig.look {
+            showPlatinum = (Look.storedOverride ?? configLook).showsPlatinum
+        } else if let override = Look.storedOverride {
+            showPlatinum = override.showsPlatinum
+        }
+
+        if let configWheels = vehicle?.vehicleConfig.wheels {
+            selectedWheel = Wheels.storedOverride ?? configWheels
+        } else if let override = Wheels.storedOverride {
+            selectedWheel = override
         }
     }
 

@@ -10,6 +10,9 @@ struct SettingsView: View {
     @State private var showPhotoPicker = false
     @State private var showErrorAlert: Bool = false
     @AppStorage(DefaultsKey.carColorOverride, store: .appGroup) private var carColorOverride = ""
+    @AppStorage(DefaultsKey.interiorOverride, store: .appGroup) private var interiorOverride = ""
+    @AppStorage(DefaultsKey.lookOverride, store: .appGroup) private var lookOverride = ""
+    @AppStorage(DefaultsKey.wheelsOverride, store: .appGroup) private var wheelsOverride = ""
     
     private var currentScheme: AppColorScheme {
         let rawValue = UserDefaults.appGroup.integer(forKey: DefaultsKey.colorScheme)
@@ -120,7 +123,43 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: carColorOverride) {
-                        model.applyPaintColorOverride()
+                        model.applyAppearanceOverrides()
+                    }
+
+                    Picker("Interior Override", selection: $interiorOverride) {
+                        Text("None").tag("")
+                        ForEach(Interior.overrideChoices, id: \.overrideStorageKey) { interior in
+                            HStack {
+                                Circle()
+                                    .fill(interior.leatherColor)
+                                    .frame(width: 14, height: 14)
+                                Text(interior.title)
+                            }
+                            .tag(interior.overrideStorageKey)
+                        }
+                    }
+                    .onChange(of: interiorOverride) {
+                        model.applyAppearanceOverrides()
+                    }
+
+                    Picker("Look Override", selection: $lookOverride) {
+                        Text("None").tag("")
+                        ForEach(Look.overrideChoices, id: \.overrideStorageKey) { look in
+                            Text(look.title).tag(look.overrideStorageKey)
+                        }
+                    }
+                    .onChange(of: lookOverride) {
+                        model.applyAppearanceOverrides()
+                    }
+
+                    Picker("Wheels Override", selection: $wheelsOverride) {
+                        Text("None").tag("")
+                        ForEach(Wheels.overrideChoices, id: \.overrideStorageKey) { wheels in
+                            Text(wheels.title).tag(wheels.overrideStorageKey)
+                        }
+                    }
+                    .onChange(of: wheelsOverride) {
+                        model.applyAppearanceOverrides()
                     }
                 }
                 

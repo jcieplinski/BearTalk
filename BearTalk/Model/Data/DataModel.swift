@@ -52,10 +52,11 @@ import SceneKit
     
     // Car Scene
     var selectedModel: CarSceneModel = CarSceneModel.allCases.randomElement() ?? .air
-    var showPlatinum: Bool = false
+    var showPlatinum: Bool = Look.storedOverride?.showsPlatinum ?? false
     var showGlassRoof: Bool = true
     var paintColor: PaintColor = PaintColor.storedOverride ?? .eurekaGold
-    var selectedWheel: Wheels = .dream
+    var selectedInterior: Interior = Interior.storedOverride ?? .yosemite
+    var selectedWheel: Wheels = Wheels.storedOverride ?? .dream
     var fancyMirrorCaps: Bool = true
     var shouldResetCamera: Bool = false
     
@@ -630,12 +631,8 @@ import SceneKit
             selectedModel = .gravity
         }
         
-        switch vehicle.vehicleConfig.look {
-        case .unknown, .UNRECOGNIZED, .platinum, .surfrider, .base:
-            showPlatinum = true
-        case .stealth, .sapphire:
-            showPlatinum = false
-        }
+        let look = Look.storedOverride ?? vehicle.vehicleConfig.look
+        showPlatinum = look.showsPlatinum
         
         switch vehicle.vehicleConfig.roof {
         case .unknown, .glassCanopy, .UNRECOGNIZED:
@@ -644,7 +641,8 @@ import SceneKit
             showGlassRoof = false
         }
         
-        self.selectedWheel = vehicle.vehicleConfig.wheels
+        selectedInterior = Interior.storedOverride ?? vehicle.vehicleConfig.interior
+        selectedWheel = Wheels.storedOverride ?? vehicle.vehicleConfig.wheels
         
         switch vehicle.vehicleConfig.modelVariant {
         case .unknown, .UNRECOGNIZED, .touring, .pure:
