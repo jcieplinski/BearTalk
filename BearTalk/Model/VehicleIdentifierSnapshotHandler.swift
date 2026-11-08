@@ -173,14 +173,14 @@ actor VehicleIdentifierSnapshotHandler {
     }
     
     private func updateSnapshotMaterials(in scene: SCNScene, vehicle: Vehicle) async {
+        let actual = CarSceneModel(model: vehicle.vehicleConfig.model, variant: vehicle.vehicleConfig.modelVariant)
+        let sceneModel = displayedScene(for: vehicle)
+        let ownsDisplayed = sceneModel == actual
+
         await MainActor.run {
             print("Updating materials for vehicle: \(vehicle.vehicleConfig.model) \(vehicle.vehicleConfig.modelVariant)")
             print("Roof configuration: \(vehicle.vehicleConfig.roof)")
             print("Look configuration: \(vehicle.vehicleConfig.look)")
-            
-            let actual = CarSceneModel(model: vehicle.vehicleConfig.model, variant: vehicle.vehicleConfig.modelVariant)
-            let sceneModel = displayedScene(for: vehicle)
-            let ownsDisplayed = sceneModel == actual
 
             // Skip material updates for Sapphire as it has a fixed appearance
             if sceneModel == .sapphire {
