@@ -52,17 +52,20 @@ extension Double {
 }
 
 extension SCNScene {
-    /// Tints Gravity leather. Textured leather keeps its grain; flat leather takes the color directly.
+    /// Tints Gravity seat leather. Door leather stays Mojave grey.
     func tintLeather(_ color: Color) {
-        let uiColor = UIColor(color)
+        let seatColor = UIColor(color)
+        let blackLeather = UIColor(Interior.mojave.leatherColor)
         rootNode.enumerateChildNodes { node, _ in
             guard let materials = node.geometry?.materials else { return }
             for material in materials {
-                guard let name = material.name?.lowercased(), name.contains("leather") else { continue }
-                if material.diffuse.contents is UIColor {
-                    material.diffuse.contents = uiColor
-                } else {
-                    material.multiply.contents = uiColor
+                switch material.name {
+                case "leather_black":
+                    material.diffuse.contents = blackLeather
+                case "configuration_int_leather_seats":
+                    material.multiply.contents = seatColor
+                default:
+                    break
                 }
             }
         }

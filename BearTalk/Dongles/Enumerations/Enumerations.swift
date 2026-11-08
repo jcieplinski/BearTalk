@@ -214,7 +214,7 @@ enum Interior: Codable, Equatable {
         }
     }
 
-    /// Seat and door leather tint. Gravity interiors are sampled from Lucid's swatches.
+    /// Gravity seat leather tint, sampled from Lucid's swatches.
     /// Anything else keeps the light leather already in the model.
     var leatherColor: Color {
         switch self {
