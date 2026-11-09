@@ -47,13 +47,14 @@ extension DataModel {
         let ownsDisplayed = displayed == actual
         sceneModel = displayed
 
+        let fallbackRoof = ownsDisplayed ? (vehicle?.vehicleConfig.roof ?? .glassCanopy) : .glassCanopy
+        showGlassRoof = RoofType.resolved(
+            for: displayed,
+            ownsCar: ownsDisplayed,
+            fallback: fallbackRoof
+        ).showsGlassRoof
+
         if ownsDisplayed, let vehicle {
-            switch vehicle.vehicleConfig.roof {
-            case .unknown, .glassCanopy, .UNRECOGNIZED:
-                showGlassRoof = true
-            case .metal, .carbonFiber:
-                showGlassRoof = false
-            }
             switch vehicle.vehicleConfig.modelVariant {
             case .unknown, .UNRECOGNIZED, .touring, .pure:
                 fancyMirrorCaps = false
@@ -61,7 +62,6 @@ extension DataModel {
                 fancyMirrorCaps = true
             }
         } else {
-            showGlassRoof = true
             fancyMirrorCaps = true
         }
 

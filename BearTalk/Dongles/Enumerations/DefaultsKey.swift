@@ -27,6 +27,7 @@ enum DefaultsKey {
     static let interiorOverride: String = "interiorOverride"
     static let lookOverride: String = "lookOverride"
     static let wheelsOverride: String = "wheelsOverride"
+    static let roofOverride: String = "roofOverride"
     static let lastEfficiency: String = "lastEfficiency"
     static let efficiencyLogs: String = "efficiencyLogs"
     static let controlsFavorites: String = "controlsFavorites"

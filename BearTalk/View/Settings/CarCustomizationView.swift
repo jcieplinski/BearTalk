@@ -9,6 +9,7 @@ struct CarCustomizationView: View {
     @State private var interiorOverride = ""
     @State private var lookOverride = ""
     @State private var wheelsOverride = ""
+    @State private var roofOverride = ""
 
     var body: some View {
         NavigationStack {
@@ -70,6 +71,17 @@ struct CarCustomizationView: View {
                                 }
                                 ForEach(Look.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { look in
                                     Text(look.title).tag(look.overrideStorageKey)
+                                }
+                            }
+
+                            if model.sceneModel == .air {
+                                Picker("Roof", selection: roofSelection) {
+                                    if ownsDisplayedCar {
+                                        Text("None").tag("")
+                                    }
+                                    ForEach(RoofType.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { roof in
+                                        Text(roof.title).tag(roof.overrideStorageKey)
+                                    }
                                 }
                             }
 
@@ -138,6 +150,10 @@ struct CarCustomizationView: View {
         overrideSelection($wheelsOverride, baseKey: DefaultsKey.wheelsOverride)
     }
 
+    private var roofSelection: Binding<String> {
+        overrideSelection($roofOverride, baseKey: DefaultsKey.roofOverride)
+    }
+
     private var customPaintColor: Binding<Color> {
         let key = DefaultsKey.scoped(DefaultsKey.customPaintColor, model: model.sceneModel)
         return Binding(
@@ -186,6 +202,11 @@ struct CarCustomizationView: View {
             choices: Wheels.overrideChoices(for: model.sceneModel),
             preset: Wheels.preset(for: model.sceneModel)
         )
+        roofOverride = readOverride(
+            DefaultsKey.roofOverride,
+            choices: RoofType.overrideChoices(for: model.sceneModel),
+            preset: RoofType.preset(for: model.sceneModel)
+        )
     }
 
     private func readOverride<Option: OverrideChoice>(
@@ -209,6 +230,7 @@ extension PaintColor: OverrideChoice {}
 extension Interior: OverrideChoice {}
 extension Look: OverrideChoice {}
 extension Wheels: OverrideChoice {}
+extension RoofType: OverrideChoice {}
 
 #Preview {
     CarCustomizationView()
