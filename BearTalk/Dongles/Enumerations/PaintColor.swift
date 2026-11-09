@@ -103,7 +103,7 @@ enum PaintColor: Codable, Equatable {
         case .sapphireBlue:
             return "Sapphire Blue"
         case .lunarTitanium:
-            return "Lunar Titanium"
+            return "Titanium Silver"
         case .auroraGreen:
             return "Aurora Green"
         case .supernovaBronze:
@@ -120,15 +120,11 @@ enum PaintColor: Codable, Equatable {
         case .gravity:
             [
                 .stellarWhite,
-                .infiniteBlack,
-                .cosmosSilver,
-                .quantumGrey,
-                .zenithRed,
-                .fathomBlue,
-                .lunarTitanium,
+                .glossBlackPrimary,
                 .auroraGreen,
                 .supernovaBronze,
-                .glossBlackPrimary
+                .quantumGrey,
+                .lunarTitanium
             ]
         case .sapphire:
             [

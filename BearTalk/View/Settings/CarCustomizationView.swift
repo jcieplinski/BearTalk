@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct CarCustomizationView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(DataModel.self) var model: DataModel
+    let colorSchemeManager: ColorSchemeManager = .shared
     @AppStorage(DefaultsKey.carModelOverride, store: .appGroup) private var carModelOverride = ""
     @State private var paintOverride = ""
     @State private var interiorOverride = ""
@@ -9,89 +11,106 @@ struct CarCustomizationView: View {
     @State private var wheelsOverride = ""
 
     var body: some View {
-        VStack(spacing: 0) {
-            CarView()
-                .padding(.vertical, 8)
+        NavigationStack {
+            VStack(spacing: 0) {
+                CarView()
+                    .padding(.vertical, 8)
 
-            List {
-                Picker("Car", selection: $carModelOverride) {
-                    Text("None").tag("")
-                    ForEach(CarSceneModel.allCases, id: \.rawValue) { car in
-                        Text(car.displayTitle).tag(car.rawValue)
-                    }
-                }
-                .onChange(of: carModelOverride) {
-                    model.applyAppearanceOverrides()
-                    reloadOverrideSelections()
-                }
-
-                if model.sceneModel != .sapphire {
-                    Group {
-                        Picker("Color", selection: paintSelection) {
-                            if ownsDisplayedCar {
-                                Text("None").tag("")
-                            }
-                            ForEach(paintOverrideChoices, id: \.overrideStorageKey) { color in
-                                HStack {
-                                    Circle()
-                                        .fill(color.color)
-                                        .frame(width: 14, height: 14)
-                                    Text(color.title)
-                                }
-                                .tag(color.overrideStorageKey)
-                            }
-                        }
-
-                        if paintSelection.wrappedValue == PaintColor.custom.overrideStorageKey {
-                            ColorPicker("Custom Color", selection: customPaintColor, supportsOpacity: false)
-                        }
-
-                        Picker("Interior", selection: interiorSelection) {
-                            if ownsDisplayedCar {
-                                Text("None").tag("")
-                            }
-                            ForEach(Interior.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { interior in
-                                HStack {
-                                    Circle()
-                                        .fill(interior.leatherColor)
-                                        .frame(width: 14, height: 14)
-                                    Text(interior.title)
-                                }
-                                .tag(interior.overrideStorageKey)
-                            }
-                        }
-
-                        Picker("Look", selection: lookSelection) {
-                            if ownsDisplayedCar {
-                                Text("None").tag("")
-                            }
-                            ForEach(Look.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { look in
-                                Text(look.title).tag(look.overrideStorageKey)
-                            }
-                        }
-
-                        Picker("Wheels", selection: wheelSelection) {
-                            if ownsDisplayedCar {
-                                Text("None").tag("")
-                            }
-                            ForEach(Wheels.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { wheels in
-                                Text(wheels.title).tag(wheels.overrideStorageKey)
-                            }
+                List {
+                    Picker("Car", selection: $carModelOverride) {
+                        Text("None").tag("")
+                        ForEach(CarSceneModel.allCases, id: \.rawValue) { car in
+                            Text(car.displayTitle).tag(car.rawValue)
                         }
                     }
-                    .id(model.sceneModel)
+                    .onChange(of: carModelOverride) {
+                        model.applyAppearanceOverrides()
+                        reloadOverrideSelections()
+                    }
+
+                    if model.sceneModel != .sapphire {
+                        Group {
+                            Picker("Color", selection: paintSelection) {
+                                if ownsDisplayedCar {
+                                    Text("None").tag("")
+                                }
+                                ForEach(paintOverrideChoices, id: \.overrideStorageKey) { color in
+                                    HStack {
+                                        Circle()
+                                            .fill(color.color)
+                                            .frame(width: 14, height: 14)
+                                        Text(color.title)
+                                    }
+                                    .tag(color.overrideStorageKey)
+                                }
+                            }
+
+                            if paintSelection.wrappedValue == PaintColor.custom.overrideStorageKey {
+                                ColorPicker("Custom Color", selection: customPaintColor, supportsOpacity: false)
+                            }
+
+                            Picker("Interior", selection: interiorSelection) {
+                                if ownsDisplayedCar {
+                                    Text("None").tag("")
+                                }
+                                ForEach(Interior.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { interior in
+                                    HStack {
+                                        Circle()
+                                            .fill(interior.leatherColor)
+                                            .frame(width: 14, height: 14)
+                                        Text(interior.title)
+                                    }
+                                    .tag(interior.overrideStorageKey)
+                                }
+                            }
+
+                            Picker("Look", selection: lookSelection) {
+                                if ownsDisplayedCar {
+                                    Text("None").tag("")
+                                }
+                                ForEach(Look.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { look in
+                                    Text(look.title).tag(look.overrideStorageKey)
+                                }
+                            }
+
+                            Picker("Wheels", selection: wheelSelection) {
+                                if ownsDisplayedCar {
+                                    Text("None").tag("")
+                                }
+                                ForEach(Wheels.overrideChoices(for: model.sceneModel), id: \.overrideStorageKey) { wheels in
+                                    Text(wheels.title).tag(wheels.overrideStorageKey)
+                                }
+                            }
+                        }
+                        .id(model.sceneModel)
+                    }
                 }
             }
+            .onAppear {
+                model.applyAppearanceOverrides()
+                reloadOverrideSelections()
+            }
+            .onChange(of: model.sceneModel) {
+                reloadOverrideSelections()
+            }
+            .navigationTitle("Car Customization")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .confirm) {
+                            dismiss()
+                        }
+                        .tint(.active)
+                    } else {
+                        Button("Done") {
+                            dismiss()
+                        }
+                    }
+                }
+            }
+            .preferredColorScheme(colorSchemeManager.currentScheme)
         }
-        .onAppear {
-            model.applyAppearanceOverrides()
-            reloadOverrideSelections()
-        }
-        .onChange(of: model.sceneModel) {
-            reloadOverrideSelections()
-        }
-        .navigationTitle("Car Customization")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var ownsDisplayedCar: Bool {
@@ -192,8 +211,6 @@ extension Look: OverrideChoice {}
 extension Wheels: OverrideChoice {}
 
 #Preview {
-    NavigationStack {
-        CarCustomizationView()
-    }
-    .environment(DataModel())
+    CarCustomizationView()
+        .environment(DataModel())
 }
