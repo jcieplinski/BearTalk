@@ -244,7 +244,11 @@ actor VehicleIdentifierSnapshotHandler {
                 ownsCar: ownsDisplayed,
                 fallback: vehicle.vehicleConfig.look
             ).showsPlatinum
-            let showGlassRoof = ownsDisplayed ? vehicle.vehicleConfig.roof == .glassCanopy : true
+            let showGlassRoof = RoofType.resolved(
+                for: sceneModel,
+                ownsCar: ownsDisplayed,
+                fallback: ownsDisplayed ? vehicle.vehicleConfig.roof : .glassCanopy
+            ).showsGlassRoof
             
             print("Show platinum: \(showPlatinum)")
             print("Show glass roof: \(showGlassRoof)")

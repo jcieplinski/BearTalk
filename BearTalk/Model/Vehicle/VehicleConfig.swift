@@ -109,6 +109,30 @@ enum RoofType: Codable, Equatable {
         case .UNRECOGNIZED(let int): return int
         }
     }
+
+    var title: String {
+        switch self {
+        case .unknown:
+            "Unknown"
+        case .glassCanopy:
+            "Glass"
+        case .metal:
+            "Metal"
+        case .carbonFiber:
+            "Carbon Fiber"
+        case .UNRECOGNIZED(let int):
+            "Unrecognized(\(int))"
+        }
+    }
+
+    var showsGlassRoof: Bool {
+        switch self {
+        case .metal, .carbonFiber:
+            false
+        case .unknown, .glassCanopy, .UNRECOGNIZED:
+            true
+        }
+    }
     
     init(proto: Mobilegateway_Protos_RoofType) {
         switch proto {
@@ -117,6 +141,59 @@ enum RoofType: Codable, Equatable {
         case .metal: self = .metal
         case .carbonFiber: self = .carbonFiber
         case .UNRECOGNIZED(let int): self = .UNRECOGNIZED(int)
+        }
+    }
+
+    static func overrideChoices(for model: CarSceneModel) -> [RoofType] {
+        switch model {
+        case .air:
+            [.glassCanopy, .metal]
+        case .gravity, .sapphire:
+            []
+        }
+    }
+
+    static func storedOverride(for model: CarSceneModel) -> RoofType? {
+        let raw = UserDefaults.appGroup.string(forKey: DefaultsKey.scoped(DefaultsKey.roofOverride, model: model)) ?? ""
+        guard !raw.isEmpty, let roof = RoofType(overrideStorageKey: raw), overrideChoices(for: model).contains(roof) else { return nil }
+        return roof
+    }
+
+    static func resolved(for model: CarSceneModel, ownsCar: Bool, fallback: RoofType) -> RoofType {
+        if let stored = storedOverride(for: model) { return stored }
+        if !ownsCar, let preset = preset(for: model) { return preset }
+        return fallback
+    }
+
+    static func preset(for model: CarSceneModel) -> RoofType? {
+        switch model {
+        case .air: .glassCanopy
+        case .gravity, .sapphire: nil
+        }
+    }
+
+    var overrideStorageKey: String {
+        switch self {
+        case .unknown: "unknown"
+        case .glassCanopy: "glassCanopy"
+        case .metal: "metal"
+        case .carbonFiber: "carbonFiber"
+        case .UNRECOGNIZED(let value): "unrecognized-\(value)"
+        }
+    }
+
+    init?(overrideStorageKey: String) {
+        switch overrideStorageKey {
+        case "unknown": self = .unknown
+        case "glassCanopy": self = .glassCanopy
+        case "metal": self = .metal
+        case "carbonFiber": self = .carbonFiber
+        default:
+            guard overrideStorageKey.hasPrefix("unrecognized-"),
+                  let value = Int(overrideStorageKey.dropFirst("unrecognized-".count)) else {
+                return nil
+            }
+            self = .UNRECOGNIZED(value)
         }
     }
 }

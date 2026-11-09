@@ -105,10 +105,6 @@ struct SettingsView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
-
-                    NavigationLink(destination: CarCustomizationView()) {
-                        Text("Car Customization")
-                    }
                 }
                 
                 Section("Units") {

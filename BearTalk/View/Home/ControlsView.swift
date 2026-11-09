@@ -17,6 +17,7 @@ struct ControlsView: View {
     @State private var showClimateControl: Bool = false
     @State private var showSeatClimate: Bool = false
     @State private var showSettings: Bool = false
+    @State private var showCarCustomization: Bool = false
     @State private var showWindowControls: Bool = false
     @State private var showRideHeight: Bool = false
     @State private var draggedCell: String?
@@ -242,6 +243,12 @@ struct ControlsView: View {
                             } label: {
                                 Label("Settings", systemImage: "gear")
                             }
+
+                            Button {
+                                showCarCustomization = true
+                            } label: {
+                                Label("Car Customization", systemImage: "paintpalette")
+                            }
                         } label: {
                             if let photoUrl = model.userProfile?.photoUrl {
                                 ProfileImageView(photoUrl: photoUrl)
@@ -277,6 +284,12 @@ struct ControlsView: View {
                             } label: {
                                 Label("Settings", systemImage: "gear")
                             }
+
+                            Button {
+                                showCarCustomization = true
+                            } label: {
+                                Label("Car Customization", systemImage: "paintpalette")
+                            }
                         } label: {
                             if let photoUrl = model.userProfile?.photoUrl {
                                 ProfileImageView(photoUrl: photoUrl)
@@ -296,6 +309,9 @@ struct ControlsView: View {
                     .presentationBackground(.thinMaterial)
                     .presentationDetents([.fraction(0.70), .large])
                     .presentationSizing(.page)
+            }
+            .fullScreenCover(isPresented: $showCarCustomization) {
+                CarCustomizationView()
             }
             .sheet(isPresented: $showClimateControl) {
                 ClimateControlSheet(modalPresented: true)
