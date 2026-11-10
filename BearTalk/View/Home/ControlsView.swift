@@ -178,7 +178,7 @@ struct ControlsView: View {
                         SoftwareUpdateCell()
                             .padding(.horizontal)
                         
-                        VStack(spacing: 16) {
+                        VStack(spacing: 20) {
                             ForEach(visibleCells, id: \.self) { cellType in
                                 cellView(for: cellType, isWideMode: viewWidth > 500)
                             }
