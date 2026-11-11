@@ -93,6 +93,8 @@ struct ControlsView: View {
                 EmptyView()
             }
         }
+        .frame(maxWidth: .infinity)
+        .compositingGroup()
         .onDrag {
             draggedCell = type
             let provider = NSItemProvider(object: type as NSString)
