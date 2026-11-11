@@ -119,6 +119,7 @@ struct ChargingCell: View {
         .frame(maxWidth: .infinity)
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.bottom, 8)
     }
 }
 
