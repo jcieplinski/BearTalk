@@ -52,7 +52,7 @@ struct ChargingCell: View {
     }
     
     private var cellContent: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             HStack {
                 Text("Charging")
                     .font(.headline)
