@@ -104,24 +104,14 @@ struct ChargingCell: View {
                         .foregroundStyle(.secondary)
                 }
                 
-                VStack {
-                    HStack {
-                        Text("Current: \(model.chargePercentage)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        
-                        Spacer()
-                    }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Current: \(model.chargePercentage)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                     
-                    Spacer()
-                    
-                    HStack {
-                        Text("Charge Limit: \(chargeLimit)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        
-                        Spacer()
-                    }
+                    Text("Charge Limit: \(chargeLimit)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
