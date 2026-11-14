@@ -268,11 +268,11 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .doorLocks:
             return entry.vehicleState?.bodyState.doorLocks == .locked
         case .frunk:
-            return entry.vehicleState?.bodyState.frontCargo != .closed
+            return entry.vehicleState?.bodyState.frontCargo.isOpen
         case .trunk:
-            return entry.vehicleState?.bodyState.rearCargo != .closed
+            return entry.vehicleState?.bodyState.rearCargo.isOpen
         case .chargePort:
-            return entry.vehicleState?.bodyState.chargePortState.isOpen ?? false
+            return entry.vehicleState?.bodyState.chargePortState.isOpen
         case .climateControl:
             return entry.vehicleState?.hvacState.power == .hvacOn
         case .maxAC:
