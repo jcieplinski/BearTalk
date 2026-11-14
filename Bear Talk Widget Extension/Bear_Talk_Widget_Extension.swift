@@ -268,11 +268,11 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .doorLocks:
             return entry.vehicleState?.bodyState.doorLocks == .locked
         case .frunk:
-            return entry.vehicleState?.bodyState.frontCargo != .closed
+            return entry.vehicleState?.bodyState.frontCargo.isOpen
         case .trunk:
-            return entry.vehicleState?.bodyState.rearCargo != .closed
+            return entry.vehicleState?.bodyState.rearCargo.isOpen
         case .chargePort:
-            return entry.vehicleState?.bodyState.chargePortState.isOpen ?? false
+            return entry.vehicleState?.bodyState.chargePortState.isOpen
         case .climateControl:
             return entry.vehicleState?.hvacState.power == .hvacOn
         case .maxAC:
@@ -288,11 +288,11 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
         case .lights:
             return entry.vehicleState?.chassisState.headlights == .on
         case .hazards:
-            return false
+            return entry.vehicleState?.chassisState.headlights == .hazardOn
         case .windows:
             return entry.vehicleState?.bodyState.windowPosition.isOpen ?? false
         case .rideHeight:
-            return false
+            return entry.vehicleState?.bodyState.rideHeight != .standard && entry.vehicleState?.bodyState.rideHeight != .unknown
         case .remoteDrive:
             return entry.vehicleState?.keylessDrivingState == .keylessDrivingOn
         case .batteryPrecondition:
@@ -380,9 +380,14 @@ struct Bear_Talk_Widget_ExtensionEntryView : View {
             intent.action = action
             return intent
         case .hazards:
-            break
+            let action: HazardStatus = entry.vehicleState?.chassisState.headlights == .hazardOn ? .off : .on
+            let intent = HazardsIntent(vehicle: entry.configuration.$vehicle)
+            intent.status = action
+            return intent
         case .rideHeight:
-            break
+            let intent = RideHeightIntent(vehicle: entry.configuration.$vehicle)
+            intent.height = .standard
+            return intent
         case .remoteDrive:
             let status: KeylessDrivingStatus = entry.vehicleState?.keylessDrivingState == .keylessDrivingOn ? .off : .on
             let intent = KeylessDrivingIntent(vehicle: entry.configuration.$vehicle)
